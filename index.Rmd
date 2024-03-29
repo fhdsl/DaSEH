@@ -1,0 +1,81 @@
+---
+title: |
+  ![](docs/images/Intro_to_R.png){width=120px align=left style="padding-right: 20px"}
+  Introduction to R for Public Health Researchers
+  <br>
+output:
+  html_document
+---
+
+```{r setup, echo = FALSE, message = FALSE}
+library(pander)
+library(kableExtra)
+library(tidyverse)
+library(config)
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+<a href="http://www.jhsph.edu/"><img alt = "JHSPH" align="right" src="docs/images/bloomberg.logo.small.horizontal.blue.png" style="width:40%"/></a>
+<br>
+<br>
+
+<br>
+
+## Overview
+***
+
+**Welcome to Introduction to R for Public Health Researchers!**  
+
+This course is for students who have little to no familiarity with the R programming language and want to learn more about how to use R to import, wrangle, visualize, and analyze data.
+
+The course will provide students with **“hands-on” training** for analyzing data with the R programming language for statistical computing, a popular open-source solution for data analysis and visualization.  
+
+### Instructors
+
+`r config::get("instructors")`
+
+### Teaching Assistant
+
+`r config::get("ta")`
+
+<br>
+
+## Class
+***
+
+* `r config::get("course_dates")` 1:30PM-4:50PM on Zoom  - `r config::get("holiday")`
+* Zoom link will be emailed prior to the first class.
+* [Installation Instructions](https://jhudatascience.org/intro_to_r/docs/module_details/day0.html) - This is **required** before the course, but we can help you on the first day (or before) if you have trouble.
+* Slack Workspace invitation will be sent directly via email.
+* [CoursePlus Website](`r config::get("courseplus_web")`)
+* [Syllabus](syllabus.html)
+* [Materials + Schedule](materials_schedule.html)
+* [Resources](resources.html)
+
+
+<br>
+
+## Testimonials
+***
+
+"Thanks all for a wonderful course! I feel super confident in R now and I am excited to apply what we learned to future projects. Cheers !!"
+
+"I feel like a data witch now! I just say poof and the data looks the way I want"
+
+"OK - this is getting to be too much fun now"
+
+"My 14 year old thinks this class looks cool and wants to take it (she's a wanna be engineer)"
+
+<br>
+
+
+## Find an Error!?
+***
+
+Feel free to submit typos/errors/etc via the GitHub repository associated with the class: 
+https://github.com/jhudsl/intro_to_r
+
+This page was last updated on `r Sys.Date()`.
+
+<p style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://live.staticflickr.com/4557/26350808799_6f9c8bcaa2_b.jpg" height="150"/> </a> </p><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

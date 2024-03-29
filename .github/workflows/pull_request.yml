@@ -1,0 +1,332 @@
+# Candace Savonen Dec 2021
+
+name: Pull Request
+
+on:
+  pull_request:
+    branches: [ main, staging ]
+
+jobs:
+
+  yaml-check:
+    name: Load user automation choices
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
+
+        # Use the yaml-env-action action.
+      - name: Load environment from YAML
+        uses: doughepi/yaml-env-action@v1.0.0
+        with:
+            files: config_automation.yml # Pass a space-separated list of configuration files. Rightmost files take precedence.
+
+      # Delete the branch if this has been run before
+      - name: Delete branch locally and remotely
+        run: git push origin --delete preview-${{ github.event.pull_request.number }} || echo "No branch to delete"
+
+      # Make the branch fresh
+      - name: Make the branch fresh
+        run: |
+          git config --global --add safe.directory $GITHUB_WORKSPACE
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          branch_name='preview-${{ github.event.pull_request.number }}'
+          echo branch doesnt exist
+          git checkout -b $branch_name || echo branch exists
+          git push --set-upstream origin $branch_name || echo echo branch exists remotely
+        shell: bash
+
+    outputs:
+      toggle_spell_check: "${{ env.SPELL_CHECK }}"
+      toggle_style_code: "${{ env.STYLE_CODE }}"
+      toggle_url_check: "${{ env.URL_CHECKER }}"
+      toggle_quiz_check: "${{ env.CHECK_QUIZZES }}"
+      toggle_render_preview: "${{ env.RENDER_PREVIEW }}"
+      toggle_make_labs: "${{ env.MAKE_LABS }}"
+      rendering_docker_image: "${{ env.RENDERING_DOCKER_IMAGE }}"
+      
+########################## Make the error reports ##############################
+
+  spell-check:
+    name: Check spelling
+    needs: yaml-check
+    if: ${{needs.yaml-check.outputs.toggle_spell_check == 'yes'}}
+    uses: jhudsl/ottr-reports/.github/workflows/report-maker.yml@main
+    with:
+      check_type: spelling
+      error_min: 1
+      gh_pat: secrets.GH_PAT
+      branch_name: ${GITHUB_HEAD_REF}
+
+  url-check:
+    name: Check URLs
+    needs: yaml-check
+    if: ${{needs.yaml-check.outputs.toggle_url_check == 'yes'}}
+    uses: jhudsl/ottr-reports/.github/workflows/report-maker.yml@main
+    with:
+      check_type: urls
+      error_min: 1
+      gh_pat: secrets.GH_PAT
+      branch_name: ${GITHUB_HEAD_REF}
+
+########################## Style Code ##############################
+ 
+  style-code:
+    name: Style code
+    needs: yaml-check
+    runs-on: ubuntu-latest
+    if: ${{needs.yaml-check.outputs.toggle_style_code == 'yes'}}
+    container:
+      image: jhudsl/base_ottr:main
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Run styler
+        run: Rscript -e "styler::style_file(list.files(pattern = 'Rmd$', recursive = TRUE, full.names = TRUE));warnings()"
+
+      - name: Commit styled files
+        run: |
+          git config --system --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          git add \*.Rmd
+          git commit -m 'Style Rmds' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
+
+########################## Preview ##############################
+
+  render-preview:
+    name: Render preview
+    needs: yaml-check
+    runs-on: ubuntu-latest
+    container:
+      image: ${{needs.yaml-check.outputs.rendering_docker_image}}
+    if: ${{needs.yaml-check.outputs.toggle_render_preview == 'yes'}}
+
+    steps:
+      # Give permission to access the repo
+      - name: safelist repository
+        run: |
+          repo_name='${{ github.event.repository.name }}'
+          git config --global --add safe.directory /__w/$repo_name/$repo_name
+
+      # # Checks-out your repository with the token so your job can access it
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          # get the full repo
+          fetch-depth: 0
+          # use github PAT
+          token: ${{ secrets.GH_PAT }}
+
+      # Set up git checkout
+      - name: Set up git checkout
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          branch_name='preview-${{ github.event.pull_request.number }}'
+          git fetch --all
+          git checkout $branch_name
+          git merge -s recursive --strategy-option=theirs origin/${{ github.head_ref }} --allow-unrelated-histories
+        shell: bash
+        
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+      # NOTE: `since_last_remote_commit: true` is implied by default and falls back to the previous local commit.
+
+      - name: List all changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
+
+      # We want a fresh run of the renders each time - so first delete old html files
+      - name: Delete old *.html
+        run: Rscript -e "rmarkdown::clean_site(preview = FALSE)"
+
+       # Now we want to render all the html files from the Rmd files
+      - name: Run render html for the main website
+        id: site
+        run: Rscript -e "rmarkdown::render_site()"
+
+       # Render module details for syllabus
+      - name: Render module details for syllabus
+        run: Rscript "scripts/render_module_details_for_syllabus.R"
+      
+      # Create blank labs - runs quickly, so just does it for all of them
+      - name: Run lab converter
+        if: ${{needs.yaml-check.outputs.toggle_make_labs == 'yes'}}
+        shell: bash
+        run: bash scripts/blank_labs_from_keys.sh
+
+       # Render all module files
+      - name: Render html of modules where .Rmd has changed
+        run: |
+          Rscript --vanilla "scripts/render_modules.R" --files "${{ steps.changed-files.outputs.all_changed_files }}"
+          
+       # Render the cheatsheets
+      - name: Render Cheatsheet pdfs
+        run: |
+          Rscript --vanilla "scripts/render_cheatsheets.R" --files "${{ steps.changed-files.outputs.all_changed_files }}"
+        
+       # Render resource pdfs + html
+      - name: Render Resource pdfs + html
+        run: |
+          Rscript --vanilla "scripts/render_resources.R" --files "${{ steps.changed-files.outputs.all_changed_files }}"
+        
+        # Generate list of files that need pdfs
+      - name: Generate list of lectures that need pdfs generated
+        run: |
+          Rscript --vanilla "scripts/render_html_list.R"
+          echo the following need pdfs:
+          echo "$(cat files.txt)"
+        
+      - name: Store list of lectures that need pdfs generated // Delete intermediate files
+        id: getfiles
+        run: |
+          echo "files=$(cat files.txt)" >> $GITHUB_OUTPUT 
+          rm files.txt
+          rm cheatsheet_files.csv
+          rm lab_files.csv
+          rm lecture_files.csv
+
+      # This checks on the steps before it and makes sure that they completed.
+      # If the renders didn't complete we don't want to commit the file changes
+      - name: Check on render steps
+        if: steps.site.outcome != 'success'
+        run: |
+          echo site status ${{steps.site.outcome}}
+          exit 1
+
+      # Commit the rendered website files
+      - name: Commit rendered website files to preview branch
+        id: commit
+        run: |
+          branch_name='preview-${{ github.event.pull_request.number }}'
+          git diff origin/main -- '*.html' >/dev/null && changes=true || changes=false
+          echo "changes=$changes" >> $GITHUB_OUTPUT
+          git add . --force
+          git commit -m 'Render preview' || echo "No changes to commit"
+          git pull --rebase --set-upstream origin $branch_name --allow-unrelated-histories --strategy-option=ours
+          git push --force || echo "No changes to commit"
+        shell: bash
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2.2.0
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: latest commit
+
+      - name: Build components of the comment
+        id: build-components
+        run: |
+          course_name=$(head -n 1 _website.yml | cut -d'"' -f 2| tr " " "-")
+          website_link=$(echo "https://htmlpreview.github.io/?https://raw.githubusercontent.com/$GITHUB_REPOSITORY/preview-${{ github.event.pull_request.number }}/index.html")
+          echo "website_link=$website_link" >> $GITHUB_OUTPUT
+          echo "time=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+          echo "commit_id=$GITHUB_SHA" >> $GITHUB_OUTPUT
+          echo ${{steps.commit.outputs.changes}}
+
+      - name: Create or update comment
+        if: steps.commit.outputs.changes == 'true'
+        uses: peter-evans/create-or-update-comment@v2.1.0
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Re-rendered previews from the latest commit: See [preview of website here](${{ steps.build-components.outputs.website_link }})
+
+            _Updated at ${{ steps.build-components.outputs.time }} with changes from ${{ steps.build-components.outputs.commit_id }}_
+          edit-mode: replace
+
+      - name: No comment if no changes
+        if: steps.commit.outputs.changes == 'false'
+        uses: peter-evans/create-or-update-comment@v2.1.0
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            The latest commit did not produce rendering changes.
+
+            _Updated at ${{ steps.build-components.outputs.time }} with changes from ${{ steps.build-components.outputs.commit_id }}_
+          edit-mode: replace
+          
+    # Save files for conversion to pdf      
+    outputs:
+      pdffiles: "${{ steps.getfiles.outputs.files }}"
+
+########################## PDFs ##############################
+
+  render-pdf-lectures:
+    name: Render pdf lecture slides
+    needs: render-preview
+    runs-on: ubuntu-latest
+    container:
+      image: ${{needs.yaml-check.outputs.rendering_docker_image}}
+    if: ${{needs.yaml-check.outputs.toggle_render_preview == 'yes'}}
+    strategy:
+      matrix:
+        modulenames: ${{fromJson(needs.render-preview.outputs.pdffiles)}}
+        
+    steps:
+      # Give permission to access the repo
+      - name: safelist repository
+        run: |
+          repo_name='${{ github.event.repository.name }}'
+          git config --global --add safe.directory /__w/$repo_name/$repo_name
+          
+      - name: Checkout files
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
+
+      # Set up git checkout
+      - name: Set up git checkout
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          branch_name='preview-${{ github.event.pull_request.number }}'
+          git fetch --all
+          git checkout $branch_name
+          git merge -s recursive --strategy-option=theirs origin/${{ github.head_ref }} --allow-unrelated-histories
+        shell: bash
+        
+      # Render pdfs of slides
+      - name: Convert HTML to PDF
+        uses: fifsky/html-to-pdf-action@master
+        with:
+          htmlFile: ./modules/${{ matrix.modulenames }}/${{ matrix.modulenames }}.html
+          outputFile: ./modules/${{ matrix.modulenames }}/${{ matrix.modulenames }}.pdf
+          
+      # Commit the rendered website files
+      - name: Commit rendered website pdf files to preview branch
+        id: commit_pdfs
+        run: |
+          branch_name='preview-${{ github.event.pull_request.number }}'
+          git diff origin/main -- '*.pdf' >/dev/null && changes=true || changes=false
+          echo "changes=$changes" >> $GITHUB_OUTPUT 
+          git status
+          git add *.pdf --force
+          git commit -m 'Render preview' || echo "No changes to commit"
+          git status
+          git pull --rebase --set-upstream origin $branch_name --allow-unrelated-histories --strategy-option=ours
+          git push --force || echo "No changes to commit"
+        shell: bash
+

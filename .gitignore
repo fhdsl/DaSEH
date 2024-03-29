@@ -1,0 +1,9 @@
+# Personal files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+
+# Docker token
+docker/git_token.txt

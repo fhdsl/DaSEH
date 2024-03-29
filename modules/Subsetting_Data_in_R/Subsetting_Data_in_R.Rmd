@@ -1,0 +1,1049 @@
+---
+title: "Subsetting Data in R"
+output:
+  ioslides_presentation:
+    css: ../../docs/styles.css
+    widescreen: yes
+  pdf_document:
+    latex_engine: xelatex
+---
+
+```{r, echo = FALSE}
+library(knitr)
+opts_chunk$set(comment = "")
+suppressPackageStartupMessages(library(dplyr))
+library(dplyr)
+library(jhur)
+```
+
+## Reminder
+
+Refresh the website and get the latest version of the labs and slides!
+We are constantly making improvements. 
+
+## Recap
+
+- Use `<-` to save (assign) values to objects  
+- Use `c()` to **combine** vectors  
+- `length()`, `class()`, and `str()` tell you information about an object  
+- The sequence `seq()` function helps you create numeric vectors (`from`,`to`, `by`, and `length.out` arguments)  
+- The repeat `rep()` function helps you create vectors with the `each` and `times` arguments  
+-  Reproducible science makes everyone's life easier!  
+- `readr`has helpful functions like `read_csv()` that can help you import data into R  
+
+📃[Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-2.pdf)
+
+
+## Overview
+
+In this module, we will show you how to:
+
+1. Look at your data in different ways
+2. Create a data frame and a tibble
+3. Create new variables/make rownames a column
+4. Rename columns of a data frame
+5. Subset rows of a data frame
+6. Subset columns of a data frame
+7. Add/remove new columns to a data frame
+8. Order the columns of a data frame
+9. Order the rows of a data frame
+
+
+## Setup
+
+We will largely focus on the `dplyr` package which is part of the `tidyverse`.
+
+```{r, fig.alt="dplyr", out.width = "25%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://tidyverse.tidyverse.org/logo.png")
+```
+
+Some resources on how to use `dplyr`: 
+
+* https://dplyr.tidyverse.org/
+* https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html
+* https://www.opencasestudies.org/
+
+
+## Why dplyr?
+
+```{r, fig.alt="dplyr", out.width = "100%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/dplyr.png")
+```
+The `dplyr` package is one of the most helpful packages for altering your data to get it into a form that is useful for creating visualizations, summarizing, or more deeply analyzing. 
+
+So you can imagine using pliers on your data. 
+
+```{r, fig.alt="dplyr", out.width = "20%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/621a9c8c5d7b47c4b6d72e8f01f28d14310e8370/193fc/css/images/hex/dplyr.png")
+```
+
+
+## Loading in dplyr and tidyverse
+
+See this website for a list of the packages included in the `tidyverse`: https://www.tidyverse.org/packages/
+```{r}
+library(tidyverse) # loads dplyr and other packages!
+```
+
+## Getting data to work with
+
+We will use a dataset from a project we worked on called Open Case Studies. 
+
+See https://www.opencasestudies.org/. 
+
+First we need to install and load the package.
+
+```{r, eval = FALSE}
+install.packages("OCSdata")
+```
+
+```{r, echo = FALSE, message=FALSE, comment= FALSE, results='hide'}
+install.packages("OCSdata", repos='http://cran.us.r-project.org')
+```
+
+```{r}
+library(OCSdata)
+```
+
+## Getting data to work with
+
+Then we will load data from one of the case studies about opioid shipments.
+
+See https://cran.r-project.org/web/packages/OCSdata/vignettes/instructions.html for more info on what data is available. 
+
+See https://www.opencasestudies.org/ocs-bp-opioid-rural-urban/ about this data.
+
+##  EXTRA PRACTICE - Get the data into your project directory
+
+```{r, results='hide', eval = FALSE}
+OCSdata::simpler_import_data("ocs-bp-opioid-rural-urban", 
+                             outpath = tempdir())
+```
+
+Where is the data?
+
+Simulates creating subdirectories to organize your data.
+
+```{r, fig.alt="dplyr", out.width = "55%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/path.gif")
+```
+
+## Import the data
+`here` function of the `here` package helps R start looking where your .Rproj file is.
+
+```{r, echo = FALSE, message=FALSE, comment= FALSE, results='hide'}
+install.packages("here", repos='http://cran.us.r-project.org')
+```
+
+```{r, eval = FALSE}
+#install.packages(here)
+library(here)
+annualDosage <- read_csv(file = 
+   here("OCS_data/data/simpler_import/county_annual.csv"))
+
+```
+
+
+## Or do this!
+
+```{r}
+OCSdata::load_imported_data("ocs-bp-opioid-rural-urban")
+```
+
+You will see a few new objects in your environment called:
+
+- `annualDosage` (number of shipments (count) of either oxycodone or hydrocodone pills (DOSAGE_UNIT))
+- `county_pop` (population per county)
+- `land` (land area per county)
+
+## Checking the data `dim()`
+
+The `dim()`, `nrow()`, and `ncol()` functions are good options to check the dimensions of your data before moving forward.
+
+```{r}
+dim(annualDosage) # rows, columns
+nrow(annualDosage) # number of rows
+ncol(annualDosage) # number of columns
+```
+
+## Checking the data: `glimpse()`
+
+In addition to `head()` and `tail()`, the `glimpse()`function of the `dplyr` package  is another great function to look at your data. 
+
+```{r}
+glimpse(annualDosage)
+```
+
+
+## Checking your data: `slice_sample()`
+
+What if you want to see the middle of your data? You can use the `slice_sample()` function of the `dplyr` package to see a **random** set of rows. You can specify the number of rows with the `n` argument.
+
+```{r}
+slice_sample(annualDosage, n = 2)
+slice_sample(annualDosage, n = 2)
+
+```
+
+
+# Data frames and tibbles
+
+## Data frames
+
+An older version of data in tables is called a data frame. The iris dataset is an example of this. 
+
+```{r}
+class(iris)
+head(iris)
+```
+## tibble
+
+Tibbles are a **fancier** version of data frames:
+
+- We don't have to use head to see a preview of it
+- We see the dimensions
+- We see the data types for each column
+
+```{r}
+annualDosage
+
+```
+
+
+## Creating a `tibble`
+
+If we wanted to create a `tibble` ("fancy" data frame), we can using the  `tibble()` function on a data frame.  
+
+```{r}
+tbl_iris <- tibble(iris) 
+tbl_iris
+```
+
+Note don't necessarily need to use `head()` with tibbles, as they conveniently print a portion of the data.
+
+
+## Summary of tibbles and data frames
+
+We generally recommend using tibbles, but you are likely to run into lots of data frames with your work. 
+
+Most functions work for both so you don't need to worry about it much!
+
+It can be helpful to convert data frames to tibbles though just to see more about the data more easily. The `tibble()` function helps us do that.
+
+## Data frames vs tibbles - watch out for rownames
+ 
+Note that this conversion can remove row names - which some data frames have.  For example, `mtcars`  (part of R) has row names. In this case we would want to make the rownames a new column first before making into a tibble.
+
+```{r}
+head(mtcars, n = 2)
+head(tibble(mtcars), n = 2)
+```
+
+## rownames_to_column function{.codesmall}
+
+There is a function that specifically helps you do that.
+
+```{r}
+head(rownames_to_column(mtcars), n = 2)
+head(tibble(rownames_to_column(mtcars)), n = 2)
+
+```
+
+
+## Data for now
+
+Let's stick with the tibble annualDosage data for our next lesson 
+
+```{r}
+head(annualDosage)
+```
+
+
+# Renaming Columns
+
+## `rename` function
+
+```{r, fig.alt="dplyr", out.width = "70%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/rename.png")
+```
+"Artwork by @allison_horst". https://allisonhorst.com/
+
+
+## Renaming Columns of a data frame or tibble
+
+To rename columns in `dplyr`, you can use the `rename` function.
+
+For example, let's rename BUYER_COUNTY to County. Notice the new name is listed **first**, similar to how a new object is assigned on the left!
+
+<div class = "codeexample">
+```{r, eval = FALSE}
+# general format! not code!
+{data you are creating or changing} <- rename({data you are using}, 
+                                          {New Name} = {Old name})
+```
+</div>
+
+```{r}
+renamed_annualDosage<- rename(annualDosage, County = BUYER_COUNTY)
+head(renamed_annualDosage)
+```
+
+
+## Take Care with Column Names
+
+When you can, avoid spaces, special punctuation, or numbers in column names, as these require special treatment to refer to them. 
+
+See https://jhudatascience.org/intro_to_r/resources/quotes_vs_backticks.html for more guidance.
+
+```{r, eval = FALSE}
+ # this will cause an error
+renamed_annualDosage <- rename(annualDosage, County! = BUYER_COUNTY)
+```
+
+```{r}
+# this will work
+renamed_annualDosage <- rename(annualDosage, `County!` = BUYER_COUNTY) 
+head(renamed_annualDosage, 2)
+```
+
+
+## Unusual Column Names
+
+It's best to avoid unusual column names where possible, as things get tricky later.
+
+We just showed the use of \` backticks\` . You may see people use quotes as well.
+
+```{r, fig.alt="dplyr", out.width = "14%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/backtick_1.png")
+```
+
+Other atypical column names are those with:
+
+- spaces
+- number without characters
+- number starting the name
+- other punctuation marks (besides "_" or "." and not at the beginning)
+
+
+## A solution!
+
+Rename tricky column names so that you don't have to deal with them later!
+
+```{r, fig.align='center', echo = FALSE}
+include_graphics("https://media.giphy.com/media/6q29hxDKvJvPy/giphy.gif")
+```
+
+## Be careful about copy pasting code!
+
+Curly quotes will not work!
+
+```{r, eval = FALSE}
+# this will cause an error!
+renamed_annualDosage <- rename(annualDosage, ‘County!’ = BUYER_COUNTY) 
+```
+
+```{r, eval = FALSE}
+# this will work!
+renamed_annualDosage <- rename(annualDosage, 'County!' = BUYER_COUNTY) 
+```
+
+Also true for double quotes
+```{r, eval = FALSE}
+ # this will cause an error!
+renamed_annualDosage <- rename(annualDosage, “County!” = BUYER_COUNTY)
+```
+
+```{r, eval = FALSE}
+# this will work!
+renamed_annualDosage <- rename(annualDosage, "County!" = BUYER_COUNTY) 
+```
+
+## Rename multiple columns
+
+A comma can separate different column names to change.
+
+```{r}
+renamed_annualDosage <- rename(annualDosage, 
+                               County = BUYER_COUNTY, 
+                               State = BUYER_STATE)
+head(renamed_annualDosage, 3)
+```
+
+## Renaming all columns of a data frame: dplyr {.codesmall}
+
+To rename all columns you use the `rename_with()`. In this case we will use `toupper()` to make all letters upper case. Could also use `tolower()` function.
+
+```{r}
+annualDosage_upper <- rename_with(annualDosage, toupper)
+head(annualDosage_upper, 3)
+```
+
+```{r}
+annualDosage_lower<- rename_with(annualDosage, tolower)
+head(annualDosage_lower, 3)
+```
+
+## janitor package
+
+If you need to do lots of naming fixes - look into the janitor package!
+
+```{r, echo = FALSE, message=FALSE, comment= FALSE, warning = FALSE, results='hide'}
+install.packages("janitor", repos='http://cran.us.r-project.org')
+```
+
+```{r, message=FALSE, warning=FALSE}
+#install.packages("janitor")
+library(janitor)
+```
+
+## janitor `clean_names`
+
+The `clean_names` function can intuit what fixes you might need. Here it makes everything consistent.
+
+```{r}
+head(annualDosage, 2)
+clean_AD <- clean_names(annualDosage)
+head(clean_AD, 2)
+```
+
+## more of clean_names
+
+`clean_names` can also get rid of spaces and replace them with `_`.
+
+```{r}
+test <- tibble(`col 1` = c(1,2,3), `col 2` = c(2,3,4))
+test
+clean_names(test)
+```
+
+## Summary
+
+- data frames are simpler version of a data table
+- tibbles are fancier `tidyverse` version
+- tibbles are made with `tibble()` 
+- if your original data has rownames, you need to use `rownames_to_column` before converting to tibble
+- the `rename()` function of `dplyr` can help you rename columns
+- avoid using punctuation (except underscores), spaces, and numbers (to start or alone) in column names
+- if you must do a nonstandard column name - typically use backticks around it. See https://jhudatascience.org/intro_to_r/resources/quotes_vs_backticks.html.
+- avoid copy and pasting code from other sources - quotation marks will change!
+- check out `janitor` if you need to make lots of column name changes
+
+## Lab Part 1
+
+🏠 [Class Website](https://jhudatascience.org/intro_to_r/)    
+💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
+
+# Subsetting Columns
+
+## Let's get our data again
+
+This time lets also make it a smaller subset so it is easier for us to see the full dataset as we work through examples. 
+
+```{r}
+#install.packages(OCSdata)
+#library(OCSdata)
+#OCSdata::load_imported_data("ocs-bp-opioid-rural-urban")
+set.seed(1234)
+AD <-slice_sample(annualDosage, n = 30)
+```
+
+## Subset columns of a data frame - `tidyverse` way: 
+
+To grab (or "pull" out) the `year` column the `tidyverse` way we can use the `pull` function:
+```{r}
+pull(AD, year)
+```
+
+
+## Subset columns of a data frame: dplyr
+
+The `select` command from `dplyr` allows you to subset (still a `tibble`!)
+```{r}
+select(AD, year)
+```
+
+## Select multiple columns
+
+We can use `select` to select for multiple columns.
+
+```{r}
+select(AD, year, BUYER_COUNTY)
+```
+
+## Subset columns of a data frame: dplyr
+
+Note that if you want the values (not a `tibble`), use `pull` - as it pulls out the data:
+```{r}
+pull(AD, year)
+
+# pull with select works too!
+
+pull(select(AD, year))
+```
+
+## Select columns of a data frame: dplyr
+
+The `select` command from `dplyr` allows you to subset columns matching patterns:
+
+```{r}
+head(AD, 2)
+select(AD, starts_with("B"))
+```
+
+## See the Select "helpers"
+
+Here are a few:
+
+```{r, eval = FALSE}
+last_col()
+starts_with()
+ends_with()
+contains() # like searching
+```
+
+Type `tidyselect::` in the **console** and see what RStudio suggests:
+
+```{r, fig.alt="dplyr", out.width = "70%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/tidyselect.png")
+```
+
+## Combining tidyselect helpers with regular selection
+
+```{r}
+head(AD, 2)
+select(AD, starts_with("B"), year)
+```
+## Multiple tidyselect functions
+
+Follows OR logic.
+
+```{r}
+select(AD, starts_with("B"), ends_with("r"))
+
+```
+
+## Multiple patterns with tidyselect
+
+Need to combine the patterns with the `c()` function.
+
+```{r}
+select(AD, starts_with(c("B", "D")))
+
+```
+
+
+## The `where()` function can help select columns of a specific class{.codesmall}
+
+`is.character()` and `is.numeric()` are often the most helpful
+
+```{r}
+head(AD, 2)
+select(AD, where(is.numeric))
+
+```
+
+
+
+
+# Subsetting Rows
+
+## `filter` function
+
+```{r, fig.alt="dplyr", out.width = "70%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/filter.png")
+```
+
+"Artwork by @allison_horst". https://allisonhorst.com/
+
+## Subset rows of a data frame: dplyr
+
+The command in `dplyr` for subsetting rows is `filter`.
+
+```{r}
+filter(AD, count > 10000)
+```
+
+
+## Subset rows of a data frame: dplyr
+
+You can have multiple logical conditions using the following:
+
+* `==` : equals to
+* `!=`: not equal to (`!` : not/negation)
+* `>` / `<`: greater than / less than
+* `>=` or `<=`: greater than or equal to / less than or equal to
+* `&` : AND
+* `|` : OR
+
+## Common error for filter
+
+If you try to filter for a column that does not exist it will not work:
+ 
+ - misspelled column name 
+ - column that was already removed 
+
+
+
+## Subset rows of a data frame: dplyr {.codesmall}
+
+You can filter by two conditions using `&` or commas (must meet both conditions):
+
+```{r, eval = FALSE}
+filter(AD, count > 10000, year == 2012)
+```
+
+```{r}
+filter(AD, count > 10000 & year == 2012) # same result
+```
+
+## Subset rows of a data frame: dplyr
+
+If you want OR statements (meaning the data can meet either condition does not need to meet both), you need to use `|` between conditions:
+
+```{r}
+filter(AD, count > 10000 | year == 2012)
+
+```
+
+## Subset rows of a data frame: dplyr {.codesmall}
+
+The `%in%` operator can be used find values from a pre-made list (using `c()`) for a **single column** at a time. 
+
+```{r}
+filter(AD,  BUYER_STATE %in% c("CO","NM","GA"))
+
+filter(AD,  BUYER_STATE == "CO"| BUYER_STATE == "NM"| BUYER_STATE == "GA") #equivalent
+```
+
+## Subset rows of a data frame: dplyr {.codesmall}
+
+The `%in%` operator can be used find values from a pre-made list (using `c()`) for a **single column** at a time with different columns.
+
+```{r}
+filter(AD, year %in% c(2012,2014), BUYER_STATE %in% c("GA","CO"))
+
+```
+
+## Be careful with column names and `filter`
+
+This will not work the way you might expect! Best to stick with nothing but the column name if it is a typical name. 
+
+```{r}
+filter(AD, "year" > 2014)
+```
+
+## Don't use quotes for atypical names
+
+Atypical names are those with punctuation, spaces, start with a number, or are just a number. 
+
+```{r}
+AD_rename <- rename(AD, `year!` = year)
+
+filter(AD_rename, "year!" > 2013) # will not work correctly
+```
+
+## Be careful with column names and `filter`
+
+Using backticks works!
+
+```{r}
+filter(AD_rename, `year!` > 2013) 
+```
+
+
+## Be careful with column names and `filter`
+
+```{r}
+filter(AD, "BUYER_STATE" == "CO") # this will not work
+```
+
+## Be careful with column names and `filter`
+
+```{r}
+filter(AD, BUYER_STATE == "CO")# this works!
+```
+
+## `filter()` is tricky
+
+Try not use anything special for the column names in `filter()`. This is why it is good to not use atypical column names. Then you can just use the column name!
+
+
+## Always good to check each step!
+
+Did the filter work the way you expected? Did the dimensions change?
+
+```{r, echo = FALSE, fig.align='center'}
+knitr::include_graphics("https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif")
+```
+https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
+
+## Summary
+
+- `pull()` to get values out of a data frame/tibble
+- `select()` is the `tidyverse` way to get a tibble with only certain columns
+-  you can `select()` based on patterns in the column names
+-  you can also `select()` based on column class with the `where()` function
+-  you can combine multiple tidyselect functions together like `select(starts_with("C"), ends_with("state"))`
+-  you can combine multiple patterns with the `c()` function like `select(starts_with(c("A", "C")))`
+- `filter()` can be used to filter out rows based on logical conditions
+-  avoid using quotes when referring to column names with `filter()`
+
+## Summary Continued
+
+- `==` is the same as equivalent to
+- `&` means both conditions must be met to remain after `filter()`
+- `|` means either conditions needs to be met to remain after `filter()`
+
+## Lab Part 2
+
+🏠 [Class Website](https://jhudatascience.org/intro_to_r/)    
+💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
+
+## Get the data
+
+```{r}
+#install.packages(OCSdata)
+#library(OCSdata)
+#OCSdata::load_imported_data("ocs-bp-opioid-rural-urban")
+set.seed(1234)
+AD <-slice_sample(annualDosage, n = 30)
+```
+
+## Combining `filter` and `select`
+
+You can combine `filter` and `select` to subset the rows and columns, respectively, of a data frame:
+
+```{r}
+select(filter(AD, year > 2012), BUYER_STATE)
+```
+
+
+## Nesting
+
+In `R`, the common way to perform multiple operations is to wrap functions around each other in a "nested" form.
+
+```{r}
+head(select(AD, year, BUYER_STATE), 2)
+```
+
+## Nesting can get confusing looking
+
+```{r}
+select(filter(AD, year > 2000 & BUYER_STATE == "CO"), year, count)
+```
+
+## Assigning Temporary Objects
+
+One can also create temporary objects and reassign them:
+
+```{r}
+AD_CO <- filter(AD, year > 2000 & BUYER_STATE == "CO")
+AD_CO <- select(AD_CO, year, count)
+
+head(AD_CO)
+```
+
+## Using the `pipe` (comes with `dplyr`):
+
+The pipe `%>%` makes this much more readable.  It reads left side "pipes" into right side.  RStudio `CMD/Ctrl + Shift + M` shortcut. Pipe `tb` into `filter`, then pipe that into `select`:
+
+
+```{r}
+AD %>% filter(year > 2000 & BUYER_STATE == "CO") %>% select(year, count)
+```
+
+
+# Adding/Removing Columns
+
+
+## Adding columns to a data frame: dplyr (`tidyverse` way){.codesmall}
+
+The `mutate` function in `dplyr` allows you to add or modify columns of a data frame.
+
+<div class = "codeexample">
+```{r, eval = FALSE}
+# General format - Not the code!
+{data object to update} <- mutate({data to use}, 
+                           {new variable name} = {new variable source}) 
+```
+</div>
+
+```{r}
+AD <- mutate(AD, newcol = count * 2)
+head(AD, 4)
+```
+
+
+## Use mutate to modify existing columns {.codesmall}
+
+The `mutate` function in `dplyr` allows you to add or modify columns of a data frame.
+
+<div class = "codeexample">
+```{r, eval = FALSE}
+# General format - Not the code!
+{data object to update} <- mutate({data to use}, 
+                           {variable name to change} = {variable modification}) 
+```
+</div>
+
+```{r}
+AD <- mutate(AD, newcol = newcol / 2)
+head(AD, 4)
+```
+
+
+## You can pipe data into mutate {.codesmall}
+
+
+```{r}
+AD <- AD %>% mutate(newcol = newcol / 2)
+head(AD,4)
+```
+
+## `mutate` function
+
+```{r, fig.alt="dplyr", out.width = "80%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/mutate.png")
+```
+"Artwork by @allison_horst". https://allisonhorst.com/
+
+
+## Removing columns of a data frame: dplyr {.codesmall}
+
+The `NULL` method is still very common.
+
+The `select` function can remove a column with exclamation mark (`!`) our using the minus sign (`-`):
+
+```{r, eval = FALSE}
+select(AD, !newcol)
+```
+
+```{r, echo = FALSE}
+head(select(AD, !newcol))
+```
+
+**Or, you can simply select the columns you want to keep, ignoring the ones you want to remove.**
+
+## Removing columns in a data frame: dplyr {.codesmall}
+
+You can use `c()` to list the columns to remove.
+
+Remove `newcol` and `drat`:
+```{r}
+select(AD, !c(newcol, year))
+```
+
+
+# Ordering columns
+
+## Ordering the columns of a data frame: dplyr 
+
+The `select` function can reorder columns.
+```{r}
+head(AD, 2)
+AD %>% select(year, count, BUYER_STATE, BUYER_COUNTY) %>%
+head(2)
+```
+
+## Ordering the columns of a data frame: dplyr {.codesmall}
+
+The `select` function can reorder columns.  Put `newcol` first, then select the rest of columns:
+```{r, eval = FALSE}
+select(AD, newcol, everything())
+```
+
+```{r, echo = FALSE}
+head(select(AD, newcol, everything()), 3)
+```
+
+## Ordering the columns of a data frame: dplyr {.codesmall}
+
+Put `year` at the end ("remove, everything, then add back in"):
+
+```{r, eval = FALSE}
+select(AD, !year, everything(), year)
+```
+
+```{r, echo = FALSE}
+head(select(AD, !year, everything(), year), 3)
+```
+
+
+## Ordering the column names of a data frame: alphabetically {.codesmall}
+
+Using the base R `order()` function.
+
+```{r}
+order(colnames(AD))
+AD %>% select(order(colnames(AD)))
+```
+
+
+## Ordering the columns of a data frame: dplyr {.codesmall}
+
+In addition to `select` we can also use the `relocate()` function of dplyr to rearrange the columns for more complicated moves.
+
+For example, let say we just wanted `year` to be before `BUYER_STATE`.
+
+```{r}
+
+head(AD, 1)
+
+tb_carb <- relocate(AD, year, .before = BUYER_STATE)
+
+head(tb_carb, 1)
+```
+
+
+
+# Ordering rows
+
+## Ordering the rows of a data frame: dplyr
+
+The `arrange` function can reorder rows  By default, `arrange` orders in increasing order:
+```{r}
+arrange(AD, year)
+```
+
+## Ordering the rows of a data frame: dplyr
+
+Use the `desc` to arrange the rows in descending order:
+```{r}
+arrange(AD, desc(year))
+```
+
+## Ordering the rows of a data frame: dplyr
+
+You can combine increasing and decreasing orderings:
+```{r}
+arrange(AD, count, desc(year)) %>% head(n = 2)
+
+arrange(AD, desc(year), count) %>% head(n = 2)
+```
+
+
+## Summary
+
+- `select()` and `filter()` can be combined together
+- you can do sequential steps in a few ways:
+    1. nesting them inside one another using parentheses `()`
+    2. creating intermediate data objects in between
+    3. using pipes `%>%` (like "then" statements)
+- `select()` and `relocate()` can be used to reorder columns
+- `arrange()` can be used to reorder rows
+- can remove rows with `filter()`
+- can remove a column in a few ways:  
+    2. using `select()` with exclamation mark in front of column name(s)  
+    3. not selecting it (without exclamation mark)  
+
+## Summary cont...
+
+- `mutate()` can be used to create new variables or modify them
+
+<div class = "codeexample">
+```{r, eval = FALSE}
+# General format - Not the code!
+{data object to update} <- mutate({data to use}, 
+                                {new variable name} = {new variable source}) 
+```
+</div>
+
+```{r, eval = FALSE}
+AD <- mutate(AD, newcol = count/2.2)
+```
+
+## A note about base R: 
+
+The `$` operator is similar to `pull()`. This is the base R way to do this:
+
+```{r}
+AD$year
+```
+
+Although it is easier (for this one task), mixing and matching the `$` operator with tidyverse functions usually doesn't work. Therefore, we want to let you know about it in case you see it, but we suggest that you try working with the tidyverse way.
+
+## Adding new columns to a data frame: base R
+
+You can add a new column (or modify an existing one) using the `$` operator instead of `mutate`.
+
+Just want you to be aware of this as it is very common.
+
+```{r}
+AD$newcol <- AD$count/2.2
+head(AD,3)
+```
+
+Even though `$` is easier for creating new columns, `mutate` is really powerful, so it's worth getting used to.
+
+## Lab Part 3
+
+🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
+
+💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
+
+
+
+```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
+knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
+```
+
+Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
+
+# Extra Slides
+
+## `which()` function
+
+Instead of removing rows like filter, `which()` simply shows where the values occur if they pass a specific condition. We will see that this can be helpful later when we want to select and filter in more complicated ways.
+
+```{r}
+which(select(AD, year) == 2014)
+select(AD, year) == 2014 %>% head(10)
+```
+
+## Remove a column in base R
+
+```{r, eval = FALSE}
+AD$year <- NULL
+```
+
+## Renaming Columns of a data frame: base R
+
+We can use the `colnames` function to extract and/or directly reassign column names of `df`:
+
+```{r}
+colnames(AD) # just prints
+colnames(AD)[1:3] <- c("County", "State", "Year") # reassigns
+head(AD)
+```
+
+## Subset rows of a data frame with indices: 
+
+Let's select **rows** 1 and 3 from `df` using brackets:
+
+```{r}
+AD[ c(1, 3), ]
+```
+
+## Subset columns of a data frame: 
+
+We can also subset a data frame using the bracket `[, ]` subsetting. 
+
+For data frames and matrices (2-dimensional objects), the brackets are `[rows, columns]` subsetting.  We can grab the `x` column using the index of the column or the column name ("`year`") 
+
+```{r}
+AD[, 3]
+AD[, "count"]
+```
+
+## Subset columns of a data frame: 
+
+We can select multiple columns using multiple column names:
+
+```{r}
+AD[, c("State", "count")]
+
+```
+
+
+
+
