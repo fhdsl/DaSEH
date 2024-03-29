@@ -1,6 +1,6 @@
 ---
 title: |
-  ![](images/logo_big_font2_banner_wide.png)
+  ![](images/DaSEH_banner_wide_transparent.png)
   <br>
 output:
   html_document
@@ -15,9 +15,6 @@ library(config)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
-<a href="http://www.jhsph.edu/"><img alt = "JHSPH" align="right" src="docs/images/bloomberg.logo.small.horizontal.blue.png" style="width:40%"/></a>
-<br>
-<br>
 
 <br>
 
