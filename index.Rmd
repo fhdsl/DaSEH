@@ -1,7 +1,6 @@
 ---
 title: |
-  ![](docs/images/Intro_to_R.png){width=120px align=left style="padding-right: 20px"}
-  Introduction to R for Public Health Researchers
+  ![](images/logo_big_font2_banner_wide.png)
   <br>
 output:
   html_document
