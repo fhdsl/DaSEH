@@ -6,10 +6,8 @@ output:
 
 ### **Instructions**
 
-Completed homework should be submitted on CoursePlus as an **Rmd file**. Please see the course website for more information about submitting assignments: https://jhudatascience.org/intro_to_r/syllabus.html#submitting-assignments.
 
-Homework will be graded for correct output, not code style. All assignments are due at the end of the course. Please see the course website for more information about grading: https://jhudatascience.org/intro_to_r/syllabus.html#grading.
-
+Homework is optional, but we recommend it so you can get the most out of this course.
 
 ```{r initiatePackages, message=FALSE}
 ## you can add more, or change...these are suggestions

@@ -96,7 +96,6 @@ You should see some messages in the console, ending with `* DONE (jhur)` if the 
 
 ## Drop Boxes
 
-[Homework 1 Drop Box](`r config::get("courseplus_dropboxes")`)
 
 **Note**: only people taking the course for credit must turn in the assignments. However, we will evaluate all submitted assignments in case others would like feedback on their work.
 
