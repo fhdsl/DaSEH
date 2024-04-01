@@ -18,37 +18,33 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 <br>
 
-## Overview
+## Welcome!
 ***
 
-**Welcome to Introduction to R for Public Health Researchers!**  
+Data Science for Environmental Health (DaSEH) is a short course that combines **online** learning and an **in-person** project-focused intensive. DaSEH is tailored for beginners and novices in R programming, offering instruction on importing, wrangling, visualizing, and analyzing data. It provides hands-on training in using R for statistical computing, a widely-used open-source tool for data analysis and visualization.
 
-This course is for students who have little to no familiarity with the R programming language and want to learn more about how to use R to import, wrangle, visualize, and analyze data.
+### Two-week course
 
-The course will provide students with **“hands-on” training** for analyzing data with the R programming language for statistical computing, a popular open-source solution for data analysis and visualization.  
+DaSEH begins with a two-week online course that solidifies R programming foundations. Participants learn best practices and ingrain programming skills via active hands-on lab activities. We will practice new skills one topic at a time to make the content more manageable! 
+
+### Code-a-thon
+
+The two-week foundation prepares participants a three-day in-person intensive “Code-a-thon”. Here, we'll work on authentic environmental health projects. We'll also practice data ethics skills in peer code review, reproducibility, and transparency in a supportive environment. 
 
 ### Instructors
 
 `r config::get("instructors")`
 
-### Teaching Assistant
+The lead instructors have earned recognition for excellence in teaching and have trained hundreds of professional learners. We can't wait to have you in class, too!
 
-`r config::get("ta")`
+We're also supported by our data scientist, `r config::get("ds")`.
 
 <br>
 
-## Class
+## Sign Up!
 ***
 
-* `r config::get("course_dates")` 1:30PM-4:50PM on Zoom  - `r config::get("holiday")`
-* Zoom link will be emailed prior to the first class.
-* [Installation Instructions](https://jhudatascience.org/intro_to_r/docs/module_details/day0.html) - This is **required** before the course, but we can help you on the first day (or before) if you have trouble.
-* Slack Workspace invitation will be sent directly via email.
-* [CoursePlus Website](`r config::get("courseplus_web")`)
-* [Syllabus](syllabus.html)
-* [Materials + Schedule](materials_schedule.html)
-* [Resources](resources.html)
-
+Our next session of DaSEH will be held online `r config::get("course_dates_online")` and in-person `r config::get("course_dates_inperson")`. For more details check out [Logistics](syllabus.html). You can register using this link: `r config::get("register_link")`!
 
 <br>
 
@@ -70,7 +66,7 @@ The course will provide students with **“hands-on” training** for analyzing 
 ***
 
 Feel free to submit typos/errors/etc via the GitHub repository associated with the class: 
-https://github.com/jhudsl/intro_to_r
+https://github.com/fhdsl/DaSEH
 
 This page was last updated on `r Sys.Date()`.
 

@@ -44,6 +44,7 @@ csv
 custimization
 customizable
 cwrigh
+DaSEH
 Dataquest
 Dayananda
 DESeq
@@ -120,6 +121,7 @@ longdash
 Linetype
 lightblue
 lightgreen
+lubridate
 misspecification
 mclaire
 macosx
@@ -209,6 +211,7 @@ tabset
 TAs
 th
 ThemePark
+thon
 tibble
 tidyr
 tidyselect
