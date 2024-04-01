@@ -30,11 +30,10 @@ source("scripts/utils.R")
 pander::pandoc.table(
   read_markdown("docs/_schedule_table.Rmd") %>%
     mutate(across(
-      .fns = ~ str_replace_all(., "\\./", "https://jhudatascience.org/intro_to_r/")
+      .fns = ~ str_replace_all(., "\\./", "https://hutchdatascience.org/DaSEH/")
     )),
   missing = "",
   split.tables = Inf,
   style = "rmarkdown"
 )
 ```
-

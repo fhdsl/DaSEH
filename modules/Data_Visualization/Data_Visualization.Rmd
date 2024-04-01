@@ -30,7 +30,7 @@ library(emo)
     -   `values_from` specifies the old column name that contains new cell values\
 -   to merge/join data sets together need a variable in common - usually "id"
 
-📃[Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-6.pdf)
+📃[Cheatsheet](https://daseh.org//modules/cheatsheets/Day-6.pdf)
 
 ## Recap continued
 
@@ -43,7 +43,7 @@ library(emo)
 -   `anti_join(x, y)` - all rows from `x` not in `y` keeping just columns from `x`.
 -   `esquisser()` function of the `esquisse` package can help make plot sketches
 
-📃[Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-6.pdf)
+📃[Cheatsheet](https://daseh.org//modules/cheatsheets/Day-6.pdf)
 
 ## `esquisse` and `ggplot2`
 
@@ -482,8 +482,8 @@ Orange %>% ggplot(aes(x = circumference,
 
 ## Lab 1
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)\
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules//Data_Visualization/lab/Data_Visualization_Lab.Rmd)
+🏠 [Class Website](https://daseh.org//)\
+💻 [Lab](https://daseh.org//modules//Data_Visualization/lab/Data_Visualization_Lab.Rmd)
 
 ## theme() function:
 
@@ -962,8 +962,8 @@ Check out this [guide](https://jhudatascience.org/tidyversecourse/dataviz.html#m
 
 ## Lab 2
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)\
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules//Data_Visualization/lab/Data_Visualization_Lab.Rmd)
+🏠 [Class Website](https://daseh.org//)\
+💻 [Lab](https://daseh.org//modules//Data_Visualization/lab/Data_Visualization_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

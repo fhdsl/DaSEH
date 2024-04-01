@@ -6,9 +6,9 @@ output:
 
 ### **Instructions**
 
-Completed homework should be submitted on CoursePlus as an **Rmd file**. Please see the course website for more information about submitting assignments: https://jhudatascience.org/intro_to_r/syllabus.html#submitting-assignments.
+Completed homework should be submitted on CoursePlus as an **Rmd file**. Please see the course website for more information about submitting assignments: https://daseh.org//syllabus.html#submitting-assignments.
 
-Homework will be graded for correct output, not code style. All assignments are due at the end of the course. Please see the course website for more information about grading: https://jhudatascience.org/intro_to_r/syllabus.html#grading.
+Homework will be graded for correct output, not code style. All assignments are due at the end of the course. Please see the course website for more information about grading: https://daseh.org//syllabus.html#grading.
 
 
 ```{r initiatePackages, message=FALSE}
@@ -25,7 +25,7 @@ library(tidyr)
 
 1\. Bring the following dataset into R. 
 
--  The dataset is located at: https://jhudatascience.org/intro_to_r/data/mortality.csv. 
+-  The dataset is located at: https://daseh.org//data/mortality.csv. 
 -  You can use the link, download it, or use whatever method you like for getting the file. 
 -  Once you get the file, read the dataset in using `read_csv()` and assign it the name "mort".
 
@@ -84,7 +84,7 @@ library(tidyr)
 
 8\. Bring an additional dataset into R. 
 
--  The dataset is tab-delimited and located at: https://jhudatascience.org/intro_to_r/data/country_pop.txt. 
+-  The dataset is tab-delimited and located at: https://daseh.org//data/country_pop.txt. 
 -  You can use the link, download it, or use whatever method you like for getting the file. 
 -  Once you get the file, read the dataset in using `read_tsv()` and assign it the name "pop".
 
@@ -154,7 +154,7 @@ library(tidyr)
 
 A\. Bring the following dataset into R. 
 
--  The dataset is located at: https://jhudatascience.org/intro_to_r/data/asthma.xlsx. 
+-  The dataset is located at: https://daseh.org//data/asthma.xlsx. 
 -  You should download the associated data.
 -  Once you get the file, read the dataset in using `read_excel()` from the `readxl` package and assign it the name "asthma".
 -  Read in the sheet named "Age Group (Years)".
