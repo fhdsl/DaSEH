@@ -1,7 +1,7 @@
-name: Introduction to R for Public Health Researchers
+name: Data Science for Environmental Health
 output_dir: '.'
 navbar:
-  title: Intro to R
+  title: DaSEH
   left:
   - text: Syllabus
     href: syllabus.html
