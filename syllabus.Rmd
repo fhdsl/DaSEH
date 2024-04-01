@@ -173,6 +173,8 @@ We would like to create an open, safe, welcoming, diverse, inclusive, intellectu
 
 We strive to be a space in which individual differences are respected, so that each individual can reach their fullest potential.
 
+TODO: Put code of conduct here
+
 <br>
 
 ### Guidelines
@@ -196,4 +198,4 @@ This applies to emails, surveys, Slack, Zoom, office hours, meetings with other 
 
 ### Resources
 
-<Put code of conduct and other resources here>
+TODO: Put other resources here!
