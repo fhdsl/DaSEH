@@ -23,11 +23,11 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 Data Science for Environmental Health (DaSEH) is a short course that combines **online** learning and an **in-person** project-focused intensive. DaSEH is tailored for beginners and novices in R programming, offering instruction on importing, wrangling, visualizing, and analyzing data. It provides hands-on training in using R for statistical computing, a widely-used open-source tool for data analysis and visualization.
 
-**Two-week course**
+### Two-week course
 
 DaSEH begins with a two-week online course that solidifies R programming foundations. Participants learn best practices and ingrain programming skills via active hands-on lab activities. We will practice new skills one topic at a time to make the content more manageable! 
 
-**Code-a-thon**
+### Code-a-thon
 
 The two-week foundation prepares participants a three-day in-person intensive “Code-a-thon”. Here, we'll work on authentic environmental health projects. We'll also practice data ethics skills in peer code review, reproducibility, and transparency in a supportive environment. 
 
@@ -37,9 +37,7 @@ The two-week foundation prepares participants a three-day in-person intensive �
 
 The lead instructors have earned recognition for excellence in teaching and have trained hundreds of professional learners. We can't wait to have you in class, too!
 
-### Content Data Scientist
-
-`r config::get("ds")`
+We're also supported by our data scientist, `r config::get("ds")`.
 
 <br>
 
