@@ -19,7 +19,7 @@ pre { /* Code block - slightly smaller in this lecture */
 </style>
 
 
-## Outline 
+## Outline
 
 * Part 0: A little bit of set up!
 * Part 1: reading in manually (point and click)
@@ -74,7 +74,7 @@ knitr::include_graphics("images/Data_Input_new_project_details.png")
 
 ## New R Project
 
-You now have a new R Project folder on your Desktop! 
+You now have a new R Project folder on your Desktop!
 
 Make sure you add any scripts or data files to this folder as we go through today's lesson. This will make sure R is able to "find" your files.
 
@@ -117,7 +117,7 @@ Youth Tobacco Survey (YTS) dataset:
 -  `>` File
 -  `>` Import Dataset
 -  `>` From Text (`readr`)
--  `>` paste the url (http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv)
+-  `>` paste the url (https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv)
 -  `>` click "Update" and "Import"
 
 
@@ -176,7 +176,7 @@ Cons: obscures some of what's happening, others will have difficulty running you
 Importing data:
 
 -  File `>` Import Dataset `>` From Text (`readr`)
--  Paste the url (http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv)
+-  Paste the url (https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv)
 -  Click "Update" and "Import"
 
 Review the process: [`https://youtu.be/LEkNfJgpunQ`](https://youtu.be/LEkNfJgpunQ)
@@ -188,13 +188,13 @@ Review the process: [`https://youtu.be/LEkNfJgpunQ`](https://youtu.be/LEkNfJgpun
 
 # Part 2: Getting data into R (directly)
 
-## Data Input: Read in Directly 
+## Data Input: Read in Directly
 
 ```{r message = FALSE}
 # load library `readr` that contains function `read_csv`
 library(readr)
 dat <- read_csv(
-  file = "http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv"
+  file = "https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv"
 )
 
 # `head` displays first few rows of a data frame. `tail()` works the same way.
@@ -205,22 +205,22 @@ head(dat, n = 5)
 
 ```{r message = FALSE}
 dat <- read_csv(
-  file = "http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv"
+  file = "https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv"
 )
 # EQUIVALENT TO
 dat <- read_csv(
-  "http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv"
+  "https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv"
 )
 ```
 
 
-## Data Input: Read in Directly 
+## Data Input: Read in Directly
 
 `read_csv()` needs an argument `file =`.
 
 -  `file` is the path to your file, **in quotation marks**
 -  can be path to a file on a website (URL)
--  can be **path** in your local computer -- absolute file path or relative file path 
+-  can be **path** in your local computer -- absolute file path or relative file path
 
 ```{r, eval = FALSE}
 # Examples
@@ -246,7 +246,7 @@ knitr::include_graphics("images/Data_Input_where_are_the_files.gif")
 
 When you set up an R Project, R looks for files in that folder.
 
-Luckily, we already set up an R Project! 
+Luckily, we already set up an R Project!
 
 Move downloaded files into the R Project folder.
 
@@ -277,7 +277,7 @@ dat <- read_csv(file = "Youth_Tobacco_Survey_YTS_Data.csv")
 
 When we create an R Project, we establish the **working directory**.
 
-Working directory is a folder (directory) that RStudio assumes "you are working in". 
+Working directory is a folder (directory) that RStudio assumes "you are working in".
 
 It's where R looks for files.
 
@@ -329,8 +329,8 @@ knitr::include_graphics("images/Data_Input_View_data.png")
 
 `read_delim()` needs path to your file and **file's delimiter**, will return a tibble
 
--  `file` is the path to your file, in quotes 
--  `delim` is what separates the fields within a record 
+-  `file` is the path to your file, in quotes
+-  `delim` is what separates the fields within a record
 
 ```{r, eval = FALSE}
 ## Examples
@@ -349,7 +349,7 @@ dat <- read_delim(file = "data.txt", delim = "|")
 ```{r}
 # Programmatically download
 download.file(
-  url = "http://jhudatascience.org/intro_to_r/data/asthma.xlsx",
+  url = "https://daseh.org/data/asthma.xlsx",
   destfile = "asthma.xlsx",
   overwrite = TRUE,
   mode = "wb"
@@ -392,17 +392,17 @@ read_dta(file = "mtcars.dta")
 
 ## `read.csv` is * base R *
 
-There are also data importing functions provided in base R (rather than the `readr` package), like `read.delim()` and `read.csv()`. 
+There are also data importing functions provided in base R (rather than the `readr` package), like `read.delim()` and `read.csv()`.
 
-These functions have slightly different syntax for reading in data (e.g. `header` argument). 
+These functions have slightly different syntax for reading in data (e.g. `header` argument).
 
-However, while many online resources use the base R tools, the latest version of RStudio switched to use these new `readr` data import tools, so we will use them in the class for slides. They are also up to two times faster for reading in large datasets, and have a progress bar which is nice. 
+However, while many online resources use the base R tools, the latest version of RStudio switched to use these new `readr` data import tools, so we will use them in the class for slides. They are also up to two times faster for reading in large datasets, and have a progress bar which is nice.
 
 
 ## TROUBLESHOOTING: Common new user mistakes we have seen
 
 1.  **Working directory problems: trying to read files that R "can't find"**
-    - Path misspecification 
+    - Path misspecification
     - more on this shortly!
 2.  Typos (R is **case sensitive**, `x` and `X` are different)
     - RStudio helps with "tab completion"
@@ -464,7 +464,7 @@ setwd("/Users/avahoffman/Desktop")
 
 ## Other Useful Functions
 
-- The `str()` function can tell you about data/objects (different variables and their classes - more on this later). 
+- The `str()` function can tell you about data/objects (different variables and their classes - more on this later).
 - We will also discuss the `glimpse()` function later, which does something very similar.
 - `head()` shows first few rows
 - `tail()` shows the last few rows
@@ -480,10 +480,10 @@ here()
 
 `read_csv()` function from `readr` package:
 
-- comma delimited data 
+- comma delimited data
 - needs a file path to be provided
 - returns a tibble (data frame)
-  
+
 R Projects are a good way to keep your files organized and reduce headaches
 
 - Use `getwd()` to check your working directory, where R looks for your data files
@@ -498,7 +498,7 @@ Look at your data!
 
 Other file types
 
-- `readr` package: `read_delim()` for general delimited files 
+- `readr` package: `read_delim()` for general delimited files
 - `readxl` package: `read_excel()` for Excel files
 
 Don't forget to use `<-` to assign your data to an object!

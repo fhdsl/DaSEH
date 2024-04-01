@@ -613,7 +613,7 @@ First, we will read in some data for the purpose of demonstration about food pri
 
 ```{r}
 food <- read_csv(
-  file = "http://jhudatascience.org/intro_to_r/data/food_price.csv")
+  file = "https://daseh.org/data/food_price.csv")
 ```
 
 ## Food data

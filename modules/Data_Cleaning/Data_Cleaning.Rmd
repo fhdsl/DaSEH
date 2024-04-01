@@ -108,7 +108,7 @@ Check the values for your variables, are they what you expect?
 ```{r, message=FALSE}
 library(jhur)
 bike <- read_csv(file =
-    "http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv")
+    "https://daseh.org/data/Bike_Lanes.csv")
 bike %>% count(subType)
 ```
 
@@ -414,7 +414,7 @@ data_diet <- tibble(Diet = rep(c("A", "B", "B"),
 ## Reading in the data if it were an excel sheet
 Data is also here: 
 
-http://jhudatascience.org/intro_to_r/data/cleaning_diet_data.xlsx
+https://daseh.org/data/cleaning_diet_data.xlsx
 
 ```{r}
 library(readxl)

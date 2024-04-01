@@ -16,7 +16,7 @@ Data used
 Bike Lanes Dataset: BikeBaltimore is the Department of Transportation's bike program. 
 The data is from http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms
 
-You can Download as a CSV in your current working directory.  Note its also available at: 	http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv 
+You can Download as a CSV in your current working directory.  Note its also available at: 	https://daseh.org/data/Bike_Lanes.csv 
 
 ```{r, echo = TRUE, message=FALSE, error = FALSE}
 library(readr)
@@ -24,7 +24,7 @@ library(dplyr)
 library(tidyverse)
 library(jhur)
 
-bike <- read_csv(file = "http://jhudatascience.org/intro_to_r/data/Bike_Lanes.csv")
+bike <- read_csv(file = "https://daseh.org/data/Bike_Lanes.csv")
 ```
 
 or use 

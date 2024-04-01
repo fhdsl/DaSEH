@@ -67,7 +67,7 @@ Perform a t-test to determine if there is evidence of a difference between child
 
 ### 2.1
 
-Read in the Kaggle cars auction dataset using `read_kaggle()` from the `jhur` package.  Assign it to the "cars" variable. You can also find the data here:  http://jhudatascience.org/intro_to_r/data/kaggleCarAuction.csv.
+Read in the Kaggle cars auction dataset using `read_kaggle()` from the `jhur` package.  Assign it to the "cars" variable. You can also find the data here:  https://daseh.org/data/kaggleCarAuction.csv.
 
 ```{r 2.1response}
 

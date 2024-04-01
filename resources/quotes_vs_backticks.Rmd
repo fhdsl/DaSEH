@@ -267,7 +267,7 @@ This is true for URLs or paths.
 
 ```{r message=FALSE, warning=FALSE}
 # Use this
-vacc <- read_csv(file = "http://jhudatascience.org/intro_to_r/data/vaccinations.csv")
+vacc <- read_csv(file = "https://daseh.org/data/vaccinations.csv")
 ```
 
 ### tidyselect helper functions like `contains()`

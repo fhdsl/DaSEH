@@ -80,10 +80,10 @@ We will use data on student dropouts from the State of California during the 201
 
 To preserve school anonymity, "CDS_CODE" is used in place of the individual school's name.
 
-You can download the data from the JHU website here: http://jhudatascience.org/intro_to_r/data/dropouts.txt
+You can download the data from the DaSEH website here: https://daseh.org/data/dropouts.txt
 
 ```{r}
-dropouts <- read_delim("http://jhudatascience.org/intro_to_r/data/dropouts.txt", delim = "\t")
+dropouts <- read_delim("https://daseh.org/data/dropouts.txt", delim = "\t")
 dropouts
 ```
 
@@ -125,9 +125,9 @@ dropouts
 head(dropouts)
 ```
 
-Notice that `grade` is a `chr` variable. This indicates that the values are **character** strings. 
+Notice that `grade` is a `chr` variable. This indicates that the values are **character** strings.
 
-R does not realize that there is any order related to the `grade` values. It will assume that it is **alphabetical**. 
+R does not realize that there is any order related to the `grade` values. It will assume that it is **alphabetical**.
 
 However, we know that the order is: **freshman**, **sophomore**, **junior**, **senior**.
 
@@ -151,7 +151,7 @@ dropouts_subset %>%
   theme_bw(base_size = 16) # make all labels size 16
 ```
 
-OK this is very useful, but it is a bit difficult to read. We expect the values to be plotted by the order that we know, not by alphabetical order. 
+OK this is very useful, but it is a bit difficult to read. We expect the values to be plotted by the order that we know, not by alphabetical order.
 
 ## Change to factor
 
@@ -232,7 +232,7 @@ dropouts_fct %>%
 
 ## `forcats` for ordering{.smaller}
 
-What if we wanted to order `grade` by increasing `n_dropouts`? 
+What if we wanted to order `grade` by increasing `n_dropouts`?
 
 ```{r, fig.height= 3}
 library(forcats)
@@ -321,4 +321,3 @@ knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
 
 Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
-

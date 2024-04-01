@@ -191,7 +191,7 @@ Newly created column names are enclosed in quotation marks.
 
 ## Data used: Charm City Circulator
 
-http://jhudatascience.org/intro_to_r/data/Charm_City_Circulator_Ridership.csv
+https://daseh.org/data/Charm_City_Circulator_Ridership.csv
 
 ```{r, message = FALSE}
 library(jhur)
