@@ -380,7 +380,7 @@ as Desktop)</li>
 <p>Use the manual import method (File &gt; Import Dataset &gt; From Text
 (<code>readr</code>)) to Read in SARS-CoV-2 vaccination data from this
 URL:</p>
-<p><a href="https://jhudatascience.org/intro_to_r/data/vaccinations.csv" class="uri">https://jhudatascience.org/intro_to_r/data/vaccinations.csv</a>.</p>
+<p><a href="https://daseh.org/data/vaccinations.csv" class="uri">https://daseh.org/data/vaccinations.csv</a>.</p>
 <p>You can learn more about how the data was collected here: <a href="https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc" class="uri">https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc</a></p>
 </div>
 <div id="section-2" class="section level3">
@@ -400,9 +400,8 @@ comment using <code>#</code>.</p>
 <h1>Part 2</h1>
 <div id="section-4" class="section level3">
 <h3>2.1</h3>
-<p>Read in SARS-CoV-2 vaccination data from URL <a href="https://jhudatascience.org/intro_to_r/data/vaccinations.csv" class="uri">https://jhudatascience.org/intro_to_r/data/vaccinations.csv</a>
-and assign it to an object named <code>vacc</code>. Use the code
-structure below.</p>
+<p>Read in SARS-CoV-2 vaccination data from URL <a href="https://daseh.org/data/vaccinations.csv" class="uri">https://daseh.org/data/vaccinations.csv</a> and assign it to
+an object named <code>vacc</code>. Use the code structure below.</p>
 <pre><code># General format
 library(readr)
 # OBJECT &lt;- read_csv(FILE)</code></pre>
@@ -417,11 +416,11 @@ try <code>install.packages(&quot;readxl&quot;)</code>.</p>
 </div>
 <div id="section-6" class="section level3">
 <h3>2.3</h3>
-<p>Download the dataset of asthma prevalence in the USA from: <a href="https://jhudatascience.org/intro_to_r/data/asthma.xlsx" class="uri">https://jhudatascience.org/intro_to_r/data/asthma.xlsx</a>
-file to <code>asthma.xlsx</code> by running the following code chunk.
-This only downloads the file, it does NOT bring the file into R.</p>
+<p>Download the dataset of asthma prevalence in the USA from: <a href="https://daseh.org/data/asthma.xlsx" class="uri">https://daseh.org/data/asthma.xlsx</a> file to
+<code>asthma.xlsx</code> by running the following code chunk. This only
+downloads the file, it does NOT bring the file into R.</p>
 <pre class="r"><code>download.file(
-  url = &quot;https://jhudatascience.org/intro_to_r/data/asthma.xlsx&quot;,
+  url = &quot;https://daseh.org/data/asthma.xlsx&quot;,
   destfile = &quot;asthma.xlsx&quot;,
   overwrite = TRUE,
   mode = &quot;wb&quot;
@@ -441,7 +440,7 @@ package to read the <code>asthma.xlsx</code> file and call the output
 <div id="p.1" class="section level3">
 <h3>P.1</h3>
 <p>Run the following code - is there a problem? How do you know?</p>
-<pre class="r"><code>yts &lt;- read_delim(&quot;https://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv&quot;, delim = &quot;\t&quot;)</code></pre>
+<pre class="r"><code>yts &lt;- read_delim(&quot;https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv&quot;, delim = &quot;\t&quot;)</code></pre>
 <pre><code>## Rows: 9794 Columns: 1
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;\t&quot;

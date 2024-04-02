@@ -357,10 +357,10 @@ display: none;
 <h3><strong>Instructions</strong></h3>
 <p>Completed homework should be submitted on CoursePlus as an
 <strong>Rmd file</strong>. Please see the course website for more
-information about submitting assignments: <a href="https://jhudatascience.org/intro_to_r/syllabus.html#submitting-assignments" class="uri">https://jhudatascience.org/intro_to_r/syllabus.html#submitting-assignments</a>.</p>
+information about submitting assignments: <a href="https://daseh.org/syllabus.html#submitting-assignments" class="uri">https://daseh.org/syllabus.html#submitting-assignments</a>.</p>
 <p>Homework will be graded for correct output, not code style. All
 assignments are due at the end of the course. Please see the course
-website for more information about grading: <a href="https://jhudatascience.org/intro_to_r/syllabus.html#grading" class="uri">https://jhudatascience.org/intro_to_r/syllabus.html#grading</a>.</p>
+website for more information about grading: <a href="https://daseh.org/syllabus.html#grading" class="uri">https://daseh.org/syllabus.html#grading</a>.</p>
 <pre class="r"><code>## you can add more, or change...these are suggestions
 library(tidyverse)
 library(readr)
@@ -372,13 +372,13 @@ library(tidyr)</code></pre>
 <h3><strong>Problem Set</strong></h3>
 <p>1. Bring the following dataset into R.</p>
 <ul>
-<li>The dataset is located at: <a href="https://jhudatascience.org/intro_to_r/data/mortality.csv" class="uri">https://jhudatascience.org/intro_to_r/data/mortality.csv</a>.</li>
+<li>The dataset is located at: <a href="https://daseh.org/data/mortality.csv" class="uri">https://daseh.org/data/mortality.csv</a>.</li>
 <li>You can use the link, download it, or use whatever method you like
 for getting the file.</li>
 <li>Once you get the file, read the dataset in using
 <code>read_csv()</code> and assign it the name “mort”.</li>
 </ul>
-<pre class="r"><code>mort &lt;- read_csv(&quot;https://jhudatascience.org/intro_to_r/data/mortality.csv&quot;)</code></pre>
+<pre class="r"><code>mort &lt;- read_csv(&quot;https://daseh.org/data/mortality.csv&quot;)</code></pre>
 <pre><code>## New names:
 ## Rows: 197 Columns: 255
 ## ── Column specification
@@ -486,13 +486,13 @@ long &lt;-
   pivot_longer(mort, starts_with(c(&quot;1&quot;, &quot;2&quot;)), names_to = &quot;year&quot;, values_to = &quot;mortality&quot;)</code></pre>
 <p>8. Bring an additional dataset into R.</p>
 <ul>
-<li>The dataset is tab-delimited and located at: <a href="https://jhudatascience.org/intro_to_r/data/country_pop.txt" class="uri">https://jhudatascience.org/intro_to_r/data/country_pop.txt</a>.</li>
+<li>The dataset is tab-delimited and located at: <a href="https://daseh.org/data/country_pop.txt" class="uri">https://daseh.org/data/country_pop.txt</a>.</li>
 <li>You can use the link, download it, or use whatever method you like
 for getting the file.</li>
 <li>Once you get the file, read the dataset in using
 <code>read_tsv()</code> and assign it the name “pop”.</li>
 </ul>
-<pre class="r"><code>pop &lt;- read_tsv(&quot;https://jhudatascience.org/intro_to_r/data/country_pop.txt&quot;)</code></pre>
+<pre class="r"><code>pop &lt;- read_tsv(&quot;https://daseh.org/data/country_pop.txt&quot;)</code></pre>
 <pre><code>## Rows: 242 Columns: 6
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;\t&quot;
@@ -602,7 +602,7 @@ make up for any points lost on other questions.</p>
 <h3><strong>Bonus Practice</strong></h3>
 <p>A. Bring the following dataset into R.</p>
 <ul>
-<li>The dataset is located at: <a href="https://jhudatascience.org/intro_to_r/data/asthma.xlsx" class="uri">https://jhudatascience.org/intro_to_r/data/asthma.xlsx</a>.</li>
+<li>The dataset is located at: <a href="https://daseh.org/data/asthma.xlsx" class="uri">https://daseh.org/data/asthma.xlsx</a>.</li>
 <li>You should download the associated data.</li>
 <li>Once you get the file, read the dataset in using
 <code>read_excel()</code> from the <code>readxl</code> package and

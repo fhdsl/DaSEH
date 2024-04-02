@@ -405,16 +405,16 @@ existing object or creating a new object.</p>
 <p>Here we are creating a new object from an existing one:</p>
 <pre class="r"><code>new_rivers &lt;- sample(rivers, 5)
 new_rivers</code></pre>
-<pre><code>## [1]  286 1100  424  600  545</code></pre>
+<pre><code>## [1] 735 800 215 260 301</code></pre>
 <p>Using just this will only print the result and not actually change
 <code>new_rivers</code>:</p>
 <pre class="r"><code>new_rivers + 1</code></pre>
-<pre><code>## [1]  287 1101  425  601  546</code></pre>
+<pre><code>## [1] 736 801 216 261 302</code></pre>
 <p>If we want to modify <code>new_rivers</code> and save that modified
 version, then we need to reassign <code>new_rivers</code> like so:</p>
 <pre class="r"><code>new_rivers &lt;- new_rivers + 1
 new_rivers</code></pre>
-<pre><code>## [1]  287 1101  425  601  546</code></pre>
+<pre><code>## [1] 736 801 216 261 302</code></pre>
 <p>If we forget to reassign this can cause subsequent steps to not work
 as expected because we will not be working with the data that has been
 modified.</p>
@@ -437,8 +437,8 @@ your code.</p>
 <h2><strong>When should I use quotes (““) or backticks
 (``)?</strong></h2>
 <p>Check out our <a
-href="https://jhudatascience.org/intro_to_r/resources/quotes_vs_backticks.html">Guide
-on when to use quotes or backticks</a>.</p>
+href="https://daseh.org/resources/quotes_vs_backticks.html">Guide on
+when to use quotes or backticks</a>.</p>
 <hr />
 </div>
 <div
@@ -447,8 +447,8 @@ class="section level2">
 <h2><strong>How do I know when to use the <code>pull()</code> function,
 instead of just using <code>select()</code>?</strong></h2>
 <p>Check out our <a
-href="https://jhudatascience.org/intro_to_r/resources/functions_for_vectors.html">Guide
-on what functions require pulling values out first</a>.</p>
+href="https://daseh.org/resources/functions_for_vectors.html">Guide on
+what functions require pulling values out first</a>.</p>
 <p><br><br><br></p>
 </div>
 </div>
@@ -484,7 +484,7 @@ you never created <code>rivers2</code> and try to modify it like so:</p>
 operator:</p>
 <pre class="r"><code>rivers2 &lt;- new_rivers + 1
 rivers2</code></pre>
-<pre><code>## [1]  288 1102  426  602  547</code></pre>
+<pre><code>## [1] 737 802 217 262 303</code></pre>
 <hr />
 </div>
 <div id="error-unexpected-in-error-unexpected-in-error-unexpected-x-in"
