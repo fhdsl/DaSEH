@@ -6,9 +6,9 @@ output:
 
 ### **Instructions**
 
-Completed homework should be submitted on CoursePlus as an **Rmd file**. Please see the course website for more information about submitting assignments: https://jhudatascience.org/intro_to_r/syllabus.html#submitting-assignments.
+Completed homework should be submitted on CoursePlus as an **Rmd file**. Please see the course website for more information about submitting assignments: https://daseh.org/syllabus.html#submitting-assignments.
 
-Homework will be graded for correct output, not code style. All assignments are due at the end of the course. Please see the course website for more information about grading: https://jhudatascience.org/intro_to_r/syllabus.html#grading.
+Homework will be graded for correct output, not code style. All assignments are due at the end of the course. Please see the course website for more information about grading: https://daseh.org/syllabus.html#grading.
 
 
 ```{r initiatePackages, message=FALSE}
@@ -60,18 +60,18 @@ class(me)
 
 We will be working with a dataset from the "Kaggle" website, which hosts competitions for prediction and machine learning. More details on this dataset are here: https://www.kaggle.com/c/DontGetKicked/overview/background.
 
-5\. Bring the dataset into R. The dataset is located at: https://jhudatascience.org/intro_to_r/data/kaggleCarAuction.csv. You can use the link, download it, or use whatever method you like for getting the file. Once you get the file, read the dataset in using `read_csv()` and assign it the name `cars`.
+5\. Bring the dataset into R. The dataset is located at: https://daseh.org/data/kaggleCarAuction.csv. You can use the link, download it, or use whatever method you like for getting the file. Once you get the file, read the dataset in using `read_csv()` and assign it the name `cars`.
 
 ```{r 5response}
-cars <- read_csv(file = "https://jhudatascience.org/intro_to_r/data/kaggleCarAuction.csv")
+cars <- read_csv(file = "https://daseh.org/data/kaggleCarAuction.csv")
 # OR
-cars <- read_csv("https://jhudatascience.org/intro_to_r/data/kaggleCarAuction.csv")
+cars <- read_csv("https://daseh.org/data/kaggleCarAuction.csv")
 # OR
-url <- "https://jhudatascience.org/intro_to_r/data/kaggleCarAuction.csv"
+url <- "https://daseh.org/data/kaggleCarAuction.csv"
 cars <- read_csv(file = url)
 # OR
 download.file(
-  url = "https://jhudatascience.org/intro_to_r/data/kaggleCarAuction.csv",
+  url = "https://daseh.org/data/kaggleCarAuction.csv",
   destfile = "cars_data.csv",
   overwrite = TRUE,
   mode = "wb"
@@ -80,13 +80,13 @@ cars <- read_csv(file = "cars_data.csv")
 ```
 
 
-6\. Import the data "dictionary" from https://jhudatascience.org/intro_to_r/data/Carvana_Data_Dictionary_formatted.txt. Use the `read_tsv()` function and assign it the name "key". 
+6\. Import the data "dictionary" from https://daseh.org/data/Carvana_Data_Dictionary_formatted.txt. Use the `read_tsv()` function and assign it the name "key". 
 
 ```{r 6response}
-key <- read_tsv(file = "https://jhudatascience.org/intro_to_r/data/Carvana_Data_Dictionary_formatted.txt")
+key <- read_tsv(file = "https://daseh.org/data/Carvana_Data_Dictionary_formatted.txt")
 # OR
 download.file(
-  url = "https://jhudatascience.org/intro_to_r/data/Carvana_Data_Dictionary_formatted.txt",
+  url = "https://daseh.org/data/Carvana_Data_Dictionary_formatted.txt",
   destfile = "dict.txt",
   overwrite = TRUE,
   mode = "wb"

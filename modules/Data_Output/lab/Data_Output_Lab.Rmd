@@ -14,7 +14,7 @@ Remember anything you type here can be "sent" to the console with Cmd-Enter (OS-
 ### 1.1
 
 Read in SARS-CoV-2 vaccination data from URL 
-http://jhudatascience.org/intro_to_r/data/vaccinations.csv
+https://daseh.org/data/vaccinations.csv
 and assign it to an object named `vacc`. 
 
 ```
