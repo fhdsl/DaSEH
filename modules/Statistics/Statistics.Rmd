@@ -64,7 +64,7 @@ knitr::include_graphics("https://c.tenor.com/O3x8ywLm380AAAAd/chevy-chase.gif")
 
 There are plenty of resources online for learning more about these methods, as well as dedicated Biostatistics series (at different advancement levels) at the JHU School of Public Health.
 
-Check out [www.opencasestudies.org](https://www.opencasestudies.org/) for deeper dives on some of the concepts covered here and the [resource page](https://daseh.org//resources.html) for more resources.
+Check out [www.opencasestudies.org](https://www.opencasestudies.org/) for deeper dives on some of the concepts covered here and the [resource page](https://daseh.org/resources.html) for more resources.
 
 # Correlation
 
@@ -113,7 +113,7 @@ cor.test(x, y = NULL, alternative(c("two.sided", "less", "greater")),
 
 ## Correlation {.small}
 
-https://daseh.org//data/Charm_City_Circulator_Ridership.csv
+https://daseh.org/data/Charm_City_Circulator_Ridership.csv
 
 ```{r cor1, comment="", message = FALSE}
 library(jhur)
@@ -326,9 +326,9 @@ See [here](https://www.nature.com/articles/nbt1209-1135) for more about multiple
 
 ## Lab Part 1
 
-🏠 [Class Website](https://daseh.org//)  
+🏠 [Class Website](https://daseh.org/)  
 
-💻 [Lab](https://daseh.org//modules/Statistics/lab/Statistics_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Statistics/lab/Statistics_Lab.Rmd)
 
 # Regression
 
@@ -694,7 +694,7 @@ Some final notes:
 - `oddsratio()` from the `epitools` package can calculate odds ratios (outside of logistic regression - which allows more than one explanatory variable)
 - this is just the tip of the iceberg!
 
-## Resources (also on the [website](https://daseh.org//resources.html)!)
+## Resources (also on the [website](https://daseh.org/resources.html)!)
 
 For more check out:
 
@@ -706,9 +706,9 @@ Content for similar topics as this course can also be found on Leanpub.
 
 ## Lab Part 2
 
-🏠 [Class Website](https://daseh.org//)  
+🏠 [Class Website](https://daseh.org/)  
 
-💻 [Lab](https://daseh.org//modules/Statistics/lab/Statistics_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Statistics/lab/Statistics_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

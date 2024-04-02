@@ -253,7 +253,7 @@ knitr::include_graphics("images/monitors.jpg")
 
 * [Install RStudio](https://www.rstudio.com/products/rstudio/download/)
 
-More detailed instructions [on the website](https://daseh.org//docs/module_details/day0.html).
+More detailed instructions [on the website](https://daseh.org/docs/module_details/day0.html).
 
 RStudio is an **integrated development environment** (IDE) that makes it easier to work with R.
 
@@ -465,7 +465,7 @@ knitr::include_graphics("../../images/lol/install_packages.jpg")
 ## Useful (+ mostly Free) Resources
 
 Found on our website under the `Resources` tab:
-https://daseh.org//resources.html
+https://daseh.org/resources.html
 
 -  videos from previous offerings of the class
 -  cheatsheets for each class
@@ -474,7 +474,7 @@ https://daseh.org//resources.html
 
 Error messages can be scary!
 
-- Check out the FAQ/Help page on the website: https://daseh.org//help.html
+- Check out the FAQ/Help page on the website: https://daseh.org/help.html
 - Ask questions in Slack! Copy+pasting your error messages is really helpful!
 - Leverage our awesome TA time for 1:1 troubleshooting
 
@@ -495,11 +495,11 @@ knitr::include_graphics("images/forrest-gump-running.gif")
 - Materials will be updated frequently as we improve it. Please use the **Google Form survey** so you can provide feedback throughout the class!
 - Lots of **resources** can be found on the website. _You will have access to the website after the class is over._
 
-🏠 [Class Website](https://daseh.org//)
+🏠 [Class Website](https://daseh.org/)
 
 ## Website tour!
 
-🏠 [Class Website](https://daseh.org//)
+🏠 [Class Website](https://daseh.org/)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

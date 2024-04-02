@@ -73,12 +73,12 @@ Hit the "esc" key to restore your `>`, then fix/rerun your code.
 ***
 ## **When should I use quotes ("") or backticks (``)?**
 
-Check out our [Guide on when to use quotes or backticks](https://daseh.org//resources/quotes_vs_backticks.html).
+Check out our [Guide on when to use quotes or backticks](https://daseh.org/resources/quotes_vs_backticks.html).
 
 ***
 ## **How do I know when to use the `pull()` function, instead of just using `select()`?**
 
-Check out our [Guide on what functions require pulling values out first](https://daseh.org//resources/functions_for_vectors.html).
+Check out our [Guide on what functions require pulling values out first](https://daseh.org/resources/functions_for_vectors.html).
 
 <br><br><br>
 

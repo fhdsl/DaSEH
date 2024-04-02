@@ -32,7 +32,7 @@ pre { /* Code block - slightly smaller in this lecture */
 - remove a column: `select()` with `!` mark (`!col_name`)
 - you can do sequential steps: especially using pipes `%>%`
 
-📃[Cheatsheet](https://daseh.org//modules/cheatsheets/Day-3.pdf)
+📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
 
 
 ## Another Cheatsheet
@@ -310,9 +310,9 @@ summary(tb)
 - `summary(x)`: quantile information
 - `summarize`: creates a summary table of columns of interest
 
-🏠 [Class Website](https://daseh.org//)
+🏠 [Class Website](https://daseh.org/)
 
-💻 [Lab](https://daseh.org//modules/Data_Summarization/lab/Data_Summarization_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Data_Summarization/lab/Data_Summarization_Lab.Rmd)
 
 
 ## Youth Tobacco Survey
@@ -550,9 +550,9 @@ yts %>%
   - combine with `mutate()` to add column
 - `summarize()` with `n()` gives the count (NAs included) 
 
-🏠 [Class Website](https://daseh.org//)
+🏠 [Class Website](https://daseh.org/)
 
-💻 [Lab](https://daseh.org//modules/Data_Summarization/lab/Data_Summarization_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Data_Summarization/lab/Data_Summarization_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

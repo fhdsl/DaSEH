@@ -28,7 +28,7 @@ library(emoji)
   - combine with `mutate()` to add column
 - `summarize()` with `n()` gives the count (NAs included) 
 
-📃[Cheatsheet](https://daseh.org//modules/cheatsheets/Day-4.pdf)
+📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
 
 ## Recap on data classes
 
@@ -42,7 +42,7 @@ library(emoji)
 - Dates can be handled with the `lubridate` package
 - Make sure you choose the right function for the way the date is formatted!
 
-    📃[Cheatsheet](https://daseh.org//modules/cheatsheets/Day-4.pdf)
+    📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
 
 ## Data Cleaning {.emphasized}
 
@@ -377,8 +377,8 @@ knitr::include_graphics("images/debug.png")
 
 ## Lab Part 1
 
-🏠 [Class Website](https://daseh.org//)    
-💻[Lab](https://daseh.org//modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd)
+🏠 [Class Website](https://daseh.org/)    
+💻[Lab](https://daseh.org/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd)
 
 
 
@@ -781,8 +781,8 @@ knitr::include_graphics("images/case_when.png")
 
 ## Lab Part 2
 
-🏠 [Class Website](https://daseh.org//)    
-💻[Lab](https://daseh.org//modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd)
+🏠 [Class Website](https://daseh.org/)    
+💻[Lab](https://daseh.org/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

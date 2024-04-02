@@ -190,9 +190,9 @@ esquisser(long_circ) # day as x, Boardings as y, Route as fill
 
 ## Lab
 
-🏠 [Class Website](https://daseh.org//)
+🏠 [Class Website](https://daseh.org/)
 
-💻 [Lab](https://daseh.org//modules/Esquisse_Data_Visualization/lab/Esquisse_Data_Visualization_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Esquisse_Data_Visualization/lab/Esquisse_Data_Visualization_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

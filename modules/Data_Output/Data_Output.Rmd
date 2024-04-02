@@ -115,9 +115,9 @@ knitr::include_graphics(here::here("images/save_environment.png"))
 - `.rds` files can be handy for saving intermediate work
 - Can save environment (or subset) using `save()` and `save.image()`
 
-🏠 [Class Website](https://daseh.org//)
+🏠 [Class Website](https://daseh.org/)
 
-💻 [Data Output Lab](https://daseh.org//modules/Data_Output/lab/Data_Output_Lab.Rmd)
+💻 [Data Output Lab](https://daseh.org/modules/Data_Output/lab/Data_Output_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

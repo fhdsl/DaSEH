@@ -220,11 +220,11 @@ knitr::include_graphics("images/pane_layout.png")
 
 ## Lab: Starting with R and RMarkdown
 
-💻 [RStudio Lab](https://daseh.org//modules/RStudio/lab/RStudio_Lab.Rmd)
+💻 [RStudio Lab](https://daseh.org/modules/RStudio/lab/RStudio_Lab.Rmd)
 
 To do this lab we need to:
 
-- Download the file at the link above by clicking on it or go to the [website](https://daseh.org//materials_schedule.html) schedule page
+- Download the file at the link above by clicking on it or go to the [website](https://daseh.org/materials_schedule.html) schedule page
 - Find the downloaded file on your computer
 - Open the file in RStudio (double clicking the file name typically works)
 
@@ -284,7 +284,7 @@ knitr::include_graphics("images/output.png")
 
 ## If you get annoyed by code previews in Markdown files...
 
-See the [Help page](https://daseh.org//help.html) of the website. You can adjust this and change your RStudio settings:
+See the [Help page](https://daseh.org/help.html) of the website. You can adjust this and change your RStudio settings:
 
 Tools > Global Options > Appearance
 
@@ -441,9 +441,9 @@ knitr::include_graphics("images/double_question.png")
 -  R code goes within what is called a chunk (the gray box with a green play button)
 -  Code chunks can be modified so that they show differently in reports
 
-🏠 [Class Website](https://daseh.org//)
+🏠 [Class Website](https://daseh.org/)
 
-💻 [Lab](https://daseh.org//modules/RStudio/lab/RStudio_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/RStudio/lab/RStudio_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "25%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

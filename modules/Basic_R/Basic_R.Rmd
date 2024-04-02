@@ -279,7 +279,7 @@ x + c(1, 2, 3, 4)
 - Use the `c()` function to combine text/numbers/etc. into a vector
 - Use the `length()` function to determine number of elements
 
-💻 [Lab](https://daseh.org//modules/Basic_R/lab/Basic_R_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
 
 
 # Pause for Day 1
@@ -364,7 +364,7 @@ This tells you that `x` is a numeric vector and tells you the length.
 - Reassigning allows you to make changes "in place"
 - `str()` tells you a lot of information about an object in your environment
 
-💻 [Lab](https://daseh.org//modules/Basic_R/lab/Basic_R_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
 
 ## Useful functions to create vectors `seq()`
 
@@ -422,9 +422,9 @@ y
 
 ## Summary
 
-🏠 [Class Website](https://daseh.org//)
+🏠 [Class Website](https://daseh.org/)
 
-💻 [Basic R Lab](https://daseh.org//modules/Basic_R/lab/Basic_R_Lab.Rmd)
+💻 [Basic R Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

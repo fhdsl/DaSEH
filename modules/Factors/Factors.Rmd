@@ -313,8 +313,8 @@ dropouts_fct %>%
 
 ## Lab
 
-🏠 [Class Website](https://daseh.org//)    
-💻 [Lab](https://daseh.org//modules//Factors/lab/Factors_Lab.Rmd)
+🏠 [Class Website](https://daseh.org/)    
+💻 [Lab](https://daseh.org/modules//Factors/lab/Factors_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
