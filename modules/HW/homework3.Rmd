@@ -6,9 +6,6 @@ output:
 
 ### **Instructions**
 
-Completed homework should be submitted on CoursePlus as an **Rmd file**. Please see the course website for more information about submitting assignments: https://daseh.org/syllabus.html#submitting-assignments.
-
-Homework will be graded for correct output, not code style. All assignments are due at the end of the course. Please see the course website for more information about grading: https://daseh.org/syllabus.html#grading.
 
 
 ```{r initiatePackages, message=FALSE}

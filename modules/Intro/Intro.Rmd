@@ -209,11 +209,7 @@ knitr::include_graphics("../../docs/images/Intro_to_R.png")
  * `r config::get("holiday")`
  * Final classes will focus on final project
 
-## CoursePlus
 
-`r config::get("courseplus_web")`
-
-- Upload homework
 
 ## Surveys
 
