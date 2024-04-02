@@ -6,7 +6,6 @@ output:
 
 ### **Instructions**
 
-Homework is optional, but we recommend it so you can get the most out of this course.
 
 ```{r initiatePackages, message=FALSE}
 ## you can add more, or change...these are suggestions
@@ -55,14 +54,14 @@ library(tidyr)
 
 We will be working with a dataset from the "Kaggle" website, which hosts competitions for prediction and machine learning. More details on this dataset are here: https://www.kaggle.com/c/DontGetKicked/overview/background.
 
-5\. Bring the dataset into R. The dataset is located at: https://jhudatascience.org/intro_to_r/data/kaggleCarAuction.csv. You can use the link, download it, or use whatever method you like for getting the file. Once you get the file, read the dataset in using `read_csv()` and assign it the name `cars`.
+5\. Bring the dataset into R. The dataset is located at: https://daseh.org/data/kaggleCarAuction.csv. You can use the link, download it, or use whatever method you like for getting the file. Once you get the file, read the dataset in using `read_csv()` and assign it the name `cars`.
 
 ```{r 5response}
 
 ```
 
 
-6\. Import the data "dictionary" from https://jhudatascience.org/intro_to_r/data/Carvana_Data_Dictionary_formatted.txt. Use the `read_tsv()` function and assign it the name "key". 
+6\. Import the data "dictionary" from https://daseh.org/data/Carvana_Data_Dictionary_formatted.txt. Use the `read_tsv()` function and assign it the name "key". 
 
 ```{r 6response}
 

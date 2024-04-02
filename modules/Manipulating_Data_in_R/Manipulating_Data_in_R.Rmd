@@ -32,7 +32,7 @@ library(tidyverse)
     - `separate()` can split columns into additional columns
     - `unite()` can combine columns
 
-📃[Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-5.pdf)
+📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-5.pdf)
 
 ## Manipulating Data 
 
@@ -152,7 +152,7 @@ You might see old functions `gather` and `spread` when googling. These are older
 
 ```{r, message = FALSE}
 wide_vacc <- read_csv(
-  file = "https://jhudatascience.org/intro_to_r/data/wide_vacc.csv")
+  file = "https://daseh.org/data/wide_vacc.csv")
 ```
 
 ```{r}
@@ -191,7 +191,7 @@ Newly created column names are enclosed in quotation marks.
 
 ## Data used: Charm City Circulator
 
-http://jhudatascience.org/intro_to_r/data/Charm_City_Circulator_Ridership.csv
+https://daseh.org/data/Charm_City_Circulator_Ridership.csv
 
 ```{r, message = FALSE}
 library(jhur)
@@ -331,9 +331,9 @@ wide
 
 ## Lab Part 1
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
+🏠 [Class Website](https://daseh.org/)
 
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Manipulating_Data_in_R/lab/Manipulating_Data_in_R_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Manipulating_Data_in_R/lab/Manipulating_Data_in_R_Lab.Rmd)
 
 ## Joining
 
@@ -357,9 +357,9 @@ knitr::include_graphics("images/joins.png")
 
 ```{r message=FALSE}
 data_As <- read_csv(
-  file = "https://jhudatascience.org/intro_to_r/data/data_As_1.csv")
+  file = "https://daseh.org/data/data_As_1.csv")
 data_cold <- read_csv(
-  file = "https://jhudatascience.org/intro_to_r/data/data_cold_1.csv")
+  file = "https://daseh.org/data/data_cold_1.csv")
 ```
 
 ```{r}
@@ -467,9 +467,9 @@ fj
 
 ```{r message=FALSE}
 data_As <- read_csv(
-  file = "https://jhudatascience.org/intro_to_r/data/data_As_2.csv")
+  file = "https://daseh.org/data/data_As_2.csv")
 data_cold <- read_csv(
-  file = "https://jhudatascience.org/intro_to_r/data/data_cold_2.csv")
+  file = "https://daseh.org/data/data_cold_2.csv")
 ```
 
 ```{r}
@@ -566,9 +566,9 @@ anti_join(data_cold, data_As, by = "State") # order switched
 
 ## Lab Part 2
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
+🏠 [Class Website](https://daseh.org/)
 
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Manipulating_Data_in_R/lab/Manipulating_Data_in_R_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Manipulating_Data_in_R/lab/Manipulating_Data_in_R_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

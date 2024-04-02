@@ -402,9 +402,9 @@ circ %>% mutate(year = year(date_formatted)) %>%
 
 ## Lab Part 1
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/) 
+🏠 [Class Website](https://daseh.org/) 
 
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules//Data_Classes/lab/Data_Classes_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules//Data_Classes/lab/Data_Classes_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

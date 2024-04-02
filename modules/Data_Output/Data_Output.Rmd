@@ -39,7 +39,7 @@ write_csv(x, file,
 ```
 
 ```{r, echo = FALSE}
-dat <- read_csv("http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv")
+dat <- read_csv("https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv")
 ```
 
 ## Data Output
@@ -115,9 +115,9 @@ knitr::include_graphics(here::here("images/save_environment.png"))
 - `.rds` files can be handy for saving intermediate work
 - Can save environment (or subset) using `save()` and `save.image()`
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
+🏠 [Class Website](https://daseh.org/)
 
-💻 [Data Output Lab](https://jhudatascience.org/intro_to_r/modules/Data_Output/lab/Data_Output_Lab.Rmd)
+💻 [Data Output Lab](https://daseh.org/modules/Data_Output/lab/Data_Output_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

@@ -1,6 +1,6 @@
 ---
 title: "Syllabus"
-output: 
+output:
   html_document
 ---
 
@@ -36,7 +36,7 @@ By the end of the course, students should be comfortable:
 
 <br>
 
-### When 
+### When
 
 - **Dates:** `r config::get("course_dates")` (`r config::get("holiday")`)
 - **Time:** `r config::get("course_time")`
@@ -45,7 +45,7 @@ By the end of the course, students should be comfortable:
 
 ### Where
 
-- **Class Website:** http://jhudatascience.org/intro_to_r/   
+
 - Course lectures and labs will be online through Zoom
 - Zoom link and Slack link will be emailed to students
 - Communication will mainly occur through Slack
@@ -62,16 +62,16 @@ By the end of the course, students should be comfortable:
 ## Course Format
 
 - Each class will consist of 2 or 3 hour-long modules.
-- Each module features a lecture and an R programming lab, where students apply the skills taught in the modules to real data in breakout rooms. 
-- Class sessions will be recorded and later posted. 
-- If you have a question not covered during class, please post it on Slack. This allows everyone to see it. If another student does not answer your question (which we encourage!), we will try to answer it within 24 hours. If you feel uncomfortable posting a question publicly, let a TA or instructor know your question and we will post it for you anonymously. 
+- Each module features a lecture and an R programming lab, where students apply the skills taught in the modules to real data in breakout rooms.
+- Class sessions will be recorded and later posted.
+- If you have a question not covered during class, please post it on Slack. This allows everyone to see it. If another student does not answer your question (which we encourage!), we will try to answer it within 24 hours. If you feel uncomfortable posting a question publicly, let a TA or instructor know your question and we will post it for you anonymously.
 - To get the most out of this class, if possible, we suggest working virtually with a **large monitor or two screens**. This setup allows you to follow along on Zoom while also doing the hands-on coding.  
 - <details><summary> <span style = "color: #5383bb;"> **Please click here for details about using Zoom.**</span></summary>
-      
+
   Zoom + Working Virtually
-  
+
   ***
-  
+
   * Please be aware that there is the option to use closed captioning:
 
   ![closed captioning on zoom](docs/images/CC.png)
@@ -85,7 +85,7 @@ By the end of the course, students should be comfortable:
   ![ask for help](docs/images/help.png)
 
   * For directions on how to change breakout rooms click [here](https://docs.google.com/document/d/1YP1pZF1bIm66_Tl15Y3eHl8pGxNIASD33mKCtGCfQzc/edit?usp=sharing).
-    
+
   ***
   </details>
 
@@ -95,9 +95,7 @@ By the end of the course, students should be comfortable:
 
 Course evaluations are very important for the school to determine what courses to continue to support. It also helps us to improve the course with your feedback.
 
-- Use this link to access the evaluation: https://courseevaluations.jhsph.edu. 
-- Use your JHED ID or  and password to log in. If you do not have a JHED ID, sign in as a “Guest User” using the email provided to create your JHU login during course registration. Please contact JHSPH.courseeval@jhu.edu for assistance.  
-- All non-auditing institute students (whether they are taking courses for credit or not) are eligible to evaluate their courses. 
+TODO: What are the methods for course evaluations???
 
 <br>
 
@@ -107,7 +105,7 @@ Course evaluations are very important for the school to determine what courses t
 
 ### Grading
 
-All assignments are due **`r config::get("final_due_date")`**. 
+All assignments are due **`r config::get("final_due_date")`**.
 
 | **Assignment**       |  **Percent of Grade**|
 |:---------------------|---------------------:|
@@ -130,7 +128,7 @@ You should complete the following:
 | :-------------------------: | :-------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------: |
 | Homework 1                  | [Day 0 Instructions](docs/module_details/day0.html) | [Dataquest](https://app.dataquest.io/login?target-url=%2Fm%2F499%2Fintroduction-to-programming-in-r)                                               |
 | Homework 2                  |                                                     | [Rmd](modules/HW/homework2.Rmd), [HTML](modules/HW/homework2.html), [Key](modules/HW/homework2_Key.Rmd), [Key HTML](modules/HW/homework2_Key.html) |
-| Homework 3                  |                                                     | [Rmd](modules/HW/homework3.Rmd), [HTML](modules/HW/homework3.html), [Key](modules/HW/homework3_Key.Rmd), [Key HTML](modules/HW/homework3_Key.html) | 
+| Homework 3                  |                                                     | [Rmd](modules/HW/homework3.Rmd), [HTML](modules/HW/homework3.html), [Key](modules/HW/homework3_Key.Rmd), [Key HTML](modules/HW/homework3_Key.html) |
 
 <br>
 
@@ -142,7 +140,7 @@ This project should entail:
 - doing some light data cleaning
 - performing some data summarization
 - creating a couple of visualizations
-- doing some very light statistical analysis, like regression or t-tests 
+- doing some very light statistical analysis, like regression or t-tests
 
 You may use public datasets, or your own data for the project. If using your own dataset, **be sure any sensitive information is protected**.
 
@@ -154,7 +152,7 @@ See the [guidelines/instructions](modules/Project_Guidelines/Project_Guidelines.
 
 ### Submission
 
-All assignments are due **`r config::get("final_due_date")`**. 
+All assignments are due **`r config::get("final_due_date")`**.
 
 Submit each assignment to the designated [Drop Box on CoursePlus](`r config::get("courseplus_dropboxes")`).
 
@@ -170,9 +168,11 @@ For example, if you scored 9/10 on an assignment (90%) but turned it in two days
 
 ## Code of Conduct
 
-We would like to create an open, safe, welcoming, diverse, inclusive, intellectually stimulating, and hopefully fun class experience. 
+We would like to create an open, safe, welcoming, diverse, inclusive, intellectually stimulating, and hopefully fun class experience.
 
 We strive to be a space in which individual differences are respected, so that each individual can reach their fullest potential.
+
+TODO: Put code of conduct here
 
 <br>
 
@@ -191,23 +191,10 @@ We strive to be a space in which individual differences are respected, so that e
 
 This applies to emails, surveys, Slack, Zoom, office hours, meetings with other students, instructors, or TAs.
 
- **Please reach out to a TA or instructor if you witness or experience a violation of the class guidelines or other JHU codes of conduct.**
- 
+ **Please reach out to a TA or instructor if you witness or experience a violation of the class guidelines our codes of conduct.**
+
 <br>
- 
+
 ### Resources
 
-- **JHU Student Code of Conduct:** https://studentaffairs.jhu.edu/policies-guidelines/student-code/  
-- **Hopkins School of Medicine:** https://www.hopkinsmedicine.org/research/resources/offices-policies/OPC/Research_Integrity/som_code_of_conduct_04302020.pdf   
-- **JHSPH Academic Ethics Code:** https://www.jhsph.edu/offices-and-services/student-affairs/resources/student-policies/_documents/academic-ethics-code.pdf  
-
-**The University has developed avenues for reporting and for seeking help including:** 
-
-- JHU Sexual Assault Helpline, 410-516-7333 (confidential)  
-- Campus Safety and Security, 410-516-7777  
-- University Sexual Assault Response and Prevention website  
-- Johns Hopkins Compliance Hotline, 844-SPEAK2US (844-733-2528)  
-- JHU Office of Institutional Equity 410-516-8075 (nonconfidential)   
-- Johns Hopkins Student Assistance Program (JHSAP), 443-287-7000  
-- University Health Services - Mental Health (UHS-MS), 410-955-1892  
-- The Faculty and Staff Assistance Program (FASAP), 443-997-7000  
+TODO: Put other resources here!

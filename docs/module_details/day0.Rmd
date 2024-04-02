@@ -58,8 +58,6 @@ Install the latest version of RStudio (Desktop):
 
 You can also visit the `RStudio` website, <https://posit.co/download/rstudio-desktop/>.
 
-If you are using a computer issued from Hopkins, you may need to work with the IT department in advance to do these installations.
-
 ## Installing `jhur` (optional)
 
 The instructor team has created a collection of code, called a "package", that will help get data into your programming environment quickly. Copy and paste the following into the console and hit "return" to run the code.
@@ -98,4 +96,3 @@ You should see some messages in the console, ending with `* DONE (jhur)` if the 
 
 
 **Note**: only people taking the course for credit must turn in the assignments. However, we will evaluate all submitted assignments in case others would like feedback on their work.
-

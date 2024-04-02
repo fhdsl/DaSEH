@@ -68,7 +68,7 @@ Read in the Charm City Circulator data using `read_circulator()` function from `
 
 ```{r}
 circ <- read_circulator()
-circ <- read_csv(file = "http://jhudatascience.org/intro_to_r/data/Charm_City_Circulator_Ridership.csv")
+circ <- read_csv(file = "https://daseh.org/data/Charm_City_Circulator_Ridership.csv")
 ```
 
 Use the `str()` function to take a look at the data and learn about the column types.
