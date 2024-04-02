@@ -92,13 +92,10 @@ By the end of the course, students should be comfortable:
 
 <br>
 
-## Course Evaluation
+## Course Evaluation Survey
 
-Course evaluations are very important for the school to determine what courses to continue to support. It also helps us to improve the course with your feedback.
+We will ask you to fill out a final course evaluation survey to help us improve DaSEH with your feedback, as well as to help us identify what aspects of this program work well or could be enhanced or changed to help us with other similar data science education initiatives. 
 
-- Use this link to access the evaluation: https://courseevaluations.jhsph.edu. 
-- Use your JHED ID or  and password to log in. If you do not have a JHED ID, sign in as a “Guest User” using the email provided to create your JHU login during course registration. Please contact JHSPH.courseeval@jhu.edu for assistance.  
-- All non-auditing institute students (whether they are taking courses for credit or not) are eligible to evaluate their courses. 
 
 <br>
 
