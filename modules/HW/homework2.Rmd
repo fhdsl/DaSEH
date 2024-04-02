@@ -6,6 +6,7 @@ output:
 
 ### **Instructions**
 
+Homework is optional, but we recommend it so you can get the most out of this course.
 
 ```{r initiatePackages, message=FALSE}
 ## you can add more, or change...these are suggestions
