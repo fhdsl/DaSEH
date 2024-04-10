@@ -47,15 +47,14 @@ By the end of the course, learners should be comfortable:
 
 <br>
 
-### When
+#### When
 
-- **Dates:** `r config::get("course_dates")` (`r config::get("holiday")`)
+- **Dates:** `r config::get("course_dates")`
 - **Time:** `r config::get("course_time")`
 
 <br>
 
-### Where
-
+#### Where
 
 - Course lectures and labs will be online through Zoom
 - Zoom link and Slack link will be emailed to students
@@ -63,14 +62,7 @@ By the end of the course, learners should be comfortable:
 
 <br>
 
-### Instruction Team
-
-- **Instructors:** `r config::get("instructors")`
-- **Teaching Assistants:** `r config::get("ta")`
-
-<br>
-
-## Course Format
+#### Format
 
 - Each class will consist of 2 or 3 hour-long modules.
 - Each module features a lecture and an R programming lab, where students apply the skills taught in the modules to real data in breakout rooms.
@@ -104,44 +96,17 @@ By the end of the course, learners should be comfortable:
 
 ## Course Evaluation
 
-Course evaluations are very important for the school to determine what courses to continue to support. It also helps us to improve the course with your feedback.
-
-TODO: What are the methods for course evaluations???
+Course evaluations are very important for the school to determine what courses to continue to support. It also helps us to improve the course with your feedback. We will be using surveys throughout DaSEH to help make it a rewarding experience.
 
 <br>
 
 ## Assignments
 
-<br>
-
-### Grading
-
-All assignments are due **`r config::get("final_due_date")`**.
-
-| **Assignment**       |  **Percent of Grade**|
-|:---------------------|---------------------:|
-|Attendance/Participation               | 20% |
-|Homework 1                             | 15% |
-|Homework 2                             | 15% |
-|Homework 3                             | 15% |
-|Final Project                          | 35% |
-|**Total**                              | 100%|
-
-**Note**: only people taking the course for credit must turn in the assignments. However, we will evaluate all submitted assignments in case others would like feedback on their work.
+Homework is *strictly optional*. We encourage it to reinforce your learning.
 
 <br>
 
-### Homework
 
-You should complete the following:
-
-| **Module**                  | **Details**                                         | **Code**                                                                                                                                           |
-| :-------------------------: | :-------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------: |
-| Homework 1                  | [Day 0 Instructions](docs/module_details/day0.html) | [Dataquest](https://app.dataquest.io/login?target-url=%2Fm%2F499%2Fintroduction-to-programming-in-r)                                               |
-| Homework 2                  |                                                     | [Rmd](modules/HW/homework2.Rmd), [HTML](modules/HW/homework2.html), [Key](modules/HW/homework2_Key.Rmd), [Key HTML](modules/HW/homework2_Key.html) |
-| Homework 3                  |                                                     | [Rmd](modules/HW/homework3.Rmd), [HTML](modules/HW/homework3.html), [Key](modules/HW/homework3_Key.Rmd), [Key HTML](modules/HW/homework3_Key.html) |
-
-<br>
 
 ### Final Project
 
@@ -161,21 +126,8 @@ See the [guidelines/instructions](modules/Project_Guidelines/Project_Guidelines.
 
 <br>
 
-### Submission
 
-All assignments are due **`r config::get("final_due_date")`**.
 
-Submit each assignment to the designated [Drop Box on CoursePlus](`r config::get("courseplus_dropboxes")`).
-
-<br>
-
-### Assignment Extensions
-
-We know that you will try your best to submit assignments on time. However, we understand that life happens. We can accept late assignments with a deduction of 2% of your assignment score per day late.
-
-For example, if you scored 9/10 on an assignment (90%) but turned it in two days late, your score would be 8.6/10 (86%).
-
-<br>
 
 ## Code of Conduct
 
