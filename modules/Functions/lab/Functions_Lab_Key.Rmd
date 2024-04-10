@@ -88,10 +88,10 @@ has_n(x = nums, n = b_num)
 
 ### 2.1
 
-Read in the SARS-CoV-2 Vaccination data from http://jhudatascience.org/intro_to_r/data/USA_covid19_vaccinations.csv. Assign the data the name "vacc".
+Read in the SARS-CoV-2 Vaccination data from https://daseh.org/data/USA_covid19_vaccinations.csv. Assign the data the name "vacc".
 
 ```{r message = FALSE, label = '2.1response'}
-vacc <- read_csv("http://jhudatascience.org/intro_to_r/data/USA_covid19_vaccinations.csv")
+vacc <- read_csv("https://daseh.org/data/USA_covid19_vaccinations.csv")
 # If downloaded
 # vacc <- read_csv("USA_covid19_vaccinations.csv")
 ```

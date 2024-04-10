@@ -41,7 +41,7 @@ knitr::include_graphics("images/green_play_button.png")
 2^3
 ```
 
-Note: when you enter your command in the Console, R inherently thinks you want to print the result. 
+Note: when you enter your command in the Console, R inherently thinks you want to print the result.
 
 ## R as a calculator
 
@@ -49,7 +49,7 @@ Note: when you enter your command in the Console, R inherently thinks you want t
 - Try to play around with it:
     - +, -, /, * are add, subtract, divide and multiply
     - ^ or ** is power
-    - parentheses -- ( and ) -- work with order of operations 
+    - parentheses -- ( and ) -- work with order of operations
     - %% finds the remainder
 
 ## R as a calculator
@@ -174,7 +174,7 @@ z <- 3,000
 ## TROUBLESHOOTING: Complete the statement
 
 ```{r error = TRUE}
-10 / 
+10 /
 ```
 
 `+` indicates an incomplete statement. Hit "esc" to clear and bring back the `>`.
@@ -198,7 +198,7 @@ name
 
 ## The 'combine' function `c()`
 
-The function `c()` collects/combines/joins single R objects into a vector of R objects. It is mostly used for creating vectors of numbers, character strings, and other data types. 
+The function `c()` collects/combines/joins single R objects into a vector of R objects. It is mostly used for creating vectors of numbers, character strings, and other data types.
 
 ```{r assign3a}
 x <- c(1, 4, 6, 8)
@@ -279,7 +279,7 @@ x + c(1, 2, 3, 4)
 - Use the `c()` function to combine text/numbers/etc. into a vector
 - Use the `length()` function to determine number of elements
 
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Basic_R/lab/Basic_R_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
 
 
 # Pause for Day 1
@@ -364,7 +364,7 @@ This tells you that `x` is a numeric vector and tells you the length.
 - Reassigning allows you to make changes "in place"
 - `str()` tells you a lot of information about an object in your environment
 
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Basic_R/lab/Basic_R_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
 
 ## Useful functions to create vectors `seq()`
 
@@ -382,7 +382,7 @@ seq(from = -5, to = 5, length.out = 10)
 
 ## Useful functions to create vectors `rep()`
 
-For character: `rep()` can create very long vectors. 
+For character: `rep()` can create very long vectors.
 Works for creating character and numeric vectors.
 
 The `each` argument specifies how many of each item you want repeated.
@@ -402,13 +402,13 @@ rep(c("black", "white"), each = 2, times = 2)
  The `x` argument specifies what you are sampling from.
  The `size` argument specifies how many values there should be.
  The `replace` argument specifies if values should be replaced or not.
- 
+
 ```{r}
 seq_hun <- seq(from = 0, to = 100, by = 1)
 seq_hun
 y <- sample(x = seq_hun, size = 5, replace = TRUE)
 y
-``` 
+```
 
 ## Summary
 
@@ -422,9 +422,9 @@ y
 
 ## Summary
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
+🏠 [Class Website](https://daseh.org/)
 
-💻 [Basic R Lab](https://jhudatascience.org/intro_to_r/modules/Basic_R/lab/Basic_R_Lab.Rmd)
+💻 [Basic R Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
 
 ```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

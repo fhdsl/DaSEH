@@ -161,7 +161,7 @@ Go to Help > Cheat Sheets > R Markdown Cheat Sheet (which will download it)
 
 Or checkout Help > Cheat Sheets > R Markdown Reference Guide
 
-Or checkout the 🏠 [Class Website](https://jhudatascience.org/intro_to_r/)!
+Or checkout the 🏠 [Class Website](https://daseh.org/)!
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics("images/markdown_cheatsheet.png")
@@ -187,8 +187,8 @@ knitr::include_graphics("images/session_info.png")
 
 ## Lab 1
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)    
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Reproducibility/lab/Reproducibility_Lab.Rmd)
+🏠 [Class Website](https://daseh.org/)    
+💻 [Lab](https://daseh.org/modules/Reproducibility/lab/Reproducibility_Lab.Rmd)
 
 ## More resources
 
@@ -210,7 +210,7 @@ To help make your work more reproducible:
 - Tell your future self and others what you did!
 - Print session info!
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
+🏠 [Class Website](https://daseh.org/)
 
 ```{r, fig.alt="The End", out.width = "25%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

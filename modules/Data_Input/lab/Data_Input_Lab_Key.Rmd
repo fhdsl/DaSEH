@@ -29,7 +29,7 @@ Set up your R Project. Once complete, confirm you have created a project folder.
 
 Use the manual import method (File > Import Dataset > From Text (`readr`)) to Read in SARS-CoV-2 vaccination data from this URL:
 
-https://jhudatascience.org/intro_to_r/data/vaccinations.csv. 
+https://daseh.org/data/vaccinations.csv. 
 
 You can learn more about how the data was collected here: https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc
 
@@ -55,7 +55,7 @@ Preview the data by clicking the table button in the Environment. How many obser
 ### 2.1
 
 Read in SARS-CoV-2 vaccination data from URL 
-https://jhudatascience.org/intro_to_r/data/vaccinations.csv
+https://daseh.org/data/vaccinations.csv
 and assign it to an object named `vacc`. Use the code structure below.
 
 ```
@@ -66,7 +66,7 @@ library(readr)
 
 ```{r 2.1response}
 library(readr)
-vacc <- read_csv(file = "https://jhudatascience.org/intro_to_r/data/vaccinations.csv")
+vacc <- read_csv(file = "https://daseh.org/data/vaccinations.csv")
 ```
 
 ### 2.2
@@ -81,11 +81,11 @@ library(readxl)
 
 ### 2.3
 
-Download the dataset of asthma prevalence in the USA from: https://jhudatascience.org/intro_to_r/data/asthma.xlsx file to `asthma.xlsx` by running the following code chunk. This only downloads the file, it does NOT bring the file into R.
+Download the dataset of asthma prevalence in the USA from: https://daseh.org/data/asthma.xlsx file to `asthma.xlsx` by running the following code chunk. This only downloads the file, it does NOT bring the file into R.
 
 ```{r}
 download.file(
-  url = "https://jhudatascience.org/intro_to_r/data/asthma.xlsx",
+  url = "https://daseh.org/data/asthma.xlsx",
   destfile = "asthma.xlsx",
   overwrite = TRUE,
   mode = "wb"
@@ -110,7 +110,7 @@ asthma <- read_excel(path = "asthma.xlsx")
 Run the following code - is there a problem? How do you know?
 
 ```{r}
-yts <- read_delim("https://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv", delim = "\t")
+yts <- read_delim("https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv", delim = "\t")
 yts
 ```
 
