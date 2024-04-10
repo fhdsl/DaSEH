@@ -1,6 +1,4 @@
 default:
-  course_name_long: "Epi/Biostats Summer Institute - Introduction to R for Public Health Researchers 140.604.73"
-  #course_dates: "January 8-12 and 16-19, 2024"
   course_dates: >
       * July 8-18 (online/virtual course) + July 29-31 (in person in Seattle)
 

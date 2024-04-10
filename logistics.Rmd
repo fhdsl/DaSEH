@@ -1,5 +1,5 @@
 ---
-title: "Syllabus"
+title: "Logistics"
 output: 
   html_document
 ---
@@ -12,15 +12,25 @@ library(tidyverse)
 
 ## Overview
 
-**`r config::get("course_name_long")`**
+Data Science for Environmental Health (DaSEH) is a short course that combines **online** and **in-person** modalities to help professionals get the most out of this training. 
 
-This course will provide *"hands-on" training*  for learning how to analyze data in the R statistical software package. We will cover data input/output, data management and manipulation, and how to make useful and informative graphics.
+We focus on building R skills in the online portion of the course. When in-person, we focus on project skills, working with real datasets.
 
 <br>
 
-## Objectives
+## Audience 
 
-By the end of the course, students should be comfortable:
+We have designed DaSEH for the following audience:
+
+- Practitioners, professionals, or researchers in the environmental health space who want programming and data science skills
+- Educators who want programming and data science skills with a focus on environmental health
+- Practitioners, professionals, researchers, or advanced students from [Minority Serving Institutions](https://msiexchange.nasa.gov/pdf/2023-2024%20MSI%20List.pdf) or institutions without training opportunities like DaSEH.
+
+We especially encourage participants to join who are [underrepresented in data and health sciences](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-20-031.html).
+
+## Learning Objectives
+
+By the end of the course, learners should be comfortable:
 
 - Reading data into R
 - Recoding and manipulating data
@@ -29,10 +39,11 @@ By the end of the course, students should be comfortable:
 - Performing basic statistical tests
 - Understanding basic programming syntax
 - Creating reproducible R documents
+- Collaborating on and developing independent projects in environmental health data science
 
 <br>
 
-## Logistics
+## Online Course Logistics
 
 <br>
 
