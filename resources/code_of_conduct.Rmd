@@ -1,0 +1,6 @@
+---
+title: "Code of Conduct"
+output: 
+  html_document:
+    css: ../docs/web_styles.css
+---
