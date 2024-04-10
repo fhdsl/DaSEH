@@ -44,7 +44,11 @@ We're also supported by our data scientist, `r config::get("ds")`.
 ## Sign Up!
 ***
 
-Our next session of DaSEH will be held online `r config::get("course_dates_online")` and in-person `r config::get("course_dates_inperson")`. For more details check out [Logistics](syllabus.html). You can register using this link: `r config::get("register_link")`!
+Please apply using [this form](`r config::get("register_link")`). 
+
+Our next session(s) of DaSEH will be: 
+
+`r config::get("course_dates")`
 
 <br>
 

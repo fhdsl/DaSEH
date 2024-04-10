@@ -1,10 +1,12 @@
 default:
   course_name_long: "Epi/Biostats Summer Institute - Introduction to R for Public Health Researchers 140.604.73"
   #course_dates: "January 8-12 and 16-19, 2024"
-  course_dates_online: "July 8-12 and 16-19, 2024"
-  course_dates_inperson: "July 29-31, 2024"
+  course_dates: >
+      * July 8-18 (online/virtual course) + July 29-31 (in person in Seattle)
+
+      * September 30 - October 3 (online/virtual course) + October 16-18 (in person in Seattle)
   course_time: "1:30 p.m. - 4:50 p.m. ET"
-  register_link: "https://example.com"
+  register_link: "https://forms.gle/BNrdKJJ8PHpQtKMS8"
   #final_due_date: "January 24th at 11:59pm ET"
   #grades_due: "January 26"
   holiday: "In recognition of [Martin Luther King Jr. Day](https://en.wikipedia.org/wiki/Martin_Luther_King_Jr._Day), there will be **no class on Monday January 15th, 2024**."
