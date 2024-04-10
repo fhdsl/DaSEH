@@ -108,23 +108,23 @@ Homework is *strictly optional*. We encourage it to reinforce your learning.
 
 
 
-### Final Project
+<!-- ### Final Project -->
 
-This project should entail:
+<!-- This project should entail: -->
 
-- reading in a dataset of your choosing
-- doing some light data cleaning
-- performing some data summarization
-- creating a couple of visualizations
-- doing some very light statistical analysis, like regression or t-tests
+<!-- - reading in a dataset of your choosing -->
+<!-- - doing some light data cleaning -->
+<!-- - performing some data summarization -->
+<!-- - creating a couple of visualizations -->
+<!-- - doing some very light statistical analysis, like regression or t-tests -->
 
-You may use public datasets, or your own data for the project. If using your own dataset, **be sure any sensitive information is protected**.
+<!-- You may use public datasets, or your own data for the project. If using your own dataset, **be sure any sensitive information is protected**. -->
 
-Example projects can be found with the source code: [Rmd](modules/Project_Example/Project_Example.Rmd), and the output [html](modules/Project_Example/Project_Example.html) here.
+<!-- Example projects can be found with the source code: [Rmd](modules/Project_Example/Project_Example.Rmd), and the output [html](modules/Project_Example/Project_Example.html) here. -->
 
-See the [guidelines/instructions](modules/Project_Guidelines/Project_Guidelines.html) for final projects, including dataset resources.
+<!-- See the [guidelines/instructions](modules/Project_Guidelines/Project_Guidelines.html) for final projects, including dataset resources. -->
 
-<br>
+<!-- <br> -->
 
 
 
