@@ -28,6 +28,8 @@ We have designed DaSEH for the following audience:
 
 We especially encourage participants to join who are [underrepresented in data and health sciences](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-20-031.html).
 
+<br>
+
 ## Learning Objectives
 
 By the end of the course, learners should be comfortable:
@@ -49,7 +51,8 @@ By the end of the course, learners should be comfortable:
 
 #### When
 
-- **Dates:** `r config::get("course_dates")`
+- **Dates:** 
+     `r config::get("course_dates")`
 - **Time:** `r config::get("course_time")`
 
 <br>
