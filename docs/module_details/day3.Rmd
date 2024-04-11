@@ -46,7 +46,7 @@ pander::pandoc.table(
 
 ## Homework
 
-`r emo::ji("rotating_light")` **SURVEY**: [Day 3 check-in](`r config::get("courseplus_surveys")`)
+
 
 `r emo::ji("pencil")` **HOMEWORK 1**: [Dataquest](https://app.dataquest.io/login?target-url=%2Fm%2F499%2Fintroduction-to-programming-in-r) 
 
@@ -55,7 +55,7 @@ pander::pandoc.table(
 
 ## Drop Boxes
 
-[Assignment Drop Boxes](`r config::get("courseplus_dropboxes")`)
+
 
 **Note**: only people taking the course for credit must turn in the assignments. However, we will evaluate all submitted assignments in case others would like feedback on their work.
 

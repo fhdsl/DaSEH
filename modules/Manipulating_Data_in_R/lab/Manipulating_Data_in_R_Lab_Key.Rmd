@@ -21,13 +21,13 @@ library(tidyr)
 
 ### 1.1
 
-Read in the SARS-CoV-2 Vaccination data from http://jhudatascience.org/intro_to_r/data/USA_covid19_vaccinations.csv. You can use the url or download the data. Assign the data the name "vacc". We will be reviewing new concepts here and incorporating some from week 1. 
+Read in the SARS-CoV-2 Vaccination data from https://daseh.org/data/USA_covid19_vaccinations.csv. You can use the url or download the data. Assign the data the name "vacc". We will be reviewing new concepts here and incorporating some from week 1. 
 
 -  Remember to use `read_csv()` from the `readr` package.
 -  Do NOT use `read.csv()`.
 
 ```{r 1.1response}
-vacc <- read_csv("http://jhudatascience.org/intro_to_r/data/USA_covid19_vaccinations.csv")
+vacc <- read_csv("https://daseh.org/data/USA_covid19_vaccinations.csv")
 # If downloaded
 # vacc <- read_csv("USA_covid19_vaccinations.csv")
 ```
@@ -121,7 +121,7 @@ Take the code from Questions 1.1 and 1.3-1.7. Chain all of this code together us
 
 ```{r P.1response}
 vacc_compare <-
-  read_csv("http://jhudatascience.org/intro_to_r/data/USA_covid19_vaccinations.csv") %>%
+  read_csv("https://daseh.org/data/USA_covid19_vaccinations.csv") %>%
   rename(Entity = `State/Territory/Federal Entity`) %>%
   select(Entity, starts_with("Percent")) %>%
   pivot_longer(cols = !Entity) %>%
@@ -140,7 +140,7 @@ Modify the code from Question P.1:
 
 ```{r P.2response}
 vacc_compare2 <-
-  read_csv("http://jhudatascience.org/intro_to_r/data/USA_covid19_vaccinations.csv") %>%
+  read_csv("https://daseh.org/data/USA_covid19_vaccinations.csv") %>%
   rename(Entity = `State/Territory/Federal Entity`) %>%
   select(Entity, starts_with("Total")) %>%
   pivot_longer(cols = !Entity) %>%
@@ -154,10 +154,10 @@ vacc_compare2
 
 ### 2.1
 
-Read in the GDP and Personal Income Data from http://jhudatascience.org/intro_to_r/data/gdp_personal_income.csv. You can use the url or download the data. Call it "gdp". 
+Read in the GDP and Personal Income Data from https://daseh.org/data/gdp_personal_income.csv. You can use the url or download the data. Call it "gdp". 
 
 ```{r 2.1response}
-gdp <- read_csv("http://jhudatascience.org/intro_to_r/data/gdp_personal_income.csv")
+gdp <- read_csv("https://daseh.org/data/gdp_personal_income.csv")
 # If downloaded
 # gdp <- read_csv("gdp_personal_income.csv")
 ```
