@@ -7,7 +7,7 @@ output:
 
 Welcome to the DaSEH community! This Code of Conduct has been adapted from the [Bioconductor Community Code of Conduct](https://bioconductor.org/about/code-of-conduct/). These living documents are intended for reference and use during DaSEH online courses, in-person events (e.g., the Code-a-thon), and online communications (e.g., Slack workspace).
 
-In general, we encourage all individauls to take the time to consider how speech and actions can influence others. We encourage [critical reflection](https://www.dso.ufl.edu/documents/nsfp/What_is_Critical_Reflection.pdf) and question assumptions you have. We also ask that you acknowledge and respect the boundaries of other members.
+In general, we encourage all individuals to take the time to consider how speech and actions can influence others. We encourage [critical reflection](https://www.dso.ufl.edu/documents/nsfp/What_is_Critical_Reflection.pdf) and question assumptions you have. We also ask that you acknowledge and respect the boundaries of other members.
 
 ## Code of Conduct (version 1.0.0)
 
