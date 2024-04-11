@@ -51,8 +51,8 @@ By the end of the course, learners should be comfortable:
 
 #### When
 
-- **Dates:** 
-     `r config::get("course_dates")`
+`r config::get("course_dates")`
+
 - **Time:** `r config::get("course_time")`
 
 <br>
