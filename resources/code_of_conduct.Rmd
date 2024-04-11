@@ -7,7 +7,7 @@ output:
 
 Welcome to the DaSEH community! This Code of Conduct has been adapted from the [Bioconductor Community Code of Conduct](https://bioconductor.org/about/code-of-conduct/). These living documents are intended for reference and use during DaSEH online courses, in-person events (e.g., the Code-a-thon), and online communications (e.g., Slack workspace).
 
-In general, we encourage all individauls to take the time to consider how speech and actions can influence others. We encourage (critical reflection)[https://www.dso.ufl.edu/documents/nsfp/What_is_Critical_Reflection.pdf] and question assumptions you have. We also ask that you acknowledge and respect the boundaries of other members.
+In general, we encourage all individauls to take the time to consider how speech and actions can influence others. We encourage [critical reflection](https://www.dso.ufl.edu/documents/nsfp/What_is_Critical_Reflection.pdf) and question assumptions you have. We also ask that you acknowledge and respect the boundaries of other members.
 
 ## Code of Conduct (version 1.0.0)
 
@@ -24,7 +24,7 @@ In line with these values, DaSEH is dedicated to providing a welcoming, supporti
 - identity: gender, gender identity and expression, sexual orientation, disability, physical appearance, ethnicity, body size, race, age, religion, language, etc.  
 - intellectual position: approaches to data analysis, software preferences, coding style, scientific perspective, stage of career, etc.
 
-By participating in this learning community, you agree not to engage in behavior contrary to these values at any DaSEH-sponsored event (in person or virtual, including but not limited to classroom time, interactive labs, group work, social activities), electronic communication channels (including but not limited to DaSEH Slack and social media communications), or in collaborative code (including commits). Furthermore, we require all participants to have identifiable accounts in DaSEH online forums (Slack). Accounts that do not adhere to this after request to de-anonymise may be deleted.
+By participating in this learning community, you agree not to engage in behavior contrary to these values at any DaSEH-sponsored event (in person or virtual, including but not limited to classroom time, interactive labs, group work, social activities), electronic communication channels (including but not limited to DaSEH Slack and social media communications), or in collaborative code (including commits). Furthermore, we require all participants to have identifiable accounts in DaSEH online forums (Slack). Accounts that do not adhere to this after request to de-anonymize may be deleted.
 
 We do not tolerate harassment, intimidation, or bullying of community members. Sexual language and imagery are not appropriate in presentations, communications or in online venues, including chats.
 
@@ -49,7 +49,7 @@ Intimidation and bullying include, but are not limited to:
 - Mocking or insulting another person’s intellect, work, perspective, or question/comment  
 - Making reference to someone’s gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, age, religion, or other personal attributes in the context of a scientific discussion  
 - Deliberately making someone feel unwelcome  
-- Trolling behaviour (deliberately inflammatory or offensive messages)  
+- Trolling behavior (deliberately inflammatory or offensive messages)  
 - Sustained off-topic posts  
 
 ## Enforcement
