@@ -91,11 +91,9 @@ By the end of the course, students should be comfortable:
 
 <br>
 
-## Course Evaluation
+## Course Evaluation Survey
 
-Course evaluations are very important for the school to determine what courses to continue to support. It also helps us to improve the course with your feedback.
-
-TODO: What are the methods for course evaluations???
+We will ask you to fill out a final course evaluation survey to help us improve DaSEH with your feedback, as well as to help us identify what aspects of this program work well or could be enhanced or changed to help us with other similar data science education initiatives. 
 
 <br>
 

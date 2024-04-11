@@ -48,7 +48,7 @@ Our next session of DaSEH will be held online `r config::get("course_dates_onlin
 
 <br>
 
-## Testimonials
+## Testimonials from our other courses:
 ***
 
 "Thanks all for a wonderful course! I feel super confident in R now and I am excited to apply what we learned to future projects. Cheers !!"
