@@ -3,8 +3,10 @@ output_dir: '.'
 navbar:
   title: DaSEH
   left:
-  - text: Syllabus
-    href: syllabus.html
+  - text: Apply
+    href: https://forms.gle/BNrdKJJ8PHpQtKMS8
+  - text: Logistics
+    href: logistics.html
   - text: Materials + Schedule
     href: materials_schedule.html
   - text: Resources
