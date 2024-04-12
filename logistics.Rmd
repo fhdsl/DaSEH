@@ -97,6 +97,37 @@ By the end of the course, learners should be comfortable:
 
 <br>
 
+## In-person Course Logistics
+
+<br>
+
+#### How
+
+- Although DaSEH itself is free, participants will need to pay travel costs to get to Seattle (flight, train, hotel, etc.). Please select whatever mode of transportation works best for you.
+- Travel stipends are available for select participants. **You must indicate whether you would like to be considered for a travel stipend in the application.** If selected for a travel stipend, Fred Hutch and DaSEH will work with you to book travel.
+
+#### When
+
+`r config::get("course_dates")`
+
+- **Time:** Full working day (9am - 5pm Pacific Time)
+
+<br>
+
+#### Where
+
+- The Code-a-thon will take place at [Fred Hutch Cancer Center](https://maps.app.goo.gl/LRV4D4mELB5VzbWm8) in Seattle, WA. Fred Hutch is home to cancer research, clinical applications, as well as basic sciences and public health research.
+
+<br>
+
+#### Format
+
+- Each day will consist of 1-2 mini-modules to cover a collaborative topic (such as working on GitHub)
+- The majority of the day will consist of working in teams on a collaborative research project that applies the R programming skills learned in the online course. 
+- DaSEH organizers will rotate around to help debug or tackle questions.
+
+<br>
+
 ## Course Evaluation
 
 Course evaluations are very important for the school to determine what courses to continue to support. It also helps us to improve the course with your feedback. We will be using surveys throughout DaSEH to help make it a rewarding experience.
