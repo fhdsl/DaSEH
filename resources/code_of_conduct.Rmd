@@ -90,7 +90,7 @@ We understand that you may want a person unrelated to DaSEH overseeing your conf
 
 The organizers follow a standard procedure to deal with conflicts. This procedure is briefly summarized below. Incident procedures are based on the book “How to Respond to Code of Conduct Reports” by Valerie Aurora and Mary Gardiner.
 
-#### Report Acknowledgement
+#### Report Acknowledgment
 
 After receiving a report, the organizers will confirm receipt within 24 hours if contact information has been provided. If the report does not contain enough information, the organizers will attempt to obtain all relevant information to resolve the incident.
 
