@@ -3,6 +3,8 @@ title: "FAQ / Help"
 output: 
   html_document:
     toc: true
+    includes:
+      after_body: footer.html
 ---
 
 <br>
@@ -267,3 +269,4 @@ Go to the menu Tools > Global Options > Appearance. Choose a theme and apply!
 
 <br>
 <br>
+

@@ -1,7 +1,9 @@
 ---
 title: "Resources"
 output:
-  html_document
+   html_document:
+      includes:
+        after_body: footer.html
 ---
 
 ```{r, include = FALSE}
