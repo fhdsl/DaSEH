@@ -1,0 +1,123 @@
+---
+title: "Code of Conduct"
+output: 
+  html_document:
+    css: ../docs/web_styles.css
+---
+
+Welcome to the DaSEH community! This Code of Conduct has been adapted from the [Bioconductor Community Code of Conduct](https://bioconductor.org/about/code-of-conduct/). These living documents are intended for reference and use during DaSEH online courses, in-person events (e.g., the Code-a-thon), and online communications (e.g., Slack workspace).
+
+In general, we encourage all individuals to take the time to consider how speech and actions can influence others. We encourage [critical reflection](https://www.dso.ufl.edu/documents/nsfp/What_is_Critical_Reflection.pdf) and question assumptions you have. We also ask that you acknowledge and respect the boundaries of other members.
+
+## Code of Conduct (version 1.0.0)
+
+The DaSEH community values an open approach to science and learning that promotes
+
+- sharing of ideas, code, software, and expertise  
+- collaboration   
+- diversity and inclusivity  
+- a kind and welcoming environment  
+- constructive feedback
+
+In line with these values, DaSEH is dedicated to providing a welcoming, supportive, collegial experience free of harassment, intimidation, and bullying regardless of:
+
+- identity: gender, gender identity and expression, sexual orientation, disability, physical appearance, ethnicity, body size, race, age, religion, language, etc.  
+- intellectual position: approaches to data analysis, software preferences, coding style, scientific perspective, stage of career, etc.
+
+By participating in this learning community, you agree not to engage in behavior contrary to these values at any DaSEH-sponsored event (in person or virtual, including but not limited to classroom time, interactive labs, group work, social activities), electronic communication channels (including but not limited to DaSEH Slack and social media communications), or in collaborative code (including commits). Furthermore, we require all participants to have identifiable accounts in DaSEH online forums (Slack). Accounts that do not adhere to this after request to de-anonymize may be deleted.
+
+We do not tolerate harassment, intimidation, or bullying of community members. Sexual language and imagery are not appropriate in presentations, communications or in online venues, including chats.
+
+Any person/s violating the Code of Conduct may be sanctioned or expelled temporarily or permanently from an electronic platform or event at the discretion of the DaSEH organizers.
+
+The DaSEH community is committed to ethical partnerships and avoiding partnerships with entities whose practices are inconsistent with DaSEH values. We encourage community members to report or raise concerns about partnerships they deem unethical to the instructors or via the reporting form.
+
+#### Examples of unacceptable harassment, intimidation, and bullying behavior
+
+Harassment includes, but is not limited to:
+
+- Making comments in chats, to an audience or personally, that belittle or demean another person  
+- Sharing sexual images online  
+- Harassing photography or recording  
+- Sustained disruption of talks or other events  
+- Unwelcome sexual attention  
+- Advocating for, or encouraging, any of the above behavior  
+
+Intimidation and bullying include, but are not limited to:
+
+- Aggressive or browbeating behavior  
+- Mocking or insulting another person’s intellect, work, perspective, or question/comment  
+- Making reference to someone’s gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, age, religion, or other personal attributes in the context of a scientific discussion  
+- Deliberately making someone feel unwelcome  
+- Trolling behavior (deliberately inflammatory or offensive messages)  
+- Sustained off-topic posts  
+
+## Enforcement
+
+Anyone asked to stop harassing or intimidating behavior are expected to comply immediately.
+
+If a person contravenes the Code of Conduct, the DaSEH organizers retain the right to take any action that ensures a welcoming environment for all community members. This includes warning the alleged offender or temporary/permanent expulsion from the event and/or electronic platforms under DaSEH’s control.
+
+The organizers may take action to redress anything designed to, or with the clear impact of, disrupting an event or electronic communication platform or making the environment hostile for any community member.
+
+We expect everyone in the DaSEH community to comply with the Code of Conduct when participating in events and online communication platforms.
+
+## Reporting
+
+If someone makes you or anyone else feel unsafe or unwelcome, please report it as soon as possible. You can make a report either anonymously or personally. All reports will be reviewed by the organizers and will be kept confidential.
+
+#### Electronically
+
+You can make an anonymous or non-anonymous report via the following link: https://forms.gle/WBymAnzfWYpfWk4b6. It is a free-form text box that will be forwarded to the organizers. If you are uncomfortable reporting to the organizers as a group, you can contact any individual instructor via email or a direct message on the Slack workspace (https://daseh.slack.com/). Please include screenshots/copies of all relevant electronic conversations whenever possible (you don’t need to compromise your anonymity!).
+
+We can’t follow up an anonymous report with you directly, but we will fully investigate it and take whatever action is necessary to prevent a recurrence.
+
+#### Personal Report (for any DaSEH events: in-person or virtual)
+
+You can make a personal report to any member of the instructors or organizers present at an event. **If you feel uncomfortable in any way reporting to an organizer or instructor, please see the section Ombudsperson below.**
+
+When taking a personal report, we will ensure you are safe and cannot be overheard. We may involve other event staff to ensure your report is managed properly. Once safe, we’ll ask you to tell us about what happened. This can be upsetting, but we’ll handle it as respectfully as possible, and you can bring someone to support you. You won’t be asked to confront anyone, and we won’t tell anyone who you are.
+
+Our team will be happy to help you get the relevant support (e.g. help contacting hotel/venue security, local law enforcement, local support services, provide escorts, or otherwise assist you to feel safe for the duration of the event).
+
+We value your attendance and participation in our community.
+
+## Ombudsperson
+
+We understand that you may want a person unrelated to DaSEH overseeing your conflict resolution. To facilitate this, we encourage community members to reach out to our designated third party service (EthicsPoint) contracted by Fred Hutch. See more information [here](https://secure.ethicspoint.com/domain/media/en/gui/89211/index.html). They can assist community members by offering consultation, mediation, coaching and referrals to other resources.
+
+## Incident Procedure
+
+The organizers follow a standard procedure to deal with conflicts. This procedure is briefly summarized below. Incident procedures are based on the book “How to Respond to Code of Conduct Reports” by Valerie Aurora and Mary Gardiner.
+
+#### Report Acknowledgment
+
+After receiving a report, the organizers will confirm receipt within 24 hours if contact information has been provided. If the report does not contain enough information, the organizers will attempt to obtain all relevant information to resolve the incident.
+
+#### Initial Incident Response Assessment
+
+After acknowledging receipt of a report, the next step in the process is an initial incident response assessment. This includes asking any organizers to recuse themselves if they have conflicts of interest. During this step documentation of the incident is started.
+
+#### Informing the Reportee
+
+After the initial assessment, the reportee (person named as a violator of the code of conduct in the report) is informed. Information passed to the reportee will include an account of the alleged incident without compromising the anonymity of any anonymous reporters. The reportee will be asked to confirm the receipt and given the opportunity to state their views of the incident. Furthermore they will be informed of the remaining process as well as the appeals process, and given an expected timeline for the next communication from the organizers. Any statements by the reportee will be documented.
+
+#### Resolution
+
+The organizers will meet in order to discuss and determine a resolution to the incident. Possible resolutions that the organizers can take are simple communication of resolution to the reportee and non-anonymous reporters and may include:
+
+- a warning
+- temporary suspension
+- permanent suspension
+
+#### Appeal Process
+
+Any individual(s) involved in a report handled by the organizers has the right to appeal a decision. An appeal can be made directly to the organizers.
+
+The email should include documentation related to the incident to support the appeal. The said documentation may include, but does not have to be limited to:
+
+- Information from the reportee justifying reasoning for the appeal.  
+- Letters of support from community members.  
+- Statements from other individuals involved in the incident to support the appeal.  
+
+Appeals can be requested up to 30 days after a resolution has been determined.
