@@ -1,9 +1,6 @@
 ---
 title: "Materials + Schedule"
-output:
-   html_document:
-      includes:
-        after_body: footer.html
+
 ---
 
 There is an assignment due before we start to [install software](modules/Setup/R_and_RStudio_installation.html). We recommend completing HW 1 (Dataquest module indicated below) before class so we can hit the ground running!

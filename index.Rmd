@@ -2,10 +2,6 @@
 title: |
   ![](images/DaSEH_banner_wide_transparent.png)
   <br>
-output:
-   html_document:
-      includes:
-        after_body: footer.html
 ---
 
 ```{r setup, echo = FALSE, message = FALSE}
