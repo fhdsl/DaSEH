@@ -1,7 +1,7 @@
----
-title: "Materials + Schedule"
 
----
+<div class="leaf"></div> 
+# Materials + Schedule
+***
 
 There is an assignment due before we start to [install software](modules/Setup/R_and_RStudio_installation.html). We recommend completing HW 1 (Dataquest module indicated below) before class so we can hit the ground running!
 
