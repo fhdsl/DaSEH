@@ -20,7 +20,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 # Welcome!
 ***
 
-<div class="leafshape" id="one"><br><b>Travel <br> scholarships<br> are available <br>for eligible participants<br><br><span style="text-align:center;"> <ul>
+<div class="leafshape" id="one"><br><b>Travel <br> scholarships<br> are available <br>for eligible participants!<br><br><span style="text-align:center;"> <ul>
   <li>July 8-18 (online)/ <br> July 29-31 (Seattle)<br> or <li>Sept30-Oct 10 (online)/ <br> Oct 23-25 (Seattle) </ul></small>Please <a href="https://forms.gle/BNrdKJJ8PHpQtKMS8">Apply!</b><br></a></span> <br> </div>
 
 
