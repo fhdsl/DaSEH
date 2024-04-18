@@ -1,8 +1,4 @@
----
-title: "Logistics"
-output: 
-  html_document
----
+
 
 ```{r setup, echo = FALSE, message = FALSE}
 library(tidyverse)
@@ -10,6 +6,9 @@ library(tidyverse)
 
 <br>
 
+<div class="leaf"></div> 
+# Logistics
+***
 ## Overview
 
 Data Science for Environmental Health (DaSEH) is a short course that combines **online** and **in-person** modalities to help professionals get the most out of this training. 

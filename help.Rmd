@@ -3,6 +3,7 @@ title: "FAQ / Help"
 output: 
   html_document:
     toc: true
+
 ---
 
 <br>
@@ -261,9 +262,10 @@ ggplot(data = iris, aes(x = Species, y = Petal.Length)) +
 <br>
 
 ***
-## **How do I change the color / theme?
+## **How do I change the color / theme?**
 
 Go to the menu Tools > Global Options > Appearance. Choose a theme and apply!
 
 <br>
 <br>
+

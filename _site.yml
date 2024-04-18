@@ -24,4 +24,5 @@ output:
     css: docs/web_styles.css
     includes:
       in_header: [resources/header.html, GA_Script.Rhtml]
+      after_body: footer.html
       
