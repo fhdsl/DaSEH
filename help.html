@@ -358,8 +358,8 @@ id="toc-how-do-i-get-output-to-stop-printing-inside-the-rmarkdown-and-only-show-
 do I get output to stop printing inside the Rmarkdown and only show it
 in the console? (How Ava has her setup?)</strong></a></li>
 <li><a href="#how-do-i-change-the-color-theme"
-id="toc-how-do-i-change-the-color-theme">**How do I change the color /
-theme?</a></li>
+id="toc-how-do-i-change-the-color-theme"><strong>How do I change the
+color / theme?</strong></a></li>
 </ul></li>
 </ul>
 </div>
@@ -408,16 +408,16 @@ existing object or creating a new object.</p>
 <p>Here we are creating a new object from an existing one:</p>
 <pre class="r"><code>new_rivers &lt;- sample(rivers, 5)
 new_rivers</code></pre>
-<pre><code>## [1] 900 290 450 301 360</code></pre>
+<pre><code>## [1]  710  325  735  291 1100</code></pre>
 <p>Using just this will only print the result and not actually change
 <code>new_rivers</code>:</p>
 <pre class="r"><code>new_rivers + 1</code></pre>
-<pre><code>## [1] 901 291 451 302 361</code></pre>
+<pre><code>## [1]  711  326  736  292 1101</code></pre>
 <p>If we want to modify <code>new_rivers</code> and save that modified
 version, then we need to reassign <code>new_rivers</code> like so:</p>
 <pre class="r"><code>new_rivers &lt;- new_rivers + 1
 new_rivers</code></pre>
-<pre><code>## [1] 901 291 451 302 361</code></pre>
+<pre><code>## [1]  711  326  736  292 1101</code></pre>
 <p>If we forget to reassign this can cause subsequent steps to not work
 as expected because we will not be working with the data that has been
 modified.</p>
@@ -487,7 +487,7 @@ you never created <code>rivers2</code> and try to modify it like so:</p>
 operator:</p>
 <pre class="r"><code>rivers2 &lt;- new_rivers + 1
 rivers2</code></pre>
-<pre><code>## [1] 902 292 452 303 362</code></pre>
+<pre><code>## [1]  712  327  737  293 1102</code></pre>
 <hr />
 </div>
 <div id="error-unexpected-in-error-unexpected-in-error-unexpected-x-in"
@@ -622,13 +622,17 @@ output in the console.</div>
 <hr />
 </div>
 <div id="how-do-i-change-the-color-theme" class="section level2">
-<h2>**How do I change the color / theme?</h2>
+<h2><strong>How do I change the color / theme?</strong></h2>
 <p>Go to the menu Tools &gt; Global Options &gt; Appearance. Choose a
 theme and apply!</p>
 <p><br> <br></p>
 </div>
 </div>
 
+
+<p style="text-align:center;"> <small> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. </small></p>
+
+<p style="text-align:center;"><img src="images/logo_icon_highres.png" height="20"/><small>DaSEH is funded by the National Institute of Environmental Health Sciences <a href="https://reporter.nih.gov/search/cMEAgQFeo025gUX1DDzH9g/project-details/10746327">1R25ES035590-01.</a> </p></small>
 
 
 
