@@ -56,7 +56,7 @@ We're also supported by our data scientist, `r config::get("ds")`.
 ## Sign Up!
 ***
 
-Please apply using [this form](`r config::get("register_link")`). 
+Please apply using [this form](`r config::get("register_link")`) by **May 24, 2024**. 
 
 Our next session(s) of DaSEH will be: 
 
