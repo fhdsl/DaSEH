@@ -62,6 +62,8 @@ Our next session(s) of DaSEH will be:
 
 `r config::get("course_dates")`
 
+Please reach out to daseh @ fredhutch.org with any questions.
+
 <br>
 
 ## Testimonials from our other courses:
