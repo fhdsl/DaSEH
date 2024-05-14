@@ -9,29 +9,31 @@ editor_options:
 
 **Data used**
 
-Bike Lanes Dataset: BikeBaltimore is the Department of Transportation's bike program. 
-The data is from http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms
+CalEnviroScreen Dataset: CalEnviroScreen is a project that ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. Data used in the CalEnviroScreen model come from national and state sources.
 
-You can Download as a CSV in your current working directory.  Note its also available at: 	https://daseh.org/data/Bike_Lanes.csv 
+The data is from https://calenviroscreen-oehha.hub.arcgis.com/#Data
+
+You can Download as a CSV in your current working directory.  Note its also available at: 	https://daseh.org/data/CalEnvironmentalScreen_data.csv 
 
 ```{r}
 library(readr)
 library(tidyverse)
 library(dplyr)
 library(lubridate)
-library(jhur)
+library(dasehr)
 library(tidyverse)
 library(broom)
 # install.packages("naniar")
 library(naniar)
 ```
 
-Read in the bike data, you can use the URL or download the data.
+Read in the CalEnviroScreen data, you can use the URL or download the data.
 
-Bike Lanes Dataset: BikeBaltimore is the Department of Transportation's bike program. 
-The data is from http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms
+CalEnviroScreen Dataset: CalEnviroScreen is a project that ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. Data used in the CalEnviroScreen model come from national and state sources.
 
-You can Download as a CSV in your current working directory.  Note its also available at: 	https://daseh.org/data/Bike_Lanes.csv 
+The data is from https://calenviroscreen-oehha.hub.arcgis.com/#Data
+
+You can Download as a CSV in your current working directory.  Note its also available at: 	https://daseh.org/data/CalEnvironmentalScreen_data.csv 
 
 ```{r 1.0response}
 
@@ -39,7 +41,7 @@ You can Download as a CSV in your current working directory.  Note its also avai
 
 ### 1.1
 
-Use the `is.na()`  and `any()` functions to check if the bike `dateInstalled` variable has any `NA` values. Use the pipe between each step. 
+Use the `is.na()`  and `any()` functions to check if the ces `Lead` variable has any `NA` values. Use the pipe between each step. 
 Hint: You first need to `pull` out the vector version of this variable to use the `is.na()` function.
 
 ```
@@ -56,7 +58,7 @@ TIBBLE %>%
 
 ### 1.2
 
-Clean rows of bike, so that only rows remain that do NOT have missing values for the `route` variable,  using `drop_na`. Assign this to the object `have_route.`
+Clean rows of ces, so that only rows remain that do NOT have missing values for the `Education` variable,  using `drop_na`. Assign this to the object `have_ed_data.`
 
 ```{r 1.2response}
 
@@ -64,7 +66,7 @@ Clean rows of bike, so that only rows remain that do NOT have missing values for
 
 ### 1.3
 
-Use `naniar` to make a visual of the amount of data missing for each variable of `bike` (use `gg_miss_var()`). Check out more about this package here: https://www.njtierney.com/post/2018/06/12/naniar-on-cran/
+Use `naniar` to make a visual of the amount of data missing for each variable of `calenviroscreen` (use `gg_miss_var()`). Check out more about this package here: https://www.njtierney.com/post/2018/06/12/naniar-on-cran/
 
 ```{r 1.3response}
 
@@ -75,12 +77,11 @@ Use `naniar` to make a visual of the amount of data missing for each variable of
 
 ### P.1
 
-What percentage of the `subType` variable is complete of `bike` ? Hint: use another `naniar` function.
+What percentage of the `LinguisticIsol` variable is complete of `bike` ? Hint: use another `naniar` function.
  
 ```{r P.1response}
 
 ```
-
 
 # Part 2
 
