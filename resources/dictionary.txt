@@ -22,7 +22,10 @@ Boardings
 Bonferroni
 bp
 BSPH
+CalEnviroScreen
 CDS
+CES
+ces
 ChatGPT
 cheatsheet
 circ
@@ -46,6 +49,7 @@ ctrl
 custimization
 customizable
 cwrigh
+daseh
 DaSEH
 DaSEH's
 Dataquest
@@ -74,6 +78,7 @@ fct
 Fewings
 Fleetwood
 forcats
+fredhutch
 freepik
 fwang
 Gardiner
