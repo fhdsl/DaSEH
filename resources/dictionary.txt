@@ -93,7 +93,9 @@ ggthemes
 github
 GitHub
 GitHub
+HAA
 Hadley
+Haloacetic
 healthdata
 hoffman
 Hotline
