@@ -39,6 +39,7 @@ codeexample
 codesmall
 collegial
 CoursePlus
+Covid
 CoV
 cran
 csavone
