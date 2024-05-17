@@ -16,7 +16,7 @@ library(readr)
 library(tidyverse)
 library(dplyr)
 library(lubridate)
-library(jhur)
+library(dasehr)
 ```
 
 Create some data to work with by running the following code chunk.
@@ -64,11 +64,11 @@ Coerce `rand_vect` to character class using `as.character()`. Save this vector a
 
 ### 1.6
 
-Read in the Charm City Circulator data using `read_circulator()` function from `jhur` package using the code supplied in the chunk. Or alternatively using the url link.
+Read in the Wastewater Covid Viral Load data from `dasehr` package using the code supplied in the chunk. Alternatively using the url link.
 
 ```{r}
-circ <- read_circulator()
-circ <- read_csv(file = "https://daseh.org/data/Charm_City_Circulator_Ridership.csv")
+#wwviral <- 
+wwviral <- read_csv(file = "https://daseh.org/data/Wastewater_covid_level_data.csv")
 ```
 
 Use the `str()` function to take a look at the data and learn about the column types.
@@ -79,7 +79,7 @@ Use the `str()` function to take a look at the data and learn about the column t
 
 ### 1.7
 
-Use the `mutate()` function to create a new column named `date_formatted` that is of `Date` class. The new variable is created from `date` column. Hint: use `mdy()` function. Reassign to `circ`.
+Use the `mutate()` function to create a new column named `date_formatted` that is of `Date` class. The new variable is created from `date` column. Hint: use `mdy()` function. Reassign to `wwviral`.
 
 ```
 # General format
