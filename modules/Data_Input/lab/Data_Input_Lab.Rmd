@@ -27,11 +27,11 @@ Set up your R Project. Once complete, confirm you have created a project folder.
 
 ### 1.2
 
-Use the manual import method (File > Import Dataset > From Text (`readr`)) to Read in SARS-CoV-2 vaccination data from this URL:
+Use the manual import method (File > Import Dataset > From Text (`readr`)) to read in Haloacetic Acids (HAA5) Exposure for WA Populations on Public Water Systems data from this URL:
 
-https://daseh.org/data/vaccinations.csv. 
+https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv.
 
-You can learn more about how the data was collected here: https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc
+These data were collected by the Washington Tracking Network. You can learn more about the data here: https://fortress.wa.gov/doh/wtn/WTNPortal/#!q0=674
 
 ### 1.3
 
@@ -54,9 +54,8 @@ Preview the data by clicking the table button in the Environment. How many obser
 
 ### 2.1
 
-Read in SARS-CoV-2 vaccination data from URL 
-https://daseh.org/data/vaccinations.csv
-and assign it to an object named `vacc`. Use the code structure below.
+Read Haloacetic Acids (HAA5) Exposure for WA Populations on Public Water Systems data from https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv.
+and assign it to an object named `haa5`. Use the code structure below.
 
 ```
 # General format
@@ -80,12 +79,14 @@ If it is not installed, install it via: `RStudio --> Tools --> Install Packages`
 
 ### 2.3
 
-Download the dataset of asthma prevalence in the USA from: https://daseh.org/data/asthma.xlsx file to `asthma.xlsx` by running the following code chunk. This only downloads the file, it does NOT bring the file into R.
+The Washington Tracking Network also collects data on nitrate levels in the public water systems. More information on this data can be found here: https://fortress.wa.gov/doh/wtn/WTNPortal/#!q0=685
+
+We've downloaded this dataset already and have saved it as an Excel file. Download the dataset of asthma prevalence in the USA from: https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_data.xlsx file to `nitrate.xlsx` by running the following code chunk. This only downloads the file, it does NOT bring the file into R.
 
 ```{r}
 download.file(
-  url = "https://daseh.org/data/asthma.xlsx",
-  destfile = "asthma.xlsx",
+  url = "https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_data.xlsx",
+  destfile = "nitrate.xlsx",
   overwrite = TRUE,
   mode = "wb"
 )
@@ -95,7 +96,7 @@ Note: the "wb" option makes sure the file can be read correctly on Windows machi
 
 ### 2.4
 
-Use the `read_excel()` function in the `readxl` package to read the `asthma.xlsx` file and call the output `asthma`. 
+Use the `read_excel()` function in the `readxl` package to read the `nitrate.xlsx` file and call the output `nitrate`. 
 
 ```{r 2.4response}
 
@@ -106,11 +107,12 @@ Use the `read_excel()` function in the `readxl` package to read the `asthma.xlsx
 
 ### P.1
 
+Let's practice with data about CO2 emissions over time that was curated as part of the Open Case Studies project (https://www.opencasestudies.org/ocs-bp-co2-emissions/).
+
 Run the following code - is there a problem? How do you know?
 
 ```{r}
-yts <- read_delim("https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv", delim = "\t")
-yts
+
 ```
 
 ```{r P1response}
@@ -141,12 +143,12 @@ Learn your working directory by running `getwd()`
 
 ```
 
-Create a folder in your R project called data. Move the "asthma.xlsx" file there. 
+Create a folder in your R project called data. Move the "nitrate.xlsx" file there. 
 
-Modify the following code so that it finds "asthma.xlsx" in the "data" directory.
+Modify the following code so that it finds "nitrate.xlsx" in the "data" directory.
 
 ```
-asthma <- read_excel(path = "asthma.xlsx")
+nitrate <- read_excel(path = "nitrate.xlsx")
 ```
 
 ```{r eval=FALSE, label = 'P4bresponse'}
@@ -156,4 +158,3 @@ asthma <- read_excel(path = "asthma.xlsx")
 ### P.5
 
 Practice importing a dataset of your choice, give it an object name, and use `head()` to preview the first few lines.
-
