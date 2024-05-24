@@ -22,7 +22,10 @@ Boardings
 Bonferroni
 bp
 BSPH
+CalEnviroScreen
 CDS
+CES
+ces
 ChatGPT
 cheatsheet
 circ
@@ -36,6 +39,7 @@ codeexample
 codesmall
 collegial
 CoursePlus
+Covid
 CoV
 cran
 csavone
@@ -46,6 +50,7 @@ ctrl
 custimization
 customizable
 cwrigh
+daseh
 DaSEH
 DaSEH's
 Dataquest
@@ -74,6 +79,7 @@ fct
 Fewings
 Fleetwood
 forcats
+fredhutch
 freepik
 fwang
 Gardiner
@@ -87,7 +93,9 @@ ggthemes
 github
 GitHub
 GitHub
+HAA
 Hadley
+Haloacetic
 healthdata
 hoffman
 Hotline
@@ -148,6 +156,7 @@ NISSANs
 nizovatina
 NonCommercial
 nonconfidential
+NWSS
 obert
 ocs
 OCSdata
@@ -203,6 +212,7 @@ Rtools
 Rupshikha
 Sagar
 Saravanan
+SARS
 Savonen
 setosa
 ShareAlike
@@ -246,6 +256,7 @@ VehBCost
 VehicleAge
 VehOdo
 VehYear
+wastewater
 wb
 Wickham
 Wickham's
