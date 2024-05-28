@@ -32,8 +32,8 @@ library(tidyverse)
 or use 
 
 ```{r}
-library(dasehr)
-ces <- read_ces()
+#library(dasehr)
+#ces <- calenviroscreen()
 ```
 
 ### 1.1 
