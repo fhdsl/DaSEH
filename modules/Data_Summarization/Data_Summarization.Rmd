@@ -13,7 +13,7 @@ opts_chunk$set(comment = "", message = FALSE)
 suppressWarnings({library(dplyr)})
 library(readr)
 library(tidyverse)
-library(jhur)
+#library(dasehr)
 ```
 
 <style type="text/css">
@@ -86,7 +86,7 @@ quantile(x, na.rm = TRUE)
 
 ## Statistical summarization{.codesmall}
 
-We will talk more about data types later, but you can only do summarization on numeric or logical types. Not characters.
+We will talk more about data types later, but you can only do summarization on numeric or logical types, NOT characters.
 
 ```{r error = TRUE}
 x <- c(1, 5, 7, 4, 2, 8)
@@ -100,11 +100,11 @@ sum(z)
 
 ## Some examples
 
-We can use the `jhu_cars` to explore different ways of summarizing data.  The `head` command displays the first rows of an object:
+We can use the `CO_heat_ER` object from the `dasehr` package to explore different ways of summarizing data. (This dataset contains information about the number and rate of visits for heat-related illness to ERs in Colorado from 2011-2022, adjusted for age.)  The `head` command displays the first rows of an object:
 
 ```{r}
-library(jhur)
-head(jhu_cars)
+#library(dasehr)
+head(CO_heat_ER)
 ```
 
 
@@ -134,10 +134,10 @@ me %>%
 ## Statistical summarization the "tidy" way
 
 ```{r}
-jhu_cars %>% pull(hp) %>% mean() # alt: pull(jhu_cars, hp) %>% mean()
-jhu_cars %>% pull(wt) %>% median()
-jhu_cars %>% pull(hp) %>% quantile()
-jhu_cars %>% pull(wt) %>% quantile(probs = 0.6)
+CO_heat_ER %>% pull(visits) %>% mean(na.rm=T) # alt: pull(CO_heat_ER, visits) %>% mean(na.rm=T)
+CO_heat_ER %>% pull(rate) %>% median(na.rm=T)
+CO_heat_ER %>% pull(visits) %>% quantile(na.rm=T)
+CO_heat_ER %>% pull(rate) %>% quantile(probs = 0.9, na.rm=T)
 ```
 
 
@@ -146,79 +146,75 @@ jhu_cars %>% pull(wt) %>% quantile(probs = 0.6)
 `pull()` converts a single data column into a vector. This allows you to run summary functions on these data. Once you have "pulled" the data column out, you don't have to name it again in any piped summary functions.
 
 ```{r}
-cars_wt <- jhu_cars %>% pull(wt)
-class(cars_wt)
-cars_wt
+er_visits <- CO_heat_ER %>% pull(visits)
+class(er_visits)
+er_visits
 ```
 
 ```{r, eval=FALSE}
-jhu_cars %>% pull(wt) %>% range(wt) # Incorrect
+CO_heat_ER %>% pull(visits) %>% range(visits) # Incorrect
 ```
 
 ```{r}
-jhu_cars %>% pull(wt) %>% range() # Correct
+CO_heat_ER %>% pull(visits) %>% range(na.rm=T) # Correct
 ```
 
 
 # Summarization on tibbles (data frames)
 
-## TB Incidence 
+## Historical CO2 emissions by country
 
-Let's read in a `tibble` of values from TB incidence.
+Let's look at a dataset that tracks yearly estimated CO2 emissions by country. We will read it in as a `tibble`.
 
-If you have the `jhur` package installed successfully:
+If you have the `dasehr` package installed successfully:
 
 ```{r}
-library(jhur)
-tb <- read_tb()
+#library(dasehr)
+#yearly_co2 <- yearly_co2_emissions()
 ```
 
 <br>
-If not, download the `xlsx` file from https://daseh.org/data/tb_incidence.xlsx and read it in:
+If not, download the `csv` file from https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv and read it in:
 
 ```{r eval = FALSE}
-library(readxl)
-tb <- read_excel("tb_incidence.xlsx")
+#yearly_co2 <- read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv
+")
 ```
-
-
-## TB Incidence 
 
 Check out the data:
 
 ```{r}
-head(tb)
+head(yearly_co2)
 ```
 
-
-## TB Incidence 
+## Historical CO2 emissions by country
 
 Check out the data:
 
 ```{r}
-str(tb)
+str(yearly_co2)
 ```
 
 
-## Indicator of TB
+## CO2 Emissions
 
-Before we go further, let's rename the first column using the `rename()` function in `dplyr`.
+Before we go further, let's rename the second column using the `rename()` function in `dplyr`.
 
-In this case, we have to use the backticks (\`) because there are spaces and funky characters in the name. 
+In this case, we will use the backticks (\`) because we will be referring to a column that has a numerical name. If there are funky spaces or characters in the column name, the backticks are required. 
 
 ```{r}
 library(dplyr)
-tb <- tb %>%
-  rename(country = `TB incidence, all forms (per 100 000 population per year)`)
+yearly_co2 <- yearly_co2 %>%
+  rename(year1751 = `1751`)
 ```
 
 
-## Indicator of TB
+## CO2 Emissions
 
-`colnames()` will show us the column names and show that country is renamed:
+`colnames()` will show us the column names and show that the `1751` column is renamed:
 
 ```{r}
-colnames(tb)
+colnames(yearly_co2)
 ```
 
 
@@ -253,10 +249,10 @@ You can also do more elaborate summaries across different groups of data using `
 </div>
 
 ```{r}
-tb %>% 
-  summarize(mean_1991 = mean(`1991`)) # Note the backticks, this is a column name!
-tb %>% 
-  summarize(mean_1991 = mean(`1991`, na.rm = TRUE))
+yearly_co2 %>% 
+  summarize(mean_1989 = mean(`1989`)) # Note the backticks, this is a column name!
+yearly_co2 %>% 
+  summarize(mean_1989 = mean(`1989`, na.rm = TRUE))
 ```
 
 
@@ -265,9 +261,9 @@ tb %>%
 `summarize()` can do multiple operations at once. Just separate by a comma.
 
 ```{r}
-tb %>% 
-  summarize(mean_1991 = mean(`1991`, na.rm = TRUE),
-            median_1991 = median(`1991`, na.rm = TRUE),
+yearly_co2 %>% 
+  summarize(mean_1989 = mean(`1989`, na.rm = TRUE),
+            median_1989 = median(`1989`, na.rm = TRUE),
             median(`2000`, na.rm = TRUE))
 ```
 
@@ -280,9 +276,9 @@ Notice how when we forget to provide a new name, output is still provided, but t
 This looks better.
 
 ```{r}
-tb %>% 
-  summarize(mean_1991 = mean(`1991`, na.rm = TRUE),
-            median_1991 = median(`1991`, na.rm = TRUE),
+yearly_co2 %>% 
+  summarize(mean_1989 = mean(`1989`, na.rm = TRUE),
+            median_1989 = median(`1989`, na.rm = TRUE),
             median_2000 = median(`2000`, na.rm = TRUE))
 ```
 
@@ -299,7 +295,7 @@ If you want to save a summary statistic in the original data, use `mutate()` ins
 Using `summary()` can give you rough snapshots of each numeric column (character columns are skipped):
 
 ```{r}
-summary(tb)
+summary(yearly_co2)
 ```
 
 
@@ -315,14 +311,12 @@ summary(tb)
 💻 [Lab](https://daseh.org/modules/Data_Summarization/lab/Data_Summarization_Lab.Rmd)
 
 
-## Youth Tobacco Survey
+## CO ER Heat Illness Visits
 
-Here we will be using the Youth Tobacco Survey data:
-https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv
+Let's go back to the dataset of CO ER visits for heat-related illness. Remember, we loaded this data into our session and saved it as the object `CO_heat_ER`.
 
 ```{r}
-yts <- read_yts()
-head(yts)
+head(CO_heat_ER)
 ```
 
 
@@ -331,8 +325,8 @@ head(yts)
 `distinct(x)` will return the unique elements of column `x`.
 
 ```{r, message = FALSE}
-yts %>%
-  distinct(LocationDesc)
+CO_heat_ER %>%
+  distinct(county)
 ```
 
 
@@ -341,8 +335,8 @@ yts %>%
 `n_distinct()` tells you the number of unique elements. _Must pull the column first!_
 
 ```{r}
-yts %>%
-  pull(LocationDesc) %>% 
+CO_heat_ER %>%
+  pull(county) %>% 
   n_distinct()
 ```
 
@@ -357,7 +351,7 @@ options(max.print = 1000)
 Use `count` to return a frequency table of unique elements of a data.frame.
 
 ```{r, message = FALSE}
-yts %>% count(LocationDesc)
+CO_heat_ER %>% count(county)
 ```
 
 
@@ -366,16 +360,7 @@ yts %>% count(LocationDesc)
 Multiple columns listed further subdivides the count.
 
 ```{r, message = FALSE}
-yts %>% count(LocationDesc, TopicDesc)
-```
-
-
-## `dplyr`: `count` 
-
-Multiple columns listed further subdivides the count.
-
-```{r, message = FALSE}
-yts %>% count(LocationDesc, TopicDesc)
+CO_heat_ER %>% count(county, gender)
 ```
 
 <br>
@@ -391,7 +376,7 @@ yts %>% count(LocationDesc, TopicDesc)
 
 ```{r}
 # Regular data
-yts
+CO_heat_ER
 ```
 
 
@@ -400,8 +385,8 @@ yts
 `group_by` allows you group the data set by variables/columns you specify:
 
 ```{r}
-yts_grouped <- yts %>% group_by(Response)
-yts_grouped
+CO_heat_ER_grouped <- CO_heat_ER %>% group_by(gender)
+CO_heat_ER_grouped
 ```
 
 
@@ -410,7 +395,7 @@ yts_grouped
 It's grouped! Grouping doesn't change the data in any way, but how **functions operate on it**. Now we can summarize `Data_Value` (percent of respondents) by group:
 
 ```{r}
-yts_grouped %>% summarize(avg_percent = mean(Data_Value, na.rm = TRUE))
+CO_heat_ER_grouped %>% summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
 
 
@@ -419,10 +404,10 @@ yts_grouped %>% summarize(avg_percent = mean(Data_Value, na.rm = TRUE))
 Pipe `yts` into `group_by`, then pipe that into `summarize`:
 
 ```{r}
-yts %>%
-  group_by(Response) %>%
-  summarize(avg_percent = mean(Data_Value, na.rm = TRUE),
-            max_percent = max(Data_Value, na.rm = TRUE))
+CO_heat_ER %>%
+  group_by(gender) %>%
+  summarize(avg_visits = mean(visits, na.rm = TRUE),
+            max_visits = max(visits, na.rm = TRUE))
 ```
 
 
@@ -431,10 +416,10 @@ yts %>%
 `group_by` Response and Education:
 
 ```{r}
-yts %>%
-  group_by(Response, Education) %>%
-  summarize(avg_percent = mean(Data_Value, na.rm = TRUE),
-            max_percent = max(Data_Value, na.rm = TRUE))
+CO_heat_ER %>%
+  group_by(gender, year) %>%
+  summarize(avg_visits = mean(visits, na.rm = TRUE),
+            max_visits = max(visits, na.rm = TRUE))
 ```
 
 
@@ -443,9 +428,9 @@ yts %>%
 You can overwrite the first `group_by` with a new one.
 
 ```{r}
-yts %>% 
-  group_by(Response, Education)  %>% 
-  group_by(Education) 
+CO_heat_ER %>% 
+  group_by(gender, year)  %>% 
+  group_by(year) 
 ```
 
 
@@ -454,8 +439,8 @@ yts %>%
 The `ungroup` function will allow you to clear the groups from the data.
 
 ```{r}
-yts <- ungroup(yts)
-yts
+CO_heat_ER <- ungroup(CO_heat_ER)
+CO_heat_ER
 ```
 
 
@@ -464,10 +449,10 @@ yts
 We can also use `mutate` to calculate the mean value for each year and add it as a column:
 
 ```{r}
-yts %>%
-  group_by(YEAR) %>%
-  mutate(year_avg = mean(Data_Value, na.rm = TRUE)) %>%
-  select(LocationDesc, Data_Value, year_avg)
+CO_heat_ER %>%
+  group_by(year, gender) %>%
+  mutate(visits_year_avg = mean(visits, na.rm = TRUE)) %>%
+  select(county, visits, visits_year_avg)
 ```
 
 
@@ -476,10 +461,10 @@ yts %>%
 There are other functions, such as `n()` count the number of observations (NAs included).
 
 ```{r}
-yts %>%
-  group_by(YEAR) %>%
+CO_heat_ER %>%
+  group_by(year) %>%
   summarize(n = n(),
-            mean = mean(Data_Value, na.rm = TRUE))
+            mean = mean(visits, na.rm = TRUE))
 ```
 
 
@@ -488,8 +473,8 @@ yts %>%
 `count()` and `n()` can give very similar information.
 
 ```{r}
-mtcars %>% count(cyl)
-mtcars %>% group_by(cyl) %>% summarize(n()) # n() typically used with summarize
+CO_heat_ER %>% count(county)
+CO_heat_ER %>% group_by(county) %>% summarize(n()) # n() typically used with summarize
 ```
 
 
@@ -501,9 +486,8 @@ mtcars %>% group_by(cyl) %>% summarize(n()) # n() typically used with summarize
 These functions require a column as a vector using `pull()`.
 
 ```{r, message = FALSE}
-yts <- read_yts()
-yts_loc <- yts %>% pull(LocationDesc) # pull() to make a vector
-yts_loc %>% unique() # similar to distinct()
+CO_heat_ER_loc <- CO_heat_ER %>% pull(county) # pull() to make a vector
+CO_heat_ER_loc %>% unique() # similar to distinct()
 ```
 
 ## Base R functions you might see: `length` and `unique`
@@ -511,27 +495,27 @@ yts_loc %>% unique() # similar to distinct()
 These functions require a column as a vector using `pull()`.
 
 ```{r, message = FALSE}
-yts_loc %>% unique() %>% length() # similar to n_distinct()
+CO_heat_ER_loc %>% unique() %>% length() # similar to n_distinct()
 ```
 
 ## * New! * Many dplyr functions now have a `.by=` argument
 
-Pipe `yts` into `group_by`, then pipe that into `summarize`:
+Pipe `CO_heat_ER` into `group_by`, then pipe that into `summarize`:
 
 ```{r eval = FALSE}
-yts %>%
-  group_by(Response) %>%
-  summarize(avg_percent = mean(Data_Value, na.rm = TRUE),
-            max_percent = max(Data_Value, na.rm = TRUE))
+CO_heat_ER %>%
+  group_by(county) %>%
+  summarize(avg_visits = mean(visits, na.rm = TRUE),
+            max_visits = max(visits, na.rm = TRUE))
 ```
 
 is the same as..
 
 ```{r eval = FALSE}
-yts %>%
-  summarize(avg_percent = mean(Data_Value, na.rm = TRUE),
-            max_percent = max(Data_Value, na.rm = TRUE),
-            .by = Response)
+CO_heat_ER %>%
+  summarize(avg_visits = mean(visits, na.rm = TRUE),
+            max_visits = max(visits, na.rm = TRUE),
+            .by = county)
 ```
 
 
@@ -576,15 +560,15 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
 
 Get means for each row.
 
-Let's see what the mean TB incidence is across years each row (country):
+Let's see what the mean CO2 emissions is across years for each row (country):
 
 ```{r}
-tb %>%
+yearly_co2 %>%
   select(starts_with("year")) %>%
   rowMeans(na.rm = TRUE) %>%
   head(n = 5)
 
-tb %>%
+yearly_co2 %>%
   group_by(country) %>%
   summarize(mean = rowMeans(across(starts_with("year")), na.rm = TRUE)) %>%
   head(n = 5)
@@ -598,11 +582,11 @@ Get means for each column.
 Let's see what the mean is across each column (year):
 
 ```{r}
-tb %>%
+yearly_co2 %>%
   select(starts_with("year")) %>%
   colMeans(na.rm = TRUE) %>%
   head(n = 5)
 
-tb %>%
+yearly_co2 %>%
   summarize(across(starts_with("year"), ~mean(.x, na.rm = TRUE)))
 ```
