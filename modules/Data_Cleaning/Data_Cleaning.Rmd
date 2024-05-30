@@ -106,10 +106,10 @@ Check the values for your variables, are they what you expect?
 `count()` is a great option because it helps you check if rare values make sense.
 
 ```{r, message=FALSE}
-library(jhur)
-bike <- read_csv(file =
-    "https://daseh.org/data/Bike_Lanes.csv")
-bike %>% count(subType)
+#library(dasehr)
+yearly_co2 <- read_csv(file =
+    "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+yearly_co2 %>% count(`1989`)
 ```
 
 
@@ -135,14 +135,17 @@ knitr::include_graphics("images/naniar.png")
 This can tell you if there are missing values in the dataset.
 
 ```{R}
-pct_complete(bike)
+pct_complete(yearly_co2)
 ```
 
 Or for a particular variable:
 
 ```{R}
-bike%>% select(route) %>%
-pct_complete()
+yearly_co2 %>% select(`1989`) %>% 
+  pct_complete()
+
+yearly_co2 %>% select(`1889`) %>% 
+  pct_complete()
 ```
 
 ## naniar:`miss_var_summary()`
@@ -150,7 +153,7 @@ pct_complete()
 To get the percent missing (and counts) for each variable as a table, use this function.
 
 ```{r}
-miss_var_summary(bike)
+miss_var_summary(yearly_co2)
 ```
 
 ## `naniar` plots
@@ -159,7 +162,7 @@ The `gg_miss_var()` function creates a nice plot about the number of
 missing values for each variable, (need a data frame).
 
 ```{r, fig.height=4, warning=FALSE, fig.align='center'}
-gg_miss_var(bike)
+gg_miss_var(yearly_co2)
 ```
 
 
@@ -206,7 +209,9 @@ What if NA values represent values that are so low it is undetectable?
 Filter will drop them from the data.
 
 ```{r}
-bike %>% filter(subType == "STCLN")
+#CO_heat_ER <- read_csv(file = "https://daseh.org/data/Colorado_ER_heat_visits_AgeAdjusted_data.csv")
+
+CO_heat_ER %>% filter(visits > 0)
 ```
 
 ## filter() and missing data 
@@ -214,7 +219,7 @@ bike %>% filter(subType == "STCLN")
 `is.na()` can help us keep them.
 
 ```{r}
-bike %>% filter(subType == "STCLN" | is.na(subType))
+CO_heat_ER %>% filter(visits > 0 | is.na(visits))
 ```
 
 ## To remove **rows** with `NA` values for a **variable** use `drop_na()`
@@ -224,9 +229,9 @@ A function from the `tidyr` package. (Need a data frame to start!)
 Disclaimer: Don't do this unless you have thought about if dropping `NA` values makes sense based on knowing what these values mean in your data. **Also consider if you need those rows for values for other variables.**
 
 ```{r}
-dim(bike)
-bike_drop <- bike %>% drop_na(route)
-dim(bike_drop)
+dim(yearly_co2)
+yearly_co2_drop <- yearly_co2 %>% drop_na(`1989`)
+dim(yearly_co2_drop)
 ```
 
 ## Let's take a look
@@ -234,7 +239,7 @@ dim(bike_drop)
 Can still have NAs for other columns
 
 ```{r}
-bike_drop 
+yearly_co2_drop 
 ```
 
 
@@ -244,8 +249,8 @@ bike_drop
 This function of the `tidyr` package drops rows with **any** missing data in **any** column when used on a df.
 
 ```{r}
-bike_drop <- bike %>% drop_na()
-bike_drop
+yearly_co2_drop <- yearly_co2 %>% drop_na()
+yearly_co2_drop
 ```
 
 ## Drop **columns** with any missing values
@@ -253,7 +258,7 @@ bike_drop
 Use the `miss_var_which()` function from `naniar`
 
 ```{r}
-miss_var_which(bike)# which columns have missing values
+miss_var_which(yearly_co2)# which columns have missing values
 ```
 
 ## Drop **columns** with any missing values {.codesmall}
@@ -261,8 +266,8 @@ miss_var_which(bike)# which columns have missing values
 `miss_var_which` and  function from `naniar` (need a data frame)
 
 ```{r}
-bike_drop <- bike %>% select(!miss_var_which(bike))
-bike_drop
+yearly_co2_drop <- yearly_co2 %>% select(!miss_var_which(yearly_co2))
+yearly_co2_drop
 ```
 
 
@@ -272,7 +277,11 @@ bike_drop
 Let's say we think that all 0 values should be `NA`.
 
 ```{r}
-count(bike, dateInstalled)
+covid_ww <- covid_wastewater
+
+#covid_ww <- read_csv(file = "https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv")
+
+covid_ww %>% count(is.na(rna_pct_change_15d))
 ```
 
 ## Change a value to be `NA`{.codesmall}
@@ -280,9 +289,10 @@ count(bike, dateInstalled)
 The `na_if()` function of `dplyr` can be helpful for changing all 0 values to `NA`.
 
 ```{r}
-bike <- bike %>% 
-  mutate(dateInstalled = na_if(dateInstalled, 0))
-count(bike, dateInstalled)
+covid_ww <- covid_ww %>% 
+  mutate(rna_pct_change_15d = na_if(rna_pct_change_15d, 0))
+
+covid_ww %>% count(is.na(rna_pct_change_15d))
 ```
 
 
@@ -291,9 +301,9 @@ count(bike, dateInstalled)
 The `replace_na()` function (part of the `tidyr` package), can do the opposite of `na_if()`.
  (note that you must use numeric values as replacement - we will show how to replace with character strings soon)
 ```{r}
-bike %>% 
-  mutate(dateInstalled = replace_na(dateInstalled, 2005)) %>% 
-  count(dateInstalled)
+covid_ww %>% 
+  mutate(rna_pct_change_15d = replace_na(rna_pct_change_15d, 0)) %>% 
+  count(is.na(rna_pct_change_15d))
 ```
 
 
@@ -337,14 +347,14 @@ This is because the denominator changes.
 
 
 ```{r}
-count(bike, dateInstalled) %>% mutate(percent = (n/(sum(n)) *100))
+count(yearly_co2, `1800`) %>% mutate(percent = (n/(sum(n)) *100))
 ```
 
 ## Word of caution - Percentages with `NA`
 
 ```{r}
-bike %>% drop_na(dateInstalled) %>% 
-  count(dateInstalled) %>% mutate(percent = (n/(sum(n)) *100))
+yearly_co2 %>% drop_na(`1800`) %>% 
+  count(`1800`) %>% mutate(percent = (n/(sum(n)) *100))
 ```
 
 Should you be dividing by the total count with `NA` values included?   

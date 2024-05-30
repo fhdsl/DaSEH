@@ -20,7 +20,7 @@ library(readr)
 library(tidyverse)
 library(dplyr)
 library(lubridate)
-library(dasehr)
+#library(dasehr)
 library(tidyverse)
 library(broom)
 # install.packages("naniar")
@@ -33,7 +33,8 @@ CalEnviroScreen Dataset: CalEnviroScreen is a project that ranks census tracts i
 
 The data is from https://calenviroscreen-oehha.hub.arcgis.com/#Data
 
-You can Download as a CSV in your current working directory.  Note its also available at: 	https://daseh.org/data/CalEnvironmentalScreen_data.csv 
+You can Download as a CSV in your current working directory.  Note its also available at: 	https://daseh.org/data/CalEnvironmentalScreen_data.csv
+
 ```{r 1.0response}
 ces <- read_csv(file = "https://daseh.org/data/CalEnvironmentalScreen_data.csv")
 ```
