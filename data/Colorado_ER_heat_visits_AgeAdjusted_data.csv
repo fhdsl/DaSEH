@@ -1,0 +1,2341 @@
+﻿county,rate,lower95cl,upper95cl,visits,year,gender
+Statewide,5.642730252,4.697641586,6.587818918,140,2011,Female
+Statewide,7.386868299,6.298822406,8.474914192,183,2011,Male
+Statewide,6.514945036,5.796589743,7.233300329,323,2011,Both genders
+Statewide,5.641340892,4.715310573,6.567371211,146,2012,Female
+Statewide,7.564397516,6.479708879,8.649086152,193,2012,Male
+Statewide,6.583569927,5.875107098,7.292032756,339,2012,Both genders
+Statewide,4.940380655,4.062533713,5.818227596,124,2013,Female
+Statewide,6.717544422,5.718072347,7.717016496,178,2013,Male
+Statewide,5.823446459,5.159864572,6.487028346,302,2013,Both genders
+Statewide,3.524674652,2.795441777,4.253907527,92,2014,Female
+Statewide,5.330719588,4.450501625,6.210937551,145,2014,Male
+Statewide,4.442144749,3.869291725,5.014997774,237,2014,Both genders
+Statewide,5.284243939,4.396447049,6.172040828,140,2015,Female
+Statewide,7.792640963,6.732488248,8.852793678,215,2015,Male
+Statewide,6.554547936,5.862667787,7.246428085,355,2015,Both genders
+Statewide,6.317302106,5.3598926,7.274711611,172,2016,Female
+Statewide,10.64921228,9.412978753,11.88544582,295,2016,Male
+Statewide,8.456524074,7.678571993,9.234476156,467,2016,Both genders
+Statewide,3.843863835,3.122554992,4.565172678,113,2017,Female
+Statewide,7.534565741,6.498546905,8.570584578,210,2017,Male
+Statewide,5.676163406,5.048105431,6.304221381,323,2017,Both genders
+Statewide,5.667657165,4.781112482,6.554201847,163,2018,Female
+Statewide,10.12914308,8.951317501,11.30696866,293,2018,Male
+Statewide,7.887310141,7.152143089,8.622477193,456,2018,Both genders
+Statewide,5.434728739,4.561649262,6.307808215,154,2019,Female
+Statewide,8.053337572,7.007662586,9.099012558,235,2019,Male
+Statewide,6.762752232,6.080800082,7.444704381,389,2019,Both genders
+Statewide,3.51210544,2.827624968,4.196585911,105,2020,Female
+Statewide,6.597209903,5.659542633,7.534877173,197,2020,Male
+Statewide,5.050740169,4.47115269,5.630327647,302,2020,Both genders
+Statewide,5.674628816,4.809452399,6.539805234,173,2021,Female
+Statewide,8.410298316,7.355389398,9.465207235,252,2021,Male
+Statewide,7.05443959,6.372133869,7.73674531,425,2021,Both genders
+Statewide,6.192130742,5.282437014,7.101824471,185,2022,Female
+Statewide,10.23653604,9.076752747,11.39631934,309,2022,Male
+Statewide,8.195835792,7.460658898,8.931012686,494,2022,Both genders
+Adams,7.596958419,4.383039444,11.68026088,17,2011,Female
+Adams,5.831630726,2.941607455,9.693968294,12,2011,Male
+Adams,6.729917655,4.223059376,9.236775934,29,2011,Both genders
+Adams,,,,,2012,Female
+Adams,5.481494001,2.89687114,8.87658742,13,2012,Male
+Adams,4.843983212,2.84893747,6.839028955,23,2012,Both genders
+Adams,6.2185011,3.367822117,9.928822625,14,2013,Female
+Adams,7.912269589,4.393147862,12.44960565,17,2013,Male
+Adams,6.836648236,4.35973518,9.313561292,31,2013,Both genders
+Adams,,,,,2014,Female
+Adams,,,,,2014,Male
+Adams,3.080949839,1.711087221,4.846995946,15,2014,Both genders
+Adams,,,,,2015,Female
+Adams,,,,,2015,Male
+Adams,3.356537988,1.892911591,5.232461331,16,2015,Both genders
+Adams,6.161906917,3.350233756,9.816068112,14,2016,Female
+Adams,11.67466944,7.181640703,16.16769818,28,2016,Male
+Adams,8.84850373,6.124961246,11.57204621,42,2016,Both genders
+Adams,4.68582808,2.314646988,7.879132018,11,2017,Female
+Adams,8.474550109,4.726532113,12.2225681,21,2017,Male
+Adams,6.634644436,4.292045516,8.977243356,32,2017,Both genders
+Adams,6.386427072,3.619401408,9.926209399,16,2018,Female
+Adams,7.713807914,4.367156249,11.06045958,21,2018,Male
+Adams,7.105566828,4.772990008,9.438143648,37,2018,Both genders
+Adams,6.644858728,3.85461669,10.18243184,17,2019,Female
+Adams,6.775349495,4.060661261,10.17364518,19,2019,Male
+Adams,6.761452008,4.528807297,8.994096718,36,2019,Both genders
+Adams,,,,,2020,Female
+Adams,6.058570011,3.327605632,9.594252101,15,2020,Male
+Adams,4.758211201,2.818594552,6.697827849,24,2020,Both genders
+Adams,7.351333433,4.408796625,11.03389187,19,2021,Female
+Adams,6.552124899,3.69666796,10.21132959,16,2021,Male
+Adams,6.931533762,4.611049427,9.252018098,35,2021,Both genders
+Adams,6.698301517,3.949689454,10.16102319,18,2022,Female
+Adams,9.825732044,6.102786431,13.54867766,27,2022,Male
+Adams,8.228158328,5.809519746,10.64679691,45,2022,Both genders
+Alamosa,0,0,0,0,2011,Female
+Alamosa,0,0,0,0,2011,Male
+Alamosa,0,0,0,0,2011,Both genders
+Alamosa,0,0,0,0,2012,Female
+Alamosa,0,0,0,0,2012,Male
+Alamosa,0,0,0,0,2012,Both genders
+Alamosa,,,,,2013,Female
+Alamosa,0,0,0,0,2013,Male
+Alamosa,,,,,2013,Both genders
+Alamosa,0,0,0,0,2014,Female
+Alamosa,0,0,0,0,2014,Male
+Alamosa,0,0,0,0,2014,Both genders
+Alamosa,0,0,0,0,2015,Female
+Alamosa,,,,,2015,Male
+Alamosa,,,,,2015,Both genders
+Alamosa,0,0,0,0,2016,Female
+Alamosa,,,,,2016,Male
+Alamosa,,,,,2016,Both genders
+Alamosa,0,0,0,0,2017,Female
+Alamosa,,,,,2017,Male
+Alamosa,,,,,2017,Both genders
+Alamosa,0,0,0,0,2018,Female
+Alamosa,0,0,0,0,2018,Male
+Alamosa,0,0,0,0,2018,Both genders
+Alamosa,,,,,2019,Female
+Alamosa,0,0,0,0,2019,Male
+Alamosa,,,,,2019,Both genders
+Alamosa,0,0,0,0,2020,Female
+Alamosa,,,,,2020,Male
+Alamosa,,,,,2020,Both genders
+Alamosa,0,0,0,0,2021,Female
+Alamosa,0,0,0,0,2021,Male
+Alamosa,0,0,0,0,2021,Both genders
+Alamosa,0,0,0,0,2022,Female
+Alamosa,0,0,0,0,2022,Male
+Alamosa,0,0,0,0,2022,Both genders
+Arapahoe,5.824394232,3.316677649,9.026570062,16,2011,Female
+Arapahoe,5.691579606,3.306085498,8.714417852,17,2011,Male
+Arapahoe,5.825223336,3.81861711,7.831829562,33,2011,Both genders
+Arapahoe,4.201957857,2.153997993,6.922733035,12,2012,Female
+Arapahoe,5.174244263,2.884194077,8.122483931,15,2012,Male
+Arapahoe,4.74912683,2.940135948,6.558117711,27,2012,Both genders
+Arapahoe,3.928061444,1.951659739,6.584065763,11,2013,Female
+Arapahoe,,,,,2013,Male
+Arapahoe,3.580914014,2.000522993,5.161305036,20,2013,Both genders
+Arapahoe,,,,,2014,Female
+Arapahoe,,,,,2014,Male
+Arapahoe,,,,,2014,Both genders
+Arapahoe,5.118596021,2.904401555,7.949835878,16,2015,Female
+Arapahoe,4.476032068,2.478747924,7.053768543,15,2015,Male
+Arapahoe,4.799849008,3.085568139,6.514129877,31,2015,Both genders
+Arapahoe,5.623633315,3.323531508,8.518757506,18,2016,Female
+Arapahoe,7.181147787,4.04428702,10.31800855,21,2016,Male
+Arapahoe,6.277862897,4.287310679,8.268415115,39,2016,Both genders
+Arapahoe,,,,,2017,Female
+Arapahoe,,,,,2017,Male
+Arapahoe,2.618504541,1.479302646,4.077627338,16,2017,Both genders
+Arapahoe,3.664679835,1.925359504,5.954424114,13,2018,Female
+Arapahoe,6.288834921,3.568379026,9.009290817,21,2018,Male
+Arapahoe,4.988529272,3.289412054,6.687646491,34,2018,Both genders
+Arapahoe,5.228931073,3.016904117,8.039288551,17,2019,Female
+Arapahoe,4.291183037,2.322992177,6.853322307,14,2019,Male
+Arapahoe,4.829324314,3.106767831,6.551880796,31,2019,Both genders
+Arapahoe,,,,,2020,Female
+Arapahoe,3.274517048,1.600850931,5.536964448,11,2020,Male
+Arapahoe,2.269218291,1.280702341,3.535820754,16,2020,Both genders
+Arapahoe,3.380357682,1.710051244,5.610254608,12,2021,Female
+Arapahoe,5.378542381,3.160895772,8.175990623,18,2021,Male
+Arapahoe,4.443234725,2.824751779,6.061717671,30,2021,Both genders
+Arapahoe,4.200031321,2.314384186,6.63828137,15,2022,Female
+Arapahoe,7.481160467,4.461356492,10.50096444,24,2022,Male
+Arapahoe,5.827256214,3.973461546,7.681050882,39,2022,Both genders
+Archuleta,0,0,0,0,2011,Female
+Archuleta,0,0,0,0,2011,Male
+Archuleta,0,0,0,0,2011,Both genders
+Archuleta,0,0,0,0,2012,Female
+Archuleta,0,0,0,0,2012,Male
+Archuleta,0,0,0,0,2012,Both genders
+Archuleta,0,0,0,0,2013,Female
+Archuleta,0,0,0,0,2013,Male
+Archuleta,0,0,0,0,2013,Both genders
+Archuleta,0,0,0,0,2014,Female
+Archuleta,0,0,0,0,2014,Male
+Archuleta,0,0,0,0,2014,Both genders
+Archuleta,0,0,0,0,2015,Female
+Archuleta,0,0,0,0,2015,Male
+Archuleta,0,0,0,0,2015,Both genders
+Archuleta,0,0,0,0,2016,Female
+Archuleta,0,0,0,0,2016,Male
+Archuleta,0,0,0,0,2016,Both genders
+Archuleta,,,,,2017,Female
+Archuleta,,,,,2017,Male
+Archuleta,,,,,2017,Both genders
+Archuleta,0,0,0,0,2018,Female
+Archuleta,,,,,2018,Male
+Archuleta,,,,,2018,Both genders
+Archuleta,,,,,2019,Female
+Archuleta,0,0,0,0,2019,Male
+Archuleta,,,,,2019,Both genders
+Archuleta,0,0,0,0,2020,Female
+Archuleta,0,0,0,0,2020,Male
+Archuleta,0,0,0,0,2020,Both genders
+Archuleta,,,,,2021,Female
+Archuleta,,,,,2021,Male
+Archuleta,,,,,2021,Both genders
+Archuleta,,,,,2022,Female
+Archuleta,,,,,2022,Male
+Archuleta,,,,,2022,Both genders
+Baca,0,0,0,0,2011,Female
+Baca,0,0,0,0,2011,Male
+Baca,0,0,0,0,2011,Both genders
+Baca,0,0,0,0,2012,Female
+Baca,0,0,0,0,2012,Male
+Baca,0,0,0,0,2012,Both genders
+Baca,0,0,0,0,2013,Female
+Baca,0,0,0,0,2013,Male
+Baca,0,0,0,0,2013,Both genders
+Baca,0,0,0,0,2014,Female
+Baca,0,0,0,0,2014,Male
+Baca,0,0,0,0,2014,Both genders
+Baca,0,0,0,0,2015,Female
+Baca,0,0,0,0,2015,Male
+Baca,0,0,0,0,2015,Both genders
+Baca,0,0,0,0,2016,Female
+Baca,0,0,0,0,2016,Male
+Baca,0,0,0,0,2016,Both genders
+Baca,0,0,0,0,2017,Female
+Baca,0,0,0,0,2017,Male
+Baca,0,0,0,0,2017,Both genders
+Baca,,,,,2018,Female
+Baca,0,0,0,0,2018,Male
+Baca,,,,,2018,Both genders
+Baca,,,,,2019,Female
+Baca,0,0,0,0,2019,Male
+Baca,,,,,2019,Both genders
+Baca,0,0,0,0,2020,Female
+Baca,0,0,0,0,2020,Male
+Baca,0,0,0,0,2020,Both genders
+Baca,0,0,0,0,2021,Female
+Baca,0,0,0,0,2021,Male
+Baca,0,0,0,0,2021,Both genders
+Baca,0,0,0,0,2022,Female
+Baca,,,,,2022,Male
+Baca,,,,,2022,Both genders
+Bent,0,0,0,0,2011,Female
+Bent,0,0,0,0,2011,Male
+Bent,0,0,0,0,2011,Both genders
+Bent,0,0,0,0,2012,Female
+Bent,,,,,2012,Male
+Bent,,,,,2012,Both genders
+Bent,0,0,0,0,2013,Female
+Bent,0,0,0,0,2013,Male
+Bent,0,0,0,0,2013,Both genders
+Bent,0,0,0,0,2014,Female
+Bent,,,,,2014,Male
+Bent,,,,,2014,Both genders
+Bent,0,0,0,0,2015,Female
+Bent,,,,,2015,Male
+Bent,,,,,2015,Both genders
+Bent,0,0,0,0,2016,Female
+Bent,,,,,2016,Male
+Bent,,,,,2016,Both genders
+Bent,0,0,0,0,2017,Female
+Bent,,,,,2017,Male
+Bent,,,,,2017,Both genders
+Bent,,,,,2018,Female
+Bent,,,,,2018,Male
+Bent,,,,,2018,Both genders
+Bent,,,,,2019,Female
+Bent,,,,,2019,Male
+Bent,,,,,2019,Both genders
+Bent,0,0,0,0,2020,Female
+Bent,,,,,2020,Male
+Bent,,,,,2020,Both genders
+Bent,0,0,0,0,2021,Female
+Bent,,,,,2021,Male
+Bent,,,,,2021,Both genders
+Bent,0,0,0,0,2022,Female
+Bent,0,0,0,0,2022,Male
+Bent,0,0,0,0,2022,Both genders
+Boulder,,,,,2011,Female
+Boulder,,,,,2011,Male
+Boulder,4.034535158,2.052591184,6.674967063,12,2011,Both genders
+Boulder,,,,,2012,Female
+Boulder,,,,,2012,Male
+Boulder,4.079100661,2.150140918,6.615393027,13,2012,Both genders
+Boulder,,,,,2013,Female
+Boulder,,,,,2013,Male
+Boulder,3.792547926,1.903132856,6.322454414,12,2013,Both genders
+Boulder,,,,,2014,Female
+Boulder,,,,,2014,Male
+Boulder,6.290257722,3.711340897,9.538429265,19,2014,Both genders
+Boulder,,,,,2015,Female
+Boulder,,,,,2015,Male
+Boulder,4.75554403,2.565740562,7.609785535,14,2015,Both genders
+Boulder,,,,,2016,Female
+Boulder,,,,,2016,Male
+Boulder,5.67667787,3.313322405,8.665886852,18,2016,Both genders
+Boulder,,,,,2017,Female
+Boulder,,,,,2017,Male
+Boulder,3.509452842,1.772095031,5.830437997,12,2017,Both genders
+Boulder,,,,,2018,Female
+Boulder,6.366964128,3.099384316,10.79091975,11,2018,Male
+Boulder,5.07284974,2.939247858,7.779146934,18,2018,Both genders
+Boulder,,,,,2019,Female
+Boulder,,,,,2019,Male
+Boulder,3.706147494,1.926632284,6.058060921,13,2019,Both genders
+Boulder,,,,,2020,Female
+Boulder,,,,,2020,Male
+Boulder,3.641104794,1.856410114,6.016874149,12,2020,Both genders
+Boulder,,,,,2021,Female
+Boulder,6.514964182,3.183610419,11.01899842,11,2021,Male
+Boulder,5.512484465,3.254009831,8.356524321,19,2021,Both genders
+Boulder,,,,,2022,Female
+Boulder,8.629166321,4.739395012,13.66514863,15,2022,Male
+Boulder,5.484898507,3.228965052,8.328739682,19,2022,Both genders
+Broomfield,,,,,2011,Female
+Broomfield,,,,,2011,Male
+Broomfield,,,,,2011,Both genders
+Broomfield,,,,,2012,Female
+Broomfield,,,,,2012,Male
+Broomfield,,,,,2012,Both genders
+Broomfield,,,,,2013,Female
+Broomfield,0,0,0,0,2013,Male
+Broomfield,,,,,2013,Both genders
+Broomfield,,,,,2014,Female
+Broomfield,0,0,0,0,2014,Male
+Broomfield,,,,,2014,Both genders
+Broomfield,0,0,0,0,2015,Female
+Broomfield,,,,,2015,Male
+Broomfield,,,,,2015,Both genders
+Broomfield,,,,,2016,Female
+Broomfield,0,0,0,0,2016,Male
+Broomfield,,,,,2016,Both genders
+Broomfield,,,,,2017,Female
+Broomfield,0,0,0,0,2017,Male
+Broomfield,,,,,2017,Both genders
+Broomfield,0,0,0,0,2018,Female
+Broomfield,,,,,2018,Male
+Broomfield,,,,,2018,Both genders
+Broomfield,,,,,2019,Female
+Broomfield,,,,,2019,Male
+Broomfield,,,,,2019,Both genders
+Broomfield,,,,,2020,Female
+Broomfield,,,,,2020,Male
+Broomfield,,,,,2020,Both genders
+Broomfield,,,,,2021,Female
+Broomfield,,,,,2021,Male
+Broomfield,,,,,2021,Both genders
+Broomfield,,,,,2022,Female
+Broomfield,,,,,2022,Male
+Broomfield,,,,,2022,Both genders
+Chaffee,0,0,0,0,2011,Female
+Chaffee,0,0,0,0,2011,Male
+Chaffee,0,0,0,0,2011,Both genders
+Chaffee,0,0,0,0,2012,Female
+Chaffee,,,,,2012,Male
+Chaffee,,,,,2012,Both genders
+Chaffee,,,,,2013,Female
+Chaffee,,,,,2013,Male
+Chaffee,,,,,2013,Both genders
+Chaffee,,,,,2014,Female
+Chaffee,0,0,0,0,2014,Male
+Chaffee,,,,,2014,Both genders
+Chaffee,0,0,0,0,2015,Female
+Chaffee,,,,,2015,Male
+Chaffee,,,,,2015,Both genders
+Chaffee,0,0,0,0,2016,Female
+Chaffee,0,0,0,0,2016,Male
+Chaffee,0,0,0,0,2016,Both genders
+Chaffee,,,,,2017,Female
+Chaffee,0,0,0,0,2017,Male
+Chaffee,,,,,2017,Both genders
+Chaffee,,,,,2018,Female
+Chaffee,,,,,2018,Male
+Chaffee,,,,,2018,Both genders
+Chaffee,,,,,2019,Female
+Chaffee,0,0,0,0,2019,Male
+Chaffee,,,,,2019,Both genders
+Chaffee,0,0,0,0,2020,Female
+Chaffee,0,0,0,0,2020,Male
+Chaffee,0,0,0,0,2020,Both genders
+Chaffee,0,0,0,0,2021,Female
+Chaffee,,,,,2021,Male
+Chaffee,,,,,2021,Both genders
+Chaffee,0,0,0,0,2022,Female
+Chaffee,0,0,0,0,2022,Male
+Chaffee,0,0,0,0,2022,Both genders
+Cheyenne,0,0,0,0,2011,Female
+Cheyenne,0,0,0,0,2011,Male
+Cheyenne,0,0,0,0,2011,Both genders
+Cheyenne,0,0,0,0,2012,Female
+Cheyenne,0,0,0,0,2012,Male
+Cheyenne,0,0,0,0,2012,Both genders
+Cheyenne,0,0,0,0,2013,Female
+Cheyenne,0,0,0,0,2013,Male
+Cheyenne,0,0,0,0,2013,Both genders
+Cheyenne,0,0,0,0,2014,Female
+Cheyenne,0,0,0,0,2014,Male
+Cheyenne,0,0,0,0,2014,Both genders
+Cheyenne,0,0,0,0,2015,Female
+Cheyenne,0,0,0,0,2015,Male
+Cheyenne,0,0,0,0,2015,Both genders
+Cheyenne,0,0,0,0,2016,Female
+Cheyenne,0,0,0,0,2016,Male
+Cheyenne,0,0,0,0,2016,Both genders
+Cheyenne,0,0,0,0,2017,Female
+Cheyenne,0,0,0,0,2017,Male
+Cheyenne,0,0,0,0,2017,Both genders
+Cheyenne,,,,,2018,Female
+Cheyenne,,,,,2018,Male
+Cheyenne,,,,,2018,Both genders
+Cheyenne,0,0,0,0,2019,Female
+Cheyenne,0,0,0,0,2019,Male
+Cheyenne,0,0,0,0,2019,Both genders
+Cheyenne,,,,,2020,Female
+Cheyenne,0,0,0,0,2020,Male
+Cheyenne,,,,,2020,Both genders
+Cheyenne,0,0,0,0,2021,Female
+Cheyenne,0,0,0,0,2021,Male
+Cheyenne,0,0,0,0,2021,Both genders
+Cheyenne,0,0,0,0,2022,Female
+Cheyenne,,,,,2022,Male
+Cheyenne,,,,,2022,Both genders
+Clear Creek,0,0,0,0,2011,Female
+Clear Creek,0,0,0,0,2011,Male
+Clear Creek,0,0,0,0,2011,Both genders
+Clear Creek,0,0,0,0,2012,Female
+Clear Creek,0,0,0,0,2012,Male
+Clear Creek,0,0,0,0,2012,Both genders
+Clear Creek,0,0,0,0,2013,Female
+Clear Creek,,,,,2013,Male
+Clear Creek,,,,,2013,Both genders
+Clear Creek,0,0,0,0,2014,Female
+Clear Creek,0,0,0,0,2014,Male
+Clear Creek,0,0,0,0,2014,Both genders
+Clear Creek,,,,,2015,Female
+Clear Creek,0,0,0,0,2015,Male
+Clear Creek,,,,,2015,Both genders
+Clear Creek,0,0,0,0,2016,Female
+Clear Creek,,,,,2016,Male
+Clear Creek,,,,,2016,Both genders
+Clear Creek,0,0,0,0,2017,Female
+Clear Creek,,,,,2017,Male
+Clear Creek,,,,,2017,Both genders
+Clear Creek,0,0,0,0,2018,Female
+Clear Creek,,,,,2018,Male
+Clear Creek,,,,,2018,Both genders
+Clear Creek,,,,,2019,Female
+Clear Creek,0,0,0,0,2019,Male
+Clear Creek,,,,,2019,Both genders
+Clear Creek,0,0,0,0,2020,Female
+Clear Creek,0,0,0,0,2020,Male
+Clear Creek,0,0,0,0,2020,Both genders
+Clear Creek,0,0,0,0,2021,Female
+Clear Creek,0,0,0,0,2021,Male
+Clear Creek,0,0,0,0,2021,Both genders
+Clear Creek,0,0,0,0,2022,Female
+Clear Creek,0,0,0,0,2022,Male
+Clear Creek,0,0,0,0,2022,Both genders
+Conejos,0,0,0,0,2011,Female
+Conejos,0,0,0,0,2011,Male
+Conejos,0,0,0,0,2011,Both genders
+Conejos,0,0,0,0,2012,Female
+Conejos,0,0,0,0,2012,Male
+Conejos,0,0,0,0,2012,Both genders
+Conejos,,,,,2013,Female
+Conejos,0,0,0,0,2013,Male
+Conejos,,,,,2013,Both genders
+Conejos,0,0,0,0,2014,Female
+Conejos,,,,,2014,Male
+Conejos,,,,,2014,Both genders
+Conejos,0,0,0,0,2015,Female
+Conejos,0,0,0,0,2015,Male
+Conejos,0,0,0,0,2015,Both genders
+Conejos,0,0,0,0,2016,Female
+Conejos,,,,,2016,Male
+Conejos,,,,,2016,Both genders
+Conejos,0,0,0,0,2017,Female
+Conejos,0,0,0,0,2017,Male
+Conejos,0,0,0,0,2017,Both genders
+Conejos,,,,,2018,Female
+Conejos,,,,,2018,Male
+Conejos,,,,,2018,Both genders
+Conejos,0,0,0,0,2019,Female
+Conejos,,,,,2019,Male
+Conejos,,,,,2019,Both genders
+Conejos,0,0,0,0,2020,Female
+Conejos,,,,,2020,Male
+Conejos,,,,,2020,Both genders
+Conejos,0,0,0,0,2021,Female
+Conejos,0,0,0,0,2021,Male
+Conejos,0,0,0,0,2021,Both genders
+Conejos,0,0,0,0,2022,Female
+Conejos,0,0,0,0,2022,Male
+Conejos,0,0,0,0,2022,Both genders
+Costilla,0,0,0,0,2011,Female
+Costilla,0,0,0,0,2011,Male
+Costilla,0,0,0,0,2011,Both genders
+Costilla,0,0,0,0,2012,Female
+Costilla,0,0,0,0,2012,Male
+Costilla,0,0,0,0,2012,Both genders
+Costilla,0,0,0,0,2013,Female
+Costilla,0,0,0,0,2013,Male
+Costilla,0,0,0,0,2013,Both genders
+Costilla,0,0,0,0,2014,Female
+Costilla,0,0,0,0,2014,Male
+Costilla,0,0,0,0,2014,Both genders
+Costilla,0,0,0,0,2015,Female
+Costilla,0,0,0,0,2015,Male
+Costilla,0,0,0,0,2015,Both genders
+Costilla,0,0,0,0,2016,Female
+Costilla,0,0,0,0,2016,Male
+Costilla,0,0,0,0,2016,Both genders
+Costilla,0,0,0,0,2017,Female
+Costilla,0,0,0,0,2017,Male
+Costilla,0,0,0,0,2017,Both genders
+Costilla,0,0,0,0,2018,Female
+Costilla,0,0,0,0,2018,Male
+Costilla,0,0,0,0,2018,Both genders
+Costilla,0,0,0,0,2019,Female
+Costilla,0,0,0,0,2019,Male
+Costilla,0,0,0,0,2019,Both genders
+Costilla,0,0,0,0,2020,Female
+Costilla,0,0,0,0,2020,Male
+Costilla,0,0,0,0,2020,Both genders
+Costilla,0,0,0,0,2021,Female
+Costilla,0,0,0,0,2021,Male
+Costilla,0,0,0,0,2021,Both genders
+Costilla,0,0,0,0,2022,Female
+Costilla,0,0,0,0,2022,Male
+Costilla,0,0,0,0,2022,Both genders
+Crowley,0,0,0,0,2011,Female
+Crowley,,,,,2011,Male
+Crowley,,,,,2011,Both genders
+Crowley,,,,,2012,Female
+Crowley,0,0,0,0,2012,Male
+Crowley,,,,,2012,Both genders
+Crowley,,,,,2013,Female
+Crowley,0,0,0,0,2013,Male
+Crowley,,,,,2013,Both genders
+Crowley,0,0,0,0,2014,Female
+Crowley,0,0,0,0,2014,Male
+Crowley,0,0,0,0,2014,Both genders
+Crowley,0,0,0,0,2015,Female
+Crowley,0,0,0,0,2015,Male
+Crowley,0,0,0,0,2015,Both genders
+Crowley,,,,,2016,Female
+Crowley,0,0,0,0,2016,Male
+Crowley,,,,,2016,Both genders
+Crowley,0,0,0,0,2017,Female
+Crowley,,,,,2017,Male
+Crowley,,,,,2017,Both genders
+Crowley,0,0,0,0,2018,Female
+Crowley,0,0,0,0,2018,Male
+Crowley,0,0,0,0,2018,Both genders
+Crowley,0,0,0,0,2019,Female
+Crowley,,,,,2019,Male
+Crowley,,,,,2019,Both genders
+Crowley,,,,,2020,Female
+Crowley,,,,,2020,Male
+Crowley,,,,,2020,Both genders
+Crowley,0,0,0,0,2021,Female
+Crowley,,,,,2021,Male
+Crowley,,,,,2021,Both genders
+Crowley,0,0,0,0,2022,Female
+Crowley,0,0,0,0,2022,Male
+Crowley,0,0,0,0,2022,Both genders
+Custer,0,0,0,0,2011,Female
+Custer,0,0,0,0,2011,Male
+Custer,0,0,0,0,2011,Both genders
+Custer,,,,,2012,Female
+Custer,0,0,0,0,2012,Male
+Custer,,,,,2012,Both genders
+Custer,0,0,0,0,2013,Female
+Custer,0,0,0,0,2013,Male
+Custer,0,0,0,0,2013,Both genders
+Custer,0,0,0,0,2014,Female
+Custer,0,0,0,0,2014,Male
+Custer,0,0,0,0,2014,Both genders
+Custer,0,0,0,0,2015,Female
+Custer,0,0,0,0,2015,Male
+Custer,0,0,0,0,2015,Both genders
+Custer,0,0,0,0,2016,Female
+Custer,0,0,0,0,2016,Male
+Custer,0,0,0,0,2016,Both genders
+Custer,0,0,0,0,2017,Female
+Custer,0,0,0,0,2017,Male
+Custer,0,0,0,0,2017,Both genders
+Custer,0,0,0,0,2018,Female
+Custer,0,0,0,0,2018,Male
+Custer,0,0,0,0,2018,Both genders
+Custer,0,0,0,0,2019,Female
+Custer,0,0,0,0,2019,Male
+Custer,0,0,0,0,2019,Both genders
+Custer,0,0,0,0,2020,Female
+Custer,0,0,0,0,2020,Male
+Custer,0,0,0,0,2020,Both genders
+Custer,0,0,0,0,2021,Female
+Custer,0,0,0,0,2021,Male
+Custer,0,0,0,0,2021,Both genders
+Custer,0,0,0,0,2022,Female
+Custer,0,0,0,0,2022,Male
+Custer,0,0,0,0,2022,Both genders
+Delta,0,0,0,0,2011,Female
+Delta,0,0,0,0,2011,Male
+Delta,0,0,0,0,2011,Both genders
+Delta,0,0,0,0,2012,Female
+Delta,0,0,0,0,2012,Male
+Delta,0,0,0,0,2012,Both genders
+Delta,0,0,0,0,2013,Female
+Delta,0,0,0,0,2013,Male
+Delta,0,0,0,0,2013,Both genders
+Delta,0,0,0,0,2014,Female
+Delta,0,0,0,0,2014,Male
+Delta,0,0,0,0,2014,Both genders
+Delta,0,0,0,0,2015,Female
+Delta,,,,,2015,Male
+Delta,,,,,2015,Both genders
+Delta,,,,,2016,Female
+Delta,,,,,2016,Male
+Delta,,,,,2016,Both genders
+Delta,,,,,2017,Female
+Delta,,,,,2017,Male
+Delta,,,,,2017,Both genders
+Delta,,,,,2018,Female
+Delta,,,,,2018,Male
+Delta,,,,,2018,Both genders
+Delta,,,,,2019,Female
+Delta,0,0,0,0,2019,Male
+Delta,,,,,2019,Both genders
+Delta,,,,,2020,Female
+Delta,,,,,2020,Male
+Delta,,,,,2020,Both genders
+Delta,,,,,2021,Female
+Delta,,,,,2021,Male
+Delta,,,,,2021,Both genders
+Delta,,,,,2022,Female
+Delta,0,0,0,0,2022,Male
+Delta,,,,,2022,Both genders
+Denver,5.219075478,2.931619428,8.155349208,16,2011,Female
+Denver,9.424576259,5.61775771,13.23139481,26,2011,Male
+Denver,7.114236027,4.889333524,9.339138529,42,2011,Both genders
+Denver,5.990977575,3.489900069,9.156790627,18,2012,Female
+Denver,7.890321008,4.466438802,11.31420322,22,2012,Male
+Denver,6.793702395,4.621311131,8.966093659,40,2012,Both genders
+Denver,,,,,2013,Female
+Denver,,,,,2013,Male
+Denver,2.945863431,1.745371699,4.455435315,19,2013,Both genders
+Denver,,,,,2014,Female
+Denver,5.730704869,3.349523115,8.740827196,19,2014,Male
+Denver,3.556912499,2.026541446,5.087283552,23,2014,Both genders
+Denver,,,,,2015,Female
+Denver,4.626095936,2.556583878,7.299142012,16,2015,Male
+Denver,3.843781154,2.262272214,5.425290095,25,2015,Both genders
+Denver,4.022507288,2.071287479,6.610461314,13,2016,Female
+Denver,8.50636609,5.298048978,11.7146832,30,2016,Male
+Denver,6.182937234,4.249674456,8.116200012,43,2016,Both genders
+Denver,3.561593173,1.818776978,5.880241968,13,2017,Female
+Denver,3.152883133,1.503509565,5.402624783,11,2017,Male
+Denver,3.315020838,1.923657396,4.70638428,24,2017,Both genders
+Denver,3.763202539,1.971706087,6.124046222,13,2018,Female
+Denver,7.979898483,4.998318366,10.9614786,30,2018,Male
+Denver,5.805259516,4.005964854,7.604554177,43,2018,Both genders
+Denver,3.307076282,1.66373365,5.505445534,12,2019,Female
+Denver,5.759438482,3.254969119,8.263907845,22,2019,Male
+Denver,4.537265998,2.950957131,6.123574865,34,2019,Both genders
+Denver,3.072440809,1.544655094,5.116728214,12,2020,Female
+Denver,5.936864632,3.340724759,8.533004505,22,2020,Male
+Denver,4.422048886,2.882421118,5.961676654,34,2020,Both genders
+Denver,,,,,2021,Female
+Denver,5.384262843,2.962048358,7.806477327,20,2021,Male
+Denver,3.84747781,2.377614452,5.317341167,28,2021,Both genders
+Denver,5.464217829,3.167104336,8.377520207,18,2022,Female
+Denver,7.448053408,4.627825246,10.26828157,29,2022,Male
+Denver,6.475106589,4.547324141,8.402889037,47,2022,Both genders
+Dolores,0,0,0,0,2011,Female
+Dolores,0,0,0,0,2011,Male
+Dolores,0,0,0,0,2011,Both genders
+Dolores,0,0,0,0,2012,Female
+Dolores,0,0,0,0,2012,Male
+Dolores,0,0,0,0,2012,Both genders
+Dolores,0,0,0,0,2013,Female
+Dolores,0,0,0,0,2013,Male
+Dolores,0,0,0,0,2013,Both genders
+Dolores,0,0,0,0,2014,Female
+Dolores,0,0,0,0,2014,Male
+Dolores,0,0,0,0,2014,Both genders
+Dolores,0,0,0,0,2015,Female
+Dolores,0,0,0,0,2015,Male
+Dolores,0,0,0,0,2015,Both genders
+Dolores,0,0,0,0,2016,Female
+Dolores,0,0,0,0,2016,Male
+Dolores,0,0,0,0,2016,Both genders
+Dolores,0,0,0,0,2017,Female
+Dolores,0,0,0,0,2017,Male
+Dolores,0,0,0,0,2017,Both genders
+Dolores,0,0,0,0,2018,Female
+Dolores,0,0,0,0,2018,Male
+Dolores,0,0,0,0,2018,Both genders
+Dolores,0,0,0,0,2019,Female
+Dolores,0,0,0,0,2019,Male
+Dolores,0,0,0,0,2019,Both genders
+Dolores,0,0,0,0,2020,Female
+Dolores,0,0,0,0,2020,Male
+Dolores,0,0,0,0,2020,Both genders
+Dolores,0,0,0,0,2021,Female
+Dolores,0,0,0,0,2021,Male
+Dolores,0,0,0,0,2021,Both genders
+Dolores,0,0,0,0,2022,Female
+Dolores,0,0,0,0,2022,Male
+Dolores,0,0,0,0,2022,Both genders
+Douglas,,,,,2011,Female
+Douglas,,,,,2011,Male
+Douglas,,,,,2011,Both genders
+Douglas,,,,,2012,Female
+Douglas,,,,,2012,Male
+Douglas,4.7545722,2.402709702,7.895587911,13,2012,Both genders
+Douglas,,,,,2013,Female
+Douglas,,,,,2013,Male
+Douglas,5.777905215,3.283637696,8.965365337,17,2013,Both genders
+Douglas,,,,,2014,Female
+Douglas,,,,,2014,Male
+Douglas,,,,,2014,Both genders
+Douglas,,,,,2015,Female
+Douglas,,,,,2015,Male
+Douglas,,,,,2015,Both genders
+Douglas,,,,,2016,Female
+Douglas,,,,,2016,Male
+Douglas,,,,,2016,Both genders
+Douglas,,,,,2017,Female
+Douglas,,,,,2017,Male
+Douglas,3.977528871,2.084580078,6.471816122,13,2017,Both genders
+Douglas,,,,,2018,Female
+Douglas,,,,,2018,Male
+Douglas,,,,,2018,Both genders
+Douglas,,,,,2019,Female
+Douglas,,,,,2019,Male
+Douglas,5.3397722,3.11797213,8.149490108,18,2019,Both genders
+Douglas,,,,,2020,Female
+Douglas,,,,,2020,Male
+Douglas,,,,,2020,Both genders
+Douglas,,,,,2021,Female
+Douglas,,,,,2021,Male
+Douglas,,,,,2021,Both genders
+Douglas,,,,,2022,Female
+Douglas,,,,,2022,Male
+Douglas,,,,,2022,Both genders
+Eagle,0,0,0,0,2011,Female
+Eagle,0,0,0,0,2011,Male
+Eagle,0,0,0,0,2011,Both genders
+Eagle,0,0,0,0,2012,Female
+Eagle,0,0,0,0,2012,Male
+Eagle,0,0,0,0,2012,Both genders
+Eagle,0,0,0,0,2013,Female
+Eagle,0,0,0,0,2013,Male
+Eagle,0,0,0,0,2013,Both genders
+Eagle,,,,,2014,Female
+Eagle,0,0,0,0,2014,Male
+Eagle,,,,,2014,Both genders
+Eagle,0,0,0,0,2015,Female
+Eagle,0,0,0,0,2015,Male
+Eagle,0,0,0,0,2015,Both genders
+Eagle,0,0,0,0,2016,Female
+Eagle,0,0,0,0,2016,Male
+Eagle,0,0,0,0,2016,Both genders
+Eagle,0,0,0,0,2017,Female
+Eagle,,,,,2017,Male
+Eagle,,,,,2017,Both genders
+Eagle,0,0,0,0,2018,Female
+Eagle,,,,,2018,Male
+Eagle,,,,,2018,Both genders
+Eagle,,,,,2019,Female
+Eagle,,,,,2019,Male
+Eagle,,,,,2019,Both genders
+Eagle,0,0,0,0,2020,Female
+Eagle,0,0,0,0,2020,Male
+Eagle,0,0,0,0,2020,Both genders
+Eagle,0,0,0,0,2021,Female
+Eagle,0,0,0,0,2021,Male
+Eagle,0,0,0,0,2021,Both genders
+Eagle,0,0,0,0,2022,Female
+Eagle,0,0,0,0,2022,Male
+Eagle,0,0,0,0,2022,Both genders
+Elbert,,,,,2011,Female
+Elbert,0,0,0,0,2011,Male
+Elbert,,,,,2011,Both genders
+Elbert,,,,,2012,Female
+Elbert,0,0,0,0,2012,Male
+Elbert,,,,,2012,Both genders
+Elbert,0,0,0,0,2013,Female
+Elbert,,,,,2013,Male
+Elbert,,,,,2013,Both genders
+Elbert,0,0,0,0,2014,Female
+Elbert,,,,,2014,Male
+Elbert,,,,,2014,Both genders
+Elbert,,,,,2015,Female
+Elbert,0,0,0,0,2015,Male
+Elbert,,,,,2015,Both genders
+Elbert,,,,,2016,Female
+Elbert,,,,,2016,Male
+Elbert,,,,,2016,Both genders
+Elbert,0,0,0,0,2017,Female
+Elbert,0,0,0,0,2017,Male
+Elbert,0,0,0,0,2017,Both genders
+Elbert,,,,,2018,Female
+Elbert,,,,,2018,Male
+Elbert,,,,,2018,Both genders
+Elbert,,,,,2019,Female
+Elbert,0,0,0,0,2019,Male
+Elbert,,,,,2019,Both genders
+Elbert,,,,,2020,Female
+Elbert,0,0,0,0,2020,Male
+Elbert,,,,,2020,Both genders
+Elbert,,,,,2021,Female
+Elbert,,,,,2021,Male
+Elbert,,,,,2021,Both genders
+Elbert,0,0,0,0,2022,Female
+Elbert,,,,,2022,Male
+Elbert,,,,,2022,Both genders
+El Paso,5.676177781,3.279353169,8.71973895,17,2011,Female
+El Paso,8.021979186,4.777403504,11.26655487,25,2011,Male
+El Paso,6.886914988,4.763948689,9.009881287,42,2011,Both genders
+El Paso,,,,,2012,Female
+El Paso,7.060129601,4.045669671,10.07458953,23,2012,Male
+El Paso,5.113938316,3.334560142,6.89331649,33,2012,Both genders
+El Paso,,,,,2013,Female
+El Paso,5.991223315,3.324393432,8.658053198,20,2013,Male
+El Paso,4.197016233,2.591243099,5.802789367,27,2013,Both genders
+El Paso,3.503610657,1.739937667,5.874152525,11,2014,Female
+El Paso,,,,,2014,Male
+El Paso,2.881581977,1.71687949,4.342945656,19,2014,Both genders
+El Paso,3.943856415,2.010249072,6.518095522,12,2015,Female
+El Paso,6.19230087,3.389266356,8.995335384,20,2015,Male
+El Paso,5.017244008,3.235931166,6.798556851,32,2015,Both genders
+El Paso,3.791390843,2.04649338,6.065335836,14,2016,Female
+El Paso,7.275874598,4.279701791,10.2720474,24,2016,Male
+El Paso,5.508012786,3.715007302,7.30101827,38,2016,Both genders
+El Paso,,,,,2017,Female
+El Paso,6.483100609,3.705269862,9.260931355,22,2017,Male
+El Paso,4.592364773,2.973082723,6.211646824,32,2017,Both genders
+El Paso,4.376265742,2.528608997,6.722380542,17,2018,Female
+El Paso,9.07280586,5.743483179,12.40212854,31,2018,Male
+El Paso,6.515871469,4.621601945,8.410140994,48,2018,Both genders
+El Paso,,,,,2019,Female
+El Paso,7.527045439,4.581141667,10.47294921,28,2019,Male
+El Paso,5.298876006,3.561525262,7.03622675,38,2019,Both genders
+El Paso,,,,,2020,Female
+El Paso,4.618428842,2.67227698,7.088269943,18,2020,Male
+El Paso,3.300472399,1.999644505,4.601300293,26,2020,Both genders
+El Paso,4.590360935,2.642438516,7.067357554,17,2021,Female
+El Paso,4.494319818,2.65401935,6.811408002,19,2021,Male
+El Paso,4.545599271,3.022250176,6.068948366,36,2021,Both genders
+El Paso,5.57732394,3.328319925,8.397409987,19,2022,Female
+El Paso,6.611418745,3.860818759,9.362018732,24,2022,Male
+El Paso,6.100918857,4.233779337,7.968058377,43,2022,Both genders
+Fremont,,,,,2011,Female
+Fremont,,,,,2011,Male
+Fremont,,,,,2011,Both genders
+Fremont,,,,,2012,Female
+Fremont,,,,,2012,Male
+Fremont,,,,,2012,Both genders
+Fremont,0,0,0,0,2013,Female
+Fremont,,,,,2013,Male
+Fremont,,,,,2013,Both genders
+Fremont,,,,,2014,Female
+Fremont,0,0,0,0,2014,Male
+Fremont,,,,,2014,Both genders
+Fremont,,,,,2015,Female
+Fremont,,,,,2015,Male
+Fremont,,,,,2015,Both genders
+Fremont,,,,,2016,Female
+Fremont,,,,,2016,Male
+Fremont,,,,,2016,Both genders
+Fremont,,,,,2017,Female
+Fremont,,,,,2017,Male
+Fremont,,,,,2017,Both genders
+Fremont,,,,,2018,Female
+Fremont,,,,,2018,Male
+Fremont,,,,,2018,Both genders
+Fremont,,,,,2019,Female
+Fremont,,,,,2019,Male
+Fremont,,,,,2019,Both genders
+Fremont,,,,,2020,Female
+Fremont,,,,,2020,Male
+Fremont,,,,,2020,Both genders
+Fremont,0,0,0,0,2021,Female
+Fremont,,,,,2021,Male
+Fremont,,,,,2021,Both genders
+Fremont,,,,,2022,Female
+Fremont,,,,,2022,Male
+Fremont,,,,,2022,Both genders
+Garfield,0,0,0,0,2011,Female
+Garfield,,,,,2011,Male
+Garfield,,,,,2011,Both genders
+Garfield,,,,,2012,Female
+Garfield,,,,,2012,Male
+Garfield,,,,,2012,Both genders
+Garfield,0,0,0,0,2013,Female
+Garfield,0,0,0,0,2013,Male
+Garfield,0,0,0,0,2013,Both genders
+Garfield,0,0,0,0,2014,Female
+Garfield,,,,,2014,Male
+Garfield,,,,,2014,Both genders
+Garfield,0,0,0,0,2015,Female
+Garfield,,,,,2015,Male
+Garfield,,,,,2015,Both genders
+Garfield,,,,,2016,Female
+Garfield,,,,,2016,Male
+Garfield,,,,,2016,Both genders
+Garfield,,,,,2017,Female
+Garfield,,,,,2017,Male
+Garfield,,,,,2017,Both genders
+Garfield,,,,,2018,Female
+Garfield,,,,,2018,Male
+Garfield,,,,,2018,Both genders
+Garfield,,,,,2019,Female
+Garfield,,,,,2019,Male
+Garfield,,,,,2019,Both genders
+Garfield,0,0,0,0,2020,Female
+Garfield,,,,,2020,Male
+Garfield,,,,,2020,Both genders
+Garfield,,,,,2021,Female
+Garfield,,,,,2021,Male
+Garfield,,,,,2021,Both genders
+Garfield,0,0,0,0,2022,Female
+Garfield,,,,,2022,Male
+Garfield,,,,,2022,Both genders
+Gilpin,0,0,0,0,2011,Female
+Gilpin,0,0,0,0,2011,Male
+Gilpin,0,0,0,0,2011,Both genders
+Gilpin,0,0,0,0,2012,Female
+Gilpin,0,0,0,0,2012,Male
+Gilpin,0,0,0,0,2012,Both genders
+Gilpin,0,0,0,0,2013,Female
+Gilpin,0,0,0,0,2013,Male
+Gilpin,0,0,0,0,2013,Both genders
+Gilpin,0,0,0,0,2014,Female
+Gilpin,0,0,0,0,2014,Male
+Gilpin,0,0,0,0,2014,Both genders
+Gilpin,0,0,0,0,2015,Female
+Gilpin,0,0,0,0,2015,Male
+Gilpin,0,0,0,0,2015,Both genders
+Gilpin,0,0,0,0,2016,Female
+Gilpin,0,0,0,0,2016,Male
+Gilpin,0,0,0,0,2016,Both genders
+Gilpin,0,0,0,0,2017,Female
+Gilpin,,,,,2017,Male
+Gilpin,,,,,2017,Both genders
+Gilpin,0,0,0,0,2018,Female
+Gilpin,0,0,0,0,2018,Male
+Gilpin,0,0,0,0,2018,Both genders
+Gilpin,0,0,0,0,2019,Female
+Gilpin,0,0,0,0,2019,Male
+Gilpin,0,0,0,0,2019,Both genders
+Gilpin,0,0,0,0,2020,Female
+Gilpin,,,,,2020,Male
+Gilpin,,,,,2020,Both genders
+Gilpin,0,0,0,0,2021,Female
+Gilpin,0,0,0,0,2021,Male
+Gilpin,0,0,0,0,2021,Both genders
+Gilpin,0,0,0,0,2022,Female
+Gilpin,0,0,0,0,2022,Male
+Gilpin,0,0,0,0,2022,Both genders
+Grand,0,0,0,0,2011,Female
+Grand,0,0,0,0,2011,Male
+Grand,0,0,0,0,2011,Both genders
+Grand,0,0,0,0,2012,Female
+Grand,,,,,2012,Male
+Grand,,,,,2012,Both genders
+Grand,0,0,0,0,2013,Female
+Grand,0,0,0,0,2013,Male
+Grand,0,0,0,0,2013,Both genders
+Grand,0,0,0,0,2014,Female
+Grand,0,0,0,0,2014,Male
+Grand,0,0,0,0,2014,Both genders
+Grand,0,0,0,0,2015,Female
+Grand,0,0,0,0,2015,Male
+Grand,0,0,0,0,2015,Both genders
+Grand,0,0,0,0,2016,Female
+Grand,0,0,0,0,2016,Male
+Grand,0,0,0,0,2016,Both genders
+Grand,,,,,2017,Female
+Grand,0,0,0,0,2017,Male
+Grand,,,,,2017,Both genders
+Grand,0,0,0,0,2018,Female
+Grand,,,,,2018,Male
+Grand,,,,,2018,Both genders
+Grand,0,0,0,0,2019,Female
+Grand,,,,,2019,Male
+Grand,,,,,2019,Both genders
+Grand,0,0,0,0,2020,Female
+Grand,0,0,0,0,2020,Male
+Grand,0,0,0,0,2020,Both genders
+Grand,0,0,0,0,2021,Female
+Grand,0,0,0,0,2021,Male
+Grand,0,0,0,0,2021,Both genders
+Grand,0,0,0,0,2022,Female
+Grand,0,0,0,0,2022,Male
+Grand,0,0,0,0,2022,Both genders
+Gunnison,0,0,0,0,2011,Female
+Gunnison,0,0,0,0,2011,Male
+Gunnison,0,0,0,0,2011,Both genders
+Gunnison,0,0,0,0,2012,Female
+Gunnison,0,0,0,0,2012,Male
+Gunnison,0,0,0,0,2012,Both genders
+Gunnison,0,0,0,0,2013,Female
+Gunnison,0,0,0,0,2013,Male
+Gunnison,0,0,0,0,2013,Both genders
+Gunnison,0,0,0,0,2014,Female
+Gunnison,0,0,0,0,2014,Male
+Gunnison,0,0,0,0,2014,Both genders
+Gunnison,0,0,0,0,2015,Female
+Gunnison,,,,,2015,Male
+Gunnison,,,,,2015,Both genders
+Gunnison,0,0,0,0,2016,Female
+Gunnison,0,0,0,0,2016,Male
+Gunnison,0,0,0,0,2016,Both genders
+Gunnison,,,,,2017,Female
+Gunnison,0,0,0,0,2017,Male
+Gunnison,,,,,2017,Both genders
+Gunnison,0,0,0,0,2018,Female
+Gunnison,0,0,0,0,2018,Male
+Gunnison,0,0,0,0,2018,Both genders
+Gunnison,0,0,0,0,2019,Female
+Gunnison,0,0,0,0,2019,Male
+Gunnison,0,0,0,0,2019,Both genders
+Gunnison,0,0,0,0,2020,Female
+Gunnison,0,0,0,0,2020,Male
+Gunnison,0,0,0,0,2020,Both genders
+Gunnison,0,0,0,0,2021,Female
+Gunnison,,,,,2021,Male
+Gunnison,,,,,2021,Both genders
+Gunnison,0,0,0,0,2022,Female
+Gunnison,0,0,0,0,2022,Male
+Gunnison,0,0,0,0,2022,Both genders
+Hinsdale,0,0,0,0,2011,Female
+Hinsdale,0,0,0,0,2011,Male
+Hinsdale,0,0,0,0,2011,Both genders
+Hinsdale,0,0,0,0,2012,Female
+Hinsdale,0,0,0,0,2012,Male
+Hinsdale,0,0,0,0,2012,Both genders
+Hinsdale,0,0,0,0,2013,Female
+Hinsdale,0,0,0,0,2013,Male
+Hinsdale,0,0,0,0,2013,Both genders
+Hinsdale,0,0,0,0,2014,Female
+Hinsdale,0,0,0,0,2014,Male
+Hinsdale,0,0,0,0,2014,Both genders
+Hinsdale,0,0,0,0,2015,Female
+Hinsdale,0,0,0,0,2015,Male
+Hinsdale,0,0,0,0,2015,Both genders
+Hinsdale,0,0,0,0,2016,Female
+Hinsdale,0,0,0,0,2016,Male
+Hinsdale,0,0,0,0,2016,Both genders
+Hinsdale,0,0,0,0,2017,Female
+Hinsdale,0,0,0,0,2017,Male
+Hinsdale,0,0,0,0,2017,Both genders
+Hinsdale,0,0,0,0,2018,Female
+Hinsdale,0,0,0,0,2018,Male
+Hinsdale,0,0,0,0,2018,Both genders
+Hinsdale,0,0,0,0,2019,Female
+Hinsdale,0,0,0,0,2019,Male
+Hinsdale,0,0,0,0,2019,Both genders
+Hinsdale,0,0,0,0,2020,Female
+Hinsdale,0,0,0,0,2020,Male
+Hinsdale,0,0,0,0,2020,Both genders
+Hinsdale,0,0,0,0,2021,Female
+Hinsdale,0,0,0,0,2021,Male
+Hinsdale,0,0,0,0,2021,Both genders
+Hinsdale,0,0,0,0,2022,Female
+Hinsdale,0,0,0,0,2022,Male
+Hinsdale,0,0,0,0,2022,Both genders
+Huerfano,0,0,0,0,2011,Female
+Huerfano,0,0,0,0,2011,Male
+Huerfano,0,0,0,0,2011,Both genders
+Huerfano,0,0,0,0,2012,Female
+Huerfano,0,0,0,0,2012,Male
+Huerfano,0,0,0,0,2012,Both genders
+Huerfano,,,,,2013,Female
+Huerfano,0,0,0,0,2013,Male
+Huerfano,,,,,2013,Both genders
+Huerfano,,,,,2014,Female
+Huerfano,0,0,0,0,2014,Male
+Huerfano,,,,,2014,Both genders
+Huerfano,0,0,0,0,2015,Female
+Huerfano,0,0,0,0,2015,Male
+Huerfano,0,0,0,0,2015,Both genders
+Huerfano,0,0,0,0,2016,Female
+Huerfano,0,0,0,0,2016,Male
+Huerfano,0,0,0,0,2016,Both genders
+Huerfano,0,0,0,0,2017,Female
+Huerfano,,,,,2017,Male
+Huerfano,,,,,2017,Both genders
+Huerfano,0,0,0,0,2018,Female
+Huerfano,,,,,2018,Male
+Huerfano,,,,,2018,Both genders
+Huerfano,,,,,2019,Female
+Huerfano,,,,,2019,Male
+Huerfano,,,,,2019,Both genders
+Huerfano,0,0,0,0,2020,Female
+Huerfano,0,0,0,0,2020,Male
+Huerfano,0,0,0,0,2020,Both genders
+Huerfano,0,0,0,0,2021,Female
+Huerfano,0,0,0,0,2021,Male
+Huerfano,0,0,0,0,2021,Both genders
+Huerfano,0,0,0,0,2022,Female
+Huerfano,0,0,0,0,2022,Male
+Huerfano,0,0,0,0,2022,Both genders
+Jackson,0,0,0,0,2011,Female
+Jackson,0,0,0,0,2011,Male
+Jackson,0,0,0,0,2011,Both genders
+Jackson,0,0,0,0,2012,Female
+Jackson,0,0,0,0,2012,Male
+Jackson,0,0,0,0,2012,Both genders
+Jackson,0,0,0,0,2013,Female
+Jackson,0,0,0,0,2013,Male
+Jackson,0,0,0,0,2013,Both genders
+Jackson,0,0,0,0,2014,Female
+Jackson,0,0,0,0,2014,Male
+Jackson,0,0,0,0,2014,Both genders
+Jackson,0,0,0,0,2015,Female
+Jackson,0,0,0,0,2015,Male
+Jackson,0,0,0,0,2015,Both genders
+Jackson,0,0,0,0,2016,Female
+Jackson,0,0,0,0,2016,Male
+Jackson,0,0,0,0,2016,Both genders
+Jackson,0,0,0,0,2017,Female
+Jackson,0,0,0,0,2017,Male
+Jackson,0,0,0,0,2017,Both genders
+Jackson,0,0,0,0,2018,Female
+Jackson,0,0,0,0,2018,Male
+Jackson,0,0,0,0,2018,Both genders
+Jackson,0,0,0,0,2019,Female
+Jackson,0,0,0,0,2019,Male
+Jackson,0,0,0,0,2019,Both genders
+Jackson,0,0,0,0,2020,Female
+Jackson,,,,,2020,Male
+Jackson,,,,,2020,Both genders
+Jackson,0,0,0,0,2021,Female
+Jackson,0,0,0,0,2021,Male
+Jackson,0,0,0,0,2021,Both genders
+Jackson,0,0,0,0,2022,Female
+Jackson,0,0,0,0,2022,Male
+Jackson,0,0,0,0,2022,Both genders
+Jefferson,4.147086815,2.010525514,7.044050112,11,2011,Female
+Jefferson,5.758787253,3.115374646,9.200782288,14,2011,Male
+Jefferson,4.97788259,2.985783398,6.969981782,25,2011,Both genders
+Jefferson,5.385166591,2.963894741,8.517431201,15,2012,Female
+Jefferson,7.260022824,4.29222832,10.99502288,18,2012,Male
+Jefferson,6.326530984,4.142006975,8.511054993,33,2012,Both genders
+Jefferson,,,,,2013,Female
+Jefferson,6.616388159,3.862816681,10.09878882,18,2013,Male
+Jefferson,4.407675837,2.599062051,6.216289623,24,2013,Both genders
+Jefferson,,,,,2014,Female
+Jefferson,4.350119551,2.209896711,7.202953739,12,2014,Male
+Jefferson,3.972672594,2.282057566,5.663287622,22,2014,Both genders
+Jefferson,4.891399541,2.618552505,7.862570237,14,2015,Female
+Jefferson,4.116035834,2.023293512,6.939368874,11,2015,Male
+Jefferson,4.50851301,2.700146872,6.316879148,25,2015,Both genders
+Jefferson,4.822931531,2.69403532,7.561498139,16,2016,Female
+Jefferson,9.184124588,5.651935484,12.71631369,27,2016,Male
+Jefferson,7.143788295,4.954733665,9.332842924,43,2016,Both genders
+Jefferson,3.896494049,1.875975896,6.64299178,11,2017,Female
+Jefferson,4.35251064,2.268820618,7.103644596,13,2017,Male
+Jefferson,4.069384844,2.386177905,5.752591784,24,2017,Both genders
+Jefferson,4.427383853,2.274961746,7.284426002,13,2018,Female
+Jefferson,8.21835123,4.838051193,11.59865127,24,2018,Male
+Jefferson,6.330890262,4.2197184,8.442062123,37,2018,Both genders
+Jefferson,,,,,2019,Female
+Jefferson,5.65338235,3.14224774,8.889782505,15,2019,Male
+Jefferson,4.424847786,2.6267071,6.222988472,24,2019,Both genders
+Jefferson,3.972970136,2.036633644,6.545441048,13,2020,Female
+Jefferson,4.780926663,2.580856222,7.647951293,14,2020,Male
+Jefferson,4.426880441,2.706778975,6.146981906,27,2020,Both genders
+Jefferson,6.107004466,3.304068937,8.909939995,20,2021,Female
+Jefferson,5.18791945,2.903352322,8.124634929,16,2021,Male
+Jefferson,5.69890036,3.766136366,7.631664354,36,2021,Both genders
+Jefferson,4.560574495,2.433159366,7.345181658,14,2022,Female
+Jefferson,5.006453985,2.712048917,7.992481114,14,2022,Male
+Jefferson,4.776363191,2.964999831,6.58772655,28,2022,Both genders
+Kiowa,0,0,0,0,2011,Female
+Kiowa,,,,,2011,Male
+Kiowa,,,,,2011,Both genders
+Kiowa,0,0,0,0,2012,Female
+Kiowa,0,0,0,0,2012,Male
+Kiowa,0,0,0,0,2012,Both genders
+Kiowa,0,0,0,0,2013,Female
+Kiowa,0,0,0,0,2013,Male
+Kiowa,0,0,0,0,2013,Both genders
+Kiowa,0,0,0,0,2014,Female
+Kiowa,0,0,0,0,2014,Male
+Kiowa,0,0,0,0,2014,Both genders
+Kiowa,0,0,0,0,2015,Female
+Kiowa,0,0,0,0,2015,Male
+Kiowa,0,0,0,0,2015,Both genders
+Kiowa,0,0,0,0,2016,Female
+Kiowa,0,0,0,0,2016,Male
+Kiowa,0,0,0,0,2016,Both genders
+Kiowa,0,0,0,0,2017,Female
+Kiowa,0,0,0,0,2017,Male
+Kiowa,0,0,0,0,2017,Both genders
+Kiowa,0,0,0,0,2018,Female
+Kiowa,,,,,2018,Male
+Kiowa,,,,,2018,Both genders
+Kiowa,0,0,0,0,2019,Female
+Kiowa,,,,,2019,Male
+Kiowa,,,,,2019,Both genders
+Kiowa,0,0,0,0,2020,Female
+Kiowa,,,,,2020,Male
+Kiowa,,,,,2020,Both genders
+Kiowa,0,0,0,0,2021,Female
+Kiowa,,,,,2021,Male
+Kiowa,,,,,2021,Both genders
+Kiowa,0,0,0,0,2022,Female
+Kiowa,0,0,0,0,2022,Male
+Kiowa,0,0,0,0,2022,Both genders
+Kit Carson,,,,,2011,Female
+Kit Carson,,,,,2011,Male
+Kit Carson,,,,,2011,Both genders
+Kit Carson,0,0,0,0,2012,Female
+Kit Carson,0,0,0,0,2012,Male
+Kit Carson,0,0,0,0,2012,Both genders
+Kit Carson,0,0,0,0,2013,Female
+Kit Carson,0,0,0,0,2013,Male
+Kit Carson,0,0,0,0,2013,Both genders
+Kit Carson,0,0,0,0,2014,Female
+Kit Carson,0,0,0,0,2014,Male
+Kit Carson,0,0,0,0,2014,Both genders
+Kit Carson,0,0,0,0,2015,Female
+Kit Carson,,,,,2015,Male
+Kit Carson,,,,,2015,Both genders
+Kit Carson,,,,,2016,Female
+Kit Carson,0,0,0,0,2016,Male
+Kit Carson,,,,,2016,Both genders
+Kit Carson,0,0,0,0,2017,Female
+Kit Carson,,,,,2017,Male
+Kit Carson,,,,,2017,Both genders
+Kit Carson,0,0,0,0,2018,Female
+Kit Carson,,,,,2018,Male
+Kit Carson,,,,,2018,Both genders
+Kit Carson,0,0,0,0,2019,Female
+Kit Carson,0,0,0,0,2019,Male
+Kit Carson,0,0,0,0,2019,Both genders
+Kit Carson,0,0,0,0,2020,Female
+Kit Carson,0,0,0,0,2020,Male
+Kit Carson,0,0,0,0,2020,Both genders
+Kit Carson,,,,,2021,Female
+Kit Carson,0,0,0,0,2021,Male
+Kit Carson,,,,,2021,Both genders
+Kit Carson,0,0,0,0,2022,Female
+Kit Carson,,,,,2022,Male
+Kit Carson,,,,,2022,Both genders
+Lake,0,0,0,0,2011,Female
+Lake,0,0,0,0,2011,Male
+Lake,0,0,0,0,2011,Both genders
+Lake,0,0,0,0,2012,Female
+Lake,0,0,0,0,2012,Male
+Lake,0,0,0,0,2012,Both genders
+Lake,0,0,0,0,2013,Female
+Lake,,,,,2013,Male
+Lake,,,,,2013,Both genders
+Lake,0,0,0,0,2014,Female
+Lake,0,0,0,0,2014,Male
+Lake,0,0,0,0,2014,Both genders
+Lake,0,0,0,0,2015,Female
+Lake,0,0,0,0,2015,Male
+Lake,0,0,0,0,2015,Both genders
+Lake,0,0,0,0,2016,Female
+Lake,,,,,2016,Male
+Lake,,,,,2016,Both genders
+Lake,,,,,2017,Female
+Lake,0,0,0,0,2017,Male
+Lake,,,,,2017,Both genders
+Lake,0,0,0,0,2018,Female
+Lake,0,0,0,0,2018,Male
+Lake,0,0,0,0,2018,Both genders
+Lake,0,0,0,0,2019,Female
+Lake,0,0,0,0,2019,Male
+Lake,0,0,0,0,2019,Both genders
+Lake,0,0,0,0,2020,Female
+Lake,0,0,0,0,2020,Male
+Lake,0,0,0,0,2020,Both genders
+Lake,0,0,0,0,2021,Female
+Lake,0,0,0,0,2021,Male
+Lake,0,0,0,0,2021,Both genders
+Lake,0,0,0,0,2022,Female
+Lake,0,0,0,0,2022,Male
+Lake,0,0,0,0,2022,Both genders
+La Plata,0,0,0,0,2011,Female
+La Plata,,,,,2011,Male
+La Plata,,,,,2011,Both genders
+La Plata,0,0,0,0,2012,Female
+La Plata,0,0,0,0,2012,Male
+La Plata,0,0,0,0,2012,Both genders
+La Plata,0,0,0,0,2013,Female
+La Plata,0,0,0,0,2013,Male
+La Plata,0,0,0,0,2013,Both genders
+La Plata,0,0,0,0,2014,Female
+La Plata,,,,,2014,Male
+La Plata,,,,,2014,Both genders
+La Plata,,,,,2015,Female
+La Plata,,,,,2015,Male
+La Plata,,,,,2015,Both genders
+La Plata,,,,,2016,Female
+La Plata,0,0,0,0,2016,Male
+La Plata,,,,,2016,Both genders
+La Plata,,,,,2017,Female
+La Plata,,,,,2017,Male
+La Plata,,,,,2017,Both genders
+La Plata,,,,,2018,Female
+La Plata,0,0,0,0,2018,Male
+La Plata,,,,,2018,Both genders
+La Plata,,,,,2019,Female
+La Plata,,,,,2019,Male
+La Plata,,,,,2019,Both genders
+La Plata,0,0,0,0,2020,Female
+La Plata,,,,,2020,Male
+La Plata,,,,,2020,Both genders
+La Plata,,,,,2021,Female
+La Plata,,,,,2021,Male
+La Plata,,,,,2021,Both genders
+La Plata,,,,,2022,Female
+La Plata,,,,,2022,Male
+La Plata,,,,,2022,Both genders
+Larimer,8.761257095,4.456379493,14.49684173,12,2011,Female
+Larimer,,,,,2011,Male
+Larimer,7.207984188,4.005435838,10.41053254,20,2011,Both genders
+Larimer,6.478294426,3.191408367,10.90915894,11,2012,Female
+Larimer,9.131385587,4.894047595,14.66821963,14,2012,Male
+Larimer,7.92713024,4.74599832,11.10826216,25,2012,Both genders
+Larimer,7.396889979,3.646397507,12.4514723,11,2013,Female
+Larimer,,,,,2013,Male
+Larimer,7.119148852,4.029216599,10.2090811,21,2013,Both genders
+Larimer,,,,,2014,Female
+Larimer,7.438016715,3.671623751,12.51153372,11,2014,Male
+Larimer,5.486613348,3.155374482,8.452126509,17,2014,Both genders
+Larimer,,,,,2015,Female
+Larimer,15.9258013,9.759926053,22.09167655,27,2015,Male
+Larimer,10.62776834,7.061020719,14.19451596,36,2015,Both genders
+Larimer,8.130175065,4.324430922,13.11725779,14,2016,Female
+Larimer,16.70173891,10.35661821,23.0468596,28,2016,Male
+Larimer,12.45829327,8.577961707,16.33862484,42,2016,Both genders
+Larimer,,,,,2017,Female
+Larimer,9.862450561,5.57162545,15.35828632,16,2017,Male
+Larimer,5.465654088,3.203107662,8.322855478,18,2017,Both genders
+Larimer,7.538320872,4.165848007,11.894374,16,2018,Female
+Larimer,15.44067924,9.421001603,21.46035688,26,2018,Male
+Larimer,11.29910792,7.77764696,14.82056887,42,2018,Both genders
+Larimer,5.886184652,2.854054857,9.997237694,11,2019,Female
+Larimer,12.20368298,6.866362758,17.5410032,21,2019,Male
+Larimer,9.102263382,5.861093422,12.34343334,32,2019,Both genders
+Larimer,,,,,2020,Female
+Larimer,,,,,2020,Male
+Larimer,3.187627957,1.659137579,5.206841112,13,2020,Both genders
+Larimer,7.594891145,4.229176035,11.92964218,16,2021,Female
+Larimer,7.503023585,4.118499508,11.88583623,15,2021,Male
+Larimer,7.497914927,4.773384925,10.22244493,31,2021,Both genders
+Larimer,8.722896373,4.942401645,13.55961439,17,2022,Female
+Larimer,16.03401515,9.934193024,22.13383727,28,2022,Male
+Larimer,12.2629216,8.549910447,15.97593274,45,2022,Both genders
+Las Animas,0,0,0,0,2011,Female
+Las Animas,0,0,0,0,2011,Male
+Las Animas,0,0,0,0,2011,Both genders
+Las Animas,0,0,0,0,2012,Female
+Las Animas,0,0,0,0,2012,Male
+Las Animas,0,0,0,0,2012,Both genders
+Las Animas,0,0,0,0,2013,Female
+Las Animas,0,0,0,0,2013,Male
+Las Animas,0,0,0,0,2013,Both genders
+Las Animas,0,0,0,0,2014,Female
+Las Animas,0,0,0,0,2014,Male
+Las Animas,0,0,0,0,2014,Both genders
+Las Animas,,,,,2015,Female
+Las Animas,,,,,2015,Male
+Las Animas,,,,,2015,Both genders
+Las Animas,,,,,2016,Female
+Las Animas,,,,,2016,Male
+Las Animas,,,,,2016,Both genders
+Las Animas,0,0,0,0,2017,Female
+Las Animas,,,,,2017,Male
+Las Animas,,,,,2017,Both genders
+Las Animas,,,,,2018,Female
+Las Animas,,,,,2018,Male
+Las Animas,,,,,2018,Both genders
+Las Animas,,,,,2019,Female
+Las Animas,,,,,2019,Male
+Las Animas,,,,,2019,Both genders
+Las Animas,0,0,0,0,2020,Female
+Las Animas,,,,,2020,Male
+Las Animas,,,,,2020,Both genders
+Las Animas,,,,,2021,Female
+Las Animas,,,,,2021,Male
+Las Animas,,,,,2021,Both genders
+Las Animas,,,,,2022,Female
+Las Animas,,,,,2022,Male
+Las Animas,,,,,2022,Both genders
+Lincoln,0,0,0,0,2011,Female
+Lincoln,0,0,0,0,2011,Male
+Lincoln,0,0,0,0,2011,Both genders
+Lincoln,0,0,0,0,2012,Female
+Lincoln,0,0,0,0,2012,Male
+Lincoln,0,0,0,0,2012,Both genders
+Lincoln,,,,,2013,Female
+Lincoln,0,0,0,0,2013,Male
+Lincoln,,,,,2013,Both genders
+Lincoln,0,0,0,0,2014,Female
+Lincoln,0,0,0,0,2014,Male
+Lincoln,0,0,0,0,2014,Both genders
+Lincoln,0,0,0,0,2015,Female
+Lincoln,0,0,0,0,2015,Male
+Lincoln,0,0,0,0,2015,Both genders
+Lincoln,,,,,2016,Female
+Lincoln,0,0,0,0,2016,Male
+Lincoln,,,,,2016,Both genders
+Lincoln,0,0,0,0,2017,Female
+Lincoln,0,0,0,0,2017,Male
+Lincoln,0,0,0,0,2017,Both genders
+Lincoln,0,0,0,0,2018,Female
+Lincoln,0,0,0,0,2018,Male
+Lincoln,0,0,0,0,2018,Both genders
+Lincoln,0,0,0,0,2019,Female
+Lincoln,0,0,0,0,2019,Male
+Lincoln,0,0,0,0,2019,Both genders
+Lincoln,0,0,0,0,2020,Female
+Lincoln,,,,,2020,Male
+Lincoln,,,,,2020,Both genders
+Lincoln,0,0,0,0,2021,Female
+Lincoln,,,,,2021,Male
+Lincoln,,,,,2021,Both genders
+Lincoln,0,0,0,0,2022,Female
+Lincoln,0,0,0,0,2022,Male
+Lincoln,0,0,0,0,2022,Both genders
+Logan,0,0,0,0,2011,Female
+Logan,,,,,2011,Male
+Logan,,,,,2011,Both genders
+Logan,,,,,2012,Female
+Logan,,,,,2012,Male
+Logan,,,,,2012,Both genders
+Logan,0,0,0,0,2013,Female
+Logan,,,,,2013,Male
+Logan,,,,,2013,Both genders
+Logan,0,0,0,0,2014,Female
+Logan,,,,,2014,Male
+Logan,,,,,2014,Both genders
+Logan,0,0,0,0,2015,Female
+Logan,,,,,2015,Male
+Logan,,,,,2015,Both genders
+Logan,,,,,2016,Female
+Logan,,,,,2016,Male
+Logan,,,,,2016,Both genders
+Logan,0,0,0,0,2017,Female
+Logan,,,,,2017,Male
+Logan,,,,,2017,Both genders
+Logan,,,,,2018,Female
+Logan,,,,,2018,Male
+Logan,,,,,2018,Both genders
+Logan,,,,,2019,Female
+Logan,88.19445676,42.36272573,150.5460511,11,2019,Male
+Logan,58.90483977,30.47284777,96.55015194,13,2019,Both genders
+Logan,0,0,0,0,2020,Female
+Logan,,,,,2020,Male
+Logan,,,,,2020,Both genders
+Logan,,,,,2021,Female
+Logan,,,,,2021,Male
+Logan,,,,,2021,Both genders
+Logan,,,,,2022,Female
+Logan,,,,,2022,Male
+Logan,,,,,2022,Both genders
+Mesa,,,,,2011,Female
+Mesa,,,,,2011,Male
+Mesa,8.023094642,4.214855398,13.03664635,13,2011,Both genders
+Mesa,,,,,2012,Female
+Mesa,,,,,2012,Male
+Mesa,8.880506672,4.52826227,14.6739084,12,2012,Both genders
+Mesa,,,,,2013,Female
+Mesa,15.53398613,7.951628912,25.61268575,12,2013,Male
+Mesa,14.00038441,7.874362591,20.12640623,21,2013,Both genders
+Mesa,,,,,2014,Female
+Mesa,,,,,2014,Male
+Mesa,9.669590641,5.018259418,15.82090355,13,2014,Both genders
+Mesa,,,,,2015,Female
+Mesa,,,,,2015,Male
+Mesa,13.17748783,7.816517267,19.91563319,19,2015,Both genders
+Mesa,,,,,2016,Female
+Mesa,23.93416484,14.23776707,36.10781954,19,2016,Male
+Mesa,18.67837966,11.6851784,25.67158092,29,2016,Both genders
+Mesa,,,,,2017,Female
+Mesa,,,,,2017,Male
+Mesa,9.078821813,4.867207955,14.58148699,14,2017,Both genders
+Mesa,,,,,2018,Female
+Mesa,28.59472136,15.851001,41.33844173,20,2018,Male
+Mesa,21.17041104,13.41877917,28.92204291,30,2018,Both genders
+Mesa,,,,,2019,Female
+Mesa,16.78867587,8.834314853,27.25414759,13,2019,Male
+Mesa,12.0079548,7.027493792,18.30077635,18,2019,Both genders
+Mesa,,,,,2020,Female
+Mesa,,,,,2020,Male
+Mesa,9.080610296,4.843307943,14.62748301,14,2020,Both genders
+Mesa,,,,,2021,Female
+Mesa,,,,,2021,Male
+Mesa,12.02112391,7.1171239,18.18945994,19,2021,Both genders
+Mesa,,,,,2022,Female
+Mesa,12.84791635,6.187489928,21.90049359,11,2022,Male
+Mesa,9.773429162,5.492859009,15.26700501,17,2022,Both genders
+Mineral,0,0,0,0,2011,Female
+Mineral,0,0,0,0,2011,Male
+Mineral,0,0,0,0,2011,Both genders
+Mineral,0,0,0,0,2012,Female
+Mineral,0,0,0,0,2012,Male
+Mineral,0,0,0,0,2012,Both genders
+Mineral,0,0,0,0,2013,Female
+Mineral,0,0,0,0,2013,Male
+Mineral,0,0,0,0,2013,Both genders
+Mineral,0,0,0,0,2014,Female
+Mineral,0,0,0,0,2014,Male
+Mineral,0,0,0,0,2014,Both genders
+Mineral,0,0,0,0,2015,Female
+Mineral,0,0,0,0,2015,Male
+Mineral,0,0,0,0,2015,Both genders
+Mineral,0,0,0,0,2016,Female
+Mineral,0,0,0,0,2016,Male
+Mineral,0,0,0,0,2016,Both genders
+Mineral,0,0,0,0,2017,Female
+Mineral,0,0,0,0,2017,Male
+Mineral,0,0,0,0,2017,Both genders
+Mineral,0,0,0,0,2018,Female
+Mineral,0,0,0,0,2018,Male
+Mineral,0,0,0,0,2018,Both genders
+Mineral,0,0,0,0,2019,Female
+Mineral,0,0,0,0,2019,Male
+Mineral,0,0,0,0,2019,Both genders
+Mineral,0,0,0,0,2020,Female
+Mineral,0,0,0,0,2020,Male
+Mineral,0,0,0,0,2020,Both genders
+Mineral,0,0,0,0,2021,Female
+Mineral,0,0,0,0,2021,Male
+Mineral,0,0,0,0,2021,Both genders
+Mineral,0,0,0,0,2022,Female
+Mineral,0,0,0,0,2022,Male
+Mineral,0,0,0,0,2022,Both genders
+Moffat,0,0,0,0,2011,Female
+Moffat,0,0,0,0,2011,Male
+Moffat,0,0,0,0,2011,Both genders
+Moffat,,,,,2012,Female
+Moffat,,,,,2012,Male
+Moffat,,,,,2012,Both genders
+Moffat,,,,,2013,Female
+Moffat,,,,,2013,Male
+Moffat,,,,,2013,Both genders
+Moffat,0,0,0,0,2014,Female
+Moffat,0,0,0,0,2014,Male
+Moffat,0,0,0,0,2014,Both genders
+Moffat,,,,,2015,Female
+Moffat,0,0,0,0,2015,Male
+Moffat,,,,,2015,Both genders
+Moffat,0,0,0,0,2016,Female
+Moffat,,,,,2016,Male
+Moffat,,,,,2016,Both genders
+Moffat,,,,,2017,Female
+Moffat,,,,,2017,Male
+Moffat,,,,,2017,Both genders
+Moffat,0,0,0,0,2018,Female
+Moffat,0,0,0,0,2018,Male
+Moffat,0,0,0,0,2018,Both genders
+Moffat,0,0,0,0,2019,Female
+Moffat,0,0,0,0,2019,Male
+Moffat,0,0,0,0,2019,Both genders
+Moffat,0,0,0,0,2020,Female
+Moffat,0,0,0,0,2020,Male
+Moffat,0,0,0,0,2020,Both genders
+Moffat,,,,,2021,Female
+Moffat,,,,,2021,Male
+Moffat,,,,,2021,Both genders
+Moffat,,,,,2022,Female
+Moffat,,,,,2022,Male
+Moffat,,,,,2022,Both genders
+Montezuma,0,0,0,0,2011,Female
+Montezuma,0,0,0,0,2011,Male
+Montezuma,0,0,0,0,2011,Both genders
+Montezuma,0,0,0,0,2012,Female
+Montezuma,0,0,0,0,2012,Male
+Montezuma,0,0,0,0,2012,Both genders
+Montezuma,0,0,0,0,2013,Female
+Montezuma,0,0,0,0,2013,Male
+Montezuma,0,0,0,0,2013,Both genders
+Montezuma,0,0,0,0,2014,Female
+Montezuma,0,0,0,0,2014,Male
+Montezuma,0,0,0,0,2014,Both genders
+Montezuma,0,0,0,0,2015,Female
+Montezuma,,,,,2015,Male
+Montezuma,,,,,2015,Both genders
+Montezuma,,,,,2016,Female
+Montezuma,,,,,2016,Male
+Montezuma,,,,,2016,Both genders
+Montezuma,0,0,0,0,2017,Female
+Montezuma,,,,,2017,Male
+Montezuma,,,,,2017,Both genders
+Montezuma,0,0,0,0,2018,Female
+Montezuma,,,,,2018,Male
+Montezuma,,,,,2018,Both genders
+Montezuma,,,,,2019,Female
+Montezuma,,,,,2019,Male
+Montezuma,,,,,2019,Both genders
+Montezuma,,,,,2020,Female
+Montezuma,,,,,2020,Male
+Montezuma,,,,,2020,Both genders
+Montezuma,0,0,0,0,2021,Female
+Montezuma,0,0,0,0,2021,Male
+Montezuma,0,0,0,0,2021,Both genders
+Montezuma,0,0,0,0,2022,Female
+Montezuma,,,,,2022,Male
+Montezuma,,,,,2022,Both genders
+Montrose,0,0,0,0,2011,Female
+Montrose,0,0,0,0,2011,Male
+Montrose,0,0,0,0,2011,Both genders
+Montrose,0,0,0,0,2012,Female
+Montrose,0,0,0,0,2012,Male
+Montrose,0,0,0,0,2012,Both genders
+Montrose,0,0,0,0,2013,Female
+Montrose,,,,,2013,Male
+Montrose,,,,,2013,Both genders
+Montrose,,,,,2014,Female
+Montrose,,,,,2014,Male
+Montrose,,,,,2014,Both genders
+Montrose,0,0,0,0,2015,Female
+Montrose,0,0,0,0,2015,Male
+Montrose,0,0,0,0,2015,Both genders
+Montrose,0,0,0,0,2016,Female
+Montrose,,,,,2016,Male
+Montrose,,,,,2016,Both genders
+Montrose,,,,,2017,Female
+Montrose,,,,,2017,Male
+Montrose,,,,,2017,Both genders
+Montrose,,,,,2018,Female
+Montrose,,,,,2018,Male
+Montrose,,,,,2018,Both genders
+Montrose,,,,,2019,Female
+Montrose,,,,,2019,Male
+Montrose,,,,,2019,Both genders
+Montrose,,,,,2020,Female
+Montrose,,,,,2020,Male
+Montrose,,,,,2020,Both genders
+Montrose,,,,,2021,Female
+Montrose,,,,,2021,Male
+Montrose,,,,,2021,Both genders
+Montrose,,,,,2022,Female
+Montrose,,,,,2022,Male
+Montrose,,,,,2022,Both genders
+Morgan,0,0,0,0,2011,Female
+Morgan,0,0,0,0,2011,Male
+Morgan,0,0,0,0,2011,Both genders
+Morgan,,,,,2012,Female
+Morgan,,,,,2012,Male
+Morgan,,,,,2012,Both genders
+Morgan,,,,,2013,Female
+Morgan,,,,,2013,Male
+Morgan,,,,,2013,Both genders
+Morgan,,,,,2014,Female
+Morgan,,,,,2014,Male
+Morgan,,,,,2014,Both genders
+Morgan,0,0,0,0,2015,Female
+Morgan,,,,,2015,Male
+Morgan,,,,,2015,Both genders
+Morgan,,,,,2016,Female
+Morgan,,,,,2016,Male
+Morgan,,,,,2016,Both genders
+Morgan,,,,,2017,Female
+Morgan,,,,,2017,Male
+Morgan,,,,,2017,Both genders
+Morgan,,,,,2018,Female
+Morgan,,,,,2018,Male
+Morgan,,,,,2018,Both genders
+Morgan,,,,,2019,Female
+Morgan,,,,,2019,Male
+Morgan,,,,,2019,Both genders
+Morgan,0,0,0,0,2020,Female
+Morgan,,,,,2020,Male
+Morgan,,,,,2020,Both genders
+Morgan,,,,,2021,Female
+Morgan,,,,,2021,Male
+Morgan,,,,,2021,Both genders
+Morgan,,,,,2022,Female
+Morgan,,,,,2022,Male
+Morgan,36.71647204,17.92073622,62.13947863,11,2022,Both genders
+Otero,0,0,0,0,2011,Female
+Otero,0,0,0,0,2011,Male
+Otero,0,0,0,0,2011,Both genders
+Otero,,,,,2012,Female
+Otero,,,,,2012,Male
+Otero,,,,,2012,Both genders
+Otero,,,,,2013,Female
+Otero,,,,,2013,Male
+Otero,,,,,2013,Both genders
+Otero,,,,,2014,Female
+Otero,,,,,2014,Male
+Otero,,,,,2014,Both genders
+Otero,,,,,2015,Female
+Otero,,,,,2015,Male
+Otero,,,,,2015,Both genders
+Otero,,,,,2016,Female
+Otero,,,,,2016,Male
+Otero,,,,,2016,Both genders
+Otero,,,,,2017,Female
+Otero,,,,,2017,Male
+Otero,,,,,2017,Both genders
+Otero,,,,,2018,Female
+Otero,,,,,2018,Male
+Otero,,,,,2018,Both genders
+Otero,,,,,2019,Female
+Otero,,,,,2019,Male
+Otero,,,,,2019,Both genders
+Otero,,,,,2020,Female
+Otero,,,,,2020,Male
+Otero,,,,,2020,Both genders
+Otero,,,,,2021,Female
+Otero,,,,,2021,Male
+Otero,,,,,2021,Both genders
+Otero,,,,,2022,Female
+Otero,,,,,2022,Male
+Otero,,,,,2022,Both genders
+Ouray,0,0,0,0,2011,Female
+Ouray,0,0,0,0,2011,Male
+Ouray,0,0,0,0,2011,Both genders
+Ouray,0,0,0,0,2012,Female
+Ouray,0,0,0,0,2012,Male
+Ouray,0,0,0,0,2012,Both genders
+Ouray,0,0,0,0,2013,Female
+Ouray,0,0,0,0,2013,Male
+Ouray,0,0,0,0,2013,Both genders
+Ouray,0,0,0,0,2014,Female
+Ouray,0,0,0,0,2014,Male
+Ouray,0,0,0,0,2014,Both genders
+Ouray,0,0,0,0,2015,Female
+Ouray,0,0,0,0,2015,Male
+Ouray,0,0,0,0,2015,Both genders
+Ouray,0,0,0,0,2016,Female
+Ouray,0,0,0,0,2016,Male
+Ouray,0,0,0,0,2016,Both genders
+Ouray,0,0,0,0,2017,Female
+Ouray,0,0,0,0,2017,Male
+Ouray,0,0,0,0,2017,Both genders
+Ouray,0,0,0,0,2018,Female
+Ouray,0,0,0,0,2018,Male
+Ouray,0,0,0,0,2018,Both genders
+Ouray,0,0,0,0,2019,Female
+Ouray,0,0,0,0,2019,Male
+Ouray,0,0,0,0,2019,Both genders
+Ouray,0,0,0,0,2020,Female
+Ouray,0,0,0,0,2020,Male
+Ouray,0,0,0,0,2020,Both genders
+Ouray,0,0,0,0,2021,Female
+Ouray,0,0,0,0,2021,Male
+Ouray,0,0,0,0,2021,Both genders
+Ouray,0,0,0,0,2022,Female
+Ouray,,,,,2022,Male
+Ouray,,,,,2022,Both genders
+Park,0,0,0,0,2011,Female
+Park,0,0,0,0,2011,Male
+Park,0,0,0,0,2011,Both genders
+Park,0,0,0,0,2012,Female
+Park,0,0,0,0,2012,Male
+Park,0,0,0,0,2012,Both genders
+Park,0,0,0,0,2013,Female
+Park,0,0,0,0,2013,Male
+Park,0,0,0,0,2013,Both genders
+Park,0,0,0,0,2014,Female
+Park,,,,,2014,Male
+Park,,,,,2014,Both genders
+Park,0,0,0,0,2015,Female
+Park,0,0,0,0,2015,Male
+Park,0,0,0,0,2015,Both genders
+Park,0,0,0,0,2016,Female
+Park,0,0,0,0,2016,Male
+Park,0,0,0,0,2016,Both genders
+Park,0,0,0,0,2017,Female
+Park,0,0,0,0,2017,Male
+Park,0,0,0,0,2017,Both genders
+Park,0,0,0,0,2018,Female
+Park,0,0,0,0,2018,Male
+Park,0,0,0,0,2018,Both genders
+Park,0,0,0,0,2019,Female
+Park,0,0,0,0,2019,Male
+Park,0,0,0,0,2019,Both genders
+Park,,,,,2020,Female
+Park,,,,,2020,Male
+Park,,,,,2020,Both genders
+Park,0,0,0,0,2021,Female
+Park,0,0,0,0,2021,Male
+Park,0,0,0,0,2021,Both genders
+Park,0,0,0,0,2022,Female
+Park,0,0,0,0,2022,Male
+Park,0,0,0,0,2022,Both genders
+Phillips,0,0,0,0,2011,Female
+Phillips,0,0,0,0,2011,Male
+Phillips,0,0,0,0,2011,Both genders
+Phillips,0,0,0,0,2012,Female
+Phillips,0,0,0,0,2012,Male
+Phillips,0,0,0,0,2012,Both genders
+Phillips,0,0,0,0,2013,Female
+Phillips,0,0,0,0,2013,Male
+Phillips,0,0,0,0,2013,Both genders
+Phillips,,,,,2014,Female
+Phillips,,,,,2014,Male
+Phillips,,,,,2014,Both genders
+Phillips,0,0,0,0,2015,Female
+Phillips,,,,,2015,Male
+Phillips,,,,,2015,Both genders
+Phillips,0,0,0,0,2016,Female
+Phillips,0,0,0,0,2016,Male
+Phillips,0,0,0,0,2016,Both genders
+Phillips,0,0,0,0,2017,Female
+Phillips,0,0,0,0,2017,Male
+Phillips,0,0,0,0,2017,Both genders
+Phillips,0,0,0,0,2018,Female
+Phillips,0,0,0,0,2018,Male
+Phillips,0,0,0,0,2018,Both genders
+Phillips,,,,,2019,Female
+Phillips,,,,,2019,Male
+Phillips,,,,,2019,Both genders
+Phillips,0,0,0,0,2020,Female
+Phillips,0,0,0,0,2020,Male
+Phillips,0,0,0,0,2020,Both genders
+Phillips,0,0,0,0,2021,Female
+Phillips,0,0,0,0,2021,Male
+Phillips,0,0,0,0,2021,Both genders
+Phillips,0,0,0,0,2022,Female
+Phillips,0,0,0,0,2022,Male
+Phillips,0,0,0,0,2022,Both genders
+Pitkin,0,0,0,0,2011,Female
+Pitkin,,,,,2011,Male
+Pitkin,,,,,2011,Both genders
+Pitkin,0,0,0,0,2012,Female
+Pitkin,0,0,0,0,2012,Male
+Pitkin,0,0,0,0,2012,Both genders
+Pitkin,0,0,0,0,2013,Female
+Pitkin,0,0,0,0,2013,Male
+Pitkin,0,0,0,0,2013,Both genders
+Pitkin,0,0,0,0,2014,Female
+Pitkin,0,0,0,0,2014,Male
+Pitkin,0,0,0,0,2014,Both genders
+Pitkin,0,0,0,0,2015,Female
+Pitkin,0,0,0,0,2015,Male
+Pitkin,0,0,0,0,2015,Both genders
+Pitkin,0,0,0,0,2016,Female
+Pitkin,0,0,0,0,2016,Male
+Pitkin,0,0,0,0,2016,Both genders
+Pitkin,0,0,0,0,2017,Female
+Pitkin,0,0,0,0,2017,Male
+Pitkin,0,0,0,0,2017,Both genders
+Pitkin,0,0,0,0,2018,Female
+Pitkin,0,0,0,0,2018,Male
+Pitkin,0,0,0,0,2018,Both genders
+Pitkin,0,0,0,0,2019,Female
+Pitkin,0,0,0,0,2019,Male
+Pitkin,0,0,0,0,2019,Both genders
+Pitkin,0,0,0,0,2020,Female
+Pitkin,0,0,0,0,2020,Male
+Pitkin,0,0,0,0,2020,Both genders
+Pitkin,,,,,2021,Female
+Pitkin,0,0,0,0,2021,Male
+Pitkin,,,,,2021,Both genders
+Pitkin,0,0,0,0,2022,Female
+Pitkin,,,,,2022,Male
+Pitkin,,,,,2022,Both genders
+Prowers,,,,,2011,Female
+Prowers,,,,,2011,Male
+Prowers,,,,,2011,Both genders
+Prowers,,,,,2012,Female
+Prowers,,,,,2012,Male
+Prowers,,,,,2012,Both genders
+Prowers,,,,,2013,Female
+Prowers,,,,,2013,Male
+Prowers,,,,,2013,Both genders
+Prowers,0,0,0,0,2014,Female
+Prowers,,,,,2014,Male
+Prowers,,,,,2014,Both genders
+Prowers,0,0,0,0,2015,Female
+Prowers,0,0,0,0,2015,Male
+Prowers,0,0,0,0,2015,Both genders
+Prowers,,,,,2016,Female
+Prowers,,,,,2016,Male
+Prowers,89.27539894,43.39806476,151.4198548,11,2016,Both genders
+Prowers,,,,,2017,Female
+Prowers,,,,,2017,Male
+Prowers,,,,,2017,Both genders
+Prowers,,,,,2018,Female
+Prowers,,,,,2018,Male
+Prowers,,,,,2018,Both genders
+Prowers,,,,,2019,Female
+Prowers,,,,,2019,Male
+Prowers,,,,,2019,Both genders
+Prowers,,,,,2020,Female
+Prowers,,,,,2020,Male
+Prowers,,,,,2020,Both genders
+Prowers,0,0,0,0,2021,Female
+Prowers,,,,,2021,Male
+Prowers,,,,,2021,Both genders
+Prowers,,,,,2022,Female
+Prowers,,,,,2022,Male
+Prowers,,,,,2022,Both genders
+Pueblo,,,,,2011,Female
+Pueblo,16.71144268,8.735133063,27.23193676,13,2011,Male
+Pueblo,15.08104408,8.769962414,21.39212575,23,2011,Both genders
+Pueblo,,,,,2012,Female
+Pueblo,20.89692081,11.83621844,32.49057017,16,2012,Male
+Pueblo,16.26618219,9.894995807,22.63736858,26,2012,Both genders
+Pueblo,13.93559622,6.846887285,23.50072228,11,2013,Female
+Pueblo,20.95608705,11.89002252,32.54899539,16,2013,Male
+Pueblo,17.42787528,10.76371524,24.09203532,27,2013,Both genders
+Pueblo,16.13440593,8.190445879,26.72623495,12,2014,Female
+Pueblo,18.50198253,9.911497164,29.72901856,14,2014,Male
+Pueblo,17.28319863,10.48134928,24.08504799,26,2014,Both genders
+Pueblo,15.43184094,7.779300077,25.66132869,12,2015,Female
+Pueblo,20.63239428,11.85439144,31.80280536,17,2015,Male
+Pueblo,18.10678773,11.33587975,24.8776957,29,2015,Both genders
+Pueblo,16.24524922,8.454673567,26.53736116,13,2016,Female
+Pueblo,30.72700244,18.16701489,43.28698998,24,2016,Male
+Pueblo,23.11192526,15.45846158,30.76538894,37,2016,Both genders
+Pueblo,,,,,2017,Female
+Pueblo,25.0172076,14.5952523,38.20135437,18,2017,Male
+Pueblo,18.30050449,11.30734833,25.29366065,28,2017,Both genders
+Pueblo,13.7248556,6.569841901,23.47094744,11,2018,Female
+Pueblo,29.89239513,17.70658597,42.07820429,25,2018,Male
+Pueblo,21.72558057,14.31359779,29.13756334,36,2018,Both genders
+Pueblo,,,,,2019,Female
+Pueblo,17.22849711,9.249474281,27.64785018,14,2019,Male
+Pueblo,13.20794008,7.513542339,18.90233783,22,2019,Both genders
+Pueblo,,,,,2020,Female
+Pueblo,25.06546273,14.83561731,37.93421837,19,2020,Male
+Pueblo,17.79896059,11.00153278,24.5963884,28,2020,Both genders
+Pueblo,,,,,2021,Female
+Pueblo,22.91425196,13.31342188,35.07906091,18,2021,Male
+Pueblo,15.89090956,9.541646947,22.24017218,26,2021,Both genders
+Pueblo,20.15782981,11.52194198,31.16933555,17,2022,Female
+Pueblo,14.60262058,7.190413644,24.59625585,11,2022,Male
+Pueblo,17.42469654,10.81110073,24.03829235,28,2022,Both genders
+Rio Blanco,0,0,0,0,2011,Female
+Rio Blanco,0,0,0,0,2011,Male
+Rio Blanco,0,0,0,0,2011,Both genders
+Rio Blanco,0,0,0,0,2012,Female
+Rio Blanco,0,0,0,0,2012,Male
+Rio Blanco,0,0,0,0,2012,Both genders
+Rio Blanco,0,0,0,0,2013,Female
+Rio Blanco,0,0,0,0,2013,Male
+Rio Blanco,0,0,0,0,2013,Both genders
+Rio Blanco,0,0,0,0,2014,Female
+Rio Blanco,0,0,0,0,2014,Male
+Rio Blanco,0,0,0,0,2014,Both genders
+Rio Blanco,0,0,0,0,2015,Female
+Rio Blanco,0,0,0,0,2015,Male
+Rio Blanco,0,0,0,0,2015,Both genders
+Rio Blanco,,,,,2016,Female
+Rio Blanco,,,,,2016,Male
+Rio Blanco,,,,,2016,Both genders
+Rio Blanco,0,0,0,0,2017,Female
+Rio Blanco,0,0,0,0,2017,Male
+Rio Blanco,0,0,0,0,2017,Both genders
+Rio Blanco,,,,,2018,Female
+Rio Blanco,0,0,0,0,2018,Male
+Rio Blanco,,,,,2018,Both genders
+Rio Blanco,0,0,0,0,2019,Female
+Rio Blanco,0,0,0,0,2019,Male
+Rio Blanco,0,0,0,0,2019,Both genders
+Rio Blanco,0,0,0,0,2020,Female
+Rio Blanco,,,,,2020,Male
+Rio Blanco,,,,,2020,Both genders
+Rio Blanco,0,0,0,0,2021,Female
+Rio Blanco,,,,,2021,Male
+Rio Blanco,,,,,2021,Both genders
+Rio Blanco,0,0,0,0,2022,Female
+Rio Blanco,0,0,0,0,2022,Male
+Rio Blanco,0,0,0,0,2022,Both genders
+Rio Grande,0,0,0,0,2011,Female
+Rio Grande,0,0,0,0,2011,Male
+Rio Grande,0,0,0,0,2011,Both genders
+Rio Grande,0,0,0,0,2012,Female
+Rio Grande,,,,,2012,Male
+Rio Grande,,,,,2012,Both genders
+Rio Grande,0,0,0,0,2013,Female
+Rio Grande,,,,,2013,Male
+Rio Grande,,,,,2013,Both genders
+Rio Grande,0,0,0,0,2014,Female
+Rio Grande,,,,,2014,Male
+Rio Grande,,,,,2014,Both genders
+Rio Grande,0,0,0,0,2015,Female
+Rio Grande,0,0,0,0,2015,Male
+Rio Grande,0,0,0,0,2015,Both genders
+Rio Grande,0,0,0,0,2016,Female
+Rio Grande,,,,,2016,Male
+Rio Grande,,,,,2016,Both genders
+Rio Grande,0,0,0,0,2017,Female
+Rio Grande,0,0,0,0,2017,Male
+Rio Grande,0,0,0,0,2017,Both genders
+Rio Grande,0,0,0,0,2018,Female
+Rio Grande,0,0,0,0,2018,Male
+Rio Grande,0,0,0,0,2018,Both genders
+Rio Grande,0,0,0,0,2019,Female
+Rio Grande,0,0,0,0,2019,Male
+Rio Grande,0,0,0,0,2019,Both genders
+Rio Grande,,,,,2020,Female
+Rio Grande,,,,,2020,Male
+Rio Grande,,,,,2020,Both genders
+Rio Grande,0,0,0,0,2021,Female
+Rio Grande,0,0,0,0,2021,Male
+Rio Grande,0,0,0,0,2021,Both genders
+Rio Grande,0,0,0,0,2022,Female
+Rio Grande,0,0,0,0,2022,Male
+Rio Grande,0,0,0,0,2022,Both genders
+Routt,0,0,0,0,2011,Female
+Routt,0,0,0,0,2011,Male
+Routt,0,0,0,0,2011,Both genders
+Routt,0,0,0,0,2012,Female
+Routt,0,0,0,0,2012,Male
+Routt,0,0,0,0,2012,Both genders
+Routt,0,0,0,0,2013,Female
+Routt,0,0,0,0,2013,Male
+Routt,0,0,0,0,2013,Both genders
+Routt,0,0,0,0,2014,Female
+Routt,0,0,0,0,2014,Male
+Routt,0,0,0,0,2014,Both genders
+Routt,0,0,0,0,2015,Female
+Routt,0,0,0,0,2015,Male
+Routt,0,0,0,0,2015,Both genders
+Routt,0,0,0,0,2016,Female
+Routt,,,,,2016,Male
+Routt,,,,,2016,Both genders
+Routt,0,0,0,0,2017,Female
+Routt,0,0,0,0,2017,Male
+Routt,0,0,0,0,2017,Both genders
+Routt,0,0,0,0,2018,Female
+Routt,,,,,2018,Male
+Routt,,,,,2018,Both genders
+Routt,0,0,0,0,2019,Female
+Routt,,,,,2019,Male
+Routt,,,,,2019,Both genders
+Routt,0,0,0,0,2020,Female
+Routt,0,0,0,0,2020,Male
+Routt,0,0,0,0,2020,Both genders
+Routt,,,,,2021,Female
+Routt,0,0,0,0,2021,Male
+Routt,,,,,2021,Both genders
+Routt,,,,,2022,Female
+Routt,0,0,0,0,2022,Male
+Routt,,,,,2022,Both genders
+Saguache,0,0,0,0,2011,Female
+Saguache,0,0,0,0,2011,Male
+Saguache,0,0,0,0,2011,Both genders
+Saguache,0,0,0,0,2012,Female
+Saguache,0,0,0,0,2012,Male
+Saguache,0,0,0,0,2012,Both genders
+Saguache,0,0,0,0,2013,Female
+Saguache,0,0,0,0,2013,Male
+Saguache,0,0,0,0,2013,Both genders
+Saguache,0,0,0,0,2014,Female
+Saguache,,,,,2014,Male
+Saguache,,,,,2014,Both genders
+Saguache,,,,,2015,Female
+Saguache,0,0,0,0,2015,Male
+Saguache,,,,,2015,Both genders
+Saguache,0,0,0,0,2016,Female
+Saguache,0,0,0,0,2016,Male
+Saguache,0,0,0,0,2016,Both genders
+Saguache,0,0,0,0,2017,Female
+Saguache,,,,,2017,Male
+Saguache,,,,,2017,Both genders
+Saguache,0,0,0,0,2018,Female
+Saguache,,,,,2018,Male
+Saguache,,,,,2018,Both genders
+Saguache,0,0,0,0,2019,Female
+Saguache,,,,,2019,Male
+Saguache,,,,,2019,Both genders
+Saguache,0,0,0,0,2020,Female
+Saguache,0,0,0,0,2020,Male
+Saguache,0,0,0,0,2020,Both genders
+Saguache,0,0,0,0,2021,Female
+Saguache,0,0,0,0,2021,Male
+Saguache,0,0,0,0,2021,Both genders
+Saguache,0,0,0,0,2022,Female
+Saguache,0,0,0,0,2022,Male
+Saguache,0,0,0,0,2022,Both genders
+San Juan,0,0,0,0,2011,Female
+San Juan,0,0,0,0,2011,Male
+San Juan,0,0,0,0,2011,Both genders
+San Juan,0,0,0,0,2012,Female
+San Juan,0,0,0,0,2012,Male
+San Juan,0,0,0,0,2012,Both genders
+San Juan,0,0,0,0,2013,Female
+San Juan,0,0,0,0,2013,Male
+San Juan,0,0,0,0,2013,Both genders
+San Juan,0,0,0,0,2014,Female
+San Juan,0,0,0,0,2014,Male
+San Juan,0,0,0,0,2014,Both genders
+San Juan,0,0,0,0,2015,Female
+San Juan,0,0,0,0,2015,Male
+San Juan,0,0,0,0,2015,Both genders
+San Juan,0,0,0,0,2016,Female
+San Juan,0,0,0,0,2016,Male
+San Juan,0,0,0,0,2016,Both genders
+San Juan,0,0,0,0,2017,Female
+San Juan,0,0,0,0,2017,Male
+San Juan,0,0,0,0,2017,Both genders
+San Juan,0,0,0,0,2018,Female
+San Juan,0,0,0,0,2018,Male
+San Juan,0,0,0,0,2018,Both genders
+San Juan,0,0,0,0,2019,Female
+San Juan,0,0,0,0,2019,Male
+San Juan,0,0,0,0,2019,Both genders
+San Juan,0,0,0,0,2020,Female
+San Juan,0,0,0,0,2020,Male
+San Juan,0,0,0,0,2020,Both genders
+San Juan,0,0,0,0,2021,Female
+San Juan,0,0,0,0,2021,Male
+San Juan,0,0,0,0,2021,Both genders
+San Juan,0,0,0,0,2022,Female
+San Juan,0,0,0,0,2022,Male
+San Juan,0,0,0,0,2022,Both genders
+San Miguel,0,0,0,0,2011,Female
+San Miguel,0,0,0,0,2011,Male
+San Miguel,0,0,0,0,2011,Both genders
+San Miguel,0,0,0,0,2012,Female
+San Miguel,0,0,0,0,2012,Male
+San Miguel,0,0,0,0,2012,Both genders
+San Miguel,0,0,0,0,2013,Female
+San Miguel,,,,,2013,Male
+San Miguel,,,,,2013,Both genders
+San Miguel,0,0,0,0,2014,Female
+San Miguel,0,0,0,0,2014,Male
+San Miguel,0,0,0,0,2014,Both genders
+San Miguel,0,0,0,0,2015,Female
+San Miguel,0,0,0,0,2015,Male
+San Miguel,0,0,0,0,2015,Both genders
+San Miguel,0,0,0,0,2016,Female
+San Miguel,0,0,0,0,2016,Male
+San Miguel,0,0,0,0,2016,Both genders
+San Miguel,0,0,0,0,2017,Female
+San Miguel,0,0,0,0,2017,Male
+San Miguel,0,0,0,0,2017,Both genders
+San Miguel,0,0,0,0,2018,Female
+San Miguel,0,0,0,0,2018,Male
+San Miguel,0,0,0,0,2018,Both genders
+San Miguel,0,0,0,0,2019,Female
+San Miguel,0,0,0,0,2019,Male
+San Miguel,0,0,0,0,2019,Both genders
+San Miguel,0,0,0,0,2020,Female
+San Miguel,0,0,0,0,2020,Male
+San Miguel,0,0,0,0,2020,Both genders
+San Miguel,0,0,0,0,2021,Female
+San Miguel,0,0,0,0,2021,Male
+San Miguel,0,0,0,0,2021,Both genders
+San Miguel,0,0,0,0,2022,Female
+San Miguel,0,0,0,0,2022,Male
+San Miguel,0,0,0,0,2022,Both genders
+Sedgwick,0,0,0,0,2011,Female
+Sedgwick,0,0,0,0,2011,Male
+Sedgwick,0,0,0,0,2011,Both genders
+Sedgwick,0,0,0,0,2012,Female
+Sedgwick,0,0,0,0,2012,Male
+Sedgwick,0,0,0,0,2012,Both genders
+Sedgwick,0,0,0,0,2013,Female
+Sedgwick,0,0,0,0,2013,Male
+Sedgwick,0,0,0,0,2013,Both genders
+Sedgwick,0,0,0,0,2014,Female
+Sedgwick,0,0,0,0,2014,Male
+Sedgwick,0,0,0,0,2014,Both genders
+Sedgwick,0,0,0,0,2015,Female
+Sedgwick,,,,,2015,Male
+Sedgwick,,,,,2015,Both genders
+Sedgwick,0,0,0,0,2016,Female
+Sedgwick,,,,,2016,Male
+Sedgwick,,,,,2016,Both genders
+Sedgwick,,,,,2017,Female
+Sedgwick,,,,,2017,Male
+Sedgwick,,,,,2017,Both genders
+Sedgwick,0,0,0,0,2018,Female
+Sedgwick,,,,,2018,Male
+Sedgwick,,,,,2018,Both genders
+Sedgwick,0,0,0,0,2019,Female
+Sedgwick,0,0,0,0,2019,Male
+Sedgwick,0,0,0,0,2019,Both genders
+Sedgwick,0,0,0,0,2020,Female
+Sedgwick,0,0,0,0,2020,Male
+Sedgwick,0,0,0,0,2020,Both genders
+Sedgwick,0,0,0,0,2021,Female
+Sedgwick,0,0,0,0,2021,Male
+Sedgwick,0,0,0,0,2021,Both genders
+Sedgwick,0,0,0,0,2022,Female
+Sedgwick,,,,,2022,Male
+Sedgwick,,,,,2022,Both genders
+Summit,0,0,0,0,2011,Female
+Summit,0,0,0,0,2011,Male
+Summit,0,0,0,0,2011,Both genders
+Summit,,,,,2012,Female
+Summit,,,,,2012,Male
+Summit,,,,,2012,Both genders
+Summit,0,0,0,0,2013,Female
+Summit,0,0,0,0,2013,Male
+Summit,0,0,0,0,2013,Both genders
+Summit,0,0,0,0,2014,Female
+Summit,0,0,0,0,2014,Male
+Summit,0,0,0,0,2014,Both genders
+Summit,0,0,0,0,2015,Female
+Summit,0,0,0,0,2015,Male
+Summit,0,0,0,0,2015,Both genders
+Summit,0,0,0,0,2016,Female
+Summit,,,,,2016,Male
+Summit,,,,,2016,Both genders
+Summit,0,0,0,0,2017,Female
+Summit,0,0,0,0,2017,Male
+Summit,0,0,0,0,2017,Both genders
+Summit,0,0,0,0,2018,Female
+Summit,0,0,0,0,2018,Male
+Summit,0,0,0,0,2018,Both genders
+Summit,,,,,2019,Female
+Summit,0,0,0,0,2019,Male
+Summit,,,,,2019,Both genders
+Summit,,,,,2020,Female
+Summit,,,,,2020,Male
+Summit,,,,,2020,Both genders
+Summit,0,0,0,0,2021,Female
+Summit,0,0,0,0,2021,Male
+Summit,0,0,0,0,2021,Both genders
+Summit,,,,,2022,Female
+Summit,0,0,0,0,2022,Male
+Summit,,,,,2022,Both genders
+Teller,0,0,0,0,2011,Female
+Teller,0,0,0,0,2011,Male
+Teller,0,0,0,0,2011,Both genders
+Teller,0,0,0,0,2012,Female
+Teller,0,0,0,0,2012,Male
+Teller,0,0,0,0,2012,Both genders
+Teller,,,,,2013,Female
+Teller,,,,,2013,Male
+Teller,,,,,2013,Both genders
+Teller,0,0,0,0,2014,Female
+Teller,,,,,2014,Male
+Teller,,,,,2014,Both genders
+Teller,0,0,0,0,2015,Female
+Teller,0,0,0,0,2015,Male
+Teller,0,0,0,0,2015,Both genders
+Teller,0,0,0,0,2016,Female
+Teller,0,0,0,0,2016,Male
+Teller,0,0,0,0,2016,Both genders
+Teller,0,0,0,0,2017,Female
+Teller,0,0,0,0,2017,Male
+Teller,0,0,0,0,2017,Both genders
+Teller,0,0,0,0,2018,Female
+Teller,,,,,2018,Male
+Teller,,,,,2018,Both genders
+Teller,,,,,2019,Female
+Teller,,,,,2019,Male
+Teller,,,,,2019,Both genders
+Teller,0,0,0,0,2020,Female
+Teller,,,,,2020,Male
+Teller,,,,,2020,Both genders
+Teller,0,0,0,0,2021,Female
+Teller,,,,,2021,Male
+Teller,,,,,2021,Both genders
+Teller,,,,,2022,Female
+Teller,,,,,2022,Male
+Teller,,,,,2022,Both genders
+Washington,0,0,0,0,2011,Female
+Washington,0,0,0,0,2011,Male
+Washington,0,0,0,0,2011,Both genders
+Washington,0,0,0,0,2012,Female
+Washington,0,0,0,0,2012,Male
+Washington,0,0,0,0,2012,Both genders
+Washington,0,0,0,0,2013,Female
+Washington,0,0,0,0,2013,Male
+Washington,0,0,0,0,2013,Both genders
+Washington,,,,,2014,Female
+Washington,0,0,0,0,2014,Male
+Washington,,,,,2014,Both genders
+Washington,0,0,0,0,2015,Female
+Washington,,,,,2015,Male
+Washington,,,,,2015,Both genders
+Washington,0,0,0,0,2016,Female
+Washington,,,,,2016,Male
+Washington,,,,,2016,Both genders
+Washington,0,0,0,0,2017,Female
+Washington,,,,,2017,Male
+Washington,,,,,2017,Both genders
+Washington,,,,,2018,Female
+Washington,,,,,2018,Male
+Washington,,,,,2018,Both genders
+Washington,,,,,2019,Female
+Washington,,,,,2019,Male
+Washington,,,,,2019,Both genders
+Washington,0,0,0,0,2020,Female
+Washington,0,0,0,0,2020,Male
+Washington,0,0,0,0,2020,Both genders
+Washington,,,,,2021,Female
+Washington,,,,,2021,Male
+Washington,,,,,2021,Both genders
+Washington,0,0,0,0,2022,Female
+Washington,,,,,2022,Male
+Washington,,,,,2022,Both genders
+Weld,10.25073116,5.427980378,16.58111672,13,2011,Female
+Weld,10.09438122,5.365406358,16.2929146,13,2011,Male
+Weld,10.31400216,6.321321836,14.30668249,26,2011,Both genders
+Weld,13.20378708,7.642149431,20.26118973,17,2012,Female
+Weld,12.75893607,6.961803285,20.28297724,15,2012,Male
+Weld,12.73755349,8.251797664,17.22330931,32,2012,Both genders
+Weld,,,,,2013,Female
+Weld,10.44173177,5.627905126,16.71856462,14,2013,Male
+Weld,8.638221832,5.067801751,12.20864191,23,2013,Both genders
+Weld,,,,,2014,Female
+Weld,,,,,2014,Male
+Weld,5.57026519,3.087269814,8.773867729,15,2014,Both genders
+Weld,7.355696429,3.665027739,12.31031607,11,2015,Female
+Weld,13.03653678,7.625156857,19.87531526,18,2015,Male
+Weld,10.20985684,6.447420903,13.97229278,29,2015,Both genders
+Weld,,,,,2016,Female
+Weld,9.274905408,5.046941867,14.76801704,14,2016,Male
+Weld,7.080657822,4.025257583,10.13605806,21,2016,Both genders
+Weld,,,,,2017,Female
+Weld,15.46355374,9.237665332,21.68944215,24,2017,Male
+Weld,10.76108665,7.066859021,14.45531428,33,2017,Both genders
+Weld,12.37523462,7.426128908,18.56756717,19,2018,Female
+Weld,11.14693086,6.588733935,16.88397733,18,2018,Male
+Weld,11.7683605,7.953866806,15.58285419,37,2018,Both genders
+Weld,,,,,2019,Female
+Weld,10.26717139,5.819545365,15.95659961,16,2019,Male
+Weld,6.902525645,3.988215419,9.816835871,22,2019,Both genders
+Weld,,,,,2020,Female
+Weld,10.22528283,5.821141593,15.84965284,16,2020,Male
+Weld,7.820345915,4.734281705,10.90641012,25,2020,Both genders
+Weld,,,,,2021,Female
+Weld,11.70008665,6.534484367,16.86568893,20,2021,Male
+Weld,8.593717566,5.495372851,11.69206228,30,2021,Both genders
+Weld,,,,,2022,Female
+Weld,14.51211957,8.76116409,20.26307504,25,2022,Male
+Weld,8.915140624,5.751528821,12.07875243,31,2022,Both genders
+Yuma,0,0,0,0,2011,Female
+Yuma,,,,,2011,Male
+Yuma,,,,,2011,Both genders
+Yuma,,,,,2012,Female
+Yuma,0,0,0,0,2012,Male
+Yuma,,,,,2012,Both genders
+Yuma,0,0,0,0,2013,Female
+Yuma,,,,,2013,Male
+Yuma,,,,,2013,Both genders
+Yuma,0,0,0,0,2014,Female
+Yuma,0,0,0,0,2014,Male
+Yuma,0,0,0,0,2014,Both genders
+Yuma,,,,,2015,Female
+Yuma,,,,,2015,Male
+Yuma,,,,,2015,Both genders
+Yuma,0,0,0,0,2016,Female
+Yuma,0,0,0,0,2016,Male
+Yuma,0,0,0,0,2016,Both genders
+Yuma,0,0,0,0,2017,Female
+Yuma,,,,,2017,Male
+Yuma,,,,,2017,Both genders
+Yuma,,,,,2018,Female
+Yuma,,,,,2018,Male
+Yuma,,,,,2018,Both genders
+Yuma,,,,,2019,Female
+Yuma,,,,,2019,Male
+Yuma,,,,,2019,Both genders
+Yuma,0,0,0,0,2020,Female
+Yuma,,,,,2020,Male
+Yuma,,,,,2020,Both genders
+Yuma,0,0,0,0,2021,Female
+Yuma,,,,,2021,Male
+Yuma,,,,,2021,Both genders
+Yuma,,,,,2022,Female
+Yuma,,,,,2022,Male
+Yuma,,,,,2022,Both genders
