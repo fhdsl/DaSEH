@@ -20,8 +20,10 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 # Welcome!
 ***
 
-<div class="leafshape" id="one"><br><b>Travel <br> scholarships<br> are available <br>for eligible participants!<br><br><span style="text-align:center;"> <ul>
-  <li>July 8-18 (online)/ <br> July 29-31 (Seattle)<br> or <li>Sept30-Oct 10 (online)/ <br> Oct 23-25 (Seattle) </ul></small>Please <a href="https://forms.gle/BNrdKJJ8PHpQtKMS8">Apply!</b><br></a></span> <br> </div>
+<div class="leafshape" id="one"><br><b>Travel <br> awards <br> are available <br>for eligible participants!<br><br>
+
+&emsp; Sept 30 - Oct 10 (online) &emsp; <br> Oct 23 - 25 (Seattle) <br> 
+<a href="https://forms.gle/BNrdKJJ8PHpQtKMS8"> Applications <br> Open! </b><br></a></span> <br> </div>
 
 
 Data Science for Environmental Health (DaSEH) is a short course that combines **online** learning and an **in-person** project-focused intensive. DaSEH is tailored for beginners and novices in R programming, offering instruction on importing, wrangling, visualizing, and analyzing data. It provides hands-on training in using R for statistical computing, a widely-used open-source tool for data analysis and visualization.
@@ -56,11 +58,11 @@ We're also supported by our data scientist, `r config::get("ds")`.
 ## Sign Up!
 ***
 
-Please apply using [this form](`r config::get("register_link")`) by **May 24, 2024**. 
-
-Our next session(s) of DaSEH will be: 
+Our upcoming session(s) of DaSEH will be: 
 
 `r config::get("course_dates")`
+
+Our Summer Session applications are closed. Please apply for the Fall Session using [this form](`r config::get("register_link")`) by **July 31, 2024**. 
 
 Please reach out to daseh @ fredhutch.org with any questions.
 
