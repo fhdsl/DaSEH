@@ -20,9 +20,9 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 # Welcome!
 ***
 
-<div class="leafshape" id="one"><br><b>Travel <br> awards <br> are available <br>for eligible participants!<br><br><span style="text-align:center;"> <ul>
+<div class="leafshape" id="one"><br><b>Travel <br> awards <br> are available <br>for eligible participants!<br><br>
 
-Sept 30 - Oct 10 (online) &nbsp; <br> Oct 23 - 25 (Seattle) &nbsp; </small> 
+Sept 30 - Oct 10 (online) <br> Oct 23 - 25 (Seattle) </small> 
 <a href="https://forms.gle/BNrdKJJ8PHpQtKMS8"> Applications <br> Open! </b><br></a></span> <br> </div>
 
 
