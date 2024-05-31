@@ -100,16 +100,16 @@ knitr::include_graphics("images/Data_Input_new_desktop.png")
 
 ## Note: data for demonstration
 
-* We have added functionality to load some datasets directly in the `jhur` package
+* We have added functionality to load some datasets directly in the `dasehr` package
 
 
 ## Data Input
 
-Youth Tobacco Survey (YTS) dataset:
+CalEnviroScreen Dataset: 
 
-"The YTS was developed to provide states with comprehensive data on both middle school and high school students regarding tobacco use, exposure to environmental tobacco smoke, smoking cessation, school curriculum, minors' ability to purchase or otherwise obtain tobacco products, knowledge and attitudes about tobacco, and familiarity with pro-tobacco and anti-tobacco media messages."
+CalEnviroScreen is a project that ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. Data used in the CalEnviroScreen model come from national and state sources.
 
-* Check out the data at: https://catalog.data.gov/dataset/youth-tobacco-survey-yts-data
+* Check out the data at: https://calenviroscreen-oehha.hub.arcgis.com/#Data
 
 
 ## Import Dataset
@@ -117,7 +117,7 @@ Youth Tobacco Survey (YTS) dataset:
 -  `>` File
 -  `>` Import Dataset
 -  `>` From Text (`readr`)
--  `>` paste the url (https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv)
+-  `>` paste the url (https://daseh.org/data/CalEnvironmentalScreen_data.csv)
 -  `>` click "Update" and "Import"
 
 
@@ -132,7 +132,7 @@ knitr::include_graphics("images/Data_Input_data_imported.png")
 
 ## What Just Happened?
 
-You see a new object called `Youth_Tobacco_Survey_YTS_Data` in your environment pane (top right). The table button opens the data for you to view.
+You see a new object called `CalEnvironmentalScreen_data` in your environment pane (top right). The table button opens the data for you to view.
 
 ```{r, fig.alt="The image shows an image of an arrow pointing to the newly created R project repository.", out.width = "80%", echo = FALSE, align = "center"}
 knitr::include_graphics("images/Data_Input_data_imported.png")
@@ -176,7 +176,7 @@ Cons: obscures some of what's happening, others will have difficulty running you
 Importing data:
 
 -  File `>` Import Dataset `>` From Text (`readr`)
--  Paste the url (https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv)
+-  Paste the url (https://daseh.org/data/CalEnvironmentalScreen_data.csv)
 -  Click "Update" and "Import"
 
 Review the process: [`https://youtu.be/LEkNfJgpunQ`](https://youtu.be/LEkNfJgpunQ)
@@ -194,7 +194,8 @@ Review the process: [`https://youtu.be/LEkNfJgpunQ`](https://youtu.be/LEkNfJgpun
 # load library `readr` that contains function `read_csv`
 library(readr)
 dat <- read_csv(
-  file = "https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv"
+  file = "https://daseh.org/data/CalEnvironmentalScreen_data.csv
+"
 )
 
 # `head` displays first few rows of a data frame. `tail()` works the same way.
@@ -205,11 +206,12 @@ head(dat, n = 5)
 
 ```{r message = FALSE}
 dat <- read_csv(
-  file = "https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv"
+  file = "https://daseh.org/data/CalEnvironmentalScreen_data.csv
+"
 )
 # EQUIVALENT TO
 dat <- read_csv(
-  "https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv"
+  "https://daseh.org/data/CalEnvironmentalScreen_data.csv"
 )
 ```
 
@@ -227,9 +229,9 @@ dat <- read_csv(
 
 dat <- read_csv(file = "www.someurl.com/table1.csv")
 
-dat <- read_csv(file = "/Users/avahoffman/Downloads/Youth_Tobacco_Survey_YTS_Data.csv")
+dat <- read_csv(file = "/Users/avahoffman/Downloads/CalEnvironmentalScreen_data.csv")
 
-dat <- read_csv(file = "Youth_Tobacco_Survey_YTS_Data.csv")
+dat <- read_csv(file = "CalEnvironmentalScreen_data.csv")
 ```
 
 
@@ -266,10 +268,10 @@ knitr::include_graphics("images/Data_Input_project_directory.png")
 
 ## Data Input: File paths
 
-If we add the Youth_Tobacco_Survey_YTS_Data.csv file to the R Project folder, we can use the file name for the `file` argument:
+If we add the CalEnvironmentalScreen_data.csv file to the R Project folder, we can use the file name for the `file` argument:
 
 ```{r, eval = FALSE}
-dat <- read_csv(file = "Youth_Tobacco_Survey_YTS_Data.csv")
+dat <- read_csv(file = "CalEnvironmentalScreen_data.csv")
 ```
 
 
@@ -301,7 +303,7 @@ If you move a file into a nested folder, **you must update the path!**
 
 ```{r, eval = FALSE}
 # Notice "data/" has been added!
-dat <- read_csv(file = "data/Youth_Tobacco_Survey_YTS_Data.csv")
+dat <- read_csv(file = "data/CalEnvironmentalScreen_data.csv")
 ```
 
 Always confirm you read in the data by checking the "Environment" pane (top right).
