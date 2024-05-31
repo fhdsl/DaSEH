@@ -76,15 +76,18 @@ x_fact
 
 ## A Factor Example{.smaller}
 
-We will use data on student dropouts from the State of California during the 2016-2017 school year. More on this data can be found here: https://www.cde.ca.gov/ds/ad/filesdropouts.asp
+We will use data on heat-related visits to the ER from the State of Colorado, separated by age category, for 2011-2022. More on this data can be found here: https://coepht.colorado.gov/heat-related-illness
 
-To preserve school anonymity, "CDS_CODE" is used in place of the individual school's name.
+You can download the data from the DaSEH website here: https://daseh.org/data/CO_ER_heat_visits_by_age_data.csv
 
-You can download the data from the DaSEH website here: https://daseh.org/data/dropouts.txt
+This dataset is also available in the `dasehr` package.
 
 ```{r}
-dropouts <- read_delim("https://daseh.org/data/dropouts.txt", delim = "\t")
-dropouts
+#library(dasehr)
+#er_visits_age <- CO_heat_ER_byage
+
+er_visits_age <- read_csv("https://daseh.org/data/CO_ER_heat_visits_by_age_data")
+er_visits_age
 ```
 
 ## Preparing the data
