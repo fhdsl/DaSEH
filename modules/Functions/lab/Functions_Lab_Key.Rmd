@@ -88,17 +88,18 @@ has_n(x = nums, n = b_num)
 
 ### 2.1
 
-Read in the SARS-CoV-2 Vaccination data from https://daseh.org/data/USA_covid19_vaccinations.csv. Assign the data the name "vacc".
+Read in the CalEnviroScreen from https://daseh.org/data/CalEnvironmentalScreen_data.csv. Assign the data the name "ces".
 
 ```{r message = FALSE, label = '2.1response'}
-vacc <- read_csv("https://daseh.org/data/USA_covid19_vaccinations.csv")
+ces <- read_csv("https://daseh.org/data/CalEnvironmentalScreen_data.csv
+")
 # If downloaded
-# vacc <- read_csv("USA_covid19_vaccinations.csv")
+# ces <- read_csv("CalEnvironmentalScreen_data.csv")
 ```
 
 ### 2.2
 
-We want to get some summary statistics on the Moderna vaccines. Use `across` inside `summarize` to get the sum total number vaccine doses for any variable containing the word "Moderna" AND starting with "Total". **Hint**: use `contains()` AND `starts_with()` to select the right columns inside `across`. Keep in mind that this includes the United States as a whole and so it is not totally accurate! Remember that `NA` values can influence calculations.
+We want to get some summary statistics on water contamination. Use `across` inside `summarize` to get the sum total number vaccine doses for any variable containing the string "water" AND ending with "Pctl". **Hint**: use `contains()` AND `ends_with()` to select the right columns inside `across`. Remember that `NA` values can influence calculations.
 
 ```
 # General format
@@ -111,14 +112,14 @@ data %>%
 ```
 
 ```{r 2.2response}
-vacc %>%
+ces %>%
   summarize(across(
-    .cols = contains("Moderna") & starts_with("Total"),
+    .cols = contains("Water") & ends_with("Pctl"),
     .fns = sum
   ))
-vacc %>%
+ces %>%
   summarize(across(
-    .cols = contains("Moderna") & starts_with("Total"),
+    .cols = contains("Water") & ends_with("Pctl"),
     .fns = sum,
     na.rm = TRUE
   ))
@@ -126,26 +127,26 @@ vacc %>%
 
 ### 2.3
 
-Use `across` and `mutate` to convert all columns containing the word "Percent" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use a "function on the fly" to divide by 100. It will also be easier to check your work if you `select()` columns that match "Percent".
+Use `across` and `mutate` to convert all columns containing the word "Pctl" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use a "function on the fly" to divide by 100. It will also be easier to check your work if you `select()` columns that match "Pctl".
 
 ```{r 2.3response}
-vacc %>%
+ces %>%
   mutate(across(
-    .cols = contains("Percent"),
+    .cols = contains("Pctl"),
     .fns = function(x) x / 100
   )) %>%
-  select(contains("Percent"))
+  select(contains("Pctl"))
 ```
 
 ### 2.4
 
-Use `across` and `mutate` to convert all columns starting with the word "Total" into a binary variable: TRUE if the value is greater than 10,000,000 and FALSE if less than or equal to 10,000,000. **Hint**: use `starts_with()` to select the columns starting with "Total". Use a "function on the fly" to do a logical test if the value is greater than 10,000,000.
+Use `across` and `mutate` to convert all columns starting with the string "PM" into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. **Hint**: use `starts_with()` to select the columns that start with "PM". Use a "function on the fly" to do a logical test if the value is greater than 10.
 
 ```{r 2.4response}
-vacc %>%
+ces %>%
   mutate(across(
-    .cols = starts_with("Total"),
-    .fns = function(x) x > 10000000
+    .cols = starts_with("PM"),
+    .fns = function(x) x > 10
   ))
 ```
 
@@ -154,28 +155,28 @@ vacc %>%
 
 ### P.1
 
-Take your code from question 2.4 and assign it to the variable `vacc_dat`. 
+Take your code from question 2.4 and assign it to the variable `ces_dat`. 
 
-- use `filter()` to drop any rows where "United States" appears in `State/Territory/Federal Entity`. Make sure to reassign this to `vacc_dat`.
-- Create a ggplot boxplot (`geom_boxplot()`) where (1) the x-axis is `Total Doses Delivered` and (2) the y-axis is `Percent of fully vaccinated people with booster doses`.
-- You change the `labs()` layer so that the x-axis is "Total Doses Delivered: Greater than 10,000,000"
+- use `filter()` to drop any rows where "Oakland" appears in `ApproxLocation`. Make sure to reassign this to `ces_dat`.
+- Create a ggplot boxplot (`geom_boxplot()`) where (1) the x-axis is `PM2.5` and (2) the y-axis is `Asthma`.
+- You change the `labs()` layer so that the x-axis is "ER Visits for Asthma: PM2.5 greater than 10"
 
 ```{r P.1response}
-vacc_dat <-
-  vacc %>%
+ces_dat <-
+  ces %>%
   mutate(across(
-    .cols = starts_with("Total"),
-    .fns = function(x) x > 10000000
+    .cols = starts_with("PM"),
+    .fns = function(x) x > 10
   )) %>%
-  filter(`State/Territory/Federal Entity` != "United States")
+  filter(`ApproxLocation` != "Oakland")
 
-vacc_boxplot <- function(df) {
+ces_boxplot <- function(df) {
   ggplot(df) +
     geom_boxplot(aes(
-      x = `Total Doses Delivered`,
-      y = `Percent of fully vaccinated people with booster doses`
+      x = `Asthma`,
+      y = `PM2.5`
     )) +
-    labs(x = "Total Doses Delivered: Greater than 10,000,000")
+    labs(x = "ER Visits for Asthma: PM2.5 greater than 10")
 }
-vacc_boxplot(vacc_dat)
+ces_boxplot(ces_dat)
 ```
