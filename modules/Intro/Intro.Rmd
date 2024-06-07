@@ -75,7 +75,7 @@ Email: ehumphri@fredhutch.org
 *this is not her dog
 
 ```{r, fig.alt="Elizabeth's picture", out.width = "30%", echo = FALSE, fig.align='center'}
-knitr::include_graphics(here::here("modules", "Intro", "images", "elizabeth.png"))
+knitr::include_graphics(here::here("modules", "Intro", "images", "elizabeth.jpg"))
 ```
 
 ## About you!
