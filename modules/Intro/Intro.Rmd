@@ -62,15 +62,21 @@ Email: ahoffma2@fredhutch.org Web: https://avahoffman.com
 knitr::include_graphics(here::here("modules", "Intro", "images", "ava.png"))
 ```
 
-## About Us
+## About Us: TA
 
 **Elizabeth Humphries (she/her)**
 
-TODO: Elizabeth puts stuff about herself here
+Staff Scientist, Fred Hutchinson Cancer Center
 
-## About Us - TAs
+PhD in Molecular Epidemiology
 
-TODO: Whatever TAs we have describe themselves here.
+Email: ehumphri@fredhutch.org
+
+*this is not her dog
+
+```{r, fig.alt="Elizabeth's picture", out.width = "30%", echo = FALSE, fig.align='center'}
+knitr::include_graphics(here::here("modules", "Intro", "images", "elizabeth.png"))
+```
 
 ## About you!
 
@@ -179,14 +185,14 @@ knitr::include_graphics("images/hope.jpg")
 
 ## Course Website
 
-http://jhudatascience.org/intro_to_r
+https://daseh.org/
 
 Materials will be uploaded the night before class.
 We are constantly trying to improve content!
 Please refresh/download materials before class.
 
-```{r, fig.alt="Intro to R course logo", out.width = "60%", echo = FALSE, fig.align='center'}
-knitr::include_graphics("../../docs/images/Intro_to_R.png")
+```{r, fig.alt="Data Science for Environmental Public Health course logo", out.width = "60%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("../../docs/images/DaSEH_logo_transparent.png")
 ```
 
 ## Learning Objectives
@@ -207,7 +213,6 @@ knitr::include_graphics("../../docs/images/Intro_to_R.png")
  * Two 10 min breaks each day - timing may vary
  * `r config::get("course_dates")` `r config::get("course_time")` on Zoom
  * `r config::get("holiday")`
- * Final classes will focus on final project
 
 
 
@@ -221,17 +226,11 @@ knitr::include_graphics("images/feedback-illustration.jpeg")
 
 <sub>[[source - Banner vector created by pch.vector - www.freepik.com]("https://www.freepik.com/vectors/banner")]</sub>
 
-## Grading
+## Homework
 
- 1. Attendance/Participation: 20% - this can be asynchronous - just some sort of interaction with the instructors/TAs (turning in assignments, emailing etc.)
- 2. Homework: 3 x 15%
- 3. Final "Project": 35%
+While we do have homework assignments on the course schedule, these are **strictly optional!!!**
 
-Homework and Final Project due by **`r config::get("final_due_date")`**.
-
-If you turn homework in earlier this can allow us to potentially give you feedback earlier.
-
-Note: Only people taking the course for credit must turn in the assignments. However, we will evaluate all submitted assignments in case others would like feedback on their work.
+We encourage you to try the assignments, as the best way to get comfortable with any programming language is through practice.
 
 ## Your Setup
 
