@@ -1,10 +1,12 @@
 ---
-title: 'Introduction to R: Homework 2'
+title: 'Introduction to R: Homework 3'
 output:
   html_document: default
 ---
 
 ### **Instructions**
+
+
 
 Homework is optional, but we recommend it so you can get the most out of this course.
 
@@ -20,172 +22,126 @@ library(tidyr)
 
 ### **Problem Set**
 
-1\. Create the following two objects.
+1\. Bring the following dataset into R. 
 
-(a) Make an object "bday". Assign it your birthday in day-month format (1-Jan). 
-(b) Make another object "name". Assign it your name. Make sure to use quotation marks for anything with text!
+-  The dataset is located at: https://daseh.org/data/mortality.csv. 
+-  You can use the link, download it, or use whatever method you like for getting the file. 
+-  Once you get the file, read the dataset in using `read_csv()` and assign it the name "mort".
 
 ```{r 1response}
 
 ```
 
 
-2\. Make an object "me" that is "bday" and "name" combined.
+2\. Run the `colnames()` function to take a look at the dataset column names. You should see that there was originally no name for the first column and that R replaced it with "...1". Rename the first column of "mort" to "country" using the `rename()` function in `dplyr`.  
 
 ```{r 2response}
 
 ```
 
 
-3\. Determine the data class for "me".
+3\. Select only the numeric type columns (`select()`). Then, create the variable "year" from column names by using the `colnames()` function to extract them. 
 
 ```{r 3response}
 
 ```
 
 
-4\. If I want to do `me / 2` I get the following error: `Error in me/2 : non-numeric argument to binary operator`. Why? Write your answer as a comment inside the R chunk below.
+4\. What is the `typeof()` for "year"? If it's not an integer, turn it into integer form with `as.integer()`.
 
-```{r response}
+```{r 4response}
 
 ```
 
 
-**The following questions involve an outside dataset.** 
-
-We will be working with a dataset from the "Kaggle" website, which hosts competitions for prediction and machine learning. More details on this dataset are here: https://www.kaggle.com/c/DontGetKicked/overview/background.
-
-5\. Bring the dataset into R. The dataset is located at: https://daseh.org/data/kaggleCarAuction.csv. You can use the link, download it, or use whatever method you like for getting the file. Once you get the file, read the dataset in using `read_csv()` and assign it the name `cars`.
+5\. Use the `pct_complete()` function in the `naniar` package to determine the percent missing data in "mort". You might need to load and install `naniar`!
 
 ```{r 5response}
 
 ```
 
 
-6\. Import the data "dictionary" from https://daseh.org/data/Carvana_Data_Dictionary_formatted.txt. Use the `read_tsv()` function and assign it the name "key". 
+6\. Are there any countries that have a complete record in "mort" across all years? Just look at the output here, don't reassign it. **Hint:** look for complete records by dropping all NAs from the dataset using `drop_na()`.
 
 ```{r 6response}
 
 ```
 
 
-7\. You should now be ready to work with the "cars" dataset.
+7\. Reshape the "complete" data to long form. 
 
-(a) Preview the data so that you can see the names of the columns. There are several possible functions to do this.
-(b) Determine the class of the first three columns using `str()`. Write your answer as a comment inside the R chunk below.
+- There should be a column for country ("country"), a column for year ("year"), and a column for the mortality value ("mortality"). 
+- Use `pivot_longer()`. 
+- You should pivot all columns except "country". 
+- **Hint:** listing `!COLUMN` or `-COLUMN` means everything except COLUMN. 
+- Assign the reshaped data to "long".
 
 ```{r 7response}
 
 ```
 
 
-8\. How many cars (rows) are in the dataset? How many variables (columns) are recorded for each car? 
+8\. Bring an additional dataset into R. 
+
+-  The dataset is tab-delimited and located at: https://daseh.org/data/country_pop.txt. 
+-  You can use the link, download it, or use whatever method you like for getting the file. 
+-  Once you get the file, read the dataset in using `read_tsv()` and assign it the name "pop".
 
 ```{r 8response}
 
 ```
 
 
-9\. Filter out (i.e., remove) any vehicles that cost less than or equal to $5000 ("VehBCost") or that have missing values. Replace the original "cars" object by reassigning the new filtered dataset to "cars". How many vehicles are left after filtering?
-
-**Hint:** The `filter()` function also removes missing values.
+9\. Rename the second column in "pop" to "country" and the column "% of world population", to "percent". Use the `rename()` function. Don't forget to reassign the renamed data to "pop".
 
 ```{r 9response}
 
 ```
 
 
-10\. From this point on, work with the filtered "cars" dataset from the above question. Given the average car loan today is 70 months, create a new variable (column) called "MonthlyPrice" that shows the monthly cost for each car (Divide "VehBCost" by 70). Check to make sure the new column is there.
-
-**Hint:** use the `mutate()` function.
+10\. Sort the data in "pop" by "Population" from largest to smallest using `arrange()` and `desc()`. After sorting, `select()` "country" to create an one-column tibble of countries ordered by population. Assign this data the name "country_ordered".
 
 ```{r 10response}
 
 ```
 
 
-11\. What is the range of the manufacture year ("VehYear") of the vehicles?
+11\. Subset "long"  based on years 2000-2010, including 2000 and 2010 and call this "long_sub" using `&` or the `between()` function. Confirm your filtering worked by looking at the range of "year". If you're getting a strange error, make sure you created the "year" column in problem #7.
 
 ```{r 11response}
 
 ```
 
 
-12\. Create a random sample with of mileage (odometer reading) from `cars`. To determine the column that corresponds to mileage (The vehicle's odometer reading), check the "key" corresponding to the data dictionary that you imported above in question 6. Use `sample()` and `pull()`. Remember that by default random samples differ each time you run the code.
+12\. Further subset `long_sub`. You will filter for specific countries using `filter()` and the `%in%` operator. Only include countries in this list: `c("Venezuela", "Bahrain", "Estonia", "Iran", "Thailand", "Canada")`. Make sure to reassign to "long_sub".
 
 ```{r 12response}
 
 ```
 
 
-13\. How many cars were from before 2004? What percent/proportion do these represent? Use:
-
-- `filter()` and `nrow()`
-- `group_by()` and `summarize()` or
-- `sum()`
+13\. Use `pivot_wider()` to turn the "year" column of "long_sub" into multiple columns, each representing a different year. Fill values (`values_from=`) with "mortality". Assign this pivoted dataset the name "mort_sub".
 
 ```{r 13response}
 
 ```
 
 
-14\. How many different vehicle manufacturers/makes ("Make") are there?
-
-**Hint:** use `length()` with `unique()` or `table()`. Remember to `pull()` the right column.
+14\. Using "country_ordered" and "mort_sub", `right_join()` the two datasets by "country". Use the pipe `%>%` to join this dataset to "pop", keeping only the data on the lefthand side of the join. Call this "joined".
 
 ```{r 14response}
 
 ```
 
 
-15\. How many different vehicle models ("Model") are there?
+15\. The values in the table are percentages of the total population (not proportion). 
+
+-  Create a new column called "mort_count" that estimates the total number of child deaths per year based on the total population. You can use (a) any year or (b) an average of all years to make your calculation. Whichever you choose, justify your choice. 
+-  Finally, `select()` only "country", "Population", and "mort_count" and view the data.
+
+> Justification is just for fun. The main point is that decisions in your analysis should depend on your reasoning not how many lines of code it takes :)
 
 ```{r 15response}
-
-```
-
-
-16\. Which vehicle color group had the highest mean acquisition cost paid for the vehicle at time of purchase, and what was this cost?
-
-**Hint:** Use  `group_by()` with `summarize()`. To determine the column that corresponds to "acquisition cost paid for the vehicle at time of purchase", check the "key" corresponding to the data dictionary that you imported above in question 6.
-
-```{r 16response}
-
-```
-
-
-17\. Extend on the code you wrote for question 16. Use the `arrange()` function to sort the output by mean acquisition cost.
-
-```{r 17response}
-
-```
-
-
-18\. How many vehicles were red and have fewer than 30,000 miles? To determine the column that corresponds to mileage (The vehicle's odometer reading), check the "key" corresponding to the data dictionary that you imported above in question 6. use:
-
-- `filter()` and `count()`
-- `filter()` and `tally()` or
-- `sum()`
-
-```{r 18response}
-
-```
-
-
-19\. How many vehicles are blue or red? use:
-
-- `filter()` and `count()`
-- `filter()` and `tally()` or
-- `sum()`
-
-```{r 19response}
-
-```
-
-
-20\. Select all columns in "cars" where the column names starts with "Veh" (using `select()` and `starts_with()`. Then, use `colMeans()` to summarize across these columns.
-
-```{r 20response}
 
 ```
 
@@ -195,41 +151,53 @@ We will be working with a dataset from the "Kaggle" website, which hosts competi
 
 ### **Bonus Practice**
 
-A\. Using "cars", create a new binary (TRUEs and FALSEs) column to indicate if the car has an automatic transmission. Call the new column "is_automatic".
+A\. Bring the following dataset into R. 
+
+-  The dataset is located at: https://daseh.org/data/asthma.xlsx. 
+-  You should download the associated data.
+-  Once you get the file, read the dataset in using `read_excel()` from the `readxl` package and assign it the name "asthma".
+-  Read in the sheet named "Age Group (Years)".
 
 ```{r Aresponse}
 
 ```
 
 
-B\. What is the average vehicle odometer reading for cars that are both RED and NISSANs? How does this compare with vehicles that do NOT fit this criteria?
+B\. Rename the column `Weighted Number With Current Asthma` to "asthma_count" using `rename()`. Replace the original "asthma" object by calling the new dataset "asthma".
 
 ```{r Bresponse}
 
 ```
 
 
-C\. Among red Nissans, what is the distribution of vehicle ages?
+C\. Separate `Percent (SE)` into two separate columns: "percent" and "SE" using the `separate()` function. Replace the original "asthma" object by calling the new dataset "asthma".
 
 ```{r Cresponse}
 
 ```
 
 
-D\. How many vehicles (using `filter()` or `sum()` ) are made by Chrysler or Nissan and are white or silver?
+D\. Remove the parentheses around the numbers in the new SE column. You should use a combination of `str_replace()`,  `pull()` (because stringr package functions work on vectors not dataframes!) and `mutate()`. Replace the original "asthma" object by calling the new dataset "asthma".
+
+-  The `pattern =` to find the starting parenthesis is "[(]"
+-  The `pattern =` to find for the ending parenthesis is "[)]"
+-  The `replacement =` for both can be empty quotation marks: ""
 
 ```{r Dresponse}
 
 ```
 
 
-E\. Make a boxplot (`boxplot()`) that looks at vehicle age ("VehicleAge") on the x-axis and odometer reading ("VehOdo") on the y-axis.
+E\. Determine the class of "percent" and "SE". Can you take the mean values? Why or why not?
 
 ```{r Eresponse}
 
 ```
 
 
-F\. Knit your document into a report.
+F\. Use `as.numeric()` to convert "percent" and "SE" to numeric class. Calculate the mean for both.
 
-You use the knit button to do this. Make sure all your code is working first!
+```{r Fresponse}
+
+```
+
