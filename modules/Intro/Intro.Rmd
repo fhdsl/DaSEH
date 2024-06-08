@@ -72,7 +72,7 @@ PhD in Molecular Epidemiology
 
 Email: ehumphri@fredhutch.org
 
-*this is not her dog
+**NOTE** this is not her dog
 
 ```{r, fig.alt="Elizabeth's picture", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("modules", "Intro", "images", "elizabeth.jpg"))
@@ -208,11 +208,17 @@ knitr::include_graphics("../../docs/images/DaSEH_logo_transparent.png")
 
 ## Course Format
 
+ONLINE VIRTUAL COURSE
  * Lecture with slides, interactive
  * Lab/Practical experience
  * Two 10 min breaks each day - timing may vary
- * `r config::get("course_dates")` `r config::get("course_time")` on Zoom
- * `r config::get("holiday")`
+ * July 8-18, 10:30am - 2:00pm PST on Zoom
+
+IN-PERSON CODEATHON
+ * Mostly independent group work
+ * Frequent check-ins with instructors and other groups
+ * Some lectures about the practical aspects of coding
+ * July 29-31 (in person in Seattle)
 
 
 
