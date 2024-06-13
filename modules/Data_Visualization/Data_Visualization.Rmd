@@ -366,13 +366,13 @@ ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
 `scale_x_continuous()` and `scale_y_continuous()` can change how the axis is plotted. Can use the `breaks` argument to specify how you want the axis ticks to be.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-range(pull(Orange, circumference))
-range(pull(Orange, age))
-plot_scale <-ggplot(Orange, aes(x = circumference, y = age)) +
-                geom_point(size = 5, color = "red", alpha = 0.5) +
-                geom_line(size = 0.8, color = "brown", linetype = 2) +
-                scale_x_continuous(breaks = seq(from = 20, to = 240, by = 20)) +
-                scale_y_continuous(breaks = seq(from = 100, to = 1600, by = 200))
+range(pull(er_visits_all, year))
+
+ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
+                geom_point(size = 5, color = "green", alpha = 0.5) +
+                geom_line(size = 0.8, color = "blue", linetype = 2) +
+                scale_x_continuous(breaks = seq(from = 2011, to = 2022, by = 1))
+
 ```
 
 ## Changing axis: specifying axis limits
@@ -381,11 +381,12 @@ plot_scale <-ggplot(Orange, aes(x = circumference, y = age)) +
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 
-ggplot(Orange, aes(x = circumference, y = age)) +
-  geom_point(size = 5, color = "red", alpha = 0.5) +
-  geom_line(size = 0.8, color = "brown", linetype = 2) +
-  labs(title = "My plot of orange tree circumference vs age") +
-  xlim(100, max(pull(Orange, circumference)))
+ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
+            geom_point(size = 5, color = "green", alpha = 0.5) +
+            geom_line(size = 0.8, color = "blue", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO",
+              x = "Year",
+              y = "Age-adjusted Visit Rate") +
+  ylim(0, max(pull(er_visits_all, rate)))
 
 ```
 
