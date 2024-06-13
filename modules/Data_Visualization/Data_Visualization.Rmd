@@ -14,7 +14,7 @@ opts_chunk$set(echo = TRUE,
                fig.height = 4,
                fig.width = 7,
                comment = "")
-library(jhur)
+library(dasehr)
 library(tidyverse)
 library(tidyr)
 library(emo)
@@ -153,7 +153,7 @@ Type `?Orange` for more information.
 Is the data in tidy? Is it in long format?
 
 ```{r}
-head(Orange)
+head(er_visits_all)
 ```
 
 # First plot with `ggplot2` package
@@ -180,7 +180,7 @@ ggplot({data_to plot}, aes(x = {var in data to plot},
 :::
 
 ```{r, fig.width=3, fig.height=2.5, fig.align='center', class.source = "codereg"}
-ggplot(Orange, aes(x = circumference, y = age))
+ggplot(er_visits_all, aes(x = year, y = rate, group = county))
 ```
 
 ## Next layer code with `ggplot2` package
@@ -222,7 +222,7 @@ ggplot({data_to plot}, aes(x = {var in data to plot},
 :::
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
-ggplot(Orange, aes(x = circumference, y = age)) +
+ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
   geom_point()
 ```
 
@@ -251,7 +251,7 @@ geom_boxplot()
 ## Plots can be assigned as an object {.mall}
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
-plt1 <- ggplot(Orange, aes(x = circumference, y = age)) +
+plt1 <- ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
           geom_point()
 
 plt1
@@ -260,10 +260,10 @@ plt1
 ## Examples of different geoms
 
 ```{r, fig.show="hold", out.width="40%"}
-plt1 <- ggplot(Orange, aes(x = circumference, y = age)) +
+plt1 <- ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
           geom_point()
 
-plt2 <- ggplot(Orange, aes(x = circumference, y = age)) +
+plt2 <- ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
           geom_line()
 
 plt1 # fig.show = "hold" makes plots appear
@@ -275,7 +275,7 @@ plt2 # next to one another in the chunk settings
 Layer a plot on top of another plot with `+`
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
-ggplot(Orange, aes(x = circumference, y = age)) +
+ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
   geom_point() +
   geom_line()
 ```
@@ -283,7 +283,7 @@ ggplot(Orange, aes(x = circumference, y = age)) +
 ## Adding color - can map color to a variable
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
-ggplot(Orange, aes(x = circumference, y = age, color = Tree)) +
+ggplot(er_visits_all, aes(x = year, y = rate, group = county, color = county)) +
   geom_point() +
   geom_line()
 ```
@@ -293,7 +293,7 @@ ggplot(Orange, aes(x = circumference, y = age, color = Tree)) +
 You can change look of each layer separately. Note the arguments like `linetype` and `alpha` that allow us to change the opacity of the points and style of the line respectively. 
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(Orange, aes(x = circumference, y = age)) +
+ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
   geom_point(size = 5, color = "red", alpha = 0.5) +
   geom_line(size = 0.8, color = "black", linetype = 2)
 ```
@@ -311,9 +311,9 @@ knitr::include_graphics("img/frosting.png")
 You can change the look of whole plot using [`theme_*()` functions](https://ggplot2.tidyverse.org/reference/ggtheme.html).
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(Orange, aes(x = circumference, y = age)) +
-  geom_point(size = 5, color = "red", alpha = 0.5) +
-  geom_line(size = 0.8, color = "brown", linetype = 2) +
+ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
+  geom_point(size = 5, color = "green", alpha = 0.5) +
+  geom_line(size = 0.8, color = "blue", linetype = 2) +
   theme_dark()
 ```
 
@@ -329,9 +329,9 @@ There's not only the built in ggplot2 themes but all kinds of themes from other 
 You can change the look of whole plot - **specific elements, too** - like changing [font](http://www.cookbook-r.com/Graphs/Fonts/) and font size - or even more [fonts](https://blog.revolutionanalytics.com/2012/09/how-to-use-your-favorite-fonts-in-r-charts.html)
 
 ```{r, fig.width=6, fig.height=3.5, fig.align='center'}
-ggplot(Orange, aes(x = circumference, y = age)) +
-  geom_point(size = 5, color = "red", alpha = 0.5) +
-  geom_line(size = 0.8, color = "brown", linetype = 2) +
+ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
+  geom_point(size = 5, color = "green", alpha = 0.5) +
+  geom_line(size = 0.8, color = "blue", linetype = 2) +
   theme_bw() +
   theme(text=element_text(size=16,  family="Comic Sans MS"))
 ```
@@ -341,12 +341,12 @@ ggplot(Orange, aes(x = circumference, y = age)) +
 The `labs()` function can help you add or modify titles on your plot. The `title` argument specifies the title. The `x` argument specifies the x axis label. The `y` argument specifies the y axis label.
 
 ```{r, fig.width=4, fig.height=2.5, fig.align='center'}
-ggplot(Orange, aes(x = circumference, y = age)) +
+ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
             geom_point(size = 5, color = "red", alpha = 0.5) +
             geom_line(size = 0.8, color = "brown", linetype = 2) +
-            labs(title = "My plot of orange tree data",
-              x = "Tree Circumference (mm)",
-              y = "Tree Age (days since 12/31/1968)")
+            labs(title = "My plot of Heat-Related ER Visits in CO",
+              x = "Year",
+              y = "Age-adjusted Visit Rate")
 ```
 
 ## Adding labels line break {.codesmall}
@@ -354,12 +354,11 @@ ggplot(Orange, aes(x = circumference, y = age)) +
 Line breaks can be specified using `\n` within the `labs()` function to have a label with multiple lines.
 
 ```{r, fig.width=4, fig.height=2.5, fig.align='center'}
-ggplot(Orange, aes(x = circumference, y = age)) +
+ggplot(er_visits_all, aes(x = year, y = rate, group = county)) +
             geom_point(size = 5, color = "red", alpha = 0.5) +
-            geom_line(size = 0.8, color = "brown", linetype = 2) +
-            labs(title = "Plot of orange tree data from 1968: \n trunk circumference vs tree age",
-              x = "Tree Circumference (mm)",
-              y = "Tree Age (days since 12/31/1968)")
+            geom_line(size = 0.8, color = "brown", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO: \n age-adjusted visit rate by year",
+              x = "Year",
+              y = "Age-adjusted Visit Rate")
 ```
 
 ## Changing axis: specifying axis scale {.codesmall}
