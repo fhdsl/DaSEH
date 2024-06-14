@@ -644,37 +644,26 @@ ggplot(er_visits_all, aes(x = year,
 ggplot(er_visits_all, aes(x = year,
                            y = rate,
                        color = county)) +
-  geom_line()
+  geom_line()+
+  theme(legend.position = "bottom")
 ```
 
-## Sometimes you need group and color
-
-Now let's create a plot using the `er_visits_gender` dataset. This dataset can be called from the `dasehr` package.
-
-```{r, fig.width=5, fig.height=3, fig.align='center'}
-
-#er_visits_gender <- CO_heat_ER_visits_bygender
-
-ggplot(er_visits_gender, aes(x = year,
-                 y = rate,
-                 group = gender,
-                 color = county)) +
-  geom_line()
-
-```
 
 ## Adding a facet can help make it easier to see what is happening {.codesmall}
+
+But what if we wanted to look at rates by county for different genders? Let's work a little with the `er_visits_gender` dataset. This is a subset of the larger CO ER visits dataset.
 
 Two options: `facet_grid()`- creates a grid shape `facet_wrap()` -more flexible
 
 Need to specify how you are faceting with the `~` sign.
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
-ggplot(food, aes(x = observation_time,
-                 y = item_price_change,
-                 color = item_ID)) +
+ggplot(er_visits_gender, aes(x = year,
+                 y = rate,
+                 color = county)) +
   geom_line() +
-  facet_grid( ~ item_categ)
+  facet_grid( ~ gender)+
+  theme(legend.position = "bottom")
 ```
 
 ## facet_wrap() {.codesmall}
@@ -683,10 +672,10 @@ ggplot(food, aes(x = observation_time,
 -   can have different scales for axes using `scales = "free_x"`, `scales = "free_y"`, or `scales = "free"`
 
 ```{r, fig.width=4, fig.height=2.7, fig.align='center'}
-rp_fac_plot <- ggplot(food, aes(x = observation_time, y = item_price_change,color = item_ID)) +
+rp_fac_plot <- ggplot(er_visits_gender, aes(x = year, y = rate,color = county)) +
                   geom_line()  +
                   geom_point() +
-                  facet_wrap( ~ item_categ, ncol = 1, scales = "free")
+                  facet_wrap( ~ gender, ncol = 1, scales = "free")
 rp_fac_plot
 ```
 
@@ -702,14 +691,14 @@ Let's talk additional tricks and tips for making ggplots!
 -   `fill` is generally needed for boxes and bars
 
 ```{r, out.width="30%", fig.show='hold'}
-ggplot(food, aes(x = item_ID,
-                 y = item_price_change,
-                 color = item_categ)) + #color creates an outline
+ggplot(er_visits_gender, aes(x = gender,
+                 y = rate,
+                 color = gender)) + #color creates an outline
   geom_boxplot()
 
-ggplot(food, aes(x = item_ID,
-                 y = item_price_change,
-                 fill = item_categ)) + # fills the boxplot
+ggplot(er_visits_gender, aes(x = gender,
+                 y = rate,
+                 fill = gender)) + # fills the boxplot
   geom_boxplot()
 ```
 
@@ -718,9 +707,9 @@ ggplot(food, aes(x = item_ID,
 Can add `width` argument to make the jitter more narrow.
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
-ggplot(food, aes(x = item_ID,
-                 y = item_price_change,
-                 fill = item_categ)) +
+ggplot(er_visits_gender, aes(x = gender,
+                 y = rate,
+                 fill = gender)) +
   geom_boxplot() +
   geom_jitter(width = .06)
 ```
@@ -730,9 +719,9 @@ ggplot(food, aes(x = item_ID,
 `scale_fill_viridis_d()` for discrete /categorical data `scale_fill_viridis_c()` for continuous data
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
-ggplot(food, aes(x = item_ID,
-                 y = item_price_change,
-                 fill = item_categ)) +
+ggplot(er_visits_gender, aes(x = gender,
+                 y = rate,
+                 fill = gender)) +
   geom_boxplot() +
   geom_jitter(width = .06) +
   scale_fill_viridis_d()
@@ -742,18 +731,18 @@ ggplot(food, aes(x = item_ID,
 
 ```{r, fig.width=5 , fig.height=2.5, fig.align='center'}
 
-food_bar <-food %>%
-  group_by(item_categ) %>%
-  summarize("max_price_change" = max(item_price_change)) %>%
+er_bar <- er_visits_gender %>%
+  group_by(gender) %>%
+  summarize("max_rate" = max(rate, na.rm=T)) %>%
 
-ggplot(aes(x = item_categ,
-           y = max_price_change,
-           fill = item_categ)) +
+ggplot(aes(x = gender,
+           y = max_rate,
+           fill = gender)) +
   scale_fill_viridis_d()+
   geom_col() +
   theme(legend.position = "none")
 
-food_bar
+er_bar
 ```
 
 ## Tip - color outside of `aes()`
@@ -761,7 +750,7 @@ food_bar
 Can be used to add an outline around column/bar plots.
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
-food_bar +
+er_bar +
    geom_col(color = "black")
 ```
 
@@ -774,44 +763,44 @@ food_bar +
 `r emo::ji("warning")` May not be plotting what you think you are! `r emo::ji("warning")`
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
-ggplot(food, aes(x = item_ID,
-                 y = item_price_change,
-                 fill = item_categ)) +
+ggplot(er_visits_gender, aes(x = gender,
+                 y = visits,
+                 fill = gender)) +
   geom_col()
 ```
 
 ## What did we plot? Always good to check it is correct! {.codesmall}
 
 ```{r}
-head(food, n = 3)
+head(er_visits_gender, n = 3)
 
-food %>% group_by(item_ID) %>%
-  summarize(sum = sum(item_price_change))
+er_visits_gender %>% group_by(gender) %>%
+  summarize(sum = sum(visits, na.rm=T))
 ```
 
 ## Try that again {.codesmall}
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
-food %>% group_by(item_categ, item_ID) %>%
-  summarize(mean_change = mean(item_price_change))
+er_visits_gender %>% group_by(gender, county) %>%
+  summarize(mean_visits = mean(visits, na.rm=T))
 ```
 
 ## Try that again {.codesmall}
 
 ```{r}
-food %>% group_by(item_categ, item_ID) %>%
-  summarize(mean_change = mean(item_price_change)) %>%
+er_visits_gender %>% group_by(gender, county) %>%
+  summarize(mean_visits = mean(visits, na.rm=T)) %>%
 
-ggplot(aes(x = item_ID,
-           y = mean_change,
-           fill = item_categ)) +
+ggplot(aes(x = gender,
+           y = mean_visits,
+           fill = gender)) +
   geom_col()
 ```
 
 ## Tip - make sure labels aren't too small
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
-food_bar +
+er_bar +
   theme(text = element_text(size = 20))
 
 ```
@@ -823,16 +812,17 @@ Set `outlier.shape = NA` to get ride of outliers. Be careful about if you really
 However, if can be helpful if your plot is getting stretched to accommodate plotting an outlier. You can always say in the figure legend what you removed.
 
 ```{r}
-esoph1 <- ggplot(esoph, aes(y = ncases, x = agegp)) +
+er_no_out1 <- ggplot(er_visits_gender, aes(y = visits, x = gender)) +
   geom_boxplot()
 
-esoph2 <- ggplot(esoph, aes(y = ncases, x = agegp)) +
-  geom_boxplot(outlier.shape = NA)
+er_no_out2 <- ggplot(er_visits_gender, aes(y = visits, x = gender)) +
+  geom_boxplot(outlier.shape = NA) +
+  ylim(0,40)
 ```
 
 ```{r, fig.show="hold", out.width="40%", echo = FALSE}
-esoph1 # fig.show = "hold" makes plots appear
-esoph2 # next to one another in the chunk settings
+er_no_out1 # fig.show = "hold" makes plots appear
+er_no_out2 # next to one another in the chunk settings
 ```
 
 ## NA Values {.codesmall}
