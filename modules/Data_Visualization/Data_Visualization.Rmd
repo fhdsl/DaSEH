@@ -599,16 +599,21 @@ Guide on how to: <https://rpubs.com/mclaire19/ggplot2-custom-themes>
 
 ## Group and/or color by variable's values
 
-We've worked with this dataset a bit earlier, but let's take a closer look at the dataset we've been calling `er_visits_all`. This dataset contains the number of visits to the ER for heat-related illnesses, as well as the age-adjusted rate and the 95% confidence bounds around the rate, for:
+Let's work with two slightly different versions of the CO ER visits dataset. We used the first one, `er_visits_all`, a little earlier in this lecture. This dataset includes county-level data on the number of visits to the ER for heat-related illness, as well as the age-adjusted rate and the 95% confidence bounds. The dataset includes:
 
 -   17 different CO counties (plus the statewide data)
 -   12 different years 
 
-```{r}
-head(er_visits_all)
-```
+We can also work with a dataset which we'll call `er_visits_gender`. This dataset contains the number of visits to the ER for heat-related illnesses, as well as the age-adjusted rate and the 95% confidence bounds around the rate, for:
+
+-   two genders (male, female)
+-   9 different CO counties (plus the statewide data)
+-   12 different years 
+
 
 ## Starting a plot
+
+Let's start with `er_visits_all`.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 ggplot(er_visits_all, aes(x = year,
@@ -624,7 +629,7 @@ knitr::include_graphics("https://media.giphy.com/media/xT0xeuOy2Fcl9vDGiA/giphy.
 
 ## Using `group` in plots
 
-You can use `group` element in a mapping to indicate that each `item_ID` will have a separate price line.
+You can use `group` element in a mapping to indicate that each `county` will have a rate line.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 ggplot(er_visits_all, aes(x = year,
@@ -644,11 +649,16 @@ ggplot(er_visits_all, aes(x = year,
 
 ## Sometimes you need group and color
 
+Now let's create a plot using the `er_visits_gender` dataset. This dataset can be called from the `dasehr` package.
+
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(food, aes(x = observation_time,
-                 y = item_price_change,
-                 group = item_ID,
-                 color = item_categ)) +
+
+#er_visits_gender <- CO_heat_ER_visits_bygender
+
+ggplot(er_visits_gender, aes(x = year,
+                 y = rate,
+                 group = gender,
+                 color = county)) +
   geom_line()
 
 ```
