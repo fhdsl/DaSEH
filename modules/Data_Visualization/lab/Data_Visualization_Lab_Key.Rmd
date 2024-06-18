@@ -217,5 +217,5 @@ Modify `facet_plot` one more time with a fun theme! Look into the [ThemePark pac
 # remotes::install_github("MatthewBJane/ThemePark")
 library(ThemePark)
 
-facet_plot + theme_barbie()
+facet_plot + theme_grand_budapest()
 ```
