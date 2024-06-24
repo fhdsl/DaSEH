@@ -113,12 +113,12 @@ cor.test(x, y = NULL, alternative(c("two.sided", "less", "greater")),
 
 ## Correlation {.small}
 
-https://daseh.org/data/Charm_City_Circulator_Ridership.csv
+https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv
 
 ```{r cor1, comment="", message = FALSE}
-library(jhur)
-circ <- read_circulator()
-head(circ)
+library(dasehr)
+
+head(yearly_co2_emissions)
 ```
 
 ## Correlation for two vectors
@@ -129,8 +129,9 @@ Like other functions, if there are `NA`s, you get `NA` as the result.  But if yo
 
 ```{r}
 # x and y must be numeric vectors
-x <- circ %>% pull(orangeAverage)
-y <- circ %>% pull(purpleAverage)
+x <- pull(yearly_co2_emissions, `1989`)
+
+y <- pull(yearly_co2_emissions, `2014`)
 ```
 
 ```{r,fig.width=3, fig.height=3}
@@ -164,8 +165,8 @@ In plot form... `geom_smooth()` and `annotate()` can help.
 ```{r}
 corr_value <- pull(cor_result, estimate) %>% round(digits = 4)
 cor_label <- paste0("R = ", corr_value)
-circ %>%
-  ggplot(aes(x = orangeAverage, y = purpleAverage)) +
+yearly_co2_emissions %>%
+  ggplot(aes(x = `1989`, y = `2014`)) +
   geom_point(size = 0.3) +
   geom_smooth() +
   annotate("text", x = 2000, y = 7500, label = cor_label)
@@ -178,8 +179,8 @@ circ %>%
 <!-- install.packages("ggpubr") -->
 
 <!-- library(ggpubr) -->
-<!-- circ %>% -->
-<!--   ggplot(aes(x = orangeAverage, y = purpleAverage)) + -->
+<!-- yearly_co2_emissions %>% -->
+<!--   ggplot(aes(x = `1989`, y = `2014`)) + -->
 <!--   geom_point(size = 0.3) + -->
 <!--   geom_smooth() + -->
 <!--   stat_cor(p.accuracy = 0.001) -->
@@ -194,15 +195,15 @@ We can compute correlation for all pairs of columns of a data frame / matrix. Th
 Columns must be all numeric!
 
 ```{r}
-circ_subset_Average <- circ %>% select(ends_with("Average"))
-head(circ_subset_Average)
+co2_subset <- yearly_co2_emissions %>% select(c(`1909`, `1929`, `1949`, `1969`, `1989`, `2009`))
+head(co2_subset)
 ```
 
 ## Correlation for data frame columns
 We can compute correlation for all pairs of columns of a data frame / matrix. This is often called, *"computing a correlation matrix"*.
 
 ```{r}
-cor_mat <- cor(circ_subset_Average, use = "complete.obs")
+cor_mat <- cor(co2_subset, use = "complete.obs")
 cor_mat
 ```
 
@@ -252,9 +253,13 @@ It tests the mean of a variable in one group. By default (i.e., without us expli
 - returns result assuming confidence level 0.95 (`conf.level = 0.95`)
 - omits `NA` values in data
 
+Let's look at the dataset of haloacetic acid levels in public water sources in Washington, saved as `haa5` in the `dasehr` package.
+
 ```{r}
-x <- circ %>% pull(orangeAverage)
+
+x <- haa5 %>% pull(perc_pop_exposed_to_exceedances)
 sum(is.na(x)) # count NAs in x
+
 t.test(x)
 ```
 
@@ -274,10 +279,12 @@ Check out this this [case study](https://www.opencasestudies.org/ocs-bp-rural-an
 ## Running two-sample t-test in R
 
 ```{r}
-x <- circ %>% pull(orangeAverage)
-y <- circ %>% pull(purpleAverage)
+x <- haa5 %>% pull(pop_on_sampled_PWS)
+y <- haa5 %>% pull(pop_exposed_to_exceedances)
+
 sum(is.na(x))
 sum(is.na(y)) # count NAs in x and y
+
 t.test(x, y)
 ```
 
