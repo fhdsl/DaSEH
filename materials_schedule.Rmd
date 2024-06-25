@@ -3,7 +3,7 @@
 # Materials + Schedule
 ***
 
-There is an assignment due before we start to [install software](modules/Setup/R_and_RStudio_installation.html). We recommend completing HW 1 (Swirl module indicated below) before class so we can hit the ground running!
+It's helpful to [install software](modules/Setup/Setup.html) before you start DaSEH. We also recommend completing HW 1 (Swirl module indicated below) before class so we can hit the ground running!
 
 <br>
 
