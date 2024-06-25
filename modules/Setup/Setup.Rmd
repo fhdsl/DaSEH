@@ -6,8 +6,7 @@ title: "R and RStudio Installation"
 -   [Installing `RStudio`](#installing-rstudio)
 -   [`R` packages](#r-packages)
     -   [Installing `R` packages](#installing-r-package)
-    -   [Exercise: Install `R` package](#exercise-install-r-package)
-    -   [Exercise: Install other `R` packages we will use in this course](#exercise-install-other-r-packages-we-will-use-in-this-course)
+    -   [Exercise: Install `R` package](#exercise-install-r-package)  
 
 `R` is a powerful analytical language and contains a number of useful packages for analyzing data.
 

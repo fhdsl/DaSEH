@@ -46,7 +46,7 @@ pander::pandoc.table(
 
 ## Homework
 
-** homework and project is optional **:
+_homework is optional._
 
 `r emo::ji("pencil")` **HOMEWORK 1**: [Questions (HTML)](../../modules/HW/homework1.html)
 

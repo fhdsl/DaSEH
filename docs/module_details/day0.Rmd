@@ -61,6 +61,6 @@ You can also visit the `RStudio` website, <https://posit.co/download/rstudio-des
 
 ## Homework
 
-** homework is optional - but we strongly suggest you complete it before the course starts)**:
+_homework is optional._
 
 `r emo::ji("pencil")` **HOMEWORK 1**: [Questions (HTML)](../../modules/HW/homework1.html)
