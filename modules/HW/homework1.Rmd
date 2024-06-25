@@ -4,17 +4,11 @@ output:
   html_document: default
 ---
 
-### **Instructions**
-
-Completed homework should be submitted on CoursePlus as a screenshot of the final question in this exercise. Please see the course website for more information about submitting assignments.
-
-All assignments are due at the end of the course. Please see the course website for more information about grading: https://jhudatascience.org/intro_to_r/syllabus.html.
-
 ## Download Lesson
 
 Click the following link to download the lesson:
 
-https://github.com/jhudsl/intro_to_r/raw/main/modules/HW/Intro_to_R_Course.swc 
+https://github.com/fhdsl/DaSEH/raw/main/modules/HW/Intro_to_R_Course.swc 
 
 ## Install Swirl
 
