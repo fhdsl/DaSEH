@@ -638,16 +638,11 @@ summary(binom_fit)
 Check out [this paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2938757/).
 
 
-## Odds ratios
-
-```{r}
-head(ice_cream)
-ice_cream %>% count(ill, vanilla.ice.cream)
-```
-
 ## Odds ratios {.smaller}
 
 Use `oddsratio(x, y)` from the `epitools()` package to calculate odds ratios.
+
+In this case, we're calculating the odds ratio for whether the the first 6 months or last 6 months predicts whether the percentage of population exposed to excess nitrates is more than 0.1%
 
 ```{r}
 library(epitools)
