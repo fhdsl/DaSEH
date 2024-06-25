@@ -23,13 +23,13 @@ We recommend installing the most recent version or `R` `r config::get("r_version
 
 -   [Download For Windows users](`r config::get("r_dl_windows")`)
 
-For other operating systems, or if you prefer to access the download link from the official website, visit <http://cran.us.r-project.org> and select `Download R for Linux`, `Download R for macOS` or `Download R for Windows` based on which device you have.
+For other operating systems, or if you prefer to access the download link from the official website, visit <https://cran.r-project.org/> and select `Download R for Linux`, `Download R for macOS` or `Download R for Windows` based on which device you have.
 
 Once the proper installation package has been selected, run the package and follow the on-screen directions. This installation includes the `R` language and a graphical user interface (GUI). Rather using the GUI, we recommend installing `RStudio` - an integrated development environment (IDE) that lets you interact with `R` with some added benefits.
 
 # Installing `RStudio` {#installing-rstudio}
 
-To install `RStudio`, visit <https://posit.co/download/rstudio-desktop/>. The website should look like this:
+To install `RStudio`, visit <https://posit.co/download/rstudio-desktop/>. The website should look something like this:
 
 ![](images/RStudio_landing.png)
 
@@ -101,12 +101,3 @@ Packages are the fundamental units of reproducible `R` code. They are collection
 
 Use the above to install `knitr` package. Execute the `library(...)` command to check if the package loads successfully.
 
-## Exercise: Install other `R` packages we will use in this course {#exercise-install-other-r-packages-we-will-use-in-this-course}
-
-[This file](../../resources/all_the_packages.txt) contains a list of packages we will use for this course. You can install them one by one, or use the following code we prepared:
-
-    if (!requireNamespace("remotes", quietly = TRUE)) {
-      install.packages("remotes")
-    }
-    library(remotes)
-    install_github("jhur/jhur")
