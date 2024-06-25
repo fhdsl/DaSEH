@@ -47,13 +47,10 @@ pander::pandoc.table(
 
 ## Homework
 
-`r emo::ji("pencil")` **HOMEWORK 1**: [Dataquest](https://app.dataquest.io/login?target-url=%2Fm%2F499%2Fintroduction-to-programming-in-r) 
+** homework is optional **:
 
+`r emo::ji("pencil")` **HOMEWORK 1**: [Questions (HTML)](../../modules/HW/homework1.html)
 
-## Drop Boxes
-
-
-**Note**: only people taking the course for credit must turn in the assignments. However, we will evaluate all submitted assignments in case others would like feedback on their work.
 
 
 ## Library
