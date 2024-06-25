@@ -363,9 +363,6 @@ display: none;
 packages</a></li>
 <li><a href="#exercise-install-r-package">Exercise: Install
 <code>R</code> package</a></li>
-<li><a href="#exercise-install-other-r-packages-we-will-use-in-this-course">Exercise:
-Install other <code>R</code> packages we will use in this
-course</a></li>
 </ul></li>
 </ul>
 <p><code>R</code> is a powerful analytical language and contains a
@@ -377,18 +374,18 @@ this class.</p>
 <div id="installing-r" class="section level1">
 <h1>Installing <code>R</code></h1>
 <p>We recommend installing the most recent version or <code>R</code>
-(4.4.0 (called ‘Puppy Cup’) as of 2024-04-24). <strong>If you have had
-installed <code>R</code> already some time ago, we recommend
+(4.3.2 (called ‘Eye Holes’) as of October 31, 2023). <strong>If you have
+had installed <code>R</code> already some time ago, we recommend
 updating/reinstalling it to the most recent version.</strong> Use a link
 below to launch download of <code>R</code> installers (if the download
 does not start, a fix may be to copy-paste the below link to your
 browser):</p>
 <ul>
-<li><p><a href="https://cran.r-project.org/bin/macosx/big-sur-arm64/base/R-4.4.0-arm64.pkg">Download
+<li><p><a href="https://cran.r-project.org/bin/macosx/big-sur-arm64/base/R-4.3.2-arm64.pkg">Download
 For Mac users (M1 chip)</a></p></li>
-<li><p><a href="https://cran.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.4.0-x86_64.pkg">Download
+<li><p><a href="https://cran.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.3.2-x86_64.pkg">Download
 For Mac users (Intel chip)</a></p></li>
-<li><p><a href="https://cran.r-project.org/bin/windows/base/R-4.4.0-win.exe">Download
+<li><p><a href="https://cran.r-project.org/bin/windows/base/R-4.3.2-win.exe">Download
 For Windows users</a></p></li>
 </ul>
 <p>For other operating systems, or if you prefer to access the download
@@ -497,18 +494,6 @@ above commands.)</p>
 <p>Use the above to install <code>knitr</code> package. Execute the
 <code>library(...)</code> command to check if the package loads
 successfully.</p>
-</div>
-<div id="exercise-install-other-r-packages-we-will-use-in-this-course" class="section level2">
-<h2>Exercise: Install other <code>R</code> packages we will use in this
-course</h2>
-<p><a href="../../resources/all_the_packages.txt">This file</a> contains
-a list of packages we will use for this course. You can install them one
-by one, or use the following code we prepared:</p>
-<pre><code>if (!requireNamespace(&quot;remotes&quot;, quietly = TRUE)) {
-  install.packages(&quot;remotes&quot;)
-}
-library(remotes)
-install_github(&quot;jhur/jhur&quot;)</code></pre>
 </div>
 </div>
 
