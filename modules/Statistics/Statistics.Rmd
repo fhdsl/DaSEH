@@ -467,24 +467,19 @@ For example, if we want to fit a regression model where outcome is `income` and 
 
 ## Linear regression
 
-We will use data about emergency room doctor complaints.
+We will use our dataset about nitrate levels by quarter in public water sources in Washington.
 
-"Data was recorded on 44 doctors working in an emergency service at a hospital to study the factors affecting the number of complaints received."
 
 ```{r}
-# install.packages("faraway")
-library(faraway)
-
-data(esdcomp)
-esdcomp
+head(nitrate)
 ```
 
 ## Linear regression: model fitting
 
-We fit linear regression model with the number of patient visits (`visits`) as an outcome and total number of hours worked (`hours`) as a predictor. In other words, we are evaluation if the number of hours worked is predictive of the number of visits a doctor had.
+The upper limit of acceptable nitrates in water is 10 ug/L. We fit linear regression model with the number of people on public water systems with more than the limit of nitrates (`pop_exposed_to_exceedances`) as an outcome and the number of people exposed to 3-5 ug/L of nitrates (`pop_>3-5ug/L`) as a predictor. In other words, we are evaluating if the number of people exposed to low levels of nitrates in their water is predictive of the number of people exposed to excess nitrates in their water.of visits a doctor had.
 
 ```{r}
-fit <- glm(visits ~ hours, data = esdcomp)
+fit <- glm(pop_exposed_to_exceedances ~ `pop_>3-5ug/L`, data = nitrate)
 fit
 ```
 
@@ -506,10 +501,10 @@ tidy(fit) %>% glimpse()
 
 ## Linear regression: multiple predictors {.smaller}
 
-Let's try adding another explanatory variable to our model, dollars per hour earned by the doctor (`revenue`). The tidy function will not work with this unfortunately. The meaning of coefficients is more complicated here.
+Let's try adding another explanatory variable to our model, year (`year`). The tidy function will not work with this unfortunately. The meaning of coefficients is more complicated here.
 
 ```{r}
-fit2 <- glm(visits ~ hours + revenue, data = esdcomp)
+fit2 <- glm(pop_exposed_to_exceedances ~ `pop_>3-5ug/L` + year, data = nitrate)
 summary(fit2)
 ```
 
@@ -518,7 +513,6 @@ summary(fit2)
 Can also use `tidy` and `glimpse` to see the output nicely.
 
 ```{r}
-fit2 <- glm(visits ~ hours + revenue, data = esdcomp)
 fit2 %>%
   tidy() %>%
   glimpse()
@@ -528,29 +522,22 @@ fit2 %>%
 
 Factors get special treatment in regression models - lowest level of the factor is the comparison group, and all other factors are **relative** to its values.
 
-`residency` takes values Y or N to indicate whether the doctor is a resident.
+`quarter` takes values Q1, Q2, Q3, and Q4 to indicate the quarter of the year for each observation.
 
 ```{r}
-esdcomp %>% count(residency)
+nitrate %>% count(quarter)
 ```
+
+
 
 ## Linear regression: factors {.smaller}
 
-Yes relative to No - baseline is no
+The comparison group that is not listed is treated as intercept. All other estimates are relative to the intercept. 
 
 ```{r regressbaseline, comment="", fig.height=4,fig.width=8}
-fit_3 <- glm(visits ~ residency, data = esdcomp)
-summary(fit_3)
-```
 
-## Linear regression: factors {.smaller}
-
-Comparison group is not listed - treated as intercept. All other estimates are relative to the intercept.
-
-```{r regress8, comment="", fig.height=4,fig.width=8}
-circ <- jhur::read_circulator()
-fit_4 <- glm(orangeBoardings ~ factor(day), data = circ)
-summary(fit_4)
+fit3 <- glm(pop_exposed_to_exceedances ~ `pop_>3-5ug/L` + year + factor(quarter), data = nitrate)
+summary(fit3)
 ```
 
 ## Linear regression: factors {.smaller}
@@ -558,33 +545,32 @@ summary(fit_4)
 Relative to the level is not listed.
 
 ```{r}
-circ <- circ %>% mutate(day = factor(day,
+nitrate <- nitrate %>% mutate(quarter = factor(quarter,
   levels =
     c(
-      "Monday", "Tuesday", "Wednesday",
-      "Thursday", "Friday", "Saturday", "Sunday"
+      "Q1", "Q2", "Q3", "Q4"
     )
 ))
-fit_5 <- glm(orangeBoardings ~ day, data = circ)
-summary(fit_5)
+fit4 <- glm(pop_exposed_to_exceedances ~ `pop_>3-5ug/L` + year + quarter, data = nitrate)
+summary(fit4)
 ```
 
 ## Linear regression: factors {.smaller}
 
-Can view estimates for the comparison group by removing the intercept in the GLM formula `y ~ x - 1`. Caveat is that the p-values change.
+You can view estimates for the comparison group by removing the intercept in the GLM formula `y ~ x - 1`. *Caveat* is that the p-values change.
 
 ```{r regress9, comment="", fig.height=4, fig.width=8}
-fit_6 <- glm(orangeBoardings ~ factor(day) - 1, data = circ)
-summary(fit_6)
+fit5 <- glm(pop_exposed_to_exceedances ~ `pop_>3-5ug/L` + year + quarter - 1, data = nitrate)
+summary(fit5)
 ```
 
 ## Linear regression: interactions {.smaller}
 
-Can also specify interactions between variables in a formula `y ~ x1 + x2 + x1 * x2`. This allows for not only the intercepts between factors to differ, but also the slopes with regard to the interacting variable.
+You can also specify interactions between variables in a formula `y ~ x1 + x2 + x1 * x2`. This allows for not only the intercepts between factors to differ, but also the slopes with regard to the interacting variable.
 
 ```{r fig.height=4, fig.width=8}
-fit_7 <- glm(visits ~ hours + residency + hours * residency, data = esdcomp)
-tidy(fit_7)
+fit6 <- glm(pop_exposed_to_exceedances ~ `pop_>3-5ug/L` + year + quarter + year * quarter, data = nitrate)
+tidy(fit6)
 ```
 
 ## Linear regression: interactions {.smaller}
@@ -592,10 +578,10 @@ tidy(fit_7)
 By default, `ggplot` with a factor added as a color will look include the interaction term. Notice the different intercept and slope of the lines.
 
 ```{r fig.height=3.5, fig.width=7}
-ggplot(esdcomp, aes(x = hours, y = visits, color = residency)) +
+ggplot(nitrate, aes(x = `pop_>3-5ug/L`, y = pop_exposed_to_exceedances, color = quarter)) +
   geom_point(size = 1, alpha = 0.8) +
   geom_smooth(method = "glm", se = FALSE) +
-  scale_color_manual(values = c("black", "grey50")) +
+  scale_color_manual(values = c("black", "grey45", "grey65", "grey85")) +
   theme_classic()
 ```
 
