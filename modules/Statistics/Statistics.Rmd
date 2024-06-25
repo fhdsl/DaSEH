@@ -603,18 +603,23 @@ See `?family` documentation for details of family functions.
 
 ## Logistic regression {.smaller}
 
-We will use data about breast cancer tumors.
-
-"The purpose of this study was to determine whether a new procedure called fine needle aspiration which draws only a small sample of tissue could be effective in determining tumor status."
+Let's look at a logistic regression example. We'll use the `nitrate` dataset again, but first we'll need to create a binary variable that tells us whether the percentage of the population exposed to exceedances `perc_pop_exposed_to_exceedances` is greater than 0.1%.
 
 ```{r}
-data(wbca)
-wbca
+nitrate <-
+  nitrate %>%
+    mutate(
+      PercExpMore0.1 = case_when
+      (perc_pop_exposed_to_exceedances > 0.1 ~ 1,
+        perc_pop_exposed_to_exceedances <= 0.1 ~ 0))
 ```
+
 
 ## Logistic regression {.smaller}
 
-`Class` is a 0/1-valued variable indicating if the tumor was malignant (0 if malignant, 1 if benign).
+Now that we've created the `PercExpMore0.1` variable (where a `1` indicates the percentage of the population exposed to excessive nitrates is greater than 0.1%), we can run a logistic regression.
+
+Let's explore how `quarter` and `year` might predict `PercExpMore0.1`.
 
 ```
 # General format
@@ -622,7 +627,7 @@ glm(y ~ x, data = DATASET_NAME, family = binomial(link = "logit"))
 ```
 
 ```{r regress7, comment="", fig.height=4,fig.width=8}
-binom_fit <- glm(Class ~ UShap + USize, data = wbca, family = binomial(link = "logit"))
+binom_fit <- glm(PercExpMore0.1 ~ year + quarter, data = nitrate, family = binomial(link = "logit"))
 summary(binom_fit)
 ```
 
@@ -632,22 +637,6 @@ summary(binom_fit)
 
 Check out [this paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2938757/).
 
-## Odds ratios
-
-This data shows whether people became ill after eating ice cream in the 1940s.
-
-```{r}
-# install.packages(epitools)
-library(epitools)
-data(oswego)
-ice_cream <-
-  oswego %>%
-  select(ill, vanilla.ice.cream) %>%
-  mutate(
-    ill = recode(ill, "Y" = 1, "N" = 0),
-    vanilla.ice.cream = recode(vanilla.ice.cream, "Y" = 1, "N" = 0)
-  )
-```
 
 ## Odds ratios
 
@@ -662,8 +651,8 @@ Use `oddsratio(x, y)` from the `epitools()` package to calculate odds ratios.
 
 ```{r}
 library(epitools)
-response <- ice_cream %>% pull(ill)
-predictor <- ice_cream %>% pull(vanilla.ice.cream)
+response <- nitrate %>% pull(PercExpMore0.1)
+predictor <- nitrate %>% pull(half_of_year)
 oddsratio(predictor, response)
 ```
 
