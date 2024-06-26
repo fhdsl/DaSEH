@@ -13,21 +13,42 @@ install.packages("ggplot2")
 ```{r, comment = FALSE}
 library(esquisse)
 library(ggplot2)
-library(jhur)
+library(dasehr)
 ```
 
 ### 1.1
 
-Try creating a plot using the `Orange` data that automatically comes with R using the `esquisse` package.
+Try creating a plot in `esquisse` using the `calenviroscreen` data from the `dasehr` packaged. This dataset has a lot of variables, so first run the below code to subset it so that you're only working with these variables: `CES4.0Percentile`,  `Asthma`, and `ChildrenPercLess10`. We will also categorize `CES4.0Percentile` into three categories (high, middle, and low) to make visualization a little easier!
 
--   Drag and drop the `age` variable to be plotted on the x-axis.
--   Drag and drop the `circumference` variable to be plotted on the y-axis.
--   What happens when you drag `tree` to the facet region of the esquisse GUI?
+```{r}
+ces_sub <- select(calenviroscreen, c("CES4.0Percentile", "Asthma", "ChildrenPercLess10"))
+
+ces_sub <- ces_sub %>% 
+            mutate(CES4.0Perc_cat = 
+              case_when(CES4.0Percentile > 75  ~ "High", 
+                        CES4.0Percentile <= 75 & CES4.0Percentile >25 ~ "Middle",
+                        CES4.0Percentile <= 25 ~ "Low"))
+```
+
+-   Drag and drop the `ChildrenPercLess10` variable to be plotted on the x-axis.
+-   Drag and drop the `Asthma` variable to be plotted on the y-axis.
+-   What happens when you drag `CES4.0Perc_cat` to the facet region of the esquisse GUI?
 -   What happens if you move this to color?
 -   Copy and paste the code from both options into the chunk below:
 
 ```{r 1.1response}
+# esquisser(ces_sub)
+ggplot(ces_sub) +
+  aes(x = ChildrenPercLess10, y = Asthma) +
+  geom_point(shape = "circle", size = 1.5, colour = "#112446") +
+  theme_minimal() +
+  facet_wrap(vars(CES4.0Perc_cat))
 
+ggplot(ces_sub) +
+  aes(x = ChildrenPercLess10, y = Asthma, colour = CES4.0Perc_cat) +
+  geom_point(shape = "circle", size = 1.5) +
+  scale_color_hue(direction = 1) +
+  theme_minimal()
 ```
 
 ### 1.2
@@ -35,7 +56,11 @@ Try creating a plot using the `Orange` data that automatically comes with R usin
 Click where it says "point" (may say "auto" depending on how you did the last question) on the far left side and change the plot to a different type of plot. Copy and paste the code into the chunk below. Close Esquisse and run the chunk below to generate a ggplot.
 
 ```{r 1.2response}
-
+ggplot(ces_sub) +
+  aes(x = ChildrenPercLess10, y = Asthma, colour = CES4.0Perc_cat) +
+  geom_line(size = 0.5) +
+  scale_color_hue(direction = 1) +
+  theme_minimal()
 ```
 
 
@@ -46,11 +71,13 @@ Click where it says "point" (may say "auto" depending on how you did the last qu
 Launch Esquisse on any selection of the following datasets we have worked with before and explore!
 
 ```{r}
-yts <- read_yts()
-tb <- read_tb()
-bike <- read_bike()
-circ <- read_circulator()
-vacc <- read_csv("https://daseh.org/data/USA_covid19_vaccinations.csv")
+covid_wastewater
+CO_heat_ER
+CO_heat_ER_byage
+CO_heat_ER_bygender
+yearly_co2_emissions
+nitrate
+haa5
 ```
 
 ```{r P.1response}
