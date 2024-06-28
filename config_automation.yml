@@ -16,5 +16,5 @@ docker-test: no
 # Autogenerate Labs from Keys (clear the Rmarkdown chunks)
 make-labs: yes
 
-# What docker image should be used for the render?
-rendering-docker-image: 'jhudsl/daseh:main'
+# What docker image should be used for rendering?
+rendering-docker-image: 'fhdsl/daseh:latest'
