@@ -15,6 +15,7 @@ Data in this lab comes from the CDC (https://covid.cdc.gov/covid-data-tracker/#v
 library(readr)
 library(dplyr)
 library(tidyr)
+library(dasehr)
 ```
 
 # Part 1
@@ -154,17 +155,19 @@ vacc_compare2
 
 ### 2.1
 
-Read in the GDP and Personal Income Data from https://daseh.org/data/gdp_personal_income.csv. You can use the url or download the data. Call it "gdp". 
+Open the `CO_heat_ER_bygender` dataset from the `dasehr` package and assign it to the name `heat_long`, selecting only the "county", "visits", "year", and "gender" columns using `%>% filter()`
+
 
 ```{r 2.1response}
-gdp <- read_csv("https://daseh.org/data/gdp_personal_income.csv")
+CO_heat <- CO_heat_ER_bygender %>% select(c("county", "visits", "year", "gender"))
+  
 # If downloaded
-# gdp <- read_csv("gdp_personal_income.csv")
+# CO_heat <- read_csv("Colorado_ER_heat_visits_by_county_gender.csv")
 ```
 
 ### 2.2
 
-Use `pivot_wider` to reshape "gdp". Use "Description" for the `names_from` argument. Use "`2020`" for the `values_from` argument. Reassign this data to "gdp".
+Use `pivot_wider` to reshape "CO_heat". Use "year" for the `names_from` argument. Use "visits" for the `values_from` argument. Reassign this data to "CO_heat".
 
 ```
 # General format
@@ -172,10 +175,10 @@ new_data <- old_data %>% pivot_wider(names_from = column1, values_from = column2
 ```
 
 ```{r 2.2response}
-gdp <- gdp %>%
+CO_heat <- CO_heat %>%
   pivot_wider(
-    names_from = Description,
-    values_from = `2020`
+    names_from = year,
+    values_from = visits
   )
 ```
 
