@@ -13,7 +13,7 @@ library(knitr)
 opts_chunk$set(comment = "")
 suppressPackageStartupMessages(library(dplyr))
 library(dplyr)
-library(jhur)
+library(dasehr)
 ```
 
 ## Reminder
@@ -215,8 +215,8 @@ annualDosage
 If we wanted to create a `tibble` ("fancy" data frame), we can using the  `tibble()` function on a data frame.  
 
 ```{r}
-tbl_iris <- tibble(iris) 
-tbl_iris
+tbl_orange <- tibble(Orange) 
+tbl_orange
 ```
 
 Note don't necessarily need to use `head()` with tibbles, as they conveniently print a portion of the data.
@@ -235,8 +235,8 @@ It can be helpful to convert data frames to tibbles though just to see more abou
 Note that this conversion can remove row names - which some data frames have.  For example, `mtcars`  (part of R) has row names. In this case we would want to make the rownames a new column first before making into a tibble.
 
 ```{r}
-head(mtcars, n = 2)
-head(tibble(mtcars), n = 2)
+head(Orange, n = 2)
+head(tibble(Orange), n = 2)
 ```
 
 ## rownames_to_column function{.codesmall}
@@ -244,8 +244,8 @@ head(tibble(mtcars), n = 2)
 There is a function that specifically helps you do that.
 
 ```{r}
-head(rownames_to_column(mtcars), n = 2)
-head(tibble(rownames_to_column(mtcars)), n = 2)
+head(rownames_to_column(Orange), n = 2)
+head(tibble(rownames_to_column(Orange)), n = 2)
 
 ```
 
