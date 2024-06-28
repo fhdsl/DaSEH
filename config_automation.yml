@@ -17,4 +17,4 @@ docker-test: no
 make-labs: yes
 
 # What docker image should be used for rendering?
-rendering-docker-image: 'fhdsl/daseh:latest'
+rendering-docker-image: 'jhudsl/daseh:latest'
