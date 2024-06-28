@@ -1,8 +1,8 @@
 default:
   course_dates: >
-      * **Session 1** : July 8-18 (online/virtual course) + July 29-31 (in person in Seattle)
+      * **Summer Session ** : July 8-18 (online/virtual course) + July 29-31 (in person in Seattle)
 
-      * **Session 2** : September 30 - October 10 (online/virtual course) + October 23-25 (in person in Seattle)
+      * **Fall Session ** : September 30 - October 10 (online/virtual course) + October 23-25 (in person in Seattle)
   course_time: "1:30 p.m. - 4:50 p.m. ET"
   register_link: "https://forms.gle/BNrdKJJ8PHpQtKMS8"
   #final_due_date: "January 24th at 11:59pm ET"
