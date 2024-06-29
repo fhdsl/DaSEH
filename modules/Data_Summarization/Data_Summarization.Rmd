@@ -13,7 +13,6 @@ opts_chunk$set(comment = "", message = FALSE)
 suppressWarnings({library(dplyr)})
 library(readr)
 library(tidyverse)
-library(dasehr)
 ```
 
 <style type="text/css">
@@ -103,7 +102,7 @@ sum(z)
 We can use the `CO_heat_ER` object from the `dasehr` package to explore different ways of summarizing data. (This dataset contains information about the number and rate of visits for heat-related illness to ERs in Colorado from 2011-2022, adjusted for age.)  The `head` command displays the first rows of an object:
 
 ```{r}
-#library(dasehr)
+library(dasehr)
 head(CO_heat_ER)
 ```
 
