@@ -24,9 +24,9 @@ You can Download as a CSV in your current working directory.  Note its also avai
 library(readr)
 library(dplyr)
 library(tidyverse)
-#library(dasehr)
+library(dasehr)
 
-#ces <- read_csv(file = "https://daseh.org/data/CalEnvironmentalScreen_data.csv")
+ces <- read_csv(file = "https://daseh.org/data/CalEnvironmentalScreen_data.csv")
 ```
 
 or use 
