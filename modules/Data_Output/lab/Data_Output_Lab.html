@@ -361,24 +361,24 @@ be “sent” to the console with Cmd-Enter (OS-X) or Ctrl-Enter
 <h1>Part 1</h1>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>Read in SARS-CoV-2 vaccination data from URL <a href="https://daseh.org/data/vaccinations.csv" class="uri">https://daseh.org/data/vaccinations.csv</a> and assign it to
-an object named <code>vacc</code>.</p>
+<p>Read in the SARS-CoV-2 wastewater data from URL <a href="https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv" class="uri">https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv</a>
+and assign it to an object named <code>covid</code>.</p>
 <pre><code># General format
 library(readr)
 # OBJECT &lt;- read_csv(FILE)</code></pre>
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
-<p>Filter the dataset so that the “Location” column is equal to “US”
-(aka the entire USA). Store the modified dataset as
-<code>vacc_filtered</code>.</p>
+<p>Filter the dataset so that the “reporting_jurisdiction” column is
+equal to “Maryland” (aka the entire USA). Store the modified dataset as
+<code>covid_filtered</code>.</p>
 <pre><code># General format
 NEW_OBJECT &lt;- OBJECT %&gt;% filter(COLUMNNAME == CRITERIA)</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
-<p>Write out the <code>vacc_filtered</code> object as a CSV file calling
-it “vacc_filtered.csv”, using <code>write_csv()</code>:</p>
+<p>Write out the <code>covid_filtered</code> object as a CSV file
+calling it “covid_filtered.csv”, using <code>write_csv()</code>:</p>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
