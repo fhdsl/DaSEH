@@ -39,7 +39,7 @@ write_csv(x, file,
 ```
 
 ```{r, echo = FALSE}
-dat <- read_csv("https://daseh.org/data/CalEnvironmentalScreen_data.csv")
+dat <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
 ```
 
 ## Data Output
