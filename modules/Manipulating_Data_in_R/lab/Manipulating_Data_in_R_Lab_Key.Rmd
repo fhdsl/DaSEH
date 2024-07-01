@@ -44,7 +44,7 @@ colnames(co2)
 
 ### 1.3
 
-Let's rename the column "2011" in "co2" to "CO2_2011" using `rename`. Repeat this for the years 2012, 2013, and 2014. Make sure to reassign to `vacc` here and in subsequent steps.
+Let's rename the column "2011" in "co2" to "CO2_2011" using `rename`. Repeat this for the years 2012, 2013, and 2014. Make sure to reassign to `co2` here and in subsequent steps.
 
 ```
 # General format
@@ -52,10 +52,12 @@ new_data <- old_data %>% rename(newname = oldname)
 ```
 
 ```{r 1.3response}
-co2 <- co2 %>% rename(CO2_2011 = `2011`)
-co2 <- co2 %>% rename(CO2_2012 = `2012`)
-co2 <- co2 %>% rename(CO2_2013 = `2013`)
-co2 <- co2 %>% rename(CO2_2014 = `2014`)
+co2 <- co2 %>% rename(
+  CO2_2011 = `2011`,
+  CO2_2012 = `2012`,
+  CO2_2013 = `2013`,
+  CO2_2014 = `2014`
+)
 ```
 
 ### 1.4
@@ -87,21 +89,21 @@ co2_long <- co2 %>% pivot_longer(cols = !country)
 
 ### 1.6
 
-Using `co2_long`, filter the "country" column so it only includes values from the United States. **Hint**: use `filter` and `%>%`.
+Using `co2_long`, filter the "country" column so it only includes values from Indonesia and Canada. **Hint**: use `filter` and `%in%`.
 
 ```
 # General format
-new_data <- old_data %>% filter(colname %>% "name")
+new_data <- old_data %>% filter(colname %in% c(...))
 ```
 
 ```{r 1.6response}
 co2_long <- co2_long %>%
-  filter(country %in% "United States")
+  filter(country %in% c("Indonesia", "Canada"))
 ```
 
 ### 1.7
 
-Use `pivot_wider` to reshape "co2_long". Use "name" for the `names_from` argument. Use "value" for the `values_from` argument. Call this new data `co2_wide`. Look at the data. How do these years compare to one another.
+Use `pivot_wider` to reshape "co2_long". Use "county" for the `names_from` argument. Use "value" for the `values_from` argument. Call this new data `co2_wide`. Look at the data. How do these years compare to one another?
 
 ```
 # General format
@@ -111,7 +113,7 @@ new_data <- old_data %>% pivot_wider(names_from = column1, values_from = column2
 ```{r 1.7response}
 co2_wide <- co2_long %>%
   pivot_wider(
-    names_from = name,
+    names_from = country,
     values_from = value
   )
 co2_wide
@@ -126,15 +128,16 @@ Take the code from Questions 1.1 and 1.3-1.7. Chain all of this code together us
 
 ```{r P.1response}
 co2_compare <-
-  co2 <- yearly_co2_emissions %>%
-  rename(CO2_2011 = `2011`) %>%
-  rename(CO2_2012 = `2012`) %>%
-  rename(CO2_2013 = `2013`) %>%
-  rename(CO2_2014 = `2014`) %>%
-  select(country, starts_with("CO2_")) %>%
+  yearly_co2_emissions %>%
+  rename(
+    CO2_2011 = `2011`,
+    CO2_2012 = `2012`,
+    CO2_2013 = `2013`,
+    CO2_2014 = `2014`
+  ) %>% select(country, starts_with("CO2_")) %>%
   pivot_longer(cols = !country) %>%
-  filter(country %in% "United States") %>%
-  pivot_wider(names_from = name, values_from = value)
+  filter(country %in% c("Indonesia", "Canada")) %>%
+  pivot_wider(names_from = country, values_from = value)
 
 co2_compare
 ```
@@ -144,20 +147,21 @@ co2_compare
 Modify the code from Question P.1:
 
 -  Choose 4 different years to examine 
--  Select different country to compare
+-  Select different countries to compare
 -  Call your data `co2_compare2`
 
 ```{r P.2response}
 co2_compare2 <-
-  co2 <- yearly_co2_emissions %>%
-  rename(CO2_2011 = `1960`) %>%
-  rename(CO2_2012 = `1970`) %>%
-  rename(CO2_2013 = `1980`) %>%
-  rename(CO2_2014 = `1990`) %>%
-  select(country, starts_with("CO2_")) %>%
+  yearly_co2_emissions %>%
+  rename(
+    CO2_1950 = `1950`,
+    CO2_1960 = `1960`,
+    CO2_1970 = `1970`,
+    CO2_1980 = `1980`
+  ) %>% select(country, starts_with("CO2_")) %>%
   pivot_longer(cols = !country) %>%
-  filter(country %in% "United Kingdom") %>%
-  pivot_wider(names_from = name, values_from = value)
+  filter(country %in% c("Brazil", "Mexico")) %>%
+  pivot_wider(names_from = country, values_from = value)
 
 co2_compare2
 ```
@@ -167,89 +171,59 @@ co2_compare2
 
 ### 2.1
 
-Open the `CO_heat_ER_bygender` dataset from the `dasehr` package and assign it to the name `CO_heat`, selecting only the "county", "visits", "year", and "gender" columns using `%>% filter()`
+Open the `Yearly_CC_Disasters` dataset using the url below. Save the dataset as an object called "cc". rename the column "Country" to "country".
+
+"https://daseh.org/data/Yearly_CC_Disasters.csv"
 
 
 ```{r 2.1response}
-CO_heat <- CO_heat_ER_bygender %>% select(c("county", "visits", "year", "gender"))
-  
-# If downloaded
-# CO_heat <- read_csv("Colorado_ER_heat_visits_by_county_gender.csv")
+cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv") %>% 
+  rename(country = Country)
 ```
+
 
 ### 2.2
 
-Use `pivot_wider` to reshape "CO_heat". Use "county" for the `names_from` argument. Use "visits" for the `values_from` argument. Reassign this data to "CO_heat".
+Join the datasets "co2" and "cc" by "country". Keep all rows, even if there is no match. How many rows are there?
 
 ```
 # General format
-new_data <- old_data %>% pivot_wider(names_from = column1, values_from = column2)
+full_join(data1, data2, by = "")
 ```
 
 ```{r 2.2response}
-CO_heat <- CO_heat %>%
-  pivot_wider(
-    names_from = county,
-    values_from = visits
-  )
+full_join(co2, cc, by = "country")
+# 1,032 rows
 ```
+
 
 ### 2.3
 
-Join the data. Keep only data that is found in both "co2_long" and "CO_heat". Before you do this, you will need to rename the years in "co2_long" from "CO2_2011" to "2011", etc using  `mutate` and `recode`.
+Join the datasets "co2" and "cc" by "country". Keep only rows that match both datasets. How many rows are there?
 
 ```
 # General format
-new_data <- old_data %>% mutate(column_name = recode(column_name, old_value1 = 'new_value1', old_value2 = 'new_value2'))
-```
-
-Once you've renamed your values, join the data in two ways:
-
-- First, try joining without using the `by` argument - what happens? 
-- Next, try joining using `by = c("year" = "name")`. 
-- Call the output "merged". How many observations (rows) are there?
-
-```
-# General format
-new_data <- inner_join(x, y, by = c("colname1" = "colname2"))
+inner_join(data1, data2, by = "")
 ```
 
 ```{r 2.3response}
-co2_long <- co2_long %>% mutate(name = recode(name, CO2_2011 = '2011', CO2_2012 = '2012', CO2_2013 = '2013', CO2_2014 = '2014'))
-
-#merged <- inner_join(CO_heat, co2_long)
-#merged <- inner_join(CO_heat, co2_long, by = c("year" = "name"))
-#nrow(merged)
+inner_join(co2, cc, by = "country")
+# 628 rows
 ```
 
-Wait, why did neither merge work? It turns out the class of the columns we are merging by need to be the same, so we need to change `name` in `co2_long` to class `double` in order to merge it with `CO_heat`. We can do this using `mutate` and `as.double`.
-
-```
-# General format
-new_data <- old_data %>% mutate(column_name = as.double(column_name))
-```
-
-
-```{r 2.3responsePt2}
-co2_long <- co2_long %>% mutate(name = as.double(name))
-
-#merged <- inner_join(CO_heat, co2_long)
-merged <- inner_join(CO_heat, co2_long, by = c("year" = "name"))
-nrow(merged)
-```
 
 ### 2.4
 
-Change your code from Question 2.3 to do a `full_join.` Call the output "full". How many observations (rows) are there?
+What countries are present in "co2" that are not present in "cc"? Use `anti_join`. What countries are present in "cc" that are not present in "co2"?
 
 ```
 # General format
-new_data <- full_join(x, y, by = c("colname1" = "colname2"))
+anti_join(data1, data2, by = "") %>% select(index)
 ```
 
 ```{r 2.4response}
-full <- full_join(CO_heat, co2_long, by = c("year" = "name"))
-nrow(full)
+anti_join(co2, cc, by = "country") %>% select(country)
+anti_join(cc, co2, by = "country") %>% select(country) %>% distinct()
 ```
 
 
@@ -257,34 +231,54 @@ nrow(full)
 
 ### P.3
 
-Do a left join of "CO_heat" and "co2_long". Call the output "left". How many observations are there?
+Take the code from 2.2 and save the output as an object "co2_cc". Filter the dataset. Filter so that you only keep Indonesia and Canada.
 
 ```{r P.3response}
-left <- left_join(CO_heat, co2_long, by = c("year" = "name"))
-nrow(left)
+co2_cc <- full_join(co2, cc, by = "country") %>% 
+  filter(country %in% c("Indonesia", "Canada"))
 ```
+
 
 ### P.4
 
-Copy your code from Question P.3 and change it to a `right_join` with the same order of the arguments. Call the output "right". How many observations are there?
+Select:
+
+* the "country" column
+* data from the years 2014 originally in BOTH DATASETS (columns "CO2_2014" and `2014`)
+* the "Indicator" column
+
+Rename:
+
+* emissions = CO2_2014
+* disasters = `2014`
+
+Reassign to "co2_cc".
 
 ```{r P.4response}
-right <- right_join(CO_heat, co2_long, by = c("year" = "name"))
-nrow(right)
+co2_cc <- co2_cc %>% select(country, CO2_2014, Indicator, `2014`) %>%
+  rename(emissions = CO2_2014, disasters = `2014`)
 ```
+
 
 ### P.5
 
-Perform two `anti_join` operations on "CO_heat" and "co2_long" to determine what years are missing from the `CO_heat` data and which are missing from the `co2_long` data.
-
-```
-# General format
-anti_join(L, R, by = c("name_L" = "name_R")) %>% select(name_L)
-```
+Use `stringr` to trim the piece of text, "Climate related disasters frequency, Number of Disasters: ", from the "Indicator" column. You will use the function `str_remove()` to do this. It works similarly to other `stringr` functions. Try to intuit how it works by using the documentation page (?str_remove).
 
 ```{r P.5response}
-in_CO_heat_only <- anti_join(CO_heat, co2_long, by = c("year" = "name")) %>% select(year)
-in_co2_long_only <- anti_join(co2_long, CO_heat, by = c("name" = "year")) %>% select(name)
-in_CO_heat_only
-in_co2_long_only
+co2_cc <- co2_cc %>% mutate(Indicator = str_remove(
+  Indicator,
+  "Climate related disasters frequency, Number of Disasters: "
+))
+```
+
+
+### P.6
+
+Pivot the dataset so that there are columns for country, emissions, and a column for each "Indicator".
+
+```{r P.6response}
+co2_cc %>% pivot_wider(
+  names_from = Indicator, 
+  values_from = disasters
+)
 ```
