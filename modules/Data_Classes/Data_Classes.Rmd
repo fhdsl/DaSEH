@@ -222,7 +222,7 @@ as.numeric(x_fact)
 
 ```{r, results='hide'}
 library(dasehr)
-covidww <- er_CO_statewide
+covidww <- covid_wastewater
 ```
 
 ```{r}
