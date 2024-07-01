@@ -361,36 +361,49 @@ be “sent” to the console with Cmd-Enter (OS-X) or Ctrl-Enter
 <h1>Part 1</h1>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>Read in SARS-CoV-2 vaccination data from URL <a href="https://daseh.org/data/vaccinations.csv" class="uri">https://daseh.org/data/vaccinations.csv</a> and assign it to
-an object named <code>vacc</code>.</p>
+<p>Read in the SARS-CoV-2 wastewater data from URL <a href="https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv" class="uri">https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv</a>
+and assign it to an object named <code>covid</code>.</p>
 <pre><code># General format
 library(readr)
 # OBJECT &lt;- read_csv(FILE)</code></pre>
-<pre class="r"><code>library(tidyverse)
-vacc &lt;- read_csv(file = &quot;https://daseh.org/data/vaccinations.csv&quot;)</code></pre>
-<pre><code>## Rows: 37272 Columns: 103
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>covid &lt;- read_csv(file = &quot;https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv&quot;)</code></pre>
+<pre><code>## Warning: One or more parsing issues, call `problems()` on your data frame for details,
+## e.g.:
+##   dat &lt;- vroom(...)
+##   problems(dat)</code></pre>
+<pre><code>## Rows: 776059 Columns: 12
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr   (2): Date, Location
-## dbl (101): MMWR_week, Distributed, Distributed_Janssen, Distributed_Moderna,...
+## chr (12): reporting_jurisdiction, sample_location, key_plot_id, county_names...
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
-<p>Filter the dataset so that the “Location” column is equal to “US”
-(aka the entire USA). Store the modified dataset as
-<code>vacc_filtered</code>.</p>
+<p>Filter the dataset so that the “reporting_jurisdiction” column is
+equal to “Maryland” (aka the entire USA). Store the modified dataset as
+<code>covid_filtered</code>.</p>
 <pre><code># General format
 NEW_OBJECT &lt;- OBJECT %&gt;% filter(COLUMNNAME == CRITERIA)</code></pre>
-<pre class="r"><code>vacc_filtered &lt;- vacc %&gt;% filter(Location == &quot;US&quot;)</code></pre>
+<pre class="r"><code>covid_filtered &lt;- covid %&gt;% filter(reporting_jurisdiction == &quot;Maryland&quot;)</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
-<p>Write out the <code>vacc_filtered</code> object as a CSV file calling
-it “vacc_filtered.csv”, using <code>write_csv()</code>:</p>
-<pre class="r"><code>write_csv(vacc_filtered, file = &quot;vacc_filtered.csv&quot;)</code></pre>
+<p>Write out the <code>covid_filtered</code> object as a CSV file
+calling it “covid_filtered.csv”, using <code>write_csv()</code>:</p>
+<pre class="r"><code>write_csv(covid_filtered, file = &quot;covid_filtered.csv&quot;)</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
@@ -402,7 +415,7 @@ directory inside your R Project. <em>Note: you may need to make a new
 folder named “data” if it doesn’t already exist.</em></p>
 <pre class="r"><code>getwd()
 dir.create(&quot;data&quot;)
-write_csv(vacc_filtered, file = &quot;data/vacc_filtered.csv&quot;)</code></pre>
+write_csv(covid_filtered, file = &quot;data/covid_filtered.csv&quot;)</code></pre>
 </div>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>

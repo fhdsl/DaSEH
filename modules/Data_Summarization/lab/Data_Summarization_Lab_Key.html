@@ -356,266 +356,281 @@ display: none;
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
 <p>Data used</p>
-<p>Bike Lanes Dataset: BikeBaltimore is the Department of
-Transportation’s bike program. The data is from <a href="http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms" class="uri">http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms</a></p>
+<p>CalEnviroScreen Dataset: CalEnviroScreen is a project that ranks
+census tracts in California based on potential exposures to pollutants,
+adverse environmental conditions, socioeconomic factors and the
+prevalence of certain health conditions. Data used in the
+CalEnviroScreen model come from national and state sources.</p>
+<p>The data is from <a href="https://calenviroscreen-oehha.hub.arcgis.com/#Data" class="uri">https://calenviroscreen-oehha.hub.arcgis.com/#Data</a></p>
 <p>You can Download as a CSV in your current working directory. Note its
-also available at: <a href="https://daseh.org/data/Bike_Lanes.csv" class="uri">https://daseh.org/data/Bike_Lanes.csv</a></p>
+also available at: <a href="https://daseh.org/data/CalEnviroScreen_data.csv" class="uri">https://daseh.org/data/CalEnviroScreen_data.csv</a></p>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(tidyverse)
-library(jhur)
+library(dasehr)
 
-bike &lt;- read_csv(file = &quot;https://daseh.org/data/Bike_Lanes.csv&quot;)</code></pre>
+ces &lt;- read_csv(file = &quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;)</code></pre>
 <p>or use</p>
-<pre class="r"><code>library(jhur)
-bike &lt;- read_bike()</code></pre>
-<pre><code>## Rows: 1631 Columns: 9
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (6): subType, name, block, type, project, route
-## dbl (3): numLanes, length, dateInstalled
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>library(dasehr)
+ces &lt;- calenviroscreen</code></pre>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>How many bike “lanes” are currently in Baltimore? You can assume each
-observation/row is a different bike “lane”. (hint: how do you get the
+<p>How many census tracts are in California? You can assume each
+observation/row is a different census tract. (hint: how do you get the
 number of rows of a data set? You can use <code>dim()</code> or
 <code>nrow()</code> or another function).</p>
-<pre class="r"><code>nrow(bike)</code></pre>
-<pre><code>## [1] 1631</code></pre>
-<pre class="r"><code>dim(bike)</code></pre>
-<pre><code>## [1] 1631    9</code></pre>
-<pre class="r"><code>bike %&gt;% nrow()</code></pre>
-<pre><code>## [1] 1631</code></pre>
-<pre class="r"><code>bike %&gt;% count()</code></pre>
+<pre class="r"><code>nrow(ces)</code></pre>
+<pre><code>## [1] 8035</code></pre>
+<pre class="r"><code>dim(ces)</code></pre>
+<pre><code>## [1] 8035   67</code></pre>
+<pre class="r"><code>ces %&gt;% nrow()</code></pre>
+<pre><code>## [1] 8035</code></pre>
+<pre class="r"><code>ces %&gt;% count()</code></pre>
 <pre><code>## # A tibble: 1 × 1
 ##       n
 ##   &lt;int&gt;
-## 1  1631</code></pre>
+## 1  8035</code></pre>
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
-<p>How many feet of bike “lanes” are currently in Baltimore, based on
-the <code>length</code> column? (use <code>sum()</code>)</p>
-<pre class="r"><code>sum(bike$length)</code></pre>
-<pre><code>## [1] 439447.6</code></pre>
-<pre class="r"><code>sum(bike %&gt;% pull(length))</code></pre>
-<pre><code>## [1] 439447.6</code></pre>
-<pre class="r"><code>bike %&gt;%
-  pull(length) %&gt;%
+<p>What was the population of California in the 2010 census, based on
+the <code>TotalPop</code> column? (use <code>sum()</code>)</p>
+<pre class="r"><code>sum(ces$TotalPop)</code></pre>
+<pre><code>## [1] 39283497</code></pre>
+<pre class="r"><code>sum(ces %&gt;% pull(TotalPop))</code></pre>
+<pre><code>## [1] 39283497</code></pre>
+<pre class="r"><code>ces %&gt;%
+  pull(TotalPop) %&gt;%
   sum()</code></pre>
-<pre><code>## [1] 439447.6</code></pre>
+<pre><code>## [1] 39283497</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
-<p>Summarize the data to get the <code>max</code> of <code>length</code>
-using the <code>summarize</code> function.</p>
+<p>Summarize the data to get the <code>max</code> of
+<code>TotalPop</code> using the <code>summarize</code> function.</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% 
     summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN))</code></pre>
-<pre class="r"><code>bike %&gt;% summarize(
-  max = max(length)
+<pre class="r"><code>ces %&gt;% summarize(
+  max = max(TotalPop)
 )</code></pre>
 <pre><code>## # A tibble: 1 × 1
 ##     max
-##   &lt;dbl&gt;
-## 1 3749.</code></pre>
+##   &lt;int&gt;
+## 1 38754</code></pre>
 </div>
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
 <p>Modify your code from 1.3 to add the <code>min</code> of
-<code>length</code> using the <code>summarize</code> function.</p>
+<code>TotalPop</code> using the <code>summarize</code> function.</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% 
     summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN),
               SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN)
     )</code></pre>
-<pre class="r"><code>bike %&gt;% summarize(
-  max = max(length),
-  min = min(length)
+<pre class="r"><code>ces %&gt;% summarize(
+  max = max(TotalPop),
+  min = min(TotalPop)
 )</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##     max   min
-##   &lt;dbl&gt; &lt;dbl&gt;
-## 1 3749.     0</code></pre>
+##   &lt;int&gt; &lt;int&gt;
+## 1 38754     0</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
 <h1>Practice on Your Own!</h1>
 <div id="p.1" class="section level3">
 <h3>P.1</h3>
-<p>Summarize the <code>bike</code> data to get the mean of
-<code>length</code> and <code>dateInstalled</code>. Make sure to remove
+<p>Summarize the <code>ces</code> data to get the mean of
+<code>TotalPop</code> and <code>Pesticides</code>. Make sure to remove
 <code>NA</code>s.</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% 
     summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE),
               SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE)
     )</code></pre>
-<pre class="r"><code>bike %&gt;% summarize(
-  mean_length = mean(length, na.rm = TRUE),
-  mean_date = mean(dateInstalled, na.rm = TRUE)
+<pre class="r"><code>ces %&gt;% summarize(
+  mean_pop = mean(TotalPop, na.rm = TRUE),
+  mean_pesticide = mean(Pesticides, na.rm = TRUE)
 )</code></pre>
 <pre><code>## # A tibble: 1 × 2
-##   mean_length mean_date
-##         &lt;dbl&gt;     &lt;dbl&gt;
-## 1        269.     1854.</code></pre>
-<pre class="r"><code>bike %&gt;%
-  select(length, dateInstalled) %&gt;%
+##   mean_pop mean_pesticide
+##      &lt;dbl&gt;          &lt;dbl&gt;
+## 1    4889.           268.</code></pre>
+<pre class="r"><code>ces %&gt;%
+  select(TotalPop, Pesticides) %&gt;%
   colMeans()</code></pre>
-<pre><code>##        length dateInstalled 
-##      269.4344     1853.9454</code></pre>
-<pre class="r"><code># The mean date is in the 1800s -- that doesn&#39;t seem right!</code></pre>
+<pre><code>##   TotalPop Pesticides 
+##  4889.0475   268.4894</code></pre>
 </div>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
-<p>You should have gotten a mean date sometime in the 1800s - that
-doesn’t make much sense! Hypothesize why the average date is a date from
-before bike lanes were being built in Baltimore.</p>
-<pre class="r"><code># There are probably some zeros or other incorrect low values in the data.</code></pre>
+<p>Given that parts of California are heavily agricultural, and the max
+value for the <code>Pesticides</code> variable is 80811, why might the
+average value be so low??</p>
+<pre class="r"><code># There are probably some zeros or other incorrect low values in the data from the census tracts that are in urban areas.</code></pre>
 </div>
 <div id="p.3" class="section level3">
 <h3>P.3</h3>
-<p>Filter any zeros out of <code>bike</code> <code>dateInstalled</code>.
-Use <code>filter()</code>. Assign this “cleaned” dataset object the name
-<code>bike_2</code>.</p>
+<p>Filter any zeros out of <code>ces</code> <code>Pesticides</code>. Use
+<code>filter()</code>. Assign this “cleaned” dataset object the name
+`exurban_ces``.</p>
+<p>(We are making the admittedly shaky assumption that places with no
+reported pesticide use are within cities.)</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% filter(LOGICAL_COMPARISON)</code></pre>
-<pre class="r"><code>bike_2 &lt;- bike %&gt;% filter(dateInstalled != 0)</code></pre>
+<pre class="r"><code>exurban_ces &lt;- ces %&gt;% filter(Pesticides != 0)</code></pre>
+<p>How many census tracts have pesticide values greater than 0?</p>
+<pre class="r"><code>nrow(exurban_ces)</code></pre>
+<pre><code>## [1] 2602</code></pre>
+<pre class="r"><code>dim(exurban_ces)</code></pre>
+<pre><code>## [1] 2602   67</code></pre>
+<pre class="r"><code>exurban_ces %&gt;% nrow()</code></pre>
+<pre><code>## [1] 2602</code></pre>
+<pre class="r"><code>exurban_ces %&gt;% count()</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##       n
+##   &lt;int&gt;
+## 1  2602</code></pre>
 </div>
 </div>
-<div id="part-2" class="section level1">
-<h1>Part 2</h1>
+<div id="part-2install" class="section level1">
+<h1>Part 2install</h1>
 <div id="section-4" class="section level3">
 <h3>2.1</h3>
-<p>How many bike lanes are there in each type of lane? Use
-<code>count()</code> on the column named <code>type</code>. Use
-<code>bike</code> instead of <code>bike_2</code>.</p>
-<pre class="r"><code>bike %&gt;% count(type)</code></pre>
-<pre><code>## # A tibble: 8 × 2
-##   type                n
-##   &lt;chr&gt;           &lt;int&gt;
-## 1 BIKE BOULEVARD     49
-## 2 BIKE LANE         621
-## 3 CONTRAFLOW         13
-## 4 SHARED BUS BIKE    39
-## 5 SHARROW           589
-## 6 SIDEPATH            7
-## 7 SIGNED ROUTE      304
-## 8 &lt;NA&gt;                9</code></pre>
+<p>The variable <code>CES4.0PercRange</code> categorizes the calculated
+CES4.0 value (a measure of the pollution burden in a particular region)
+into percentile ranges, grouped by 5% increments.</p>
+<p>How many census tracts are there in each percentile range? Use
+<code>count()</code> on the column named <code>CES4.0PercRange</code>.
+Use <code>ces</code> instead of <code>exurban_ces</code>.</p>
+<pre class="r"><code>ces %&gt;% count(CES4.0PercRange)</code></pre>
+<pre><code>## # A tibble: 21 × 2
+##    CES4.0PercRange          n
+##    &lt;chr&gt;                &lt;int&gt;
+##  1 1-5% (lowest scores)   396
+##  2 10-15%                 396
+##  3 15-20%                 397
+##  4 20-25%                 396
+##  5 25-30%                 397
+##  6 30-35%                 397
+##  7 35-40%                 396
+##  8 40-45%                 397
+##  9 45-50%                 396
+## 10 5-10%                  397
+## # ℹ 11 more rows</code></pre>
 </div>
 <div id="section-5" class="section level3">
 <h3>2.2</h3>
-<p>Modify your code from question 2.1 to break down each lane type by
-number of lanes. Use <code>count()</code> on the columns named
-<code>type</code> and <code>numLanes</code>.</p>
-<pre class="r"><code>bike %&gt;% count(type, numLanes)</code></pre>
-<pre><code>## # A tibble: 16 × 3
-##    type            numLanes     n
-##    &lt;chr&gt;              &lt;dbl&gt; &lt;int&gt;
-##  1 BIKE BOULEVARD         1     1
-##  2 BIKE BOULEVARD         2    48
-##  3 BIKE LANE              0    20
-##  4 BIKE LANE              1   411
-##  5 BIKE LANE              2   190
-##  6 CONTRAFLOW             1     7
-##  7 CONTRAFLOW             2     6
-##  8 SHARED BUS BIKE        1    39
-##  9 SHARROW                1   217
-## 10 SHARROW                2   372
-## 11 SIDEPATH               1     6
-## 12 SIDEPATH               2     1
-## 13 SIGNED ROUTE           1   211
-## 14 SIGNED ROUTE           2    93
-## 15 &lt;NA&gt;                   0     1
-## 16 &lt;NA&gt;                   1     8</code></pre>
+<p>Modify your code from question 2.1 to break down each percentile
+range by California county. Use <code>count()</code> on the columns
+named <code>CES4.0PercRange</code> and
+<code>CaliforniaCounty</code>.</p>
+<pre class="r"><code>ces %&gt;% count(CES4.0PercRange, CaliforniaCounty)</code></pre>
+<pre><code>## # A tibble: 730 × 3
+##    CES4.0PercRange      CaliforniaCounty     n
+##    &lt;chr&gt;                &lt;chr&gt;            &lt;int&gt;
+##  1 1-5% (lowest scores) &quot;Alameda &quot;          25
+##  2 1-5% (lowest scores) &quot;Contra Costa&quot;      43
+##  3 1-5% (lowest scores) &quot;El Dorado&quot;         16
+##  4 1-5% (lowest scores) &quot;Fresno &quot;            2
+##  5 1-5% (lowest scores) &quot;Los Angeles&quot;       28
+##  6 1-5% (lowest scores) &quot;Marin &quot;            22
+##  7 1-5% (lowest scores) &quot;Monterey &quot;         13
+##  8 1-5% (lowest scores) &quot;Napa &quot;              1
+##  9 1-5% (lowest scores) &quot;Nevada &quot;            5
+## 10 1-5% (lowest scores) &quot;Orange &quot;           29
+## # ℹ 720 more rows</code></pre>
+<p>Hmm. This isn’t the easiest table to read. Let’s try a different
+approach.</p>
 </div>
 <div id="section-6" class="section level3">
 <h3>2.3</h3>
-<p>How many bike lanes are there in each type of lane? Use
+<p>How many census tracts are there in each county? Use
 <code>group_by()</code>, <code>summarize()</code>, and <code>n()</code>
-on the column named <code>type</code>.</p>
+on the column named <code>county</code>.</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% 
     group_by(GROUPING_COLUMN_NAME) %&gt;% 
     summarize(SUMMARY_COLUMN_NAME = n())</code></pre>
-<pre class="r"><code>bike %&gt;%
-  group_by(type) %&gt;%
+<pre class="r"><code>ces %&gt;%
+  group_by(CaliforniaCounty) %&gt;%
   summarize(count = n())</code></pre>
-<pre><code>## # A tibble: 8 × 2
-##   type            count
-##   &lt;chr&gt;           &lt;int&gt;
-## 1 BIKE BOULEVARD     49
-## 2 BIKE LANE         621
-## 3 CONTRAFLOW         13
-## 4 SHARED BUS BIKE    39
-## 5 SHARROW           589
-## 6 SIDEPATH            7
-## 7 SIGNED ROUTE      304
-## 8 &lt;NA&gt;                9</code></pre>
+<pre><code>## # A tibble: 58 × 2
+##    CaliforniaCounty count
+##    &lt;chr&gt;            &lt;int&gt;
+##  1 &quot;Alameda &quot;         360
+##  2 &quot;Alpine &quot;            1
+##  3 &quot;Amador &quot;            9
+##  4 &quot;Butte &quot;            51
+##  5 &quot;Calaveras &quot;        10
+##  6 &quot;Colusa &quot;            5
+##  7 &quot;Contra Costa&quot;     207
+##  8 &quot;Del Norte&quot;          7
+##  9 &quot;El Dorado&quot;         42
+## 10 &quot;Fresno &quot;          199
+## # ℹ 48 more rows</code></pre>
 </div>
 <div id="section-7" class="section level3">
 <h3>2.4</h3>
-<p>Modify your code from 2.3 to also group by <code>numLanes</code>.</p>
-<pre class="r"><code>bike %&gt;%
-  group_by(type, numLanes) %&gt;%
+<p>Modify your code from 2.3 to also group by
+<code>CES4.0PercRange</code>.</p>
+<pre class="r"><code>ces %&gt;%
+  group_by(CaliforniaCounty, CES4.0PercRange) %&gt;%
   summarize(count = n())</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;type&#39;. You can override using the
-## `.groups` argument.</code></pre>
-<pre><code>## # A tibble: 16 × 3
-## # Groups:   type [8]
-##    type            numLanes count
-##    &lt;chr&gt;              &lt;dbl&gt; &lt;int&gt;
-##  1 BIKE BOULEVARD         1     1
-##  2 BIKE BOULEVARD         2    48
-##  3 BIKE LANE              0    20
-##  4 BIKE LANE              1   411
-##  5 BIKE LANE              2   190
-##  6 CONTRAFLOW             1     7
-##  7 CONTRAFLOW             2     6
-##  8 SHARED BUS BIKE        1    39
-##  9 SHARROW                1   217
-## 10 SHARROW                2   372
-## 11 SIDEPATH               1     6
-## 12 SIDEPATH               2     1
-## 13 SIGNED ROUTE           1   211
-## 14 SIGNED ROUTE           2    93
-## 15 &lt;NA&gt;                   0     1
-## 16 &lt;NA&gt;                   1     8</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;CaliforniaCounty&#39;. You can override using
+## the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 730 × 3
+## # Groups:   CaliforniaCounty [58]
+##    CaliforniaCounty CES4.0PercRange      count
+##    &lt;chr&gt;            &lt;chr&gt;                &lt;int&gt;
+##  1 &quot;Alameda &quot;       1-5% (lowest scores)    25
+##  2 &quot;Alameda &quot;       10-15%                  14
+##  3 &quot;Alameda &quot;       15-20%                  21
+##  4 &quot;Alameda &quot;       20-25%                  30
+##  5 &quot;Alameda &quot;       25-30%                  27
+##  6 &quot;Alameda &quot;       30-35%                  21
+##  7 &quot;Alameda &quot;       35-40%                  22
+##  8 &quot;Alameda &quot;       40-45%                  20
+##  9 &quot;Alameda &quot;       45-50%                  16
+## 10 &quot;Alameda &quot;       5-10%                   21
+## # ℹ 720 more rows</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own-1" class="section level1">
 <h1>Practice on Your Own!</h1>
 <div id="p.4" class="section level3">
 <h3>P.4</h3>
-<p>Modify code from 2.3 to also summarize by longest average bike lane
-length? In your summarized output, make sure you call the new summarized
-average bike lane length variable (column name) “mean”. In other words,
-the head of your output should look like:</p>
+<p>Modify code from 2.3 to also summarize by largest average total
+population. In your summarized output, make sure you call the new
+summarized average total population variable (column name) “mean”. In
+other words, the head of your output should look like:</p>
 <pre><code># A tibble: 
   type                     count  mean
   &lt;chr&gt;                    &lt;int&gt; &lt;dbl&gt;
 1 BIKE BOULEVARD              49  197.
 ...</code></pre>
-<pre class="r"><code>bike %&gt;%
-  group_by(type) %&gt;%
+<pre class="r"><code>ces %&gt;%
+  group_by(CaliforniaCounty) %&gt;%
   summarize(
     count = n(),
-    mean = mean(length)
+    mean = mean(TotalPop)
   )</code></pre>
-<pre><code>## # A tibble: 8 × 3
-##   type            count  mean
-##   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
-## 1 BIKE BOULEVARD     49  197.
-## 2 BIKE LANE         621  300.
-## 3 CONTRAFLOW         13  136.
-## 4 SHARED BUS BIKE    39  277.
-## 5 SHARROW           589  244.
-## 6 SIDEPATH            7  666.
-## 7 SIGNED ROUTE      304  264.
-## 8 &lt;NA&gt;                9  260.</code></pre>
+<pre><code>## # A tibble: 58 × 3
+##    CaliforniaCounty count  mean
+##    &lt;chr&gt;            &lt;int&gt; &lt;dbl&gt;
+##  1 &quot;Alameda &quot;         360 4602.
+##  2 &quot;Alpine &quot;            1 1039 
+##  3 &quot;Amador &quot;            9 4270.
+##  4 &quot;Butte &quot;            51 4428.
+##  5 &quot;Calaveras &quot;        10 4551.
+##  6 &quot;Colusa &quot;            5 4291.
+##  7 &quot;Contra Costa&quot;     207 5518.
+##  8 &quot;Del Norte&quot;          7 3928.
+##  9 &quot;El Dorado&quot;         42 4490.
+## 10 &quot;Fresno &quot;          199 4947.
+## # ℹ 48 more rows</code></pre>
 </div>
 <div id="p.5" class="section level3">
 <h3>P.5</h3>
@@ -625,24 +640,27 @@ the head of your output should look like:</p>
 <li>Add the <code>arrange()</code> to sort the output by the summarized
 column “mean”.</li>
 </ul>
-<pre class="r"><code>bike %&gt;%
-  group_by(type) %&gt;%
+<pre class="r"><code>ces %&gt;%
+  group_by(CaliforniaCounty) %&gt;%
   summarize(
     count = n(),
-    mean = mean(length)
+    mean = mean(TotalPop)
   ) %&gt;%
   arrange(mean)</code></pre>
-<pre><code>## # A tibble: 8 × 3
-##   type            count  mean
-##   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
-## 1 CONTRAFLOW         13  136.
-## 2 BIKE BOULEVARD     49  197.
-## 3 SHARROW           589  244.
-## 4 &lt;NA&gt;                9  260.
-## 5 SIGNED ROUTE      304  264.
-## 6 SHARED BUS BIKE    39  277.
-## 7 BIKE LANE         621  300.
-## 8 SIDEPATH            7  666.</code></pre>
+<pre><code>## # A tibble: 58 × 3
+##    CaliforniaCounty count  mean
+##    &lt;chr&gt;            &lt;int&gt; &lt;dbl&gt;
+##  1 &quot;Alpine &quot;            1 1039 
+##  2 &quot;Modoc &quot;             4 2227.
+##  3 &quot;Trinity &quot;           5 2540 
+##  4 &quot;Plumas &quot;            7 2666.
+##  5 &quot;Mariposa &quot;          6 2903.
+##  6 &quot;Inyo &quot;              6 2996.
+##  7 &quot;Sierra &quot;            1 3040 
+##  8 &quot;Siskiyou &quot;         14 3105.
+##  9 &quot;Lassen &quot;            9 3424.
+## 10 &quot;Napa &quot;             40 3491.
+## # ℹ 48 more rows</code></pre>
 </div>
 </div>
 
