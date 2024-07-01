@@ -221,8 +221,7 @@ as.numeric(x_fact)
 ## Class conversion in with a dataset
 
 ```{r, results='hide'}
-remotes::install_github("fhdsl/dasehr")
-library(dasehr)
+require(dasehr)
 covidww <- covid_wastewater
 ```
 
