@@ -32,8 +32,8 @@ ces <- read_csv(file = "https://daseh.org/data/CalEnvironmentalScreen_data.csv")
 or use 
 
 ```{r}
-#library(dasehr)
-#ces <- calenviroscreen()
+library(dasehr)
+ces <- calenviroscreen
 ```
 
 ### 1.1 
@@ -121,7 +121,7 @@ DATA_TIBBLE %>% filter(LOGICAL_COMPARISON)
 ```
 
 ```{r P.3response_part1_part2}
-
+exurban_ces <- ces %>% filter(Pesticides != 0)
 ```
 
 How many census tracts have pesticide values greater than 0?
