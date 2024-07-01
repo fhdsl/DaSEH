@@ -32,8 +32,8 @@ ces <- read_csv(file = "https://daseh.org/data/CalEnvironmentalScreen_data.csv")
 or use 
 
 ```{r}
-#library(dasehr)
-#ces <- calenviroscreen()
+library(dasehr)
+ces <- calenviroscreen
 ```
 
 ### 1.1 

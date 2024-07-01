@@ -1,4 +1,3 @@
----
 title: "Data Summarization"
 output:
   ioslides_presentation:
@@ -168,16 +167,16 @@ Let's look at a dataset that tracks yearly estimated CO2 emissions by country. W
 If you have the `dasehr` package installed successfully:
 
 ```{r}
-#library(dasehr)
-#yearly_co2 <- yearly_co2_emissions()
+library(dasehr)
+yearly_co2 <- yearly_co2_emissions
 ```
 
 <br>
 If not, download the `csv` file from https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv and read it in:
 
 ```{r eval = FALSE}
-#yearly_co2 <- read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv
-")
+yearly_co2 <- 
+  read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
 ```
 
 Check out the data:
