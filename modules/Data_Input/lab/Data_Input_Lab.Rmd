@@ -112,7 +112,8 @@ Let's practice with data about CO2 emissions over time that was curated as part 
 Run the following code - is there a problem? How do you know?
 
 ```{r}
-
+co2 <- read_delim("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv", delim = "\t")
+co2
 ```
 
 ```{r P1response}
@@ -158,3 +159,4 @@ nitrate <- read_excel(path = "nitrate.xlsx")
 ### P.5
 
 Practice importing a dataset of your choice, give it an object name, and use `head()` to preview the first few lines.
+
