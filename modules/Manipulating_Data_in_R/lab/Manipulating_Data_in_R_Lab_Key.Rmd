@@ -265,6 +265,7 @@ co2_cc <- co2_cc %>% select(country, CO2_2014, Indicator, `2014`) %>%
 Use `stringr` to trim the piece of text, "Climate related disasters frequency, Number of Disasters: ", from the "Indicator" column. You will use the function `str_remove()` to do this. It works similarly to other `stringr` functions. Try to intuit how it works by using the documentation page (?str_remove).
 
 ```{r P.5response}
+library(stringr)
 co2_cc <- co2_cc %>% mutate(Indicator = str_remove(
   Indicator,
   "Climate related disasters frequency, Number of Disasters: "
