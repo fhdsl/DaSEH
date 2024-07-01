@@ -18,12 +18,12 @@ RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/g
 RUN apt update && apt install -y gh;
 
 # Uninstall old version of pandoc
-RUN sudo apt-get purge pandoc pandoc-citeproc pandoc-data \
-  && sudo apt-get autoremove --purge
+# RUN sudo apt-get purge pandoc pandoc-citeproc pandoc-data \
+#  && sudo apt-get autoremove --purge
 
 # Install pandoc
-RUN wget https://github.com/jgm/pandoc/releases/download/2.14.1/pandoc-2.14.1-1-amd64.deb \
-  && sudo apt-get install ./pandoc-2.14.1-1-amd64.deb
+RUN wget https://github.com/jgm/pandoc/releases/download/3.2.1/pandoc-3.2.1-1-amd64.deb \
+  && sudo apt-get install ./pandoc-3.2.1-1-amd64.deb
 
 # Create new symlinks
 RUN ln -s /usr/bin/pandoc /usr/lib/rstudio-server/bin/pandoc
@@ -39,8 +39,8 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
 RUN apt-get -y --no-install-recommends install \
    python3-pip  python3-dev
 
-# JHUR package
-RUN Rscript -e "options(warn = 2); install.packages('remotes'); remotes::install_github('muschellij2/jhur');remotes::install_github('MatthewBJane/ThemePark')"
+# DaSEH package
+RUN Rscript -e "options(warn = 2); install.packages('remotes'); remotes::install_github('fhdsl/dasehr'); remotes::install_github('MatthewBJane/ThemePark')"
 
 # R packages
 RUN Rscript -e  "options(warn = 2);install.packages( \
