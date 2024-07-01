@@ -26,7 +26,7 @@ library(tidyverse)
 ## Recap of Data Cleaning
 
 -   `case_when()` can recode **entire values** based on conditions
-    -   remember `case_when()` needs `TRUE ~ varaible` to keep values that aren't specified by conditions, otherwise will be `NA`
+    -   remember `case_when()` needs `TRUE ~ variable` to keep values that aren't specified by conditions, otherwise will be `NA`
 -   `stringr` package has great functions for looking for specific **parts of values** especially `filter()` and `str_detect()` combined
     - also has other useful string manipulation functions like `str_replace()` and more!
     - `separate()` can split columns into additional columns
@@ -194,27 +194,29 @@ Newly created column names are enclosed in quotation marks.
 https://daseh.org/data/Charm_City_Circulator_Ridership.csv
 
 ```{r, message = FALSE}
-library(jhur)
-circ <- read_circulator()
-head(circ, 5)
+library(dasehr)
+wide <- CO_heat_ER_wide
+head(wide)
 ```
 
-## Mission: Taking the average boardings by line
+## Mission: Taking the average visit rates by location
 
-Let's imagine we want to create a table of average boardings by route/line. Results should look something like:
+Let's imagine we want to create a table of visit rate by county and year. Results should look something like:
 
 ```{r, message = FALSE, echo = FALSE}
-example <- tibble(line = c("orange","purple","green","banner"),
-                  avg_boardings = c("600(?)", "700(?)", "500(?)", "400(?)")
-)
+example <- tibble(county = c("Boulder", "Boulder", "Denver", "Denver"),
+                  year = c("2011", "2012", "2011", "2012"),
+                  visit_rate = c("4", "5", "3", "3"))
 example
 ```
 
 ## Reshaping data from **wide to long**
 
 ```{r}
-long <- circ %>% 
-  pivot_longer(starts_with(c("orange","purple","green","banner")))
+long <- wide %>% 
+  pivot_longer(starts_with("20"),
+               names_to = "year",
+               values_to = "visit_rate")
 long
 ```
 
@@ -229,12 +231,12 @@ long %>% select(day, date, daily) %>% head()
 
 ## Cleaning up long data
 
-We will use `str_replace` from the `stringr` package to put `_` in the names
+We will use `str_replace` from the `stringr` package to put `_county` in the county names 
 
 ```{r}
 long <- long %>% mutate(
-  name = str_replace(string = name, pattern = "B", replacement = "_B"),
-  name = str_replace(string = name, pattern = "A", replacement = "_A")
+  county = str_replace(string = county, pattern = "Boulder", replacement = "Boulder_county"),
+  county = str_replace(string = county, pattern = "Denver", replacement = "Denver_county")
 )
 long
 ```
@@ -247,38 +249,24 @@ long
 
 ```{r}
 long <- long %>% 
-  separate(name, into = c("line", "type"), sep = "_")
+  separate(county, into = c("location_name", "location_type"), sep = "_")
 long
 ```
 
-## Mission: Taking the average boardings by line
-
-Filter by Boardings only..
-
-```{r}
-long <- long %>% 
-  filter(type == "Boardings")
-long
-```
-
-## Mission: Taking the average boardings by line
+## Mission: Taking the average visit rates by location
 
 Now our data is more tidy, and we can take the averages easily!
 
 ```{r}
 long %>% 
-  group_by(line) %>% 
-  summarize("avg_boardings" = mean(value, na.rm = TRUE))
+  group_by(location_name) %>% 
+  summarize("avg_visit_rate" = mean(visit_rate, na.rm = TRUE))
 ```
 
 ## Reshaping data from **wide to long**
 
 There are many ways to **select** the columns we want. Check out https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html to look at more column selection options.
 
-```{r}
-circ %>% 
-  pivot_longer( !c(day, date, daily))
-```
 
 # `pivot_wider`...
 
@@ -306,17 +294,17 @@ wide_vacc <- long_vacc %>% pivot_wider(names_from = "Month",
 wide_vacc
 ```
 
-## Reshaping Charm City Circulator
+## Reshaping CO Heat-related ER Visits data
 
 ```{r}
 long
 ```
 
-## Reshaping Charm City Circulator
+## Reshaping CO Heat-related ER Visits data
 
 ```{r}
-wide <- long %>% pivot_wider(names_from = "line", 
-                             values_from = "value") 
+wide <- long %>% pivot_wider(names_from = "year", 
+                             values_from = "visit_rate") 
 wide
 ```
 
