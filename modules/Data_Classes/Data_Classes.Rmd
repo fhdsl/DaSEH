@@ -221,12 +221,12 @@ as.numeric(x_fact)
 ## Class conversion in with a dataset
 
 ```{r, results='hide'}
-library(jhur)
-circ <- read_circulator()
+library(dasehr)
+covidww <- covid_wastewater
 ```
 
 ```{r}
-head(circ)
+head(covidww)
 ```
 
 ## Class conversion in with a dataset
@@ -234,8 +234,9 @@ head(circ)
 Say we want to change `daily` to be an integer. We would need to use mutate to help us modify that column or create a new column. Let's create a new one so it is easier to see what is happening. 
 
 ```{r}
-circ_updated <- mutate(circ, daily_int= as.integer(daily))
-circ_updated %>% select(daily, daily_int)
+covidww_updated <- mutate(covidww, pop_int= as.integer(population_served))
+
+covidww_updated %>% select(population_served, pop_int)
 ```
 
 
@@ -376,17 +377,17 @@ There are functions in case your data have only date, hour and minute (`ymd_hm()
 
 Note dates are always displayed year month day, even if made with `mdy`!
 ```{r}
-circ <- mutate(circ, date_formatted = mdy(date)) %>% 
-  relocate(date_formatted, .before = orangeBoardings) 
-glimpse(circ)
+covidww <- mutate(covidww, date_start_formatted = mdy(date_start)) %>% 
+  relocate(date_start_formatted, .before = date_end) 
+glimpse(covidww)
 ```
 ## Once a variable is a date type we can convert to other types
 
 
 ```{r}
-circ %>% mutate(year = year(date_formatted)) %>%
-         mutate(month = month(date_formatted)) %>%
-         relocate(c(year, month), .before = orangeBoardings) %>%
+covidww %>% mutate(year = year(date_start_formatted)) %>%
+         mutate(month = month(date_start_formatted)) %>%
+         relocate(c(year, month), .before = date_end) %>%
   glimpse()
 ```
 
@@ -419,10 +420,10 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
 `as.matrix()` creates a matrix from a data frame or tibble (where all values are the same class).
 
 ```{r,}
-circ_mat <- select(circ, contains("orange")) %>%
+covidww_mat <- select(covidww, contains("Missouri")) %>%
   head(n = 3)
-circ_mat
-as.matrix(circ_mat)
+covidww_mat
+as.matrix(covidww_mat)
 ```
 
 ## Matrices
