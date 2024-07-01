@@ -3117,7 +3117,7 @@ div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -3128,7 +3128,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -3528,55 +3528,46 @@ class(x_fact)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Class conversion in with a dataset</h2></hgroup><article  id="class-conversion-in-with-a-dataset">
 
-<pre class = 'prettyprint lang-r'>library(jhur)
-circ &lt;- read_circulator()</pre>
+<pre class = 'prettyprint lang-r'>library(dasehr)
+covidww &lt;- covid_wastewater</pre>
 
-<pre >## Rows: 1146 Columns: 15
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr  (2): day, date
-## dbl (13): orangeBoardings, orangeAlightings, orangeAverage, purpleBoardings,...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</pre>
+<pre class = 'prettyprint lang-r'>head(covidww)</pre>
 
-<pre class = 'prettyprint lang-r'>head(circ)</pre>
-
-<pre >## # A tibble: 6 × 15
-##   day       date  orangeBoardings orangeAlightings orangeAverage purpleBoardings
-##   &lt;chr&gt;     &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;
-## 1 Monday    01/1…             877             1027          952               NA
-## 2 Tuesday   01/1…             777              815          796               NA
-## 3 Wednesday 01/1…            1203             1220         1212.              NA
-## 4 Thursday  01/1…            1194             1233         1214.              NA
-## 5 Friday    01/1…            1645             1643         1644               NA
-## 6 Saturday  01/1…            1457             1524         1490.              NA
-## # ℹ 9 more variables: purpleAlightings &lt;dbl&gt;, purpleAverage &lt;dbl&gt;,
-## #   greenBoardings &lt;dbl&gt;, greenAlightings &lt;dbl&gt;, greenAverage &lt;dbl&gt;,
-## #   bannerBoardings &lt;dbl&gt;, bannerAlightings &lt;dbl&gt;, bannerAverage &lt;dbl&gt;,
-## #   daily &lt;dbl&gt;</pre>
+<pre >## # A tibble: 6 × 12
+##   reporting_jurisdiction sample_location key_plot_id                county_names
+##   &lt;chr&gt;                  &lt;chr&gt;           &lt;chr&gt;                      &lt;chr&gt;       
+## 1 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
+## 2 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
+## 3 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
+## 4 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
+## 5 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
+## 6 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
+## # ℹ 8 more variables: population_served &lt;dbl&gt;, date_start &lt;chr&gt;,
+## #   date_end &lt;chr&gt;, rna_pct_change_15d &lt;dbl&gt;, pos_PCR_prop_15d &lt;dbl&gt;,
+## #   percentile &lt;dbl&gt;, sampling_prior &lt;chr&gt;, first_sample_date &lt;chr&gt;</pre>
 
 </article></slide><slide class=""><hgroup><h2>Class conversion in with a dataset</h2></hgroup><article  id="class-conversion-in-with-a-dataset-1">
 
 <p>Say we want to change <code>daily</code> to be an integer. We would need to use mutate to help us modify that column or create a new column. Let’s create a new one so it is easier to see what is happening.</p>
 
-<pre class = 'prettyprint lang-r'>circ_updated &lt;- mutate(circ, daily_int= as.integer(daily))
-circ_updated %&gt;% select(daily, daily_int)</pre>
+<pre class = 'prettyprint lang-r'>covidww_updated &lt;- mutate(covidww, pop_int= as.integer(population_served))
 
-<pre >## # A tibble: 1,146 × 2
-##    daily daily_int
-##    &lt;dbl&gt;     &lt;int&gt;
-##  1  952        952
-##  2  796        796
-##  3 1212.      1211
-##  4 1214.      1213
-##  5 1644       1644
-##  6 1490.      1490
-##  7  888.       888
-##  8 1000.       999
-##  9 1035       1035
-## 10 1396.      1395
-## # ℹ 1,136 more rows</pre>
+covidww_updated %&gt;% select(population_served, pop_int)</pre>
+
+<pre >## # A tibble: 776,059 × 2
+##    population_served pop_int
+##                &lt;dbl&gt;   &lt;int&gt;
+##  1              9100    9100
+##  2              9100    9100
+##  3              9100    9100
+##  4              9100    9100
+##  5              9100    9100
+##  6              9100    9100
+##  7              9100    9100
+##  8              9100    9100
+##  9              9100    9100
+## 10              9100    9100
+## # ℹ 776,049 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Classes Overview</h2></hgroup><article  id="classes-overview">
 
@@ -3782,56 +3773,50 @@ a - b</pre>
 
 <p>Note dates are always displayed year month day, even if made with <code>mdy</code>!</p>
 
-<pre class = 'prettyprint lang-r'>circ &lt;- mutate(circ, date_formatted = mdy(date)) %&gt;% 
-  relocate(date_formatted, .before = orangeBoardings) 
-glimpse(circ)</pre>
+<pre class = 'prettyprint lang-r'>covidww &lt;- mutate(covidww, date_start_formatted = mdy(date_start)) %&gt;% 
+  relocate(date_start_formatted, .before = date_end) 
+glimpse(covidww)</pre>
 
-<pre >## Rows: 1,146
-## Columns: 16
-## $ day              &lt;chr&gt; &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday…
-## $ date             &lt;chr&gt; &quot;01/11/2010&quot;, &quot;01/12/2010&quot;, &quot;01/13/2010&quot;, &quot;01/14/2010…
-## $ date_formatted   &lt;date&gt; 2010-01-11, 2010-01-12, 2010-01-13, 2010-01-14, 2010…
-## $ orangeBoardings  &lt;dbl&gt; 877, 777, 1203, 1194, 1645, 1457, 839, 999, 1023, 137…
-## $ orangeAlightings &lt;dbl&gt; 1027, 815, 1220, 1233, 1643, 1524, 938, 1000, 1047, 1…
-## $ orangeAverage    &lt;dbl&gt; 952.0, 796.0, 1211.5, 1213.5, 1644.0, 1490.5, 888.5, …
-## $ purpleBoardings  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ purpleAlightings &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ purpleAverage    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ greenBoardings   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ greenAlightings  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ greenAverage     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ bannerBoardings  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ bannerAlightings &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ bannerAverage    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ daily            &lt;dbl&gt; 952.0, 796.0, 1211.5, 1213.5, 1644.0, 1490.5, 888.5, …</pre>
+<pre >## Rows: 776,059
+## Columns: 13
+## $ reporting_jurisdiction &lt;chr&gt; &quot;Missouri&quot;, &quot;Missouri&quot;, &quot;Missouri&quot;, &quot;Missouri&quot;,…
+## $ sample_location        &lt;chr&gt; &quot;Treatment plant&quot;, &quot;Treatment plant&quot;, &quot;Treatmen…
+## $ key_plot_id            &lt;chr&gt; &quot;NWSS_mo_259_Treatment plant_raw wastewater&quot;, &quot;…
+## $ county_names           &lt;chr&gt; &quot;Barry,Lawrence&quot;, &quot;Barry,Lawrence&quot;, &quot;Barry,Lawr…
+## $ population_served      &lt;dbl&gt; 9100, 9100, 9100, 9100, 9100, 9100, 9100, 9100,…
+## $ date_start             &lt;chr&gt; &quot;6/21/2020&quot;, &quot;6/22/2020&quot;, &quot;6/23/2020&quot;, &quot;6/24/20…
+## $ date_start_formatted   &lt;date&gt; 2020-06-21, 2020-06-22, 2020-06-23, 2020-06-24…
+## $ date_end               &lt;chr&gt; &quot;7/5/2020&quot;, &quot;7/6/2020&quot;, &quot;7/7/2020&quot;, &quot;7/8/2020&quot;,…
+## $ rna_pct_change_15d     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 3683, 3683, 3683, 3…
+## $ pos_PCR_prop_15d       &lt;dbl&gt; 100, 100, 100, 100, 100, 100, 100, 100, 100, 10…
+## $ percentile             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ sampling_prior         &lt;chr&gt; &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;…
+## $ first_sample_date      &lt;chr&gt; &quot;7/5/2020&quot;, &quot;7/5/2020&quot;, &quot;7/5/2020&quot;, &quot;7/5/2020&quot;,…</pre>
 
 </article></slide><slide class=""><hgroup><h2>Once a variable is a date type we can convert to other types</h2></hgroup><article  id="once-a-variable-is-a-date-type-we-can-convert-to-other-types">
 
-<pre class = 'prettyprint lang-r'>circ %&gt;% mutate(year = year(date_formatted)) %&gt;%
-         mutate(month = month(date_formatted)) %&gt;%
-         relocate(c(year, month), .before = orangeBoardings) %&gt;%
+<pre class = 'prettyprint lang-r'>covidww %&gt;% mutate(year = year(date_start_formatted)) %&gt;%
+         mutate(month = month(date_start_formatted)) %&gt;%
+         relocate(c(year, month), .before = date_end) %&gt;%
   glimpse()</pre>
 
-<pre >## Rows: 1,146
-## Columns: 18
-## $ day              &lt;chr&gt; &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday…
-## $ date             &lt;chr&gt; &quot;01/11/2010&quot;, &quot;01/12/2010&quot;, &quot;01/13/2010&quot;, &quot;01/14/2010…
-## $ date_formatted   &lt;date&gt; 2010-01-11, 2010-01-12, 2010-01-13, 2010-01-14, 2010…
-## $ year             &lt;dbl&gt; 2010, 2010, 2010, 2010, 2010, 2010, 2010, 2010, 2010,…
-## $ month            &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
-## $ orangeBoardings  &lt;dbl&gt; 877, 777, 1203, 1194, 1645, 1457, 839, 999, 1023, 137…
-## $ orangeAlightings &lt;dbl&gt; 1027, 815, 1220, 1233, 1643, 1524, 938, 1000, 1047, 1…
-## $ orangeAverage    &lt;dbl&gt; 952.0, 796.0, 1211.5, 1213.5, 1644.0, 1490.5, 888.5, …
-## $ purpleBoardings  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ purpleAlightings &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ purpleAverage    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ greenBoardings   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ greenAlightings  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ greenAverage     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ bannerBoardings  &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ bannerAlightings &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ bannerAverage    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
-## $ daily            &lt;dbl&gt; 952.0, 796.0, 1211.5, 1213.5, 1644.0, 1490.5, 888.5, …</pre>
+<pre >## Rows: 776,059
+## Columns: 15
+## $ reporting_jurisdiction &lt;chr&gt; &quot;Missouri&quot;, &quot;Missouri&quot;, &quot;Missouri&quot;, &quot;Missouri&quot;,…
+## $ sample_location        &lt;chr&gt; &quot;Treatment plant&quot;, &quot;Treatment plant&quot;, &quot;Treatmen…
+## $ key_plot_id            &lt;chr&gt; &quot;NWSS_mo_259_Treatment plant_raw wastewater&quot;, &quot;…
+## $ county_names           &lt;chr&gt; &quot;Barry,Lawrence&quot;, &quot;Barry,Lawrence&quot;, &quot;Barry,Lawr…
+## $ population_served      &lt;dbl&gt; 9100, 9100, 9100, 9100, 9100, 9100, 9100, 9100,…
+## $ date_start             &lt;chr&gt; &quot;6/21/2020&quot;, &quot;6/22/2020&quot;, &quot;6/23/2020&quot;, &quot;6/24/20…
+## $ date_start_formatted   &lt;date&gt; 2020-06-21, 2020-06-22, 2020-06-23, 2020-06-24…
+## $ year                   &lt;dbl&gt; 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020,…
+## $ month                  &lt;dbl&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7,…
+## $ date_end               &lt;chr&gt; &quot;7/5/2020&quot;, &quot;7/6/2020&quot;, &quot;7/7/2020&quot;, &quot;7/8/2020&quot;,…
+## $ rna_pct_change_15d     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 3683, 3683, 3683, 3…
+## $ pos_PCR_prop_15d       &lt;dbl&gt; 100, 100, 100, 100, 100, 100, 100, 100, 100, 10…
+## $ percentile             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ sampling_prior         &lt;chr&gt; &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;…
+## $ first_sample_date      &lt;chr&gt; &quot;7/5/2020&quot;, &quot;7/5/2020&quot;, &quot;7/5/2020&quot;, &quot;7/5/2020&quot;,…</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summary</h2></hgroup><article  id="summary-1">
 
@@ -3861,23 +3846,18 @@ glimpse(circ)</pre>
 
 <p><code>as.matrix()</code> creates a matrix from a data frame or tibble (where all values are the same class).</p>
 
-<pre class = 'prettyprint lang-r'>circ_mat &lt;- select(circ, contains(&quot;orange&quot;)) %&gt;%
+<pre class = 'prettyprint lang-r'>covidww_mat &lt;- select(covidww, contains(&quot;Missouri&quot;)) %&gt;%
   head(n = 3)
-circ_mat</pre>
+covidww_mat</pre>
 
-<pre >## # A tibble: 3 × 3
-##   orangeBoardings orangeAlightings orangeAverage
-##             &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;
-## 1             877             1027          952 
-## 2             777              815          796 
-## 3            1203             1220         1212.</pre>
+<pre >## # A tibble: 3 × 0</pre>
 
-<pre class = 'prettyprint lang-r'>as.matrix(circ_mat)</pre>
+<pre class = 'prettyprint lang-r'>as.matrix(covidww_mat)</pre>
 
-<pre >##      orangeBoardings orangeAlightings orangeAverage
-## [1,]             877             1027         952.0
-## [2,]             777              815         796.0
-## [3,]            1203             1220        1211.5</pre>
+<pre >##     
+## [1,]
+## [2,]
+## [3,]</pre>
 
 </article></slide><slide class=""><hgroup><h2>Matrices</h2></hgroup><article  id="matrices-1">
 
