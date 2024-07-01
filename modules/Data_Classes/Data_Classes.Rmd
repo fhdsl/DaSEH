@@ -221,8 +221,8 @@ as.numeric(x_fact)
 ## Class conversion in with a dataset
 
 ```{r, results='hide'}
-require(dasehr)
-covidww <- covid_wastewater
+library(dasehr)
+covidww <- er_CO_statewide
 ```
 
 ```{r}
