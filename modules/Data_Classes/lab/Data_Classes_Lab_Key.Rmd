@@ -122,7 +122,7 @@ Use `range()` function on `date_formatted` variable to display the range of date
 
 ```{r P.2response}
 pull(covidww, date_formatted) %>% range()
-pull(covidww, date) %>% range()
+pull(covidww, first_sample_date) %>% range()
 
-# The max of `pull(covidww, date) %>% range()` is numerical not based on date.
+# The max of `pull(covidww, first_sample_date) %>% range()` is numerical not based on date.
 ```
