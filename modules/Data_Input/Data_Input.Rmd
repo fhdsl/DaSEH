@@ -117,7 +117,7 @@ CalEnviroScreen is a project that ranks census tracts in California based on pot
 -  `>` File
 -  `>` Import Dataset
 -  `>` From Text (`readr`)
--  `>` paste the url (https://daseh.org/data/CalEnvironmentalScreen_data.csv)
+-  `>` paste the url (https://daseh.org/data/CalEnviroScreen_data.csv)
 -  `>` click "Update" and "Import"
 
 
@@ -132,7 +132,7 @@ knitr::include_graphics("images/Data_Input_data_imported.png")
 
 ## What Just Happened?
 
-You see a new object called `CalEnvironmentalScreen_data` in your environment pane (top right). The table button opens the data for you to view.
+You see a new object called `CalEnviroScreen_data` in your environment pane (top right). The table button opens the data for you to view.
 
 ```{r, fig.alt="The image shows an image of an arrow pointing to the newly created R project repository.", out.width = "80%", echo = FALSE, align = "center"}
 knitr::include_graphics("images/Data_Input_data_imported.png")
@@ -176,7 +176,7 @@ Cons: obscures some of what's happening, others will have difficulty running you
 Importing data:
 
 -  File `>` Import Dataset `>` From Text (`readr`)
--  Paste the url (https://daseh.org/data/CalEnvironmentalScreen_data.csv)
+-  Paste the url (https://daseh.org/data/CalEnviroScreen_data.csv)
 -  Click "Update" and "Import"
 
 Review the process: [`https://youtu.be/LEkNfJgpunQ`](https://youtu.be/LEkNfJgpunQ)
@@ -194,7 +194,7 @@ Review the process: [`https://youtu.be/LEkNfJgpunQ`](https://youtu.be/LEkNfJgpun
 # load library `readr` that contains function `read_csv`
 library(readr)
 dat <- read_csv(
-  file = "https://daseh.org/data/CalEnvironmentalScreen_data.csv
+  file = "https://daseh.org/data/CalEnviroScreen_data.csv
 "
 )
 
@@ -206,12 +206,12 @@ head(dat, n = 5)
 
 ```{r message = FALSE}
 dat <- read_csv(
-  file = "https://daseh.org/data/CalEnvironmentalScreen_data.csv
+  file = "https://daseh.org/data/CalEnviroScreen_data.csv
 "
 )
 # EQUIVALENT TO
 dat <- read_csv(
-  "https://daseh.org/data/CalEnvironmentalScreen_data.csv"
+  "https://daseh.org/data/CalEnviroScreen_data.csv"
 )
 ```
 
@@ -229,9 +229,9 @@ dat <- read_csv(
 
 dat <- read_csv(file = "www.someurl.com/table1.csv")
 
-dat <- read_csv(file = "/Users/avahoffman/Downloads/CalEnvironmentalScreen_data.csv")
+dat <- read_csv(file = "/Users/avahoffman/Downloads/CalEnviroScreen_data.csv")
 
-dat <- read_csv(file = "CalEnvironmentalScreen_data.csv")
+dat <- read_csv(file = "CalEnviroScreen_data.csv")
 ```
 
 
@@ -268,10 +268,10 @@ knitr::include_graphics("images/Data_Input_project_directory.png")
 
 ## Data Input: File paths
 
-If we add the CalEnvironmentalScreen_data.csv file to the R Project folder, we can use the file name for the `file` argument:
+If we add the CalEnviroScreen_data.csv file to the R Project folder, we can use the file name for the `file` argument:
 
 ```{r, eval = FALSE}
-dat <- read_csv(file = "CalEnvironmentalScreen_data.csv")
+dat <- read_csv(file = "CalEnviroScreen_data.csv")
 ```
 
 
@@ -303,7 +303,7 @@ If you move a file into a nested folder, **you must update the path!**
 
 ```{r, eval = FALSE}
 # Notice "data/" has been added!
-dat <- read_csv(file = "data/CalEnvironmentalScreen_data.csv")
+dat <- read_csv(file = "data/CalEnviroScreen_data.csv")
 ```
 
 Always confirm you read in the data by checking the "Environment" pane (top right).
