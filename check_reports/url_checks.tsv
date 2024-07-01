@@ -1,0 +1,3 @@
+urls	urls_status	file
+https://daseh.org/data/CalEnvironmentalScreen_data.csv	failed	/github/workspace/modules/Statistics/lab/Statistics_Lab_Key.Rmd
+https://daseh.org/data/CalEnvironmentalScreen_data.csv	failed	/github/workspace/modules/Statistics/lab/Statistics_Lab.Rmd
