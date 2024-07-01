@@ -17,7 +17,7 @@ CalEnviroScreen Dataset: CalEnviroScreen is a project that ranks census tracts i
 
 The data is from https://calenviroscreen-oehha.hub.arcgis.com/#Data
 
-You can Download as a CSV in your current working directory.  Note its also available at: 	https://daseh.org/data/CalEnvironmentalScreen_data.csv 
+You can Download as a CSV in your current working directory.  Note its also available at: 	https://daseh.org/data/CalEnviroScreen_data.csv 
 
 
 ```{r, echo = TRUE, message=FALSE, error = FALSE}
@@ -26,7 +26,7 @@ library(dplyr)
 library(tidyverse)
 library(dasehr)
 
-ces <- read_csv(file = "https://daseh.org/data/CalEnvironmentalScreen_data.csv")
+ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
 ```
 
 or use 
