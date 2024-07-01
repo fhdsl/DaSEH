@@ -356,43 +356,39 @@ display: none;
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
 <p>Data used</p>
-<p>Bike Lanes Dataset: BikeBaltimore is the Department of
-Transportation’s bike program. The data is from <a href="http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms" class="uri">http://data.baltimorecity.gov/Transportation/Bike-Lanes/xzfj-gyms</a></p>
+<p>CalEnviroScreen Dataset: CalEnviroScreen is a project that ranks
+census tracts in California based on potential exposures to pollutants,
+adverse environmental conditions, socioeconomic factors and the
+prevalence of certain health conditions. Data used in the
+CalEnviroScreen model come from national and state sources.</p>
+<p>The data is from <a href="https://calenviroscreen-oehha.hub.arcgis.com/#Data" class="uri">https://calenviroscreen-oehha.hub.arcgis.com/#Data</a></p>
 <p>You can Download as a CSV in your current working directory. Note its
-also available at: <a href="https://daseh.org/data/Bike_Lanes.csv" class="uri">https://daseh.org/data/Bike_Lanes.csv</a></p>
+also available at: <a href="https://daseh.org/data/CalEnviroScreen_data.csv" class="uri">https://daseh.org/data/CalEnviroScreen_data.csv</a></p>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(tidyverse)
-library(jhur)
+library(dasehr)
 
-bike &lt;- read_csv(file = &quot;https://daseh.org/data/Bike_Lanes.csv&quot;)</code></pre>
+ces &lt;- read_csv(file = &quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;)</code></pre>
 <p>or use</p>
-<pre class="r"><code>library(jhur)
-bike &lt;- read_bike()</code></pre>
-<pre><code>## Rows: 1631 Columns: 9
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (6): subType, name, block, type, project, route
-## dbl (3): numLanes, length, dateInstalled
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>library(dasehr)
+ces &lt;- calenviroscreen</code></pre>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>How many bike “lanes” are currently in Baltimore? You can assume each
-observation/row is a different bike “lane”. (hint: how do you get the
+<p>How many census tracts are in California? You can assume each
+observation/row is a different census tract. (hint: how do you get the
 number of rows of a data set? You can use <code>dim()</code> or
 <code>nrow()</code> or another function).</p>
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
-<p>How many feet of bike “lanes” are currently in Baltimore, based on
-the <code>length</code> column? (use <code>sum()</code>)</p>
+<p>What was the population of California in the 2010 census, based on
+the <code>TotalPop</code> column? (use <code>sum()</code>)</p>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
-<p>Summarize the data to get the <code>max</code> of <code>length</code>
-using the <code>summarize</code> function.</p>
+<p>Summarize the data to get the <code>max</code> of
+<code>TotalPop</code> using the <code>summarize</code> function.</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% 
     summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN))</code></pre>
@@ -400,7 +396,7 @@ DATA_TIBBLE %&gt;%
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
 <p>Modify your code from 1.3 to add the <code>min</code> of
-<code>length</code> using the <code>summarize</code> function.</p>
+<code>TotalPop</code> using the <code>summarize</code> function.</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% 
     summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN),
@@ -412,8 +408,8 @@ DATA_TIBBLE %&gt;%
 <h1>Practice on Your Own!</h1>
 <div id="p.1" class="section level3">
 <h3>P.1</h3>
-<p>Summarize the <code>bike</code> data to get the mean of
-<code>length</code> and <code>dateInstalled</code>. Make sure to remove
+<p>Summarize the <code>ces</code> data to get the mean of
+<code>TotalPop</code> and <code>Pesticides</code>. Make sure to remove
 <code>NA</code>s.</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% 
@@ -423,38 +419,48 @@ DATA_TIBBLE %&gt;%
 </div>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
-<p>You should have gotten a mean date sometime in the 1800s - that
-doesn’t make much sense! Hypothesize why the average date is a date from
-before bike lanes were being built in Baltimore.</p>
+<p>Given that parts of California are heavily agricultural, and the max
+value for the <code>Pesticides</code> variable is 80811, why might the
+average value be so low??</p>
 </div>
 <div id="p.3" class="section level3">
 <h3>P.3</h3>
-<p>Filter any zeros out of <code>bike</code> <code>dateInstalled</code>.
-Use <code>filter()</code>. Assign this “cleaned” dataset object the name
-<code>bike_2</code>.</p>
+<p>Filter any zeros out of <code>ces</code> <code>Pesticides</code>. Use
+<code>filter()</code>. Assign this “cleaned” dataset object the name
+`exurban_ces``.</p>
+<p>(We are making the admittedly shaky assumption that places with no
+reported pesticide use are within cities.)</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% filter(LOGICAL_COMPARISON)</code></pre>
+<pre class="r"><code>exurban_ces &lt;- ces %&gt;% filter(Pesticides != 0)</code></pre>
+<p>How many census tracts have pesticide values greater than 0?</p>
 </div>
 </div>
-<div id="part-2" class="section level1">
-<h1>Part 2</h1>
+<div id="part-2install" class="section level1">
+<h1>Part 2install</h1>
 <div id="section-4" class="section level3">
 <h3>2.1</h3>
-<p>How many bike lanes are there in each type of lane? Use
-<code>count()</code> on the column named <code>type</code>. Use
-<code>bike</code> instead of <code>bike_2</code>.</p>
+<p>The variable <code>CES4.0PercRange</code> categorizes the calculated
+CES4.0 value (a measure of the pollution burden in a particular region)
+into percentile ranges, grouped by 5% increments.</p>
+<p>How many census tracts are there in each percentile range? Use
+<code>count()</code> on the column named <code>CES4.0PercRange</code>.
+Use <code>ces</code> instead of <code>exurban_ces</code>.</p>
 </div>
 <div id="section-5" class="section level3">
 <h3>2.2</h3>
-<p>Modify your code from question 2.1 to break down each lane type by
-number of lanes. Use <code>count()</code> on the columns named
-<code>type</code> and <code>numLanes</code>.</p>
+<p>Modify your code from question 2.1 to break down each percentile
+range by California county. Use <code>count()</code> on the columns
+named <code>CES4.0PercRange</code> and
+<code>CaliforniaCounty</code>.</p>
+<p>Hmm. This isn’t the easiest table to read. Let’s try a different
+approach.</p>
 </div>
 <div id="section-6" class="section level3">
 <h3>2.3</h3>
-<p>How many bike lanes are there in each type of lane? Use
+<p>How many census tracts are there in each county? Use
 <code>group_by()</code>, <code>summarize()</code>, and <code>n()</code>
-on the column named <code>type</code>.</p>
+on the column named <code>county</code>.</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% 
     group_by(GROUPING_COLUMN_NAME) %&gt;% 
@@ -462,17 +468,18 @@ DATA_TIBBLE %&gt;%
 </div>
 <div id="section-7" class="section level3">
 <h3>2.4</h3>
-<p>Modify your code from 2.3 to also group by <code>numLanes</code>.</p>
+<p>Modify your code from 2.3 to also group by
+<code>CES4.0PercRange</code>.</p>
 </div>
 </div>
 <div id="practice-on-your-own-1" class="section level1">
 <h1>Practice on Your Own!</h1>
 <div id="p.4" class="section level3">
 <h3>P.4</h3>
-<p>Modify code from 2.3 to also summarize by longest average bike lane
-length? In your summarized output, make sure you call the new summarized
-average bike lane length variable (column name) “mean”. In other words,
-the head of your output should look like:</p>
+<p>Modify code from 2.3 to also summarize by largest average total
+population. In your summarized output, make sure you call the new
+summarized average total population variable (column name) “mean”. In
+other words, the head of your output should look like:</p>
 <pre><code># A tibble: 
   type                     count  mean
   &lt;chr&gt;                    &lt;int&gt; &lt;dbl&gt;
