@@ -13,7 +13,7 @@
 
 <title>FAQ / Help</title>
 
-<script src="site_libs/header-attrs-2.26/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -339,12 +339,13 @@ in “x”</strong></a></li>
 id="toc-error-unexpected-input-in-x"><strong>Error: unexpected input in
 “x”</strong></a></li>
 <li><a
-href="#error-mapping-must-be-created-by-aes-ℹ-did-you-use-or-instead-of"
+href="#error-mapping-must-be-created-by-aes-%E2%84%B9-did-you-use-or-instead-of"
 id="toc-error-mapping-must-be-created-by-aes-ℹ-did-you-use-or-instead-of"><strong>Error:
 <code>mapping</code> must be created by <code>aes()</code> /
 <code>ℹ</code> Did you use ‘%&gt;%’ or ‘|&gt;’ instead of
 ‘+’?</strong></a></li>
-<li><a href="#error-in-.gg-ℹ-did-you-accidentally-put-on-a-new-line"
+<li><a
+href="#error-in-.gg-%E2%84%B9-did-you-accidentally-put-on-a-new-line"
 id="toc-error-in-.gg-ℹ-did-you-accidentally-put-on-a-new-line"><strong>Error
 in +.gg: <code>ℹ</code> Did you accidentally put ‘+’ on a new
 line?</strong></a></li>
@@ -408,16 +409,16 @@ existing object or creating a new object.</p>
 <p>Here we are creating a new object from an existing one:</p>
 <pre class="r"><code>new_rivers &lt;- sample(rivers, 5)
 new_rivers</code></pre>
-<pre><code>## [1]  350 1450  202  730  780</code></pre>
+<pre><code>## [1] 460 425 410 505 377</code></pre>
 <p>Using just this will only print the result and not actually change
 <code>new_rivers</code>:</p>
 <pre class="r"><code>new_rivers + 1</code></pre>
-<pre><code>## [1]  351 1451  203  731  781</code></pre>
+<pre><code>## [1] 461 426 411 506 378</code></pre>
 <p>If we want to modify <code>new_rivers</code> and save that modified
 version, then we need to reassign <code>new_rivers</code> like so:</p>
 <pre class="r"><code>new_rivers &lt;- new_rivers + 1
 new_rivers</code></pre>
-<pre><code>## [1]  351 1451  203  731  781</code></pre>
+<pre><code>## [1] 461 426 411 506 378</code></pre>
 <p>If we forget to reassign this can cause subsequent steps to not work
 as expected because we will not be working with the data that has been
 modified.</p>
@@ -487,7 +488,7 @@ you never created <code>rivers2</code> and try to modify it like so:</p>
 operator:</p>
 <pre class="r"><code>rivers2 &lt;- new_rivers + 1
 rivers2</code></pre>
-<pre><code>## [1]  352 1452  204  732  782</code></pre>
+<pre><code>## [1] 462 427 412 507 379</code></pre>
 <hr />
 </div>
 <div id="error-unexpected-in-error-unexpected-in-error-unexpected-x-in"
@@ -554,7 +555,7 @@ will not work.</p>
 <pre class="r"><code>df_quotes %&gt;% pull(&quot;The Values&quot;) # this works</code></pre>
 <pre><code>## [1] 1 2 3</code></pre>
 <pre class="r"><code>df_quotes %&gt;% pull(“The Values”) # this doesn&#39;t work</code></pre>
-<pre class="bg-error"><code>## Error: &lt;text&gt;:1:20: unexpected input
+<pre class="bg-error"><code>## Error: &lt;text&gt;:1:20: unexpected invalid token
 ## 1: df_quotes %&gt;% pull(“
 ##                        ^</code></pre>
 <hr />
