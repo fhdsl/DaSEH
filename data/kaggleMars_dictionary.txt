@@ -1,0 +1,13 @@
+earth_year	Year on Earth
+earth_date	Month and date on Earth
+mars_date	Date on Mars, recorded as month and solar longitude
+solar_day	Number of solar days that have elapsed since the Curiosity rover landed and began taking measurements
+max_ground_temp	Maximum ground temperature, measured in degrees Celsius
+min_ground_temp	Minimum ground temperature, measured in degrees Celsius
+max_air_temp	Maximum air temperature, measured in degrees Celsius
+min_air_temp	Minimum air temperature, measured in degrees Celsius
+mean_pressure	Average atmospheric pressure, measured in Pascals
+sunrise	Time of sunrise
+sunset	Time of sunset
+UV_Radiation	Estimated level of UV radiation
+weather	Weather conditions
