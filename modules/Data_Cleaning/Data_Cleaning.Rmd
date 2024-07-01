@@ -978,7 +978,8 @@ Base R:
 ## some data to work with
 
 ```{r readSal, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
-Sal = read_salaries() # or
+Sal <- read_csv(file =
+    "https://jhudatascience.org/data/Baltimore_City_Employee_Salaries_FY2015.csv")
 ```
 
 ## Showing difference in `str_extract`
@@ -986,7 +987,7 @@ Sal = read_salaries() # or
 `str_extract` extracts just the matched string
 
 ```{r}
-ss = str_extract(Sal$Name, "Rawling")
+ss <- str_extract(Sal$Name, "Rawling")
 head(ss)
 ss[ !is.na(ss)]
 ```
@@ -1070,8 +1071,8 @@ Sal[1:5, c("name", "AnnualSalary", "JobTitle")]
 We can do the same thing (with 2 piping operations!) in dplyr
 
 ```{r}
-dplyr_sal = Sal
-dplyr_sal = dplyr_sal %>% mutate( 
+dplyr_sal <- Sal
+dplyr_sal <- dplyr_sal %>% mutate( 
   AnnualSalary = AnnualSalary %>%
     str_replace(
       fixed("$"), 
@@ -1099,7 +1100,7 @@ tab
 ## Creating Two-way Tables
 
 ```{r}
-tab_df = tibble(x = c(0, 1, 2, 3, 2, 3, 3, 2,2, 3),
+tab_df <- tibble(x = c(0, 1, 2, 3, 2, 3, 3, 2,2, 3),
              y = c(0, 1, 2, 3, 2, 3, 3, 4, 4, 3))
 tab_df %>% count(x, y)
 ```
