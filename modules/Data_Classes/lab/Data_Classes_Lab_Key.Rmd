@@ -72,7 +72,6 @@ rand_char_vect # Numbers now have quotation marks
 Read in the National Wastewater Surveillance System (NWSS) SARS-CoV-2 Wastewater data from `dasehr` package using the code supplied in the chunk. Alternatively using the url link.
 
 ```{r}
-#covidww <- 
 covidww <- read_csv(file = "https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv")
 ```
 
@@ -91,7 +90,7 @@ Use the `mutate()` function to create a new column named `date_formatted` that i
 NEWDATA <- OLD_DATA %>% mutate(NEW_COLUMN = OLD_COLUMN)
 ```
 
-```{r 7response}
+```{r 1.7response}
 covidww <- mutate(covidww, date_formatted = mdy(first_sample_date))
 ```
 
