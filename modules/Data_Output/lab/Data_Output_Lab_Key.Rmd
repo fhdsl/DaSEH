@@ -13,9 +13,9 @@ Remember anything you type here can be "sent" to the console with Cmd-Enter (OS-
 
 ### 1.1
 
-Read in SARS-CoV-2 vaccination data from URL 
-https://daseh.org/data/vaccinations.csv
-and assign it to an object named `vacc`. 
+Read in the SARS-CoV-2 wastewater data from URL 
+https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv
+and assign it to an object named `covid`. 
 
 ```
 # General format
@@ -25,12 +25,12 @@ library(readr)
 
 ```{r 1.1response}
 library(tidyverse)
-vacc <- read_csv(file = "https://daseh.org/data/vaccinations.csv")
+covid <- read_csv(file = "https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv")
 ```
 
 ### 1.2
 
-Filter the dataset so that the "Location" column is equal to "US" (aka the entire USA). Store the modified dataset as `vacc_filtered`.
+Filter the dataset so that the "reporting_jurisdiction" column is equal to "Maryland" (aka the entire USA). Store the modified dataset as `covid_filtered`.
 
 ```
 # General format
@@ -38,15 +38,15 @@ NEW_OBJECT <- OBJECT %>% filter(COLUMNNAME == CRITERIA)
 ```
 
 ```{r 1.2response}
-vacc_filtered <- vacc %>% filter(Location == "US")
+covid_filtered <- covid %>% filter(reporting_jurisdiction == "Maryland")
 ```
 
 ### 1.3
 
-Write out the `vacc_filtered` object as a CSV file calling it "vacc_filtered.csv", using `write_csv()`:
+Write out the `covid_filtered` object as a CSV file calling it "covid_filtered.csv", using `write_csv()`:
 
 ```{r 1.3response}
-write_csv(vacc_filtered, file = "vacc_filtered.csv")
+write_csv(covid_filtered, file = "covid_filtered.csv")
 ```
 
 
@@ -59,7 +59,7 @@ Copy your code from problem 1.3 and modify it to write to the data directory ins
 ```{r eval = FALSE, label = 'P.1response'}
 getwd()
 dir.create("data")
-write_csv(vacc_filtered, file = "data/vacc_filtered.csv")
+write_csv(covid_filtered, file = "data/covid_filtered.csv")
 ```
 
 ### P.2
