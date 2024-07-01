@@ -1,5 +1,5 @@
 ---
-title: "Data Output Lab - Key"
+title: "Data Output Lab"
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -24,7 +24,6 @@ library(readr)
 ```
 
 ```{r 1.1response}
-
 
 ```
 
