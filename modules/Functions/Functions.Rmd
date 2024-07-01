@@ -403,10 +403,7 @@ or
 ```replace_na({vector}, {single value})```
 
 ```{r warning=FALSE, message=FALSE}
-# Child mortality data
-#co2 <- yearly_co2_emissions 
-
-co2 %>%
+yearly_co2_emissions %>%
   select(country, starts_with("194")) %>%
   mutate(across(
     .cols = c(`1943`, `1944`, `1945`),
