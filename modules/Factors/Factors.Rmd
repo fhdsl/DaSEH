@@ -86,7 +86,7 @@ This dataset is also available in the `dasehr` package.
 #library(dasehr)
 #er_visits_age <- CO_heat_ER_byage
 
-er_visits_age <- read_csv("https://daseh.org/data/CO_ER_heat_visits_by_age_data")
+er_visits_age <- read_csv("https://daseh.org/data/CO_ER_heat_visits_by_age_data.csv")
 er_visits_age
 ```
 
