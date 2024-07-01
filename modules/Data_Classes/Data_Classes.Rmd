@@ -221,12 +221,12 @@ as.numeric(x_fact)
 ## Class conversion in with a dataset
 
 ```{r, results='hide'}
-#library(dasehr)
-covid_ww <- SARS_CoV_2_Wastewater_Data
+library(dasehr)
+covidww <- covid_wastewater
 ```
 
 ```{r}
-head(covid_ww)
+head(covidww)
 ```
 
 ## Class conversion in with a dataset
@@ -234,9 +234,9 @@ head(covid_ww)
 Say we want to change `daily` to be an integer. We would need to use mutate to help us modify that column or create a new column. Let's create a new one so it is easier to see what is happening. 
 
 ```{r}
-covid_ww_updated <- mutate(covid_ww, pop_int= as.integer(population_served))
+covidww_updated <- mutate(covidww, pop_int= as.integer(population_served))
 
-covid_ww_updated %>% select(population_served, pop_int)
+covidww_updated %>% select(population_served, pop_int)
 ```
 
 
@@ -377,15 +377,15 @@ There are functions in case your data have only date, hour and minute (`ymd_hm()
 
 Note dates are always displayed year month day, even if made with `mdy`!
 ```{r}
-covid_ww <- mutate(covid_ww, date_start_formatted = mdy(date_start)) %>% 
+covidww <- mutate(covidww, date_start_formatted = mdy(date_start)) %>% 
   relocate(date_start_formatted, .before = date_end) 
-glimpse(covid_ww)
+glimpse(covidww)
 ```
 ## Once a variable is a date type we can convert to other types
 
 
 ```{r}
-covid_ww %>% mutate(year = year(date_start_formatted)) %>%
+covidww %>% mutate(year = year(date_start_formatted)) %>%
          mutate(month = month(date_start_formatted)) %>%
          relocate(c(year, month), .before = date_end) %>%
   glimpse()
@@ -420,10 +420,10 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
 `as.matrix()` creates a matrix from a data frame or tibble (where all values are the same class).
 
 ```{r,}
-covid_ww_mat <- select(covid_ww, contains("Missouri")) %>%
+covidww_mat <- select(covidww, contains("Missouri")) %>%
   head(n = 3)
-covid_ww_mat
-as.matrix(covid_ww_mat)
+covidww_mat
+as.matrix(covidww_mat)
 ```
 
 ## Matrices
