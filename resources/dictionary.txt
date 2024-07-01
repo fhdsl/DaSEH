@@ -42,6 +42,7 @@ codeexample
 codesmall
 collegial
 CoursePlus
+covid
 Covid
 CoV
 cran
@@ -69,6 +70,7 @@ dropdowns
 econd
 edu
 Epi
+ERs
 esc
 esquisse
 Esquisse
@@ -213,6 +215,7 @@ Rproj
 rpubs
 rstudio
 RStudio
+RStudio's
 Rtools
 Rupshikha
 Sagar
