@@ -22,6 +22,7 @@ Boardings
 Bonferroni
 bp
 BSPH
+byquarter
 CalEnviroScreen
 CDS
 CES
@@ -245,6 +246,7 @@ TRUEs
 TSV
 twodash
 UHS
+ug
 Un
 Uncheck
 Ungroup
