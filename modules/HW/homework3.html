@@ -450,14 +450,7 @@ calculation. Whichever you choose, justify your choice.</li>
 your analysis should depend on your reasoning not how many lines of code
 it takes :)</p>
 </blockquote>
-<blockquote>
-<p>The following questions are not required for full credit, but can
-make up for any points lost on other questions.</p>
-</blockquote>
-</div>
-<div id="bonus-practice" class="section level3">
-<h3><strong>Bonus Practice</strong></h3>
-<p>A. Bring the following dataset into R.</p>
+<p>16. Bring the following dataset into R.</p>
 <ul>
 <li>The dataset is located at: <a href="https://daseh.org/data/asthma.xlsx" class="uri">https://daseh.org/data/asthma.xlsx</a>.</li>
 <li>You should download the associated data.</li>
@@ -466,13 +459,14 @@ make up for any points lost on other questions.</p>
 assign it the name “asthma”.</li>
 <li>Read in the sheet named “Age Group (Years)”.</li>
 </ul>
-<p>B. Rename the column <code>Weighted Number With Current Asthma</code>
-to “asthma_count” using <code>rename()</code>. Replace the original
-“asthma” object by calling the new dataset “asthma”.</p>
-<p>C. Separate <code>Percent (SE)</code> into two separate columns:
+<p>17. Rename the column
+<code>Weighted Number With Current Asthma</code> to “asthma_count” using
+<code>rename()</code>. Replace the original “asthma” object by calling
+the new dataset “asthma”.</p>
+<p>18. Separate <code>Percent (SE)</code> into two separate columns:
 “percent” and “SE” using the <code>separate()</code> function. Replace
 the original “asthma” object by calling the new dataset “asthma”.</p>
-<p>D. Remove the parentheses around the numbers in the new SE column.
+<p>19. Remove the parentheses around the numbers in the new SE column.
 You should use a combination of <code>str_replace()</code>,
 <code>pull()</code> (because stringr package functions work on vectors
 not dataframes!) and <code>mutate()</code>. Replace the original
@@ -485,9 +479,9 @@ not dataframes!) and <code>mutate()</code>. Replace the original
 <li>The <code>replacement =</code> for both can be empty quotation
 marks: “”</li>
 </ul>
-<p>E. Determine the class of “percent” and “SE”. Can you take the mean
+<p>20. Determine the class of “percent” and “SE”. Can you take the mean
 values? Why or why not?</p>
-<p>F. Use <code>as.numeric()</code> to convert “percent” and “SE” to
+<p>21. Use <code>as.numeric()</code> to convert “percent” and “SE” to
 numeric class. Calculate the mean for both.</p>
 </div>
 
