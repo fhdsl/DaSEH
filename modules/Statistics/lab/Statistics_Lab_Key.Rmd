@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### 1.1
 
-Load the libraries needed in this lab. Then, read in the CalEnviroScreen data from `dasehr` package. Assign it to the "ces" variable. You can also find the data here: https://daseh.org/data/CalEnvironmentalScreen_data.csv
+Load the libraries needed in this lab. Then, read in the CalEnviroScreen data from `dasehr` package. Assign it to the "ces" variable. You can also find the data at "https://daseh.org/data/CalEnvironmentalScreen_data.csv"
 
 
 ```{r message = FALSE}
