@@ -38,16 +38,7 @@ return(result)
 ```
 
 ```{r 1.1response}
-nums <- c(2, 7, 21, 30, 90)
 
-sum_squared <- function(x) sum(x)^2
-sum_squared(x = nums)
-
-sum_squared <- function(x) {
-  out <- sum(x)^2
-  return(out)
-}
-sum_squared(x = nums)
 ```
 
 ### 1.2
@@ -55,11 +46,7 @@ sum_squared(x = nums)
 Create a function that takes two arguments, (1) a vector and (2) a numeric value. This function tests whether the number (2) is contained within the vector (1). **Hint**: use `%in%`. Call it `has_n`. Test your function on the vector `c(2,7,21,30,90)` and number `21` - you should get the answer TRUE.
 
 ```{r 1.2response}
-nums <- c(2, 7, 21, 30, 90)
-a_num <- 21
 
-has_n <- function(x, n) n %in% x
-has_n(x = nums, n = a_num)
 ```
 
 ### 1.3
@@ -67,11 +54,7 @@ has_n(x = nums, n = a_num)
 Amend the function `has_n` from question 1.2 so that it takes a default value of `21` for the numeric argument.
 
 ```{r 1.3response}
-nums <- c(2, 7, 21, 30, 90)
-a_num <- 21
 
-has_n <- function(x, n = 21) n %in% x
-has_n(x = nums)
 ```
 
 ### 1.4
@@ -79,8 +62,7 @@ has_n(x = nums)
 Create a new number `b_num` that is not contained with `nums`. Use your updated `has_n` function with the default value and add `b_num` as the `n` argument when calling the function. What is the outcome?
 
 ```{r 1.4response}
-b_num <- 11
-has_n(x = nums, n = b_num)
+
 ```
 
 
@@ -88,7 +70,7 @@ has_n(x = nums, n = b_num)
 
 ### 2.1
 
-Read in the CalEnviroScreen data from https://daseh.org/data/CalEnvironmentalScreen_data.csv. Assign the data the name "ces".
+Read in the CalEnviroScreen from https://daseh.org/data/CalEnviroScreen_data.csv. Assign the data the name "ces".
 
 ```{r message = FALSE, label = '2.1response'}
 

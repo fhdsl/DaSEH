@@ -3117,7 +3117,7 @@ div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -3128,7 +3128,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -3440,27 +3440,36 @@ loud(word = &quot;hooray!&quot;)</pre>
 
 <pre class = 'prettyprint lang-r'>get_row &lt;- function(dat, row) dat %&gt;% filter(row_number() == row)
 
-cars &lt;- read_kaggle()
-cars_1_8 &lt;- cars %&gt;% select(1:8)</pre>
+ces &lt;- calenviroscreen
+ces_1_8 &lt;- ces %&gt;% select(1:8)</pre>
 
-<pre class = 'prettyprint lang-r'>get_row(dat = cars, row = 10)</pre>
+<pre class = 'prettyprint lang-r'>get_row(dat = ces, row = 10)</pre>
 
-<pre ># A tibble: 1 × 34
-  RefId IsBadBuy PurchDate Auction VehYear VehicleAge Make  Model Trim  SubModel
-  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   
-1    10        0 12/7/2009 ADESA      2007          2 FORD  FIVE… SEL   4D SEDA…
-# ℹ 24 more variables: Color &lt;chr&gt;, Transmission &lt;chr&gt;, WheelTypeID &lt;chr&gt;,
-#   WheelType &lt;chr&gt;, VehOdo &lt;dbl&gt;, Nationality &lt;chr&gt;, Size &lt;chr&gt;,
-#   TopThreeAmericanName &lt;chr&gt;, MMRAcquisitionAuctionAveragePrice &lt;chr&gt;,
-#   MMRAcquisitionAuctionCleanPrice &lt;chr&gt;,
-#   MMRAcquisitionRetailAveragePrice &lt;chr&gt;,
-#   MMRAcquisitonRetailCleanPrice &lt;chr&gt;, MMRCurrentAuctionAveragePrice &lt;chr&gt;,
-#   MMRCurrentAuctionCleanPrice &lt;chr&gt;, MMRCurrentRetailAveragePrice &lt;chr&gt;, …</pre>
+<pre ># A tibble: 1 × 67
+  CensusTract CaliforniaCounty   ZIP Longitude Latitude ApproxLocation
+        &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
+1  6001401000 &quot;Alameda &quot;       94608     -122.     37.8 Oakland       
+# ℹ 61 more variables: CES4.0Score &lt;dbl&gt;, CES4.0Percentile &lt;dbl&gt;,
+#   CES4.0PercRange &lt;chr&gt;, Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;,
+#   PM2.5.Pctl &lt;dbl&gt;, DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
+#   DrinkingWaterPctl &lt;dbl&gt;, Lead &lt;dbl&gt;, LeadPctl &lt;dbl&gt;, Pesticides &lt;dbl&gt;,
+#   PesticidesPctl &lt;dbl&gt;, ToxRelease &lt;dbl&gt;, ToxReleasePctl &lt;dbl&gt;,
+#   Traffic &lt;dbl&gt;, TrafficPctl &lt;dbl&gt;, CleanupSites &lt;dbl&gt;,
+#   CleanupSitesPctl &lt;dbl&gt;, GroundwaterThreats &lt;dbl&gt;, …</pre>
 
-<pre class = 'prettyprint lang-r'>get_row(dat = iris, row = 4)</pre>
+<pre class = 'prettyprint lang-r'>get_row(dat = ces, row = 4)</pre>
 
-<pre >  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          4.6         3.1          1.5         0.2  setosa</pre>
+<pre ># A tibble: 1 × 67
+  CensusTract CaliforniaCounty   ZIP Longitude Latitude ApproxLocation
+        &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
+1  6001400400 &quot;Alameda &quot;       94609     -122.     37.8 Oakland       
+# ℹ 61 more variables: CES4.0Score &lt;dbl&gt;, CES4.0Percentile &lt;dbl&gt;,
+#   CES4.0PercRange &lt;chr&gt;, Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;,
+#   PM2.5.Pctl &lt;dbl&gt;, DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
+#   DrinkingWaterPctl &lt;dbl&gt;, Lead &lt;dbl&gt;, LeadPctl &lt;dbl&gt;, Pesticides &lt;dbl&gt;,
+#   PesticidesPctl &lt;dbl&gt;, ToxRelease &lt;dbl&gt;, ToxReleasePctl &lt;dbl&gt;,
+#   Traffic &lt;dbl&gt;, TrafficPctl &lt;dbl&gt;, CleanupSites &lt;dbl&gt;,
+#   CleanupSitesPctl &lt;dbl&gt;, GroundwaterThreats &lt;dbl&gt;, …</pre>
 
 </article></slide><slide class=""><hgroup><h2>Functions for tibbles</h2></hgroup><article  id="functions-for-tibbles-1">
 
@@ -3472,12 +3481,12 @@ cars_1_8 &lt;- cars %&gt;% select(1:8)</pre>
     select(all_of(col))
 }
 
-get_index(dat = cars, row = 10, col = 8)</pre>
+get_index(dat = ces, row = 10, col = 7)</pre>
 
 <pre ># A tibble: 1 × 1
-  Model       
-  &lt;chr&gt;       
-1 FIVE HUNDRED</pre>
+  CES4.0Score
+        &lt;dbl&gt;
+1        43.7</pre>
 
 </article></slide><slide class=""><hgroup><h2>Functions for tibbles</h2></hgroup><article  id="functions-for-tibbles-2">
 
@@ -3489,12 +3498,12 @@ get_index(dat = cars, row = 10, col = 8)</pre>
     select(all_of(col))
 }
 
-get_top(dat = cars)</pre>
+get_top(dat = ces)</pre>
 
 <pre ># A tibble: 1 × 1
-  RefId
-  &lt;dbl&gt;
-1     1</pre>
+  CensusTract
+        &lt;dbl&gt;
+1  6001400100</pre>
 
 </article></slide><slide class=""><hgroup><h2>Functions for tibbles</h2></hgroup><article  id="functions-for-tibbles-3">
 
@@ -3506,41 +3515,22 @@ get_top(dat = cars)</pre>
   return(my_data_out)
 }
 
-clean_dataset(dataset = mtcars, col_name = &quot;cyl&quot;)</pre>
+clean_dataset(dataset = ces, col_name = &quot;CES4.0Score&quot;)</pre>
 
-<pre >                    cyl
-Mazda RX4             6
-Mazda RX4 Wag         6
-Datsun 710            4
-Hornet 4 Drive        6
-Hornet Sportabout     8
-Valiant               6
-Duster 360            8
-Merc 240D             4
-Merc 230              4
-Merc 280              6
-Merc 280C             6
-Merc 450SE            8
-Merc 450SL            8
-Merc 450SLC           8
-Cadillac Fleetwood    8
-Lincoln Continental   8
-Chrysler Imperial     8
-Fiat 128              4
-Honda Civic           4
-Toyota Corolla        4
-Toyota Corona         4
-Dodge Challenger      8
-AMC Javelin           8
-Camaro Z28            8
-Pontiac Firebird      8
-Fiat X1-9             4
-Porsche 914-2         4
-Lotus Europa          4
-Ford Pantera L        8
-Ferrari Dino          6
-Maserati Bora         8
-Volvo 142E            4</pre>
+<pre ># A tibble: 8,035 × 1
+   CES4.0Score
+         &lt;dbl&gt;
+ 1        4.85
+ 2        4.88
+ 3       11.2 
+ 4       12.4 
+ 5       16.7 
+ 6       20.0 
+ 7       36.7 
+ 8       37.1 
+ 9       40.7 
+10       43.7 
+# ℹ 8,025 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summary</h2></hgroup><article  id="summary">
 
@@ -3576,61 +3566,69 @@ Volvo 142E            4</pre>
 
 <p>You can also pipe into your function.</p>
 
-<pre class = 'prettyprint lang-r'>head(iris, n = 2)</pre>
+<pre class = 'prettyprint lang-r'>er_visits &lt;- CO_heat_ER
 
-<pre >  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.1         3.5          1.4         0.2  setosa
-2          4.9         3.0          1.4         0.2  setosa</pre>
+head(er_visits, n = 2)</pre>
 
-<pre class = 'prettyprint lang-r'>sapply(iris, class)</pre>
+<pre ># A tibble: 2 × 7
+  county     rate lower95cl upper95cl visits  year gender
+  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+1 Statewide  5.64      4.70      6.59    140  2011 Female
+2 Statewide  7.39      6.30      8.47    183  2011 Male  </pre>
 
-<pre >Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-   &quot;numeric&quot;    &quot;numeric&quot;    &quot;numeric&quot;    &quot;numeric&quot;     &quot;factor&quot; </pre>
+<pre class = 'prettyprint lang-r'>sapply(er_visits, class)</pre>
 
-<pre class = 'prettyprint lang-r'>iris %&gt;% sapply(class)</pre>
+<pre >     county        rate   lower95cl   upper95cl      visits        year 
+&quot;character&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot; 
+     gender 
+&quot;character&quot; </pre>
 
-<pre >Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
-   &quot;numeric&quot;    &quot;numeric&quot;    &quot;numeric&quot;    &quot;numeric&quot;     &quot;factor&quot; </pre>
+<pre class = 'prettyprint lang-r'>er_visits %&gt;% sapply(class)</pre>
+
+<pre >     county        rate   lower95cl   upper95cl      visits        year 
+&quot;character&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot; 
+     gender 
+&quot;character&quot; </pre>
 
 </article></slide><slide class=""><hgroup><h2>Using your custom functions: <code>sapply()</code></h2></hgroup><article  id="using-your-custom-functions-sapply-1">
 
-<pre class = 'prettyprint lang-r'>select(cars, VehYear:VehicleAge) %&gt;% head()</pre>
+<pre class = 'prettyprint lang-r'>select(er_visits, rate:upper95cl) %&gt;% head()</pre>
 
-<pre ># A tibble: 6 × 2
-  VehYear VehicleAge
-    &lt;dbl&gt;      &lt;dbl&gt;
-1    2006          3
-2    2004          5
-3    2005          4
-4    2004          5
-5    2005          4
-6    2004          5</pre>
+<pre ># A tibble: 6 × 3
+   rate lower95cl upper95cl
+  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1  5.64      4.70      6.59
+2  7.39      6.30      8.47
+3  6.51      5.80      7.23
+4  5.64      4.72      6.57
+5  7.56      6.48      8.65
+6  6.58      5.88      7.29</pre>
 
-<pre class = 'prettyprint lang-r'>select(cars, VehYear:VehicleAge) %&gt;%
+<pre class = 'prettyprint lang-r'>select(er_visits, rate:upper95cl) %&gt;%
   sapply(times_2) %&gt;%
   head()</pre>
 
-<pre >     VehYear VehicleAge
-[1,]    4012          6
-[2,]    4008         10
-[3,]    4010          8
-[4,]    4008         10
-[5,]    4010          8
-[6,]    4008         10</pre>
+<pre >         rate lower95cl upper95cl
+[1,] 11.28546  9.395283  13.17564
+[2,] 14.77374 12.597645  16.94983
+[3,] 13.02989 11.593179  14.46660
+[4,] 11.28268  9.430621  13.13474
+[5,] 15.12880 12.959418  17.29817
+[6,] 13.16714 11.750214  14.58407</pre>
 
 </article></slide><slide class=""><hgroup><h2>Using your custom functions &ldquo;on the fly&rdquo; to iterate</h2></hgroup><article  id="using-your-custom-functions-on-the-fly-to-iterate">
 
-<pre class = 'prettyprint lang-r'>select(cars, VehYear:VehicleAge) %&gt;%
+<pre class = 'prettyprint lang-r'>select(er_visits, rate:upper95cl) %&gt;%
   sapply(function(x) x / 1000) %&gt;%
   head()</pre>
 
-<pre >     VehYear VehicleAge
-[1,]   2.006      0.003
-[2,]   2.004      0.005
-[3,]   2.005      0.004
-[4,]   2.004      0.005
-[5,]   2.005      0.004
-[6,]   2.004      0.005</pre>
+<pre >            rate   lower95cl   upper95cl
+[1,] 0.005642730 0.004697642 0.006587819
+[2,] 0.007386868 0.006298822 0.008474914
+[3,] 0.006514945 0.005796590 0.007233300
+[4,] 0.005641341 0.004715311 0.006567371
+[5,] 0.007564398 0.006479709 0.008649086
+[6,] 0.006583570 0.005875107 0.007292033</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>across</h2></hgroup><article  id="across">
 
@@ -3638,15 +3636,15 @@ Volvo 142E            4</pre>
 
 <p>Already know how to use functions to modify columns using <code>mutate()</code> or calculate summary statistics using <code>summarize()</code>.</p>
 
-<pre class = 'prettyprint lang-r'>cars %&gt;%
-  mutate(VehOdo_round = round(VehOdo, -3)) %&gt;%
-  summarize(max_Odo_round = max(VehOdo_round),
-            max_Odo = max(VehOdo))</pre>
+<pre class = 'prettyprint lang-r'>er_visits %&gt;%
+  mutate(rate_round = round(rate, 2)) %&gt;%
+  summarize(max_rate_round = max(rate_round, na.rm = T),
+            max_rate = max(rate, na.rm = T))</pre>
 
 <pre ># A tibble: 1 × 2
-  max_Odo_round max_Odo
-          &lt;dbl&gt;   &lt;dbl&gt;
-1        116000  115717</pre>
+  max_rate_round max_rate
+           &lt;dbl&gt;    &lt;dbl&gt;
+1           89.3     89.3</pre>
 
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr">
 
@@ -3668,110 +3666,110 @@ Volvo 142E            4</pre>
 
 <p>Combining with <code>summarize()</code></p>
 
-<pre class = 'prettyprint lang-r'>cars_dbl &lt;- cars %&gt;% select(Make, starts_with(&quot;Veh&quot;))
+<pre class = 'prettyprint lang-r'>ces_dbl &lt;- ces %&gt;% select(CaliforniaCounty, CES4.0Score, CES4.0Percentile)
 
-cars_dbl %&gt;%
-  summarize(across(.cols = everything(), .fns = mean))</pre>
+ces_dbl %&gt;%
+  summarize(across(.cols = everything(), .fns = mean, na.rm=T))</pre>
 
-<pre ># A tibble: 1 × 5
-   Make VehYear VehicleAge VehOdo VehBCost
-  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-1    NA   2005.       4.18 71500.    6731.</pre>
+<pre ># A tibble: 1 × 3
+  CaliforniaCounty CES4.0Score CES4.0Percentile
+             &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;
+1               NA        28.3             50.0</pre>
 
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-2">
 
 <p>Can use with other tidyverse functions like <code>group_by</code>!</p>
 
-<pre class = 'prettyprint lang-r'>cars_dbl %&gt;%
-  group_by(Make) %&gt;%
-  summarize(across(.cols = everything(), .fns = mean))</pre>
+<pre class = 'prettyprint lang-r'>ces_dbl %&gt;%
+  group_by(CaliforniaCounty) %&gt;%
+  summarize(across(.cols = everything(), .fns = mean, na.rm=T))</pre>
 
-<pre ># A tibble: 33 × 5
-   Make      VehYear VehicleAge VehOdo VehBCost
-   &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
- 1 ACURA       2003.       6.52 81732.    9039.
- 2 BUICK       2004.       5.65 76238.    6169.
- 3 CADILLAC    2004.       5.24 73770.   10958.
- 4 CHEVROLET   2006.       3.97 73390.    6835.
- 5 CHRYSLER    2006.       3.65 66814.    6507.
- 6 DODGE       2006.       3.75 68261.    7047.
- 7 FORD        2005.       4.75 76749.    6403.
- 8 GMC         2004.       5.61 79273.    8342.
- 9 HONDA       2004.       5.33 77877.    8350.
-10 HUMMER      2006        3    70809    11920 
-# ℹ 23 more rows</pre>
+<pre ># A tibble: 58 × 3
+   CaliforniaCounty CES4.0Score CES4.0Percentile
+   &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;
+ 1 &quot;Alameda &quot;              22.9             41.3
+ 2 &quot;Alpine &quot;               13.6             22  
+ 3 &quot;Amador &quot;               20.7             38.8
+ 4 &quot;Butte &quot;                21.7             39.8
+ 5 &quot;Calaveras &quot;            16.1             28.0
+ 6 &quot;Colusa &quot;               27.0             52.2
+ 7 &quot;Contra Costa&quot;          21.0             36.7
+ 8 &quot;Del Norte&quot;             21.4             40.3
+ 9 &quot;El Dorado&quot;             10.2             14.6
+10 &quot;Fresno &quot;               40.9             69.5
+# ℹ 48 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-3">
 
 <p>To add arguments to functions, may need to use anonymous function. In this syntax, the shorthand <code>\(x)</code> is equivalent to <code>function(x)</code>.</p>
 
-<pre class = 'prettyprint lang-r'>cars_dbl %&gt;%
-  group_by(Make) %&gt;%
+<pre class = 'prettyprint lang-r'>ces_dbl %&gt;%
+  group_by(CaliforniaCounty) %&gt;%
   summarize(across(.cols = everything(), .fns = \(x) mean(x, na.rm = TRUE)))</pre>
 
-<pre ># A tibble: 33 × 5
-   Make      VehYear VehicleAge VehOdo VehBCost
-   &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
- 1 ACURA       2003.       6.52 81732.    9039.
- 2 BUICK       2004.       5.65 76238.    6169.
- 3 CADILLAC    2004.       5.24 73770.   10958.
- 4 CHEVROLET   2006.       3.97 73390.    6835.
- 5 CHRYSLER    2006.       3.65 66814.    6507.
- 6 DODGE       2006.       3.75 68261.    7047.
- 7 FORD        2005.       4.75 76749.    6403.
- 8 GMC         2004.       5.61 79273.    8342.
- 9 HONDA       2004.       5.33 77877.    8350.
-10 HUMMER      2006        3    70809    11920 
-# ℹ 23 more rows</pre>
+<pre ># A tibble: 58 × 3
+   CaliforniaCounty CES4.0Score CES4.0Percentile
+   &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;
+ 1 &quot;Alameda &quot;              22.9             41.3
+ 2 &quot;Alpine &quot;               13.6             22  
+ 3 &quot;Amador &quot;               20.7             38.8
+ 4 &quot;Butte &quot;                21.7             39.8
+ 5 &quot;Calaveras &quot;            16.1             28.0
+ 6 &quot;Colusa &quot;               27.0             52.2
+ 7 &quot;Contra Costa&quot;          21.0             36.7
+ 8 &quot;Del Norte&quot;             21.4             40.3
+ 9 &quot;El Dorado&quot;             10.2             14.6
+10 &quot;Fresno &quot;               40.9             69.5
+# ℹ 48 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-4">
 
 <p>Using different <code>tidyselect()</code> options (e.g., <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code>)</p>
 
-<pre class = 'prettyprint lang-r'>cars_dbl %&gt;%
-  group_by(Make) %&gt;%
-  summarize(across(.cols = starts_with(&quot;Veh&quot;), .fns = mean))</pre>
+<pre class = 'prettyprint lang-r'>ces_dbl %&gt;%
+  group_by(CaliforniaCounty) %&gt;%
+  summarize(across(.cols = contains(&quot;Perc&quot;), .fns = mean))</pre>
 
-<pre ># A tibble: 33 × 5
-   Make      VehYear VehicleAge VehOdo VehBCost
-   &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
- 1 ACURA       2003.       6.52 81732.    9039.
- 2 BUICK       2004.       5.65 76238.    6169.
- 3 CADILLAC    2004.       5.24 73770.   10958.
- 4 CHEVROLET   2006.       3.97 73390.    6835.
- 5 CHRYSLER    2006.       3.65 66814.    6507.
- 6 DODGE       2006.       3.75 68261.    7047.
- 7 FORD        2005.       4.75 76749.    6403.
- 8 GMC         2004.       5.61 79273.    8342.
- 9 HONDA       2004.       5.33 77877.    8350.
-10 HUMMER      2006        3    70809    11920 
-# ℹ 23 more rows</pre>
+<pre ># A tibble: 58 × 2
+   CaliforniaCounty CES4.0Percentile
+   &lt;chr&gt;                       &lt;dbl&gt;
+ 1 &quot;Alameda &quot;                   NA  
+ 2 &quot;Alpine &quot;                    22  
+ 3 &quot;Amador &quot;                    38.8
+ 4 &quot;Butte &quot;                     39.8
+ 5 &quot;Calaveras &quot;                 NA  
+ 6 &quot;Colusa &quot;                    52.2
+ 7 &quot;Contra Costa&quot;               36.7
+ 8 &quot;Del Norte&quot;                  40.3
+ 9 &quot;El Dorado&quot;                  14.6
+10 &quot;Fresno &quot;                    NA  
+# ℹ 48 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-5">
 
 <p>Combining with <code>mutate()</code>: rounding to the nearest power of 10 (with negative digits value)</p>
 
-<pre class = 'prettyprint lang-r'>cars_dbl %&gt;%
+<pre class = 'prettyprint lang-r'>ces_dbl %&gt;%
   mutate(across(
-    .cols = starts_with(&quot;Veh&quot;),
+    .cols = starts_with(&quot;CES&quot;),
     .fns = round,
-    digits = -3
+    digits = 3
   ))</pre>
 
-<pre ># A tibble: 72,983 × 5
-   Make       VehYear VehicleAge VehOdo VehBCost
-   &lt;chr&gt;        &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
- 1 MAZDA         2000          0  89000     7000
- 2 DODGE         2000          0  94000     8000
- 3 DODGE         2000          0  74000     5000
- 4 DODGE         2000          0  66000     4000
- 5 FORD          2000          0  69000     4000
- 6 MITSUBISHI    2000          0  81000     6000
- 7 KIA           2000          0  65000     4000
- 8 FORD          2000          0  66000     4000
- 9 KIA           2000          0  50000     6000
-10 FORD          2000          0  85000     8000
-# ℹ 72,973 more rows</pre>
+<pre ># A tibble: 8,035 × 3
+   CaliforniaCounty CES4.0Score CES4.0Percentile
+   &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;
+ 1 &quot;Alameda &quot;              4.85             2.8 
+ 2 &quot;Alameda &quot;              4.88             2.87
+ 3 &quot;Alameda &quot;             11.2             15.9 
+ 4 &quot;Alameda &quot;             12.4             19.0 
+ 5 &quot;Alameda &quot;             16.7             29.7 
+ 6 &quot;Alameda &quot;             20.0             37.6 
+ 7 &quot;Alameda &quot;             36.7             70.1 
+ 8 &quot;Alameda &quot;             37.1             70.7 
+ 9 &quot;Alameda &quot;             40.7             76.2 
+10 &quot;Alameda &quot;             43.7             80.4 
+# ℹ 8,025 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-6" class="smaller">
 
@@ -3779,10 +3777,7 @@ cars_dbl %&gt;%
 
 <p><code>replace_na({data frame}, {list of values})</code> or <code>replace_na({vector}, {single value})</code></p>
 
-<pre class = 'prettyprint lang-r'># Child mortality data
-mort &lt;- read_mortality() %&gt;% rename(country = `...1`)
-
-mort %&gt;%
+<pre class = 'prettyprint lang-r'>yearly_co2_emissions %&gt;%
   select(country, starts_with(&quot;194&quot;)) %&gt;%
   mutate(across(
     .cols = c(`1943`, `1944`, `1945`),
@@ -3790,20 +3785,21 @@ mort %&gt;%
     replace = 0
   ))</pre>
 
-<pre ># A tibble: 197 × 11
-   country `1940` `1941` `1942` `1943` `1944` `1945` `1946` `1947` `1948` `1949`
-   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Afghan… NA     NA     NA      0      0      0     NA     NA     NA     NA    
- 2 Albania  1.53   1.31   1.48   1.46   1.43   1.40   1.37   1.41   1.37   1.34 
- 3 Algeria NA     NA     NA      0      0      0     NA     NA     NA     NA    
- 4 Angola   4.46   4.46   4.46   4.34   4.34   4.34   4.33   4.22   4.22   4.21 
- 5 Argent…  0.641  0.603  0.602  0.558  0.551  0.510  0.503  0.496  0.494  0.492
- 6 Armenia NA     NA     NA      0      0      0     NA     NA     NA     NA    
- 7 Aruba   NA     NA     NA      0      0      0     NA     NA     NA     NA    
- 8 Austra…  0.263  0.275  0.276  0.299  0.260  0.271  0.295  0.279  0.271  0.271
- 9 Austria  0.504  0.474  0.417  0.389  0.360  0.311  0.311  0.312  0.274  0.274
-10 Azerba… NA     NA     NA      0      0      0     NA     NA     NA     NA    
-# ℹ 187 more rows</pre>
+<pre ># A tibble: 192 × 11
+   country        `1940` `1941` `1942` `1943` `1944` `1945` `1946` `1947` `1948`
+   &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 Afghanistan        NA     NA     NA      0      0      0     NA     NA     NA
+ 2 Albania           693    627    744    462    154    121    484    928    704
+ 3 Algeria           238    312    499    469    499    616    763    744    803
+ 4 Andorra            NA     NA     NA      0      0      0     NA     NA     NA
+ 5 Angola             NA     NA     NA      0      0      0     NA     NA     NA
+ 6 Antigua and B…     NA     NA     NA      0      0      0     NA     NA     NA
+ 7 Argentina       15900  14000  13500  14100  14000  13700  13700  14500  17400
+ 8 Armenia           848    745    513    655    613    649    730    878    935
+ 9 Australia       29100  34600  36500  35000  34200  32700  35500  38000  38500
+10 Austria          7350   7980   8560   9620   9400   4570  12800  17600  24500
+# ℹ 182 more rows
+# ℹ 1 more variable: `1949` &lt;dbl&gt;</pre>
 
 </article></slide><slide class=""><hgroup><h2>Use custom functions within <code>mutate</code> and <code>across</code></h2></hgroup><article  id="use-custom-functions-within-mutate-and-across">
 
