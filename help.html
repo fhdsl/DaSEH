@@ -409,16 +409,16 @@ existing object or creating a new object.</p>
 <p>Here we are creating a new object from an existing one:</p>
 <pre class="r"><code>new_rivers &lt;- sample(rivers, 5)
 new_rivers</code></pre>
-<pre><code>## [1]  280  250 2533  280  424</code></pre>
+<pre><code>## [1] 900 890 390 500 380</code></pre>
 <p>Using just this will only print the result and not actually change
 <code>new_rivers</code>:</p>
 <pre class="r"><code>new_rivers + 1</code></pre>
-<pre><code>## [1]  281  251 2534  281  425</code></pre>
+<pre><code>## [1] 901 891 391 501 381</code></pre>
 <p>If we want to modify <code>new_rivers</code> and save that modified
 version, then we need to reassign <code>new_rivers</code> like so:</p>
 <pre class="r"><code>new_rivers &lt;- new_rivers + 1
 new_rivers</code></pre>
-<pre><code>## [1]  281  251 2534  281  425</code></pre>
+<pre><code>## [1] 901 891 391 501 381</code></pre>
 <p>If we forget to reassign this can cause subsequent steps to not work
 as expected because we will not be working with the data that has been
 modified.</p>
@@ -488,7 +488,7 @@ you never created <code>rivers2</code> and try to modify it like so:</p>
 operator:</p>
 <pre class="r"><code>rivers2 &lt;- new_rivers + 1
 rivers2</code></pre>
-<pre><code>## [1]  282  252 2535  282  426</code></pre>
+<pre><code>## [1] 902 892 392 502 382</code></pre>
 <hr />
 </div>
 <div id="error-unexpected-in-error-unexpected-in-error-unexpected-x-in"

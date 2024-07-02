@@ -357,97 +357,82 @@ display: none;
 <h1>Part 1</h1>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>Load the libraries needed in this lab. Then, read in the following
-child mortality data using <code>read_mortality()</code> function from
-<code>jhur</code> package. Assign it to the “mort” variable. Change its
-first column name from <code>...1</code> into <code>country</code>. You
-can also find the data here: <a href="https://daseh.org/data/mortality.csv" class="uri">https://daseh.org/data/mortality.csv</a></p>
-<p>Note that the data has lots of <code>NA</code> values - don’t worry
-if you see that.</p>
+<p>Load the libraries needed in this lab. Then, read in the
+CalEnviroScreen data from <code>dasehr</code> package. Assign it to the
+“ces” variable. You can also find the data at <a href="https://daseh.org/data/CalEnviroScreen_data.csv" class="uri">https://daseh.org/data/CalEnviroScreen_data.csv</a></p>
 <pre class="r"><code>library(dplyr)
-library(jhur)
+library(dasehr)
 library(broom)</code></pre>
-<pre class="r"><code>mort &lt;- read_mortality()</code></pre>
-<pre><code>## New names:
-## Rows: 197 Columns: 255
-## ── Column specification
-## ──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
-## (1): ...1 dbl (254): 1760, 1761, 1762, 1763, 1764, 1765, 1766, 1767, 1768,
-## 1769, 1770,...
-## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
-## Specify the column types or set `show_col_types = FALSE` to quiet this message.
-## • `` -&gt; `...1`</code></pre>
-<pre class="r"><code>mort &lt;- mort %&gt;%
-  rename(country = `...1`)</code></pre>
+<pre class="r"><code>ces &lt;- calenviroscreen</code></pre>
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
 <p>Compute the correlation (with <code>cor</code>) between the
-<code>2006</code> and <code>2007</code> mortality variables. (No need to
-save this in an object. Just display the result to the screen.) Use the
+<code>PM2.5</code> and <code>Ozone</code> variables. (No need to save
+this in an object. Just display the result to the screen.) Use the
 <code>pull()</code> function to first extract these columns. To use a
 column name in <code>pull()</code> that starts with a number, surround
 it with backticks. Then, use the <code>cor</code> function.</p>
-<pre class="r"><code>x &lt;- pull(mort, `2006`)
-y &lt;- pull(mort, `2007`)
+<pre class="r"><code>x &lt;- pull(ces, PM2.5)
+y &lt;- pull(ces, Ozone)
 
 cor(x, y)</code></pre>
-<pre><code>## [1] 0.9995124</code></pre>
+<pre><code>## [1] 0.4242936</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
 <p>Compute the correlation (with <code>cor</code>) between the
-<code>1980</code>, <code>1990</code>, <code>2000</code>, and
-<code>2010</code> mortality variables. (No need to save this in an
-object. Just display the result to the screen.) Use
-<code>select()</code> function to first subset the data frame to keep
-the four columns only. To use a column name in <code>select()</code>
-that starts with a number, surround it with backticks. How does this
-change when we use the <code>use = &quot;complete.obs&quot;</code> argument?</p>
-<pre class="r"><code>mort_sub &lt;-
-  mort %&gt;%
-  select(`1980`, `1990`, `2000`, `2010`)
+<code>DieselPM</code>, <code>Lead</code>, <code>Traffic</code>, and
+<code>Asthma</code> variables. (No need to save this in an object. Just
+display the result to the screen.) Use <code>select()</code> function to
+first subset the data frame to keep the four columns only. To use a
+column name in <code>select()</code> that starts with a number, surround
+it with backticks. Does this change when we use the
+<code>use = &quot;complete.obs&quot;</code> argument?</p>
+<pre class="r"><code>ces_sub &lt;-
+  ces %&gt;%
+  select(DieselPM, Lead, Traffic, Asthma)
 
-cor(mort_sub)</code></pre>
-<pre><code>##           1980      1990      2000 2010
-## 1980 1.0000000 0.9601540 0.8888411   NA
-## 1990 0.9601540 1.0000000 0.9613842   NA
-## 2000 0.8888411 0.9613842 1.0000000   NA
-## 2010        NA        NA        NA    1</code></pre>
-<pre class="r"><code>cor(mort_sub, use = &quot;complete.obs&quot;)</code></pre>
-<pre><code>##           1980      1990      2000      2010
-## 1980 1.0000000 0.9596846 0.8877433 0.8468284
-## 1990 0.9596846 1.0000000 0.9610269 0.9247192
-## 2000 0.8877433 0.9610269 1.0000000 0.9862345
-## 2010 0.8468284 0.9247192 0.9862345 1.0000000</code></pre>
+cor(ces_sub)</code></pre>
+<pre><code>##          DieselPM Lead Traffic Asthma
+## DieselPM        1   NA      NA     NA
+## Lead           NA    1      NA     NA
+## Traffic        NA   NA       1     NA
+## Asthma         NA   NA      NA      1</code></pre>
+<pre class="r"><code>cor(ces_sub, use = &quot;complete.obs&quot;)</code></pre>
+<pre><code>##           DieselPM       Lead     Traffic      Asthma
+## DieselPM 1.0000000 0.25051463  0.34561061  0.14494038
+## Lead     0.2505146 1.00000000  0.08835065  0.41469905
+## Traffic  0.3456106 0.08835065  1.00000000 -0.03962609
+## Asthma   0.1449404 0.41469905 -0.03962609  1.00000000</code></pre>
 </div>
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
 <p>Perform a t-test to determine if there is evidence of a difference
-between child mortality in <code>1987</code> versus <code>2007</code>.
-Use the <code>pull()</code> function to extract these columns. Print the
-results using the <code>tidy</code> function from the <code>broom</code>
-package.</p>
-<pre class="r"><code>x &lt;- pull(mort, `1987`)
-y &lt;- pull(mort, `2007`)
+between lead exposure burden (<code>Lead</code>) and poverty burden
+(<code>Poverty</code>). Use the <code>pull()</code> function to extract
+these columns. Print the results using the <code>tidy</code> function
+from the <code>broom</code> package.</p>
+<pre class="r"><code>x &lt;- pull(ces, Lead)
+y &lt;- pull(ces, Poverty)
 
 t.test(x, y)</code></pre>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
 ## data:  x and y
-## t = 4.8283, df = 348.16, p-value = 2.065e-06
+## t = 53.389, df = 15084, p-value &lt; 2.2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  0.1991780 0.4729767
+##  16.98224 18.27674
 ## sample estimates:
 ## mean of x mean of y 
-## 0.7700633 0.4339860</code></pre>
+##  48.97170  31.34221</code></pre>
 <pre class="r"><code>tidy(t.test(x, y))</code></pre>
 <pre><code>## # A tibble: 1 × 10
-##   estimate estimate1 estimate2 statistic    p.value parameter conf.low conf.high
-##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1    0.336     0.770     0.434      4.83 0.00000207      348.    0.199     0.473
+##   estimate estimate1 estimate2 statistic p.value parameter conf.low conf.high
+##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1     17.6      49.0      31.3      53.4       0    15084.     17.0      18.3
 ## # ℹ 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 </div>
 </div>
@@ -456,30 +441,30 @@ t.test(x, y)</code></pre>
 <div id="p.1" class="section level3">
 <h3>P.1</h3>
 <p>Perform a t-test to determine if there is evidence of a difference
-between child mortality in <code>2006</code> versus <code>2007</code>.
-Use the <code>pull()</code> function to extract these columns. Print the
-results using the <code>tidy</code> function. How do these results
-compare to those in question 1.4?</p>
-<pre class="r"><code>x &lt;- pull(mort, `2006`)
-y &lt;- pull(mort, `2007`)
+between lead exposure burden (<code>Lead</code>) and housing insecurity
+(<code>HousingBurden</code>). Use the <code>pull()</code> function to
+extract these columns. Print the results using the <code>tidy</code>
+function. How do these results compare to those in question 1.4?</p>
+<pre class="r"><code>x &lt;- pull(ces, Lead)
+y &lt;- pull(ces, HousingBurden)
 
 t.test(x, y)</code></pre>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
 ## data:  x and y
-## t = 0.30527, df = 391.32, p-value = 0.7603
+## t = 110.75, df = 9948.3, p-value &lt; 2.2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.09485069  0.12972006
+##  29.94165 31.02062
 ## sample estimates:
 ## mean of x mean of y 
-## 0.4514207 0.4339860</code></pre>
+##  48.97170  18.49057</code></pre>
 <pre class="r"><code>tidy(t.test(x, y))</code></pre>
 <pre><code>## # A tibble: 1 × 10
 ##   estimate estimate1 estimate2 statistic p.value parameter conf.low conf.high
 ##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-## 1   0.0174     0.451     0.434     0.305   0.760      391.  -0.0949     0.130
+## 1     30.5      49.0      18.5      111.       0     9948.     29.9      31.0
 ## # ℹ 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 </div>
 </div>
@@ -487,65 +472,60 @@ t.test(x, y)</code></pre>
 <h1>Part 2</h1>
 <div id="section-4" class="section level3">
 <h3>2.1</h3>
-<p>Read in the Kaggle cars auction dataset using
-<code>read_kaggle()</code> from the <code>jhur</code> package. Assign it
-to the “cars” variable. You can also find the data here: <a href="https://daseh.org/data/kaggleCarAuction.csv" class="uri">https://daseh.org/data/kaggleCarAuction.csv</a>.</p>
-<pre class="r"><code>cars &lt;- read_kaggle()</code></pre>
-</div>
-<div id="section-5" class="section level3">
-<h3>2.2</h3>
-<p>Fit a linear regression model with vehicle cost (“VehBCost”) as the
-outcome and whether it’s an online sale (“IsOnlineSale”) as the
-predictor. Save the model fit in an object called “lmfit_cars” and
+<p>Fit a linear regression model with low birthweight percentile
+(“LowBirthWeightPctl”) as the outcome and CES4.0 score (“CES4.0Score”)
+as the predictor. Save the model fit in an object called “lmfit_bw” and
 display the summary table with <code>summary()</code>.</p>
 <pre><code># General format
 glm(y ~ x, data = DATASET_NAME)</code></pre>
-<pre class="r"><code>lmfit_cars &lt;- glm(VehBCost ~ IsOnlineSale, data = cars)
-summary(lmfit_cars)</code></pre>
+<pre class="r"><code>lmfit_bw &lt;- glm(LowBirthWeightPctl ~ CES4.0Score, data = ces)
+summary(lmfit_bw)</code></pre>
 <pre><code>## 
 ## Call:
-## glm(formula = VehBCost ~ IsOnlineSale, data = cars)
+## glm(formula = LowBirthWeightPctl ~ CES4.0Score, data = ces)
 ## 
 ## Coefficients:
-##              Estimate Std. Error  t value Pr(&gt;|t|)    
-## (Intercept)  6721.220      6.624 1014.622   &lt;2e-16 ***
-## IsOnlineSale  384.260     41.664    9.223   &lt;2e-16 ***
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  26.0480     0.5733   45.44   &lt;2e-16 ***
+## CES4.0Score   0.8406     0.0174   48.30   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 3121685)
+## (Dispersion parameter for gaussian family taken to be 643.8752)
 ## 
-##     Null deviance: 2.2809e+11  on 72982  degrees of freedom
-## Residual deviance: 2.2782e+11  on 72981  degrees of freedom
-## AIC: 1298500
+##     Null deviance: 6527805  on 7806  degrees of freedom
+## Residual deviance: 5025446  on 7805  degrees of freedom
+##   (228 observations deleted due to missingness)
+## AIC: 72651
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
 </div>
-<div id="section-6" class="section level3">
-<h3>2.3</h3>
-<p>Fit a linear regression model with vehicle cost (“VehBCost”) as the
-outcome and vehicle age (“VehicleAge”) and whether it’s an online sale
-(“IsOnlineSale”) as predictors. Save the model fit in an object called
-“lmfit_cars_2” and display the summary table.</p>
-<pre class="r"><code>lmfit_cars_2 &lt;- glm(VehBCost ~ VehicleAge + IsOnlineSale, data = cars)
-summary(lmfit_cars_2)</code></pre>
+<div id="section-5" class="section level3">
+<h3>2.2</h3>
+<p>Fit a linear regression model with low birthweight percentile
+(“LowBirthWeightPctl”) as the outcome and CES4.0 score (“CES4.0Score”)
+and poverty score (“Poverty”) as the predictors. Save the model fit in
+an object called “lmfit_bw2” and display the summary table.</p>
+<pre class="r"><code>lmfit_bw2 &lt;- glm(LowBirthWeightPctl ~ CES4.0Score + Poverty, data = ces)
+summary(lmfit_bw2)</code></pre>
 <pre><code>## 
 ## Call:
-## glm(formula = VehBCost ~ VehicleAge + IsOnlineSale, data = cars)
+## glm(formula = LowBirthWeightPctl ~ CES4.0Score + Poverty, data = ces)
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   8067.47      16.44 490.705  &lt; 2e-16 ***
-## VehicleAge    -321.80       3.63 -88.639  &lt; 2e-16 ***
-## IsOnlineSale   297.31      39.60   7.508 6.07e-14 ***
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 26.71119    0.60185  44.381  &lt; 2e-16 ***
+## CES4.0Score  0.90926    0.02649  34.330  &lt; 2e-16 ***
+## Poverty     -0.08357    0.02411  -3.466 0.000532 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 2818312)
+## (Dispersion parameter for gaussian family taken to be 642.8077)
 ## 
-##     Null deviance: 2.2809e+11  on 72982  degrees of freedom
-## Residual deviance: 2.0568e+11  on 72980  degrees of freedom
-## AIC: 1291040
+##     Null deviance: 6522992  on 7804  degrees of freedom
+## Residual deviance: 5015186  on 7802  degrees of freedom
+##   (230 observations deleted due to missingness)
+## AIC: 72621
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
 </div>
@@ -554,73 +534,85 @@ summary(lmfit_cars_2)</code></pre>
 <h1>Practice on Your Own!</h1>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
-<p>Fit a linear regression model with vehicle cost (“VehBCost”) as the
-outcome with predictors: (1) vehicle age (“VehicleAge”), (2) whether
-it’s an online sale (“IsOnlineSale”), and interaction between
-“VehicleAge” and “IsOnlineSale”.</p>
+<p>Fit a linear regression model with low birthweight percentile
+(“LowBirthWeightPctl”) as the outcome, CES4.0 score (“CES4.0Score”) and
+poverty score (“Poverty”) as the predictors, and interaction between
+“CES4.0Score” and “Poverty”.</p>
 <ul>
-<li>To include the interaction, use
-<code>VehicleAge * IsOnlineSale</code> in the formula.</li>
-<li>Save the model fit in an object called “lmfit_cars_3” and display
-the summary table with <code>summary()</code>.</li>
+<li>To include the interaction, use <code>CES4.0Score * Poverty</code>
+in the formula.</li>
+<li>Save the model fit in an object called “lmfit_bw3” and display the
+summary table with <code>summary()</code>.</li>
 </ul>
-<pre class="r"><code>lmfit_cars_3 &lt;- glm(VehBCost ~ VehicleAge + IsOnlineSale + VehicleAge * IsOnlineSale, data = cars)
-summary(lmfit_cars_3)</code></pre>
+<pre class="r"><code>lmfit_bw3 &lt;- glm(LowBirthWeightPctl ~ CES4.0Score + Poverty + CES4.0Score * Poverty, data = ces)
+summary(lmfit_bw3)</code></pre>
 <pre><code>## 
 ## Call:
-## glm(formula = VehBCost ~ VehicleAge + IsOnlineSale + VehicleAge * 
-##     IsOnlineSale, data = cars)
+## glm(formula = LowBirthWeightPctl ~ CES4.0Score + Poverty + CES4.0Score * 
+##     Poverty, data = ces)
 ## 
 ## Coefficients:
-##                         Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)             8062.702     16.587 486.085  &lt; 2e-16 ***
-## VehicleAge              -320.662      3.668 -87.413  &lt; 2e-16 ***
-## IsOnlineSale             514.308    107.711   4.775  1.8e-06 ***
-## VehicleAge:IsOnlineSale  -55.373     25.561  -2.166   0.0303 *  
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)         22.039092   1.030772  21.381  &lt; 2e-16 ***
+## CES4.0Score          1.102149   0.043529  25.320  &lt; 2e-16 ***
+## Poverty              0.082456   0.038280   2.154   0.0313 *  
+## CES4.0Score:Poverty -0.005388   0.000966  -5.578 2.52e-08 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for gaussian family taken to be 2818169)
+## (Dispersion parameter for gaussian family taken to be 640.3365)
 ## 
-##     Null deviance: 2.2809e+11  on 72982  degrees of freedom
-## Residual deviance: 2.0567e+11  on 72979  degrees of freedom
-## AIC: 1291037
+##     Null deviance: 6522992  on 7804  degrees of freedom
+## Residual deviance: 4995265  on 7801  degrees of freedom
+##   (230 observations deleted due to missingness)
+## AIC: 72591
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 <div id="p.3" class="section level3">
 <h3>P.3</h3>
-<p>Fit a logistic regression model where the outcome is “bad buy”
-(“IsBadBuy”) status and predictors are the cost (“VehBCost”) and vehicle
-age (“VehicleAge”).</p>
+<p>Fit a logistic regression model where the outcome is whether the CES
+percentile is above the 50th percentile and predictors are the poverty
+measure (“Poverty”) and percentage of white residents (“WhitePerc”), as
+well as the interaction between “Poverty” and “WhitePerc”. Information
+about the CES4.0 percentile rank is stored in the “CES4.0Percentile”
+variable. You will need to first create a variable “CESPctlMoreThan50”
+using the <code>mutate</code> and <code>case_when</code> commands.</p>
 <ul>
-<li>Save the model fit in an object called “logfit_cars” and display the
+<li>Save the model fit in an object called “logfit_ces” and display the
 summary table with <code>summary()</code>.</li>
 </ul>
 <pre><code># General format
+df &lt;- df %&gt;% mutate(binary_y = case_when(y &gt; 50  ~ 1, y &lt; 50 ~ 0)) 
 glm(y ~ x, data = DATASET_NAME, family = binomial(link = &quot;logit&quot;))</code></pre>
-<pre class="r"><code>logfit_cars &lt;- glm(IsBadBuy ~ VehBCost + VehicleAge, data = cars, family = binomial(link = &quot;logit&quot;))
-summary(logfit_cars)</code></pre>
+<pre class="r"><code>ces &lt;- ces %&gt;% 
+  mutate(CESPctlMoreThan50 = 
+           case_when(CES4.0Percentile &gt; 50  ~ 1, CES4.0Percentile &lt; 50 ~ 0))
+
+logfit_ces &lt;- glm(CESPctlMoreThan50 ~ Poverty + WhitePerc + Poverty * WhitePerc, data = ces, family = binomial(link = &quot;logit&quot;))
+summary(logfit_ces)</code></pre>
 <pre><code>## 
 ## Call:
-## glm(formula = IsBadBuy ~ VehBCost + VehicleAge, family = binomial(link = &quot;logit&quot;), 
-##     data = cars)
+## glm(formula = CESPctlMoreThan50 ~ Poverty + WhitePerc + Poverty * 
+##     WhitePerc, family = binomial(link = &quot;logit&quot;), data = ces)
 ## 
 ## Coefficients:
-##               Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -2.525e+00  6.379e-02  -39.58   &lt;2e-16 ***
-## VehBCost    -9.091e-05  6.877e-06  -13.22   &lt;2e-16 ***
-## VehicleAge   2.569e-01  6.867e-03   37.41   &lt;2e-16 ***
+##                    Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)       -0.854724   0.172138  -4.965 6.86e-07 ***
+## Poverty            0.095863   0.005458  17.564  &lt; 2e-16 ***
+## WhitePerc         -0.045093   0.003783 -11.918  &lt; 2e-16 ***
+## Poverty:WhitePerc -0.000207   0.000119  -1.739   0.0821 .  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 54421  on 72982  degrees of freedom
-## Residual deviance: 52264  on 72980  degrees of freedom
-## AIC: 52270
+##     Null deviance: 10991.9  on 7928  degrees of freedom
+## Residual deviance:  5809.5  on 7925  degrees of freedom
+##   (106 observations deleted due to missingness)
+## AIC: 5817.5
 ## 
-## Number of Fisher Scoring iterations: 5</code></pre>
+## Number of Fisher Scoring iterations: 6</code></pre>
 </div>
 </div>
 
