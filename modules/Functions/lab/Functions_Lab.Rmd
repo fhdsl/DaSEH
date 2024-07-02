@@ -38,7 +38,16 @@ return(result)
 ```
 
 ```{r 1.1response}
+nums <- c(2, 7, 21, 30, 90)
 
+sum_squared <- function(x) sum(x)^2
+sum_squared(x = nums)
+
+sum_squared <- function(x) {
+  out <- sum(x)^2
+  return(out)
+}
+sum_squared(x = nums)
 ```
 
 ### 1.2
@@ -46,7 +55,11 @@ return(result)
 Create a function that takes two arguments, (1) a vector and (2) a numeric value. This function tests whether the number (2) is contained within the vector (1). **Hint**: use `%in%`. Call it `has_n`. Test your function on the vector `c(2,7,21,30,90)` and number `21` - you should get the answer TRUE.
 
 ```{r 1.2response}
+nums <- c(2, 7, 21, 30, 90)
+a_num <- 21
 
+has_n <- function(x, n) n %in% x
+has_n(x = nums, n = a_num)
 ```
 
 ### 1.3
@@ -54,7 +67,11 @@ Create a function that takes two arguments, (1) a vector and (2) a numeric value
 Amend the function `has_n` from question 1.2 so that it takes a default value of `21` for the numeric argument.
 
 ```{r 1.3response}
+nums <- c(2, 7, 21, 30, 90)
+a_num <- 21
 
+has_n <- function(x, n = 21) n %in% x
+has_n(x = nums)
 ```
 
 ### 1.4
@@ -62,7 +79,8 @@ Amend the function `has_n` from question 1.2 so that it takes a default value of
 Create a new number `b_num` that is not contained with `nums`. Use your updated `has_n` function with the default value and add `b_num` as the `n` argument when calling the function. What is the outcome?
 
 ```{r 1.4response}
-
+b_num <- 11
+has_n(x = nums, n = b_num)
 ```
 
 
@@ -70,7 +88,7 @@ Create a new number `b_num` that is not contained with `nums`. Use your updated 
 
 ### 2.1
 
-Read in the SARS-CoV-2 Vaccination data from https://daseh.org/data/USA_covid19_vaccinations.csv. Assign the data the name "vacc".
+Read in the CalEnviroScreen data from https://daseh.org/data/CalEnvironmentalScreen_data.csv. Assign the data the name "ces".
 
 ```{r message = FALSE, label = '2.1response'}
 
@@ -78,7 +96,7 @@ Read in the SARS-CoV-2 Vaccination data from https://daseh.org/data/USA_covid19_
 
 ### 2.2
 
-We want to get some summary statistics on the Moderna vaccines. Use `across` inside `summarize` to get the sum total number vaccine doses for any variable containing the word "Moderna" AND starting with "Total". **Hint**: use `contains()` AND `starts_with()` to select the right columns inside `across`. Keep in mind that this includes the United States as a whole and so it is not totally accurate! Remember that `NA` values can influence calculations.
+We want to get some summary statistics on water contamination. Use `across` inside `summarize` to get the sum total number vaccine doses for any variable containing the string "water" AND ending with "Pctl". **Hint**: use `contains()` AND `ends_with()` to select the right columns inside `across`. Remember that `NA` values can influence calculations.
 
 ```
 # General format
@@ -96,7 +114,7 @@ data %>%
 
 ### 2.3
 
-Use `across` and `mutate` to convert all columns containing the word "Percent" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use a "function on the fly" to divide by 100. It will also be easier to check your work if you `select()` columns that match "Percent".
+Use `across` and `mutate` to convert all columns containing the word "Pctl" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use a "function on the fly" to divide by 100. It will also be easier to check your work if you `select()` columns that match "Pctl".
 
 ```{r 2.3response}
 
@@ -104,7 +122,7 @@ Use `across` and `mutate` to convert all columns containing the word "Percent" i
 
 ### 2.4
 
-Use `across` and `mutate` to convert all columns starting with the word "Total" into a binary variable: TRUE if the value is greater than 10,000,000 and FALSE if less than or equal to 10,000,000. **Hint**: use `starts_with()` to select the columns starting with "Total". Use a "function on the fly" to do a logical test if the value is greater than 10,000,000.
+Use `across` and `mutate` to convert all columns starting with the string "PM" into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. **Hint**: use `starts_with()` to select the columns that start with "PM". Use a "function on the fly" to do a logical test if the value is greater than 10.
 
 ```{r 2.4response}
 
@@ -115,11 +133,11 @@ Use `across` and `mutate` to convert all columns starting with the word "Total" 
 
 ### P.1
 
-Take your code from question 2.4 and assign it to the variable `vacc_dat`. 
+Take your code from question 2.4 and assign it to the variable `ces_dat`. 
 
-- use `filter()` to drop any rows where "United States" appears in `State/Territory/Federal Entity`. Make sure to reassign this to `vacc_dat`.
-- Create a ggplot boxplot (`geom_boxplot()`) where (1) the x-axis is `Total Doses Delivered` and (2) the y-axis is `Percent of fully vaccinated people with booster doses`.
-- You change the `labs()` layer so that the x-axis is "Total Doses Delivered: Greater than 10,000,000"
+- use `filter()` to drop any rows where "Oakland" appears in `ApproxLocation`. Make sure to reassign this to `ces_dat`.
+- Create a ggplot boxplot (`geom_boxplot()`) where (1) the x-axis is `PM2.5` and (2) the y-axis is `Asthma`.
+- You change the `labs()` layer so that the x-axis is "ER Visits for Asthma: PM2.5 greater than 10"
 
 ```{r P.1response}
 
