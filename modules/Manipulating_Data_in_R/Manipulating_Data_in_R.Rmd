@@ -189,9 +189,9 @@ long_vacc
 
 Newly created column names are enclosed in quotation marks.
 
-## Data used: Charm City Circulator
+## Data used: CO Heat-related ER visits
 
-https://daseh.org/data/Charm_City_Circulator_Ridership.csv
+https://daseh.org/data/CO_heat_er_visits_DenverBoulder_wide.csv
 
 ```{r, message = FALSE}
 library(dasehr)
@@ -225,8 +225,8 @@ long
 Un-pivoted columns (`day`, `date`, `daily`) are similar
 
 ```{r}
-circ %>% select(day, date, daily) %>% head()
-long %>% select(day, date, daily) %>% head()
+wide %>% select(location_type) %>% head()
+long %>% select(location_type) %>% head()
 ```
 
 ## Cleaning up long data
