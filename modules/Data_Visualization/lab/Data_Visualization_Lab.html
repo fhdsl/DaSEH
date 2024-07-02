@@ -359,45 +359,39 @@ display: none;
 <pre class="r"><code>library(readr)
 library(ggplot2)
 library(dplyr)
-library(jhur)</code></pre>
-<p>Read Bike Lanes Dataset using <code>read_bike()</code> function from
-<code>jhur</code> package. Assign it to <code>bike</code> variable.</p>
+library(dasehr)</code></pre>
+<p>Open the Nitrate exposure via WA public waterways data from the
+<code>dasehr</code> package.</p>
+<p>(You can also access it at the link
+www.daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv)</p>
 <p>Then, use the provided code to compute a data frame
-<code>bike_agg</code> with aggregate summary of bike lanes: average
-length of lanes (<code>lane_avg_length</code>) for each year
-(<code>dateInstalled</code>).</p>
-<pre class="r"><code>bike &lt;- read_bike()</code></pre>
-<pre><code>## Rows: 1631 Columns: 9
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (6): subType, name, block, type, project, route
-## dbl (3): numLanes, length, dateInstalled
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>bike_agg &lt;- bike %&gt;%
-  # filter data to keep only these observations for which year is non-0
-  filter(dateInstalled != 0) %&gt;%
-  group_by(dateInstalled) %&gt;%
-  summarise(lane_avg_length = mean(length))
+<code>nitrate</code> with aggregate summary of exposure level: average
+exposed population (<code>pop_exposed_to_exceedances</code>) for each
+year (<code>year</code>).</p>
+<pre class="r"><code>nitrate_agg &lt;- nitrate %&gt;%
+  group_by(year) %&gt;%
+  summarise(exposed_pop_avg = mean(pop_exposed_to_exceedances))
 
-bike_agg</code></pre>
-<pre><code>## # A tibble: 8 × 2
-##   dateInstalled lane_avg_length
-##           &lt;dbl&gt;           &lt;dbl&gt;
-## 1          2006           1469.
-## 2          2007            310.
-## 3          2008            249.
-## 4          2009            407.
-## 5          2010            246.
-## 6          2011            233.
-## 7          2012            271.
-## 8          2013            290.</code></pre>
+nitrate_agg</code></pre>
+<pre><code>## # A tibble: 22 × 2
+##     year exposed_pop_avg
+##    &lt;dbl&gt;           &lt;dbl&gt;
+##  1  1999            15  
+##  2  2000             0  
+##  3  2001            76.8
+##  4  2002          3976. 
+##  5  2003          3636. 
+##  6  2004          3138. 
+##  7  2005          2968. 
+##  8  2006          2618. 
+##  9  2007          1916. 
+## 10  2008          1728. 
+## # ℹ 12 more rows</code></pre>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>Use <code>ggplot2</code> package make plot of average length of lanes
-(<code>lane_avg_length</code>; y-axis) for each year
-(<code>dateInstalled</code>; x-axis). You can use lines layer
+<p>Use <code>ggplot2</code> package make plot of average exposed
+population (<code>exposed_pop_avg</code>; y-axis) for each year
+(<code>year</code>; x-axis). You can use lines layer
 (<code>+ geom_line()</code>) or points layer
 (<code>+ geom_point()</code>), or both!</p>
 <p>Assign the plot to variable <code>my_plot</code>. Type
@@ -416,7 +410,7 @@ titles.</p>
 <h3>1.3</h3>
 <p>Use the <code>scale_x_continuous()</code> function to plot the x axis
 with the following breaks
-<code>c(2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013)</code>.</p>
+<code>c(1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017, 2019)</code>.</p>
 <pre><code># General format
 my_plot&lt;- my_plot +
   scale_x_continuous(?????)</code></pre>
@@ -434,50 +428,50 @@ my_plot + theme_bw()</code></pre>
 <div id="p.1" class="section level3">
 <h3>P.1</h3>
 <p>Create a boxplot (with the <code>geom_boxplot()</code> function)
-using the <code>Orange</code> data, where <code>Tree</code> is plotted
-on the x axis and <code>circumference</code> is plotted on the y
-axis.</p>
-<p>Notice how the trees are ordered. We will learn more about this
-soon!</p>
+using the <code>nitrate</code> data, where <code>quarter</code> is
+plotted on the x axis and <code>pop_on_sampled_PWS</code> is plotted on
+the y axis.</p>
 </div>
 </div>
 <div id="part-2" class="section level1">
 <h1>Part 2</h1>
 <div id="section-4" class="section level3">
 <h3>2.1</h3>
-<p>Use the provided code to compute a data frame <code>bike_agg_2</code>
-with aggregate summary of bike lanes: number of lanes
-(<code>lane_count</code>) – separately for each year
-(<code>dateInstalled</code>) and for each lane type.</p>
-<pre class="r"><code>bike_agg_2 &lt;- bike %&gt;%
-  filter(dateInstalled != 0) %&gt;%
-  group_by(dateInstalled, type) %&gt;%
-  summarise(lane_count = n())</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;dateInstalled&#39;. You can override using the
+<p>Use the provided code to compute a data frame
+<code>nitrate_agg_2</code> with aggregate summary of WA Nitrate data:
+population exposed to less than 10 ug/L of nitrate in the water (sum of
+<code>pop_0-3ug/L</code>, <code>pop_&gt;3-5ug/L</code>, and
+<code>pop_&gt;5-10ug/L</code>) – separately for each year
+(<code>year</code>) and for each quarter (<code>quarter</code>.</p>
+<pre class="r"><code>nitrate_agg_2 &lt;- nitrate %&gt;%
+  group_by(year, quarter) %&gt;%
+  summarise(pop_less_than_10ug_perL = sum(`pop_0-3ug/L`, `pop_&gt;3-5ug/L`, `pop_&gt;5-10ug/L`))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;year&#39;. You can override using the
 ## `.groups` argument.</code></pre>
-<pre class="r"><code>bike_agg_2</code></pre>
-<pre><code>## # A tibble: 22 × 3
-## # Groups:   dateInstalled [8]
-##    dateInstalled type            lane_count
-##            &lt;dbl&gt; &lt;chr&gt;                &lt;int&gt;
-##  1          2006 BIKE LANE                2
-##  2          2007 BIKE LANE              127
-##  3          2007 SHARROW                 95
-##  4          2007 SIGNED ROUTE           146
-##  5          2008 BIKE LANE               55
-##  6          2008 SHARROW                148
-##  7          2008 SIDEPATH                 3
-##  8          2009 BIKE LANE               46
-##  9          2009 SHARED BUS BIKE         30
-## 10          2009 SHARROW                 10
-## # ℹ 12 more rows</code></pre>
+<pre class="r"><code>nitrate_agg_2</code></pre>
+<pre><code>## # A tibble: 88 × 3
+## # Groups:   year [22]
+##     year quarter pop_less_than_10ug_perL
+##    &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;
+##  1  1999 Q1                        67807
+##  2  1999 Q2                        55688
+##  3  1999 Q3                       550650
+##  4  1999 Q4                        26389
+##  5  2000 Q1                         5996
+##  6  2000 Q2                       157428
+##  7  2000 Q3                        20752
+##  8  2000 Q4                       360235
+##  9  2001 Q1                        49702
+## 10  2001 Q2                        46259
+## # ℹ 78 more rows</code></pre>
 </div>
 <div id="section-5" class="section level3">
 <h3>2.2</h3>
 <p>Use <code>ggplot2</code> package to make a plot showing trajectories
-of number of lanes (<code>lane_count</code>; y-axis) over year
-(<code>dateInstalled</code>; x-axis), where each bike line type has a
-different color (hint: use <code>color = type</code> in mapping).</p>
+of total population exposed to less than 10 ug/L of nitrate
+(<code>pop_less_than_10ug_perL</code>; y-axis) over year
+(<code>year</code>; x-axis), where each quarter type has a different
+color (hint: use <code>color = type</code> in mapping).</p>
 <pre><code># General format
 ggplot(???, aes(
   x = ???,
@@ -490,13 +484,9 @@ ggplot(???, aes(
 <div id="section-6" class="section level3">
 <h3>2.3</h3>
 <p>Redo the above plot by adding a faceting
-(<code>+ facet_wrap( ~ type, ncol = 3)</code>) to have data for each
-bike line type in a separate plot panel.</p>
-<p>(You may see
-<code>geom_path: Each group consists of only one observation. Do you need to adjust the group aesthetic?</code>
-warning as some bike lane types will have only 1 point plotted while
-trying to plot a line). Assign the new plot as an object called
-<code>facet_plot</code>.</p>
+(<code>+ facet_wrap( ~ quarter, ncol = 2)</code>) to have data for
+quarter in a separate plot panel.</p>
+<p>Assign the new plot as an object called <code>facet_plot</code>.</p>
 </div>
 <div id="section-7" class="section level3">
 <h3>2.4</h3>
@@ -510,8 +500,9 @@ OR <code>geom_point()</code> from one of your plots above.</p>
 <h3>P.2</h3>
 <p>Modify <code>facet_plot</code> to remove the legend (hint use
 <code>theme()</code> and the <code>legend.position</code> argument) and
-change the names of the axis titles to be “Number of bike lanes” for the
-y axis and “Date bike lane was installed” for the x axis.</p>
+change the names of the axis titles to be “Population exposed to less
+than 10 ug/L of nitrate in water” for the y axis and “Year” for the x
+axis.</p>
 </div>
 <div id="p.3" class="section level3">
 <h3>P.3</h3>

@@ -76,60 +76,36 @@ x_fact
 
 ## A Factor Example{.smaller}
 
-We will use data on student dropouts from the State of California during the 2016-2017 school year. More on this data can be found here: https://www.cde.ca.gov/ds/ad/filesdropouts.asp
+We will use data on heat-related visits to the ER from the State of Colorado, separated by age category, for 2011-2022. More on this data can be found here: https://coepht.colorado.gov/heat-related-illness
 
-To preserve school anonymity, "CDS_CODE" is used in place of the individual school's name.
+You can download the data from the DaSEH website here: https://daseh.org/data/CO_ER_heat_visits_by_age_data.csv
 
-You can download the data from the DaSEH website here: https://daseh.org/data/dropouts.txt
+This dataset is also available in the `dasehr` package.
 
-```{r}
-dropouts <- read_delim("https://daseh.org/data/dropouts.txt", delim = "\t")
-dropouts
-```
-
-## Preparing the data
-
-Aggregate (sum) across ethnicity and gender:
+We will limit the data to only one of the `gender` categories - we will choose "Both genders" because of data missingness.
 
 ```{r}
-dropouts <-
-  dropouts %>%
-  group_by(CDS_CODE) %>%
-  summarize(
-    Freshman = sum(D9),
-    Sophomore = sum(D10),
-    Junior = sum(D11),
-    Senior = sum(D12)
-  )
-dropouts
+library(dasehr)
+er_visits_age <- CO_heat_ER_byage
+
+#er_visits_age <- read_csv("https://daseh.org/data/CO_ER_heat_visits_by_age_data.csv")
+
+er_visits_age <- er_visits_age %>% 
+  filter(str_detect(GENDER, "Both genders")) 
 ```
 
-## Preparing the data
-
-Pivot to long format:
-
-```{r}
-dropouts <-
-  dropouts %>%
-  pivot_longer(
-    !CDS_CODE,
-    names_to = "grade",
-    values_to = "n_dropouts"
-  )
-dropouts
-```
 
 ## The data
 
 ```{r}
-head(dropouts)
+head(er_visits_age)
 ```
 
-Notice that `grade` is a `chr` variable. This indicates that the values are **character** strings.
+Notice that `AGE` is a `chr` variable. This indicates that the values are **character** strings.
 
-R does not realize that there is any order related to the `grade` values. It will assume that it is **alphabetical**.
+R does not realize that there is any order related to the `AGE` values. It will assume that it is **alphabetical** (for numbers, this means ascending order).
 
-However, we know that the order is: **freshman**, **sophomore**, **junior**, **senior**.
+However, we know that the order is: **0-4 years old**, **5-14 years old**, **15-34 years old**, **35-64 years old**, **65+ years old**, and **All ages**.
 
 ## For the next steps, let's take a subset of data.
 
@@ -137,64 +113,64 @@ Use `set.seed()` to take the same random sample each time.
 
 ```{r}
 set.seed(123)
-dropouts_subset <- slice_sample(dropouts, n = 32)
+er_visits_age_subset <- slice_sample(er_visits_age, n = 32)
 ```
 
 ## Plot the data
 
 Let's make a plot first.
 
-```{r, fig.height= 3}
-dropouts_subset %>%
-  ggplot(mapping = aes(x = grade, y = n_dropouts)) +
+```{r, fig.height= 3, warning = F}
+er_visits_age_subset %>%
+  ggplot(mapping = aes(x = AGE, y = RATE)) +
   geom_boxplot() +
-  theme_bw(base_size = 16) # make all labels size 16
+  theme_bw(base_size = 8) # make all labels size 8
 ```
 
 OK this is very useful, but it is a bit difficult to read. We expect the values to be plotted by the order that we know, not by alphabetical order.
 
 ## Change to factor
 
-Currently `grade` is class `character` but let's change that to class `factor` which allows us to specify the levels or order of the values.
+Currently `AGE` is class `character` but let's change that to class `factor` which allows us to specify the levels or order of the values.
 
 ```{r}
-dropouts_fct <-
-  dropouts_subset %>%
-  mutate(grade = factor(grade,
-    levels = c("Freshman", "Sophomore", "Junior", "Senior")
+er_visits_age_fct <-
+  er_visits_age_subset %>%
+  mutate(AGE = factor(AGE,
+    levels = c("0-4 years old", "5-14 years old", "15-34 years old", "35-64 years old", "65+ years old", "All ages")
   ))
 
-dropouts_fct %>%
-  pull(grade) %>%
+er_visits_age_fct %>%
+  pull(AGE) %>%
   levels()
 ```
 
 ## Change to a factor
 
 ```{r}
-head(dropouts_fct)
+head(er_visits_age_fct)
 ```
 
 ## Plot again
 
 Now let's make our plot again:
 
-```{r, fig.height= 3}
-dropouts_fct %>%
-  ggplot(mapping = aes(x = grade, y = n_dropouts)) +
+```{r, fig.height= 3, warning = FALSE}
+er_visits_age_fct %>%
+  ggplot(mapping = aes(x = AGE, y = RATE)) +
   geom_boxplot() +
-  theme_bw(base_size = 16)
+  theme_bw(base_size = 8)
 ```
 
 Now that's more like it! Notice how the data is automatically plotted in the order we would like.
 
 ## What about if we `arrange()` the data by grade ?{.smaller}
 
-Character data is arranged alphabetically.
+Character data is arranged alphabetically (if letters) or by ascending first number (if numbers).
 
 ```{r}
-dropouts_subset %>%
-  arrange(grade)
+er_visits_age_subset %>%
+  arrange(AGE)
 ```
 
 Notice that the order is not what we would hope for!
@@ -204,20 +180,20 @@ Notice that the order is not what we would hope for!
 Factor data is arranged by level.
 
 ```{r}
-dropouts_fct %>%
-  arrange(grade)
+er_visits_age_fct %>%
+  arrange(AGE)
 ```
 
 Nice! Now this is what we would want!
 
 ## Making tables with characters
 
-Tables grouped by a character are arranged alphabetically.
+Tables grouped by a character are arranged alphabetically (if letters) or by ascending first number (if numbers).
 
 ```{r}
-dropouts_subset %>%
-  group_by(grade) %>%
-  summarize(total_dropouts = sum(n_dropouts))
+er_visits_age_subset %>%
+  group_by(AGE) %>%
+  summarize(total_visits = sum(VISITS, na.rm = T))
 ```
 
 ## Making tables with factors
@@ -225,25 +201,25 @@ dropouts_subset %>%
 Tables grouped by a factor are arranged by level.
 
 ```{r}
-dropouts_fct %>%
-  group_by(grade) %>%
-  summarize(total_dropouts = sum(n_dropouts))
+er_visits_age_fct %>%
+  group_by(AGE) %>%
+  summarize(total_visits = sum(VISITS, na.rm = T))
 ```
 
 ## `forcats` for ordering{.smaller}
 
-What if we wanted to order `grade` by increasing `n_dropouts`?
+What if we wanted to order `AGE` by increasing `RATE``?
 
-```{r, fig.height= 3}
+```{r, fig.height= 3, warning=FALSE}
 library(forcats)
 
-dropouts_fct %>%
-  ggplot(mapping = aes(x = grade, y = n_dropouts)) +
+er_visits_age_fct %>%
+  ggplot(mapping = aes(x = AGE, y = RATE)) +
   geom_boxplot() +
-  theme_bw(base_size = 16)
+  theme_bw(base_size = 8)
 ```
 
-This would be useful for identifying easily which grade to focus on.
+This would be useful for identifying easily which age group to focus on.
 
 ## forcats for ordering{.smaller}
 
@@ -259,37 +235,38 @@ fct_reorder({column getting changed}, {guiding column}, {summarizing function})
 
 We can order a factor by another variable by using the `fct_reorder()` function of the `forcats` package.
 
-```{r, fig.height= 3}
+```{r, fig.height= 3, warning = F}
 library(forcats)
 
-dropouts_fct %>%
-  ggplot(mapping = aes(x = fct_reorder(grade, n_dropouts, mean), y = n_dropouts)) +
+er_visits_age_fct %>%
+  ggplot(mapping = aes(x = fct_reorder(AGE, RATE, mean), y = RATE)) +
   geom_boxplot() +
-  labs(x = "Student Grade") +
-  theme_bw(base_size = 16)
+  labs(x = "Age Category") +
+  theme_bw(base_size = 8)
 ```
 
 ## forcats for ordering.. with `.desc = ` argument{.smaller}
 
-```{r, fig.height= 3}
+```{r, fig.height= 3, warning = F}
 library(forcats)
 
-dropouts_fct %>%
-  ggplot(mapping = aes(x = fct_reorder(grade, n_dropouts, mean, .desc = TRUE), y = n_dropouts)) +
+er_visits_age_fct %>%
+  ggplot(mapping = aes(x = fct_reorder(AGE, RATE, mean, .desc = TRUE), y = RATE)) +
   geom_boxplot() +
-  labs(x = "Student Grade") +
-  theme_bw(base_size = 16)
+  labs(x = "Age Category") +
+  theme_bw(base_size = 8)
 ```
 
 ## forcats for ordering.. can be used to sort datasets
 
-```{r, fig.height= 3}
-dropouts_fct %>% pull(grade) %>% levels() # By year order
-dropouts_fct <- dropouts_fct %>%
+```{r, fig.height= 3, warning=FALSE}
+er_visits_age_fct %>% pull(AGE) %>% levels() # By year order
+er_visits_age_fct <- er_visits_age_fct %>%
   mutate(
-    grade = fct_reorder(grade, n_dropouts, mean)
+    AGE = fct_reorder(AGE, RATE, mean)
   )
-dropouts_fct %>% pull(grade) %>% levels() # by increasing mean dropouts
+
+er_visits_age_fct %>% pull(AGE) %>% levels() # by increasing mean dropouts
 ```
 
 ## Checking Proportions with `fct_count()`
@@ -297,8 +274,8 @@ dropouts_fct %>% pull(grade) %>% levels() # by increasing mean dropouts
 The `fct_count()` function of the `forcats` package is helpful for checking that the proportions of each level for a factor are similar. Need the `prop = TRUE` argument otherwise just counts are reported.
 
 ```{r}
-dropouts_fct %>%
-  pull(grade) %>%
+er_visits_age_fct %>%
+  pull(AGE) %>%
   fct_count(prop = TRUE)
 ```
 

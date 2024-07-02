@@ -400,19 +400,18 @@ when calling the function. What is the outcome?</p>
 <h1>Part 2</h1>
 <div id="section-4" class="section level3">
 <h3>2.1</h3>
-<p>Read in the SARS-CoV-2 Vaccination data from <a href="https://daseh.org/data/USA_covid19_vaccinations.csv" class="uri">https://daseh.org/data/USA_covid19_vaccinations.csv</a>.
-Assign the data the name “vacc”.</p>
+<p>Read in the CalEnviroScreen from <a href="https://daseh.org/data/CalEnviroScreen_data.csv" class="uri">https://daseh.org/data/CalEnviroScreen_data.csv</a>. Assign
+the data the name “ces”.</p>
 </div>
 <div id="section-5" class="section level3">
 <h3>2.2</h3>
-<p>We want to get some summary statistics on the Moderna vaccines. Use
+<p>We want to get some summary statistics on water contamination. Use
 <code>across</code> inside <code>summarize</code> to get the sum total
-number vaccine doses for any variable containing the word “Moderna” AND
-starting with “Total”. <strong>Hint</strong>: use
-<code>contains()</code> AND <code>starts_with()</code> to select the
-right columns inside <code>across</code>. Keep in mind that this
-includes the United States as a whole and so it is not totally accurate!
-Remember that <code>NA</code> values can influence calculations.</p>
+number vaccine doses for any variable containing the string “water” AND
+ending with “Pctl”. <strong>Hint</strong>: use <code>contains()</code>
+AND <code>ends_with()</code> to select the right columns inside
+<code>across</code>. Remember that <code>NA</code> values can influence
+calculations.</p>
 <pre><code># General format
 data %&gt;%
   summarize(across(
@@ -424,20 +423,20 @@ data %&gt;%
 <div id="section-6" class="section level3">
 <h3>2.3</h3>
 <p>Use <code>across</code> and <code>mutate</code> to convert all
-columns containing the word “Percent” into proportions (i.e., divide
-that value by 100). <strong>Hint</strong>: use <code>contains()</code>
-to select the right columns within <code>across()</code>. Use a
-“function on the fly” to divide by 100. It will also be easier to check
-your work if you <code>select()</code> columns that match “Percent”.</p>
+columns containing the word “Pctl” into proportions (i.e., divide that
+value by 100). <strong>Hint</strong>: use <code>contains()</code> to
+select the right columns within <code>across()</code>. Use a “function
+on the fly” to divide by 100. It will also be easier to check your work
+if you <code>select()</code> columns that match “Pctl”.</p>
 </div>
 <div id="section-7" class="section level3">
 <h3>2.4</h3>
 <p>Use <code>across</code> and <code>mutate</code> to convert all
-columns starting with the word “Total” into a binary variable: TRUE if
-the value is greater than 10,000,000 and FALSE if less than or equal to
-10,000,000. <strong>Hint</strong>: use <code>starts_with()</code> to
-select the columns starting with “Total”. Use a “function on the fly” to
-do a logical test if the value is greater than 10,000,000.</p>
+columns starting with the string “PM” into a binary variable: TRUE if
+the value is greater than 10 and FALSE if less than or equal to 10.
+<strong>Hint</strong>: use <code>starts_with()</code> to select the
+columns that start with “PM”. Use a “function on the fly” to do a
+logical test if the value is greater than 10.</p>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
@@ -445,16 +444,16 @@ do a logical test if the value is greater than 10,000,000.</p>
 <div id="p.1" class="section level3">
 <h3>P.1</h3>
 <p>Take your code from question 2.4 and assign it to the variable
-<code>vacc_dat</code>.</p>
+<code>ces_dat</code>.</p>
 <ul>
-<li>use <code>filter()</code> to drop any rows where “United States”
-appears in <code>State/Territory/Federal Entity</code>. Make sure to
-reassign this to <code>vacc_dat</code>.</li>
+<li>use <code>filter()</code> to drop any rows where “Oakland” appears
+in <code>ApproxLocation</code>. Make sure to reassign this to
+<code>ces_dat</code>.</li>
 <li>Create a ggplot boxplot (<code>geom_boxplot()</code>) where (1) the
-x-axis is <code>Total Doses Delivered</code> and (2) the y-axis is
-<code>Percent of fully vaccinated people with booster doses</code>.</li>
-<li>You change the <code>labs()</code> layer so that the x-axis is
-“Total Doses Delivered: Greater than 10,000,000”</li>
+x-axis is <code>PM2.5</code> and (2) the y-axis is
+<code>Asthma</code>.</li>
+<li>You change the <code>labs()</code> layer so that the x-axis is “ER
+Visits for Asthma: PM2.5 greater than 10”</li>
 </ul>
 </div>
 </div>

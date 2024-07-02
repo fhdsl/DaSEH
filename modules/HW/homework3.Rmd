@@ -147,57 +147,53 @@ library(tidyr)
 
 
 
-> The following questions are not required for full credit, but can make up for any points lost on other questions.
-
-### **Bonus Practice**
-
-A\. Bring the following dataset into R. 
+16\. Bring the following dataset into R. 
 
 -  The dataset is located at: https://daseh.org/data/asthma.xlsx. 
 -  You should download the associated data.
 -  Once you get the file, read the dataset in using `read_excel()` from the `readxl` package and assign it the name "asthma".
 -  Read in the sheet named "Age Group (Years)".
 
-```{r Aresponse}
+```{r 16response}
 
 ```
 
 
-B\. Rename the column `Weighted Number With Current Asthma` to "asthma_count" using `rename()`. Replace the original "asthma" object by calling the new dataset "asthma".
+17\. Rename the column `Weighted Number With Current Asthma` to "asthma_count" using `rename()`. Replace the original "asthma" object by calling the new dataset "asthma".
 
-```{r Bresponse}
-
-```
-
-
-C\. Separate `Percent (SE)` into two separate columns: "percent" and "SE" using the `separate()` function. Replace the original "asthma" object by calling the new dataset "asthma".
-
-```{r Cresponse}
+```{r 17response}
 
 ```
 
 
-D\. Remove the parentheses around the numbers in the new SE column. You should use a combination of `str_replace()`,  `pull()` (because stringr package functions work on vectors not dataframes!) and `mutate()`. Replace the original "asthma" object by calling the new dataset "asthma".
+18\. Separate `Percent (SE)` into two separate columns: "percent" and "SE" using the `separate()` function. Replace the original "asthma" object by calling the new dataset "asthma".
+
+```{r 18response}
+
+```
+
+
+19\. Remove the parentheses around the numbers in the new SE column. You should use a combination of `str_replace()`,  `pull()` (because stringr package functions work on vectors not dataframes!) and `mutate()`. Replace the original "asthma" object by calling the new dataset "asthma".
 
 -  The `pattern =` to find the starting parenthesis is "[(]"
 -  The `pattern =` to find for the ending parenthesis is "[)]"
 -  The `replacement =` for both can be empty quotation marks: ""
 
-```{r Dresponse}
+```{r 19response}
 
 ```
 
 
-E\. Determine the class of "percent" and "SE". Can you take the mean values? Why or why not?
+20\. Determine the class of "percent" and "SE". Can you take the mean values? Why or why not?
 
-```{r Eresponse}
+```{r 20response}
 
 ```
 
 
-F\. Use `as.numeric()` to convert "percent" and "SE" to numeric class. Calculate the mean for both.
+21\. Use `as.numeric()` to convert "percent" and "SE" to numeric class. Calculate the mean for both.
 
-```{r Fresponse}
+```{r 21response}
 
 ```
 
