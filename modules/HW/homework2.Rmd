@@ -86,7 +86,7 @@ We will be working with a dataset from the "Kaggle" website, which hosts competi
 ```
 
 
-9\. Remove any rows with missing data (NA), then filter out (i.e., remove) measurements from earlier than 2015 (according to the Earth year). Replace the original "mars" object by reassigning the new filtered dataset to "mars". How many data points are left after filtering?
+9\. Filter out (i.e., remove) measurements from earlier than 2015 (according to the Earth year), as well as any rows with missing data (NA). Replace the original "mars" object by reassigning the new filtered dataset to "mars". How many data points are left after filtering?
 
 **Hint:** use drop_na() to remove rows with missing values.
 
@@ -107,7 +107,7 @@ We will be working with a dataset from the "Kaggle" website, which hosts competi
 11\. What is the range of the maximum ground temperature ("max_ground_temp") of the dataset?
 
 ```{r 11response}
- 
+
 ```
 
 
@@ -214,13 +214,14 @@ We will be working with a dataset from the "Kaggle" website, which hosts competi
 24\. How many days (using `filter()` or `sum()` ) have a maximum ground or air temperature above zero and have a UV level of "high" or "very_high"?
 
 ```{r 24response}
- 
+
 ```
 
 
 25\. Make a boxplot (`boxplot()`) that looks at earth year ("earth_year") on the x-axis and minimum air temperature ("min_air_temp") on the y-axis.
 
 ```{r 25response}
+
 ```
 
 
