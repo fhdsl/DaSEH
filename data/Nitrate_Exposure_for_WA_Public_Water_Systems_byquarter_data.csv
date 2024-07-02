@@ -1,4 +1,4 @@
-﻿year,quarter,pop_on_sampled_PWS,pop_0-3ug/L,pop_>3-5ug/L,pop_>5-10ug/L,pop_>10-20ug/L,pop_>20ug/L,pop_on_PWS_with_non-detect,pop_exposed_to_exceedances,perc_pop_exposed_to_exceedances
+year,quarter,pop_on_sampled_PWS,pop_0-3ug/L,pop_>3-5ug/L,pop_>5-10ug/L,pop_>10-20ug/L,pop_>20ug/L,pop_on_PWS_with_non-detect,pop_exposed_to_exceedances,perc_pop_exposed_to_exceedances
 1999,Q1,106720,67775,0,32,0,0,38913,0,0
 1999,Q2,85541,55476,0,212,60,0,29793,60,0.1
 1999,Q3,559137,319252,231186,212,0,0,8487,0,0

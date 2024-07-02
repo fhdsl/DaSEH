@@ -17,16 +17,19 @@ bioinformatics
 Biostatistics
 Biostats
 Birla
+birthweight
 boardings
 Boardings
 Bonferroni
 bp
 BSPH
+bw
 byquarter
 CalEnviroScreen
 CDS
 CES
 ces
+CESPctlMoreThan
 ChatGPT
 cheatsheet
 circ
@@ -99,6 +102,7 @@ GitHub
 HAA
 Hadley
 Haloacetic
+haloacetic
 healthdata
 hoffman
 Hotline
@@ -137,6 +141,7 @@ lightblue
 lightgreen
 Linetype
 lmfit
+LowBirthWeightPctl
 LocationAbbr
 logfit
 longdash
@@ -264,6 +269,7 @@ VehOdo
 VehYear
 wastewater
 wb
+WhitePerc
 Wickham
 Wickham's
 wikipedia
