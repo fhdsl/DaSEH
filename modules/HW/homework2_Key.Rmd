@@ -80,7 +80,7 @@ mars <- read_csv(file = "mars_data.csv")
 6\. Import the data "dictionary" from https://daseh.org/data/kaggleMars_dictionary.txt. Use the `read_tsv()` function and assign it the name "key". 
 
 ```{r 6response}
-key <- read_tsv(file = "https://daseh.org/data/kaggleMars.txt")
+key <- read_tsv(file = "https://daseh.org/data/kaggleMars_dictionary.txt")
 # OR
 download.file(
   url = "https://daseh.org/data/kaggleMars_dictionary.txt",
