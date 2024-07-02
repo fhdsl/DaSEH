@@ -467,16 +467,18 @@ For example, if we want to fit a regression model where outcome is `income` and 
 
 ## Linear regression
 
-We will use our dataset about nitrate levels by quarter in public water sources in Washington.
+We will use our dataset about nitrate levels by quarter in public water sources in Washington. We'll load a slightly different version of this dataset, which can be found at "https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_v2_data.csv"
 
 
 ```{r}
+nitrate <- read_csv(file = "https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_v2_data.csv", show_col_types = F)
+
 head(nitrate)
 ```
 
 ## Linear regression: model fitting
 
-The upper limit of acceptable nitrates in water is 10 ug/L. We fit linear regression model with the number of people on public water systems with more than the limit of nitrates (`pop_exposed_to_exceedances`) as an outcome and the number of people exposed to 3-5 ug/L of nitrates (`pop_>3-5ug/L`) as a predictor. In other words, we are evaluating if the number of people exposed to low levels of nitrates in their water is predictive of the number of people exposed to excess nitrates in their water.of visits a doctor had.
+The upper limit of acceptable nitrates in water is 10 ug/L. We fit linear regression model with the number of people on public water systems with more than the limit of nitrates (`pop_exposed_to_exceedances`) as an outcome and the number of people exposed to 3-5 ug/L of nitrates (`pop_>3-5ug/L`) as a predictor. In other words, we are evaluating if the number of people exposed to low levels of nitrates in their water is predictive of the number of people exposed to excess nitrates in their water.
 
 ```{r}
 fit <- glm(pop_exposed_to_exceedances ~ `pop_>3-5ug/L`, data = nitrate)
@@ -577,7 +579,7 @@ tidy(fit6)
 
 By default, `ggplot` with a factor added as a color will look include the interaction term. Notice the different intercept and slope of the lines.
 
-```{r fig.height=3.5, fig.width=7}
+```{r fig.height=3.5, fig.width=7, warning=FALSE}
 ggplot(nitrate, aes(x = `pop_>3-5ug/L`, y = pop_exposed_to_exceedances, color = quarter)) +
   geom_point(size = 1, alpha = 0.8) +
   geom_smooth(method = "glm", se = FALSE) +
