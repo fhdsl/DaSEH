@@ -651,13 +651,15 @@ ggplot(er_visits_all, aes(x = year,
 
 ## Adding a facet can help make it easier to see what is happening {.codesmall}
 
-But what if we wanted to look at rates by county for different genders? Let's work a little with the `er_visits_gender` dataset. This is a subset of the larger CO ER visits dataset.
+But what if we wanted to look at rates by county for different genders? Let's work a little with the `CO_heat_ER_bygender` dataset. This is a subset of the larger CO ER visits dataset.
 
 Two options: `facet_grid()`- creates a grid shape `facet_wrap()` -more flexible
 
 Need to specify how you are faceting with the `~` sign.
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
+er_visits_gender <- CO_heat_ER_bygender
+
 ggplot(er_visits_gender, aes(x = year,
                  y = rate,
                  color = county)) +
