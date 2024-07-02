@@ -9,27 +9,28 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Data in this lab comes from the CDC (https://covid.cdc.gov/covid-data-tracker/#vaccinations_vacc-total-admin-rate-total - snapshot from January 12, 2022) and the Bureau of Economic Analysis (https://www.bea.gov/data/income-saving/personal-income-by-state).
+Data in this lab comes from the OCS "Exploring CO2 emissions across time" activity (https://www.opencasestudies.org/ocs-bp-co2-emissions/) and the CO Department of Health (https://coepht.colorado.gov/heat-related-illness). Both datasets are available in the `dasehr` package.
 
 ```{r message=FALSE}
 library(readr)
 library(dplyr)
 library(tidyr)
+library(dasehr)
 ```
 
 # Part 1
 
 ### 1.1
 
-Read in the SARS-CoV-2 Vaccination data from https://daseh.org/data/USA_covid19_vaccinations.csv. You can use the url or download the data. Assign the data the name "vacc". We will be reviewing new concepts here and incorporating some from week 1. 
+Open the `yearly_co2_emissions` dataset from the `dasehr` package and assign it to an object called `co2`. (You can also use `read_csv()` from the `readr` package and download the dataset directly from the daseh.org website: "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
 
 -  Remember to use `read_csv()` from the `readr` package.
 -  Do NOT use `read.csv()`.
 
 ```{r 1.1response}
-vacc <- read_csv("https://daseh.org/data/USA_covid19_vaccinations.csv")
-# If downloaded
-# vacc <- read_csv("USA_covid19_vaccinations.csv")
+co2 <- yearly_co2_emissions
+
+co2 <- read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
 ```
 
 ### 1.2
@@ -37,13 +38,13 @@ vacc <- read_csv("https://daseh.org/data/USA_covid19_vaccinations.csv")
 Look at the column names using `colnames` - do you notice any patterns?
 
 ```{r 1.2response}
-colnames(vacc)
-# Looks like many start with "Percent" and some start with "Total" - this indicates there are different units of measure for these different variables!
+colnames(co2)
+# Most column names are years
 ```
 
 ### 1.3
 
-Let's rename the column "State/Territory/Federal Entity" in "vacc" to "Entity" using `rename`. Make sure to reassign to `vacc` here and in subsequent steps.
+Let's rename the column "2011" in "co2" to "CO2_2011" using `rename`. Repeat this for the years 2012, 2013, and 2014. Make sure to reassign to `co2` here and in subsequent steps.
 
 ```
 # General format
@@ -51,12 +52,17 @@ new_data <- old_data %>% rename(newname = oldname)
 ```
 
 ```{r 1.3response}
-vacc <- vacc %>% rename(Entity = `State/Territory/Federal Entity`)
+co2 <- co2 %>% rename(
+  CO2_2011 = `2011`,
+  CO2_2012 = `2012`,
+  CO2_2013 = `2013`,
+  CO2_2014 = `2014`
+)
 ```
 
 ### 1.4
 
-Select only the columns "Entity", and those that start with "Percent". Use `select` and `starts_with("Percent")`. 
+Select only the columns "country", and those that start with "CO2_". Use `select` and `starts_with("CO2_")`.
 
 ```
 # General format
@@ -64,12 +70,13 @@ new_data <- old_data %>% select(colname1, colname2, ...)
 ```
 
 ```{r 1.4response}
-vacc <- vacc %>% select(Entity, starts_with("Percent"))
+co2 <- co2 %>% select(country, starts_with("CO2_"))
+
 ```
 
 ### 1.5
 
-Create a new dataset "vacc_long" that does `pivot_longer()` on all columns except "Entity". Remember that `!Entity` means all columns except "Entity".
+Create a new dataset "co2_long" that does `pivot_longer()` on all columns except "country". Remember that `!country` means all columns except "country".
 
 ```
 # General format
@@ -77,26 +84,26 @@ new_data <- old_data %>% pivot_longer(cols = colname(s))
 ```
 
 ```{r 1.5response}
-vacc_long <- vacc %>% pivot_longer(cols = !Entity)
+co2_long <- co2 %>% pivot_longer(cols = !country)
 ```
 
 ### 1.6
 
-Using `vacc_long`, filter the "Entity" column so it only includes values in the following list: "Maryland","Virginia","Florida","Massachusetts", "United States". **Hint**: use `filter` and `%in%`.
+Using `co2_long`, filter the "country" column so it only includes values from Indonesia and Canada. **Hint**: use `filter` and `%in%`.
 
 ```
 # General format
-new_data <- old_data %>% filter(colname %in% c(1, 2, 3, ...))
+new_data <- old_data %>% filter(colname %in% c(...))
 ```
 
 ```{r 1.6response}
-vacc_long <- vacc_long %>%
-  filter(Entity %in% c("Maryland", "Virginia", "Mississippi", "Massachusetts", "United States"))
+co2_long <- co2_long %>%
+  filter(country %in% c("Indonesia", "Canada"))
 ```
 
 ### 1.7
 
-Use `pivot_wider` to reshape "vacc_long". Use "Entity" for the `names_from` argument. Use "value" for the `values_from` argument. Call this new data `vacc_wide`. Look at the data. How do these states compare to one another.
+Use `pivot_wider` to reshape "co2_long". Use "county" for the `names_from` argument. Use "value" for the `values_from` argument. Call this new data `co2_wide`. Look at the data. How do these years compare to one another?
 
 ```
 # General format
@@ -104,12 +111,12 @@ new_data <- old_data %>% pivot_wider(names_from = column1, values_from = column2
 ```
 
 ```{r 1.7response}
-vacc_wide <- vacc_long %>%
+co2_wide <- co2_long %>%
   pivot_wider(
-    names_from = Entity,
+    names_from = country,
     values_from = value
   )
-vacc_wide
+co2_wide
 ```
 
 
@@ -117,36 +124,46 @@ vacc_wide
 
 ### P.1
 
-Take the code from Questions 1.1 and 1.3-1.7. Chain all of this code together using the pipe ` %>% `. Call your data `vacc_compare`.
+Take the code from Questions 1.1 and 1.3-1.7. Chain all of this code together using the pipe ` %>% `. Call your data `co2_compare`.
 
 ```{r P.1response}
-vacc_compare <-
-  read_csv("https://daseh.org/data/USA_covid19_vaccinations.csv") %>%
-  rename(Entity = `State/Territory/Federal Entity`) %>%
-  select(Entity, starts_with("Percent")) %>%
-  pivot_longer(cols = !Entity) %>%
-  filter(Entity %in% c("Maryland", "Virginia", "Mississippi", "Massachusetts", "United States")) %>%
-  pivot_wider(names_from = Entity, values_from = value)
-vacc_compare
+co2_compare <-
+  yearly_co2_emissions %>%
+  rename(
+    CO2_2011 = `2011`,
+    CO2_2012 = `2012`,
+    CO2_2013 = `2013`,
+    CO2_2014 = `2014`
+  ) %>% select(country, starts_with("CO2_")) %>%
+  pivot_longer(cols = !country) %>%
+  filter(country %in% c("Indonesia", "Canada")) %>%
+  pivot_wider(names_from = country, values_from = value)
+
+co2_compare
 ```
 
 ### P.2
 
 Modify the code from Question P.1:
 
--  Look for columns that start with "Total" (instead of "Percent") and 
--  Select different states/Entities to compare
--  Call your data `vacc_compare2`
+-  Choose 4 different years to examine 
+-  Select different countries to compare
+-  Call your data `co2_compare2`
 
 ```{r P.2response}
-vacc_compare2 <-
-  read_csv("https://daseh.org/data/USA_covid19_vaccinations.csv") %>%
-  rename(Entity = `State/Territory/Federal Entity`) %>%
-  select(Entity, starts_with("Total")) %>%
-  pivot_longer(cols = !Entity) %>%
-  filter(Entity %in% c("Alaska", "Kansas", "California", "United States")) %>%
-  pivot_wider(names_from = Entity, values_from = value)
-vacc_compare2
+co2_compare2 <-
+  yearly_co2_emissions %>%
+  rename(
+    CO2_1950 = `1950`,
+    CO2_1960 = `1960`,
+    CO2_1970 = `1970`,
+    CO2_1980 = `1980`
+  ) %>% select(country, starts_with("CO2_")) %>%
+  pivot_longer(cols = !country) %>%
+  filter(country %in% c("Brazil", "Mexico")) %>%
+  pivot_wider(names_from = country, values_from = value)
+
+co2_compare2
 ```
 
 
@@ -154,62 +171,59 @@ vacc_compare2
 
 ### 2.1
 
-Read in the GDP and Personal Income Data from https://daseh.org/data/gdp_personal_income.csv. You can use the url or download the data. Call it "gdp". 
+Open the `Yearly_CC_Disasters` dataset using the url below. Save the dataset as an object called "cc". rename the column "Country" to "country".
+
+"https://daseh.org/data/Yearly_CC_Disasters.csv"
+
 
 ```{r 2.1response}
-gdp <- read_csv("https://daseh.org/data/gdp_personal_income.csv")
-# If downloaded
-# gdp <- read_csv("gdp_personal_income.csv")
+cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv") %>% 
+  rename(country = Country)
 ```
+
 
 ### 2.2
 
-Use `pivot_wider` to reshape "gdp". Use "Description" for the `names_from` argument. Use "`2020`" for the `values_from` argument. Reassign this data to "gdp".
+Join the datasets "co2" and "cc" by "country". Keep all rows, even if there is no match. How many rows are there?
 
 ```
 # General format
-new_data <- old_data %>% pivot_wider(names_from = column1, values_from = column2)
+full_join(data1, data2, by = "")
 ```
 
 ```{r 2.2response}
-gdp <- gdp %>%
-  pivot_wider(
-    names_from = Description,
-    values_from = `2020`
-  )
+full_join(co2, cc, by = "country")
+# 1,032 rows
 ```
+
 
 ### 2.3
 
-Join the data. Keep only data that is found in both "vacc" and "gdp". 
-
-- First, try joining without using the `by` argument - what happens? 
-- Next, try joining using `by = c("Entity" = "GeoName")`. 
-- Call the output "merged". How many observations (rows) are there?
+Join the datasets "co2" and "cc" by "country". Keep only rows that match both datasets. How many rows are there?
 
 ```
 # General format
-new_data <- inner_join(x, y, by = c("colname1" = "colname2"))
+inner_join(data1, data2, by = "")
 ```
 
 ```{r 2.3response}
-# merged <- inner_join(vacc, gdp) does not work!
-merged <- inner_join(vacc, gdp, by = c("Entity" = "GeoName"))
-nrow(merged)
+inner_join(co2, cc, by = "country")
+# 628 rows
 ```
+
 
 ### 2.4
 
-Change your code from Question 10 to do a `full_join.` Call the output "full". How many observations (rows) are there?
+What countries are present in "co2" that are not present in "cc"? Use `anti_join`. What countries are present in "cc" that are not present in "co2"?
 
 ```
 # General format
-new_data <- full_join(x, y, by = c("colname1" = "colname2"))
+anti_join(data1, data2, by = "") %>% select(index)
 ```
 
 ```{r 2.4response}
-full <- full_join(vacc, gdp, by = c("Entity" = "GeoName"))
-nrow(full)
+anti_join(co2, cc, by = "country") %>% select(country)
+anti_join(cc, co2, by = "country") %>% select(country) %>% distinct()
 ```
 
 
@@ -217,34 +231,55 @@ nrow(full)
 
 ### P.3
 
-Do a left join of "vacc" and "gdp". Call the output "left". How many observations are there?
+Take the code from 2.2 and save the output as an object "co2_cc". Filter the dataset. Filter so that you only keep Indonesia and Canada.
 
 ```{r P.3response}
-left <- left_join(vacc, gdp, by = c("Entity" = "GeoName"))
-nrow(left)
+co2_cc <- full_join(co2, cc, by = "country") %>% 
+  filter(country %in% c("Indonesia", "Canada"))
 ```
+
 
 ### P.4
 
-Copy your code from Question P.3 and change it to a `right_join` with the same order of the arguments. Call the output "right". How many observations are there?
+Select:
+
+* the "country" column
+* data from the years 2014 originally in BOTH DATASETS (columns "CO2_2014" and `2014`)
+* the "Indicator" column
+
+Rename:
+
+* emissions = CO2_2014
+* disasters = `2014`
+
+Reassign to "co2_cc".
 
 ```{r P.4response}
-right <- right_join(vacc, gdp, by = c("Entity" = "GeoName"))
-nrow(right)
+co2_cc <- co2_cc %>% select(country, CO2_2014, Indicator, `2014`) %>%
+  rename(emissions = CO2_2014, disasters = `2014`)
 ```
+
 
 ### P.5
 
-Perform two `anti_join` operations on "vacc" and "gdp" to determine what Entities are missing from the GDP data and which are missing from the vaccine data.
-
-```
-# General format
-anti_join(L, R, by = c("name_L" = "name_R")) %>% select(name_L)
-```
+Use `stringr` to trim the piece of text, "Climate related disasters frequency, Number of Disasters: ", from the "Indicator" column. You will use the function `str_remove()` to do this. It works similarly to other `stringr` functions. Try to intuit how it works by using the documentation page (`?str_remove`).
 
 ```{r P.5response}
-in_vacc_only <- anti_join(vacc, gdp, by = c("Entity" = "GeoName")) %>% select(Entity)
-in_gdp_only <- anti_join(gdp, vacc, by = c("GeoName" = "Entity")) %>% select(GeoName)
-in_vacc_only
-in_gdp_only
+library(stringr)
+co2_cc <- co2_cc %>% mutate(Indicator = str_remove(
+  Indicator,
+  "Climate related disasters frequency, Number of Disasters: "
+))
+```
+
+
+### P.6
+
+Pivot the dataset so that there are columns for country, emissions, and a column for each "Indicator".
+
+```{r P.6response}
+co2_cc %>% pivot_wider(
+  names_from = Indicator, 
+  values_from = disasters
+)
 ```
