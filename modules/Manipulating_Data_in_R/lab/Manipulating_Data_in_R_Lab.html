@@ -353,20 +353,23 @@ display: none;
 </div>
 
 
-<p>Data in this lab comes from the CDC (<a href="https://covid.cdc.gov/covid-data-tracker/#vaccinations_vacc-total-admin-rate-total" class="uri">https://covid.cdc.gov/covid-data-tracker/#vaccinations_vacc-total-admin-rate-total</a>
-- snapshot from January 12, 2022) and the Bureau of Economic Analysis
-(<a href="https://www.bea.gov/data/income-saving/personal-income-by-state" class="uri">https://www.bea.gov/data/income-saving/personal-income-by-state</a>).</p>
+<p>Data in this lab comes from the OCS “Exploring CO2 emissions across
+time” activity (<a href="https://www.opencasestudies.org/ocs-bp-co2-emissions/" class="uri">https://www.opencasestudies.org/ocs-bp-co2-emissions/</a>)
+and the CO Department of Health (<a href="https://coepht.colorado.gov/heat-related-illness" class="uri">https://coepht.colorado.gov/heat-related-illness</a>). Both
+datasets are available in the <code>dasehr</code> package.</p>
 <pre class="r"><code>library(readr)
 library(dplyr)
-library(tidyr)</code></pre>
+library(tidyr)
+library(dasehr)</code></pre>
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>Read in the SARS-CoV-2 Vaccination data from <a href="https://daseh.org/data/USA_covid19_vaccinations.csv" class="uri">https://daseh.org/data/USA_covid19_vaccinations.csv</a>. You
-can use the url or download the data. Assign the data the name “vacc”.
-We will be reviewing new concepts here and incorporating some from week
-1.</p>
+<p>Open the <code>yearly_co2_emissions</code> dataset from the
+<code>dasehr</code> package and assign it to an object called
+<code>co2</code>. (You can also use <code>read_csv()</code> from the
+<code>readr</code> package and download the dataset directly from the
+daseh.org website: “<a href="https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv" class="uri">https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv</a>”)</p>
 <ul>
 <li>Remember to use <code>read_csv()</code> from the <code>readr</code>
 package.</li>
@@ -380,45 +383,43 @@ any patterns?</p>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
-<p>Let’s rename the column “State/Territory/Federal Entity” in “vacc” to
-“Entity” using <code>rename</code>. Make sure to reassign to
-<code>vacc</code> here and in subsequent steps.</p>
+<p>Let’s rename the column “2011” in “co2” to “CO2_2011” using
+<code>rename</code>. Repeat this for the years 2012, 2013, and 2014.
+Make sure to reassign to <code>co2</code> here and in subsequent
+steps.</p>
 <pre><code># General format
 new_data &lt;- old_data %&gt;% rename(newname = oldname)</code></pre>
 </div>
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
-<p>Select only the columns “Entity”, and those that start with
-“Percent”. Use <code>select</code> and
-<code>starts_with(&quot;Percent&quot;)</code>.</p>
+<p>Select only the columns “country”, and those that start with “CO2_”.
+Use <code>select</code> and <code>starts_with(&quot;CO2_&quot;)</code>.</p>
 <pre><code># General format
 new_data &lt;- old_data %&gt;% select(colname1, colname2, ...)</code></pre>
 </div>
 <div id="section-4" class="section level3">
 <h3>1.5</h3>
-<p>Create a new dataset “vacc_long” that does
-<code>pivot_longer()</code> on all columns except “Entity”. Remember
-that <code>!Entity</code> means all columns except “Entity”.</p>
+<p>Create a new dataset “co2_long” that does <code>pivot_longer()</code>
+on all columns except “country”. Remember that <code>!country</code>
+means all columns except “country”.</p>
 <pre><code># General format
 new_data &lt;- old_data %&gt;% pivot_longer(cols = colname(s))</code></pre>
 </div>
 <div id="section-5" class="section level3">
 <h3>1.6</h3>
-<p>Using <code>vacc_long</code>, filter the “Entity” column so it only
-includes values in the following list:
-“Maryland”,“Virginia”,“Florida”,“Massachusetts”, “United States”.
-<strong>Hint</strong>: use <code>filter</code> and
-<code>%in%</code>.</p>
+<p>Using <code>co2_long</code>, filter the “country” column so it only
+includes values from Indonesia and Canada. <strong>Hint</strong>: use
+<code>filter</code> and <code>%in%</code>.</p>
 <pre><code># General format
-new_data &lt;- old_data %&gt;% filter(colname %in% c(1, 2, 3, ...))</code></pre>
+new_data &lt;- old_data %&gt;% filter(colname %in% c(...))</code></pre>
 </div>
 <div id="section-6" class="section level3">
 <h3>1.7</h3>
-<p>Use <code>pivot_wider</code> to reshape “vacc_long”. Use “Entity” for
+<p>Use <code>pivot_wider</code> to reshape “co2_long”. Use “county” for
 the <code>names_from</code> argument. Use “value” for the
 <code>values_from</code> argument. Call this new data
-<code>vacc_wide</code>. Look at the data. How do these states compare to
-one another.</p>
+<code>co2_wide</code>. Look at the data. How do these years compare to
+one another?</p>
 <pre><code># General format
 new_data &lt;- old_data %&gt;% pivot_wider(names_from = column1, values_from = column2)</code></pre>
 </div>
@@ -429,16 +430,15 @@ new_data &lt;- old_data %&gt;% pivot_wider(names_from = column1, values_from = c
 <h3>P.1</h3>
 <p>Take the code from Questions 1.1 and 1.3-1.7. Chain all of this code
 together using the pipe <code>%&gt;%</code>. Call your data
-<code>vacc_compare</code>.</p>
+<code>co2_compare</code>.</p>
 </div>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
 <p>Modify the code from Question P.1:</p>
 <ul>
-<li>Look for columns that start with “Total” (instead of “Percent”)
-and</li>
-<li>Select different states/Entities to compare</li>
-<li>Call your data <code>vacc_compare2</code></li>
+<li>Choose 4 different years to examine</li>
+<li>Select different countries to compare</li>
+<li>Call your data <code>co2_compare2</code></li>
 </ul>
 </div>
 </div>
@@ -446,60 +446,70 @@ and</li>
 <h1>Part 2</h1>
 <div id="section-7" class="section level3">
 <h3>2.1</h3>
-<p>Read in the GDP and Personal Income Data from <a href="https://daseh.org/data/gdp_personal_income.csv" class="uri">https://daseh.org/data/gdp_personal_income.csv</a>. You can
-use the url or download the data. Call it “gdp”.</p>
+<p>Open the <code>Yearly_CC_Disasters</code> dataset using the url
+below. Save the dataset as an object called “cc”. rename the column
+“Country” to “country”.</p>
+<p>“<a href="https://daseh.org/data/Yearly_CC_Disasters.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters.csv</a>”</p>
 </div>
 <div id="section-8" class="section level3">
 <h3>2.2</h3>
-<p>Use <code>pivot_wider</code> to reshape “gdp”. Use “Description” for
-the <code>names_from</code> argument. Use “<code>2020</code>” for the
-<code>values_from</code> argument. Reassign this data to “gdp”.</p>
+<p>Join the datasets “co2” and “cc” by “country”. Keep all rows, even if
+there is no match. How many rows are there?</p>
 <pre><code># General format
-new_data &lt;- old_data %&gt;% pivot_wider(names_from = column1, values_from = column2)</code></pre>
+full_join(data1, data2, by = &quot;&quot;)</code></pre>
 </div>
 <div id="section-9" class="section level3">
 <h3>2.3</h3>
-<p>Join the data. Keep only data that is found in both “vacc” and
-“gdp”.</p>
-<ul>
-<li>First, try joining without using the <code>by</code> argument - what
-happens?</li>
-<li>Next, try joining using
-<code>by = c(&quot;Entity&quot; = &quot;GeoName&quot;)</code>.</li>
-<li>Call the output “merged”. How many observations (rows) are
-there?</li>
-</ul>
+<p>Join the datasets “co2” and “cc” by “country”. Keep only rows that
+match both datasets. How many rows are there?</p>
 <pre><code># General format
-new_data &lt;- inner_join(x, y, by = c(&quot;colname1&quot; = &quot;colname2&quot;))</code></pre>
+inner_join(data1, data2, by = &quot;&quot;)</code></pre>
 </div>
 <div id="section-10" class="section level3">
 <h3>2.4</h3>
-<p>Change your code from Question 10 to do a <code>full_join.</code>
-Call the output “full”. How many observations (rows) are there?</p>
+<p>What countries are present in “co2” that are not present in “cc”? Use
+<code>anti_join</code>. What countries are present in “cc” that are not
+present in “co2”?</p>
 <pre><code># General format
-new_data &lt;- full_join(x, y, by = c(&quot;colname1&quot; = &quot;colname2&quot;))</code></pre>
+anti_join(data1, data2, by = &quot;&quot;) %&gt;% select(index)</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own-1" class="section level1">
 <h1>Practice on Your Own!</h1>
 <div id="p.3" class="section level3">
 <h3>P.3</h3>
-<p>Do a left join of “vacc” and “gdp”. Call the output “left”. How many
-observations are there?</p>
+<p>Take the code from 2.2 and save the output as an object “co2_cc”.
+Filter the dataset. Filter so that you only keep Indonesia and
+Canada.</p>
 </div>
 <div id="p.4" class="section level3">
 <h3>P.4</h3>
-<p>Copy your code from Question P.3 and change it to a
-<code>right_join</code> with the same order of the arguments. Call the
-output “right”. How many observations are there?</p>
+<p>Select:</p>
+<ul>
+<li>the “country” column</li>
+<li>data from the years 2014 originally in BOTH DATASETS (columns
+“CO2_2014” and <code>2014</code>)</li>
+<li>the “Indicator” column</li>
+</ul>
+<p>Rename:</p>
+<ul>
+<li>emissions = CO2_2014</li>
+<li>disasters = <code>2014</code></li>
+</ul>
+<p>Reassign to “co2_cc”.</p>
 </div>
 <div id="p.5" class="section level3">
 <h3>P.5</h3>
-<p>Perform two <code>anti_join</code> operations on “vacc” and “gdp” to
-determine what Entities are missing from the GDP data and which are
-missing from the vaccine data.</p>
-<pre><code># General format
-anti_join(L, R, by = c(&quot;name_L&quot; = &quot;name_R&quot;)) %&gt;% select(name_L)</code></pre>
+<p>Use <code>stringr</code> to trim the piece of text, “Climate related
+disasters frequency, Number of Disasters:”, from the “Indicator” column.
+You will use the function <code>str_remove()</code> to do this. It works
+similarly to other <code>stringr</code> functions. Try to intuit how it
+works by using the documentation page (<code>?str_remove</code>).</p>
+</div>
+<div id="p.6" class="section level3">
+<h3>P.6</h3>
+<p>Pivot the dataset so that there are columns for country, emissions,
+and a column for each “Indicator”.</p>
 </div>
 </div>
 
