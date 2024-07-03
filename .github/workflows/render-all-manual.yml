@@ -85,12 +85,12 @@ jobs:
        # Render the cheatsheets
       - name: Render Cheatsheet pdfs
         run: |
-          Rscript --vanilla "scripts/render_cheatsheets.R" --files "${{ steps.all-files.outputs.files }}"
+          Rscript --vanilla "scripts/render_cheatsheets.R" --files "all"
         
        # Render resource pdfs
       - name: Render Resource pdfs
         run: |
-          Rscript --vanilla "scripts/render_resources.R" --files "${{ steps.all-files.outputs.files }}"
+          Rscript --vanilla "scripts/render_resources.R" --files "all"
         
        # Generate list of files that need pdfs
       - name: Generate list of lectures that need pdfs generated
