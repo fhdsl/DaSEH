@@ -3117,7 +3117,7 @@ div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -3128,7 +3128,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -3422,143 +3422,15 @@ me %&gt;%
 
 <p><code>pull()</code> converts a single data column into a vector. This allows you to run summary functions on these data. Once you have &ldquo;pulled&rdquo; the data column out, you don’t have to name it again in any piped summary functions.</p>
 
-<pre class = 'prettyprint lang-r'>er_visits &lt;- CO_heat_ER %&gt;% pull(visits)
+<pre class = 'prettyprint lang-r'>er_visits &lt;- CO_heat_ER %&gt;% pull(visits) 
 class(er_visits)</pre>
 
 <pre >[1] &quot;numeric&quot;</pre>
 
-<pre class = 'prettyprint lang-r'>er_visits</pre>
+<pre class = 'prettyprint lang-r'>head(er_visits, n = 20)</pre>
 
-<pre >   [1] 140 183 323 146 193 339 124 178 302  92 145 237 140 215 355 172 295 467
-  [19] 113 210 323 163 293 456 154 235 389 105 197 302 173 252 425 185 309 494
-  [37]  17  12  29  NA  13  23  14  17  31  NA  NA  15  NA  NA  16  14  28  42
-  [55]  11  21  32  16  21  37  17  19  36  NA  15  24  19  16  35  18  27  45
-  [73]   0   0   0   0   0   0  NA   0  NA   0   0   0   0  NA  NA   0  NA  NA
-  [91]   0  NA  NA   0   0   0  NA   0  NA   0  NA  NA   0   0   0   0   0   0
- [109]  16  17  33  12  15  27  11  NA  20  NA  NA  NA  16  15  31  18  21  39
- [127]  NA  NA  16  13  21  34  17  14  31  NA  11  16  12  18  30  15  24  39
- [145]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
- [163]  NA  NA  NA   0  NA  NA  NA   0  NA   0   0   0  NA  NA  NA  NA  NA  NA
- [181]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
- [199]   0   0   0  NA   0  NA  NA   0  NA   0   0   0   0   0   0   0  NA  NA
- [217]   0   0   0   0  NA  NA   0   0   0   0  NA  NA   0  NA  NA   0  NA  NA
- [235]   0  NA  NA  NA  NA  NA  NA  NA  NA   0  NA  NA   0  NA  NA   0   0   0
- [253]  NA  NA  12  NA  NA  13  NA  NA  12  NA  NA  19  NA  NA  14  NA  NA  18
- [271]  NA  NA  12  NA  11  18  NA  NA  13  NA  NA  12  NA  11  19  NA  15  19
- [289]  NA  NA  NA  NA  NA  NA  NA   0  NA  NA   0  NA   0  NA  NA  NA   0  NA
- [307]  NA   0  NA   0  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
- [325]   0   0   0   0  NA  NA  NA  NA  NA  NA   0  NA   0  NA  NA   0   0   0
- [343]  NA   0  NA  NA  NA  NA  NA   0  NA   0   0   0   0  NA  NA   0   0   0
- [361]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
- [379]   0   0   0  NA  NA  NA   0   0   0  NA   0  NA   0   0   0   0  NA  NA
- [397]   0   0   0   0   0   0   0  NA  NA   0   0   0  NA   0  NA   0  NA  NA
- [415]   0  NA  NA   0  NA  NA  NA   0  NA   0   0   0   0   0   0   0   0   0
- [433]   0   0   0   0   0   0  NA   0  NA   0  NA  NA   0   0   0   0  NA  NA
- [451]   0   0   0  NA  NA  NA   0  NA  NA   0  NA  NA   0   0   0   0   0   0
- [469]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
- [487]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
- [505]   0  NA  NA  NA   0  NA  NA   0  NA   0   0   0   0   0   0  NA   0  NA
- [523]   0  NA  NA   0   0   0   0  NA  NA  NA  NA  NA   0  NA  NA   0   0   0
- [541]   0   0   0  NA   0  NA   0   0   0   0   0   0   0   0   0   0   0   0
- [559]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
- [577]   0   0   0   0   0   0   0   0   0   0   0   0   0  NA  NA  NA  NA  NA
- [595]  NA  NA  NA  NA  NA  NA  NA   0  NA  NA  NA  NA  NA  NA  NA  NA   0  NA
- [613]  16  26  42  18  22  40  NA  NA  19  NA  19  23  NA  16  25  13  30  43
- [631]  13  11  24  13  30  43  12  22  34  12  22  34  NA  20  28  18  29  47
- [649]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
- [667]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
- [685]  NA  NA  NA  NA  NA  13  NA  NA  17  NA  NA  NA  NA  NA  NA  NA  NA  NA
- [703]  NA  NA  13  NA  NA  NA  NA  NA  18  NA  NA  NA  NA  NA  NA  NA  NA  NA
- [721]   0   0   0   0   0   0   0   0   0  NA   0  NA   0   0   0   0   0   0
- [739]   0  NA  NA   0  NA  NA  NA  NA  NA   0   0   0   0   0   0   0   0   0
- [757]  NA   0  NA  NA   0  NA   0  NA  NA   0  NA  NA  NA   0  NA  NA  NA  NA
- [775]   0   0   0  NA  NA  NA  NA   0  NA  NA   0  NA  NA  NA  NA   0  NA  NA
- [793]  17  25  42  NA  23  33  NA  20  27  11  NA  19  12  20  32  14  24  38
- [811]  NA  22  32  17  31  48  NA  28  38  NA  18  26  17  19  36  19  24  43
- [829]  NA  NA  NA  NA  NA  NA   0  NA  NA  NA   0  NA  NA  NA  NA  NA  NA  NA
- [847]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA   0  NA  NA  NA  NA  NA
- [865]   0  NA  NA  NA  NA  NA   0   0   0   0  NA  NA   0  NA  NA  NA  NA  NA
- [883]  NA  NA  NA  NA  NA  NA  NA  NA  NA   0  NA  NA  NA  NA  NA   0  NA  NA
- [901]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
- [919]   0  NA  NA   0   0   0   0   0   0   0  NA  NA   0   0   0   0   0   0
- [937]   0   0   0   0  NA  NA   0   0   0   0   0   0   0   0   0   0   0   0
- [955]  NA   0  NA   0  NA  NA   0  NA  NA   0   0   0   0   0   0   0   0   0
- [973]   0   0   0   0   0   0   0   0   0   0   0   0   0  NA  NA   0   0   0
- [991]  NA   0  NA   0   0   0   0   0   0   0   0   0   0  NA  NA   0   0   0
-[1009]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[1027]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[1045]   0   0   0   0   0   0  NA   0  NA  NA   0  NA   0   0   0   0   0   0
-[1063]   0  NA  NA   0  NA  NA  NA  NA  NA   0   0   0   0   0   0   0   0   0
-[1081]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[1099]   0   0   0   0   0   0   0   0   0   0  NA  NA   0   0   0   0   0   0
-[1117]  11  14  25  15  18  33  NA  18  24  NA  12  22  14  11  25  16  27  43
-[1135]  11  13  24  13  24  37  NA  15  24  13  14  27  20  16  36  14  14  28
-[1153]   0  NA  NA   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[1171]   0   0   0   0  NA  NA   0  NA  NA   0  NA  NA   0  NA  NA   0   0   0
-[1189]  NA  NA  NA   0   0   0   0   0   0   0   0   0   0  NA  NA  NA   0  NA
-[1207]   0  NA  NA   0  NA  NA   0   0   0   0   0   0  NA   0  NA   0  NA  NA
-[1225]   0   0   0   0   0   0   0  NA  NA   0   0   0   0   0   0   0  NA  NA
-[1243]  NA   0  NA   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[1261]   0  NA  NA   0   0   0   0   0   0   0  NA  NA  NA  NA  NA  NA   0  NA
-[1279]  NA  NA  NA  NA   0  NA  NA  NA  NA   0  NA  NA  NA  NA  NA  NA  NA  NA
-[1297]  12  NA  20  11  14  25  11  NA  21  NA  11  17  NA  27  36  14  28  42
-[1315]  NA  16  18  16  26  42  11  21  32  NA  NA  13  16  15  31  17  28  45
-[1333]   0   0   0   0   0   0   0   0   0   0   0   0  NA  NA  NA  NA  NA  NA
-[1351]   0  NA  NA  NA  NA  NA  NA  NA  NA   0  NA  NA  NA  NA  NA  NA  NA  NA
-[1369]   0   0   0   0   0   0  NA   0  NA   0   0   0   0   0   0  NA   0  NA
-[1387]   0   0   0   0   0   0   0   0   0   0  NA  NA   0  NA  NA   0   0   0
-[1405]   0  NA  NA  NA  NA  NA   0  NA  NA   0  NA  NA   0  NA  NA  NA  NA  NA
-[1423]   0  NA  NA  NA  NA  NA  NA  11  13   0  NA  NA  NA  NA  NA  NA  NA  NA
-[1441]  NA  NA  13  NA  NA  12  NA  12  21  NA  NA  13  NA  NA  19  NA  19  29
-[1459]  NA  NA  14  NA  20  30  NA  13  18  NA  NA  14  NA  NA  19  NA  11  17
-[1477]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[1495]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[1513]   0   0   0  NA  NA  NA  NA  NA  NA   0   0   0  NA   0  NA   0  NA  NA
-[1531]  NA  NA  NA   0   0   0   0   0   0   0   0   0  NA  NA  NA  NA  NA  NA
-[1549]   0   0   0   0   0   0   0   0   0   0   0   0   0  NA  NA  NA  NA  NA
-[1567]   0  NA  NA   0  NA  NA  NA  NA  NA  NA  NA  NA   0   0   0   0  NA  NA
-[1585]   0   0   0   0   0   0   0  NA  NA  NA  NA  NA   0   0   0   0  NA  NA
-[1603]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
-[1621]   0   0   0  NA  NA  NA  NA  NA  NA  NA  NA  NA   0  NA  NA  NA  NA  NA
-[1639]  NA  NA  NA  NA  NA  NA  NA  NA  NA   0  NA  NA  NA  NA  NA  NA  NA  11
-[1657]   0   0   0  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
-[1675]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA
-[1693]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[1711]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  NA  NA
-[1729]   0   0   0   0   0   0   0   0   0   0  NA  NA   0   0   0   0   0   0
-[1747]   0   0   0   0   0   0   0   0   0  NA  NA  NA   0   0   0   0   0   0
-[1765]   0   0   0   0   0   0   0   0   0  NA  NA  NA   0  NA  NA   0   0   0
-[1783]   0   0   0   0   0   0  NA  NA  NA   0   0   0   0   0   0   0   0   0
-[1801]   0  NA  NA   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[1819]   0   0   0   0   0   0   0   0   0   0   0   0  NA   0  NA   0  NA  NA
-[1837]  NA  NA  NA  NA  NA  NA  NA  NA  NA   0  NA  NA   0   0   0  NA  NA  11
-[1855]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA   0  NA  NA  NA  NA  NA
-[1873]  NA  13  23  NA  16  26  11  16  27  12  14  26  12  17  29  13  24  37
-[1891]  NA  18  28  11  25  36  NA  14  22  NA  19  28  NA  18  26  17  11  28
-[1909]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  NA  NA  NA
-[1927]   0   0   0  NA   0  NA   0   0   0   0  NA  NA   0  NA  NA   0   0   0
-[1945]   0   0   0   0  NA  NA   0  NA  NA   0  NA  NA   0   0   0   0  NA  NA
-[1963]   0   0   0   0   0   0   0   0   0  NA  NA  NA   0   0   0   0   0   0
-[1981]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  NA  NA
-[1999]   0   0   0   0  NA  NA   0  NA  NA   0   0   0  NA   0  NA  NA   0  NA
-[2017]   0   0   0   0   0   0   0   0   0   0  NA  NA  NA   0  NA   0   0   0
-[2035]   0  NA  NA   0  NA  NA   0  NA  NA   0   0   0   0   0   0   0   0   0
-[2053]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[2071]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[2089]   0   0   0   0   0   0   0  NA  NA   0   0   0   0   0   0   0   0   0
-[2107]   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-[2125]   0   0   0   0   0   0   0   0   0   0   0   0   0  NA  NA   0  NA  NA
-[2143]  NA  NA  NA   0  NA  NA   0   0   0   0   0   0   0   0   0   0  NA  NA
-[2161]   0   0   0  NA  NA  NA   0   0   0   0   0   0   0   0   0   0  NA  NA
-[2179]   0   0   0   0   0   0  NA   0  NA  NA  NA  NA   0   0   0  NA   0  NA
-[2197]   0   0   0   0   0   0  NA  NA  NA   0  NA  NA   0   0   0   0   0   0
-[2215]   0   0   0   0  NA  NA  NA  NA  NA   0  NA  NA   0  NA  NA  NA  NA  NA
-[2233]   0   0   0   0   0   0   0   0   0  NA   0  NA   0  NA  NA   0  NA  NA
-[2251]   0  NA  NA  NA  NA  NA  NA  NA  NA   0   0   0  NA  NA  NA   0  NA  NA
-[2269]  13  13  26  17  15  32  NA  14  23  NA  NA  15  11  18  29  NA  14  21
-[2287]  NA  24  33  19  18  37  NA  16  22  NA  16  25  NA  20  30  NA  25  31
-[2305]   0  NA  NA  NA   0  NA   0  NA  NA   0   0   0  NA  NA  NA   0   0   0
-[2323]   0  NA  NA  NA  NA  NA  NA  NA  NA   0  NA  NA   0  NA  NA  NA  NA  NA</pre>
+<pre > [1] 140 183 323 146 193 339 124 178 302  92 145 237 140 215 355 172 295 467 113
+[20] 210</pre>
 
 <pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% pull(visits) %&gt;% range(visits) # Incorrect</pre>
 
@@ -3574,8 +3446,7 @@ class(er_visits)</pre>
 
 <p>If you have the <code>dasehr</code> package installed successfully:</p>
 
-<pre class = 'prettyprint lang-r'>library(dasehr)
-yearly_co2 &lt;- yearly_co2_emissions</pre>
+<pre class = 'prettyprint lang-r'>yearly_co2 &lt;- yearly_co2_emissions</pre>
 
 <p><br> If not, download the <code>csv</code> file from <a href='https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv' title=''>https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv</a> and read it in:</p>
 
@@ -3607,378 +3478,17 @@ yearly_co2 &lt;- yearly_co2_emissions</pre>
 
 <p>Check out the data:</p>
 
-<pre class = 'prettyprint lang-r'>str(yearly_co2)</pre>
+<pre class = 'prettyprint lang-r'>yearly_co2_small &lt;- select(yearly_co2, `1900`:`1905`)
 
-<pre >spc_tbl_ [192 × 265] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
- $ country: chr [1:192] &quot;Afghanistan&quot; &quot;Albania&quot; &quot;Algeria&quot; &quot;Andorra&quot; ...
- $ 1751   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1752   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1753   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1754   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1755   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1756   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1757   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1758   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1759   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1760   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1761   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1762   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1763   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1764   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1765   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1766   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1767   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1768   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1769   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1770   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1771   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1772   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1773   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1774   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1775   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1776   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1777   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1778   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1779   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1780   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1781   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1782   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1783   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1784   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1785   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1786   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1787   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1788   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1789   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1790   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1791   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1792   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1793   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1794   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1795   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1796   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1797   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1798   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1799   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1800   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1801   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1802   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1803   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1804   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1805   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1806   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1807   : num [1:192] NA NA NA NA NA NA NA NA NA 169 ...
- $ 1808   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1809   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1810   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1811   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1812   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1813   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1814   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1815   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1816   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1817   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1818   : num [1:192] NA NA NA NA NA NA NA NA NA NA ...
- $ 1819   : num [1:192] NA NA NA NA NA NA NA NA NA 253 ...
- $ 1820   : num [1:192] NA NA NA NA NA NA NA NA NA 334 ...
- $ 1821   : num [1:192] NA NA NA NA NA NA NA NA NA 359 ...
- $ 1822   : num [1:192] NA NA NA NA NA NA NA NA NA 367 ...
- $ 1823   : num [1:192] NA NA NA NA NA NA NA NA NA 348 ...
- $ 1824   : num [1:192] NA NA NA NA NA NA NA NA NA 400 ...
- $ 1825   : num [1:192] NA NA NA NA NA NA NA NA NA 403 ...
- $ 1826   : num [1:192] NA NA NA NA NA NA NA NA NA 458 ...
- $ 1827   : num [1:192] NA NA NA NA NA NA NA NA NA 477 ...
- $ 1828   : num [1:192] NA NA NA NA NA NA NA NA NA 458 ...
- $ 1829   : num [1:192] NA NA NA NA NA NA NA NA NA 477 ...
- $ 1830   : num [1:192] NA NA NA NA NA NA NA 0.032 NA 495 ...
- $ 1831   : num [1:192] NA NA NA NA NA NA NA 0.0384 NA 480 ...
- $ 1832   : num [1:192] NA NA NA NA NA NA NA 0.0256 NA 513 ...
- $ 1833   : num [1:192] NA NA NA NA NA NA NA 0.032 NA 429 ...
- $ 1834   : num [1:192] NA NA NA NA NA NA NA NA NA 587 ...
- $ 1835   : num [1:192] NA NA NA NA NA NA NA NA NA 634 ...
- $ 1836   : num [1:192] NA NA NA NA NA NA NA NA NA 675 ...
- $ 1837   : num [1:192] NA NA NA NA NA NA NA NA NA 708 ...
- $ 1838   : num [1:192] NA NA NA NA NA NA NA NA NA 851 ...
- $ 1839   : num [1:192] NA NA NA NA NA NA NA NA NA 1060 ...
- $ 1840   : num [1:192] NA NA NA NA NA NA NA NA NA 1170 ...
- $ 1841   : num [1:192] NA NA NA NA NA NA NA NA NA 1320 ...
- $ 1842   : num [1:192] NA NA NA NA NA NA NA NA NA 1460 ...
- $ 1843   : num [1:192] NA NA NA NA NA NA NA NA NA 1270 ...
- $ 1844   : num [1:192] NA NA NA NA NA NA NA NA NA 1600 ...
- $ 1845   : num [1:192] NA NA NA NA NA NA NA NA NA 1800 ...
- $ 1846   : num [1:192] NA NA NA NA NA NA NA NA NA 2120 ...
- $ 1847   : num [1:192] NA NA NA NA NA NA NA NA NA 2080 ...
- $ 1848   : num [1:192] NA NA NA NA NA NA NA NA NA 2340 ...
-  [list output truncated]
- - attr(*, &quot;spec&quot;)=
-  .. cols(
-  ..   country = col_character(),
-  ..   `1751` = col_double(),
-  ..   `1752` = col_double(),
-  ..   `1753` = col_double(),
-  ..   `1754` = col_double(),
-  ..   `1755` = col_double(),
-  ..   `1756` = col_double(),
-  ..   `1757` = col_double(),
-  ..   `1758` = col_double(),
-  ..   `1759` = col_double(),
-  ..   `1760` = col_double(),
-  ..   `1761` = col_double(),
-  ..   `1762` = col_double(),
-  ..   `1763` = col_double(),
-  ..   `1764` = col_double(),
-  ..   `1765` = col_double(),
-  ..   `1766` = col_double(),
-  ..   `1767` = col_double(),
-  ..   `1768` = col_double(),
-  ..   `1769` = col_double(),
-  ..   `1770` = col_double(),
-  ..   `1771` = col_double(),
-  ..   `1772` = col_double(),
-  ..   `1773` = col_double(),
-  ..   `1774` = col_double(),
-  ..   `1775` = col_double(),
-  ..   `1776` = col_double(),
-  ..   `1777` = col_double(),
-  ..   `1778` = col_double(),
-  ..   `1779` = col_double(),
-  ..   `1780` = col_double(),
-  ..   `1781` = col_double(),
-  ..   `1782` = col_double(),
-  ..   `1783` = col_double(),
-  ..   `1784` = col_double(),
-  ..   `1785` = col_double(),
-  ..   `1786` = col_double(),
-  ..   `1787` = col_double(),
-  ..   `1788` = col_double(),
-  ..   `1789` = col_double(),
-  ..   `1790` = col_double(),
-  ..   `1791` = col_double(),
-  ..   `1792` = col_double(),
-  ..   `1793` = col_double(),
-  ..   `1794` = col_double(),
-  ..   `1795` = col_double(),
-  ..   `1796` = col_double(),
-  ..   `1797` = col_double(),
-  ..   `1798` = col_double(),
-  ..   `1799` = col_double(),
-  ..   `1800` = col_double(),
-  ..   `1801` = col_double(),
-  ..   `1802` = col_double(),
-  ..   `1803` = col_double(),
-  ..   `1804` = col_double(),
-  ..   `1805` = col_double(),
-  ..   `1806` = col_double(),
-  ..   `1807` = col_double(),
-  ..   `1808` = col_double(),
-  ..   `1809` = col_double(),
-  ..   `1810` = col_double(),
-  ..   `1811` = col_double(),
-  ..   `1812` = col_double(),
-  ..   `1813` = col_double(),
-  ..   `1814` = col_double(),
-  ..   `1815` = col_double(),
-  ..   `1816` = col_double(),
-  ..   `1817` = col_double(),
-  ..   `1818` = col_double(),
-  ..   `1819` = col_double(),
-  ..   `1820` = col_double(),
-  ..   `1821` = col_double(),
-  ..   `1822` = col_double(),
-  ..   `1823` = col_double(),
-  ..   `1824` = col_double(),
-  ..   `1825` = col_double(),
-  ..   `1826` = col_double(),
-  ..   `1827` = col_double(),
-  ..   `1828` = col_double(),
-  ..   `1829` = col_double(),
-  ..   `1830` = col_double(),
-  ..   `1831` = col_double(),
-  ..   `1832` = col_double(),
-  ..   `1833` = col_double(),
-  ..   `1834` = col_double(),
-  ..   `1835` = col_double(),
-  ..   `1836` = col_double(),
-  ..   `1837` = col_double(),
-  ..   `1838` = col_double(),
-  ..   `1839` = col_double(),
-  ..   `1840` = col_double(),
-  ..   `1841` = col_double(),
-  ..   `1842` = col_double(),
-  ..   `1843` = col_double(),
-  ..   `1844` = col_double(),
-  ..   `1845` = col_double(),
-  ..   `1846` = col_double(),
-  ..   `1847` = col_double(),
-  ..   `1848` = col_double(),
-  ..   `1849` = col_double(),
-  ..   `1850` = col_double(),
-  ..   `1851` = col_double(),
-  ..   `1852` = col_double(),
-  ..   `1853` = col_double(),
-  ..   `1854` = col_double(),
-  ..   `1855` = col_double(),
-  ..   `1856` = col_double(),
-  ..   `1857` = col_double(),
-  ..   `1858` = col_double(),
-  ..   `1859` = col_double(),
-  ..   `1860` = col_double(),
-  ..   `1861` = col_double(),
-  ..   `1862` = col_double(),
-  ..   `1863` = col_double(),
-  ..   `1864` = col_double(),
-  ..   `1865` = col_double(),
-  ..   `1866` = col_double(),
-  ..   `1867` = col_double(),
-  ..   `1868` = col_double(),
-  ..   `1869` = col_double(),
-  ..   `1870` = col_double(),
-  ..   `1871` = col_double(),
-  ..   `1872` = col_double(),
-  ..   `1873` = col_double(),
-  ..   `1874` = col_double(),
-  ..   `1875` = col_double(),
-  ..   `1876` = col_double(),
-  ..   `1877` = col_double(),
-  ..   `1878` = col_double(),
-  ..   `1879` = col_double(),
-  ..   `1880` = col_double(),
-  ..   `1881` = col_double(),
-  ..   `1882` = col_double(),
-  ..   `1883` = col_double(),
-  ..   `1884` = col_double(),
-  ..   `1885` = col_double(),
-  ..   `1886` = col_double(),
-  ..   `1887` = col_double(),
-  ..   `1888` = col_double(),
-  ..   `1889` = col_double(),
-  ..   `1890` = col_double(),
-  ..   `1891` = col_double(),
-  ..   `1892` = col_double(),
-  ..   `1893` = col_double(),
-  ..   `1894` = col_double(),
-  ..   `1895` = col_double(),
-  ..   `1896` = col_double(),
-  ..   `1897` = col_double(),
-  ..   `1898` = col_double(),
-  ..   `1899` = col_double(),
-  ..   `1900` = col_double(),
-  ..   `1901` = col_double(),
-  ..   `1902` = col_double(),
-  ..   `1903` = col_double(),
-  ..   `1904` = col_double(),
-  ..   `1905` = col_double(),
-  ..   `1906` = col_double(),
-  ..   `1907` = col_double(),
-  ..   `1908` = col_double(),
-  ..   `1909` = col_double(),
-  ..   `1910` = col_double(),
-  ..   `1911` = col_double(),
-  ..   `1912` = col_double(),
-  ..   `1913` = col_double(),
-  ..   `1914` = col_double(),
-  ..   `1915` = col_double(),
-  ..   `1916` = col_double(),
-  ..   `1917` = col_double(),
-  ..   `1918` = col_double(),
-  ..   `1919` = col_double(),
-  ..   `1920` = col_double(),
-  ..   `1921` = col_double(),
-  ..   `1922` = col_double(),
-  ..   `1923` = col_double(),
-  ..   `1924` = col_double(),
-  ..   `1925` = col_double(),
-  ..   `1926` = col_double(),
-  ..   `1927` = col_double(),
-  ..   `1928` = col_double(),
-  ..   `1929` = col_double(),
-  ..   `1930` = col_double(),
-  ..   `1931` = col_double(),
-  ..   `1932` = col_double(),
-  ..   `1933` = col_double(),
-  ..   `1934` = col_double(),
-  ..   `1935` = col_double(),
-  ..   `1936` = col_double(),
-  ..   `1937` = col_double(),
-  ..   `1938` = col_double(),
-  ..   `1939` = col_double(),
-  ..   `1940` = col_double(),
-  ..   `1941` = col_double(),
-  ..   `1942` = col_double(),
-  ..   `1943` = col_double(),
-  ..   `1944` = col_double(),
-  ..   `1945` = col_double(),
-  ..   `1946` = col_double(),
-  ..   `1947` = col_double(),
-  ..   `1948` = col_double(),
-  ..   `1949` = col_double(),
-  ..   `1950` = col_double(),
-  ..   `1951` = col_double(),
-  ..   `1952` = col_double(),
-  ..   `1953` = col_double(),
-  ..   `1954` = col_double(),
-  ..   `1955` = col_double(),
-  ..   `1956` = col_double(),
-  ..   `1957` = col_double(),
-  ..   `1958` = col_double(),
-  ..   `1959` = col_double(),
-  ..   `1960` = col_double(),
-  ..   `1961` = col_double(),
-  ..   `1962` = col_double(),
-  ..   `1963` = col_double(),
-  ..   `1964` = col_double(),
-  ..   `1965` = col_double(),
-  ..   `1966` = col_double(),
-  ..   `1967` = col_double(),
-  ..   `1968` = col_double(),
-  ..   `1969` = col_double(),
-  ..   `1970` = col_double(),
-  ..   `1971` = col_double(),
-  ..   `1972` = col_double(),
-  ..   `1973` = col_double(),
-  ..   `1974` = col_double(),
-  ..   `1975` = col_double(),
-  ..   `1976` = col_double(),
-  ..   `1977` = col_double(),
-  ..   `1978` = col_double(),
-  ..   `1979` = col_double(),
-  ..   `1980` = col_double(),
-  ..   `1981` = col_double(),
-  ..   `1982` = col_double(),
-  ..   `1983` = col_double(),
-  ..   `1984` = col_double(),
-  ..   `1985` = col_double(),
-  ..   `1986` = col_double(),
-  ..   `1987` = col_double(),
-  ..   `1988` = col_double(),
-  ..   `1989` = col_double(),
-  ..   `1990` = col_double(),
-  ..   `1991` = col_double(),
-  ..   `1992` = col_double(),
-  ..   `1993` = col_double(),
-  ..   `1994` = col_double(),
-  ..   `1995` = col_double(),
-  ..   `1996` = col_double(),
-  ..   `1997` = col_double(),
-  ..   `1998` = col_double(),
-  ..   `1999` = col_double(),
-  ..   `2000` = col_double(),
-  ..   `2001` = col_double(),
-  ..   `2002` = col_double(),
-  ..   `2003` = col_double(),
-  ..   `2004` = col_double(),
-  ..   `2005` = col_double(),
-  ..   `2006` = col_double(),
-  ..   `2007` = col_double(),
-  ..   `2008` = col_double(),
-  ..   `2009` = col_double(),
-  ..   `2010` = col_double(),
-  ..   `2011` = col_double(),
-  ..   `2012` = col_double(),
-  ..   `2013` = col_double(),
-  ..   `2014` = col_double()
-  .. )
- - attr(*, &quot;problems&quot;)=&lt;externalptr&gt; </pre>
+str(yearly_co2_small)</pre>
+
+<pre >tibble [192 × 6] (S3: tbl_df/tbl/data.frame)
+ $ 1900: num [1:192] NA NA NA NA NA NA 2070 131 10200 27700 ...
+ $ 1901: num [1:192] NA NA NA NA NA NA 2490 135 11400 28400 ...
+ $ 1902: num [1:192] NA NA NA NA NA NA 2820 130 11400 25700 ...
+ $ 1903: num [1:192] NA NA NA NA NA NA 2860 127 11200 25600 ...
+ $ 1904: num [1:192] NA NA NA NA NA NA 3800 142 11600 26900 ...
+ $ 1905: num [1:192] NA NA NA NA NA NA 3990 126 12100 28100 ...</pre>
 
 </article></slide><slide class=""><hgroup><h2>CO2 Emissions</h2></hgroup><article  id="co2-emissions">
 
@@ -3987,60 +3497,16 @@ yearly_co2 &lt;- yearly_co2_emissions</pre>
 <p>In this case, we will use the backticks (`) because we will be referring to a column that has a numerical name. If there are funky spaces or characters in the column name, the backticks are required.</p>
 
 <pre class = 'prettyprint lang-r'>library(dplyr)
-yearly_co2 &lt;- yearly_co2 %&gt;%
-  rename(year1751 = `1751`)</pre>
+yearly_co2_small &lt;- yearly_co2_small %&gt;%
+  rename(year1900 = `1900`)</pre>
 
 </article></slide><slide class=""><hgroup><h2>CO2 Emissions</h2></hgroup><article  id="co2-emissions-1">
 
 <p><code>colnames()</code> will show us the column names and show that the <code>1751</code> column is renamed:</p>
 
-<pre class = 'prettyprint lang-r'>colnames(yearly_co2)</pre>
+<pre class = 'prettyprint lang-r'>colnames(yearly_co2_small)</pre>
 
-<pre >  [1] &quot;country&quot;  &quot;year1751&quot; &quot;1752&quot;     &quot;1753&quot;     &quot;1754&quot;     &quot;1755&quot;    
-  [7] &quot;1756&quot;     &quot;1757&quot;     &quot;1758&quot;     &quot;1759&quot;     &quot;1760&quot;     &quot;1761&quot;    
- [13] &quot;1762&quot;     &quot;1763&quot;     &quot;1764&quot;     &quot;1765&quot;     &quot;1766&quot;     &quot;1767&quot;    
- [19] &quot;1768&quot;     &quot;1769&quot;     &quot;1770&quot;     &quot;1771&quot;     &quot;1772&quot;     &quot;1773&quot;    
- [25] &quot;1774&quot;     &quot;1775&quot;     &quot;1776&quot;     &quot;1777&quot;     &quot;1778&quot;     &quot;1779&quot;    
- [31] &quot;1780&quot;     &quot;1781&quot;     &quot;1782&quot;     &quot;1783&quot;     &quot;1784&quot;     &quot;1785&quot;    
- [37] &quot;1786&quot;     &quot;1787&quot;     &quot;1788&quot;     &quot;1789&quot;     &quot;1790&quot;     &quot;1791&quot;    
- [43] &quot;1792&quot;     &quot;1793&quot;     &quot;1794&quot;     &quot;1795&quot;     &quot;1796&quot;     &quot;1797&quot;    
- [49] &quot;1798&quot;     &quot;1799&quot;     &quot;1800&quot;     &quot;1801&quot;     &quot;1802&quot;     &quot;1803&quot;    
- [55] &quot;1804&quot;     &quot;1805&quot;     &quot;1806&quot;     &quot;1807&quot;     &quot;1808&quot;     &quot;1809&quot;    
- [61] &quot;1810&quot;     &quot;1811&quot;     &quot;1812&quot;     &quot;1813&quot;     &quot;1814&quot;     &quot;1815&quot;    
- [67] &quot;1816&quot;     &quot;1817&quot;     &quot;1818&quot;     &quot;1819&quot;     &quot;1820&quot;     &quot;1821&quot;    
- [73] &quot;1822&quot;     &quot;1823&quot;     &quot;1824&quot;     &quot;1825&quot;     &quot;1826&quot;     &quot;1827&quot;    
- [79] &quot;1828&quot;     &quot;1829&quot;     &quot;1830&quot;     &quot;1831&quot;     &quot;1832&quot;     &quot;1833&quot;    
- [85] &quot;1834&quot;     &quot;1835&quot;     &quot;1836&quot;     &quot;1837&quot;     &quot;1838&quot;     &quot;1839&quot;    
- [91] &quot;1840&quot;     &quot;1841&quot;     &quot;1842&quot;     &quot;1843&quot;     &quot;1844&quot;     &quot;1845&quot;    
- [97] &quot;1846&quot;     &quot;1847&quot;     &quot;1848&quot;     &quot;1849&quot;     &quot;1850&quot;     &quot;1851&quot;    
-[103] &quot;1852&quot;     &quot;1853&quot;     &quot;1854&quot;     &quot;1855&quot;     &quot;1856&quot;     &quot;1857&quot;    
-[109] &quot;1858&quot;     &quot;1859&quot;     &quot;1860&quot;     &quot;1861&quot;     &quot;1862&quot;     &quot;1863&quot;    
-[115] &quot;1864&quot;     &quot;1865&quot;     &quot;1866&quot;     &quot;1867&quot;     &quot;1868&quot;     &quot;1869&quot;    
-[121] &quot;1870&quot;     &quot;1871&quot;     &quot;1872&quot;     &quot;1873&quot;     &quot;1874&quot;     &quot;1875&quot;    
-[127] &quot;1876&quot;     &quot;1877&quot;     &quot;1878&quot;     &quot;1879&quot;     &quot;1880&quot;     &quot;1881&quot;    
-[133] &quot;1882&quot;     &quot;1883&quot;     &quot;1884&quot;     &quot;1885&quot;     &quot;1886&quot;     &quot;1887&quot;    
-[139] &quot;1888&quot;     &quot;1889&quot;     &quot;1890&quot;     &quot;1891&quot;     &quot;1892&quot;     &quot;1893&quot;    
-[145] &quot;1894&quot;     &quot;1895&quot;     &quot;1896&quot;     &quot;1897&quot;     &quot;1898&quot;     &quot;1899&quot;    
-[151] &quot;1900&quot;     &quot;1901&quot;     &quot;1902&quot;     &quot;1903&quot;     &quot;1904&quot;     &quot;1905&quot;    
-[157] &quot;1906&quot;     &quot;1907&quot;     &quot;1908&quot;     &quot;1909&quot;     &quot;1910&quot;     &quot;1911&quot;    
-[163] &quot;1912&quot;     &quot;1913&quot;     &quot;1914&quot;     &quot;1915&quot;     &quot;1916&quot;     &quot;1917&quot;    
-[169] &quot;1918&quot;     &quot;1919&quot;     &quot;1920&quot;     &quot;1921&quot;     &quot;1922&quot;     &quot;1923&quot;    
-[175] &quot;1924&quot;     &quot;1925&quot;     &quot;1926&quot;     &quot;1927&quot;     &quot;1928&quot;     &quot;1929&quot;    
-[181] &quot;1930&quot;     &quot;1931&quot;     &quot;1932&quot;     &quot;1933&quot;     &quot;1934&quot;     &quot;1935&quot;    
-[187] &quot;1936&quot;     &quot;1937&quot;     &quot;1938&quot;     &quot;1939&quot;     &quot;1940&quot;     &quot;1941&quot;    
-[193] &quot;1942&quot;     &quot;1943&quot;     &quot;1944&quot;     &quot;1945&quot;     &quot;1946&quot;     &quot;1947&quot;    
-[199] &quot;1948&quot;     &quot;1949&quot;     &quot;1950&quot;     &quot;1951&quot;     &quot;1952&quot;     &quot;1953&quot;    
-[205] &quot;1954&quot;     &quot;1955&quot;     &quot;1956&quot;     &quot;1957&quot;     &quot;1958&quot;     &quot;1959&quot;    
-[211] &quot;1960&quot;     &quot;1961&quot;     &quot;1962&quot;     &quot;1963&quot;     &quot;1964&quot;     &quot;1965&quot;    
-[217] &quot;1966&quot;     &quot;1967&quot;     &quot;1968&quot;     &quot;1969&quot;     &quot;1970&quot;     &quot;1971&quot;    
-[223] &quot;1972&quot;     &quot;1973&quot;     &quot;1974&quot;     &quot;1975&quot;     &quot;1976&quot;     &quot;1977&quot;    
-[229] &quot;1978&quot;     &quot;1979&quot;     &quot;1980&quot;     &quot;1981&quot;     &quot;1982&quot;     &quot;1983&quot;    
-[235] &quot;1984&quot;     &quot;1985&quot;     &quot;1986&quot;     &quot;1987&quot;     &quot;1988&quot;     &quot;1989&quot;    
-[241] &quot;1990&quot;     &quot;1991&quot;     &quot;1992&quot;     &quot;1993&quot;     &quot;1994&quot;     &quot;1995&quot;    
-[247] &quot;1996&quot;     &quot;1997&quot;     &quot;1998&quot;     &quot;1999&quot;     &quot;2000&quot;     &quot;2001&quot;    
-[253] &quot;2002&quot;     &quot;2003&quot;     &quot;2004&quot;     &quot;2005&quot;     &quot;2006&quot;     &quot;2007&quot;    
-[259] &quot;2008&quot;     &quot;2009&quot;     &quot;2010&quot;     &quot;2011&quot;     &quot;2012&quot;     &quot;2013&quot;    
-[265] &quot;2014&quot;    </pre>
+<pre >[1] &quot;year1900&quot; &quot;1901&quot;     &quot;1902&quot;     &quot;1903&quot;     &quot;1904&quot;     &quot;1905&quot;    </pre>
 
 </article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function">
 
@@ -4065,35 +3531,35 @@ yearly_co2 &lt;- yearly_co2 %&gt;%
 {data to use} %&gt;% 
    summarize({summary column name} = {operator(source column)}) </pre></div>
 
-<pre class = 'prettyprint lang-r'>yearly_co2 %&gt;% 
-  summarize(mean_1989 = mean(`1989`)) # Note the backticks, this is a column name!</pre>
+<pre class = 'prettyprint lang-r'>yearly_co2_small %&gt;% 
+  summarize(mean_1901 = mean(`1901`)) # Note the backticks, this is a column name!</pre>
 
 <pre ># A tibble: 1 × 1
-  mean_1989
+  mean_1901
       &lt;dbl&gt;
 1        NA</pre>
 
 <pre class = 'prettyprint lang-r'>yearly_co2 %&gt;% 
-  summarize(mean_1989 = mean(`1989`, na.rm = TRUE))</pre>
+  summarize(mean_1901 = mean(`1901`, na.rm = TRUE))</pre>
 
 <pre ># A tibble: 1 × 1
-  mean_1989
+  mean_1901
       &lt;dbl&gt;
-1   126046.</pre>
+1    41192.</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function-2">
 
 <p><code>summarize()</code> can do multiple operations at once. Just separate by a comma.</p>
 
-<pre class = 'prettyprint lang-r'>yearly_co2 %&gt;% 
-  summarize(mean_1989 = mean(`1989`, na.rm = TRUE),
-            median_1989 = median(`1989`, na.rm = TRUE),
-            median(`2000`, na.rm = TRUE))</pre>
+<pre class = 'prettyprint lang-r'>yearly_co2_small %&gt;% 
+  summarize(mean_1901 = mean(`1901`, na.rm = TRUE),
+            median_1901 = median(`1901`, na.rm = TRUE),
+            median(`1902`, na.rm = TRUE))</pre>
 
 <pre ># A tibble: 1 × 3
-  mean_1989 median_1989 `median(\`2000\`, na.rm = TRUE)`
+  mean_1901 median_1901 `median(\`1902\`, na.rm = TRUE)`
       &lt;dbl&gt;       &lt;dbl&gt;                            &lt;dbl&gt;
-1   126046.        8690                             7510</pre>
+1    41192.        3900                             3645</pre>
 
 <p><br> Notice how when we forget to provide a new name, output is still provided, but the column name is messy.</p>
 
@@ -4101,15 +3567,15 @@ yearly_co2 &lt;- yearly_co2 %&gt;%
 
 <p>This looks better.</p>
 
-<pre class = 'prettyprint lang-r'>yearly_co2 %&gt;% 
-  summarize(mean_1989 = mean(`1989`, na.rm = TRUE),
-            median_1989 = median(`1989`, na.rm = TRUE),
-            median_2000 = median(`2000`, na.rm = TRUE))</pre>
+<pre class = 'prettyprint lang-r'>yearly_co2_small %&gt;% 
+  summarize(mean_1901 = mean(`1901`, na.rm = TRUE),
+            median_1901 = median(`1901`, na.rm = TRUE),
+            median_1902 = median(`1902`, na.rm = TRUE))</pre>
 
 <pre ># A tibble: 1 × 3
-  mean_1989 median_1989 median_2000
+  mean_1901 median_1901 median_1902
       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1   126046.        8690        7510</pre>
+1    41192.        3900        3645</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function-4">
 
@@ -4121,560 +3587,24 @@ yearly_co2 &lt;- yearly_co2 %&gt;%
 
 <p>Using <code>summary()</code> can give you rough snapshots of each numeric column (character columns are skipped):</p>
 
-<pre class = 'prettyprint lang-r'>summary(yearly_co2)</pre>
+<pre class = 'prettyprint lang-r'>summary(yearly_co2_small)</pre>
 
-<pre >   country             year1751         1752           1753           1754     
- Length:192         Min.   :9360   Min.   :9360   Min.   :9360   Min.   :9370  
- Class :character   1st Qu.:9360   1st Qu.:9360   1st Qu.:9360   1st Qu.:9370  
- Mode  :character   Median :9360   Median :9360   Median :9360   Median :9370  
-                    Mean   :9360   Mean   :9360   Mean   :9360   Mean   :9370  
-                    3rd Qu.:9360   3rd Qu.:9360   3rd Qu.:9360   3rd Qu.:9370  
-                    Max.   :9360   Max.   :9360   Max.   :9360   Max.   :9370  
-                    NA&#39;s   :191    NA&#39;s   :191    NA&#39;s   :191    NA&#39;s   :191   
-      1755           1756            1757            1758            1759      
- Min.   :9370   Min.   :10000   Min.   :10000   Min.   :10000   Min.   :10000  
- 1st Qu.:9370   1st Qu.:10000   1st Qu.:10000   1st Qu.:10000   1st Qu.:10000  
- Median :9370   Median :10000   Median :10000   Median :10000   Median :10000  
- Mean   :9370   Mean   :10000   Mean   :10000   Mean   :10000   Mean   :10000  
- 3rd Qu.:9370   3rd Qu.:10000   3rd Qu.:10000   3rd Qu.:10000   3rd Qu.:10000  
- Max.   :9370   Max.   :10000   Max.   :10000   Max.   :10000   Max.   :10000  
- NA&#39;s   :191    NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191    
-      1760            1761            1762            1763      
- Min.   :10000   Min.   :11000   Min.   :11000   Min.   :11000  
- 1st Qu.:10000   1st Qu.:11000   1st Qu.:11000   1st Qu.:11000  
- Median :10000   Median :11000   Median :11000   Median :11000  
- Mean   :10000   Mean   :11000   Mean   :11000   Mean   :11000  
- 3rd Qu.:10000   3rd Qu.:11000   3rd Qu.:11000   3rd Qu.:11000  
- Max.   :10000   Max.   :11000   Max.   :11000   Max.   :11000  
- NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191    
-      1764            1765            1766            1767      
- Min.   :11000   Min.   :11000   Min.   :12300   Min.   :12300  
- 1st Qu.:11000   1st Qu.:11000   1st Qu.:12300   1st Qu.:12300  
- Median :11000   Median :11000   Median :12300   Median :12300  
- Mean   :11000   Mean   :11000   Mean   :12300   Mean   :12300  
- 3rd Qu.:11000   3rd Qu.:11000   3rd Qu.:12300   3rd Qu.:12300  
- Max.   :11000   Max.   :11000   Max.   :12300   Max.   :12300  
- NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191    
-      1768            1769            1770            1771      
- Min.   :12300   Min.   :12300   Min.   :12300   Min.   :13600  
- 1st Qu.:12300   1st Qu.:12300   1st Qu.:12300   1st Qu.:13600  
- Median :12300   Median :12300   Median :12300   Median :13600  
- Mean   :12300   Mean   :12300   Mean   :12300   Mean   :13600  
- 3rd Qu.:12300   3rd Qu.:12300   3rd Qu.:12300   3rd Qu.:13600  
- Max.   :12300   Max.   :12300   Max.   :12300   Max.   :13600  
- NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191    
-      1772            1773            1774            1775      
- Min.   :13600   Min.   :13600   Min.   :13600   Min.   :13600  
- 1st Qu.:13600   1st Qu.:13600   1st Qu.:13600   1st Qu.:13600  
- Median :13600   Median :13600   Median :13600   Median :13600  
- Mean   :13600   Mean   :13600   Mean   :13600   Mean   :13600  
- 3rd Qu.:13600   3rd Qu.:13600   3rd Qu.:13600   3rd Qu.:13600  
- Max.   :13600   Max.   :13600   Max.   :13600   Max.   :13600  
- NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191    
-      1776            1777            1778            1779      
- Min.   :15000   Min.   :15100   Min.   :15100   Min.   :15100  
- 1st Qu.:15000   1st Qu.:15100   1st Qu.:15100   1st Qu.:15100  
- Median :15000   Median :15100   Median :15100   Median :15100  
- Mean   :15000   Mean   :15100   Mean   :15100   Mean   :15100  
- 3rd Qu.:15000   3rd Qu.:15100   3rd Qu.:15100   3rd Qu.:15100  
- Max.   :15000   Max.   :15100   Max.   :15100   Max.   :15100  
- NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191    
-      1780            1781            1782            1783      
- Min.   :15100   Min.   :16900   Min.   :16900   Min.   :16900  
- 1st Qu.:15100   1st Qu.:16900   1st Qu.:16900   1st Qu.:16900  
- Median :15100   Median :16900   Median :16900   Median :16900  
- Mean   :15100   Mean   :16900   Mean   :16900   Mean   :16900  
- 3rd Qu.:15100   3rd Qu.:16900   3rd Qu.:16900   3rd Qu.:16900  
- Max.   :15100   Max.   :16900   Max.   :16900   Max.   :16900  
- NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191     NA&#39;s   :191    
-      1784            1785               1786               1787         
- Min.   :16900   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:16900   1st Qu.: 4227.75   1st Qu.: 4802.75   1st Qu.: 4802.75  
- Median :16900   Median : 8451.83   Median : 9601.83   Median : 9601.83  
- Mean   :16900   Mean   : 8451.83   Mean   : 9601.83   Mean   : 9601.83  
- 3rd Qu.:16900   3rd Qu.:12675.92   3rd Qu.:14400.92   3rd Qu.:14400.92  
- Max.   :16900   Max.   :16900.00   Max.   :19200.00   Max.   :19200.00  
- NA&#39;s   :191     NA&#39;s   :190        NA&#39;s   :190        NA&#39;s   :190       
-      1788               1789               1790               1791         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.: 4802.75   1st Qu.: 4802.75   1st Qu.: 4802.75   1st Qu.: 5352.75  
- Median : 9601.83   Median : 9601.83   Median : 9601.83   Median :10701.83  
- Mean   : 9601.83   Mean   : 9601.83   Mean   : 9601.83   Mean   :10701.83  
- 3rd Qu.:14400.92   3rd Qu.:14400.92   3rd Qu.:14400.92   3rd Qu.:16050.92  
- Max.   :19200.00   Max.   :19200.00   Max.   :19200.00   Max.   :21400.00  
- NA&#39;s   :190        NA&#39;s   :190        NA&#39;s   :190        NA&#39;s   :190       
-      1792               1793               1794               1795         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:  236.34   1st Qu.:  241.84   1st Qu.:  223.84   1st Qu.:  225.34  
- Median :  469.00   Median :  480.00   Median :  444.00   Median :  447.00  
- Mean   : 7290.89   Mean   : 7294.56   Mean   : 7315.89   Mean   : 7316.89  
- 3rd Qu.:10934.50   3rd Qu.:10940.00   3rd Qu.:10972.00   3rd Qu.:10973.50  
- Max.   :21400.00   Max.   :21400.00   Max.   :21500.00   Max.   :21500.00  
- NA&#39;s   :189        NA&#39;s   :189        NA&#39;s   :189        NA&#39;s   :189       
-      1796               1797               1798               1799         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:  269.33   1st Qu.:  276.83   1st Qu.:  289.83   1st Qu.:  315.33  
- Median :  535.00   Median :  550.00   Median :  576.00   Median :  627.00  
- Mean   : 7646.22   Mean   : 8051.22   Mean   : 8359.89   Mean   : 8810.22  
- 3rd Qu.:11467.50   3rd Qu.:12075.00   3rd Qu.:12538.00   3rd Qu.:13213.50  
- Max.   :22400.00   Max.   :23600.00   Max.   :24500.00   Max.   :25800.00  
- NA&#39;s   :189        NA&#39;s   :189        NA&#39;s   :189        NA&#39;s   :189       
-      1800               1801               1802               1803         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:  253.00   1st Qu.:  268.00   1st Qu.:  370.50   1st Qu.:  297.00  
- Median :  407.00   Median :  444.00   Median :  554.00   Median :  462.00  
- Mean   : 5631.93   Mean   : 5590.13   Mean   : 5262.67   Mean   : 6299.53  
- 3rd Qu.:  796.00   3rd Qu.:  535.00   3rd Qu.: 4320.00   3rd Qu.:  535.00  
- Max.   :26700.00   Max.   :26700.00   Max.   :26900.00   Max.   :30200.00  
- NA&#39;s   :187        NA&#39;s   :187        NA&#39;s   :185        NA&#39;s   :187       
-      1804               1805               1806               1807         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:  365.00   1st Qu.:  341.00   1st Qu.:  334.00   1st Qu.:  221.25  
- Median :  734.00   Median :  572.00   Median :  521.00   Median :  378.00  
- Mean   : 5730.94   Mean   : 6691.33   Mean   : 7019.53   Mean   : 6153.11  
- 3rd Qu.: 1887.50   3rd Qu.: 1040.00   3rd Qu.:  939.00   3rd Qu.: 2112.00  
- Max.   :30400.00   Max.   :31500.00   Max.   :33300.00   Max.   :33300.00  
- NA&#39;s   :186        NA&#39;s   :187        NA&#39;s   :187        NA&#39;s   :186       
-      1808               1809               1810               1811         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:  392.00   1st Qu.:  403.00   1st Qu.:  455.50   1st Qu.:  482.75  
- Median :  502.00   Median :  473.00   Median :  773.50   Median :  759.00  
- Mean   : 7019.13   Mean   : 7022.13   Mean   : 6231.44   Mean   : 6603.11  
- 3rd Qu.:  898.00   3rd Qu.:  931.00   3rd Qu.: 1834.75   3rd Qu.: 1769.50  
- Max.   :33300.00   Max.   :33300.00   Max.   :33300.00   Max.   :35600.00  
- NA&#39;s   :187        NA&#39;s   :187        NA&#39;s   :186        NA&#39;s   :186       
-      1812               1813               1814               1815         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:  462.25   1st Qu.:  416.00   1st Qu.:  516.75   1st Qu.:  592.75  
- Median :  698.50   Median :  706.00   Median :  722.50   Median :  815.50  
- Mean   : 6845.94   Mean   : 6874.44   Mean   : 7023.44   Mean   : 7260.78  
- 3rd Qu.: 1893.25   3rd Qu.: 1760.25   3rd Qu.: 1788.50   3rd Qu.: 2012.50  
- Max.   :37000.00   Max.   :37400.00   Max.   :38100.00   Max.   :39000.00  
- NA&#39;s   :186        NA&#39;s   :186        NA&#39;s   :186        NA&#39;s   :186       
-      1816               1817               1818               1819         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:  667.50   1st Qu.:  725.25   1st Qu.:  816.75   1st Qu.:  506.00  
- Median : 1534.00   Median : 1702.00   Median : 1652.00   Median :  763.00  
- Mean   : 7955.94   Mean   : 8251.11   Mean   : 8286.44   Mean   : 7145.52  
- 3rd Qu.: 2472.50   3rd Qu.: 3200.00   3rd Qu.: 3242.50   3rd Qu.: 2920.00  
- Max.   :41500.00   Max.   :42000.00   Max.   :42100.00   Max.   :42400.00  
- NA&#39;s   :186        NA&#39;s   :186        NA&#39;s   :186        NA&#39;s   :185       
-      1820               1821               1822               1823         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:  541.00   1st Qu.:  594.00   1st Qu.:  616.00   1st Qu.:  625.00  
- Median :  792.00   Median :  829.00   Median :  909.00   Median : 1220.00  
- Mean   : 7251.10   Mean   : 7351.52   Mean   : 7649.24   Mean   : 8083.38  
- 3rd Qu.: 3140.00   3rd Qu.: 3270.00   3rd Qu.: 3400.00   3rd Qu.: 3605.00  
- Max.   :42600.00   Max.   :42900.00   Max.   :44600.00   Max.   :46900.00  
- NA&#39;s   :185        NA&#39;s   :185        NA&#39;s   :185        NA&#39;s   :185       
-      1824               1825               1826               1827         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:  710.00   1st Qu.:  771.50   1st Qu.:  839.00   1st Qu.:  893.50  
- Median : 1280.00   Median : 1330.00   Median : 1320.00   Median : 1450.00  
- Mean   : 8364.81   Mean   : 8682.38   Mean   : 8783.10   Mean   : 9427.24  
- 3rd Qu.: 3375.00   3rd Qu.: 4150.00   3rd Qu.: 4140.00   3rd Qu.: 5225.00  
- Max.   :49100.00   Max.   :49600.00   Max.   :50200.00   Max.   :52300.00  
- NA&#39;s   :185        NA&#39;s   :185        NA&#39;s   :185        NA&#39;s   :185       
-      1828               1829               1830               1831         
- Min.   :    3.67   Min.   :    3.67   Min.   :    0.03   Min.   :    0.04  
- 1st Qu.:  834.00   1st Qu.:  360.50   1st Qu.:    0.17   1st Qu.:    0.20  
- Median : 1600.00   Median : 1435.00   Median :    3.56   Median :    3.67  
- Mean   : 9523.10   Mean   : 8308.96   Mean   : 3715.92   Mean   : 3524.28  
- 3rd Qu.: 5395.00   3rd Qu.: 4242.50   3rd Qu.:  618.75   3rd Qu.:  562.50  
- Max.   :52600.00   Max.   :53400.00   Max.   :67900.00   Max.   :65800.00  
- NA&#39;s   :185        NA&#39;s   :184        NA&#39;s   :168        NA&#39;s   :168       
-      1832               1833               1834               1835         
- Min.   :    0.03   Min.   :    0.03   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:    0.12   1st Qu.:    0.15   1st Qu.:   51.35   1st Qu.:   33.00  
- Median :    2.77   Median :    3.46   Median : 1130.00   Median : 1210.00  
- Mean   : 3701.44   Mean   : 3774.81   Mean   : 8051.55   Mean   : 8227.94  
- 3rd Qu.:  771.50   3rd Qu.:  749.50   3rd Qu.: 4415.00   3rd Qu.: 4850.00  
- Max.   :65600.00   Max.   :65500.00   Max.   :65600.00   Max.   :65300.00  
- NA&#39;s   :169        NA&#39;s   :169        NA&#39;s   :181        NA&#39;s   :181       
-      1836               1837               1838               1839         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:   53.15   1st Qu.:   53.20   1st Qu.:   56.80   1st Qu.:   46.77  
- Median : 1370.00   Median : 1470.00   Median : 1590.00   Median : 1370.00  
- Mean   : 9527.57   Mean   : 9525.80   Mean   : 9834.91   Mean   : 9306.22  
- 3rd Qu.: 5400.00   3rd Qu.: 5980.00   3rd Qu.: 6385.00   3rd Qu.: 6790.00  
- Max.   :76500.00   Max.   :73800.00   Max.   :75900.00   Max.   :77800.00  
- NA&#39;s   :181        NA&#39;s   :181        NA&#39;s   :181        NA&#39;s   :180       
-      1840               1841               1842               1843         
- Min.   :    3.67   Min.   :    3.67   Min.   :    3.67   Min.   :    3.67  
- 1st Qu.:   43.08   1st Qu.:   91.92   1st Qu.:   83.40   1st Qu.:   88.00  
- Median : 1570.00   Median : 1730.00   Median : 1870.00   Median : 1270.00  
- Mean   : 9915.89   Mean   :10224.06   Mean   :10794.58   Mean   :10233.13  
- 3rd Qu.: 8092.50   3rd Qu.: 7940.00   3rd Qu.: 8492.50   3rd Qu.: 7770.00  
- Max.   :81000.00   Max.   :81900.00   Max.   :85400.00   Max.   :89200.00  
- NA&#39;s   :180        NA&#39;s   :180        NA&#39;s   :180        NA&#39;s   :179       
-      1844               1845                1846              1847         
- Min.   :    3.67   Min.   :     3.67   Min.   :   25.7   Min.   :    33.0  
- 1st Qu.:  158.00   1st Qu.:    99.00   1st Qu.:  131.0   1st Qu.:   166.8  
- Median : 1600.00   Median :  1800.00   Median : 2495.0   Median :  2555.0  
- Mean   :10886.59   Mean   : 11944.82   Mean   :11277.6   Mean   : 12358.8  
- 3rd Qu.: 9310.00   3rd Qu.: 11200.00   3rd Qu.:11767.5   3rd Qu.: 12757.5  
- Max.   :93500.00   Max.   :100000.00   Max.   :95800.0   Max.   :104000.0  
- NA&#39;s   :179        NA&#39;s   :179         NA&#39;s   :178       NA&#39;s   :178       
-      1848               1849               1850                1851         
- Min.   :    40.3   Min.   :    47.7   Min.   :     0.20   Min.   :    69.7  
- 1st Qu.:   293.0   1st Qu.:   271.0   1st Qu.:     1.51   1st Qu.:   284.2  
- Median :  3050.0   Median :  3010.0   Median :    70.70   Median :  2730.0  
- Mean   : 13349.7   Mean   : 14114.2   Mean   :  7309.46   Mean   : 14239.5  
- 3rd Qu.: 12800.0   3rd Qu.: 13600.0   3rd Qu.:  2735.00   3rd Qu.: 15225.0  
- Max.   :109000.0   Max.   :116000.0   Max.   :123000.00   Max.   :117000.0  
- NA&#39;s   :179        NA&#39;s   :179        NA&#39;s   :165         NA&#39;s   :178       
-      1852               1853               1854               1855          
- Min.   :    84.3   Min.   :   103.0   Min.   :   125.0   Min.   :     0.60  
- 1st Qu.:   336.8   1st Qu.:   348.5   1st Qu.:   441.5   1st Qu.:     4.61  
- Median :  3290.0   Median :  3700.0   Median :  3980.0   Median :   214.00  
- Mean   : 14812.5   Mean   : 15555.1   Mean   : 18210.8   Mean   :  9659.64  
- 3rd Qu.: 17250.0   3rd Qu.: 18550.0   3rd Qu.: 21575.0   3rd Qu.:  4175.00  
- Max.   :116000.0   Max.   :116000.0   Max.   :139000.0   Max.   :131000.00  
- NA&#39;s   :178        NA&#39;s   :178        NA&#39;s   :178        NA&#39;s   :165        
-      1856             1857             1858                1859          
- Min.   :   180   Min.   :   216   Min.   :     0.84   Min.   :     0.90  
- 1st Qu.:   520   1st Qu.:   625   1st Qu.:     5.62   1st Qu.:     5.96  
- Median :  4485   Median :  4550   Median :   266.00   Median :   317.00  
- Mean   : 19788   Mean   : 20015   Mean   :  9473.59   Mean   : 10048.96  
- 3rd Qu.: 26475   3rd Qu.: 28200   3rd Qu.:  3070.00   3rd Qu.:  3055.00  
- Max.   :140000   Max.   :138000   Max.   :135000.00   Max.   :150000.00  
- NA&#39;s   :178      NA&#39;s   :178      NA&#39;s   :162         NA&#39;s   :162        
-      1860                1861               1862                1863          
- Min.   :     1.18   Min.   :     1.5   Min.   :     1.36   Min.   :     1.42  
- 1st Qu.:    14.55   1st Qu.:    18.5   1st Qu.:    16.70   1st Qu.:    17.50  
- Median :   279.00   Median :   458.0   Median :   469.00   Median :   506.00  
- Mean   :  9454.17   Mean   :  9941.7   Mean   : 10140.36   Mean   : 10795.61  
- 3rd Qu.:  1418.00   3rd Qu.:  1489.0   3rd Qu.:  1710.00   3rd Qu.:  2015.00  
- Max.   :168000.00   Max.   :175000.0   Max.   :170000.00   Max.   :180000.00  
- NA&#39;s   :157         NA&#39;s   :157        NA&#39;s   :157         NA&#39;s   :157        
-      1864                1865                1866          
- Min.   :     1.59   Min.   :     1.52   Min.   :     4.81  
- 1st Qu.:    19.65   1st Qu.:    20.77   1st Qu.:    63.88  
- Median :   572.00   Median :   585.00   Median :   702.50  
- Mean   : 11641.33   Mean   : 12028.59   Mean   : 12403.70  
- 3rd Qu.:  2205.00   3rd Qu.:  2365.00   3rd Qu.:  2467.50  
- Max.   :194000.00   Max.   :206000.00   Max.   :212000.00  
- NA&#39;s   :157         NA&#39;s   :156         NA&#39;s   :156        
-      1867                1868                1869               1870          
- Min.   :     5.52   Min.   :     4.59   Min.   :6.23e+00   Min.   :     6.76  
- 1st Qu.:    60.02   1st Qu.:    44.30   1st Qu.:6.01e+01   1st Qu.:    45.02  
- Median :   785.00   Median :   733.00   Median :6.74e+02   Median :   681.50  
- Mean   : 13295.67   Mean   : 13261.99   Mean   :1.41e+04   Mean   : 14035.93  
- 3rd Qu.:  2785.00   3rd Qu.:  2660.00   3rd Qu.:2.64e+03   3rd Qu.:  2980.00  
- Max.   :218000.00   Max.   :213000.00   Max.   :2.24e+05   Max.   :229000.00  
- NA&#39;s   :156         NA&#39;s   :155         NA&#39;s   :155        NA&#39;s   :154        
-      1871                1872                1873                1874         
- Min.   :     9.12   Min.   :     9.36   Min.   :     8.79   Min.   :    10.7  
- 1st Qu.:    60.77   1st Qu.:    90.72   1st Qu.:    85.60   1st Qu.:   131.2  
- Median :   840.50   Median :   859.00   Median :   910.50   Median :  1025.5  
- Mean   : 14901.21   Mean   : 16480.25   Mean   : 17536.23   Mean   : 16387.0  
- 3rd Qu.:  3172.50   3rd Qu.:  3320.00   3rd Qu.:  3140.00   3rd Qu.:  3637.5  
- Max.   :242000.00   Max.   :255000.00   Max.   :265000.00   Max.   :257000.0  
- NA&#39;s   :154         NA&#39;s   :154         NA&#39;s   :154         NA&#39;s   :154       
-      1875               1876               1877               1878         
- Min.   :    12.3   Min.   :    15.2   Min.   :    15.6   Min.   :    20.3  
- 1st Qu.:   130.5   1st Qu.:   147.0   1st Qu.:   150.0   1st Qu.:   250.5  
- Median :  1305.0   Median :  1500.0   Median :  1420.0   Median :  1450.0  
- Mean   : 17822.5   Mean   : 18549.3   Mean   : 18891.4   Mean   : 18087.3  
- 3rd Qu.:  4107.5   3rd Qu.:  5440.0   3rd Qu.:  5550.0   3rd Qu.:  5535.0  
- Max.   :272000.0   Max.   :271000.0   Max.   :276000.0   Max.   :271000.0  
- NA&#39;s   :154        NA&#39;s   :155        NA&#39;s   :155        NA&#39;s   :153       
-      1879                1880               1881                1882          
- Min.   :     3.67   Min.   :    24.5   Min.   :     3.67   Min.   :     3.67  
- 1st Qu.:   123.25   1st Qu.:   211.8   1st Qu.:   183.00   1st Qu.:   206.50  
- Median :  1550.00   Median :  1970.0   Median :  1770.00   Median :  2065.00  
- Mean   : 18907.85   Mean   : 21371.8   Mean   : 21537.81   Mean   : 23334.29  
- 3rd Qu.:  5337.50   3rd Qu.:  5925.0   3rd Qu.:  5960.00   3rd Qu.:  7000.00  
- Max.   :273000.00   Max.   :297000.0   Max.   :313000.00   Max.   :315000.00  
- NA&#39;s   :152         NA&#39;s   :152        NA&#39;s   :151         NA&#39;s   :152        
-      1883               1884               1885                1886          
- Min.   :     3.7   Min.   :     3.7   Min.   :     3.67   Min.   :     7.33  
- 1st Qu.:   175.0   1st Qu.:   176.5   1st Qu.:   200.50   1st Qu.:   151.75  
- Median :  2430.0   Median :  2195.0   Median :  2295.00   Median :  2260.00  
- Mean   : 24191.0   Mean   : 23891.9   Mean   : 24059.08   Mean   : 24452.96  
- 3rd Qu.:  7440.0   3rd Qu.:  8300.0   3rd Qu.:  8347.50   3rd Qu.:  8685.00  
- Max.   :328000.0   Max.   :319000.0   Max.   :316000.00   Max.   :313000.00  
- NA&#39;s   :151        NA&#39;s   :150        NA&#39;s   :150         NA&#39;s   :150        
-      1887               1888               1889               1890         
- Min.   :     7.3   Min.   :     3.7   Min.   :     3.7   Min.   :    11.0  
- 1st Qu.:   228.0   1st Qu.:   201.0   1st Qu.:   218.0   1st Qu.:   289.8  
- Median :  2260.0   Median :  2130.0   Median :  2380.0   Median :  2500.0  
- Mean   : 25096.8   Mean   : 27101.0   Mean   : 27115.5   Mean   : 29521.9  
- 3rd Qu.:  9995.0   3rd Qu.: 10900.0   3rd Qu.: 10775.0   3rd Qu.: 10775.0  
- Max.   :321000.0   Max.   :374000.0   Max.   :345000.0   Max.   :402000.0  
- NA&#39;s   :149        NA&#39;s   :148        NA&#39;s   :148        NA&#39;s   :148       
-      1891             1892               1893               1894         
- Min.   :    22   Min.   :    47.7   Min.   :    47.7   Min.   :    40.3  
- 1st Qu.:   297   1st Qu.:   341.5   1st Qu.:   414.0   1st Qu.:   382.5  
- Median :  2420   Median :  2470.0   Median :  2460.0   Median :  2910.0  
- Mean   : 30241   Mean   : 29174.8   Mean   : 28813.7   Mean   : 29819.6  
- 3rd Qu.: 11000   3rd Qu.:  9850.0   3rd Qu.:  9750.0   3rd Qu.: 11300.0  
- Max.   :428000   Max.   :451000.0   Max.   :454000.0   Max.   :425000.0  
- NA&#39;s   :147      NA&#39;s   :145        NA&#39;s   :145        NA&#39;s   :145       
-      1895               1896               1897               1898         
- Min.   :    40.3   Min.   :    40.3   Min.   :    40.3   Min.   :    88.0  
- 1st Qu.:   415.2   1st Qu.:   442.2   1st Qu.:   522.2   1st Qu.:   633.5  
- Median :  3200.0   Median :  3295.0   Median :  3695.0   Median :  3940.0  
- Mean   : 30957.5   Mean   : 31953.2   Mean   : 33496.1   Mean   : 35332.7  
- 3rd Qu.: 11700.0   3rd Qu.: 11675.0   3rd Qu.: 12200.0   3rd Qu.: 12525.0  
- Max.   :480000.0   Max.   :481000.0   Max.   :501000.0   Max.   :546000.0  
- NA&#39;s   :144        NA&#39;s   :144        NA&#39;s   :144        NA&#39;s   :144       
-      1899               1900               1901             1902         
- Min.   :    95.3   Min.   :   131.0   Min.   :   135   Min.   :    95.3  
- 1st Qu.:   671.0   1st Qu.:   824.2   1st Qu.:   950   1st Qu.:   816.0  
- Median :  4050.0   Median :  3340.0   Median :  3900   Median :  3645.0  
- Mean   : 37808.5   Mean   : 40689.0   Mean   : 41192   Mean   : 41385.8  
- 3rd Qu.: 13300.0   3rd Qu.: 14300.0   3rd Qu.: 14400   3rd Qu.: 14825.0  
- Max.   :626000.0   Max.   :663000.0   Max.   :722000   Max.   :765000.0  
- NA&#39;s   :143        NA&#39;s   :144        NA&#39;s   :143      NA&#39;s   :142       
-      1903               1904               1905             1906          
- Min.   :   114.0   Min.   :     3.7   Min.   :   126   Min.   :      3.7  
- 1st Qu.:   965.5   1st Qu.:   803.0   1st Qu.:  1006   1st Qu.:    831.2  
- Median :  3170.0   Median :  3620.0   Median :  4140   Median :   5360.0  
- Mean   : 44259.5   Mean   : 43866.0   Mean   : 47644   Mean   :  48996.1  
- 3rd Qu.: 15300.0   3rd Qu.: 16200.0   3rd Qu.: 17250   3rd Qu.:  18850.0  
- Max.   :895000.0   Max.   :881000.0   Max.   :985000   Max.   :1030000.0  
- NA&#39;s   :141        NA&#39;s   :140        NA&#39;s   :141      NA&#39;s   :140        
-      1907                1908                1909          
- Min.   :      7.3   Min.   :      3.7   Min.   :     25.7  
- 1st Qu.:    908.0   1st Qu.:   1210.0   1st Qu.:   1280.0  
- Median :   5570.0   Median :   5720.0   Median :   5940.0  
- Mean   :  55450.9   Mean   :  52345.0   Mean   :  54351.6  
- 3rd Qu.:  19650.0   3rd Qu.:  22800.0   3rd Qu.:  20900.0  
- Max.   :1200000.0   Max.   :1050000.0   Max.   :1160000.0  
- NA&#39;s   :140         NA&#39;s   :139         NA&#39;s   :139        
-      1910                1911              1912                1913          
- Min.   :     51.3   Min.   :     11   Min.   :      3.7   Min.   :      7.3  
- 1st Qu.:   1125.0   1st Qu.:   1074   1st Qu.:   1220.0   1st Qu.:   1220.0  
- Median :   6030.0   Median :   6730   Median :   7760.0   Median :   6920.0  
- Mean   :  56043.8   Mean   :  56078   Mean   :  59721.2   Mean   :  61191.5  
- 3rd Qu.:  20375.0   3rd Qu.:  24350   3rd Qu.:  24025.0   3rd Qu.:  23200.0  
- Max.   :1270000.0   Max.   :1260000   Max.   :1340000.0   Max.   :1440000.0  
- NA&#39;s   :138         NA&#39;s   :137       NA&#39;s   :138         NA&#39;s   :135        
-      1914              1915                1916                1917          
- Min.   :     11   Min.   :     18.3   Min.   :      3.7   Min.   :      7.3  
- 1st Qu.:   1100   1st Qu.:    818.8   1st Qu.:    639.8   1st Qu.:    528.0  
- Median :   6020   Median :   5595.0   Median :   4350.0   Median :   3350.0  
- Mean   :  55650   Mean   :  53950.2   Mean   :  56245.2   Mean   :  57865.4  
- 3rd Qu.:  24500   3rd Qu.:  21175.0   3rd Qu.:  19600.0   3rd Qu.:  18900.0  
- Max.   :1320000   Max.   :1370000.0   Max.   :1520000.0   Max.   :1670000.0  
- NA&#39;s   :135       NA&#39;s   :134         NA&#39;s   :132         NA&#39;s   :131        
-      1918                1919                1920          
- Min.   :     18.3   Min.   :     18.3   Min.   :      3.7  
- 1st Qu.:    400.0   1st Qu.:    522.2   1st Qu.:    463.2  
- Median :   3190.0   Median :   3400.0   Median :   3605.0  
- Mean   :  57115.9   Mean   :  50238.6   Mean   :  56517.5  
- 3rd Qu.:  19000.0   3rd Qu.:  19250.0   3rd Qu.:  18950.0  
- Max.   :1750000.0   Max.   :1480000.0   Max.   :1740000.0  
- NA&#39;s   :131         NA&#39;s   :132         NA&#39;s   :130        
-      1921                1922                1923               1924          
- Min.   :      7.3   Min.   :     25.7   Min.   :1.47e+01   Min.   :     29.3  
- 1st Qu.:    447.0   1st Qu.:    678.0   1st Qu.:7.64e+02   1st Qu.:   1007.5  
- Median :   3340.0   Median :   3780.0   Median :4.62e+03   Median :   5900.0  
- Mean   :  48705.7   Mean   :  52677.4   Mean   :5.99e+04   Mean   :  59103.7  
- 3rd Qu.:  21450.0   3rd Qu.:  24400.0   3rd Qu.:2.65e+04   3rd Qu.:  27625.0  
- Max.   :1420000.0   Max.   :1430000.0   Max.   :1.90e+06   Max.   :1700000.0  
- NA&#39;s   :129         NA&#39;s   :131         NA&#39;s   :131        NA&#39;s   :130        
-      1925              1926                1927                1928          
- Min.   :     33   Min.   :     40.3   Min.   :     40.3   Min.   :      3.7  
- 1st Qu.:   1024   1st Qu.:   1375.0   1st Qu.:   1007.0   1st Qu.:    893.8  
- Median :   5710   Median :   6215.0   Median :   6410.0   Median :   4970.0  
- Mean   :  59397   Mean   :  58343.3   Mean   :  61780.6   Mean   :  56374.9  
- 3rd Qu.:  28825   3rd Qu.:  29175.0   3rd Qu.:  29075.0   3rd Qu.:  21425.0  
- Max.   :1740000   Max.   :1890000.0   Max.   :1850000.0   Max.   :1830000.0  
- NA&#39;s   :130       NA&#39;s   :130         NA&#39;s   :128         NA&#39;s   :122        
-      1929                1930                1931          
- Min.   :      3.7   Min.   :      7.3   Min.   :      3.7  
- 1st Qu.:    925.8   1st Qu.:    949.5   1st Qu.:    766.0  
- Median :   5070.0   Median :   5210.0   Median :   4240.0  
- Mean   :  60483.5   Mean   :  55735.0   Mean   :  47769.0  
- 3rd Qu.:  23325.0   3rd Qu.:  22975.0   3rd Qu.:  19600.0  
- Max.   :1960000.0   Max.   :1740000.0   Max.   :1480000.0  
- NA&#39;s   :122         NA&#39;s   :122         NA&#39;s   :119        
-      1932                1933                1934          
- Min.   :      3.7   Min.   :      3.7   Min.   :      3.7  
- 1st Qu.:    694.5   1st Qu.:    397.0   1st Qu.:    663.0  
- Median :   4000.0   Median :   4035.0   Median :   4780.0  
- Mean   :  41984.1   Mean   :  41418.7   Mean   :  45669.2  
- 3rd Qu.:  20250.0   3rd Qu.:  18900.0   3rd Qu.:  22100.0  
- Max.   :1260000.0   Max.   :1350000.0   Max.   :1440000.0  
- NA&#39;s   :117         NA&#39;s   :112         NA&#39;s   :113        
-      1935                1936                1937          
- Min.   :      3.7   Min.   :      7.3   Min.   :     18.3  
- 1st Qu.:    703.0   1st Qu.:    773.5   1st Qu.:    795.5  
- Median :   5450.0   Median :   5450.0   Median :   6110.0  
- Mean   :  47815.3   Mean   :  51868.8   Mean   :  55471.3  
- 3rd Qu.:  23150.0   3rd Qu.:  25225.0   3rd Qu.:  28600.0  
- Max.   :1490000.0   Max.   :1710000.0   Max.   :1790000.0  
- NA&#39;s   :113         NA&#39;s   :112         NA&#39;s   :112        
-      1938                1939                1940          
- Min.   :     33.0   Min.   :      3.7   Min.   :      7.3  
- 1st Qu.:    927.5   1st Qu.:    888.0   1st Qu.:   1360.0  
- Median :   5920.0   Median :   5860.0   Median :   6490.0  
- Mean   :  52758.9   Mean   :  54467.7   Mean   :  60953.2  
- 3rd Qu.:  26750.0   3rd Qu.:  29200.0   3rd Qu.:  25600.0  
- Max.   :1510000.0   Max.   :1670000.0   Max.   :1870000.0  
- NA&#39;s   :113         NA&#39;s   :111         NA&#39;s   :113        
-      1941                1942              1943                1944          
- Min.   :      3.7   Min.   :     11   Min.   :      7.3   Min.   :      3.7  
- 1st Qu.:    792.8   1st Qu.:   1040   1st Qu.:    696.8   1st Qu.:    770.0  
- Median :   5130.0   Median :   5350   Median :   5970.0   Median :   4880.0  
- Mean   :  60166.1   Mean   :  63079   Mean   :  62584.6   Mean   :  62709.2  
- 3rd Qu.:  22325.0   3rd Qu.:  23100   3rd Qu.:  21725.0   3rd Qu.:  20300.0  
- Max.   :2040000.0   Max.   :2200000   Max.   :2270000.0   Max.   :2440000.0  
- NA&#39;s   :110         NA&#39;s   :113       NA&#39;s   :110         NA&#39;s   :111        
-      1945                1946                1947          
- Min.   :      3.7   Min.   :      3.7   Min.   :      3.7  
- 1st Qu.:    590.0   1st Qu.:    686.0   1st Qu.:    656.0  
- Median :   4415.0   Median :   4980.0   Median :   5550.0  
- Mean   :  49118.8   Mean   :  51108.6   Mean   :  57390.8  
- 3rd Qu.:  14250.0   3rd Qu.:  22200.0   3rd Qu.:  25100.0  
- Max.   :2360000.0   Max.   :2250000.0   Max.   :2480000.0  
- NA&#39;s   :108         NA&#39;s   :107         NA&#39;s   :103        
-      1948                1949                1950          
- Min.   :      3.7   Min.   :      3.7   Min.   :      3.7  
- 1st Qu.:    346.2   1st Qu.:    477.0   1st Qu.:    221.2  
- Median :   5835.0   Median :   5610.0   Median :   1485.0  
- Mean   :  59757.7   Mean   :  56160.9   Mean   :  42926.1  
- 3rd Qu.:  24350.0   3rd Qu.:  26600.0   3rd Qu.:  10110.0  
- Max.   :2580000.0   Max.   :2160000.0   Max.   :2540000.0  
- NA&#39;s   :102         NA&#39;s   :99          NA&#39;s   :58         
-      1951                1952                1953               1954          
- Min.   :      3.7   Min.   :      3.7   Min.   :3.70e+00   Min.   :      3.7  
- 1st Qu.:    197.2   1st Qu.:    230.0   1st Qu.:2.49e+02   1st Qu.:    309.8  
- Median :   1425.0   Median :   1515.0   Median :1.65e+03   Median :   1745.0  
- Mean   :  45396.8   Mean   :  46074.2   Mean   :4.70e+04   Mean   :  47613.0  
- 3rd Qu.:  10525.0   3rd Qu.:  10975.0   3rd Qu.:1.08e+04   3rd Qu.:  12375.0  
- Max.   :2610000.0   Max.   :2550000.0   Max.   :2.61e+06   Max.   :2490000.0  
- NA&#39;s   :56          NA&#39;s   :56          NA&#39;s   :55         NA&#39;s   :54         
-      1955                1956                1957          
- Min.   :      3.7   Min.   :      3.7   Min.   :      3.7  
- 1st Qu.:    312.0   1st Qu.:    319.0   1st Qu.:    313.5  
- Median :   2120.0   Median :   2220.0   Median :   2280.0  
- Mean   :  50991.2   Mean   :  54305.1   Mean   :  55257.0  
- 3rd Qu.:  13600.0   3rd Qu.:  14400.0   3rd Qu.:  15200.0  
- Max.   :2720000.0   Max.   :2860000.0   Max.   :2830000.0  
- NA&#39;s   :51          NA&#39;s   :51          NA&#39;s   :49         
-      1958                1959                1960              1961          
- Min.   :      3.7   Min.   :      3.7   Min.   :     11   Min.   :      3.7  
- 1st Qu.:    319.0   1st Qu.:    235.0   1st Qu.:    286   1st Qu.:    287.0  
- Median :   2170.0   Median :   1840.0   Median :   2210   Median :   2315.0  
- Mean   :  54709.1   Mean   :  54666.4   Mean   :  57562   Mean   :  57157.4  
- 3rd Qu.:  15700.0   3rd Qu.:  15700.0   3rd Qu.:  16100   3rd Qu.:  16550.0  
- Max.   :2740000.0   Max.   :2830000.0   Max.   :2890000   Max.   :2880000.0  
- NA&#39;s   :43          NA&#39;s   :35          NA&#39;s   :35        NA&#39;s   :34         
-      1962                1963                1964              1965        
- Min.   :     11.0   Min.   :      7.3   Min.   :      7   Min.   :      7  
- 1st Qu.:    282.5   1st Qu.:    301.0   1st Qu.:    306   1st Qu.:    304  
- Median :   2315.0   Median :   2300.0   Median :   2270   Median :   2470  
- Mean   :  58458.5   Mean   :  61413.2   Mean   :  62221   Mean   :  65113  
- 3rd Qu.:  17625.0   3rd Qu.:  21100.0   3rd Qu.:  21950   3rd Qu.:  23800  
- Max.   :2990000.0   Max.   :3120000.0   Max.   :3260000   Max.   :3390000  
- NA&#39;s   :32          NA&#39;s   :31          NA&#39;s   :25        NA&#39;s   :25       
-      1966              1967              1968              1969        
- Min.   :      7   Min.   :      7   Min.   :      7   Min.   :      7  
- 1st Qu.:    343   1st Qu.:    438   1st Qu.:    494   1st Qu.:    539  
- Median :   2640   Median :   3050   Median :   3305   Median :   3860  
- Mean   :  68105   Mean   :  70162   Mean   :  74441   Mean   :  78894  
- 3rd Qu.:  25050   3rd Qu.:  24650   3rd Qu.:  27350   3rd Qu.:  30700  
- Max.   :3560000   Max.   :3700000   Max.   :3830000   Max.   :4020000  
- NA&#39;s   :25        NA&#39;s   :25        NA&#39;s   :26        NA&#39;s   :25       
-      1970              1971              1972              1973        
- Min.   :      4   Min.   :      4   Min.   :      4   Min.   :      4  
- 1st Qu.:    638   1st Qu.:    640   1st Qu.:    671   1st Qu.:    654  
- Median :   3810   Median :   4285   Median :   4680   Median :   5290  
- Mean   :  84575   Mean   :  87463   Mean   :  90846   Mean   :  95682  
- 3rd Qu.:  28400   3rd Qu.:  29950   3rd Qu.:  31550   3rd Qu.:  37800  
- Max.   :4330000   Max.   :4360000   Max.   :4560000   Max.   :4770000  
- NA&#39;s   :23        NA&#39;s   :22        NA&#39;s   :21        NA&#39;s   :21       
-      1974              1975              1976              1977        
- Min.   :      4   Min.   :      4   Min.   :      4   Min.   :      7  
- 1st Qu.:    682   1st Qu.:    645   1st Qu.:    648   1st Qu.:    774  
- Median :   5410   Median :   5550   Median :   5850   Median :   5720  
- Mean   :  95405   Mean   :  95535   Mean   : 100698   Mean   : 103565  
- 3rd Qu.:  36350   3rd Qu.:  37400   3rd Qu.:  41700   3rd Qu.:  42800  
- Max.   :4600000   Max.   :4410000   Max.   :4610000   Max.   :4740000  
- NA&#39;s   :21        NA&#39;s   :21        NA&#39;s   :21        NA&#39;s   :21       
-      1978              1979              1980              1981        
- Min.   :     11   Min.   :     22   Min.   :     22   Min.   :     26  
- 1st Qu.:    711   1st Qu.:    798   1st Qu.:    774   1st Qu.:    691  
- Median :   6020   Median :   6750   Median :   6460   Median :   6260  
- Mean   : 107348   Mean   : 110216   Mean   : 109769   Mean   : 106308  
- 3rd Qu.:  46450   3rd Qu.:  48450   3rd Qu.:  48500   3rd Qu.:  47475  
- Max.   :4890000   Max.   :4900000   Max.   :4720000   Max.   :4540000  
- NA&#39;s   :21        NA&#39;s   :21        NA&#39;s   :21        NA&#39;s   :20       
-      1982              1983              1984              1985        
- Min.   :     26   Min.   :     22   Min.   :     22   Min.   :     22  
- 1st Qu.:    806   1st Qu.:    850   1st Qu.:    839   1st Qu.:    855  
- Median :   6255   Median :   6795   Median :   6810   Median :   7605  
- Mean   : 105815   Mean   : 106863   Mean   : 109962   Mean   : 113989  
- 3rd Qu.:  43800   3rd Qu.:  49600   3rd Qu.:  49475   3rd Qu.:  51100  
- Max.   :4310000   Max.   :4340000   Max.   :4480000   Max.   :4490000  
- NA&#39;s   :20        NA&#39;s   :20        NA&#39;s   :20        NA&#39;s   :20       
-      1986              1987              1988              1989        
- Min.   :     18   Min.   :     22   Min.   :     22   Min.   :     22  
- 1st Qu.:    887   1st Qu.:    973   1st Qu.:   1006   1st Qu.:   1028  
- Median :   7910   Median :   7825   Median :   8295   Median :   8690  
- Mean   : 115512   Mean   : 119590   Mean   : 124048   Mean   : 126046  
- 3rd Qu.:  53500   3rd Qu.:  57700   3rd Qu.:  57600   3rd Qu.:  54750  
- Max.   :4500000   Max.   :4690000   Max.   :4890000   Max.   :4960000  
- NA&#39;s   :20        NA&#39;s   :20        NA&#39;s   :20        NA&#39;s   :20       
-      1990              1991              1992              1993        
- Min.   :      7   Min.   :      7   Min.   :      7   Min.   :      7  
- 1st Qu.:    895   1st Qu.:    961   1st Qu.:    955   1st Qu.:   1018  
- Median :   6405   Median :   6010   Median :   6990   Median :   7090  
- Mean   : 119786   Mean   : 119810   Mean   : 113426   Mean   : 114527  
- 3rd Qu.:  52200   3rd Qu.:  57000   3rd Qu.:  49350   3rd Qu.:  50600  
- Max.   :4820000   Max.   :4820000   Max.   :4910000   Max.   :5030000  
- NA&#39;s   :16        NA&#39;s   :15        NA&#39;s   :4         NA&#39;s   :4        
-      1994              1995              1996              1997        
- Min.   :      7   Min.   :      7   Min.   :      7   Min.   :      7  
- 1st Qu.:    968   1st Qu.:    953   1st Qu.:   1060   1st Qu.:   1120  
- Median :   6230   Median :   6960   Median :   7260   Median :   7570  
- Mean   : 114230   Mean   : 116464   Mean   : 119634   Mean   : 120062  
- 3rd Qu.:  54800   3rd Qu.:  54800   3rd Qu.:  53100   3rd Qu.:  55900  
- Max.   :5090000   Max.   :5130000   Max.   :5250000   Max.   :5370000  
- NA&#39;s   :3         NA&#39;s   :3         NA&#39;s   :3         NA&#39;s   :3        
-      1998              1999              2000              2001        
- Min.   :      7   Min.   :      7   Min.   :      7   Min.   :      7  
- 1st Qu.:   1170   1st Qu.:   1240   1st Qu.:   1190   1st Qu.:   1270  
- Median :   7360   Median :   7550   Median :   7510   Median :   7880  
- Mean   : 119381   Mean   : 121199   Mean   : 124827   Mean   : 125861  
- 3rd Qu.:  57100   3rd Qu.:  55400   3rd Qu.:  53800   3rd Qu.:  57000  
- Max.   :5400000   Max.   :5500000   Max.   :5690000   Max.   :5600000  
- NA&#39;s   :3         NA&#39;s   :3         NA&#39;s   :3         NA&#39;s   :3        
-      2002              2003              2004              2005        
- Min.   :     11   Min.   :     11   Min.   :     11   Min.   :     11  
- 1st Qu.:   1230   1st Qu.:   1308   1st Qu.:   1435   1st Qu.:   1455  
- Median :   8045   Median :   7890   Median :   8105   Median :   8560  
- Mean   : 127903   Mean   : 134504   Mean   : 140855   Mean   : 145649  
- 3rd Qu.:  57075   3rd Qu.:  58675   3rd Qu.:  58800   3rd Qu.:  58900  
- Max.   :5640000   Max.   :5680000   Max.   :5760000   Max.   :5900000  
- NA&#39;s   :2         NA&#39;s   :2         NA&#39;s   :2         NA&#39;s   :2        
-      2006              2007              2008              2009        
- Min.   :      7   Min.   :     11   Min.   :     11   Min.   :     11  
- 1st Qu.:   1610   1st Qu.:   1670   1st Qu.:   1770   1st Qu.:   1760  
- Median :   9480   Median :   9650   Median :   9140   Median :   8110  
- Mean   : 150693   Mean   : 154232   Mean   : 158692   Mean   : 157166  
- 3rd Qu.:  62800   3rd Qu.:  62750   3rd Qu.:  66250   3rd Qu.:  62500  
- Max.   :6530000   Max.   :7030000   Max.   :7550000   Max.   :8000000  
- NA&#39;s   :2         NA&#39;s   :1         NA&#39;s   :1         NA&#39;s   :1        
-      2010              2011              2012               2013         
- Min.   :      7   Min.   :      7   Min.   :      11   Min.   :      11  
- 1st Qu.:   1960   1st Qu.:   2090   1st Qu.:    2148   1st Qu.:    2172  
- Median :   8600   Median :   9830   Median :   10100   Median :   10700  
- Mean   : 165334   Mean   : 171765   Mean   :  174033   Mean   :  174856  
- 3rd Qu.:  64750   3rd Qu.:  63750   3rd Qu.:   63625   3rd Qu.:   64525  
- Max.   :8780000   Max.   :9730000   Max.   :10000000   Max.   :10300000  
- NA&#39;s   :1         NA&#39;s   :1                                              
-      2014         
- Min.   :      11  
- 1st Qu.:    2190  
- Median :   11300  
- Mean   :  175993  
- 3rd Qu.:   63775  
- Max.   :10300000  
-                   </pre>
+<pre >    year1900             1901             1902               1903         
+ Min.   :   131.0   Min.   :   135   Min.   :    95.3   Min.   :   114.0  
+ 1st Qu.:   824.2   1st Qu.:   950   1st Qu.:   816.0   1st Qu.:   965.5  
+ Median :  3340.0   Median :  3900   Median :  3645.0   Median :  3170.0  
+ Mean   : 40689.0   Mean   : 41192   Mean   : 41385.8   Mean   : 44259.5  
+ 3rd Qu.: 14300.0   3rd Qu.: 14400   3rd Qu.: 14825.0   3rd Qu.: 15300.0  
+ Max.   :663000.0   Max.   :722000   Max.   :765000.0   Max.   :895000.0  
+ NA&#39;s   :144        NA&#39;s   :143      NA&#39;s   :142        NA&#39;s   :141       
+      1904               1905       
+ Min.   :     3.7   Min.   :   126  
+ 1st Qu.:   803.0   1st Qu.:  1006  
+ Median :  3620.0   Median :  4140  
+ Mean   : 43866.0   Mean   : 47644  
+ 3rd Qu.: 16200.0   3rd Qu.: 17250  
+ Max.   :881000.0   Max.   :985000  
+ NA&#39;s   :140        NA&#39;s   :141     </pre>
 
 </article></slide><slide class=""><hgroup><h2>Summary &amp; Lab Part 1</h2></hgroup><article  id="summary-lab-part-1">
 
@@ -4790,21 +3720,22 @@ yearly_co2 &lt;- yearly_co2 %&gt;%
 <p><code>group_by</code> allows you group the data set by variables/columns you specify:</p>
 
 <pre class = 'prettyprint lang-r'># Regular data
+CO_heat_ER &lt;- select(CO_heat_ER, county, gender, year, visits, rate)
 CO_heat_ER</pre>
 
-<pre ># A tibble: 2,340 × 7
-   county     rate lower95cl upper95cl visits  year gender      
-   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
- 1 Statewide  5.64      4.70      6.59    140  2011 Female      
- 2 Statewide  7.39      6.30      8.47    183  2011 Male        
- 3 Statewide  6.51      5.80      7.23    323  2011 Both genders
- 4 Statewide  5.64      4.72      6.57    146  2012 Female      
- 5 Statewide  7.56      6.48      8.65    193  2012 Male        
- 6 Statewide  6.58      5.88      7.29    339  2012 Both genders
- 7 Statewide  4.94      4.06      5.82    124  2013 Female      
- 8 Statewide  6.72      5.72      7.72    178  2013 Male        
- 9 Statewide  5.82      5.16      6.49    302  2013 Both genders
-10 Statewide  3.52      2.80      4.25     92  2014 Female      
+<pre ># A tibble: 2,340 × 5
+   county    gender        year visits  rate
+   &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1 Statewide Female        2011    140  5.64
+ 2 Statewide Male          2011    183  7.39
+ 3 Statewide Both genders  2011    323  6.51
+ 4 Statewide Female        2012    146  5.64
+ 5 Statewide Male          2012    193  7.56
+ 6 Statewide Both genders  2012    339  6.58
+ 7 Statewide Female        2013    124  4.94
+ 8 Statewide Male          2013    178  6.72
+ 9 Statewide Both genders  2013    302  5.82
+10 Statewide Female        2014     92  3.52
 # ℹ 2,330 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Perform Operations By Groups: dplyr</h2></hgroup><article  id="perform-operations-by-groups-dplyr-1">
@@ -4814,20 +3745,20 @@ CO_heat_ER</pre>
 <pre class = 'prettyprint lang-r'>CO_heat_ER_grouped &lt;- CO_heat_ER %&gt;% group_by(gender)
 CO_heat_ER_grouped</pre>
 
-<pre ># A tibble: 2,340 × 7
+<pre ># A tibble: 2,340 × 5
 # Groups:   gender [3]
-   county     rate lower95cl upper95cl visits  year gender      
-   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
- 1 Statewide  5.64      4.70      6.59    140  2011 Female      
- 2 Statewide  7.39      6.30      8.47    183  2011 Male        
- 3 Statewide  6.51      5.80      7.23    323  2011 Both genders
- 4 Statewide  5.64      4.72      6.57    146  2012 Female      
- 5 Statewide  7.56      6.48      8.65    193  2012 Male        
- 6 Statewide  6.58      5.88      7.29    339  2012 Both genders
- 7 Statewide  4.94      4.06      5.82    124  2013 Female      
- 8 Statewide  6.72      5.72      7.72    178  2013 Male        
- 9 Statewide  5.82      5.16      6.49    302  2013 Both genders
-10 Statewide  3.52      2.80      4.25     92  2014 Female      
+   county    gender        year visits  rate
+   &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1 Statewide Female        2011    140  5.64
+ 2 Statewide Male          2011    183  7.39
+ 3 Statewide Both genders  2011    323  6.51
+ 4 Statewide Female        2012    146  5.64
+ 5 Statewide Male          2012    193  7.56
+ 6 Statewide Both genders  2012    339  6.58
+ 7 Statewide Female        2013    124  4.94
+ 8 Statewide Male          2013    178  6.72
+ 9 Statewide Both genders  2013    302  5.82
+10 Statewide Female        2014     92  3.52
 # ℹ 2,330 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summarize the grouped data</h2></hgroup><article  id="summarize-the-grouped-data">
@@ -4845,7 +3776,7 @@ CO_heat_ER_grouped</pre>
 
 </article></slide><slide class=""><hgroup><h2>Use the <code>pipe</code> to string these together!</h2></hgroup><article  id="use-the-pipe-to-string-these-together">
 
-<p>Pipe <code>yts</code> into <code>group_by</code>, then pipe that into <code>summarize</code>:</p>
+<p>Pipe <code>CO_heat_ER</code> into <code>group_by</code>, then pipe that into <code>summarize</code>:</p>
 
 <pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
   group_by(gender) %&gt;%
@@ -4861,7 +3792,7 @@ CO_heat_ER_grouped</pre>
 
 </article></slide><slide class=""><hgroup><h2>Group by as many variables as you want</h2></hgroup><article  id="group-by-as-many-variables-as-you-want">
 
-<p><code>group_by</code> Response and Education:</p>
+<p><code>group_by</code> Gender and Year:</p>
 
 <pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
   group_by(gender, year) %&gt;%
@@ -4892,20 +3823,20 @@ CO_heat_ER_grouped</pre>
   group_by(gender, year)  %&gt;% 
   group_by(year) </pre>
 
-<pre ># A tibble: 2,340 × 7
+<pre ># A tibble: 2,340 × 5
 # Groups:   year [12]
-   county     rate lower95cl upper95cl visits  year gender      
-   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
- 1 Statewide  5.64      4.70      6.59    140  2011 Female      
- 2 Statewide  7.39      6.30      8.47    183  2011 Male        
- 3 Statewide  6.51      5.80      7.23    323  2011 Both genders
- 4 Statewide  5.64      4.72      6.57    146  2012 Female      
- 5 Statewide  7.56      6.48      8.65    193  2012 Male        
- 6 Statewide  6.58      5.88      7.29    339  2012 Both genders
- 7 Statewide  4.94      4.06      5.82    124  2013 Female      
- 8 Statewide  6.72      5.72      7.72    178  2013 Male        
- 9 Statewide  5.82      5.16      6.49    302  2013 Both genders
-10 Statewide  3.52      2.80      4.25     92  2014 Female      
+   county    gender        year visits  rate
+   &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1 Statewide Female        2011    140  5.64
+ 2 Statewide Male          2011    183  7.39
+ 3 Statewide Both genders  2011    323  6.51
+ 4 Statewide Female        2012    146  5.64
+ 5 Statewide Male          2012    193  7.56
+ 6 Statewide Both genders  2012    339  6.58
+ 7 Statewide Female        2013    124  4.94
+ 8 Statewide Male          2013    178  6.72
+ 9 Statewide Both genders  2013    302  5.82
+10 Statewide Female        2014     92  3.52
 # ℹ 2,330 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Ungroup the data</h2></hgroup><article  id="ungroup-the-data">
@@ -4915,19 +3846,19 @@ CO_heat_ER_grouped</pre>
 <pre class = 'prettyprint lang-r'>CO_heat_ER &lt;- ungroup(CO_heat_ER)
 CO_heat_ER</pre>
 
-<pre ># A tibble: 2,340 × 7
-   county     rate lower95cl upper95cl visits  year gender      
-   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
- 1 Statewide  5.64      4.70      6.59    140  2011 Female      
- 2 Statewide  7.39      6.30      8.47    183  2011 Male        
- 3 Statewide  6.51      5.80      7.23    323  2011 Both genders
- 4 Statewide  5.64      4.72      6.57    146  2012 Female      
- 5 Statewide  7.56      6.48      8.65    193  2012 Male        
- 6 Statewide  6.58      5.88      7.29    339  2012 Both genders
- 7 Statewide  4.94      4.06      5.82    124  2013 Female      
- 8 Statewide  6.72      5.72      7.72    178  2013 Male        
- 9 Statewide  5.82      5.16      6.49    302  2013 Both genders
-10 Statewide  3.52      2.80      4.25     92  2014 Female      
+<pre ># A tibble: 2,340 × 5
+   county    gender        year visits  rate
+   &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1 Statewide Female        2011    140  5.64
+ 2 Statewide Male          2011    183  7.39
+ 3 Statewide Both genders  2011    323  6.51
+ 4 Statewide Female        2012    146  5.64
+ 5 Statewide Male          2012    193  7.56
+ 6 Statewide Both genders  2012    339  6.58
+ 7 Statewide Female        2013    124  4.94
+ 8 Statewide Male          2013    178  6.72
+ 9 Statewide Both genders  2013    302  5.82
+10 Statewide Female        2014     92  3.52
 # ℹ 2,330 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>group_by</code> with <code>mutate</code> - just add data</h2></hgroup><article  id="group_by-with-mutate---just-add-data">
@@ -5120,25 +4051,25 @@ CO_heat_ER_loc %&gt;% unique() # similar to distinct()</pre>
 <p>Let’s see what the mean CO2 emissions is across years for each row (country):</p>
 
 <pre class = 'prettyprint lang-r'>yearly_co2 %&gt;%
-  select(starts_with(&quot;year&quot;)) %&gt;%
+  select(starts_with(&quot;201&quot;)) %&gt;%
   rowMeans(na.rm = TRUE) %&gt;%
   head(n = 5)</pre>
 
-<pre >[1] NaN NaN NaN NaN NaN</pre>
+<pre >[1]  10254   5106 129800    487  32040</pre>
 
 <pre class = 'prettyprint lang-r'>yearly_co2 %&gt;%
   group_by(country) %&gt;%
-  summarize(mean = rowMeans(across(starts_with(&quot;year&quot;)), na.rm = TRUE)) %&gt;%
+  summarize(mean = rowMeans(across(starts_with(&quot;201&quot;)), na.rm = TRUE)) %&gt;%
   head(n = 5)</pre>
 
 <pre ># A tibble: 5 × 2
-  country      mean
-  &lt;chr&gt;       &lt;dbl&gt;
-1 Afghanistan   NaN
-2 Albania       NaN
-3 Algeria       NaN
-4 Andorra       NaN
-5 Angola        NaN</pre>
+  country       mean
+  &lt;chr&gt;        &lt;dbl&gt;
+1 Afghanistan  10254
+2 Albania       5106
+3 Algeria     129800
+4 Andorra        487
+5 Angola       32040</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>colMeans()</code> example</h2></hgroup><article  id="colmeans-example">
 
@@ -5147,20 +4078,20 @@ CO_heat_ER_loc %&gt;% unique() # similar to distinct()</pre>
 <p>Let’s see what the mean is across each column (year):</p>
 
 <pre class = 'prettyprint lang-r'>yearly_co2 %&gt;%
-  select(starts_with(&quot;year&quot;)) %&gt;%
+  select(starts_with(&quot;201&quot;)) %&gt;%
   colMeans(na.rm = TRUE) %&gt;%
   head(n = 5)</pre>
 
-<pre >year1751 
-    9360 </pre>
+<pre >    2010     2011     2012     2013     2014 
+165334.1 171764.9 174033.4 174856.2 175992.5 </pre>
 
 <pre class = 'prettyprint lang-r'>yearly_co2 %&gt;%
-  summarize(across(starts_with(&quot;year&quot;), ~mean(.x, na.rm = TRUE)))</pre>
+  summarize(across(starts_with(&quot;201&quot;), ~mean(.x, na.rm = TRUE)))</pre>
 
-<pre ># A tibble: 1 × 1
-  year1751
-     &lt;dbl&gt;
-1     9360</pre></article></slide>
+<pre ># A tibble: 1 × 5
+   `2010`  `2011`  `2012`  `2013`  `2014`
+    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 165334. 171765. 174033. 174856. 175993.</pre></article></slide>
 
 
   <slide class="backdrop"></slide>
