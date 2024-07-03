@@ -208,17 +208,17 @@ knitr::include_graphics("../../docs/images/DaSEH_logo_transparent.png")
 
 ## Course Format
 
-ONLINE VIRTUAL COURSE
- * Lecture with slides, interactive
- * Lab/Practical experience
- * Two 10 min breaks each day - timing may vary
- * July 8-18, 10:30am - 2:00pm PST on Zoom
+ONLINE VIRTUAL COURSE  
+* Lecture with slides, interactive  
+* Lab/Practical experience  
+* Two 10 min breaks each day - timing may vary  
+* July 8-18, 10:30am - 2:00pm PST on Zoom  
 
-IN-PERSON CODE-A-THON
- * Mostly independent group work
- * Frequent check-ins with instructors and other groups
- * Some lectures about the practical aspects of coding
- * July 29-31 (in person in Seattle)
+IN-PERSON CODE-A-THON  
+* Mostly independent group work  
+* Frequent check-ins with instructors and other groups  
+* Some lectures about the practical aspects of coding  
+* July 29-31 (in person in Seattle)  
 
 
 
