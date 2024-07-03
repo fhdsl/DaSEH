@@ -61,7 +61,6 @@ jobs:
       - name: Get all files
         id: all-files
         uses: tj-actions/changed-files@v41
-        id: getfiles
         run: |
           echo "files=$(ls -R | grep -E '\.Rmd$')" >> $GITHUB_OUTPUT 
           
