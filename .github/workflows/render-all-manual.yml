@@ -3,7 +3,7 @@
 name: Render everything manually
 
 on:
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
 
@@ -60,7 +60,6 @@ jobs:
       
       - name: Get all files
         id: all-files
-        uses: tj-actions/changed-files@v41
         run: |
           echo "files=$(ls -R | grep -E '\.Rmd$')" >> $GITHUB_OUTPUT 
           
