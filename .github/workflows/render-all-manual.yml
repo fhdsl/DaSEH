@@ -1,6 +1,6 @@
 # This workflow re-renders everything regardless of whether it's changed or not
 
-name: Render html
+name: Render everything manually
 
 on:
   workflow_dispatch:
