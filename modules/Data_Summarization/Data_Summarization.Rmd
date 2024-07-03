@@ -167,7 +167,6 @@ Let's look at a dataset that tracks yearly estimated CO2 emissions by country. W
 If you have the `dasehr` package installed successfully:
 
 ```{r}
-library(dasehr)
 yearly_co2 <- yearly_co2_emissions
 ```
 
@@ -204,7 +203,7 @@ In this case, we will use the backticks (\`) because we will be referring to a c
 
 ```{r}
 library(dplyr)
-yearly_co2 <- yearly_co2_small %>%
+yearly_co2_small <- yearly_co2_small %>%
   rename(year1900 = `1900`)
 ```
 
