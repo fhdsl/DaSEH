@@ -189,11 +189,11 @@ slice_sample(annualDosage, n = 2)
 
 ## Data frames
 
-An older version of data in tables is called a data frame. The iris dataset is an example of this. 
+An older version of data in tables is called a data frame. The Orange dataset is an example of this. 
 
 ```{r}
-class(iris)
-head(iris)
+class(Orange)
+head(Orange)
 ```
 ## tibble
 
@@ -234,8 +234,8 @@ It can be helpful to convert data frames to tibbles though just to see more abou
 Note that this conversion can remove row names - which some data frames have.  For example, `mtcars`  (part of R) has row names. In this case we would want to make the rownames a new column first before making into a tibble.
 
 ```{r}
-head(Orange, n = 2)
-head(tibble(Orange), n = 2)
+head(mtcars, n = 2)
+head(tibble(mtcars), n = 2)
 ```
 
 ## rownames_to_column function{.codesmall}
@@ -243,8 +243,8 @@ head(tibble(Orange), n = 2)
 There is a function that specifically helps you do that.
 
 ```{r}
-head(rownames_to_column(Orange), n = 2)
-head(tibble(rownames_to_column(Orange)), n = 2)
+head(rownames_to_column(mtcars), n = 2)
+head(tibble(rownames_to_column(mtcars)), n = 2)
 
 ```
 
