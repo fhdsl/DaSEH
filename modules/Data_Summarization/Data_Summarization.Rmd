@@ -145,9 +145,9 @@ CO_heat_ER %>% pull(rate) %>% quantile(probs = 0.9, na.rm=T)
 `pull()` converts a single data column into a vector. This allows you to run summary functions on these data. Once you have "pulled" the data column out, you don't have to name it again in any piped summary functions.
 
 ```{r}
-er_visits <- CO_heat_ER %>% pull(visits)
+er_visits <- CO_heat_ER %>% pull(visits) 
 class(er_visits)
-er_visits
+head(er_visits, n = 20)
 ```
 
 ```{r, eval=FALSE}
@@ -168,7 +168,6 @@ Let's look at a dataset that tracks yearly estimated CO2 emissions by country. W
 If you have the `dasehr` package installed successfully:
 
 ```{r}
-library(dasehr)
 yearly_co2 <- yearly_co2_emissions
 ```
 
@@ -191,7 +190,9 @@ head(yearly_co2)
 Check out the data:
 
 ```{r}
-str(yearly_co2)
+yearly_co2_small <- select(yearly_co2, `1900`:`1905`)
+
+str(yearly_co2_small)
 ```
 
 
@@ -203,8 +204,8 @@ In this case, we will use the backticks (\`) because we will be referring to a c
 
 ```{r}
 library(dplyr)
-yearly_co2 <- yearly_co2 %>%
-  rename(year1751 = `1751`)
+yearly_co2_small <- yearly_co2_small %>%
+  rename(year1900 = `1900`)
 ```
 
 
@@ -213,7 +214,7 @@ yearly_co2 <- yearly_co2 %>%
 `colnames()` will show us the column names and show that the `1751` column is renamed:
 
 ```{r}
-colnames(yearly_co2)
+colnames(yearly_co2_small)
 ```
 
 
@@ -248,10 +249,10 @@ You can also do more elaborate summaries across different groups of data using `
 </div>
 
 ```{r}
+yearly_co2_small %>% 
+  summarize(mean_1901 = mean(`1901`)) # Note the backticks, this is a column name!
 yearly_co2 %>% 
-  summarize(mean_1989 = mean(`1989`)) # Note the backticks, this is a column name!
-yearly_co2 %>% 
-  summarize(mean_1989 = mean(`1989`, na.rm = TRUE))
+  summarize(mean_1901 = mean(`1901`, na.rm = TRUE))
 ```
 
 
@@ -260,10 +261,10 @@ yearly_co2 %>%
 `summarize()` can do multiple operations at once. Just separate by a comma.
 
 ```{r}
-yearly_co2 %>% 
-  summarize(mean_1989 = mean(`1989`, na.rm = TRUE),
-            median_1989 = median(`1989`, na.rm = TRUE),
-            median(`2000`, na.rm = TRUE))
+yearly_co2_small %>% 
+  summarize(mean_1901 = mean(`1901`, na.rm = TRUE),
+            median_1901 = median(`1901`, na.rm = TRUE),
+            median(`1902`, na.rm = TRUE))
 ```
 
 <br>
@@ -275,10 +276,10 @@ Notice how when we forget to provide a new name, output is still provided, but t
 This looks better.
 
 ```{r}
-yearly_co2 %>% 
-  summarize(mean_1989 = mean(`1989`, na.rm = TRUE),
-            median_1989 = median(`1989`, na.rm = TRUE),
-            median_2000 = median(`2000`, na.rm = TRUE))
+yearly_co2_small %>% 
+  summarize(mean_1901 = mean(`1901`, na.rm = TRUE),
+            median_1901 = median(`1901`, na.rm = TRUE),
+            median_1902 = median(`1902`, na.rm = TRUE))
 ```
 
 
@@ -294,7 +295,7 @@ If you want to save a summary statistic in the original data, use `mutate()` ins
 Using `summary()` can give you rough snapshots of each numeric column (character columns are skipped):
 
 ```{r}
-summary(yearly_co2)
+summary(yearly_co2_small)
 ```
 
 
@@ -375,6 +376,7 @@ CO_heat_ER %>% count(county, gender)
 
 ```{r}
 # Regular data
+CO_heat_ER <- select(CO_heat_ER, county, gender, year, visits, rate)
 CO_heat_ER
 ```
 
@@ -400,7 +402,7 @@ CO_heat_ER_grouped %>% summarize(avg_visits = mean(visits, na.rm = TRUE))
 
 ## Use the `pipe` to string these together!
 
-Pipe `yts` into `group_by`, then pipe that into `summarize`:
+Pipe `CO_heat_ER` into `group_by`, then pipe that into `summarize`:
 
 ```{r}
 CO_heat_ER %>%
@@ -412,9 +414,9 @@ CO_heat_ER %>%
 
 ## Group by as many variables as you want
 
-`group_by` Response and Education:
+`group_by` Gender and Year:
 
-```{r}
+```{r, warnings = F}
 CO_heat_ER %>%
   group_by(gender, year) %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE),
@@ -563,13 +565,13 @@ Let's see what the mean CO2 emissions is across years for each row (country):
 
 ```{r}
 yearly_co2 %>%
-  select(starts_with("year")) %>%
+  select(starts_with("201")) %>%
   rowMeans(na.rm = TRUE) %>%
   head(n = 5)
 
 yearly_co2 %>%
   group_by(country) %>%
-  summarize(mean = rowMeans(across(starts_with("year")), na.rm = TRUE)) %>%
+  summarize(mean = rowMeans(across(starts_with("201")), na.rm = TRUE)) %>%
   head(n = 5)
 ```
 
@@ -582,10 +584,10 @@ Let's see what the mean is across each column (year):
 
 ```{r}
 yearly_co2 %>%
-  select(starts_with("year")) %>%
+  select(starts_with("201")) %>%
   colMeans(na.rm = TRUE) %>%
   head(n = 5)
 
 yearly_co2 %>%
-  summarize(across(starts_with("year"), ~mean(.x, na.rm = TRUE)))
+  summarize(across(starts_with("201"), ~mean(.x, na.rm = TRUE)))
 ```
