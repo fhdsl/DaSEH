@@ -1,12 +1,8 @@
----
-title: "Materials + Schedule"
-output:
-  html_document
----
 
 <div class="leaf"></div> 
-
+# Materials + Schedule
 ***
+
 
 It's helpful to [install software](modules/Setup/Setup.html) before you start DaSEH. We also recommend completing HW 1 (Swirl module indicated below) before class so we can hit the ground running!
 
