@@ -26,7 +26,7 @@ library(tidyverse)
 ## Recap of Data Cleaning
 
 -   `case_when()` can recode **entire values** based on conditions
-    -   remember `case_when()` needs `TRUE ~ varaible` to keep values that aren't specified by conditions, otherwise will be `NA`
+    -   remember `case_when()` needs `TRUE ~ variable` to keep values that aren't specified by conditions, otherwise will be `NA`
 -   `stringr` package has great functions for looking for specific **parts of values** especially `filter()` and `str_detect()` combined
     - also has other useful string manipulation functions like `str_replace()` and more!
     - `separate()` can split columns into additional columns
@@ -128,7 +128,6 @@ ex_long
 
 - `pivot_longer` - make multiple columns into variables, (wide to long)
 - `pivot_wider` - make a variable into multiple columns, (long to wide)
-- `separate` - string into multiple columns (review)
 
 The `reshape` command exists.  Its arguments are considered more confusing, so we don't recommend it.
 
@@ -189,23 +188,24 @@ long_vacc
 
 Newly created column names are enclosed in quotation marks.
 
-## Data used: Charm City Circulator
+## Data used: CO Heat-related ER visits
 
-https://daseh.org/data/Charm_City_Circulator_Ridership.csv
+https://daseh.org/data/CO_heat_er_visits_DenverBoulder_wide.csv
 
 ```{r, message = FALSE}
-library(jhur)
-circ <- read_circulator()
-head(circ, 5)
+library(dasehr)
+wide <- nitrate
+head(nitrate)
 ```
 
-## Mission: Taking the average boardings by line
+## Mission: Taking the average proportion of the population exposed by concentration
 
-Let's imagine we want to create a table of average boardings by route/line. Results should look something like:
+Let's imagine we want to see what proportion of population exposed to different nitrate concentrations. Results should look something like:
 
 ```{r, message = FALSE, echo = FALSE}
-example <- tibble(line = c("orange","purple","green","banner"),
-                  avg_boardings = c("600(?)", "700(?)", "500(?)", "400(?)")
+example <- tibble(
+  conc_cat = c("pop_0-3ug/L", "pop_>10-20ug/L", "pop_>20ug/L"),
+  avg_prop = c(0.593, 0.000678, 0.000129)
 )
 example
 ```
@@ -213,72 +213,46 @@ example
 ## Reshaping data from **wide to long**
 
 ```{r}
-long <- circ %>% 
-  pivot_longer(starts_with(c("orange","purple","green","banner")))
+long <- wide %>%
+  select(!ends_with("exceedances")) %>% 
+  pivot_longer(!c(year, quarter, pop_on_sampled_PWS),
+               names_to = "conc_cat",
+               values_to = "conc_count")
 long
 ```
 
 ## Reshaping data from **wide to long**
 
-Un-pivoted columns (`day`, `date`, `daily`) are similar
+Un-pivoted columns (`year`, `quarter`, `pop_on_sampled_PWS`) are similar
 
 ```{r}
-circ %>% select(day, date, daily) %>% head()
-long %>% select(day, date, daily) %>% head()
+long
 ```
 
 ## Cleaning up long data
 
-We will use `str_replace` from the `stringr` package to put `_` in the names
+Let's make the `conc_count` into a proportion.
 
 ```{r}
-long <- long %>% mutate(
-  name = str_replace(string = name, pattern = "B", replacement = "_B"),
-  name = str_replace(string = name, pattern = "A", replacement = "_A")
-)
+long <- long %>%
+  mutate(conc_prop = conc_count / pop_on_sampled_PWS)
 long
 ```
 
-## Cleaning up long data with `separate()`
-
--  first argument - which column should be split up?
--  "`into =`" gives names to the new columns
--  "`sep =`" to show where the separation should happen.
-
-```{r}
-long <- long %>% 
-  separate(name, into = c("line", "type"), sep = "_")
-long
-```
-
-## Mission: Taking the average boardings by line
-
-Filter by Boardings only..
-
-```{r}
-long <- long %>% 
-  filter(type == "Boardings")
-long
-```
-
-## Mission: Taking the average boardings by line
+## Mission: Taking the average proportion of the population exposed by concentration
 
 Now our data is more tidy, and we can take the averages easily!
 
 ```{r}
 long %>% 
-  group_by(line) %>% 
-  summarize("avg_boardings" = mean(value, na.rm = TRUE))
+  group_by(conc_cat) %>% 
+  summarize("avg_prop" = mean(conc_prop))
 ```
 
 ## Reshaping data from **wide to long**
 
 There are many ways to **select** the columns we want. Check out https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html to look at more column selection options.
 
-```{r}
-circ %>% 
-  pivot_longer( !c(day, date, daily))
-```
 
 # `pivot_wider`...
 
@@ -306,19 +280,32 @@ wide_vacc <- long_vacc %>% pivot_wider(names_from = "Month",
 wide_vacc
 ```
 
-## Reshaping Charm City Circulator
+## Reshaping CO Heat-related ER Visits data
 
 ```{r}
 long
 ```
 
-## Reshaping Charm City Circulator
+## Reshaping CO Heat-related ER Visits data
 
 ```{r}
-wide <- long %>% pivot_wider(names_from = "line", 
-                             values_from = "value") 
+wide <- long %>%
+  select(!c(pop_on_sampled_PWS, conc_count)) %>%
+  pivot_wider(names_from = "quarter", values_from = "conc_prop")
 wide
 ```
+
+## Reshaping Summary `tibbles`
+
+Reshaping can be helpful for your assessment of two `group_by()` categories.
+
+```{r}
+long %>% 
+  group_by(conc_cat, quarter) %>% 
+  summarize("avg_prop" = mean(conc_prop)) %>% 
+  pivot_wider(names_from = "quarter", values_from = "avg_prop")
+```
+
 
 ## Summary
 
@@ -617,30 +604,6 @@ In other words, we use `dplyr::` to be specific about the package we want to use
 
 More set operations can be found here:
 https://dplyr.tidyverse.org/reference/setops.html
-
-
-## Inconsistencies in non-pivoted columns?
-
-Notice "daily" column has different values
-
-```{r echo = FALSE}
-long2 <- long
-long2[2,1] <- "MONDAY"
-```
-
-```{r}
-long2
-```
-
-## Inconsistencies in non-pivoted columns?
-
-R won't drop data while pivoting.
-
-```{r}
-wide2 <- long2 %>% pivot_wider(names_from = "type", 
-                             values_from = "value") 
-wide2
-```
 
 ## Fast manipulation using `collapse` package
 
