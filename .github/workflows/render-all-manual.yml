@@ -57,11 +57,6 @@ jobs:
           fetch-depth: 0
           # use github PAT
           token: ${{ secrets.GH_PAT }}
-      
-      - name: Get all files
-        id: all-files
-        run: |
-          echo "files=$(ls -R | grep -E '\.Rmd$')" >> $GITHUB_OUTPUT 
           
       # We want a fresh run of the renders each time - so first delete old html files
       - name: Delete old *.html
@@ -85,7 +80,7 @@ jobs:
        # Render all module files
       - name: Render html of modules
         run: |
-          Rscript --vanilla "scripts/render_modules.R" --files "${{ steps.all-files.outputs.files }}"
+          Rscript --vanilla "scripts/render_modules.R" --files "all"
           
        # Render the cheatsheets
       - name: Render Cheatsheet pdfs
