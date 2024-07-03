@@ -1,3 +1,4 @@
+---
 title: "Data Summarization"
 output:
   ioslides_presentation:
