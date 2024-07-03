@@ -605,30 +605,6 @@ In other words, we use `dplyr::` to be specific about the package we want to use
 More set operations can be found here:
 https://dplyr.tidyverse.org/reference/setops.html
 
-
-## Inconsistencies in non-pivoted columns?
-
-Notice "daily" column has different values
-
-```{r echo = FALSE}
-long2 <- long
-long2[2,1] <- "MONDAY"
-```
-
-```{r}
-long2
-```
-
-## Inconsistencies in non-pivoted columns?
-
-R won't drop data while pivoting.
-
-```{r}
-wide2 <- long2 %>% pivot_wider(names_from = "type", 
-                             values_from = "value") 
-wide2
-```
-
 ## Fast manipulation using `collapse` package
 
 https://sebkrantz.github.io/collapse/
