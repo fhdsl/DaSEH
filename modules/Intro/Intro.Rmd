@@ -458,9 +458,40 @@ knitr::include_graphics("images/install_v_load.png")
 knitr::include_graphics("../../images/lol/install_packages.jpg")
 ```
 
+# Let's practice!
+
+## Installing `remotes` and `dasehr`
+
+Install the `remotes` package.
+
+```{r, eval=F}
+install.packages("remotes")
+```
+
+<br>
+
+Then load the package.
+
+```{r, eval=F}
+library(remotes)
+```
+
+## Installing `remotes` and `dasehr`
+
+Next, run the following. 
+
+It will install our custom package, `dasehr` from GitHub.
+
+```{r, eval=F}
+install_github("fhdsl/dasehr")
+```
+
+
+# Where to find help
+
 ## Useful (+ mostly Free) Resources
 
-Found on our website under the `Resources` tab: https://daseh.org/resources.html>
+Found on our website under the `Resources` tab: https://daseh.org/resources.html
 
 -   videos from previous offerings of the class
 -   cheatsheets for each class
@@ -469,7 +500,7 @@ Found on our website under the `Resources` tab: https://daseh.org/resources.html
 
 Error messages can be scary!
 
--   Check out the FAQ/Help page on the website: https://daseh.org/help.html>
+-   Check out the FAQ/Help page on the website: https://daseh.org/help.html
 -   Ask questions in Slack! Copy+pasting your error messages is really helpful!
 -   Leverage our awesome TA time for 1:1 troubleshooting
 
@@ -501,3 +532,4 @@ knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
 
 Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
+
