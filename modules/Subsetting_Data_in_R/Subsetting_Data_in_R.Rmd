@@ -84,23 +84,11 @@ See this website for a list of the packages included in the `tidyverse`: https:/
 library(tidyverse) # loads dplyr and other packages!
 ```
 
-## Getting data to work with
 
-We will use a dataset from a project we worked on called Open Case Studies. 
 
-See https://www.opencasestudies.org/. 
-
-We have added the specific data to our website.
 
 
 ## Getting data to work with
-
-We will load data from one of the case studies about opioid shipments.
-
-See https://www.opencasestudies.org/ocs-bp-opioid-rural-urban/ about this data.
-
-
-## Import the data
 
 We will work with data called `ER` about heat-related ER visits between 2011 and 2022, as reported by the state of Colorado, specifically made available by the Colorado Environmental Public Health Tracking program website. Full dataset available at https://coepht.colorado.gov/heat-related-illness.
 
