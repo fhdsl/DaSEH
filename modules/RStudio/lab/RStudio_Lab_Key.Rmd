@@ -32,7 +32,7 @@ You may be asked a question in the console when you do this. If so, answer by ty
 ### 0.3
 
 Now install a package that the instructors made that is not on CRAN but on GitHub, by copy and pasting the code into the console. We still don't want to copy the backticks.<br>
-`install_github("jhudsl/jhur")`<br>
+`install_github("fhdsl/dasehr")`<br>
 You may be asked a question in the console when you do this. If so, answer by typing Yes into the console.
 
 
@@ -40,17 +40,14 @@ The gray area below is a code chunk that will set up our packages and data (this
 
 ```{r setup, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(jhur)
+library(dasehr)
 library(ggplot2)
 library(dplyr)
 
-long <- read_circulator_long()
-## take just average ridership per day
-avg <- long %>%
-  filter(type == "Average")
+ER <- CO_heat_ER_bygender
 # keep non-missing data
-avg <- avg %>%
-  filter(!is.na(number))
+ER_2 <- ER %>%
+  filter(!is.na(rate))
 ```
 
 When you click the **Knit** button (at the top of RStudio), a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
@@ -67,39 +64,39 @@ Here is code that will make a plot of the average daily ridership in Baltimore C
 
 Here we plot a few days. You can embed an R code chunk like this: Try pressing the green play button to see what happens. Make sure you have run the previous code chunk first by pressing the green play button in that chunk.
 
-```{r plot_circ, out.width = "100%"}
+```{r plot, out.width = "100%"}
 # keep only some days
-avg <- avg %>%
-  filter(day %in% c("Monday", "Tuesday", "Friday", "Saturday"))
+ER_3 <- ER_2 %>%
+  filter(county %in% c("Arapahoe", "Denver", "Jefferson", "Larimer"))
 
 palette <- c(
-  banner = "blue",
-  green = "darkgreen",
-  orange = "orange",
-  purple = "purple"
+  Arapahoe = "blue",
+  Denver = "darkgreen",
+  Jefferson = "orange",
+  Larimer = "purple"
 )
 
-ggplot(aes(x = date, y = number, colour = line), data = avg) +
+ggplot(aes(x = year, y = rate, colour = county, group = county), data = ER_3) +
   geom_line() +
-  facet_wrap(~day) +
+  facet_wrap(~gender) +
   scale_colour_manual(values = palette)
 ```
 
 ```{r out.width = "100%", label = '0response'}
 # keep only some days
-avg <- avg %>%
-  filter(day %in% c("Monday", "Tuesday", "Friday", "Sunday"))
+ER_3 <- ER_2 %>%
+  filter(county %in% c("Arapahoe", "Denver", "Jefferson", "Larimer"))
 
 palette <- c(
-  banner = "red",
-  green = "darkgreen",
-  orange = "orange",
-  purple = "purple"
+  Arapahoe = "red",
+  Denver = "darkgreen",
+  Jefferson = "orange",
+  Larimer = "salmon"
 )
 
-ggplot(aes(x = date, y = number, colour = line), data = avg) +
+ggplot(aes(x = year, y = rate, colour = county, group = county), data = ER_3) +
   geom_line() +
-  facet_wrap(~day) +
+  facet_wrap(~gender) +
   scale_colour_manual(values = palette)
 ```
 
