@@ -129,7 +129,7 @@ By the end of the course, learners should be comfortable:
 
 ## Course Evaluation
 
-Course evaluations are very important for the school to determine what courses to continue to support. It also helps us to improve the course with your feedback. We will be using surveys throughout DaSEH to help make it a rewarding experience.
+Course evaluations help us to improve the course with your feedback. We will be using surveys throughout DaSEH to help make it a rewarding experience. Some surveys may be used for research to help the field better understand how to educate individuals about data science and environmental health topics. We will let you know if a survey is for research purposes.
 
 <br>
 
