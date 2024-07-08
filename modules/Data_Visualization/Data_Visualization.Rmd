@@ -287,7 +287,7 @@ ggplot(er_state, aes(x = year, y = rate)) +
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
 
-er_visits_all <- er_visits_by_CO_county
+er_visits_all <- er_CO_county
 
 ggplot(er_visits_all, aes(x = year, y = rate, color = county)) +
   geom_point() +
