@@ -360,22 +360,32 @@ only inside the code chunks designated with the <code>{r}</code>
 areas).</p>
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
-<p>First let’s get the OCSdata package if we haven’t already. We added
-an argument here so you don’t have to select a mirror.</p>
-<pre class="r"><code>install.packages(&quot;OCSdata&quot;, repos=&#39;http://cran.us.r-project.org&#39;)</code></pre>
-<pre><code>## Installing package into &#39;/usr/local/lib/R/site-library&#39;
-## (as &#39;lib&#39; is unspecified)</code></pre>
+<p>First let’s get load our packages.</p>
 <pre class="r"><code># don&#39;t forget to load the packages that you will need!
 library(dplyr)
 library(tidyverse)
-library(OCSdata)</code></pre>
-<p>Now let’s load the opioid related datasets by running this chunk.</p>
-<pre class="r"><code>OCSdata::load_imported_data(&quot;ocs-bp-opioid-rural-urban&quot;)</code></pre>
-<p>Check that it worked by seeing if you have the
-<code>county_pop</code> data.</p>
+library(dasehr)</code></pre>
+<p>Now let’s load the ER dataset by running one of these chunks. We can
+either load the data from the website or from the <code>dasehr</code>
+package.</p>
+<pre class="r"><code>library(dasehr)
+ER &lt;- CO_heat_ER_bygender</code></pre>
+<p>Or</p>
+<pre class="r"><code>ER &lt;- 
+  read_csv(&quot;https://daseh.org/data/Colorado_ER_heat_visits_by_county_gender.csv&quot;)</code></pre>
+<pre><code>## Rows: 240 Columns: 7
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (2): county, gender
+## dbl (5): rate, lower95cl, upper95cl, visits, year
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>Check that it worked by seeing if you have the <code>ER</code>
+data.</p>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>What class is <code>county_pop</code>?</p>
+<p>What class is <code>ER</code>?</p>
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
@@ -384,15 +394,15 @@ dataset - try the <code>dim()</code> function?</p>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
-<p>Next, rename the column <code>BUYER_STATE</code> to be
-<code>State_name</code> (hint - use <code>rename()</code> and watch out
+<p>Next, rename the column <code>lower95cl</code> to be
+<code>lower_limit</code> (hint - use <code>rename()</code> and watch out
 for the order of the new and old names!).</p>
 </div>
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
-<p>Convert the column names of <code>county_pop</code> to be all lower
-case. Use <code>rename_with()</code>, and the <code>tolower</code>
-command.</p>
+<p>Convert the column names of <code>ER</code> to be all upper case. Use
+<code>rename_with()</code>, and the <code>toupper</code> command. Save
+this as a new dataset called <code>ER_upper</code>.</p>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
@@ -400,50 +410,50 @@ command.</p>
 <div id="p.1" class="section level3">
 <h3>P.1</h3>
 <p>How can you print the first 3 rows and the last 3 rows of
-<code>county_pop</code> (in two lines of code)?</p>
+<code>ER</code> (in two lines of code)?</p>
 </div>
 </div>
 <div id="part-2" class="section level1">
 <h1>Part 2</h1>
 <div id="section-4" class="section level3">
 <h3>2.1</h3>
-<p>Create a subset of the <code>county_pop</code> that only contains the
-columns: <code>county_name</code>, <code>year</code>, and
-<code>population</code> and assign this object to <code>pop_sub</code> -
-what are the dimensions of this dataset?</p>
+<p>Create a subset of the <code>ER</code> that only contains the
+columns: <code>county</code>, <code>year</code>, and <code>rate</code>
+and assign this object to <code>ER_sub</code> - what are the dimensions
+of this dataset?</p>
 </div>
 <div id="section-5" class="section level3">
 <h3>2.2</h3>
-<p>Start with <code>county_pop</code> again instead of the dataset you
-just made. Subset the data to only include the <code>population</code>
-column and the columns that end with “_name”. Hint: use
-<code>select()</code> and <code>ends_with()</code>. Assign this subset
-of the data to be <code>pop2</code>. Again take a look at the data and
-check the dimensions.</p>
+<p>Start with <code>ER</code> again instead of the dataset you just
+made. Subset the data to only include the <code>rate</code> column and
+the columns that end with “cl”. Hint: use <code>select()</code> and
+<code>ends_with()</code>. Assign this subset of the data to be
+<code>ER2</code>. Again take a look at the data and check the
+dimensions.</p>
 </div>
 <div id="section-6" class="section level3">
 <h3>2.3</h3>
-<p>Pull the variable <code>county_name</code> from <code>pop2</code>.
-How does this differ form selecting it? Use head() to take a look at
-both options.</p>
+<p>Pull the variable <code>rate</code> from <code>ER2</code>. How does
+this differ form selecting it? Use head() to take a look at both
+options.</p>
 </div>
 <div id="section-7" class="section level3">
 <h3>2.4</h3>
-<p>Subset the rows of <code>county_pop</code> that have
-<strong>more</strong> than 100000 for population - how many rows are
-there? Use <code>filter()</code>.</p>
+<p>Subset the rows of <code>ER2</code> that have <strong>more</strong>
+than 10 for rate - how many rows are there? Use
+<code>filter()</code>.</p>
 </div>
 <div id="section-8" class="section level3">
 <h3>2.5</h3>
-<p>Subset the rows of <code>county_pop</code> that have a year value
-<strong>less</strong> than 2010 and <strong>more</strong> than 100000
-population - how many are there?</p>
+<p>Subset the rows of <code>ER</code> that have a year value
+<strong>less</strong> than 2012 and <strong>more</strong> than 10 rate -
+how many are there?</p>
 </div>
 <div id="section-9" class="section level3">
 <h3>2.6</h3>
-<p>Subset the rows of <code>county_pop</code> that have a year value of
-<strong>less than or equal to </strong> 2010 and <strong>more</strong>
-than 100000 population - how many are there?</p>
+<p>Subset the rows of <code>ER</code> that have a year value of
+<strong>less than or equal to </strong> 2012 and <strong>more</strong>
+than 10 rate - how many are there?</p>
 </div>
 <div id="section-10" class="section level3">
 <h3>2.7</h3>
@@ -454,29 +464,27 @@ than 100000 population - how many are there?</p>
 <h1>Practice on Your Own!</h1>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
-<p>Subset the rows of <code>county_pop</code> for rows that have
-<code>state_name</code> of <code>NM</code>, <strong>or</strong>
-<strong>less</strong> than 10000 <code>population</code>. How many rows
-have both?</p>
+<p>Subset the rows of <code>ER</code> for rows that have
+<code>county</code> of <code>Denver</code>, <strong>or</strong>
+<strong>less</strong> than 4 `rate``. How many rows have both?</p>
 </div>
 <div id="p.3" class="section level3">
 <h3>P.3</h3>
 <p>Select the variables that contain the letter “a” from
-<code>cars_mt_copy</code>.</p>
+<code>ER</code>.</p>
 </div>
 </div>
 <div id="part-3" class="section level1">
 <h1>Part 3</h1>
 <div id="section-11" class="section level3">
 <h3>3.1</h3>
-<p>Create a subset called <code>county_2012</code> from
-<code>county_pop</code> that only contains the rows for the year 2012
-and only the columns: <code>county_name</code>, <code>state_name</code>,
-<code>population</code>. <code>year</code> should not be included in
-<code>county_sub</code>. What are the dimensions of this dataset? Don’t
-use pipes (<code>%&gt;%</code>) and instead do this in two steps
-creating the <code>county_2012</code> object with <code>filter</code>
-and updating it with <code>select</code>.</p>
+<p>Create a subset called <code>ER_2012</code> from <code>ER</code> that
+only contains the rows for the year 2012 and only the columns:
+<code>county</code> and <code>rate</code>. <code>year</code> should not
+be included in <code>ER_sub</code>. What are the dimensions of this
+dataset? Don’t use pipes (<code>%&gt;%</code>) and instead do this in
+two steps creating the <code>ER_2012</code> object with
+<code>filter</code> and updating it with <code>select</code>.</p>
 </div>
 <div id="section-12" class="section level3">
 <h3>3.2</h3>
@@ -486,16 +494,16 @@ not work?</p>
 </div>
 <div id="section-13" class="section level3">
 <h3>1.3</h3>
-<p>Re-order the rows of <code>county_2012</code> by population in
-increasing order. Use <code>arrange()</code>. What is county with the
-smallest population?</p>
+<p>Re-order the rows of <code>ER_2012</code> by population in increasing
+order. Use <code>arrange()</code>. What is county with the smallest
+rate?</p>
 </div>
 <div id="section-14" class="section level3">
 <h3>1.4</h3>
-<p>Create a new variable in <code>county_2012</code> called
-<code>pop1000</code>, which is equal to <code>population</code> divided
-by 1000, using <code>mutate()</code>(don’t forget to reassign
-<code>county_2012</code>). Use pipes <code>%&gt;%</code>.</p>
+<p>Create a new variable in <code>ER_2012</code> called
+<code>rate1000</code>, which is equal to <code>rate</code> divided by
+1000, using <code>mutate()</code>(don’t forget to reassign
+<code>ER_2012</code>). Use pipes <code>%&gt;%</code>.</p>
 <pre><code># General format
 NEWDATA &lt;- OLD_DATA %&gt;% mutate(NEW_COLUMN = OLD_COLUMN)</code></pre>
 </div>
@@ -504,15 +512,18 @@ NEWDATA &lt;- OLD_DATA %&gt;% mutate(NEW_COLUMN = OLD_COLUMN)</code></pre>
 <h1>Practice on Your Own!</h1>
 <div id="p.4" class="section level3">
 <h3>P.4</h3>
-<p>Move the <code>state_name</code> column to be before
-<code>county_name</code> in the <code>county_2012</code> dataset. Use
+<p>Move the <code>rate1000</code> column to be before
+<code>county</code> in the <code>ER_2012</code> dataset. Use
 <code>relocate()</code>.</p>
 </div>
 <div id="p.5" class="section level3">
 <h3>P.5</h3>
-<p>How can you find the value of <code>population</code> for Chambers AL
-without just looking at the data manually and instead use functions we
-learned today?</p>
+<p>How can you find the value of <code>rate</code> in 2020 for Statewide
+for Females - using the initial ER data - without just looking at the
+data manually and instead use functions we learned today?</p>
+<p>Note that gender was recorded as binary, which we know isn’t really
+accurate. This is something you might encounter. Please see this article
+about ways to measure gender in a more inclusive way: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6526522/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6526522/</a>.</p>
 </div>
 </div>
 
