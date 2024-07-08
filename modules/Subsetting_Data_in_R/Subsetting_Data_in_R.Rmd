@@ -104,10 +104,13 @@ See https://www.opencasestudies.org/ocs-bp-opioid-rural-urban/ about this data.
 
 We will work with data called `ER` about heat-related ER visits between 2011 and 2022, as reported by the state of Colorado, specifically made available by the Colorado Environmental Public Health Tracking program website. Full dataset available at https://coepht.colorado.gov/heat-related-illness.
 
+
 ```{r}
+library(dasehr)
+ER <- CO_heat_ER_bygender
+#or we could do this:
 ER <- 
   read_csv("https://daseh.org/data/Colorado_ER_heat_visits_by_county_gender.csv")
-
 
 ```
 
@@ -361,6 +364,9 @@ library(janitor)
 The `clean_names` function can intuit what fixes you might need. Here it make sure year names aren't just a number, so that the colnames dont need ticks or quotes to be used.
 
 ```{r}
+#library(dasehr)
+CO2 <- dasehr::yearly_co2_emissions
+# or this:
 CO2 <- 
   read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
 head(CO2, n = 2)
@@ -402,6 +408,9 @@ clean_names(test)
 This time lets also make it a smaller subset so it is easier for us to see the full dataset as we work through examples. 
 
 ```{r}
+#library(dasehr)
+#ER <- CO_heat_ER_bygender
+#or this:
 #read_csv("https://daseh.org/data/Colorado_ER_heat_visits_by_county_gender.csv")
 set.seed(1234)
 ER_30 <-slice_sample(ER, n = 30)
@@ -652,6 +661,9 @@ https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 ## Get the data
 
 ```{r}
+#library(dasehr)
+#ER <- CO_heat_ER_bygender
+# or this:
 #read_csv("https://daseh.org/data/Colorado_ER_heat_visits_by_county_gender.csv")
 set.seed(1234)
 ER_30 <-slice_sample(ER, n = 30)
