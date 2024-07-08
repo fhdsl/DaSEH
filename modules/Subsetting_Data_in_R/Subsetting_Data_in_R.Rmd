@@ -13,7 +13,6 @@ library(knitr)
 opts_chunk$set(comment = "")
 suppressPackageStartupMessages(library(dplyr))
 library(dplyr)
-library(jhur)
 ```
 
 ## Reminder
@@ -31,7 +30,7 @@ We are constantly making improvements.
 -  Reproducible science makes everyone's life easier!  
 - `readr`has helpful functions like `read_csv()` that can help you import data into R  
 
-📃[Cheatsheet](https://jhudatascience.org/intro_to_r/modules/cheatsheets/Day-2.pdf)
+📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)
 
 
 ## Overview
@@ -251,7 +250,7 @@ head(renamed_ER)
 
 When you can, avoid spaces, special punctuation, or numbers in column names, as these require special treatment to refer to them. 
 
-See https://jhudatascience.org/intro_to_r/resources/quotes_vs_backticks.html for more guidance.
+See https://daseh.org/resources/quotes_vs_backticks.html for more guidance.
 
 ```{r, eval = FALSE}
  # this will cause an error
@@ -382,14 +381,14 @@ clean_names(test)
 - if your original data has rownames, you need to use `rownames_to_column` before converting to tibble
 - the `rename()` function of `dplyr` can help you rename columns
 - avoid using punctuation (except underscores), spaces, and numbers (to start or alone) in column names
-- if you must do a nonstandard column name - typically use backticks around it. See https://jhudatascience.org/intro_to_r/resources/quotes_vs_backticks.html.
+- if you must do a nonstandard column name - typically use backticks around it. See https://daseh.org/resources/quotes_vs_backticks.html.
 - avoid copy and pasting code from other sources - quotation marks will change!
 - check out `janitor` if you need to make lots of column name changes
 
 ## Lab Part 1
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)    
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
+🏠 [Class Website](https://daseh.org/)    
+💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
 
 # Subsetting Columns
 
@@ -652,8 +651,8 @@ https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 
 ## Lab Part 2
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)    
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
+🏠 [Class Website](https://daseh.org)    
+💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
 
 ## Get the data
 
@@ -931,9 +930,9 @@ Even though `$` is easier for creating new columns, `mutate` is really powerful,
 
 ## Lab Part 3
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
+🏠 [Class Website](https://daseh.org)
 
-💻 [Lab](https://jhudatascience.org/intro_to_r/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
 
 
 
