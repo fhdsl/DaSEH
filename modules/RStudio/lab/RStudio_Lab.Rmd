@@ -32,7 +32,7 @@ You may be asked a question in the console when you do this. If so, answer by ty
 ### 0.3
 
 Now install a package that the instructors made that is not on CRAN but on GitHub, by copy and pasting the code into the console. We still don't want to copy the backticks.<br>
-`install_github("fhdsl/dasehr")`<br>
+`install_github("jhudsl/jhur")`<br>
 You may be asked a question in the console when you do this. If so, answer by typing Yes into the console.
 
 
@@ -40,7 +40,7 @@ The gray area below is a code chunk that will set up our packages and data (this
 
 ```{r setup, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(dasehr)
+library(jhur)
 library(ggplot2)
 library(dplyr)
 
