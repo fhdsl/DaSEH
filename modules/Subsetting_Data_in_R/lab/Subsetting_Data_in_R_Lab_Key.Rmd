@@ -20,10 +20,17 @@ First let's get load our packages.
 # don't forget to load the packages that you will need!
 library(dplyr)
 library(tidyverse)
+library(dasehr)
 ```
 
-Now let's load the ER dataset by running this chunk. 
+Now let's load the ER dataset by running one of these chunks. We can either load the data from the website or from the `dasehr` package.
 
+```{r}
+library(dasehr)
+ER <- CO_heat_ER_bygender
+```
+
+Or
 ```{r}
 ER <- 
   read_csv("https://daseh.org/data/Colorado_ER_heat_visits_by_county_gender.csv")
@@ -251,6 +258,8 @@ ER_2012
 ### P.5
 
 How can you find the value of `rate` in 2020 for Statewide for Females - using the initial ER data -  without just looking at the data manually and instead use functions we learned today?
+
+Note that gender was recorded as binary, which we know isn’t really accurate. This is something you might encounter. Please see this article about ways to measure gender in a more inclusive way: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6526522/. 
 
 ```{r P.5response}
 ER %>%
