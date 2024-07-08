@@ -282,7 +282,7 @@ knitr::include_graphics("images/output.png")
 
 See the [Help page](https://daseh.org/help.html) of the website. You can adjust this and change your RStudio settings:
 
-Tools > Global Options > Appearance
+Tools > Global Options > R Markdown
 
 ## Knit file to html
 
