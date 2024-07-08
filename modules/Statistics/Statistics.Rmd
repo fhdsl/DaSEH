@@ -467,8 +467,8 @@ For example, if we want to fit a regression model where outcome is `income` and 
 
 ## Linear regression
 
-We will use our dataset about nitrate levels by quarter in public water sources in Washington. We'll load a slightly different version of this dataset, which can be found at "https://daseh.org/data/
-Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_v2_data.csv"
+We will use our dataset about nitrate levels by quarter in public water sources in Washington. We'll load a slightly different version of this dataset, which can be found at
+https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_v2_data.csv.
 
 
 ```{r}
