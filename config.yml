@@ -9,7 +9,7 @@ default:
   #grades_due: "January 26"
   holiday: "In recognition of [Martin Luther King Jr. Day](https://en.wikipedia.org/wiki/Martin_Luther_King_Jr._Day), there will be **no class on Monday January 15th, 2024**."
   google_survey: "https://forms.gle/hQ7jdHZSZoDpHAdE6"
-  slack_workspace: "https://intro-to-r-140-604.slack.com/"
+  slack_workspace: "https://daseh.slack.com/"
   # ta: "Padmashri Saravanan (psarava1 at jhu.edu), Alex Newman (anewma28 at jhu.edu)"
   ds: "Candace Savonen (csavonen at fredhutch.org)"
   instructors: "[Carrie Wright](https://carriewright11.github.io/) (cwright2 @ fredhutch.org), [Ava Hoffman](https://www.avahoffman.com/) (ahoffma2 at fredhutch.org), [Elizabeth Humphries]() (ehumphri at fredhutch.org)"
