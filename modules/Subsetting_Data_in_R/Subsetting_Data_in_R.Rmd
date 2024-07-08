@@ -349,7 +349,7 @@ library(janitor)
 
 ## janitor `clean_names`
 
-The `clean_names` function can intuit what fixes you might need. Here it make sure year names aren't just a number, so that the colnames dont need ticks or quotes to be used.
+The `clean_names` function can intuit what fixes you might need. Here it make sure year names aren't just a number, so that the colnames don't need ticks or quotes to be used.
 
 ```{r}
 #library(dasehr)
