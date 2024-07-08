@@ -7,3 +7,4 @@ https://en.wikipedia.org/wiki/Path_(computing
 http://cran.us.r-project.org)
 http://www.r-project.org/,
 https://github.com/awesomedata/awesome-public-datasets,
+https://en.wikipedia.org/wiki/R_(programming_language
