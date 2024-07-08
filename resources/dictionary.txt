@@ -255,6 +255,7 @@ ug
 Un
 Uncheck
 Ungroup
+uri
 Unsplash
 UseR
 useR

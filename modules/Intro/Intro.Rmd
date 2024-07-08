@@ -37,7 +37,7 @@ Associate, Department of Biostatistics, JHSPH
 
 PhD in Biomedical Sciences
 
-Email: [cwright2\@fredhutch.org](mailto:cwright2@fredhutch.org){.email} Web: <https://carriewright11.github.io>
+Email: [cwright2\@fredhutch.org](mailto:cwright2@fredhutch.org){.email} Web: https://carriewright11.github.io
 
 ```{r, fig.alt="Carrie's picture", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("modules", "Intro", "images", "carrie.png"))
@@ -53,7 +53,7 @@ Associate, Department of Biostatistics, JHSPH
 
 PhD in Ecology
 
-Email: [ahoffma2\@fredhutch.org](mailto:ahoffma2@fredhutch.org){.email} Web: <https://avahoffman.com>
+Email: [ahoffma2\@fredhutch.org](mailto:ahoffma2@fredhutch.org){.email} Web: https://avahoffman.com
 
 ```{r, fig.alt="Ava's picture", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("modules", "Intro", "images", "ava.png"))
@@ -269,15 +269,15 @@ This course will involve moving files around on your computer and downloading fi
 
 If you are new to this - check out these videos.
 
-If you have a PC: <https://youtu.be/we6vwB7DsNU>
+If you have a PC: https://youtu.be/we6vwB7DsNU
 
-If you have a Mac: <https://www.youtube.com/watch?v=Ao9e0cDzMrE>
+If you have a Mac: https://www.youtube.com/watch?v=Ao9e0cDzMrE
 
 You can find these on the resource page of the website.
 
 ## Basic terms
 
-R jargon: <https://link.springer.com/content/pdf/bbm%3A978-1-4419-1318-0%2F1.pdf>
+R jargon: https://link.springer.com/content/pdf/bbm%3A978-1-4419-1318-0%2F1.pdf
 
 **Package** - a package in R is a bundle or "package" of code (and or possibly data) that can be loaded together for easy repeated use or for **sharing** with others.
 
@@ -460,7 +460,7 @@ knitr::include_graphics("../../images/lol/install_packages.jpg")
 
 ## Useful (+ mostly Free) Resources
 
-Found on our website under the `Resources` tab: <https://daseh.org/resources.html>
+Found on our website under the `Resources` tab: https://daseh.org/resources.html>
 
 -   videos from previous offerings of the class
 -   cheatsheets for each class
@@ -469,7 +469,7 @@ Found on our website under the `Resources` tab: <https://daseh.org/resources.htm
 
 Error messages can be scary!
 
--   Check out the FAQ/Help page on the website: <https://daseh.org/help.html>
+-   Check out the FAQ/Help page on the website: https://daseh.org/help.html>
 -   Ask questions in Slack! Copy+pasting your error messages is really helpful!
 -   Leverage our awesome TA time for 1:1 troubleshooting
 
