@@ -362,6 +362,8 @@ library(janitor)
 The `clean_names` function can intuit what fixes you might need. Here it makes everything consistent.
 
 ```{r}
+#install.packages(OCSdata)
+library(OCSdata)
 OCSdata::load_imported_data("ocs-bp-opioid-rural-urban")
 head(annualDosage, n = 2)
 clean_names(annualDosage)
