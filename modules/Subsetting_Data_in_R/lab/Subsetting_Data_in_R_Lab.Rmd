@@ -13,26 +13,31 @@ In this lab you can use the interactive console to explore but please record you
 
 # Part 1
 
-First let's get the OCSdata package if we haven't already. We added an argument here so you don't have to select a mirror. 
+First let's get load our packages.
 
-```{r}
-install.packages("OCSdata", repos='http://cran.us.r-project.org')
-```
 
 ```{r, message = FALSE}
 # don't forget to load the packages that you will need!
 library(dplyr)
 library(tidyverse)
-library(OCSdata)
+library(dasehr)
 ```
 
-Now let's load the opioid related datasets by running this chunk. 
+Now let's load the ER dataset by running one of these chunks. We can either load the data from the website or from the `dasehr` package.
 
 ```{r}
-OCSdata::load_imported_data("ocs-bp-opioid-rural-urban")
+library(dasehr)
+ER <- CO_heat_ER_bygender
 ```
 
-Check that it worked by seeing if you have the `county_pop` data.
+Or
+```{r}
+ER <- 
+  read_csv("https://daseh.org/data/Colorado_ER_heat_visits_by_county_gender.csv")
+
+```
+
+Check that it worked by seeing if you have the `ER` data.
 
 ```{r 0response}
 
@@ -40,7 +45,7 @@ Check that it worked by seeing if you have the `county_pop` data.
 
 ### 1.1
 
-What class is `county_pop`?
+What class is `ER`?
 
 ```{r 1.1response}
 
@@ -56,7 +61,7 @@ How many observations (rows) and variables (columns) are in the dataset - try th
 
 ### 1.3
 
-Next, rename the column `BUYER_STATE`  to be `State_name` (hint - use `rename()` and watch out for the order of the new and old names!). 
+Next, rename the column `lower95cl`  to be `lower_limit` (hint - use `rename()` and watch out for the order of the new and old names!). 
 
 ```{r 1.3response}
 
@@ -64,18 +69,19 @@ Next, rename the column `BUYER_STATE`  to be `State_name` (hint - use `rename()`
 
 ### 1.4
 
-Convert the column names of `county_pop` to be all lower case. Use `rename_with()`, and the `tolower` command.
+Convert the column names of `ER` to be all upper case. Use `rename_with()`, and the `toupper` command. Save this as a new dataset called `ER_upper`.
 
 ```{r 1.4response}
 
 ```
 
 
+
 # Practice on Your Own!
 
 ### P.1
 
-How can you print the first 3 rows and the last 3 rows of `county_pop` (in two lines of code)?
+How can you print the first 3 rows and the last 3 rows of `ER` (in two lines of code)?
 
 ```{r P.1response}
 
@@ -86,7 +92,7 @@ How can you print the first 3 rows and the last 3 rows of `county_pop` (in two l
 
 ### 2.1
 
-Create a subset of the `county_pop` that only contains the columns: `county_name`, `year`, and `population` and assign this object to `pop_sub` - what are the dimensions of this dataset?
+Create a subset of the `ER` that only contains the columns: `county`, `year`, and `rate` and assign this object to `ER_sub` - what are the dimensions of this dataset?
 
 ```{r 2.1response}
 
@@ -94,7 +100,7 @@ Create a subset of the `county_pop` that only contains the columns: `county_name
 
 ### 2.2
 
-Start with `county_pop` again instead of the dataset you just made. Subset the data to only include the `population` column and the columns that end with "_name". Hint: use  `select()` and `ends_with()`. Assign this subset of the data to be `pop2`. Again take a look at the data and check the dimensions.
+Start with `ER` again instead of the dataset you just made. Subset the data to only include the `rate` column and the columns that end with "cl". Hint: use  `select()` and `ends_with()`. Assign this subset of the data to be `ER2`. Again take a look at the data and check the dimensions.
 
 ```{r 2.2response}
 
@@ -102,7 +108,7 @@ Start with `county_pop` again instead of the dataset you just made. Subset the d
 
 ### 2.3
 
-Pull the variable `county_name` from `pop2`. How does this differ form selecting it? Use head() to take a look at both options.
+Pull the variable `rate` from `ER2`. How does this differ form selecting it? Use head() to take a look at both options.
 
 ```{r 2.3response}
 
@@ -110,7 +116,7 @@ Pull the variable `county_name` from `pop2`. How does this differ form selecting
 
 ### 2.4
 
-Subset the rows of `county_pop` that have **more** than 100000 for population - how many rows are there? Use `filter()`.
+Subset the rows of `ER2` that have **more** than 10 for rate - how many rows are there? Use `filter()`.
 
 ```{r 2.4response}
 
@@ -118,7 +124,7 @@ Subset the rows of `county_pop` that have **more** than 100000 for population - 
 
 ### 2.5
 
-Subset the rows of `county_pop` that have a year value **less** than 2010 and **more** than 100000 population - how many are there?
+Subset the rows of `ER` that have a year value **less** than 2012 and **more** than 10 rate - how many are there?
 
 ```{r 2.5response}
 
@@ -126,7 +132,7 @@ Subset the rows of `county_pop` that have a year value **less** than 2010 and **
 
 ### 2.6
 
-Subset the rows of `county_pop` that have a year value of **less than or equal to ** 2010 and **more** than 100000 population - how many are there?
+Subset the rows of `ER` that have a year value of **less than or equal to ** 2012 and **more** than 10 rate - how many are there?
 
 ```{r 2.6response}
 
@@ -145,7 +151,7 @@ Why do the answers for 2.5 and 2.6 differ?
 
 ### P.2
 
-Subset the rows of `county_pop` for rows that have `state_name` of `NM`,  **or** **less** than 10000 `population`.
+Subset the rows of `ER` for rows that have `county` of `Denver`,  **or** **less** than 4 `rate``.
 How many rows have both?
 
 ```{r P.2response}
@@ -154,7 +160,7 @@ How many rows have both?
 
 ### P.3
 
-Select the variables that contain the letter "a" from `cars_mt_copy`.
+Select the variables that contain the letter "a" from `ER`.
 
 ```{r P.3response}
 
@@ -165,8 +171,8 @@ Select the variables that contain the letter "a" from `cars_mt_copy`.
 
 ### 3.1
 
-Create a subset called `county_2012` from `county_pop` that only contains the rows for the year 2012 and only the columns: `county_name`,	`state_name`, `population`. `year` should not be included in `county_sub`.
-	What are the dimensions of this dataset? Don't use pipes (`%>%`) and instead do this in two steps creating the `county_2012` object with `filter` and updating it with `select`.
+Create a subset called `ER_2012` from `ER` that only contains the rows for the year 2012 and only the columns: `county` and	`rate`. `year` should not be included in `ER_sub`.
+	What are the dimensions of this dataset? Don't use pipes (`%>%`) and instead do this in two steps creating the `ER_2012` object with `filter` and updating it with `select`.
 
 ```{r 3.1response}
 
@@ -188,7 +194,7 @@ What happens if you do the steps in a different order? Why does this not work?
 
 ### 1.3
 
-Re-order the rows of `county_2012` by population in increasing order. Use `arrange()`. What is county with the smallest population?
+Re-order the rows of `ER_2012` by population in increasing order. Use `arrange()`. What is county with the smallest rate?
 
 ```{r 3.3response}
 
@@ -196,7 +202,7 @@ Re-order the rows of `county_2012` by population in increasing order. Use `arran
 
 ### 1.4
 
-Create a new variable in `county_2012` called `pop1000`, which  is equal to `population` divided by 1000, using `mutate()`(don't forget to reassign `county_2012`). Use pipes `%>%`.
+Create a new variable in `ER_2012` called `rate1000`, which  is equal to `rate` divided by 1000, using `mutate()`(don't forget to reassign `ER_2012`). Use pipes `%>%`.
 
 ```
 # General format
@@ -212,7 +218,7 @@ NEWDATA <- OLD_DATA %>% mutate(NEW_COLUMN = OLD_COLUMN)
 
 ### P.4
 
-Move the `state_name` column to be before `county_name` in the `county_2012` dataset. Use `relocate()`.
+Move the `rate1000` column to be before `county` in the `ER_2012` dataset. Use `relocate()`.
 
 ```{r P.4response}
 
@@ -220,7 +226,9 @@ Move the `state_name` column to be before `county_name` in the `county_2012` dat
 
 ### P.5
 
-How can you find the value of `population` for Chambers AL without just looking at the data manually and instead use functions we learned today?
+How can you find the value of `rate` in 2020 for Statewide for Females - using the initial ER data -  without just looking at the data manually and instead use functions we learned today?
+
+Note that gender was recorded as binary, which we know isn’t really accurate. This is something you might encounter. Please see this article about ways to measure gender in a more inclusive way: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6526522/. 
 
 ```{r P.5response}
 
