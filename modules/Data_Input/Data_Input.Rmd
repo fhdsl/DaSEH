@@ -23,7 +23,7 @@ pre { /* Code block - slightly smaller in this lecture */
 
 R Projects are a feature of RStudio that can help you stay organized. They are pretty straightforward to set up, but are not required. You can learn more about R Projects here:
 
-https://jhudatascience.org/intro_to_r/resources/R_Projects.html
+https://daseh.org/resources/R_Projects.html
 
 
 # Getting data into R (manual/point and click)
@@ -41,16 +41,16 @@ https://jhudatascience.org/intro_to_r/resources/R_Projects.html
 
 ## Note: data for demonstration
 
-* We have added functionality to load some datasets directly in the `jhur` package
+* We have added functionality to load some datasets directly in the `dasehr` package
 
 
 ## Data Input
 
-Youth Tobacco Survey (YTS) dataset:
+CalEnviroScreen Dataset: 
 
-"The YTS was developed to provide states with comprehensive data on both middle school and high school students regarding tobacco use, exposure to environmental tobacco smoke, smoking cessation, school curriculum, minors' ability to purchase or otherwise obtain tobacco products, knowledge and attitudes about tobacco, and familiarity with pro-tobacco and anti-tobacco media messages."
+CalEnviroScreen is a project that ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. Data used in the CalEnviroScreen model come from national and state sources.
 
-* Check out the data at: https://catalog.data.gov/dataset/youth-tobacco-survey-yts-data
+* Check out the data at: https://calenviroscreen-oehha.hub.arcgis.com/#Data
 
 
 ## Import Dataset
@@ -58,7 +58,7 @@ Youth Tobacco Survey (YTS) dataset:
 -  `>` File
 -  `>` Import Dataset
 -  `>` From Text (`readr`)
--  `>` paste the url (http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv)
+-  `>` paste the url (https://daseh.org/data/CalEnviroScreen_data.csv)
 -  `>` click "Update" and "Import"
 
 
@@ -73,7 +73,7 @@ knitr::include_graphics("images/Data_Input_data_imported.png")
 
 ## What Just Happened?
 
-You see a new object called `Youth_Tobacco_Survey_YTS_Data` in your environment pane (top right). The table button opens the data for you to view.
+You see a new object called `CalEnviroScreen_data` in your environment pane (top right). The table button opens the data for you to view.
 
 ```{r, fig.alt="The image shows the data in preview form. It is organized like a spreadsheet one might see in Excel.", out.width = "80%", echo = FALSE, align = "center"}
 knitr::include_graphics("images/Data_Input_data_imported.png")
@@ -119,7 +119,7 @@ Cons: obscures some of what's happening, others will have difficulty running you
 # load library `readr` that contains function `read_csv`
 library(readr)
 dat <- read_csv(
-  file = "http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv"
+  file = "https://daseh.org/data/CalEnviroScreen_data.csv"
 )
 
 # `head` displays first few rows of a data frame. `tail()` works the same way.
@@ -131,11 +131,11 @@ head(dat, n = 5)
 
 ```{r message = FALSE}
 dat <- read_csv(
-  file = "http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv"
+  file = "https://daseh.org/data/CalEnviroScreen_data.csv"
 )
 # EQUIVALENT TO
 dat <- read_csv(
-  "http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv"
+  "https://daseh.org/data/CalEnviroScreen_data.csv"
 )
 ```
 
@@ -153,9 +153,9 @@ dat <- read_csv(
 
 dat <- read_csv(file = "www.someurl.com/table1.csv")
 
-dat <- read_csv(file = "/Users/avahoffman/Downloads/Youth_Tobacco_Survey_YTS_Data.csv")
+dat <- read_csv(file = "/Users/avahoffman/Downloads/CalEnviroScreen_data.csv")
 
-dat <- read_csv(file = "Youth_Tobacco_Survey_YTS_Data.csv")
+dat <- read_csv(file = "CalEnviroScreen_data.csv")
 ```
 
 
@@ -253,7 +253,7 @@ dat <- read_delim(file = "data.txt", delim = "|")
 ```{r, eval=FALSE}
 library(readxl)
 
-read_excel(path = "asthma.xlsx")
+read_excel(path = "nitrate.xlsx")
 ```
 
 
@@ -292,12 +292,12 @@ knitr::include_graphics("images/Data_Input_knit_directory.png")
 
 ## Summary
 
-**R Projects** can make it easier to find files. Check out [this resource](https://jhudatascience.org/intro_to_r/resources/R_Projects.html).
+**R Projects** can make it easier to find files. Check out [this resource](https://daseh.org/resources/R_Projects.html).
 
 Importing data manually:
 
 -  File `>` Import Dataset `>` From Text (`readr`)
--  Paste the url (http://jhudatascience.org/intro_to_r/data/Youth_Tobacco_Survey_YTS_Data.csv)
+-  Paste the url
 -  Click "Update" and "Import"
 -  Review the process: [`https://youtu.be/LEkNfJgpunQ`](https://youtu.be/LEkNfJgpunQ)
 
@@ -324,9 +324,9 @@ Don't forget to use `<-` to assign your data to an object!
 
 ## Lab
 
-🏠 [Class Website](https://jhudatascience.org/intro_to_r/)
+🏠 [Class Website](https://daseh.org/)
 
-💻 [Data Input Lab](https://jhudatascience.org/intro_to_r/modules/Data_Input/lab/Data_Input_Lab.Rmd)
+💻 [Data Input Lab](https://daseh.org/modules/Data_Input/lab/Data_Input_Lab.Rmd)
 
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
