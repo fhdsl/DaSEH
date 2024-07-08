@@ -102,8 +102,7 @@ See https://www.opencasestudies.org/ocs-bp-opioid-rural-urban/ about this data.
 
 ## Import the data
 
-We will work with data called `ER` about hospital visits in Colorado during extreme heat.
-
+We will work with data called `ER` about heat-related ER visits between 2011 and 2022, as reported by the state of Colorado, specifically made available by the Colorado Environmental Public Health Tracking program website. Full dataset available at https://coepht.colorado.gov/heat-related-illness.
 
 ```{r}
 ER <- 
