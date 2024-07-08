@@ -359,14 +359,13 @@ library(janitor)
 
 ## janitor `clean_names`
 
-The `clean_names` function can intuit what fixes you might need. Here it makes everything consistent.
+The `clean_names` function can intuit what fixes you might need. Here it make sure year names aren't just a number, so that the colnames dont need ticks or quotes to be used.
 
 ```{r}
-#install.packages(OCSdata)
-library(OCSdata)
-OCSdata::load_imported_data("ocs-bp-opioid-rural-urban")
-head(annualDosage, n = 2)
-clean_names(annualDosage)
+CO2 <- 
+  read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+head(CO2, n = 2)
+clean_names(CO2)
 
 ```
 
