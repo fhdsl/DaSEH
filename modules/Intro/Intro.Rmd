@@ -502,7 +502,6 @@ Error messages can be scary!
 
 -   Check out the FAQ/Help page on the website: https://daseh.org/help.html
 -   Ask questions in Slack! Copy+pasting your error messages is really helpful!
--   Leverage our awesome TA time for 1:1 troubleshooting
 
 **We will also dedicate time today to debug any installation issues**
 
