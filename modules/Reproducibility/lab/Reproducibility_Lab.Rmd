@@ -45,7 +45,7 @@ Create a vector `z` with the numbers 0 to 9. Set the seed for the R random numbe
 
 ### P.2
 
-Run the `sample()` statement again, but this time without running the `set.seed()` line. What do you notice about the 5 numbers?
+Run the `sample(x = z, size = 5, replace = TRUE)` statement again, but this time without running the `set.seed()` line. What do you notice about the 5 numbers?
 
 ```{r P.2response}
 
