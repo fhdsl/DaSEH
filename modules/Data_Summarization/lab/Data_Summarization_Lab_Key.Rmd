@@ -21,24 +21,19 @@ You can Download as a CSV in your current working directory.  Note its also avai
 
 
 ```{r, echo = TRUE, message=FALSE, error = FALSE}
-library(readr)
-library(dplyr)
 library(tidyverse)
 library(dasehr)
-
-ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
 ```
 
-or use 
-
 ```{r}
-library(dasehr)
 ces <- calenviroscreen
+# Or use
+# ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
 ```
 
 ### 1.1 
 
-How many census tracts are in California?  You can assume each observation/row is a different census tract.  (hint: how do you get the number of rows of a data set? You can use `dim()` or `nrow()` or another function).
+How observations/rows are in the `ces` data set? You can use `dim()` or `nrow()` or examine the Environment.
 
 ```{r 1.1response}
 nrow(ces)
@@ -52,27 +47,22 @@ ces %>% count()
 What was the population of California in the 2010 census, based on the `TotalPop` column? (use `sum()`)
 
 ```{r 1.2response}
-sum(ces$TotalPop)
-sum(ces %>% pull(TotalPop))
-ces %>%
-  pull(TotalPop) %>%
-  sum()
+ces %>% pull(TotalPop) %>% sum()
 ```
 
 ### 1.3
 
-Summarize the data to get the `max` of `TotalPop` using the `summarize` function.
+What is the largest (`max`) total population (`TotalPop`) among all census tracts (rows)? Use `summarize`.
 
 ```
 # General format 
 DATA_TIBBLE %>% 
-    summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN))
+    summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN))
 ```
 
 ```{r 1.3response}
-ces %>% summarize(
-  max = max(TotalPop)
-)
+ces %>% 
+  summarize(max = max(TotalPop))
 ```
 
 ### 1.4
@@ -82,16 +72,15 @@ Modify your code from 1.3 to add the `min` of `TotalPop` using the `summarize` f
 ```
 # General format 
 DATA_TIBBLE %>% 
-    summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN),
-              SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN)
+    summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN),
+              SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN)
     )
 ```
 
 ```{r 1.4response}
-ces %>% summarize(
-  max = max(TotalPop),
-  min = min(TotalPop)
-)
+ces %>% 
+  summarize(max = max(TotalPop),
+            min = min(TotalPop))
 ```
 
 
@@ -140,26 +129,27 @@ Filter any zeros out of `ces` `Pesticides`. Use `filter()`. Assign this "cleaned
 DATA_TIBBLE %>% filter(LOGICAL_COMPARISON)
 ```
 
-```{r P.3response_part1_part2}
+```{r P.3aresponse}
 exurban_ces <- ces %>% filter(Pesticides != 0)
 ```
 
 How many census tracts have pesticide values greater than 0?
 
-```{r P.3response}
+```{r P.3bresponse}
 nrow(exurban_ces)
 dim(exurban_ces)
 exurban_ces %>% nrow()
 exurban_ces %>% count()
 ```
 
-# Part 2install
+
+# Part 2
 
 ### 2.1
 
 The variable `CES4.0PercRange` categorizes the calculated CES4.0 value (a measure of the pollution burden in a particular region) into percentile ranges, grouped by 5% increments.
 
-How many census tracts are there in each percentile range? Use `count()` on the column named `CES4.0PercRange`. Use `ces` instead of `exurban_ces`.
+How many census tracts are there in each percentile range? Use `count()` on the column named `CES4.0PercRange`. Use `ces` as your input data.
 
 ```{r 2.1response}
 ces %>% count(CES4.0PercRange)
@@ -207,13 +197,13 @@ ces %>%
 
 ### P.4
 
-Modify code from 2.3 to also summarize by largest average total population. In your summarized output, make sure you call the new summarized average total population variable (column name) "mean". In other words, the head of your output should look like:
+Modify code from 2.3 to also summarize by total population per group. In your summarized output, make sure you call the new summarized average total population variable (column name) "mean". In other words, the head of your output should look like:
 
 ```
-# A tibble: 
-  type                     count  mean
-  <chr>                    <int> <dbl>
-1 BIKE BOULEVARD              49  197.
+# A tibble: 58 × 3
+   CaliforniaCounty count  mean
+   <chr>            <int> <dbl>
+ 1 "Alameda "         360 4602.
 ...
 ```
 
