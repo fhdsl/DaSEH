@@ -3583,94 +3583,63 @@ head(CO_heat_ER)</pre>
 
 <p>💻 <a href='https://daseh.org/modules/Data_Summarization/lab/Data_Summarization_Lab.Rmd' title=''>Lab</a></p>
 
-</article></slide><slide class=""><hgroup><h2>CO ER Heat Illness Visits</h2></hgroup><article  id="co-er-heat-illness-visits">
-
-<p>Let’s filter the dataset of CO ER visits for any records with &gt;0 heat-related illness.</p>
-
-<pre class = 'prettyprint lang-r'>ER_filt &lt;- CO_heat_ER %&gt;% 
-  filter(visits &gt; 0)</pre>
-
 </article></slide><slide class=""><hgroup><h2><code>distinct()</code> values</h2></hgroup><article  id="distinct-values">
 
 <p><code>distinct(x)</code> will return the unique elements of column <code>x</code>.</p>
 
-<pre class = 'prettyprint lang-r'>ER_filt %&gt;%
-  distinct(county)</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
+  distinct(gender)</pre>
 
-<pre ># A tibble: 15 × 1
-   county   
-   &lt;chr&gt;    
- 1 Statewide
- 2 Adams    
- 3 Arapahoe 
- 4 Boulder  
- 5 Denver   
- 6 Douglas  
- 7 El Paso  
- 8 Jefferson
- 9 Larimer  
-10 Logan    
-11 Mesa     
-12 Morgan   
-13 Prowers  
-14 Pueblo   
-15 Weld     </pre>
+<pre ># A tibble: 3 × 1
+  gender      
+  &lt;chr&gt;       
+1 Female      
+2 Male        
+3 Both genders</pre>
 
 </article></slide><slide class=""><hgroup><h2>How many <code>distinct()</code> values?</h2></hgroup><article  id="how-many-distinct-values">
 
 <p><code>n_distinct()</code> tells you the number of unique elements. <em>Must pull the column first!</em></p>
 
-<pre class = 'prettyprint lang-r'>ER_filt %&gt;%
-  pull(county) %&gt;% 
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
+  pull(gender) %&gt;% 
   n_distinct()</pre>
 
-<pre >[1] 15</pre>
+<pre >[1] 3</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>dplyr</code>: <code>count</code></h2></hgroup><article  id="dplyr-count">
 
-<p>Use <code>count</code> to return a frequency table of row count by category.</p>
+<p>Use <code>count</code> to return row count by category.</p>
 
-<pre class = 'prettyprint lang-r'>ER_filt %&gt;% count(county)</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% count(gender)</pre>
 
-<pre ># A tibble: 15 × 2
-   county        n
-   &lt;chr&gt;     &lt;int&gt;
- 1 Adams        30
- 2 Arapahoe     29
- 3 Boulder      15
- 4 Denver       31
- 5 Douglas       4
- 6 El Paso      30
- 7 Jefferson    33
- 8 Larimer      29
- 9 Logan         2
-10 Mesa         17
-11 Morgan        1
-12 Prowers       1
-13 Pueblo       30
-14 Statewide    36
-15 Weld         27</pre>
+<pre ># A tibble: 3 × 2
+  gender           n
+  &lt;chr&gt;        &lt;int&gt;
+1 Both genders   780
+2 Female         780
+3 Male           780</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>dplyr</code>: <code>count</code></h2></hgroup><article  id="dplyr-count-1">
 
 <p>Multiple columns listed further subdivides the count.</p>
 
-<pre class = 'prettyprint lang-r'>ER_filt %&gt;% count(county, gender)</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% count(county, gender)</pre>
 
-<pre ># A tibble: 36 × 3
-   county   gender           n
-   &lt;chr&gt;    &lt;chr&gt;        &lt;int&gt;
- 1 Adams    Both genders    12
- 2 Adams    Female           8
- 3 Adams    Male            10
- 4 Arapahoe Both genders    11
- 5 Arapahoe Female           9
- 6 Arapahoe Male             9
- 7 Boulder  Both genders    12
- 8 Boulder  Male             3
- 9 Denver   Both genders    12
-10 Denver   Female           8
-# ℹ 26 more rows</pre>
+<pre ># A tibble: 195 × 3
+   county    gender           n
+   &lt;chr&gt;     &lt;chr&gt;        &lt;int&gt;
+ 1 Adams     Both genders    12
+ 2 Adams     Female          12
+ 3 Adams     Male            12
+ 4 Alamosa   Both genders    12
+ 5 Alamosa   Female          12
+ 6 Alamosa   Male            12
+ 7 Arapahoe  Both genders    12
+ 8 Arapahoe  Female          12
+ 9 Arapahoe  Male            12
+10 Archuleta Both genders    12
+# ℹ 185 more rows</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Grouping</h2></hgroup><article  id="grouping">
 
@@ -3678,11 +3647,11 @@ head(CO_heat_ER)</pre>
 
 <p><code>group_by</code> allows you group the data set by variables/columns you specify:</p>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER_grouped &lt;- CO_heat_ER %&gt;% group_by(county)
+<pre class = 'prettyprint lang-r'>CO_heat_ER_grouped &lt;- CO_heat_ER %&gt;% group_by(gender)
 CO_heat_ER_grouped</pre>
 
 <pre ># A tibble: 2,340 × 7
-# Groups:   county [65]
+# Groups:   gender [3]
    county     rate lower95cl upper95cl visits  year gender      
    &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
  1 Statewide  5.64      4.70      6.59    140  2011 Female      
@@ -3704,129 +3673,89 @@ CO_heat_ER_grouped</pre>
 <pre class = 'prettyprint lang-r'>CO_heat_ER_grouped %&gt;% 
   summarize(avg_visits = mean(visits, na.rm = TRUE))</pre>
 
-<pre ># A tibble: 65 × 2
-   county     avg_visits
-   &lt;chr&gt;           &lt;dbl&gt;
- 1 Adams            22.7
- 2 Alamosa           0  
- 3 Arapahoe         20.8
- 4 Archuleta         0  
- 5 Baca              0  
- 6 Bent              0  
- 7 Boulder          14.5
- 8 Broomfield        0  
- 9 Chaffee           0  
-10 Cheyenne          0  
-# ℹ 55 more rows</pre>
+<pre ># A tibble: 3 × 2
+  gender       avg_visits
+  &lt;chr&gt;             &lt;dbl&gt;
+1 Both genders      16.3 
+2 Female             4.77
+3 Male               9.00</pre>
 
 </article></slide><slide class=""><hgroup><h2>Use the <code>pipe</code> to string these together!</h2></hgroup><article  id="use-the-pipe-to-string-these-together">
 
 <p>Pipe <code>CO_heat_ER</code> into <code>group_by</code>, then pipe that into <code>summarize</code>:</p>
 
 <pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
-  group_by(county) %&gt;%
+  group_by(gender) %&gt;%
   summarize(avg_visits = mean(visits, na.rm = TRUE))</pre>
 
-<pre ># A tibble: 65 × 2
-   county     avg_visits
-   &lt;chr&gt;           &lt;dbl&gt;
- 1 Adams            22.7
- 2 Alamosa           0  
- 3 Arapahoe         20.8
- 4 Archuleta         0  
- 5 Baca              0  
- 6 Bent              0  
- 7 Boulder          14.5
- 8 Broomfield        0  
- 9 Chaffee           0  
-10 Cheyenne          0  
-# ℹ 55 more rows</pre>
+<pre ># A tibble: 3 × 2
+  gender       avg_visits
+  &lt;chr&gt;             &lt;dbl&gt;
+1 Both genders      16.3 
+2 Female             4.77
+3 Male               9.00</pre>
 
 </article></slide><slide class=""><hgroup><h2>Group by as many variables as you want</h2></hgroup><article  id="group-by-as-many-variables-as-you-want">
 
-<p><code>group_by</code> county and gender:</p>
+<p><code>group_by</code> gender and year:</p>
 
 <pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
-  group_by(county, gender) %&gt;%
+  group_by(year, gender) %&gt;%
   summarize(avg_visits = mean(visits, na.rm = TRUE))</pre>
 
-<pre ># A tibble: 195 × 3
-# Groups:   county [65]
-   county    gender       avg_visits
-   &lt;chr&gt;     &lt;chr&gt;             &lt;dbl&gt;
- 1 Adams     Both genders       30.4
- 2 Adams     Female             15.8
- 3 Adams     Male               18.9
- 4 Alamosa   Both genders        0  
- 5 Alamosa   Female              0  
- 6 Alamosa   Male                0  
- 7 Arapahoe  Both genders       28.7
- 8 Arapahoe  Female             14.4
- 9 Arapahoe  Male               17.3
-10 Archuleta Both genders        0  
-# ℹ 185 more rows</pre>
+<pre ># A tibble: 36 × 3
+# Groups:   year [12]
+    year gender       avg_visits
+   &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;
+ 1  2011 Both genders      11.3 
+ 2  2011 Female             4.32
+ 3  2011 Male               6.06
+ 4  2012 Both genders      12.8 
+ 5  2012 Female             4.76
+ 6  2012 Male               6.71
+ 7  2013 Both genders      12.4 
+ 8  2013 Female             3.72
+ 9  2013 Male               6.11
+10  2014 Both genders       9.67
+# ℹ 26 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Counting</h2></hgroup><article  id="counting">
 
 <p>There are other functions, such as <code>n()</code> count the number of observations (NAs included).</p>
 
 <pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
-  group_by(county) %&gt;%
+  group_by(gender) %&gt;%
   summarize(n = n(),
             mean = mean(visits, na.rm = TRUE))</pre>
 
-<pre ># A tibble: 65 × 3
-   county         n  mean
-   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt;
- 1 Adams         36  22.7
- 2 Alamosa       36   0  
- 3 Arapahoe      36  20.8
- 4 Archuleta     36   0  
- 5 Baca          36   0  
- 6 Bent          36   0  
- 7 Boulder       36  14.5
- 8 Broomfield    36   0  
- 9 Chaffee       36   0  
-10 Cheyenne      36   0  
-# ℹ 55 more rows</pre>
+<pre ># A tibble: 3 × 3
+  gender           n  mean
+  &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt;
+1 Both genders   780 16.3 
+2 Female         780  4.77
+3 Male           780  9.00</pre>
 
 </article></slide><slide class=""><hgroup><h2>Counting</h2></hgroup><article  id="counting-1" class="codesmall">
 
 <p><code>count()</code> and <code>n()</code> can give very similar information.</p>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% count(county)</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% count(gender)</pre>
 
-<pre ># A tibble: 65 × 2
-   county         n
-   &lt;chr&gt;      &lt;int&gt;
- 1 Adams         36
- 2 Alamosa       36
- 3 Arapahoe      36
- 4 Archuleta     36
- 5 Baca          36
- 6 Bent          36
- 7 Boulder       36
- 8 Broomfield    36
- 9 Chaffee       36
-10 Cheyenne      36
-# ℹ 55 more rows</pre>
+<pre ># A tibble: 3 × 2
+  gender           n
+  &lt;chr&gt;        &lt;int&gt;
+1 Both genders   780
+2 Female         780
+3 Male           780</pre>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% group_by(county) %&gt;% summarize(n()) # n() typically used with summarize</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% group_by(gender) %&gt;% summarize(n()) # n() typically used with summarize</pre>
 
-<pre ># A tibble: 65 × 2
-   county     `n()`
-   &lt;chr&gt;      &lt;int&gt;
- 1 Adams         36
- 2 Alamosa       36
- 3 Arapahoe      36
- 4 Archuleta     36
- 5 Baca          36
- 6 Bent          36
- 7 Boulder       36
- 8 Broomfield    36
- 9 Chaffee       36
-10 Cheyenne      36
-# ℹ 55 more rows</pre>
+<pre ># A tibble: 3 × 2
+  gender       `n()`
+  &lt;chr&gt;        &lt;int&gt;
+1 Both genders   780
+2 Female         780
+3 Male           780</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>A few miscellaneous topics ..</h2></hgroup><article  id="a-few-miscellaneous-topics-..">
 
@@ -3834,37 +3763,25 @@ CO_heat_ER_grouped</pre>
 
 <p>These functions require a column as a vector using <code>pull()</code>.</p>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER_loc &lt;- CO_heat_ER %&gt;% pull(county) # pull() to make a vector
-CO_heat_ER_loc %&gt;% unique() # similar to distinct()</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER_gen &lt;- CO_heat_ER %&gt;% pull(gender) # pull() to make a vector
+CO_heat_ER_gen %&gt;% unique() # similar to distinct()</pre>
 
-<pre > [1] &quot;Statewide&quot;   &quot;Adams&quot;       &quot;Alamosa&quot;     &quot;Arapahoe&quot;    &quot;Archuleta&quot;  
- [6] &quot;Baca&quot;        &quot;Bent&quot;        &quot;Boulder&quot;     &quot;Broomfield&quot;  &quot;Chaffee&quot;    
-[11] &quot;Cheyenne&quot;    &quot;Clear Creek&quot; &quot;Conejos&quot;     &quot;Costilla&quot;    &quot;Crowley&quot;    
-[16] &quot;Custer&quot;      &quot;Delta&quot;       &quot;Denver&quot;      &quot;Dolores&quot;     &quot;Douglas&quot;    
-[21] &quot;Eagle&quot;       &quot;Elbert&quot;      &quot;El Paso&quot;     &quot;Fremont&quot;     &quot;Garfield&quot;   
-[26] &quot;Gilpin&quot;      &quot;Grand&quot;       &quot;Gunnison&quot;    &quot;Hinsdale&quot;    &quot;Huerfano&quot;   
-[31] &quot;Jackson&quot;     &quot;Jefferson&quot;   &quot;Kiowa&quot;       &quot;Kit Carson&quot;  &quot;Lake&quot;       
-[36] &quot;La Plata&quot;    &quot;Larimer&quot;     &quot;Las Animas&quot;  &quot;Lincoln&quot;     &quot;Logan&quot;      
-[41] &quot;Mesa&quot;        &quot;Mineral&quot;     &quot;Moffat&quot;      &quot;Montezuma&quot;   &quot;Montrose&quot;   
-[46] &quot;Morgan&quot;      &quot;Otero&quot;       &quot;Ouray&quot;       &quot;Park&quot;        &quot;Phillips&quot;   
-[51] &quot;Pitkin&quot;      &quot;Prowers&quot;     &quot;Pueblo&quot;      &quot;Rio Blanco&quot;  &quot;Rio Grande&quot; 
-[56] &quot;Routt&quot;       &quot;Saguache&quot;    &quot;San Juan&quot;    &quot;San Miguel&quot;  &quot;Sedgwick&quot;   
-[61] &quot;Summit&quot;      &quot;Teller&quot;      &quot;Washington&quot;  &quot;Weld&quot;        &quot;Yuma&quot;       </pre>
+<pre >[1] &quot;Female&quot;       &quot;Male&quot;         &quot;Both genders&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2>Base R functions you might see: <code>length</code> and <code>unique</code></h2></hgroup><article  id="base-r-functions-you-might-see-length-and-unique-1">
 
 <p>These functions require a column as a vector using <code>pull()</code>.</p>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER_loc %&gt;% unique() %&gt;% length() # similar to n_distinct()</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER_gen %&gt;% unique() %&gt;% length() # similar to n_distinct()</pre>
 
-<pre >[1] 65</pre>
+<pre >[1] 3</pre>
 
 </article></slide><slide class=""><hgroup><h2>* New! * Many dplyr functions now have a <code>.by=</code> argument</h2></hgroup><article  id="new-many-dplyr-functions-now-have-a-.by-argument">
 
 <p>Pipe <code>CO_heat_ER</code> into <code>group_by</code>, then pipe that into <code>summarize</code>:</p>
 
 <pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
-  group_by(county) %&gt;%
+  group_by(gender) %&gt;%
   summarize(avg_visits = mean(visits, na.rm = TRUE),
             max_visits = max(visits, na.rm = TRUE))</pre>
 
