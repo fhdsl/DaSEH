@@ -468,6 +468,10 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
     * `rowSums(x)`: takes the sum of each row of x
     * `colSums(x)`: takes the sum of each column of x
 
+```{r}
+yearly_co2 <- yearly_co2_emissions
+```
+
 
 ## `rowMeans()` example
 
