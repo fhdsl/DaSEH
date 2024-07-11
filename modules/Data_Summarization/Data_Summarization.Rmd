@@ -270,23 +270,13 @@ summary(CO_heat_ER)
 💻 [Lab](https://daseh.org/modules/Data_Summarization/lab/Data_Summarization_Lab.Rmd)
 
 
-## CO ER Heat Illness Visits
-
-Let's filter the dataset of CO ER visits for any records with >0 heat-related illness.
-
-```{r}
-ER_filt <- CO_heat_ER %>% 
-  filter(visits > 0)
-```
-
-
 ## `distinct()` values
 
 `distinct(x)` will return the unique elements of column `x`.
 
 ```{r, message = FALSE}
-ER_filt %>%
-  distinct(county)
+CO_heat_ER %>%
+  distinct(gender)
 ```
 
 
@@ -295,8 +285,8 @@ ER_filt %>%
 `n_distinct()` tells you the number of unique elements. _Must pull the column first!_
 
 ```{r}
-ER_filt %>%
-  pull(county) %>% 
+CO_heat_ER %>%
+  pull(gender) %>% 
   n_distinct()
 ```
 
@@ -308,10 +298,10 @@ options(max.print = 1000)
 
 ## `dplyr`: `count` 
 
-Use `count` to return a frequency table of row count by category.
+Use `count` to return row count by category.
 
 ```{r, message = FALSE}
-ER_filt %>% count(county)
+CO_heat_ER %>% count(gender)
 ```
 
 
@@ -320,7 +310,7 @@ ER_filt %>% count(county)
 Multiple columns listed further subdivides the count.
 
 ```{r, message = FALSE}
-ER_filt %>% count(county, gender)
+CO_heat_ER %>% count(county, gender)
 ```
 
 
@@ -332,7 +322,7 @@ ER_filt %>% count(county, gender)
 `group_by` allows you group the data set by variables/columns you specify:
 
 ```{r}
-CO_heat_ER_grouped <- CO_heat_ER %>% group_by(county)
+CO_heat_ER_grouped <- CO_heat_ER %>% group_by(gender)
 CO_heat_ER_grouped
 ```
 
@@ -353,21 +343,19 @@ Pipe `CO_heat_ER` into `group_by`, then pipe that into `summarize`:
 
 ```{r}
 CO_heat_ER %>%
-  group_by(county) %>%
+  group_by(gender) %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
-
 
 ## Group by as many variables as you want
 
-`group_by` county and gender:
+`group_by` gender and year:
 
 ```{r, warnings = F}
 CO_heat_ER %>%
-  group_by(county, gender) %>%
+  group_by(year, gender) %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
-
 
 ## Counting
 
@@ -375,7 +363,7 @@ There are other functions, such as `n()` count the number of observations (NAs i
 
 ```{r}
 CO_heat_ER %>%
-  group_by(county) %>%
+  group_by(gender) %>%
   summarize(n = n(),
             mean = mean(visits, na.rm = TRUE))
 ```
@@ -386,8 +374,8 @@ CO_heat_ER %>%
 `count()` and `n()` can give very similar information.
 
 ```{r}
-CO_heat_ER %>% count(county)
-CO_heat_ER %>% group_by(county) %>% summarize(n()) # n() typically used with summarize
+CO_heat_ER %>% count(gender)
+CO_heat_ER %>% group_by(gender) %>% summarize(n()) # n() typically used with summarize
 ```
 
 
@@ -399,8 +387,8 @@ CO_heat_ER %>% group_by(county) %>% summarize(n()) # n() typically used with sum
 These functions require a column as a vector using `pull()`.
 
 ```{r, message = FALSE}
-CO_heat_ER_loc <- CO_heat_ER %>% pull(county) # pull() to make a vector
-CO_heat_ER_loc %>% unique() # similar to distinct()
+CO_heat_ER_gen <- CO_heat_ER %>% pull(gender) # pull() to make a vector
+CO_heat_ER_gen %>% unique() # similar to distinct()
 ```
 
 ## Base R functions you might see: `length` and `unique`
@@ -408,7 +396,7 @@ CO_heat_ER_loc %>% unique() # similar to distinct()
 These functions require a column as a vector using `pull()`.
 
 ```{r, message = FALSE}
-CO_heat_ER_loc %>% unique() %>% length() # similar to n_distinct()
+CO_heat_ER_gen %>% unique() %>% length() # similar to n_distinct()
 ```
 
 ## * New! * Many dplyr functions now have a `.by=` argument
@@ -417,7 +405,7 @@ Pipe `CO_heat_ER` into `group_by`, then pipe that into `summarize`:
 
 ```{r eval = FALSE}
 CO_heat_ER %>%
-  group_by(county) %>%
+  group_by(gender) %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE),
             max_visits = max(visits, na.rm = TRUE))
 ```
