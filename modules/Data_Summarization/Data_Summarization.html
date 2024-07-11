@@ -3300,66 +3300,61 @@ pre { /* Code block - slightly smaller in this lecture */
 <li><code>max(x)</code>: maximum value in x</li>
 <li><code>min(x)</code>: minimum value in x</li>
 </ul></li>
-<li><strong>all have the </strong> <code>na.rm =</code> <strong>argument for missing data</strong></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Statistical summarization</h2></hgroup><article  id="statistical-summarization">
+<!-- ## Statistical summarization -->
 
-<p>The vector getting summarized goes inside the parentheses:</p>
+<!-- The vector getting summarized goes inside the parentheses: -->
 
-<pre class = 'prettyprint lang-r'>x &lt;- c(1, 5, 7, 4, 2, 8)
-mean(x)</pre>
+<!-- ```{r} -->
 
-<pre >[1] 4.5</pre>
+<!-- x <- c(1, 5, 7, 4, 2, 8) -->
 
-<pre class = 'prettyprint lang-r'>range(x)</pre>
+<!-- mean(x) -->
 
-<pre >[1] 1 8</pre>
+<!-- range(x) -->
 
-<pre class = 'prettyprint lang-r'>sum(x)</pre>
+<!-- sum(x) -->
 
-<pre >[1] 27</pre>
+<!-- ``` -->
 
-</article></slide><slide class=""><hgroup><h2>Statistical summarization</h2></hgroup><article  id="statistical-summarization-1">
+<!-- ## Statistical summarization -->
 
-<p>Note that many of these functions have additional inputs regarding missing data, typically requiring the <code>na.rm</code> argument (&ldquo;remove NAs&rdquo;).</p>
+<!-- Note that many of these functions have additional inputs regarding missing data, typically requiring the `na.rm` argument ("remove NAs").  -->
 
-<pre class = 'prettyprint lang-r'>x &lt;- c(1, 5, 7, 4, 2, 8, NA)
-mean(x)</pre>
+<!-- ```{r error = TRUE} -->
 
-<pre >[1] NA</pre>
+<!-- x <- c(1, 5, 7, 4, 2, 8, NA) -->
 
-<pre class = 'prettyprint lang-r'>mean(x, na.rm = TRUE)</pre>
+<!-- mean(x) -->
 
-<pre >[1] 4.5</pre>
+<!-- mean(x, na.rm = TRUE) -->
 
-<pre class = 'prettyprint lang-r'>quantile(x)</pre>
+<!-- quantile(x) -->
 
-<pre >Error in quantile.default(x): missing values and NaN&#39;s not allowed if &#39;na.rm&#39; is FALSE</pre>
+<!-- quantile(x, na.rm = TRUE) -->
 
-<pre class = 'prettyprint lang-r'>quantile(x, na.rm = TRUE)</pre>
+<!-- ``` -->
 
-<pre >  0%  25%  50%  75% 100% 
- 1.0  2.5  4.5  6.5  8.0 </pre>
+<!-- ## Statistical summarization{.codesmall} -->
 
-</article></slide><slide class=""><hgroup><h2>Statistical summarization</h2></hgroup><article  id="statistical-summarization-2" class="codesmall">
+<!-- We will talk more about data types later, but you can only do summarization on numeric or logical types, NOT characters. -->
 
-<p>We will talk more about data types later, but you can only do summarization on numeric or logical types, NOT characters.</p>
+<!-- ```{r error = TRUE} -->
 
-<pre class = 'prettyprint lang-r'>x &lt;- c(1, 5, 7, 4, 2, 8)
-sum(x)</pre>
+<!-- x <- c(1, 5, 7, 4, 2, 8) -->
 
-<pre >[1] 27</pre>
+<!-- sum(x) -->
 
-<pre class = 'prettyprint lang-r'>y &lt;- c(TRUE, FALSE, FALSE, TRUE) # FALSE == 0 and TRUE == 1
-sum(y)</pre>
+<!-- y <- c(TRUE, FALSE, FALSE, TRUE) # FALSE == 0 and TRUE == 1 -->
 
-<pre >[1] 2</pre>
+<!-- sum(y) -->
 
-<pre class = 'prettyprint lang-r'>z &lt;- c(&quot;TRUE&quot;, &quot;FALSE&quot;, &quot;FALSE&quot;, &quot;TRUE&quot;)
-sum(z)</pre>
+<!-- z <- c("TRUE", "FALSE", "FALSE", "TRUE") -->
 
-<pre >Error in sum(z): invalid &#39;type&#39; (character) of argument</pre>
+<!-- sum(z) -->
+
+<!-- ``` -->
 
 </article></slide><slide class=""><hgroup><h2>Some examples</h2></hgroup><article  id="some-examples">
 
@@ -3378,208 +3373,177 @@ head(CO_heat_ER)</pre>
 5 Statewide  7.56      6.48      8.65    193  2012 Male        
 6 Statewide  6.58      5.88      7.29    339  2012 Both genders</pre>
 
-</article></slide><slide class=""><hgroup><h2>The <code>dplyr</code> pipe <code>%&gt;%</code> operator</h2></hgroup><article  id="the-dplyr-pipe-operator">
+<!-- ## The `dplyr` pipe `%>%` operator -->
 
-<p>A nice and readable way to chain together multiple R functions.</p>
+<!-- A nice and readable way to chain together multiple R functions. -->
 
-<p>Changes <code>f(x, y)</code> to <code>x %&gt;% f(y)</code>.</p>
+<!-- Changes `f(x, y)` to `x %>% f(y)`. -->
 
-<pre class = 'prettyprint lang-r'># Going to work
-get_dressed(me,
-            pack_lunch(
-              check_pockets(
-                wallet = TRUE, phone = TRUE, keys = TRUE),
-              items = c(&quot;sandwich&quot;, &quot;chips&quot;, &quot;apple&quot;), lunchbox = TRUE),
-            pants = TRUE, shirt = TRUE, footwear = &quot;sandals&quot;)
+<!-- ```{r eval=FALSE} -->
 
-# Going to work, the tidy way
-me %&gt;%
-  get_dressed(pants = TRUE, shirt = TRUE, footwear = &quot;sandals&quot;) %&gt;%
-  pack_lunch(items = c(&quot;sandwich&quot;, &quot;chips&quot;, &quot;apple&quot;), lunchbox = TRUE) %&gt;%
-  check_pockets(wallet = TRUE, phone = TRUE, keys = TRUE)</pre>
+<!-- # Going to work -->
 
-</article></slide><slide class=""><hgroup><h2>Statistical summarization the &ldquo;tidy&rdquo; way</h2></hgroup><article  id="statistical-summarization-the-tidy-way">
+<!-- get_dressed(me, -->
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% pull(visits) %&gt;% mean(na.rm=T) # alt: pull(CO_heat_ER, visits) %&gt;% mean(na.rm=T)</pre>
+<!--             pack_lunch( -->
 
-<pre >[1] 9.791114</pre>
+<!--               check_pockets( -->
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% pull(rate) %&gt;% median(na.rm=T)</pre>
+<!--                 wallet = TRUE, phone = TRUE, keys = TRUE), -->
 
-<pre >[1] 0</pre>
+<!--               items = c("sandwich", "chips", "apple"), lunchbox = TRUE), -->
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% pull(visits) %&gt;% quantile(na.rm=T)</pre>
+<!--             pants = TRUE, shirt = TRUE, footwear = "sandals") -->
 
-<pre >  0%  25%  50%  75% 100% 
-   0    0    0    0  494 </pre>
+<!-- # Going to work, the tidy way -->
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% pull(rate) %&gt;% quantile(probs = 0.9, na.rm=T)</pre>
+<!-- me %>% -->
 
-<pre >     90% 
-6.704074 </pre>
+<!--   get_dressed(pants = TRUE, shirt = TRUE, footwear = "sandals") %>% -->
+
+<!--   pack_lunch(items = c("sandwich", "chips", "apple"), lunchbox = TRUE) %>% -->
+
+<!--   check_pockets(wallet = TRUE, phone = TRUE, keys = TRUE) -->
+
+<!-- ``` -->
 
 </article></slide><slide class=""><hgroup><h2>Behavior of <code>pull()</code> function</h2></hgroup><article  id="behavior-of-pull-function">
 
-<p><code>pull()</code> converts a single data column into a vector. This allows you to run summary functions on these data. Once you have &ldquo;pulled&rdquo; the data column out, you don’t have to name it again in any piped summary functions.</p>
+<p><code>pull()</code> converts a single data column into a vector. This allows you to run summary functions.</p>
 
-<pre class = 'prettyprint lang-r'>er_visits &lt;- CO_heat_ER %&gt;% pull(visits) 
-class(er_visits)</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% pull(visits)</pre>
 
-<pre >[1] &quot;numeric&quot;</pre>
+</article></slide><slide class=""><hgroup><h2>Statistical summarization the &ldquo;tidy&rdquo; way</h2></hgroup><article  id="statistical-summarization-the-tidy-way">
 
-<pre class = 'prettyprint lang-r'>head(er_visits, n = 20)</pre>
+<p><strong>Add the </strong> <code>na.rm =</code> <strong>argument for missing data</strong></p>
 
-<pre > [1] 140 183 323 146 193 339 124 178 302  92 145 237 140 215 355 172 295 467 113
-[20] 210</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% pull(visits) %&gt;% mean()</pre>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% pull(visits) %&gt;% range(visits) # Incorrect</pre>
+<pre >[1] NA</pre>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% pull(visits) %&gt;% range(na.rm=T) # Correct</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% pull(visits) %&gt;% mean(na.rm=T)</pre>
 
-<pre >[1]   0 494</pre>
+<pre >[1] 9.791114</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Summarization on tibbles (data frames)</h2></hgroup><article  id="summarization-on-tibbles-data-frames">
 
-</article></slide><slide class=""><hgroup><h2>Historical CO2 emissions by country</h2></hgroup><article  id="historical-co2-emissions-by-country">
+<!-- ## Historical CO2 emissions by country -->
 
-<p>Let’s look at a dataset that tracks yearly estimated CO2 emissions by country. We will read it in as a <code>tibble</code>.</p>
+<!-- Let's look at a dataset that tracks yearly estimated CO2 emissions by country. We will read it in as a `tibble`. -->
 
-<p>If you have the <code>dasehr</code> package installed successfully:</p>
+<!-- If you have the `dasehr` package installed successfully: -->
 
-<pre class = 'prettyprint lang-r'>yearly_co2 &lt;- yearly_co2_emissions</pre>
+<!-- ```{r} -->
 
-<p><br> If not, download the <code>csv</code> file from <a href='https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv' title=''>https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv</a> and read it in:</p>
+<!-- yearly_co2 <- yearly_co2_emissions -->
 
-<pre class = 'prettyprint lang-r'>yearly_co2 &lt;- 
-  read_csv(file = &quot;https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv&quot;)</pre>
+<!-- ``` -->
 
-<p>Check out the data:</p>
+<!-- <br> -->
 
-<pre class = 'prettyprint lang-r'>head(yearly_co2)</pre>
+<!-- If not, download the `csv` file from https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv and read it in: -->
 
-<pre ># A tibble: 6 × 265
-  country  `1751` `1752` `1753` `1754` `1755` `1756` `1757` `1758` `1759` `1760`
-  &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 Afghani…     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-2 Albania      NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-3 Algeria      NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-4 Andorra      NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-5 Angola       NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-6 Antigua…     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-# ℹ 254 more variables: `1761` &lt;dbl&gt;, `1762` &lt;dbl&gt;, `1763` &lt;dbl&gt;, `1764` &lt;dbl&gt;,
-#   `1765` &lt;dbl&gt;, `1766` &lt;dbl&gt;, `1767` &lt;dbl&gt;, `1768` &lt;dbl&gt;, `1769` &lt;dbl&gt;,
-#   `1770` &lt;dbl&gt;, `1771` &lt;dbl&gt;, `1772` &lt;dbl&gt;, `1773` &lt;dbl&gt;, `1774` &lt;dbl&gt;,
-#   `1775` &lt;dbl&gt;, `1776` &lt;dbl&gt;, `1777` &lt;dbl&gt;, `1778` &lt;dbl&gt;, `1779` &lt;dbl&gt;,
-#   `1780` &lt;dbl&gt;, `1781` &lt;dbl&gt;, `1782` &lt;dbl&gt;, `1783` &lt;dbl&gt;, `1784` &lt;dbl&gt;,
-#   `1785` &lt;dbl&gt;, `1786` &lt;dbl&gt;, `1787` &lt;dbl&gt;, `1788` &lt;dbl&gt;, `1789` &lt;dbl&gt;,
-#   `1790` &lt;dbl&gt;, `1791` &lt;dbl&gt;, `1792` &lt;dbl&gt;, `1793` &lt;dbl&gt;, `1794` &lt;dbl&gt;, …</pre>
+<!-- ```{r eval = FALSE} -->
 
-</article></slide><slide class=""><hgroup><h2>Historical CO2 emissions by country</h2></hgroup><article  id="historical-co2-emissions-by-country-1">
+<!-- yearly_co2 <-  -->
 
-<p>Check out the data:</p>
+<!--   read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv") -->
 
-<pre class = 'prettyprint lang-r'>yearly_co2_small &lt;- select(yearly_co2, `1900`:`1905`)
+<!-- ``` -->
 
-str(yearly_co2_small)</pre>
+<!-- Check out the data: -->
 
-<pre >tibble [192 × 6] (S3: tbl_df/tbl/data.frame)
- $ 1900: num [1:192] NA NA NA NA NA NA 2070 131 10200 27700 ...
- $ 1901: num [1:192] NA NA NA NA NA NA 2490 135 11400 28400 ...
- $ 1902: num [1:192] NA NA NA NA NA NA 2820 130 11400 25700 ...
- $ 1903: num [1:192] NA NA NA NA NA NA 2860 127 11200 25600 ...
- $ 1904: num [1:192] NA NA NA NA NA NA 3800 142 11600 26900 ...
- $ 1905: num [1:192] NA NA NA NA NA NA 3990 126 12100 28100 ...</pre>
+<!-- ```{r} -->
 
-</article></slide><slide class=""><hgroup><h2>CO2 Emissions</h2></hgroup><article  id="co2-emissions">
+<!-- head(yearly_co2) -->
 
-<p>Before we go further, let’s rename the second column using the <code>rename()</code> function in <code>dplyr</code>.</p>
+<!-- ``` -->
 
-<p>In this case, we will use the backticks (`) because we will be referring to a column that has a numerical name. If there are funky spaces or characters in the column name, the backticks are required.</p>
+<!-- ## Historical CO2 emissions by country -->
 
-<pre class = 'prettyprint lang-r'>library(dplyr)
-yearly_co2_small &lt;- yearly_co2_small %&gt;%
-  rename(year1900 = `1900`)</pre>
+<!-- Check out the data: -->
 
-</article></slide><slide class=""><hgroup><h2>CO2 Emissions</h2></hgroup><article  id="co2-emissions-1">
+<!-- ```{r} -->
 
-<p><code>colnames()</code> will show us the column names and show that the <code>1751</code> column is renamed:</p>
+<!-- yearly_co2_small <- select(yearly_co2, `1900`:`1905`) -->
 
-<pre class = 'prettyprint lang-r'>colnames(yearly_co2_small)</pre>
+<!-- str(yearly_co2_small) -->
 
-<pre >[1] &quot;year1900&quot; &quot;1901&quot;     &quot;1902&quot;     &quot;1903&quot;     &quot;1904&quot;     &quot;1905&quot;    </pre>
+<!-- ``` -->
+
+<!-- ## CO2 Emissions -->
+
+<!-- Before we go further, let's rename the second column using the `rename()` function in `dplyr`. -->
+
+<!-- In this case, we will use the backticks (\`) because we will be referring to a column that has a numerical name. If there are funky spaces or characters in the column name, the backticks are required.  -->
+
+<!-- ```{r} -->
+
+<!-- library(dplyr) -->
+
+<!-- yearly_co2_small <- yearly_co2_small %>% -->
+
+<!--   rename(year1900 = `1900`) -->
+
+<!-- ``` -->
+
+<!-- ## CO2 Emissions -->
+
+<!-- `colnames()` will show us the column names and show that the `1751` column is renamed: -->
+
+<!-- ```{r} -->
+
+<!-- colnames(yearly_co2_small) -->
+
+<!-- ``` -->
 
 </article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function">
 
-<p><code>summarize</code> creates a summary table of a column you’re interested in.</p>
+<p><code>summarize</code> creates a summary table.</p>
 
-<p>Can run multiple summary statistics at once (unlike <code>pull()</code> which can only do a single calculation on one column).</p>
-
-<p>You can also do more elaborate summaries across different groups of data using <code>group_by()</code>. More on this later!</p>
+<p>Multiple summary statistics can be calculated at once (unlike <code>pull()</code> which can only do a single calculation on one column).</p>
 
 <div class="codeexample">
 <pre class = 'prettyprint lang-r'># General format - Not the code!
 {data to use} %&gt;% 
-   summarize({summary column name} = {operator(source column)},
-             {summary column name} = {operator(source column)}) </pre></div>
+   summarize({summary column name} = {function(source column)},
+             {summary column name} = {function(source column)}) </pre></div>
 
 </article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function-1">
 
-<p><code>summarize</code> creates a summary table of a column you’re interested in.</p>
-
-<div class="codeexample">
-<pre class = 'prettyprint lang-r'># General format - Not the code!
-{data to use} %&gt;% 
-   summarize({summary column name} = {operator(source column)}) </pre></div>
-
-<pre class = 'prettyprint lang-r'>yearly_co2_small %&gt;% 
-  summarize(mean_1901 = mean(`1901`)) # Note the backticks, this is a column name!</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% 
+  summarize(mean_visits = mean(visits))</pre>
 
 <pre ># A tibble: 1 × 1
-  mean_1901
-      &lt;dbl&gt;
-1        NA</pre>
+  mean_visits
+        &lt;dbl&gt;
+1          NA</pre>
 
-<pre class = 'prettyprint lang-r'>yearly_co2 %&gt;% 
-  summarize(mean_1901 = mean(`1901`, na.rm = TRUE))</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% 
+  summarize(mean_visits = mean(visits, na.rm = TRUE))</pre>
 
 <pre ># A tibble: 1 × 1
-  mean_1901
-      &lt;dbl&gt;
-1    41192.</pre>
+  mean_visits
+        &lt;dbl&gt;
+1        9.79</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function-2">
 
 <p><code>summarize()</code> can do multiple operations at once. Just separate by a comma.</p>
 
-<pre class = 'prettyprint lang-r'>yearly_co2_small %&gt;% 
-  summarize(mean_1901 = mean(`1901`, na.rm = TRUE),
-            median_1901 = median(`1901`, na.rm = TRUE),
-            median(`1902`, na.rm = TRUE))</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% 
+  summarize(mean_visits = mean(visits, na.rm = TRUE),
+            median_visits = median(visits, na.rm = TRUE),
+            mean_rate = mean(rate, na.rm = TRUE))</pre>
 
 <pre ># A tibble: 1 × 3
-  mean_1901 median_1901 `median(\`1902\`, na.rm = TRUE)`
-      &lt;dbl&gt;       &lt;dbl&gt;                            &lt;dbl&gt;
-1    41192.        3900                             3645</pre>
-
-<p><br> Notice how when we forget to provide a new name, output is still provided, but the column name is messy.</p>
+  mean_visits median_visits mean_rate
+        &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;
+1        9.79             0      1.87</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function-3">
 
-<p>This looks better.</p>
-
-<pre class = 'prettyprint lang-r'>yearly_co2_small %&gt;% 
-  summarize(mean_1901 = mean(`1901`, na.rm = TRUE),
-            median_1901 = median(`1901`, na.rm = TRUE),
-            median_1902 = median(`1902`, na.rm = TRUE))</pre>
-
-<pre ># A tibble: 1 × 3
-  mean_1901 median_1901 median_1902
-      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-1    41192.        3900        3645</pre>
-
-</article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function-4">
-
-<p>Note that <code>summarize()</code> creates a separate tibble from the original data, so you don’t want to overwrite your original data if you decide to save the summary.</p>
+<p>Note that <code>summarize()</code> creates a separate tibble from the original data.</p>
 
 <p>If you want to save a summary statistic in the original data, use <code>mutate()</code> instead to create a new column for the summary statistic.</p>
 
@@ -3587,24 +3551,24 @@ yearly_co2_small &lt;- yearly_co2_small %&gt;%
 
 <p>Using <code>summary()</code> can give you rough snapshots of each numeric column (character columns are skipped):</p>
 
-<pre class = 'prettyprint lang-r'>summary(yearly_co2_small)</pre>
+<pre class = 'prettyprint lang-r'>summary(CO_heat_ER)</pre>
 
-<pre >    year1900             1901             1902               1903         
- Min.   :   131.0   Min.   :   135   Min.   :    95.3   Min.   :   114.0  
- 1st Qu.:   824.2   1st Qu.:   950   1st Qu.:   816.0   1st Qu.:   965.5  
- Median :  3340.0   Median :  3900   Median :  3645.0   Median :  3170.0  
- Mean   : 40689.0   Mean   : 41192   Mean   : 41385.8   Mean   : 44259.5  
- 3rd Qu.: 14300.0   3rd Qu.: 14400   3rd Qu.: 14825.0   3rd Qu.: 15300.0  
- Max.   :663000.0   Max.   :722000   Max.   :765000.0   Max.   :895000.0  
- NA&#39;s   :144        NA&#39;s   :143      NA&#39;s   :142        NA&#39;s   :141       
-      1904               1905       
- Min.   :     3.7   Min.   :   126  
- 1st Qu.:   803.0   1st Qu.:  1006  
- Median :  3620.0   Median :  4140  
- Mean   : 43866.0   Mean   : 47644  
- 3rd Qu.: 16200.0   3rd Qu.: 17250  
- Max.   :881000.0   Max.   :985000  
- NA&#39;s   :140        NA&#39;s   :141     </pre>
+<pre >    county               rate          lower95cl        upper95cl      
+ Length:2340        Min.   : 0.000   Min.   : 0.000   Min.   :  0.000  
+ Class :character   1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.:  0.000  
+ Mode  :character   Median : 0.000   Median : 0.000   Median :  0.000  
+                    Mean   : 1.869   Mean   : 1.119   Mean   :  2.755  
+                    3rd Qu.: 0.000   3rd Qu.: 0.000   3rd Qu.:  0.000  
+                    Max.   :89.275   Max.   :43.398   Max.   :151.420  
+                    NA&#39;s   :832      NA&#39;s   :832      NA&#39;s   :832      
+     visits             year         gender         
+ Min.   :  0.000   Min.   :2011   Length:2340       
+ 1st Qu.:  0.000   1st Qu.:2014   Class :character  
+ Median :  0.000   Median :2016   Mode  :character  
+ Mean   :  9.791   Mean   :2016                     
+ 3rd Qu.:  0.000   3rd Qu.:2019                     
+ Max.   :494.000   Max.   :2022                     
+ NA&#39;s   :832                                        </pre>
 
 </article></slide><slide class=""><hgroup><h2>Summary &amp; Lab Part 1</h2></hgroup><article  id="summary-lab-part-1">
 
@@ -3621,97 +3585,92 @@ yearly_co2_small &lt;- yearly_co2_small %&gt;%
 
 </article></slide><slide class=""><hgroup><h2>CO ER Heat Illness Visits</h2></hgroup><article  id="co-er-heat-illness-visits">
 
-<p>Let’s go back to the dataset of CO ER visits for heat-related illness. Remember, we loaded this data into our session and saved it as the object <code>CO_heat_ER</code>.</p>
+<p>Let’s filter the dataset of CO ER visits for any records with &gt;0 heat-related illness.</p>
 
-<pre class = 'prettyprint lang-r'>head(CO_heat_ER)</pre>
-
-<pre ># A tibble: 6 × 7
-  county     rate lower95cl upper95cl visits  year gender      
-  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
-1 Statewide  5.64      4.70      6.59    140  2011 Female      
-2 Statewide  7.39      6.30      8.47    183  2011 Male        
-3 Statewide  6.51      5.80      7.23    323  2011 Both genders
-4 Statewide  5.64      4.72      6.57    146  2012 Female      
-5 Statewide  7.56      6.48      8.65    193  2012 Male        
-6 Statewide  6.58      5.88      7.29    339  2012 Both genders</pre>
+<pre class = 'prettyprint lang-r'>ER_filt &lt;- CO_heat_ER %&gt;% 
+  filter(visits &gt; 0)</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>distinct()</code> values</h2></hgroup><article  id="distinct-values">
 
 <p><code>distinct(x)</code> will return the unique elements of column <code>x</code>.</p>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
+<pre class = 'prettyprint lang-r'>ER_filt %&gt;%
   distinct(county)</pre>
 
-<pre ># A tibble: 65 × 1
-   county    
-   &lt;chr&gt;     
- 1 Statewide 
- 2 Adams     
- 3 Alamosa   
- 4 Arapahoe  
- 5 Archuleta 
- 6 Baca      
- 7 Bent      
- 8 Boulder   
- 9 Broomfield
-10 Chaffee   
-# ℹ 55 more rows</pre>
+<pre ># A tibble: 15 × 1
+   county   
+   &lt;chr&gt;    
+ 1 Statewide
+ 2 Adams    
+ 3 Arapahoe 
+ 4 Boulder  
+ 5 Denver   
+ 6 Douglas  
+ 7 El Paso  
+ 8 Jefferson
+ 9 Larimer  
+10 Logan    
+11 Mesa     
+12 Morgan   
+13 Prowers  
+14 Pueblo   
+15 Weld     </pre>
 
 </article></slide><slide class=""><hgroup><h2>How many <code>distinct()</code> values?</h2></hgroup><article  id="how-many-distinct-values">
 
 <p><code>n_distinct()</code> tells you the number of unique elements. <em>Must pull the column first!</em></p>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
+<pre class = 'prettyprint lang-r'>ER_filt %&gt;%
   pull(county) %&gt;% 
   n_distinct()</pre>
 
-<pre >[1] 65</pre>
+<pre >[1] 15</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>dplyr</code>: <code>count</code></h2></hgroup><article  id="dplyr-count">
 
-<p>Use <code>count</code> to return a frequency table of unique elements of a data.frame.</p>
+<p>Use <code>count</code> to return a frequency table of row count by category.</p>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% count(county)</pre>
+<pre class = 'prettyprint lang-r'>ER_filt %&gt;% count(county)</pre>
 
-<pre ># A tibble: 65 × 2
-   county         n
-   &lt;chr&gt;      &lt;int&gt;
- 1 Adams         36
- 2 Alamosa       36
- 3 Arapahoe      36
- 4 Archuleta     36
- 5 Baca          36
- 6 Bent          36
- 7 Boulder       36
- 8 Broomfield    36
- 9 Chaffee       36
-10 Cheyenne      36
-# ℹ 55 more rows</pre>
+<pre ># A tibble: 15 × 2
+   county        n
+   &lt;chr&gt;     &lt;int&gt;
+ 1 Adams        30
+ 2 Arapahoe     29
+ 3 Boulder      15
+ 4 Denver       31
+ 5 Douglas       4
+ 6 El Paso      30
+ 7 Jefferson    33
+ 8 Larimer      29
+ 9 Logan         2
+10 Mesa         17
+11 Morgan        1
+12 Prowers       1
+13 Pueblo       30
+14 Statewide    36
+15 Weld         27</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>dplyr</code>: <code>count</code></h2></hgroup><article  id="dplyr-count-1">
 
 <p>Multiple columns listed further subdivides the count.</p>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% count(county, gender)</pre>
+<pre class = 'prettyprint lang-r'>ER_filt %&gt;% count(county, gender)</pre>
 
-<pre ># A tibble: 195 × 3
-   county    gender           n
-   &lt;chr&gt;     &lt;chr&gt;        &lt;int&gt;
- 1 Adams     Both genders    12
- 2 Adams     Female          12
- 3 Adams     Male            12
- 4 Alamosa   Both genders    12
- 5 Alamosa   Female          12
- 6 Alamosa   Male            12
- 7 Arapahoe  Both genders    12
- 8 Arapahoe  Female          12
- 9 Arapahoe  Male            12
-10 Archuleta Both genders    12
-# ℹ 185 more rows</pre>
-
-<p><br></p>
-
-<p><strong>Note:</strong> <code>count()</code> includes NAs</p>
+<pre ># A tibble: 36 × 3
+   county   gender           n
+   &lt;chr&gt;    &lt;chr&gt;        &lt;int&gt;
+ 1 Adams    Both genders    12
+ 2 Adams    Female           8
+ 3 Adams    Male            10
+ 4 Arapahoe Both genders    11
+ 5 Arapahoe Female           9
+ 6 Arapahoe Male             9
+ 7 Boulder  Both genders    12
+ 8 Boulder  Male             3
+ 9 Denver   Both genders    12
+10 Denver   Female           8
+# ℹ 26 more rows</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Grouping</h2></hgroup><article  id="grouping">
 
@@ -3719,197 +3678,117 @@ yearly_co2_small &lt;- yearly_co2_small %&gt;%
 
 <p><code>group_by</code> allows you group the data set by variables/columns you specify:</p>
 
-<pre class = 'prettyprint lang-r'># Regular data
-CO_heat_ER &lt;- select(CO_heat_ER, county, gender, year, visits, rate)
-CO_heat_ER</pre>
-
-<pre ># A tibble: 2,340 × 5
-   county    gender        year visits  rate
-   &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
- 1 Statewide Female        2011    140  5.64
- 2 Statewide Male          2011    183  7.39
- 3 Statewide Both genders  2011    323  6.51
- 4 Statewide Female        2012    146  5.64
- 5 Statewide Male          2012    193  7.56
- 6 Statewide Both genders  2012    339  6.58
- 7 Statewide Female        2013    124  4.94
- 8 Statewide Male          2013    178  6.72
- 9 Statewide Both genders  2013    302  5.82
-10 Statewide Female        2014     92  3.52
-# ℹ 2,330 more rows</pre>
-
-</article></slide><slide class=""><hgroup><h2>Perform Operations By Groups: dplyr</h2></hgroup><article  id="perform-operations-by-groups-dplyr-1">
-
-<p><code>group_by</code> allows you group the data set by variables/columns you specify:</p>
-
-<pre class = 'prettyprint lang-r'>CO_heat_ER_grouped &lt;- CO_heat_ER %&gt;% group_by(gender)
+<pre class = 'prettyprint lang-r'>CO_heat_ER_grouped &lt;- CO_heat_ER %&gt;% group_by(county)
 CO_heat_ER_grouped</pre>
 
-<pre ># A tibble: 2,340 × 5
-# Groups:   gender [3]
-   county    gender        year visits  rate
-   &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
- 1 Statewide Female        2011    140  5.64
- 2 Statewide Male          2011    183  7.39
- 3 Statewide Both genders  2011    323  6.51
- 4 Statewide Female        2012    146  5.64
- 5 Statewide Male          2012    193  7.56
- 6 Statewide Both genders  2012    339  6.58
- 7 Statewide Female        2013    124  4.94
- 8 Statewide Male          2013    178  6.72
- 9 Statewide Both genders  2013    302  5.82
-10 Statewide Female        2014     92  3.52
+<pre ># A tibble: 2,340 × 7
+# Groups:   county [65]
+   county     rate lower95cl upper95cl visits  year gender      
+   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
+ 1 Statewide  5.64      4.70      6.59    140  2011 Female      
+ 2 Statewide  7.39      6.30      8.47    183  2011 Male        
+ 3 Statewide  6.51      5.80      7.23    323  2011 Both genders
+ 4 Statewide  5.64      4.72      6.57    146  2012 Female      
+ 5 Statewide  7.56      6.48      8.65    193  2012 Male        
+ 6 Statewide  6.58      5.88      7.29    339  2012 Both genders
+ 7 Statewide  4.94      4.06      5.82    124  2013 Female      
+ 8 Statewide  6.72      5.72      7.72    178  2013 Male        
+ 9 Statewide  5.82      5.16      6.49    302  2013 Both genders
+10 Statewide  3.52      2.80      4.25     92  2014 Female      
 # ℹ 2,330 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summarize the grouped data</h2></hgroup><article  id="summarize-the-grouped-data">
 
-<p>It’s grouped! Grouping doesn’t change the data in any way, but how <strong>functions operate on it</strong>. Now we can summarize <code>Data_Value</code> (percent of respondents) by group:</p>
+<p>It’s grouped! Grouping doesn’t change the data in any way, but how <strong>functions operate on it</strong>. Now we can summarize <code>visits</code> by group:</p>
 
-<pre class = 'prettyprint lang-r'>CO_heat_ER_grouped %&gt;% summarize(avg_visits = mean(visits, na.rm = TRUE))</pre>
+<pre class = 'prettyprint lang-r'>CO_heat_ER_grouped %&gt;% 
+  summarize(avg_visits = mean(visits, na.rm = TRUE))</pre>
 
-<pre ># A tibble: 3 × 2
-  gender       avg_visits
-  &lt;chr&gt;             &lt;dbl&gt;
-1 Both genders      16.3 
-2 Female             4.77
-3 Male               9.00</pre>
+<pre ># A tibble: 65 × 2
+   county     avg_visits
+   &lt;chr&gt;           &lt;dbl&gt;
+ 1 Adams            22.7
+ 2 Alamosa           0  
+ 3 Arapahoe         20.8
+ 4 Archuleta         0  
+ 5 Baca              0  
+ 6 Bent              0  
+ 7 Boulder          14.5
+ 8 Broomfield        0  
+ 9 Chaffee           0  
+10 Cheyenne          0  
+# ℹ 55 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Use the <code>pipe</code> to string these together!</h2></hgroup><article  id="use-the-pipe-to-string-these-together">
 
 <p>Pipe <code>CO_heat_ER</code> into <code>group_by</code>, then pipe that into <code>summarize</code>:</p>
 
 <pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
-  group_by(gender) %&gt;%
-  summarize(avg_visits = mean(visits, na.rm = TRUE),
-            max_visits = max(visits, na.rm = TRUE))</pre>
+  group_by(county) %&gt;%
+  summarize(avg_visits = mean(visits, na.rm = TRUE))</pre>
 
-<pre ># A tibble: 3 × 3
-  gender       avg_visits max_visits
-  &lt;chr&gt;             &lt;dbl&gt;      &lt;dbl&gt;
-1 Both genders      16.3         494
-2 Female             4.77        185
-3 Male               9.00        309</pre>
+<pre ># A tibble: 65 × 2
+   county     avg_visits
+   &lt;chr&gt;           &lt;dbl&gt;
+ 1 Adams            22.7
+ 2 Alamosa           0  
+ 3 Arapahoe         20.8
+ 4 Archuleta         0  
+ 5 Baca              0  
+ 6 Bent              0  
+ 7 Boulder          14.5
+ 8 Broomfield        0  
+ 9 Chaffee           0  
+10 Cheyenne          0  
+# ℹ 55 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Group by as many variables as you want</h2></hgroup><article  id="group-by-as-many-variables-as-you-want">
 
-<p><code>group_by</code> Gender and Year:</p>
+<p><code>group_by</code> county and gender:</p>
 
 <pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
-  group_by(gender, year) %&gt;%
-  summarize(avg_visits = mean(visits, na.rm = TRUE),
-            max_visits = max(visits, na.rm = TRUE))</pre>
+  group_by(county, gender) %&gt;%
+  summarize(avg_visits = mean(visits, na.rm = TRUE))</pre>
 
-<pre ># A tibble: 36 × 4
-# Groups:   gender [3]
-   gender        year avg_visits max_visits
-   &lt;chr&gt;        &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
- 1 Both genders  2011      11.3         323
- 2 Both genders  2012      12.8         339
- 3 Both genders  2013      12.4         302
- 4 Both genders  2014       9.67        237
- 5 Both genders  2015      14.9         355
- 6 Both genders  2016      22.4         467
- 7 Both genders  2017      16.3         323
- 8 Both genders  2018      25.6         456
- 9 Both genders  2019      20.3         389
-10 Both genders  2020      14.5         302
-# ℹ 26 more rows</pre>
-
-</article></slide><slide class=""><hgroup><h2>Only the last <code>group_by</code> is recognized…</h2></hgroup><article  id="only-the-last-group_by-is-recognized">
-
-<p>You can overwrite the first <code>group_by</code> with a new one.</p>
-
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;% 
-  group_by(gender, year)  %&gt;% 
-  group_by(year) </pre>
-
-<pre ># A tibble: 2,340 × 5
-# Groups:   year [12]
-   county    gender        year visits  rate
-   &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
- 1 Statewide Female        2011    140  5.64
- 2 Statewide Male          2011    183  7.39
- 3 Statewide Both genders  2011    323  6.51
- 4 Statewide Female        2012    146  5.64
- 5 Statewide Male          2012    193  7.56
- 6 Statewide Both genders  2012    339  6.58
- 7 Statewide Female        2013    124  4.94
- 8 Statewide Male          2013    178  6.72
- 9 Statewide Both genders  2013    302  5.82
-10 Statewide Female        2014     92  3.52
-# ℹ 2,330 more rows</pre>
-
-</article></slide><slide class=""><hgroup><h2>Ungroup the data</h2></hgroup><article  id="ungroup-the-data">
-
-<p>The <code>ungroup</code> function will allow you to clear the groups from the data.</p>
-
-<pre class = 'prettyprint lang-r'>CO_heat_ER &lt;- ungroup(CO_heat_ER)
-CO_heat_ER</pre>
-
-<pre ># A tibble: 2,340 × 5
-   county    gender        year visits  rate
-   &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
- 1 Statewide Female        2011    140  5.64
- 2 Statewide Male          2011    183  7.39
- 3 Statewide Both genders  2011    323  6.51
- 4 Statewide Female        2012    146  5.64
- 5 Statewide Male          2012    193  7.56
- 6 Statewide Both genders  2012    339  6.58
- 7 Statewide Female        2013    124  4.94
- 8 Statewide Male          2013    178  6.72
- 9 Statewide Both genders  2013    302  5.82
-10 Statewide Female        2014     92  3.52
-# ℹ 2,330 more rows</pre>
-
-</article></slide><slide class=""><hgroup><h2><code>group_by</code> with <code>mutate</code> - just add data</h2></hgroup><article  id="group_by-with-mutate---just-add-data">
-
-<p>We can also use <code>mutate</code> to calculate the mean value for each year and add it as a column:</p>
-
-<pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
-  group_by(year, gender) %&gt;%
-  mutate(visits_year_avg = mean(visits, na.rm = TRUE)) %&gt;%
-  select(county, visits, visits_year_avg)</pre>
-
-<pre ># A tibble: 2,340 × 5
-# Groups:   year, gender [36]
-    year gender       county    visits visits_year_avg
-   &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;           &lt;dbl&gt;
- 1  2011 Female       Statewide    140            4.32
- 2  2011 Male         Statewide    183            6.06
- 3  2011 Both genders Statewide    323           11.3 
- 4  2012 Female       Statewide    146            4.76
- 5  2012 Male         Statewide    193            6.71
- 6  2012 Both genders Statewide    339           12.8 
- 7  2013 Female       Statewide    124            3.72
- 8  2013 Male         Statewide    178            6.11
- 9  2013 Both genders Statewide    302           12.4 
-10  2014 Female       Statewide     92            2.5 
-# ℹ 2,330 more rows</pre>
+<pre ># A tibble: 195 × 3
+# Groups:   county [65]
+   county    gender       avg_visits
+   &lt;chr&gt;     &lt;chr&gt;             &lt;dbl&gt;
+ 1 Adams     Both genders       30.4
+ 2 Adams     Female             15.8
+ 3 Adams     Male               18.9
+ 4 Alamosa   Both genders        0  
+ 5 Alamosa   Female              0  
+ 6 Alamosa   Male                0  
+ 7 Arapahoe  Both genders       28.7
+ 8 Arapahoe  Female             14.4
+ 9 Arapahoe  Male               17.3
+10 Archuleta Both genders        0  
+# ℹ 185 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Counting</h2></hgroup><article  id="counting">
 
 <p>There are other functions, such as <code>n()</code> count the number of observations (NAs included).</p>
 
 <pre class = 'prettyprint lang-r'>CO_heat_ER %&gt;%
-  group_by(year) %&gt;%
+  group_by(county) %&gt;%
   summarize(n = n(),
             mean = mean(visits, na.rm = TRUE))</pre>
 
-<pre ># A tibble: 12 × 3
-    year     n  mean
-   &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
- 1  2011   195  7.17
- 2  2012   195  8.14
- 3  2013   195  7.33
- 4  2014   195  5.51
- 5  2015   195  8.68
- 6  2016   195 13.2 
- 7  2017   195  9.39
- 8  2018   195 14.7 
- 9  2019   195 12.3 
-10  2020   195  8.45
-11  2021   195 11.6 
-12  2022   195 13.3 </pre>
+<pre ># A tibble: 65 × 3
+   county         n  mean
+   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt;
+ 1 Adams         36  22.7
+ 2 Alamosa       36   0  
+ 3 Arapahoe      36  20.8
+ 4 Archuleta     36   0  
+ 5 Baca          36   0  
+ 6 Bent          36   0  
+ 7 Boulder       36  14.5
+ 8 Broomfield    36   0  
+ 9 Chaffee       36   0  
+10 Cheyenne      36   0  
+# ℹ 55 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Counting</h2></hgroup><article  id="counting-1" class="codesmall">
 
@@ -4043,6 +3922,8 @@ CO_heat_ER_loc %&gt;% unique() # similar to distinct()</pre>
 <li><code>colSums(x)</code>: takes the sum of each column of x</li>
 </ul></li>
 </ul>
+
+<pre class = 'prettyprint lang-r'>yearly_co2 &lt;- yearly_co2_emissions</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>rowMeans()</code> example</h2></hgroup><article  id="rowmeans-example">
 

@@ -9,13 +9,10 @@ editor_options:
 
 ### 1.1
 
-Load all the libraries we will use in this lab. 
+Load all the packages we will use in this lab. 
 
 ```{r}
-library(readr)
 library(tidyverse)
-library(dplyr)
-library(lubridate)
 library(dasehr)
 ```
 
@@ -67,13 +64,8 @@ Coerce `rand_vect` to character class using `as.character()`. Save this vector a
 Read in the National Wastewater Surveillance System (NWSS) SARS-CoV-2 Wastewater data from `dasehr` package using the code supplied in the chunk. Alternatively using the url link.
 
 ```{r}
-covidww <- read_csv(file = "https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv")
-```
-
-Use the `str()` function to take a look at the data and learn about the column types.
-
-```{r 1.6response}
-
+covidww <- covid_wastewater
+# covidww <- read_csv(file = "https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv")
 ```
 
 ### 1.7

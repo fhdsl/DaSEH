@@ -3261,15 +3261,21 @@ background-color: lightgreen;
 
 <slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>One dimensional vectors</h2></hgroup><article  id="one-dimensional-vectors">
 
-</article></slide><slide class=""><hgroup><h2>Data classes/types</h2></hgroup><article  id="data-classestypes">
+<!-- ## Data classes/types -->
 
-<pre >* Character: strings or individual characters, quoted
-* Numeric: any real number(s)
-* Integer: any integer(s)/whole numbers (1,2,3)
-* Double: any number with fractional values (1.2, 4.01, 1.00004)
-* Factor: categorical/qualitative variables
-* Logical: variables composed of TRUE or FALSE
-* Date/POSIXct: represents calendar dates and times</pre>
+<!--     * Character: strings or individual characters, quoted -->
+
+<!--     * Numeric: any real number(s) -->
+
+<!--     * Integer: any integer(s)/whole numbers (1,2,3) -->
+
+<!--     * Double: any number with fractional values (1.2, 4.01, 1.00004) -->
+
+<!--     * Factor: categorical/qualitative variables -->
+
+<!--     * Logical: variables composed of TRUE or FALSE -->
+
+<!--     * Date/POSIXct: represents calendar dates and times -->
 
 </article></slide><slide class=""><hgroup><h2>Character and numeric</h2></hgroup><article  id="character-and-numeric">
 
@@ -3285,7 +3291,7 @@ background-color: lightgreen;
 
 </article></slide><slide class=""><hgroup><h2>Character and numeric</h2></hgroup><article  id="character-and-numeric-1">
 
-<p>This can also be a bit tricky.</p>
+<p>Character predominates if there are mixed classes.</p>
 
 <pre class = 'prettyprint lang-r'>class(c(1, 2, &quot;tree&quot;))</pre>
 
@@ -3304,12 +3310,7 @@ class(x)</pre>
 
 <pre >## [1] &quot;logical&quot;</pre>
 
-<p>Note that <code>logical</code> elements are NOT in quotes.</p>
-
-<pre class = 'prettyprint lang-r'>z &lt;- c(&quot;TRUE&quot;, &quot;FALSE&quot;, &quot;TRUE&quot;, &quot;FALSE&quot;)
-class(z)</pre>
-
-<pre >## [1] &quot;character&quot;</pre>
+<p><code>logical</code> elements are NOT in quotes.</p>
 
 </article></slide><slide class=""><hgroup><h2>General Class Information</h2></hgroup><article  id="general-class-information">
 
@@ -3323,10 +3324,6 @@ class(z)</pre>
 <li><code>as.numeric()</code></li>
 <li><code>as.character()</code></li>
 <li><code>as.logical()</code></li>
-<li><code>as.double()</code></li>
-<li><code>as.integer()</code></li>
-<li><code>as.Date()</code></li>
-<li><code>as.factor()</code> (More on this one later!)</li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Coercing: seamless transition</h2></hgroup><article  id="coercing-seamless-transition">
@@ -3363,10 +3360,6 @@ class(z)</pre>
 
 <pre >## [1]  TRUE FALSE    NA</pre>
 
-<pre class = 'prettyprint lang-r'>as.Date(c(&quot;2021-06-15&quot;, &quot;2021-06-32&quot;))</pre>
-
-<pre >## [1] &quot;2021-06-15&quot; NA</pre>
-
 </article></slide><slide class=""><hgroup><h2>Number Subclasses</h2></hgroup><article  id="number-subclasses">
 
 <p>There are two major number subclasses or types</p>
@@ -3376,87 +3369,18 @@ class(z)</pre>
 <li>Integer (1)</li>
 </ol>
 
-</article></slide><slide class=""><hgroup><h2>Double</h2></hgroup><article  id="double">
+</article></slide><slide class=""><hgroup><h2>Number Subclasses</h2></hgroup><article  id="number-subclasses-1">
 
 <p><code>Double</code> is equivalent to <code>numeric</code>. It is a number that contains <span style="color: red;">
 fractional values </span>. Can be any amount of places after the decimal.</p>
 
 <p><code>Double</code> stands for <a href='https://en.wikipedia.org/wiki/Double-precision_floating-point_format' title=''>double-precision</a></p>
 
-<pre class = 'prettyprint lang-r'>y &lt;- c(1.1, 2.0, 3.21, 4.5, 5.62)
-y</pre>
-
-<pre >## [1] 1.10 2.00 3.21 4.50 5.62</pre>
-
-<pre class = 'prettyprint lang-r'>class(y)</pre>
-
-<pre >## [1] &quot;numeric&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>typeof(y)</pre>
-
-<pre >## [1] &quot;double&quot;</pre>
+<p>For most purposes, the difference between integers and doubles doesn’t matter.</p>
 
 </article></slide><slide class=""><hgroup><h2>Significant figures and other formats</h2></hgroup><article  id="significant-figures-and-other-formats">
 
 <p>The <code>num</code> function of the <code>tibble</code> package can be used to change format. See here for more: <a href='https://tibble.tidyverse.org/articles/numbers.html' title=''>https://tibble.tidyverse.org/articles/numbers.html</a></p>
-
-</article></slide><slide class=""><hgroup><h2>Integer</h2></hgroup><article  id="integer">
-
-<p><code>Integer</code> is a special number that contains only <span style="color: red;">
-whole numbers</span>.</p>
-
-<pre class = 'prettyprint lang-r'>y</pre>
-
-<pre >## [1] 1.10 2.00 3.21 4.50 5.62</pre>
-
-<pre class = 'prettyprint lang-r'>y_int &lt;- as.integer(y)
-y_int</pre>
-
-<pre >## [1] 1 2 3 4 5</pre>
-
-<pre class = 'prettyprint lang-r'>class(y_int)</pre>
-
-<pre >## [1] &quot;integer&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>typeof(y_int)</pre>
-
-<pre >## [1] &quot;integer&quot;</pre>
-
-</article></slide><slide class=""><hgroup><h2>Integer</h2></hgroup><article  id="integer-1">
-
-<p>Can use <code>as.integer()</code> function to create integers (unless they are read in as integers or created as such with <code>seq</code> and <code>sample</code>). Otherwise, will be double by default.</p>
-
-<pre class = 'prettyprint lang-r'>x &lt;- c(1, 2, 3, 4, 5) # technically integers
-class(x)</pre>
-
-<pre >## [1] &quot;numeric&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>typeof(x)</pre>
-
-<pre >## [1] &quot;double&quot;</pre>
-
-</article></slide><slide class=""><hgroup><h2>Checking double vs integer</h2></hgroup><article  id="checking-double-vs-integer">
-
-<p>A <code>tibble</code> will show the difference (as does <code>glimpse()</code>).</p>
-
-<pre class = 'prettyprint lang-r'>my_data &lt;- tibble(double_var = y, int_var = y_int)
-my_data</pre>
-
-<pre >## # A tibble: 5 × 2
-##   double_var int_var
-##        &lt;dbl&gt;   &lt;int&gt;
-## 1       1.1        1
-## 2       2          2
-## 3       3.21       3
-## 4       4.5        4
-## 5       5.62       5</pre>
-
-<pre class = 'prettyprint lang-r'>glimpse(my_data)</pre>
-
-<pre >## Rows: 5
-## Columns: 2
-## $ double_var &lt;dbl&gt; 1.10, 2.00, 3.21, 4.50, 5.62
-## $ int_var    &lt;int&gt; 1, 2, 3, 4, 5</pre>
 
 </article></slide><slide class=""><hgroup><h2>Factors</h2></hgroup><article  id="factors">
 
@@ -3472,102 +3396,7 @@ my_data</pre>
 <li>beginner, novice, intermediate, expert</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Factors</h2></hgroup><article  id="factors-1">
-
-<p>Use the <code>factor()</code> function to create factors.</p>
-
-<pre class = 'prettyprint lang-r'>x &lt;- c(&quot;small&quot;, &quot;medium&quot;, &quot;large&quot;, &quot;medium&quot;, &quot;large&quot;)
-class(x)</pre>
-
-<pre >## [1] &quot;character&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>x_fact &lt;- factor(x)
-class(x_fact)</pre>
-
-<pre >## [1] &quot;factor&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>x_fact</pre>
-
-<pre >## [1] small  medium large  medium large 
-## Levels: large medium small</pre>
-
-<p>Note that levels are, by default, in <strong>alphanumerical</strong> order!</p>
-
-</article></slide><slide class=""><hgroup><h2>Factors</h2></hgroup><article  id="factors-2">
-
-<p><strong>Q:</strong> Why not use <code>as.factor()</code> ?</p>
-
-<p><strong>A:</strong> You can coerce with <code>as.factor()</code>. But you can’t specify levels! More on this soon.</p>
-
-</article></slide><slide class=""><hgroup><h2>Factors</h2></hgroup><article  id="factors-3">
-
-<p>You can learn what are the unique levels of a <code>factor</code> vector</p>
-
-<pre class = 'prettyprint lang-r'>levels(x_fact)</pre>
-
-<pre >## [1] &quot;large&quot;  &quot;medium&quot; &quot;small&quot;</pre>
-
-<p>More on how to change the levels ordering in a lecture coming up!</p>
-
-</article></slide><slide class=""><hgroup><h2>Factors</h2></hgroup><article  id="factors-4">
-
-<p>Factors can be converted to <code>numeric</code> or <code>character</code> very easily.</p>
-
-<pre class = 'prettyprint lang-r'>x_fact</pre>
-
-<pre >## [1] small  medium large  medium large 
-## Levels: large medium small</pre>
-
-<pre class = 'prettyprint lang-r'>as.character(x_fact)</pre>
-
-<pre >## [1] &quot;small&quot;  &quot;medium&quot; &quot;large&quot;  &quot;medium&quot; &quot;large&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>as.numeric(x_fact)</pre>
-
-<pre >## [1] 3 2 1 2 1</pre>
-
-</article></slide><slide class=""><hgroup><h2>Class conversion in with a dataset</h2></hgroup><article  id="class-conversion-in-with-a-dataset">
-
-<pre class = 'prettyprint lang-r'>library(dasehr)
-covidww &lt;- covid_wastewater</pre>
-
-<pre class = 'prettyprint lang-r'>head(covidww)</pre>
-
-<pre >## # A tibble: 6 × 12
-##   reporting_jurisdiction sample_location key_plot_id                county_names
-##   &lt;chr&gt;                  &lt;chr&gt;           &lt;chr&gt;                      &lt;chr&gt;       
-## 1 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
-## 2 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
-## 3 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
-## 4 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
-## 5 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
-## 6 Missouri               Treatment plant NWSS_mo_259_Treatment pla… Barry,Lawre…
-## # ℹ 8 more variables: population_served &lt;dbl&gt;, date_start &lt;chr&gt;,
-## #   date_end &lt;chr&gt;, rna_pct_change_15d &lt;dbl&gt;, pos_PCR_prop_15d &lt;dbl&gt;,
-## #   percentile &lt;dbl&gt;, sampling_prior &lt;chr&gt;, first_sample_date &lt;chr&gt;</pre>
-
-</article></slide><slide class=""><hgroup><h2>Class conversion in with a dataset</h2></hgroup><article  id="class-conversion-in-with-a-dataset-1">
-
-<p>Say we want to change <code>daily</code> to be an integer. We would need to use mutate to help us modify that column or create a new column. Let’s create a new one so it is easier to see what is happening.</p>
-
-<pre class = 'prettyprint lang-r'>covidww_updated &lt;- mutate(covidww, pop_int= as.integer(population_served))
-
-covidww_updated %&gt;% select(population_served, pop_int)</pre>
-
-<pre >## # A tibble: 776,059 × 2
-##    population_served pop_int
-##                &lt;dbl&gt;   &lt;int&gt;
-##  1              9100    9100
-##  2              9100    9100
-##  3              9100    9100
-##  4              9100    9100
-##  5              9100    9100
-##  6              9100    9100
-##  7              9100    9100
-##  8              9100    9100
-##  9              9100    9100
-## 10              9100    9100
-## # ℹ 776,049 more rows</pre>
+<p>** We will learn more about factors in a later module. **</p>
 
 </article></slide><slide class=""><hgroup><h2>Classes Overview</h2></hgroup><article  id="classes-overview">
 
@@ -3614,20 +3443,132 @@ covidww_updated %&gt;% select(population_served, pop_int)</pre>
 </tr>
 </table>
 
-</article></slide><slide class=""><hgroup><h2>Summary</h2></hgroup><article  id="summary">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Special data classes</h2></hgroup><article  id="special-data-classes">
+
+</article></slide><slide class=""><hgroup><h2>Dates</h2></hgroup><article  id="dates">
+
+<p>There are two most popular R classes used when working with dates and times:</p>
 
 <ul>
-<li>There are two types of number class objects: integer and double</li>
-<li>Logic class objects only have <code>TRUE</code> or <code>FALSE</code> (without quotes)</li>
-<li><code>class()</code> can be used to test the class of an object x</li>
-<li><code>as.CLASS_NAME(x)</code> can be used to change the class of an object x</li>
-<li>Factors are a special character class that has levels - more on that soon!</li>
-<li>tibbles show column classes!</li>
+<li><code>Date</code> class representing a calendar date</li>
+<li><code>POSIXct</code> class representing a calendar date with hours, minutes, seconds</li>
 </ul>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Two-dimensional data classes</h2></hgroup><article  id="two-dimensional-data-classes">
+<p>We convert data from character to <code>Date</code>/<code>POSIXct</code> to use functions to manipulate date/date and time</p>
 
-</article></slide><slide class=""><hgroup><h2>Two-dimensional data classes</h2></hgroup><article  id="two-dimensional-data-classes-1">
+<p><code>lubridate</code> is a powerful, widely used R package from &ldquo;tidyverse&rdquo; family to work with <code>Date</code> / <code>POSIXct</code> class objects</p>
+
+</article></slide><slide class=""><hgroup><h2>Creating <code>Date</code> class object</h2></hgroup><article  id="creating-date-class-object">
+
+<pre class = 'prettyprint lang-r'>class(&quot;2021-06-15&quot;)</pre>
+
+<pre >## [1] &quot;character&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>library(lubridate)
+
+x &lt;- ymd(&quot;2021-06-15&quot;) # lubridate package Year Month Day
+class(x)</pre>
+
+<pre >## [1] &quot;Date&quot;</pre>
+
+<p>Note for function <code>ymd</code>: <strong>y</strong>ear <strong>m</strong>onth <strong>d</strong>ay</p>
+
+</article></slide><slide class=""><hgroup><h2>Dates are useful!</h2></hgroup><article  id="dates-are-useful">
+
+<pre class = 'prettyprint lang-r'>a &lt;- ymd(&quot;2021-06-15&quot;)
+b &lt;- ymd(&quot;2021-06-18&quot;)
+a - b</pre>
+
+<pre >## Time difference of -3 days</pre>
+
+</article></slide><slide class=""><hgroup><h2>The function matches the format</h2></hgroup><article  id="the-function-matches-the-format">
+
+<pre class = 'prettyprint lang-r'>mdy(&quot;06/15/2021&quot;)</pre>
+
+<pre >## [1] &quot;2021-06-15&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>dmy(&quot;15-June-2021&quot;)</pre>
+
+<pre >## [1] &quot;2021-06-15&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>ymd(&quot;2021-06-15&quot;)</pre>
+
+<pre >## [1] &quot;2021-06-15&quot;</pre>
+
+<!-- Note for  function `mdy`: **m**onth **d**ay  **y**ear -->
+
+<!-- ## They right lubridate function needs to be used -->
+
+<!-- Must match the data format! -->
+
+<!-- ```{r} -->
+
+<!-- ymd("06/15/2021") # This doesn't work - gives NA -->
+
+<!-- mdy("06/15/2021") # This works -->
+
+<!-- ``` -->
+
+<!-- ## Creating `POSIXct` class object   -->
+
+<!-- ```{r} -->
+
+<!-- class("2013-01-24 19:39:07") -->
+
+<!-- ymd_hms("2013-01-24 19:39:07") # lubridate package -->
+
+<!-- class(ymd_hms("2013-01-24 19:39:07")) # lubridate package -->
+
+<!-- ``` -->
+
+<!-- UTC represents time zone, by default: Coordinated Universal Time -->
+
+<!-- Note for  function `ymd_hms`: year month day hour minute second.  -->
+
+<!-- There are functions in case your data have only date, hour and minute (`ymd_hm()`) or only date and hour (`ymd_h()`).  -->
+
+</article></slide><slide class=""><hgroup><h2>Class conversion in with a dataset</h2></hgroup><article  id="class-conversion-in-with-a-dataset">
+
+<pre class = 'prettyprint lang-r'>library(dasehr)
+covidww &lt;- covid_wastewater %&gt;% select(contains(&quot;date&quot;))</pre>
+
+<pre class = 'prettyprint lang-r'>head(covidww)</pre>
+
+<pre >## # A tibble: 6 × 3
+##   date_start date_end  first_sample_date
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;            
+## 1 6/21/2020  7/5/2020  7/5/2020         
+## 2 6/22/2020  7/6/2020  7/5/2020         
+## 3 6/23/2020  7/7/2020  7/5/2020         
+## 4 6/24/2020  7/8/2020  7/5/2020         
+## 5 6/25/2020  7/9/2020  7/5/2020         
+## 6 6/26/2020  7/10/2020 7/5/2020</pre>
+
+</article></slide><slide class=""><hgroup><h2>Class conversion in with a dataset</h2></hgroup><article  id="class-conversion-in-with-a-dataset-1">
+
+<p>We would need to use mutate to help us modify that column.</p>
+
+<pre class = 'prettyprint lang-r'>covidww %&gt;% 
+  mutate(date_start = mdy(date_start))</pre>
+
+<pre >## # A tibble: 776,059 × 3
+##    date_start date_end  first_sample_date
+##    &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;            
+##  1 2020-06-21 7/5/2020  7/5/2020         
+##  2 2020-06-22 7/6/2020  7/5/2020         
+##  3 2020-06-23 7/7/2020  7/5/2020         
+##  4 2020-06-24 7/8/2020  7/5/2020         
+##  5 2020-06-25 7/9/2020  7/5/2020         
+##  6 2020-06-26 7/10/2020 7/5/2020         
+##  7 2020-06-27 7/11/2020 7/5/2020         
+##  8 2020-06-28 7/12/2020 7/5/2020         
+##  9 2020-06-29 7/13/2020 7/5/2020         
+## 10 2020-06-30 7/14/2020 7/5/2020         
+## # ℹ 776,049 more rows</pre>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Other two-dimensional data classes</h2></hgroup><article  id="other-two-dimensional-data-classes">
+
+</article></slide><slide class=""><hgroup><h2>Two-dimensional data classes</h2></hgroup><article  id="two-dimensional-data-classes">
 
 <p>Two-dimensional classes are those we would often use to store data read from a file</p>
 
@@ -3670,155 +3611,7 @@ mylist</pre>
 
 <pre >## [1] &quot;list&quot;</pre>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Special data classes</h2></hgroup><article  id="special-data-classes">
-
-</article></slide><slide class=""><hgroup><h2>Dates</h2></hgroup><article  id="dates">
-
-<p>There are two most popular R classes used when working with dates and times:</p>
-
-<ul>
-<li><code>Date</code> class representing a calendar date</li>
-<li><code>POSIXct</code> class representing a calendar date with hours, minutes, seconds</li>
-</ul>
-
-<p>We convert data from character to <code>Date</code>/<code>POSIXct</code> to use functions to manipulate date/date and time</p>
-
-<p><code>lubridate</code> is a powerful, widely used R package from &ldquo;tidyverse&rdquo; family to work with <code>Date</code> / <code>POSIXct</code> class objects</p>
-
-</article></slide><slide class=""><hgroup><h2>Creating <code>Date</code> class object</h2></hgroup><article  id="creating-date-class-object">
-
-<pre class = 'prettyprint lang-r'>class(&quot;2021-06-15&quot;)</pre>
-
-<pre >## [1] &quot;character&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>library(lubridate)
-
-ymd(&quot;2021-06-15&quot;) # lubridate package Year Month Day</pre>
-
-<pre >## [1] &quot;2021-06-15&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>class(ymd(&quot;2021-06-15&quot;)) # lubridate package</pre>
-
-<pre >## [1] &quot;Date&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>class(date(&quot;2021-06-15&quot;)) # lubridate package</pre>
-
-<pre >## [1] &quot;Date&quot;</pre>
-
-<p>Note for function <code>ymd</code>: <strong>y</strong>ear <strong>m</strong>onth <strong>d</strong>ay</p>
-
-</article></slide><slide class=""><hgroup><h2>Dates are useful!</h2></hgroup><article  id="dates-are-useful">
-
-<pre class = 'prettyprint lang-r'>a &lt;- ymd(&quot;2021-06-15&quot;)
-b &lt;- ymd(&quot;2021-06-18&quot;)
-a - b</pre>
-
-<pre >## Time difference of -3 days</pre>
-
-</article></slide><slide class=""><hgroup><h2>Creating <code>Date</code> class object</h2></hgroup><article  id="creating-date-class-object-1">
-
-<p><code>date()</code> is picky…</p>
-
-<pre class = 'prettyprint lang-r'>date(&quot;06/15/2021&quot;) # This doesn&#39;t work, needs to be year month day</pre>
-
-<pre >## Error in as.POSIXlt.character(x, tz = tz(x)): character string is not in a standard unambiguous format</pre>
-
-</article></slide><slide class=""><hgroup><h2>But we can use the month day year function <code>mdy</code></h2></hgroup><article  id="but-we-can-use-the-month-day-year-function-mdy">
-
-<pre class = 'prettyprint lang-r'>mdy(&quot;06/15/2021&quot;) # This works</pre>
-
-<pre >## [1] &quot;2021-06-15&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>mdy(&quot;06/15/21&quot;) # This works</pre>
-
-<pre >## [1] &quot;2021-06-15&quot;</pre>
-
-<p>Note for function <code>mdy</code>: <strong>m</strong>onth <strong>d</strong>ay <strong>y</strong>ear</p>
-
-</article></slide><slide class=""><hgroup><h2>They right lubridate function needs to be used</h2></hgroup><article  id="they-right-lubridate-function-needs-to-be-used">
-
-<p>Must match the data format!</p>
-
-<pre class = 'prettyprint lang-r'>ymd(&quot;06/15/2021&quot;) # This doesn&#39;t work - gives NA</pre>
-
-<pre >## Warning: All formats failed to parse. No formats found.</pre>
-
-<pre >## [1] NA</pre>
-
-<pre class = 'prettyprint lang-r'>mdy(&quot;06/15/2021&quot;) # This works</pre>
-
-<pre >## [1] &quot;2021-06-15&quot;</pre>
-
-</article></slide><slide class=""><hgroup><h2>Creating <code>POSIXct</code> class object</h2></hgroup><article  id="creating-posixct-class-object">
-
-<pre class = 'prettyprint lang-r'>class(&quot;2013-01-24 19:39:07&quot;)</pre>
-
-<pre >## [1] &quot;character&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>ymd_hms(&quot;2013-01-24 19:39:07&quot;) # lubridate package</pre>
-
-<pre >## [1] &quot;2013-01-24 19:39:07 UTC&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>class(ymd_hms(&quot;2013-01-24 19:39:07&quot;)) # lubridate package</pre>
-
-<pre >## [1] &quot;POSIXct&quot; &quot;POSIXt&quot;</pre>
-
-<p>UTC represents time zone, by default: Coordinated Universal Time</p>
-
-<p>Note for function <code>ymd_hms</code>: year month day hour minute second.</p>
-
-<p>There are functions in case your data have only date, hour and minute (<code>ymd_hm()</code>) or only date and hour (<code>ymd_h()</code>).</p>
-
-</article></slide><slide class=""><hgroup><h2>In a dataframe</h2></hgroup><article  id="in-a-dataframe">
-
-<p>Note dates are always displayed year month day, even if made with <code>mdy</code>!</p>
-
-<pre class = 'prettyprint lang-r'>covidww &lt;- mutate(covidww, date_start_formatted = mdy(date_start)) %&gt;% 
-  relocate(date_start_formatted, .before = date_end) 
-glimpse(covidww)</pre>
-
-<pre >## Rows: 776,059
-## Columns: 13
-## $ reporting_jurisdiction &lt;chr&gt; &quot;Missouri&quot;, &quot;Missouri&quot;, &quot;Missouri&quot;, &quot;Missouri&quot;,…
-## $ sample_location        &lt;chr&gt; &quot;Treatment plant&quot;, &quot;Treatment plant&quot;, &quot;Treatmen…
-## $ key_plot_id            &lt;chr&gt; &quot;NWSS_mo_259_Treatment plant_raw wastewater&quot;, &quot;…
-## $ county_names           &lt;chr&gt; &quot;Barry,Lawrence&quot;, &quot;Barry,Lawrence&quot;, &quot;Barry,Lawr…
-## $ population_served      &lt;dbl&gt; 9100, 9100, 9100, 9100, 9100, 9100, 9100, 9100,…
-## $ date_start             &lt;chr&gt; &quot;6/21/2020&quot;, &quot;6/22/2020&quot;, &quot;6/23/2020&quot;, &quot;6/24/20…
-## $ date_start_formatted   &lt;date&gt; 2020-06-21, 2020-06-22, 2020-06-23, 2020-06-24…
-## $ date_end               &lt;chr&gt; &quot;7/5/2020&quot;, &quot;7/6/2020&quot;, &quot;7/7/2020&quot;, &quot;7/8/2020&quot;,…
-## $ rna_pct_change_15d     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 3683, 3683, 3683, 3…
-## $ pos_PCR_prop_15d       &lt;dbl&gt; 100, 100, 100, 100, 100, 100, 100, 100, 100, 10…
-## $ percentile             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ sampling_prior         &lt;chr&gt; &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;…
-## $ first_sample_date      &lt;chr&gt; &quot;7/5/2020&quot;, &quot;7/5/2020&quot;, &quot;7/5/2020&quot;, &quot;7/5/2020&quot;,…</pre>
-
-</article></slide><slide class=""><hgroup><h2>Once a variable is a date type we can convert to other types</h2></hgroup><article  id="once-a-variable-is-a-date-type-we-can-convert-to-other-types">
-
-<pre class = 'prettyprint lang-r'>covidww %&gt;% mutate(year = year(date_start_formatted)) %&gt;%
-         mutate(month = month(date_start_formatted)) %&gt;%
-         relocate(c(year, month), .before = date_end) %&gt;%
-  glimpse()</pre>
-
-<pre >## Rows: 776,059
-## Columns: 15
-## $ reporting_jurisdiction &lt;chr&gt; &quot;Missouri&quot;, &quot;Missouri&quot;, &quot;Missouri&quot;, &quot;Missouri&quot;,…
-## $ sample_location        &lt;chr&gt; &quot;Treatment plant&quot;, &quot;Treatment plant&quot;, &quot;Treatmen…
-## $ key_plot_id            &lt;chr&gt; &quot;NWSS_mo_259_Treatment plant_raw wastewater&quot;, &quot;…
-## $ county_names           &lt;chr&gt; &quot;Barry,Lawrence&quot;, &quot;Barry,Lawrence&quot;, &quot;Barry,Lawr…
-## $ population_served      &lt;dbl&gt; 9100, 9100, 9100, 9100, 9100, 9100, 9100, 9100,…
-## $ date_start             &lt;chr&gt; &quot;6/21/2020&quot;, &quot;6/22/2020&quot;, &quot;6/23/2020&quot;, &quot;6/24/20…
-## $ date_start_formatted   &lt;date&gt; 2020-06-21, 2020-06-22, 2020-06-23, 2020-06-24…
-## $ year                   &lt;dbl&gt; 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020,…
-## $ month                  &lt;dbl&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7,…
-## $ date_end               &lt;chr&gt; &quot;7/5/2020&quot;, &quot;7/6/2020&quot;, &quot;7/7/2020&quot;, &quot;7/8/2020&quot;,…
-## $ rna_pct_change_15d     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 3683, 3683, 3683, 3…
-## $ pos_PCR_prop_15d       &lt;dbl&gt; 100, 100, 100, 100, 100, 100, 100, 100, 100, 10…
-## $ percentile             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ sampling_prior         &lt;chr&gt; &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;…
-## $ first_sample_date      &lt;chr&gt; &quot;7/5/2020&quot;, &quot;7/5/2020&quot;, &quot;7/5/2020&quot;, &quot;7/5/2020&quot;,…</pre>
-
-</article></slide><slide class=""><hgroup><h2>Summary</h2></hgroup><article  id="summary-1">
+</article></slide><slide class=""><hgroup><h2>Summary</h2></hgroup><article  id="summary">
 
 <ul>
 <li>two dimensional object classes include: data frames, tibbles, matrices, and lists</li>
