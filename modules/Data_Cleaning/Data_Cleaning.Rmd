@@ -210,7 +210,7 @@ Filter will drop them from the data.
 
 ```{r}
 #CO_heat_ER <- read_csv(file = "https://daseh.org/data/Colorado_ER_heat_visits_AgeAdjusted_data.csv")
-
+library(dasehr)
 CO_heat_ER %>% filter(visits > 0)
 ```
 
@@ -396,24 +396,28 @@ knitr::include_graphics("images/debug.png")
 
 ## Example of Recoding
 
+Let's make some data about microplastics: https://www.medicalnewstoday.com/articles/what-do-we-know-about-microplastics-in-food#Common-microplastics-in-food
+https://www.sciencedirect.com/science/article/pii/S0045653523028072
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5708064/
+
 ```{r}
 set.seed(124)
 data_diet <- tibble(Diet = rep(c("A", "B", "B"),
                                times = 4), 
-                    Treatment = c("Ginger", 
-                               "Ginger",
+              microplastic = c("Dioxin", 
+                               "Dioxin",
                                "Other",
-                               "peppermint", 
-                               "peppermint",
-                               "Ginger", 
-                               "Mint",
+                               "Bisphenol A", 
+                               "BPA",
+                               "dioxin", 
+                               "bpa",
                                "O", 
-                               "Ginger",
-                               "mint",
-                               "Mint",
+                               "dioxin",
+                               "bpa",
+                               "BPA",
                                "O"), 
-                    Weight_start = sample(100:250, size = 12),
-                    Weight_change = sample(-10:20, size = 12))
+                  blood_level_start_nM = sample(1:8, size = 12, replace = TRUE),
+                  blood_level_change_nM = sample(-.5:4, size = 12, replace = TRUE))
 
 ```
 
@@ -421,15 +425,7 @@ data_diet <- tibble(Diet = rep(c("A", "B", "B"),
 ```{r, include = FALSE, echo = FALSE}
 #writexl::write_xlsx(data_diet, here::here("data", "cleaning_diet_data.xlsx"))
 ```
-## Reading in the data if it were an excel sheet
-Data is also here: 
 
-https://daseh.org/data/cleaning_diet_data.xlsx
-
-```{r}
-library(readxl)
-data_diet<- read_excel(here::here("data", "cleaning_diet_data.xlsx"))
-```
 
 ## Say we have some data about samples in a diet study:
 
@@ -443,12 +439,12 @@ This needs lots of recoding.
 
 ```{r}
 data_diet %>%
-  count(Treatment)
+  count(microplastic)
 ```
 
 ## `dplyr` can help!{.codesmall}
 
-Using Excel to find all of the different ways `Treatment` has been coded,
+Using Excel to find all of the different ways `microplastic` has been coded,
 could be hectic! In `dplyr` you can use the `case_when` function.
 
 
@@ -470,12 +466,12 @@ Need quotes for conditions and new values!
 
 ```{r}
 data_diet %>% 
-  mutate(Treatment_recoded = case_when(
-                               Treatment == "O" ~ "Other",
-                               Treatment == "Mint" ~ "Peppermint",
-                               Treatment == "mint" ~ "Peppermint",
-                               Treatment == "peppermint" ~ "Peppermint"))  %>% 
-  count(Treatment, Treatment_recoded)
+  mutate(microplastic_recoded = case_when(
+                               microplastic == "O" ~ "Other",
+                               microplastic == "Bisphenol A" ~ "BPA",
+                               microplastic == "bpa" ~ "BPA",
+                               microplastic =="dioxin" ~"Dioxin"))  %>% 
+  count(microplastic, microplastic_recoded)
 
 ```
 
@@ -483,15 +479,16 @@ data_diet %>%
 
 We seem to have `NA` values!
 
-We didn't specify what happens to values that were already `Other` or `Ginger`.
+We didn't specify what happens to values that were already `Other` or `Dioxin` or `BPA`.
 
 ```{r, eval = FALSE}
 data_diet %>% 
-  mutate(Treatment = case_when(
-                               Treatment == "O" ~ "Other",
-                               Treatment == "Mint" ~ "Peppermint",
-                               Treatment == "mint" ~ "Peppermint",
-                               Treatment == "peppermint" ~ "Peppermint")) 
+  mutate(microplastic_recoded = case_when(
+                               microplastic == "O" ~ "Other",
+                               microplastic == "Bisphenol A" ~ "BPA",
+                               microplastic == "bpa" ~ "BPA",
+                               microplastic =="dioxin" ~"Dioxin"))  %>% 
+  count(microplastic, microplastic_recoded)
 ```
 
 
@@ -518,13 +515,13 @@ or it can be the original values of the column
 
 ```{r}
 data_diet %>% 
-  mutate(Treatment_recoded = case_when(
-                               Treatment == "O" ~ "Other",
-                               Treatment == "Mint" ~ "Peppermint",
-                               Treatment == "mint" ~ "Peppermint",
-                               Treatment == "peppermint" ~ "Peppermint",
-                                TRUE ~ Treatment)) %>%
-  count(Treatment, Treatment_recoded)
+  mutate(microplastic_recoded = case_when(
+                               microplastic == "O" ~ "Other",
+                               microplastic == "Bisphenol A" ~ "BPA",
+                               microplastic == "bpa" ~ "BPA",
+                               microplastic =="dioxin" ~"Dioxin",
+                                TRUE ~ microplastic)) %>%
+  count(microplastic_recoded)
 ```
 
 ## Typically it is good practice to include the TRUE statement
@@ -533,13 +530,13 @@ You never know if you might be missing something - and if a value already was an
 
 ```{r, eval = FALSE}
 data_diet %>% 
-  mutate(Treatment_recoded = case_when(
-                               Treatment == "O" ~ "Other",
-                               Treatment == "Mint" ~ "Peppermint",
-                               Treatment == "mint" ~ "Peppermint",
-                               Treatment == "peppermint" ~ "Peppermint",
-                                TRUE ~ Treatment)) %>%
-  count(Treatment, Treatment_recoded)
+  mutate(microplastic_recoded = case_when(
+                               microplastic == "O" ~ "Other",
+                               microplastic == "Bisphenol A" ~ "BPA",
+                               microplastic == "bpa" ~ "BPA",
+                               microplastic =="dioxin" ~"Dioxin",
+                               TRUE ~ microplastic)) %>%
+  count(microplastic, microplastic_recoded)
 ```
 
 
@@ -549,11 +546,13 @@ Perhaps we want values that are O or Other to actually be NA, then `case_when` c
 
 ```{r}
 data_diet %>% 
-  mutate(Treatment_recoded = case_when(Treatment == "Ginger" ~ "Ginger", 
-                               Treatment == "Mint" ~ "Peppermint",
-                               Treatment == "mint" ~ "Peppermint",
-                               Treatment == "peppermint" ~ "Peppermint")) %>%
-  count(Treatment, Treatment_recoded)
+  mutate(microplastic_recoded = case_when(
+                               microplastic == "Bisphenol A" ~ "BPA",
+                               microplastic == "bpa" ~ "BPA",
+                               microplastic == "BPA" ~ "BPA",
+                               microplastic =="dioxin" ~"Dioxin",
+                               microplastic =="Dioxin" ~"Dioxin")) %>%
+  count(microplastic, microplastic_recoded)
 ```
 ## case_when() can also overwrite/update a variable
 
@@ -561,11 +560,13 @@ You need to specify what we want in the first part of `mutate`.
 
 ```{r}
 data_diet %>% 
-  mutate(Treatment = case_when(Treatment == "Ginger" ~ "Ginger", 
-                               Treatment == "Mint" ~ "Peppermint",
-                               Treatment == "mint" ~ "Peppermint",
-                               Treatment == "peppermint" ~ "Peppermint")) %>%
-  count(Treatment)
+  mutate(microplastic = case_when(
+                               microplastic == "Bisphenol A" ~ "BPA",
+                               microplastic == "bpa" ~ "BPA",
+                               microplastic == "BPA" ~ "BPA",
+                               microplastic =="dioxin" ~"Dioxin",
+                               microplastic =="Dioxin" ~"Dioxin")) %>%
+  count(microplastic)
 
 ```
 
@@ -575,12 +576,13 @@ data_diet %>%
 
 ```{r}
 data_diet %>% 
-  mutate(Treatment_recoded = case_when(
-    Treatment == "Ginger" ~ "Ginger", # keep it the same!
-    Treatment %in% c("Mint", "mint", "Peppermint", "peppermint") ~ "Peppermint",
-    Treatment %in% c("O", "Other") ~ "Other")) %>%
+  mutate(microplastic_recoded = case_when(
+    microplastic == "Dioxin" ~ "Dioxin", # keep it the same!
+    microplastic == "dioxin" ~ "Dioxin", 
+    microplastic %in% c("BPA", "bpa", "Bisphenol A") ~ "BPA",
+    microplastic %in% c("O", "Other") ~ "Other")) %>%
 
-  count(Treatment, Treatment_recoded)
+  count(microplastic, microplastic_recoded)
 
 ```
 
@@ -595,9 +597,9 @@ Here we create a new variable called `Effect`.
 ```{r}
 
 data_diet <- data_diet %>% 
-      mutate(Effect = case_when(Weight_change > 0 ~ "Increase",
-                                Weight_change == 0 ~ "Same",
-                                Weight_change < 0 ~ "Decrease"))
+      mutate(Effect = case_when(blood_level_change_nM > 0 ~ "Increase",
+                                blood_level_change_nM == 0 ~ "Same",
+                                blood_level_change_nM < 0 ~ "Decrease"))
 
 head(data_diet)
 
@@ -690,26 +692,26 @@ str_sub(string = Effect, start = 1, end = 3)
 ```{r}
 head(data_diet, n = 4)
 data_diet %>% 
-  filter(str_detect(string = Treatment,
-                    pattern = "int"))
+  filter(str_detect(string = microplastic,
+                    pattern = "B"))
 ```
 
 ## OK back to our original problem
 ```{r}
-count(data_diet, Treatment)
+count(data_diet, microplastic)
 ```
 
 ## `case_when()` made an improvement
 
-But we still might miss a strange value
+But we still might miss a strange value - like a misspelling
 
 ```{r, eval = FALSE}
 data_diet %>% 
-  mutate(Treatment_recoded = case_when(
-    Treatment %in% c("G", "g", "Ginger", "ginger") ~ "Ginger",
-    Treatment %in% c("Mint", "mint", "Peppermint", "peppermint") ~ "Peppermint",
-    Treatment %in% c("O", "Other") ~ "Other",
-    TRUE ~ Treatment))
+  mutate(microplastic_recoded = case_when(
+    microplastic %in% c("Dioxin", "dioxin") ~ "Dioxin",
+    microplastic %in% c("BPA", "bpa", "Bisphenol A") ~ "BPA",
+    microplastic %in% c("O", "Other") ~ "Other",
+    TRUE ~ microplastic))
 ```
 
 ## `case_when()` improved with `stringr`
@@ -718,14 +720,15 @@ data_diet %>%
 
 ```{r}
 data_diet %>% 
-  mutate(Treatment_recoded = case_when(
-    str_detect(string = Treatment, pattern = "int") ~ "Peppermint",
-    str_detect(string = Treatment, pattern = "^o|^O") ~ "Other",
-    TRUE ~ Treatment)) %>%
-  count(Treatment, Treatment_recoded)
+  mutate(microplastic_recoded = case_when(
+    str_detect(string = microplastic, pattern = "^b|B") ~ "BPA",
+    str_detect(string = microplastic, pattern = "^o|^O") ~ "Other",
+    str_detect(string = microplastic, pattern = "^d|^D") ~ "Dioxin",
+    TRUE ~ microplastic)) %>%
+  count(microplastic, microplastic_recoded)
 ```
 
-This is a more robust solution! It will catch typos as long as first letter is correct or there is part of the word mint.
+This is a more robust solution! It will catch typos as long as first letter is correct.
 
 ## That's better!
 
@@ -828,12 +831,12 @@ Need quotes for new values! Tolerates quotes for old values.
 ```{r, eval = FALSE}
 
 data_diet %>% 
-  mutate(Treatment_recoded = recode(Treatment,  
-                                       O = "Other",
-                                    Mint = "Peppermint",
-                                    mint = "Peppermint",
-                              peppermint = "Peppermint")) %>%
-  count(Treatment, Treatment_recoded)
+  mutate(microplastic_recoded = recode(microplastic,  
+                        "Bisphenol A" =  "BPA",
+                                "bpa" = "BPA",
+                             "dioxin" = "Dioxin",
+                                  "O" = "Other")) %>%
+  count(microplastic, microplastic_recoded)
 ```
 
 ## `recode()`
@@ -841,12 +844,12 @@ data_diet %>%
 ```{r, eval = TRUE}
 
 data_diet %>% 
-  mutate(Treatment_recoded = recode(Treatment,
-                                       O = "Other",
-                                    Mint = "Peppermint",
-                                    mint = "Peppermint",
-                              peppermint = "Peppermint")) %>%
-  count(Treatment, Treatment_recoded)
+  mutate(microplastic_recoded = recode(microplastic,  
+                        "Bisphenol A" =  "BPA",
+                                "bpa" = "BPA",
+                             "dioxin" = "Dioxin",
+                                  "O" = "Other")) %>%
+  count(microplastic, microplastic_recoded)
 ```
 
 ## Can update or overwrite variables with recode too!
@@ -856,12 +859,12 @@ Just use the same variable name to change the variable within mutate.
 ```{r, eval = TRUE}
 
 data_diet %>% 
-  mutate(Treatment= recode(Treatment,
-                                       O = "Other",
-                                    Mint = "Peppermint",
-                                    mint = "Peppermint",
-                              peppermint = "Peppermint")) %>%
-  count(Treatment)
+  mutate(microplastic = recode(microplastic,  
+                        "Bisphenol A" =  "BPA",
+                                "bpa" = "BPA",
+                             "dioxin" = "Dioxin",
+                                  "O" = "Other")) %>%
+  count(microplastic)
 ```
 
 
