@@ -358,18 +358,8 @@ display: none;
 <div id="section" class="section level3">
 <h3>1.1</h3>
 <p>Load all the packages we will use in this lab.</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.0     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(dasehr)</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(dasehr)</code></pre>
 <p>Create some data to work with by running the following code
 chunk.</p>
 <pre class="r"><code>set.seed(1234)
@@ -420,6 +410,9 @@ rand_char_vect # Numbers now have quotation marks</code></pre>
 <p>Read in the National Wastewater Surveillance System (NWSS) SARS-CoV-2
 Wastewater data from <code>dasehr</code> package using the code supplied
 in the chunk. Alternatively using the url link.</p>
+<p>The NWSS uses water from different sewage treatment plants to test
+for covid, as a way to estimate how many covid infections a community is
+experiencing.</p>
 <pre class="r"><code>covidww &lt;- covid_wastewater
 # covidww &lt;- read_csv(file = &quot;https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv&quot;)</code></pre>
 </div>

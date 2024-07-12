@@ -61,7 +61,7 @@ Coerce `rand_vect` to character class using `as.character()`. Save this vector a
 
 ### 1.6
 
-Read in the National Wastewater Surveillance System (NWSS) SARS-CoV-2 Wastewater data from `dasehr` package using the code supplied in the chunk. Alternatively using the url link.
+Read in the National Wastewater Surveillance System (NWSS) SARS-CoV-2 Wastewater data from `dasehr` package using the code supplied in the chunk. Alternatively using the url link. 
 
 The NWSS uses water from different sewage treatment plants to test for covid, as a way to estimate how many covid infections a community is experiencing.
 

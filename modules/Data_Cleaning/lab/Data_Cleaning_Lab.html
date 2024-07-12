@@ -355,20 +355,11 @@ display: none;
 
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
-<p><strong>Data used</strong></p>
-<p>CalEnviroScreen Dataset: CalEnviroScreen is a project that ranks
-census tracts in California based on potential exposures to pollutants,
-adverse environmental conditions, socioeconomic factors and the
-prevalence of certain health conditions. Data used in the
-CalEnviroScreen model come from national and state sources.</p>
-<p>The data is from <a href="https://calenviroscreen-oehha.hub.arcgis.com/#Data" class="uri">https://calenviroscreen-oehha.hub.arcgis.com/#Data</a></p>
-<p>You can Download as a CSV in your current working directory. Note its
-also available at: <a href="https://daseh.org/data/CalEnviroScreen_data.csv" class="uri">https://daseh.org/data/CalEnviroScreen_data.csv</a></p>
 <pre class="r"><code>library(readr)
 library(tidyverse)
 library(dplyr)
 library(lubridate)
-#library(dasehr)
+library(dasehr)
 library(tidyverse)
 library(broom)
 # install.packages(&quot;naniar&quot;)
@@ -385,6 +376,9 @@ CalEnviroScreen model come from national and state sources.</p>
 also available at: <a href="https://daseh.org/data/CalEnviroScreen_data.csv" class="uri">https://daseh.org/data/CalEnviroScreen_data.csv</a></p>
 <div id="section" class="section level3">
 <h3>1.1</h3>
+<p>The <code>Lead</code> variable in this dataset is an estimate of the
+risk for lead exposure in children living in low-income communities with
+older housing. A higher number indicates a greater risk.</p>
 <p>Use the <code>is.na()</code> and <code>any()</code> functions to
 check if the ces <code>Lead</code> variable has any <code>NA</code>
 values. Use the pipe between each step. Hint: You first need to
@@ -398,6 +392,8 @@ TIBBLE %&gt;%
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
+<p>The <code>Education</code> variable reports the percent of population
+over 25 with less than a high school education.</p>
 <p>Clean rows of ces, so that only rows remain that do NOT have missing
 values for the <code>Education</code> variable, using
 <code>drop_na</code>. Assign this to the object
@@ -414,8 +410,10 @@ missing for each variable of <code>calenviroscreen</code> (use
 <h1>Practice on Your Own!</h1>
 <div id="p.1" class="section level3">
 <h3>P.1</h3>
+<p>The <code>LinguisticIsol</code> variable reports the percent limited
+English speaking households in each census tract.</p>
 <p>What percentage of the <code>LinguisticIsol</code> variable is
-complete of <code>bike</code> ? Hint: use another <code>naniar</code>
+complete in <code>ces</code> ? Hint: use another <code>naniar</code>
 function.</p>
 </div>
 </div>
