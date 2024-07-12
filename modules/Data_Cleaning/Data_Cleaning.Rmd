@@ -703,7 +703,7 @@ count(data_diet, microplastic)
 
 ## `case_when()` made an improvement
 
-But we still might miss a strange value - like a mispelling
+But we still might miss a strange value - like a misspelling
 
 ```{r, eval = FALSE}
 data_diet %>% 
