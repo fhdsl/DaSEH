@@ -728,7 +728,7 @@ data_diet %>%
   count(microplastic, microplastic_recoded)
 ```
 
-This is a more robust solution! It will catch typos as long as first letter is correct or there is part of the word mint.
+This is a more robust solution! It will catch typos as long as first letter is correct.
 
 ## That's better!
 
