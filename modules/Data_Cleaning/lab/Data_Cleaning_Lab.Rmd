@@ -7,20 +7,13 @@ editor_options:
 
 # Part 1
 
-**Data used**
-
-CalEnviroScreen Dataset: CalEnviroScreen is a project that ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. Data used in the CalEnviroScreen model come from national and state sources.
-
-The data is from https://calenviroscreen-oehha.hub.arcgis.com/#Data
-
-You can Download as a CSV in your current working directory.  Note its also available at: 	https://daseh.org/data/CalEnviroScreen_data.csv 
 
 ```{r}
 library(readr)
 library(tidyverse)
 library(dplyr)
 library(lubridate)
-#library(dasehr)
+library(dasehr)
 library(tidyverse)
 library(broom)
 # install.packages("naniar")
@@ -41,6 +34,8 @@ You can Download as a CSV in your current working directory.  Note its also avai
 
 ### 1.1
 
+The `Lead` variable in this dataset is an estimate of the risk for lead exposure in children living in low-income communities with older housing. A higher number indicates a greater risk.
+
 Use the `is.na()`  and `any()` functions to check if the ces `Lead` variable has any `NA` values. Use the pipe between each step. 
 Hint: You first need to `pull` out the vector version of this variable to use the `is.na()` function.
 
@@ -57,6 +52,8 @@ TIBBLE %>%
 ```
 
 ### 1.2
+
+The `Education` variable reports the percent of population over 25 with less than a high school education. 
 
 Clean rows of ces, so that only rows remain that do NOT have missing values for the `Education` variable,  using `drop_na`. Assign this to the object `have_ed_data.`
 
@@ -77,7 +74,9 @@ Use `naniar` to make a visual of the amount of data missing for each variable of
 
 ### P.1
 
-What percentage of the `LinguisticIsol` variable is complete of `bike` ? Hint: use another `naniar` function.
+The `LinguisticIsol` variable reports the percent limited English speaking households in each census tract.
+
+What percentage of the `LinguisticIsol` variable is complete in `ces` ? Hint: use another `naniar` function.
  
 ```{r P.1response}
 
