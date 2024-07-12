@@ -210,7 +210,7 @@ Filter will drop them from the data.
 
 ```{r}
 #CO_heat_ER <- read_csv(file = "https://daseh.org/data/Colorado_ER_heat_visits_AgeAdjusted_data.csv")
-
+library(dasehr)
 CO_heat_ER %>% filter(visits > 0)
 ```
 
