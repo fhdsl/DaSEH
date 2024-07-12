@@ -94,7 +94,7 @@ Let's say we the data like so:
 
 ```{r}
 BloodType <- tibble(
-  weight_loss =
+  exposure =
     c(
       "Y", "No", "Yes", "y", "no",
       "n", "No", "N", "yes", "Yes",
@@ -119,7 +119,7 @@ There are some issues with this data that we need to figure out!
 
 ### 2.1
 
-Determine how many `NA` values there are for `weight_loss` (assume you know that`N` and `n` is for no).
+Determine how many `NA` values there are for `exposure` (assume you know that`N` and `n` is for no).
 
 ```{r 2.1response}
 
@@ -127,7 +127,7 @@ Determine how many `NA` values there are for `weight_loss` (assume you know that
 
 ### 2.2
 
-Recode the `weight_loss` variable of the `BloodType` data so that it is consistent. Use `case_when()`. Keep "Other" as "Other". Don't forget to use quotes!
+Recode the `exposure` variable of the `BloodType` data so that it is consistent. Use `case_when()`. Keep "Other" as "Other". Don't forget to use quotes!
 
 ```
 # General format
@@ -145,7 +145,7 @@ NEW_TIBBLE <- OLD_TIBBLE %>%
 
 ### 2.3
 
-Check to see how many values `weight_loss` has for each category (hint: use `count`). It's good practice to regularly check your data throughout the data wrangling process.
+Check to see how many values `exposure` has for each category (hint: use `count`). It's good practice to regularly check your data throughout the data wrangling process.
 
 ```{r 2.3response}
 
