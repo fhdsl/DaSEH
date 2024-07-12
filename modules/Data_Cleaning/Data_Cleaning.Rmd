@@ -832,10 +832,10 @@ Need quotes for new values! Tolerates quotes for old values.
 
 data_diet %>% 
   mutate(microplastic_recoded = recode(microplastic,  
-                                       O = "Other",
-                                    Mint = "Peppermint",
-                                    mint = "Peppermint",
-                              peppermint = "Peppermint")) %>%
+                        "Bisphenol A" =  "BPA",
+                                "bpa" = "BPA",
+                             "dioxin" = "Dioxin",
+                                  "O" = "Other")) %>%
   count(microplastic, microplastic_recoded)
 ```
 
@@ -844,11 +844,11 @@ data_diet %>%
 ```{r, eval = TRUE}
 
 data_diet %>% 
-  mutate(microplastic_recoded = recode(microplastic,
-                                       O = "Other",
-                                    Mint = "Peppermint",
-                                    mint = "Peppermint",
-                              peppermint = "Peppermint")) %>%
+  mutate(microplastic_recoded = recode(microplastic,  
+                        "Bisphenol A" =  "BPA",
+                                "bpa" = "BPA",
+                             "dioxin" = "Dioxin",
+                                  "O" = "Other")) %>%
   count(microplastic, microplastic_recoded)
 ```
 
@@ -859,11 +859,11 @@ Just use the same variable name to change the variable within mutate.
 ```{r, eval = TRUE}
 
 data_diet %>% 
-  mutate(microplastic= recode(microplastic,
-                                       O = "Other",
-                                    Mint = "Peppermint",
-                                    mint = "Peppermint",
-                              peppermint = "Peppermint")) %>%
+  mutate(microplastic = recode(microplastic,  
+                        "Bisphenol A" =  "BPA",
+                                "bpa" = "BPA",
+                             "dioxin" = "Dioxin",
+                                  "O" = "Other")) %>%
   count(microplastic)
 ```
 
