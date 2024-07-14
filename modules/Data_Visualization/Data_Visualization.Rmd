@@ -858,7 +858,7 @@ theme(axis.text.x = element_text(angle = 90))
 ## facet_wrap() {.codesmall}
 
 -   more flexible - arguments `ncol` and `nrow` can specify layout
--   can have different scales for axes using `scales = "free_x"`, `scales = "free_y"`, or `scales = "free"`
+-   can have different scales for axes using `scales = "free"`
 
 ```{r, fig.height = 5, fig.align='center', echo= TRUE}
 
@@ -874,7 +874,7 @@ rp_fac_plot <- lots_of_lines +
 ```
 
 
-```{r, fig.height = 5, fig.align='center', comment=FALSE}
+```{r, fig.height = 3.5, fig.width = 10, fig.align='center', comment=FALSE}
 rp_fac_plot
 ```
 
