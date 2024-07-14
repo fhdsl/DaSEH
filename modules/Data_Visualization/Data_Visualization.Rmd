@@ -657,6 +657,19 @@ Two options: `facet_grid()`- creates a grid shape `facet_wrap()` -more flexible
 
 Need to specify how you are faceting with the `~` sign.
 
+```{r, fig.width=4, fig.height=3, fig.align='center', eval = FALSE}
+er_visits_gender <- CO_heat_ER_bygender
+
+ggplot(er_visits_gender, aes(x = year,
+                 y = rate,
+                 color = county)) +
+  geom_line() +
+  facet_grid( ~ gender)+
+  theme(legend.position = "bottom")
+```
+
+## Adding a facet can help make it easier to see what is happening
+
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
 er_visits_gender <- CO_heat_ER_bygender
 
