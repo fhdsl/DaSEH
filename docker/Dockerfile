@@ -1,4 +1,4 @@
-FROM jhudsl/intro_to_r:1.1.1
+FROM jhudsl/intro_to_r:1.2.0
 LABEL maintainer="avamariehoffman@gmail.com"
 WORKDIR /rocker-build/
 
