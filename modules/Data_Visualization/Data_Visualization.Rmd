@@ -649,6 +649,9 @@ ggplot(er_visits_4, aes(x = year,
 
 Let's talk additional tricks and tips for making ggplots!
 
+We are going to use some other data about ER visits that has to do with gender.
+Note that gender was recorded as binary, which we know isn’t really accurate. This is something you might encounter. Please see this article about ways to measure gender in a more inclusive way: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6526522/.
+
 
 ## Tips - Color vs Fill {.codesmall}
 
