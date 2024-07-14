@@ -863,13 +863,13 @@ theme(axis.text.x = element_text(angle = 90))
 ```{r, fig.height = 5, fig.align='center', echo= TRUE}
 
 rp_fac_plot <- lots_of_lines +
-               facet_wrap( ~ county, ncol = 3, scales = "free") +
+               facet_wrap( ~ county, ncol = 4, scales = "free") +
                theme(legend.position = "none")
 ```
 
 ```{r, echo = FALSE, eval = TRUE}
 rp_fac_plot <- lots_of_lines +
-               facet_wrap( ~ county, ncol = 3, scales = "free") +
+               facet_wrap( ~ county, ncol = 4, scales = "free") +
                theme(legend.position = "none")
 ```
 
