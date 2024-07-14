@@ -362,7 +362,8 @@ Line breaks can be specified using `\n` within the `labs()` function to have a l
 ```{r, fig.width=4, fig.height=2.5, fig.align='center'}
 ggplot(er_state, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "red", alpha = 0.5) +
-            geom_line(size = 0.8, color = "brown", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO: \n age-adjusted visit rate by year",
+            geom_line(size = 0.8, color = "brown", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO: \n age-adjusted visit rate by year",
               x = "Year",
               y = "Age-adjusted Visit Rate")
 ```
@@ -390,7 +391,8 @@ plot_scale
 
 ggplot(er_state, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
-            geom_line(size = 0.8, color = "blue", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO",
+            geom_line(size = 0.8, color = "blue", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO",
               x = "Year",
               y = "Age-adjusted Visit Rate") +
   ylim(0, max(pull(er_visits_all, rate)))
@@ -418,7 +420,8 @@ You can add to a plot object to make changes! Note that we can save our plots as
 
 plt1 <- ggplot(er_state, aes(x = year, y = rate,)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
-            geom_line(size = 0.8, color = "blue", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO",
+            geom_line(size = 0.8, color = "blue", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO",
               x = "Year",
               y = "Age-adjusted Visit Rate") +
   ylim(0, max(pull(er_visits_all, rate)))
@@ -487,7 +490,8 @@ The `theme()` function can help you modify various elements of your plot. Here w
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 ggplot(er_state, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
-            geom_line(size = 0.8, color = "blue", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO") +
+            geom_line(size = 0.8, color = "blue", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO") +
   theme(plot.title = element_text(size = 20))
 
 ```
@@ -511,7 +515,8 @@ The `theme()` function can help you modify various elements of your plot. Here w
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 ggplot(er_state, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
-            geom_line(size = 0.8, color = "blue", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO") +
+            geom_line(size = 0.8, color = "blue", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO") +
   theme(plot.title = element_text(hjust = 0.5, size = 20))
 
 ```
@@ -521,7 +526,8 @@ ggplot(er_state, aes(x = year, y = rate)) +
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 ggplot(er_state, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
-            geom_line(size = 0.8, color = "blue", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO") +
+            geom_line(size = 0.8, color = "blue", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO") +
   theme(plot.title = element_text(hjust = 0.5, size = 20),
         axis.title = element_text(size = 16))
 ```
