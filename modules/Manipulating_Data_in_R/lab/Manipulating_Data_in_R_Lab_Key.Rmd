@@ -9,12 +9,12 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Data in this lab comes from the OCS "Exploring CO2 emissions across time" activity (https://www.opencasestudies.org/ocs-bp-co2-emissions/) and the CO Department of Health (https://coepht.colorado.gov/heat-related-illness). Both datasets are available in the `dasehr` package.
+Some data in this lab comes from the OCS "Exploring CO2 emissions across time" activity (https://www.opencasestudies.org/ocs-bp-co2-emissions/. This dataset is available in the `dasehr` package.
+
+Additional data about climate change disasters can be found at "https://daseh.org/data/Yearly_CC_Disasters.csv".
 
 ```{r message=FALSE}
-library(readr)
-library(dplyr)
-library(tidyr)
+library(tidyverse)
 library(dasehr)
 ```
 
