@@ -353,30 +353,40 @@ display: none;
 </div>
 
 
+<div id="helpful-tips-before-we-start" class="section level2">
+<h2>Helpful tips before we start</h2>
+<div id="troubleshooting-common-new-user-mistakes-we-have-seen" class="section level3">
+<h3>TROUBLESHOOTING: Common new user mistakes we have seen</h3>
+<ul>
+<li>Check the file path – is the file there?<br />
+</li>
+<li>Typos (R is <strong>case sensitive</strong>, <code>x</code> and
+<code>X</code> are different)<br />
+</li>
+<li>Open ended quotes, parentheses, and brackets<br />
+</li>
+<li>Deleting part of the code chunk<br />
+</li>
+<li>For any function, you can write <code>?FUNCTION_NAME</code>, or
+<code>help(&quot;FUNCTION_NAME&quot;)</code> to look at the help file</li>
+</ul>
+</div>
+<div id="r-projects" class="section level3">
+<h3>R Projects</h3>
+<p>R Projects can help you keep files organized and avoid issues with
+working directories. Check out our resource here: <a href="https://daseh.org/resources/R_Projects.html" class="uri">https://daseh.org/resources/R_Projects.html</a></p>
+</div>
+</div>
+<div id="lab" class="section level2">
+<h2>Lab</h2>
 <p>In this lab you can use the interactive console to explore or
 <strong>Knit</strong> the document. Remember anything you type here can
 be “sent” to the console with Cmd-Enter (OS-X) or Ctrl-Enter
 (Windows/Linux) in an R code chunk.</p>
-<pre class="r"><code>library(readr)</code></pre>
-<div id="part-1" class="section level1">
-<h1>Part 1</h1>
+<pre class="r"><code># Load the necessary package
+library(readr)</code></pre>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>Set up your R Project. Once complete, confirm you have created a
-project folder.</p>
-<ul>
-<li>First, save your files.</li>
-<li>Click on the R Project button (blue box with a green plus sign on
-the top left).</li>
-<li>If prompted, don’t save your .Rdata</li>
-<li>Click “New Directory”</li>
-<li>Click “New Project”</li>
-<li>Name the Directory (folder) and select an appropriate location (such
-as Desktop)</li>
-</ul>
-</div>
-<div id="section-1" class="section level3">
-<h3>1.2</h3>
 <p>Use the manual import method (File &gt; Import Dataset &gt; From Text
 (<code>readr</code>)) to read in Haloacetic Acids (HAA5) Exposure for WA
 Populations on Public Water Systems data from this URL:</p>
@@ -384,45 +394,59 @@ Populations on Public Water Systems data from this URL:</p>
 <p>These data were collected by the Washington Tracking Network. You can
 learn more about the data here: <a href="https://fortress.wa.gov/doh/wtn/WTNPortal/#!q0=674" class="uri">https://fortress.wa.gov/doh/wtn/WTNPortal/#!q0=674</a></p>
 </div>
-<div id="section-2" class="section level3">
-<h3>1.3</h3>
+<div id="section-1" class="section level3">
+<h3>1.2</h3>
 <p>What is the dataset object called? You can find this information in
 the Console or the Environment. Enter your answer as a comment using
 <code>#</code>.</p>
 <pre class="r"><code># HAA5_Exposure_for_WA_Public_Water_Systems_data</code></pre>
 </div>
-<div id="section-3" class="section level3">
-<h3>1.4</h3>
+<div id="section-2" class="section level3">
+<h3>1.3</h3>
 <p>Preview the data by clicking the table button in the Environment. How
 many observations and variables are there? Enter your answer as a
 comment using <code>#</code>.</p>
 <pre class="r"><code># 33 obs of 11 variables</code></pre>
 </div>
-</div>
-<div id="part-2" class="section level1">
-<h1>Part 2</h1>
-<div id="section-4" class="section level3">
-<h3>2.1</h3>
+<div id="section-3" class="section level3">
+<h3>1.4</h3>
 <p>Read Haloacetic Acids (HAA5) Exposure for WA Populations on Public
 Water Systems data from <a href="https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv" class="uri">https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv</a>.
-and assign it to an object named <code>haa5</code>. Use the code
+and assign it to an object named <code>exposure</code>. Use the code
 structure below.</p>
 <pre><code># General format
 library(readr)
 # OBJECT &lt;- read_csv(FILE)</code></pre>
 <pre class="r"><code>library(readr)
-haa5 &lt;- read_csv(file = &quot;https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv&quot;)</code></pre>
-<pre><code>## Rows: 33 Columns: 11
+exposure &lt;- read_csv(file = &quot;https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv&quot;)</code></pre>
+<pre><code>## Rows: 22 Columns: 11
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr  (1): year
-## dbl (10): pop_on_sampled_PWS, pop_0-15µg/L, pop_&gt;15-30µg/L, pop_&gt;30-45µg/L, ...
+## dbl (11): year, pop_on_sampled_PWS, pop_0-15µg/L, pop_&gt;15-30µg/L, pop_&gt;30-45...
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
+<div id="section-4" class="section level3">
+<h3>1.5</h3>
+<p>Take a look at the data. Do these data objects
+(<code>HAA5_Exposure_for_WA_Public_Water_Systems_data</code> and
+<code>exposure</code>) appear to be the same? Why or why not?</p>
+<pre class="r"><code># Yes, when we look in the RStudio environment, the two objects have the same dimensions. If we use the View() or str() functions, we can also see in more detail that the data is the same. 
+# If we wanted to get really in the weeds, we could do a logical test like all.equal(HAA5_Exposure_for_WA_Public_Water_Systems_data, exposure)</code></pre>
+</div>
 <div id="section-5" class="section level3">
-<h3>2.2</h3>
+<h3>1.6</h3>
+<p>Learn your working directory by running <code>getwd()</code>. This is
+where R will look for files unless you tell it otherwise.</p>
+<pre class="r"><code>getwd()</code></pre>
+<pre><code>## [1] &quot;/__w/DaSEH/DaSEH/modules/Data_Input/lab&quot;</code></pre>
+</div>
+</div>
+<div id="practice-on-your-own" class="section level1">
+<h1>Practice on Your Own!</h1>
+<div id="p.1" class="section level3">
+<h3>P.1</h3>
 <p>Load the <code>readxl</code> package with the <code>library()</code>
 command.</p>
 <p>If it is not installed, install it via:
@@ -430,13 +454,10 @@ command.</p>
 try <code>install.packages(&quot;readxl&quot;)</code>.</p>
 <pre class="r"><code>library(readxl)</code></pre>
 </div>
-<div id="section-6" class="section level3">
-<h3>2.3</h3>
-<p>The Washington Tracking Network also collects data on nitrate levels
-in the public water systems. More information on this data can be found
-here: <a href="https://fortress.wa.gov/doh/wtn/WTNPortal/#!q0=685" class="uri">https://fortress.wa.gov/doh/wtn/WTNPortal/#!q0=685</a></p>
-<p>We’ve downloaded this dataset already and have saved it as an Excel
-file. Download the dataset of asthma prevalence in the USA from: <a href="https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_data.xlsx" class="uri">https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_data.xlsx</a>
+<div id="p.2" class="section level3">
+<h3>P.2</h3>
+<p>Download the dataset of nitrate levels in the public water systems:
+<a href="https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_data.xlsx" class="uri">https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_data.xlsx</a>
 file to <code>nitrate.xlsx</code> by running the following code chunk.
 This only downloads the file, it does NOT bring the file into R.</p>
 <pre class="r"><code>download.file(
@@ -446,99 +467,45 @@ This only downloads the file, it does NOT bring the file into R.</p>
   mode = &quot;wb&quot;
 )</code></pre>
 <p>Note: the “wb” option makes sure the file can be read correctly on
-Windows machines.</p>
+Windows and Apple machines.</p>
 </div>
-<div id="section-7" class="section level3">
-<h3>2.4</h3>
+<div id="p.3" class="section level3">
+<h3>P.3</h3>
 <p>Use the <code>read_excel()</code> function in the <code>readxl</code>
 package to read the <code>nitrate.xlsx</code> file and call the output
 <code>nitrate</code>.</p>
 <pre class="r"><code>nitrate &lt;- read_excel(path = &quot;nitrate.xlsx&quot;)</code></pre>
 </div>
-</div>
-<div id="practice-on-your-own" class="section level1">
-<h1>Practice on Your Own!</h1>
-<div id="p.1" class="section level3">
-<h3>P.1</h3>
-<p>Let’s practice with data about CO2 emissions over time that was
-curated as part of the Open Case Studies project (<a href="https://www.opencasestudies.org/ocs-bp-co2-emissions/" class="uri">https://www.opencasestudies.org/ocs-bp-co2-emissions/</a>).</p>
+<div id="p.4" class="section level3">
+<h3>P.4</h3>
 <p>Run the following code - is there a problem? How do you know?</p>
-<pre class="r"><code>co2 &lt;- read_delim(&quot;https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv&quot;, delim = &quot;\t&quot;)</code></pre>
-<pre><code>## Rows: 192 Columns: 1
+<pre class="r"><code>exposure &lt;- read_delim(&quot;https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv&quot;, delim = &quot;\t&quot;)</code></pre>
+<pre><code>## Rows: 22 Columns: 1
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;\t&quot;
-## chr (1): country,1751,1752,1753,1754,1755,1756,1757,1758,1759,1760,1761,1762...
+## num (1): year,pop_on_sampled_PWS,pop_0-15µg/L,pop_&gt;15-30µg/L,pop_&gt;30-45µg/L,...
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>co2</code></pre>
-<pre><code>## # A tibble: 192 × 1
-##    country,1751,1752,1753,1754,1755,1756,1757,1758,1759,1760,1761,1762,1763,17…¹
-##    &lt;chr&gt;                                                                        
-##  1 Afghanistan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,…
-##  2 Albania,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,…
-##  3 Algeria,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,…
-##  4 Andorra,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,…
-##  5 Angola,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,…
-##  6 Antigua and Barbuda,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,…
-##  7 Argentina,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,…
-##  8 Armenia,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,…
-##  9 Australia,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,…
-## 10 Austria,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,169,,,,,,,,,…
-## # ℹ 182 more rows
+<pre class="r"><code>exposure</code></pre>
+<pre><code>## # A tibble: 22 × 1
+##    year,pop_on_sampled_PWS,pop_0-15µg/L,pop_&gt;15-30µg/L,pop_&gt;30-45µg/L,pop_&gt;45-…¹
+##                                                                            &lt;dbl&gt;
+##  1                                                                       2.00e40
+##  2                                                                       2.00e43
+##  3                                                                       2.00e42
+##  4                                                                       2.00e43
+##  5                                                                       2.00e39
+##  6                                                                       2.00e54
+##  7                                                                       2.01e53
+##  8                                                                       2.01e54
+##  9                                                                       2.01e52
+## 10                                                                       2.01e54
+## # ℹ 12 more rows
 ## # ℹ abbreviated name:
-## #   ¹​`country,1751,1752,1753,1754,1755,1756,1757,1758,1759,1760,1761,1762,1763,1764,1765,1766,1767,1768,1769,1770,1771,1772,1773,1774,1775,1776,1777,1778,1779,1780,1781,1782,1783,1784,1785,1786,1787,1788,1789,1790,1791,1792,1793,1794,1795,1796,1797,1798,1799,1800,1801,1802,1803,1804,1805,1806,1807,1808,1809,1810,1811,1812,1813,1814,1815,1816,1817,1818,1819,1820,1821,1822,1823,1824,1825,1826,1827,1828,1829,1830,1831,1832,1833,1834,1835,1836,1837,1838,1839,1840,1841,1842,1843,1844,1845,1846,1847,1848,1849,1850,1851,1852,1853,1854,1855,1856,1857,1858,1859,1860,1861,1862,1863,1864,1865,1866,1867,1868,1869,1870,1871,1872,1873,1874,1875,1876,1877,1878,1879,1880,1881,1882,1883,1884,1885,1886,1887,1888,1889,1890,1891,1892,1893,1894,1895,1896,1897,1898,1899,1900,1901,1902,1903,1904,1905,1906,1907,1908,1909,1910,1911,1912,1913,1914,1915,1916,1917,1918,1919,1920,1921,1922,1923,1924,1925,1926,1927,1928,1929,1930,1931,1932,1933,1934,1935,1936,1937,1938,1939,1940,1941,1942,1943,1944,1945,1946,1947,1948,1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960,1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014`</code></pre>
-<pre class="r"><code># It should be a red flag to see that there is only one column that looks like: &quot;country,1751,1752,1753...&quot;
-# This file is comma delimited not tab delimited!</code></pre>
-</div>
-<div id="p.2" class="section level3">
-<h3>P.2</h3>
-<p>By default, R reads the first sheet of an excel file. Copy your code
-from question 2.4 and add the following argument:
-<code>sheet = 2</code>. Inspect the data using <code>head()</code>.</p>
-<pre class="r"><code>nitrate &lt;- read_excel(path = &quot;nitrate.xlsx&quot;, sheet = 2)
-head(nitrate)</code></pre>
-<pre><code>## # A tibble: 6 × 11
-##   year  quarter pop_on_sampled_PWS `pop_0-3ug/L` `pop_&gt;3-5ug/L` `pop_&gt;5-10ug/L`
-##   &lt;chr&gt; &lt;chr&gt;                &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt;
-## 1 1999  Q1                  106720         67775              0              32
-## 2 1999  Q2                   85541         55476              0             212
-## 3 1999  Q3                  559137        319252         231186             212
-## 4 1999  Q4                   26995         25969            420               0
-## 5 2000  Q1                   34793          5904              0              92
-## 6 2000  Q2                  184521        157396              0              32
-## # ℹ 5 more variables: `pop_&gt;10-20ug/L` &lt;dbl&gt;, `pop_&gt;20ug/L` &lt;dbl&gt;,
-## #   `pop_on_PWS_with_non-detect` &lt;dbl&gt;, pop_exposed_to_exceedances &lt;dbl&gt;,
-## #   perc_pop_exposed_to_exceedances &lt;dbl&gt;</code></pre>
-</div>
-<div id="p.3" class="section level3">
-<h3>P.3</h3>
-<p>Install and load the <code>haven</code> package. Look at the help
-page for <code>read_dta()</code> function, and scroll to the very bottom
-of the page. Try running some of the examples provided.</p>
-<pre class="r"><code>install.packages(&quot;haven&quot;)
-library(haven)
-?read_dta
-
-path &lt;- system.file(&quot;examples&quot;, &quot;iris.dta&quot;, package = &quot;haven&quot;)
-read_dta(path)</code></pre>
-</div>
-<div id="p.4" class="section level3">
-<h3>P.4</h3>
-<p>Learn your working directory by running <code>getwd()</code></p>
-<pre class="r"><code>getwd()</code></pre>
-<pre><code>## [1] &quot;/__w/DaSEH/DaSEH/modules/Data_Input/lab&quot;</code></pre>
-<p>Create a folder in your R project called data. Move the
-“nitrate.xlsx” file there.</p>
-<p>Modify the following code so that it finds “nitrate.xlsx” in the
-“data” directory.</p>
-<pre><code>nitrate &lt;- read_excel(path = &quot;nitrate.xlsx&quot;)</code></pre>
-<pre class="r"><code>nitrate &lt;- read_excel(path = &quot;data/nitrate.xlsx&quot;)</code></pre>
-</div>
-<div id="p.5" class="section level3">
-<h3>P.5</h3>
-<p>Practice importing a dataset of your choice, give it an object name,
-and use <code>head()</code> to preview the first few lines.</p>
+## #   ¹​`year,pop_on_sampled_PWS,pop_0-15µg/L,pop_&gt;15-30µg/L,pop_&gt;30-45µg/L,pop_&gt;45-60µg/L,pop_&gt;60-75µg/L,pop_&gt;75µg/L,pop_on_PWS_with_non-detects,pop_exposed_to_exceedances,perc_pop_exposed_to_exceedances`</code></pre>
+<pre class="r"><code># It should be a red flag to see that there is only one column that looks like: `year,pop_on_sampled_PWS,pop_0-15µg/L,pop_&gt;15-30µg/L,pop_&gt;30-45µg/L,pop
+# This file is comma delimited, not tab delimited!</code></pre>
 </div>
 </div>
 

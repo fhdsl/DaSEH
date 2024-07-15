@@ -357,22 +357,18 @@ display: none;
 <h1>Part 1</h1>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>Load the libraries needed in this lab. Then, read in the following
-child mortality data using <code>read_mortality()</code> function from
-<code>jhur</code> package. Assign it to the “mort” variable. Change its
-first column name from <code>...1</code> into <code>country</code>. You
-can also find the data here: <a href="https://daseh.org/data/mortality.csv" class="uri">https://daseh.org/data/mortality.csv</a></p>
-<p>Note that the data has lots of <code>NA</code> values - don’t worry
-if you see that.</p>
+<p>Load the libraries needed in this lab. Then, read in the
+CalEnviroScreen data from <code>dasehr</code> package. Assign it to the
+“ces” variable. You can also find the data at <a href="https://daseh.org/data/CalEnviroScreen_data.csv" class="uri">https://daseh.org/data/CalEnviroScreen_data.csv</a></p>
 <pre class="r"><code>library(dplyr)
-library(jhur)
+library(dasehr)
 library(broom)</code></pre>
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
 <p>Compute the correlation (with <code>cor</code>) between the
-<code>2006</code> and <code>2007</code> mortality variables. (No need to
-save this in an object. Just display the result to the screen.) Use the
+<code>PM2.5</code> and <code>Ozone</code> variables. (No need to save
+this in an object. Just display the result to the screen.) Use the
 <code>pull()</code> function to first extract these columns. To use a
 column name in <code>pull()</code> that starts with a number, surround
 it with backticks. Then, use the <code>cor</code> function.</p>
@@ -380,21 +376,21 @@ it with backticks. Then, use the <code>cor</code> function.</p>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
 <p>Compute the correlation (with <code>cor</code>) between the
-<code>1980</code>, <code>1990</code>, <code>2000</code>, and
-<code>2010</code> mortality variables. (No need to save this in an
-object. Just display the result to the screen.) Use
-<code>select()</code> function to first subset the data frame to keep
-the four columns only. To use a column name in <code>select()</code>
-that starts with a number, surround it with backticks. How does this
-change when we use the <code>use = &quot;complete.obs&quot;</code> argument?</p>
+<code>DieselPM</code>, <code>Lead</code>, <code>Traffic</code>, and
+<code>Asthma</code> variables. (No need to save this in an object. Just
+display the result to the screen.) Use <code>select()</code> function to
+first subset the data frame to keep the four columns only. To use a
+column name in <code>select()</code> that starts with a number, surround
+it with backticks. Does this change when we use the
+<code>use = &quot;complete.obs&quot;</code> argument?</p>
 </div>
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
 <p>Perform a t-test to determine if there is evidence of a difference
-between child mortality in <code>1987</code> versus <code>2007</code>.
-Use the <code>pull()</code> function to extract these columns. Print the
-results using the <code>tidy</code> function from the <code>broom</code>
-package.</p>
+between lead exposure burden (<code>Lead</code>) and poverty burden
+(<code>Poverty</code>). Use the <code>pull()</code> function to extract
+these columns. Print the results using the <code>tidy</code> function
+from the <code>broom</code> package.</p>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
@@ -402,62 +398,61 @@ package.</p>
 <div id="p.1" class="section level3">
 <h3>P.1</h3>
 <p>Perform a t-test to determine if there is evidence of a difference
-between child mortality in <code>2006</code> versus <code>2007</code>.
-Use the <code>pull()</code> function to extract these columns. Print the
-results using the <code>tidy</code> function. How do these results
-compare to those in question 1.4?</p>
+between lead exposure burden (<code>Lead</code>) and housing insecurity
+(<code>HousingBurden</code>). Use the <code>pull()</code> function to
+extract these columns. Print the results using the <code>tidy</code>
+function. How do these results compare to those in question 1.4?</p>
 </div>
 </div>
 <div id="part-2" class="section level1">
 <h1>Part 2</h1>
 <div id="section-4" class="section level3">
 <h3>2.1</h3>
-<p>Read in the Kaggle cars auction dataset using
-<code>read_kaggle()</code> from the <code>jhur</code> package. Assign it
-to the “cars” variable. You can also find the data here: <a href="https://daseh.org/data/kaggleCarAuction.csv" class="uri">https://daseh.org/data/kaggleCarAuction.csv</a>.</p>
-</div>
-<div id="section-5" class="section level3">
-<h3>2.2</h3>
-<p>Fit a linear regression model with vehicle cost (“VehBCost”) as the
-outcome and whether it’s an online sale (“IsOnlineSale”) as the
-predictor. Save the model fit in an object called “lmfit_cars” and
+<p>Fit a linear regression model with low birthweight percentile
+(“LowBirthWeightPctl”) as the outcome and CES4.0 score (“CES4.0Score”)
+as the predictor. Save the model fit in an object called “lmfit_bw” and
 display the summary table with <code>summary()</code>.</p>
 <pre><code># General format
 glm(y ~ x, data = DATASET_NAME)</code></pre>
 </div>
-<div id="section-6" class="section level3">
-<h3>2.3</h3>
-<p>Fit a linear regression model with vehicle cost (“VehBCost”) as the
-outcome and vehicle age (“VehicleAge”) and whether it’s an online sale
-(“IsOnlineSale”) as predictors. Save the model fit in an object called
-“lmfit_cars_2” and display the summary table.</p>
+<div id="section-5" class="section level3">
+<h3>2.2</h3>
+<p>Fit a linear regression model with low birthweight percentile
+(“LowBirthWeightPctl”) as the outcome and CES4.0 score (“CES4.0Score”)
+and poverty score (“Poverty”) as the predictors. Save the model fit in
+an object called “lmfit_bw2” and display the summary table.</p>
 </div>
 </div>
 <div id="practice-on-your-own-1" class="section level1">
 <h1>Practice on Your Own!</h1>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
-<p>Fit a linear regression model with vehicle cost (“VehBCost”) as the
-outcome with predictors: (1) vehicle age (“VehicleAge”), (2) whether
-it’s an online sale (“IsOnlineSale”), and interaction between
-“VehicleAge” and “IsOnlineSale”.</p>
+<p>Fit a linear regression model with low birthweight percentile
+(“LowBirthWeightPctl”) as the outcome, CES4.0 score (“CES4.0Score”) and
+poverty score (“Poverty”) as the predictors, and interaction between
+“CES4.0Score” and “Poverty”.</p>
 <ul>
-<li>To include the interaction, use
-<code>VehicleAge * IsOnlineSale</code> in the formula.</li>
-<li>Save the model fit in an object called “lmfit_cars_3” and display
-the summary table with <code>summary()</code>.</li>
+<li>To include the interaction, use <code>CES4.0Score * Poverty</code>
+in the formula.</li>
+<li>Save the model fit in an object called “lmfit_bw3” and display the
+summary table with <code>summary()</code>.</li>
 </ul>
 </div>
 <div id="p.3" class="section level3">
 <h3>P.3</h3>
-<p>Fit a logistic regression model where the outcome is “bad buy”
-(“IsBadBuy”) status and predictors are the cost (“VehBCost”) and vehicle
-age (“VehicleAge”).</p>
+<p>Fit a logistic regression model where the outcome is whether the CES
+percentile is above the 50th percentile and predictors are the poverty
+measure (“Poverty”) and percentage of white residents (“WhitePerc”), as
+well as the interaction between “Poverty” and “WhitePerc”. Information
+about the CES4.0 percentile rank is stored in the “CES4.0Percentile”
+variable. You will need to first create a variable “CESPctlMoreThan50”
+using the <code>mutate</code> and <code>case_when</code> commands.</p>
 <ul>
-<li>Save the model fit in an object called “logfit_cars” and display the
+<li>Save the model fit in an object called “logfit_ces” and display the
 summary table with <code>summary()</code>.</li>
 </ul>
 <pre><code># General format
+df &lt;- df %&gt;% mutate(binary_y = case_when(y &gt; 50  ~ 1, y &lt; 50 ~ 0)) 
 glm(y ~ x, data = DATASET_NAME, family = binomial(link = &quot;logit&quot;))</code></pre>
 </div>
 </div>

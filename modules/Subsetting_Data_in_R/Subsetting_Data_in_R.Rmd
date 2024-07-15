@@ -13,7 +13,6 @@ library(knitr)
 opts_chunk$set(comment = "")
 suppressPackageStartupMessages(library(dplyr))
 library(dplyr)
-library(jhur)
 ```
 
 ## Reminder
@@ -85,85 +84,33 @@ See this website for a list of the packages included in the `tidyverse`: https:/
 library(tidyverse) # loads dplyr and other packages!
 ```
 
-## Getting data to work with
 
-We will use a dataset from a project we worked on called Open Case Studies. 
 
-See https://www.opencasestudies.org/. 
 
-First we need to install and load the package.
-
-```{r, eval = FALSE}
-install.packages("OCSdata")
-```
-
-```{r, echo = FALSE, message=FALSE, comment= FALSE, results='hide'}
-install.packages("OCSdata", repos='http://cran.us.r-project.org')
-```
-
-```{r}
-library(OCSdata)
-```
 
 ## Getting data to work with
 
-Then we will load data from one of the case studies about opioid shipments.
+We will work with data called `ER` about heat-related ER visits between 2011 and 2022, as reported by the state of Colorado, specifically made available by the Colorado Environmental Public Health Tracking program website. Full dataset available at https://coepht.colorado.gov/heat-related-illness.
 
-See https://cran.r-project.org/web/packages/OCSdata/vignettes/instructions.html for more info on what data is available. 
-
-See https://www.opencasestudies.org/ocs-bp-opioid-rural-urban/ about this data.
-
-##  EXTRA PRACTICE - Get the data into your project directory
-
-```{r, results='hide', eval = FALSE}
-OCSdata::simpler_import_data("ocs-bp-opioid-rural-urban", 
-                             outpath = tempdir())
-```
-
-Where is the data?
-
-Simulates creating subdirectories to organize your data.
-
-```{r, fig.alt="dplyr", out.width = "55%", echo = FALSE, fig.align='center'}
-knitr::include_graphics("images/path.gif")
-```
-
-## Import the data
-`here` function of the `here` package helps R start looking where your .Rproj file is.
-
-```{r, echo = FALSE, message=FALSE, comment= FALSE, results='hide'}
-install.packages("here", repos='http://cran.us.r-project.org')
-```
-
-```{r, eval = FALSE}
-#install.packages(here)
-library(here)
-annualDosage <- read_csv(file = 
-   here("OCS_data/data/simpler_import/county_annual.csv"))
-
-```
-
-
-## Or do this!
 
 ```{r}
-OCSdata::load_imported_data("ocs-bp-opioid-rural-urban")
+library(dasehr)
+ER <- CO_heat_ER_bygender
+#or we could do this:
+ER <- 
+  read_csv("https://daseh.org/data/Colorado_ER_heat_visits_by_county_gender.csv")
+
 ```
 
-You will see a few new objects in your environment called:
-
-- `annualDosage` (number of shipments (count) of either oxycodone or hydrocodone pills (DOSAGE_UNIT))
-- `county_pop` (population per county)
-- `land` (land area per county)
 
 ## Checking the data `dim()`
 
 The `dim()`, `nrow()`, and `ncol()` functions are good options to check the dimensions of your data before moving forward.
 
 ```{r}
-dim(annualDosage) # rows, columns
-nrow(annualDosage) # number of rows
-ncol(annualDosage) # number of columns
+dim(ER) # rows, columns
+nrow(ER) # number of rows
+ncol(ER) # number of columns
 ```
 
 ## Checking the data: `glimpse()`
@@ -171,7 +118,7 @@ ncol(annualDosage) # number of columns
 In addition to `head()` and `tail()`, the `glimpse()`function of the `dplyr` package  is another great function to look at your data. 
 
 ```{r}
-glimpse(annualDosage)
+glimpse(ER)
 ```
 
 
@@ -180,8 +127,8 @@ glimpse(annualDosage)
 What if you want to see the middle of your data? You can use the `slice_sample()` function of the `dplyr` package to see a **random** set of rows. You can specify the number of rows with the `n` argument.
 
 ```{r}
-slice_sample(annualDosage, n = 2)
-slice_sample(annualDosage, n = 2)
+slice_sample(ER, n = 2)
+slice_sample(ER, n = 2)
 
 ```
 
@@ -190,11 +137,11 @@ slice_sample(annualDosage, n = 2)
 
 ## Data frames
 
-An older version of data in tables is called a data frame. The iris dataset is an example of this. 
+An older version of data in tables is called a data frame. The mtcars dataset is an example of this. 
 
 ```{r}
-class(iris)
-head(iris)
+class(mtcars)
+head(mtcars)
 ```
 ## tibble
 
@@ -205,7 +152,7 @@ Tibbles are a **fancier** version of data frames:
 - We see the data types for each column
 
 ```{r}
-annualDosage
+ER
 
 ```
 
@@ -215,8 +162,8 @@ annualDosage
 If we wanted to create a `tibble` ("fancy" data frame), we can using the  `tibble()` function on a data frame.  
 
 ```{r}
-tbl_iris <- tibble(iris) 
-tbl_iris
+tbl_mtcars <- tibble(mtcars) 
+tbl_mtcars
 ```
 
 Note don't necessarily need to use `head()` with tibbles, as they conveniently print a portion of the data.
@@ -252,10 +199,10 @@ head(tibble(rownames_to_column(mtcars)), n = 2)
 
 ## Data for now
 
-Let's stick with the tibble annualDosage data for our next lesson 
+Let's stick with the tibble ER data for our next lesson 
 
 ```{r}
-head(annualDosage)
+head(ER)
 ```
 
 
@@ -269,11 +216,16 @@ knitr::include_graphics("images/rename.png")
 "Artwork by @allison_horst". https://allisonhorst.com/
 
 
+## checking names of columns, we can use the `colnames()` function (or `names()`)
+```{r}
+colnames(ER)
+```
+
 ## Renaming Columns of a data frame or tibble
 
 To rename columns in `dplyr`, you can use the `rename` function.
 
-For example, let's rename BUYER_COUNTY to County. Notice the new name is listed **first**, similar to how a new object is assigned on the left!
+For example, let's rename lower95CI to lower_95_CI_limit. Notice the new name is listed **first**, similar to how a new object is assigned on the left!
 
 <div class = "codeexample">
 ```{r, eval = FALSE}
@@ -284,8 +236,8 @@ For example, let's rename BUYER_COUNTY to County. Notice the new name is listed 
 </div>
 
 ```{r}
-renamed_annualDosage<- rename(annualDosage, County = BUYER_COUNTY)
-head(renamed_annualDosage)
+renamed_ER<- rename(ER, lower_95_CI_limit = lower95cl)
+head(renamed_ER)
 ```
 
 
@@ -297,13 +249,13 @@ See https://daseh.org/resources/quotes_vs_backticks.html for more guidance.
 
 ```{r, eval = FALSE}
  # this will cause an error
-renamed_annualDosage <- rename(annualDosage, County! = BUYER_COUNTY)
+renamed_ER <- rename(ER, lower_95%_CI_limit = lower95cl)
 ```
 
 ```{r}
 # this will work
-renamed_annualDosage <- rename(annualDosage, `County!` = BUYER_COUNTY) 
-head(renamed_annualDosage, 2)
+renamed_ER <- rename(ER, `lower_95%_CI_limit` = lower95cl) 
+head(renamed_ER, 2)
 ```
 
 
@@ -322,7 +274,7 @@ Other atypical column names are those with:
 - spaces
 - number without characters
 - number starting the name
-- other punctuation marks (besides "_" or "." and not at the beginning)
+- other punctuation marks like % (besides "_" or "." and not at the beginning)
 
 
 ## A solution!
@@ -339,23 +291,23 @@ Curly quotes will not work!
 
 ```{r, eval = FALSE}
 # this will cause an error!
-renamed_annualDosage <- rename(annualDosage, ‘County!’ = BUYER_COUNTY) 
+renamed_ER <- rename(ER, ‘lower_95%_CI_limit’ = lower95cl)
 ```
 
 ```{r, eval = FALSE}
 # this will work!
-renamed_annualDosage <- rename(annualDosage, 'County!' = BUYER_COUNTY) 
+renamed_ER <- rename(ER, 'lower_95%_CI_limit' = lower95cl)
 ```
 
 Also true for double quotes
 ```{r, eval = FALSE}
  # this will cause an error!
-renamed_annualDosage <- rename(annualDosage, “County!” = BUYER_COUNTY)
+renamed_ER <- rename(ER, “lower_95%_CI_limit” = lower95cl)
 ```
 
 ```{r, eval = FALSE}
 # this will work!
-renamed_annualDosage <- rename(annualDosage, "County!" = BUYER_COUNTY) 
+renamed_ER <- rename(ER, "lower_95%_CI_limit" = lower95cl)
 ```
 
 ## Rename multiple columns
@@ -363,10 +315,10 @@ renamed_annualDosage <- rename(annualDosage, "County!" = BUYER_COUNTY)
 A comma can separate different column names to change.
 
 ```{r}
-renamed_annualDosage <- rename(annualDosage, 
-                               County = BUYER_COUNTY, 
-                               State = BUYER_STATE)
-head(renamed_annualDosage, 3)
+renamed_ER <- rename(ER, 
+                        lower_95perc_CI_limit = lower95cl, 
+                        upper_95perc_CI_limit = upper95cl)
+head(renamed_ER, 3)
 ```
 
 ## Renaming all columns of a data frame: dplyr {.codesmall}
@@ -374,13 +326,12 @@ head(renamed_annualDosage, 3)
 To rename all columns you use the `rename_with()`. In this case we will use `toupper()` to make all letters upper case. Could also use `tolower()` function.
 
 ```{r}
-annualDosage_upper <- rename_with(annualDosage, toupper)
-head(annualDosage_upper, 3)
+ER_upper <- rename_with(ER, toupper)
+head(ER_upper, 3)
 ```
 
 ```{r}
-annualDosage_lower<- rename_with(annualDosage, tolower)
-head(annualDosage_lower, 3)
+rename_with(ER_upper, tolower)
 ```
 
 ## janitor package
@@ -398,12 +349,17 @@ library(janitor)
 
 ## janitor `clean_names`
 
-The `clean_names` function can intuit what fixes you might need. Here it makes everything consistent.
+The `clean_names` function can intuit what fixes you might need. Here it make sure year names aren't just a number, so that the colnames don't need ticks or quotes to be used.
 
 ```{r}
-head(annualDosage, 2)
-clean_AD <- clean_names(annualDosage)
-head(clean_AD, 2)
+#library(dasehr)
+CO2 <- dasehr::yearly_co2_emissions
+# or this:
+CO2 <- 
+  read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+head(CO2, n = 2)
+clean_names(CO2)
+
 ```
 
 ## more of clean_names
@@ -440,18 +396,19 @@ clean_names(test)
 This time lets also make it a smaller subset so it is easier for us to see the full dataset as we work through examples. 
 
 ```{r}
-#install.packages(OCSdata)
-#library(OCSdata)
-#OCSdata::load_imported_data("ocs-bp-opioid-rural-urban")
+#library(dasehr)
+#ER <- CO_heat_ER_bygender
+#or this:
+#read_csv("https://daseh.org/data/Colorado_ER_heat_visits_by_county_gender.csv")
 set.seed(1234)
-AD <-slice_sample(annualDosage, n = 30)
+ER_30 <-slice_sample(ER, n = 30)
 ```
 
 ## Subset columns of a data frame - `tidyverse` way: 
 
 To grab (or "pull" out) the `year` column the `tidyverse` way we can use the `pull` function:
 ```{r}
-pull(AD, year)
+pull(ER_30, year)
 ```
 
 
@@ -459,7 +416,7 @@ pull(AD, year)
 
 The `select` command from `dplyr` allows you to subset (still a `tibble`!)
 ```{r}
-select(AD, year)
+select(ER_30, year)
 ```
 
 ## Select multiple columns
@@ -467,27 +424,17 @@ select(AD, year)
 We can use `select` to select for multiple columns.
 
 ```{r}
-select(AD, year, BUYER_COUNTY)
+select(ER_30, year, rate, county)
 ```
 
-## Subset columns of a data frame: dplyr
-
-Note that if you want the values (not a `tibble`), use `pull` - as it pulls out the data:
-```{r}
-pull(AD, year)
-
-# pull with select works too!
-
-pull(select(AD, year))
-```
 
 ## Select columns of a data frame: dplyr
 
 The `select` command from `dplyr` allows you to subset columns matching patterns:
 
 ```{r}
-head(AD, 2)
-select(AD, starts_with("B"))
+head(ER_30, 2)
+select(ER_30, ends_with("cl"))
 ```
 
 ## See the Select "helpers"
@@ -498,7 +445,7 @@ Here are a few:
 last_col()
 starts_with()
 ends_with()
-contains() # like searching
+contains()
 ```
 
 Type `tidyselect::` in the **console** and see what RStudio suggests:
@@ -510,15 +457,15 @@ knitr::include_graphics("images/tidyselect.png")
 ## Combining tidyselect helpers with regular selection
 
 ```{r}
-head(AD, 2)
-select(AD, starts_with("B"), year)
+head(ER_30, 2)
+select(ER_30, ends_with("cl"), year)
 ```
 ## Multiple tidyselect functions
 
 Follows OR logic.
 
 ```{r}
-select(AD, starts_with("B"), ends_with("r"))
+select(ER_30, ends_with("cl"), starts_with("r"))
 
 ```
 
@@ -527,7 +474,7 @@ select(AD, starts_with("B"), ends_with("r"))
 Need to combine the patterns with the `c()` function.
 
 ```{r}
-select(AD, starts_with(c("B", "D")))
+select(ER_30, starts_with(c("r", "l")))
 
 ```
 
@@ -537,8 +484,8 @@ select(AD, starts_with(c("B", "D")))
 `is.character()` and `is.numeric()` are often the most helpful
 
 ```{r}
-head(AD, 2)
-select(AD, where(is.numeric))
+head(ER_30, 2)
+select(ER_30, where(is.numeric))
 
 ```
 
@@ -560,7 +507,7 @@ knitr::include_graphics("images/filter.png")
 The command in `dplyr` for subsetting rows is `filter`.
 
 ```{r}
-filter(AD, count > 10000)
+filter(ER_30, year > 2020)
 ```
 
 
@@ -589,11 +536,11 @@ If you try to filter for a column that does not exist it will not work:
 You can filter by two conditions using `&` or commas (must meet both conditions):
 
 ```{r, eval = FALSE}
-filter(AD, count > 10000, year == 2012)
+filter(ER_30, rate > 9, year == 2012)
 ```
 
 ```{r}
-filter(AD, count > 10000 & year == 2012) # same result
+filter(ER_30, rate > 9 & year == 2012) # same result
 ```
 
 ## Subset rows of a data frame: dplyr
@@ -601,7 +548,7 @@ filter(AD, count > 10000 & year == 2012) # same result
 If you want OR statements (meaning the data can meet either condition does not need to meet both), you need to use `|` between conditions:
 
 ```{r}
-filter(AD, count > 10000 | year == 2012)
+filter(ER_30, rate > 9 | year == 2012)
 
 ```
 
@@ -610,9 +557,9 @@ filter(AD, count > 10000 | year == 2012)
 The `%in%` operator can be used find values from a pre-made list (using `c()`) for a **single column** at a time. 
 
 ```{r}
-filter(AD,  BUYER_STATE %in% c("CO","NM","GA"))
+filter(ER_30,  county %in% c("Denver","Weld","Arapahoe"))
 
-filter(AD,  BUYER_STATE == "CO"| BUYER_STATE == "NM"| BUYER_STATE == "GA") #equivalent
+filter(ER_30,  county == "Denver"| county == "Weld"| county == "Arapahoe") #equivalent
 ```
 
 ## Subset rows of a data frame: dplyr {.codesmall}
@@ -620,7 +567,7 @@ filter(AD,  BUYER_STATE == "CO"| BUYER_STATE == "NM"| BUYER_STATE == "GA") #equi
 The `%in%` operator can be used find values from a pre-made list (using `c()`) for a **single column** at a time with different columns.
 
 ```{r}
-filter(AD, year %in% c(2012,2014), BUYER_STATE %in% c("GA","CO"))
+filter(ER_30, year %in% c(2013,2020), county %in% c("Denver","Weld"))
 
 ```
 
@@ -629,7 +576,7 @@ filter(AD, year %in% c(2012,2014), BUYER_STATE %in% c("GA","CO"))
 This will not work the way you might expect! Best to stick with nothing but the column name if it is a typical name. 
 
 ```{r}
-filter(AD, "year" > 2014)
+filter(ER_30, "year" > 2014)
 ```
 
 ## Don't use quotes for atypical names
@@ -637,9 +584,9 @@ filter(AD, "year" > 2014)
 Atypical names are those with punctuation, spaces, start with a number, or are just a number. 
 
 ```{r}
-AD_rename <- rename(AD, `year!` = year)
+ER_30_rename <- rename(ER_30, `year!` = year)
 
-filter(AD_rename, "year!" > 2013) # will not work correctly
+filter(ER_30_rename, "year!" > 2013) # will not work correctly
 ```
 
 ## Be careful with column names and `filter`
@@ -647,20 +594,20 @@ filter(AD_rename, "year!" > 2013) # will not work correctly
 Using backticks works!
 
 ```{r}
-filter(AD_rename, `year!` > 2013) 
+filter(ER_30_rename, `year!` > 2013) 
 ```
 
 
 ## Be careful with column names and `filter`
 
 ```{r}
-filter(AD, "BUYER_STATE" == "CO") # this will not work
+filter(ER_30, "county" == "Denver") # this will not work
 ```
 
 ## Be careful with column names and `filter`
 
 ```{r}
-filter(AD, BUYER_STATE == "CO")# this works!
+filter(ER_30, county == "Denver")# this works!
 ```
 
 ## `filter()` is tricky
@@ -696,17 +643,18 @@ https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 
 ## Lab Part 2
 
-🏠 [Class Website](https://daseh.org/)    
+🏠 [Class Website](https://daseh.org)    
 💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
 
 ## Get the data
 
 ```{r}
-#install.packages(OCSdata)
-#library(OCSdata)
-#OCSdata::load_imported_data("ocs-bp-opioid-rural-urban")
+#library(dasehr)
+#ER <- CO_heat_ER_bygender
+# or this:
+#read_csv("https://daseh.org/data/Colorado_ER_heat_visits_by_county_gender.csv")
 set.seed(1234)
-AD <-slice_sample(annualDosage, n = 30)
+ER_30 <-slice_sample(ER, n = 30)
 ```
 
 ## Combining `filter` and `select`
@@ -714,7 +662,7 @@ AD <-slice_sample(annualDosage, n = 30)
 You can combine `filter` and `select` to subset the rows and columns, respectively, of a data frame:
 
 ```{r}
-select(filter(AD, year > 2012), BUYER_STATE)
+select(filter(ER_30, year > 2012), county)
 ```
 
 
@@ -723,13 +671,13 @@ select(filter(AD, year > 2012), BUYER_STATE)
 In `R`, the common way to perform multiple operations is to wrap functions around each other in a "nested" form.
 
 ```{r}
-head(select(AD, year, BUYER_STATE), 2)
+head(select(ER_30, year, county), 2)
 ```
 
 ## Nesting can get confusing looking
 
 ```{r}
-select(filter(AD, year > 2000 & BUYER_STATE == "CO"), year, count)
+select(filter(ER_30, year > 2000 & county == "Denver"), year, rate)
 ```
 
 ## Assigning Temporary Objects
@@ -737,10 +685,10 @@ select(filter(AD, year > 2000 & BUYER_STATE == "CO"), year, count)
 One can also create temporary objects and reassign them:
 
 ```{r}
-AD_CO <- filter(AD, year > 2000 & BUYER_STATE == "CO")
-AD_CO <- select(AD_CO, year, count)
+ER_30_CO <- filter(ER_30, year > 2000 & county == "Denver")
+ER_30_CO <- select(ER_30_CO, year, rate)
 
-head(AD_CO)
+head(ER_30_CO)
 ```
 
 ## Using the `pipe` (comes with `dplyr`):
@@ -749,7 +697,7 @@ The pipe `%>%` makes this much more readable.  It reads left side "pipes" into r
 
 
 ```{r}
-AD %>% filter(year > 2000 & BUYER_STATE == "CO") %>% select(year, count)
+ER_30 %>% filter(year > 2000 & county == "Denver") %>% select(year, rate)
 ```
 
 
@@ -769,8 +717,8 @@ The `mutate` function in `dplyr` allows you to add or modify columns of a data f
 </div>
 
 ```{r}
-AD <- mutate(AD, newcol = count * 2)
-head(AD, 4)
+ER_30 <- mutate(ER_30, newcol = rate * 2)
+head(ER_30, 4)
 ```
 
 
@@ -787,8 +735,8 @@ The `mutate` function in `dplyr` allows you to add or modify columns of a data f
 </div>
 
 ```{r}
-AD <- mutate(AD, newcol = newcol / 2)
-head(AD, 4)
+ER_30 <- mutate(ER_30, newcol = newcol / 2)
+head(ER_30, 4)
 ```
 
 
@@ -796,8 +744,8 @@ head(AD, 4)
 
 
 ```{r}
-AD <- AD %>% mutate(newcol = newcol / 2)
-head(AD,4)
+ER_30 <- ER_30 %>% mutate(newcol = newcol / 2)
+head(ER_30,4)
 ```
 
 ## `mutate` function
@@ -815,11 +763,11 @@ The `NULL` method is still very common.
 The `select` function can remove a column with exclamation mark (`!`) our using the minus sign (`-`):
 
 ```{r, eval = FALSE}
-select(AD, !newcol)
+select(ER_30, !newcol)
 ```
 
 ```{r, echo = FALSE}
-head(select(AD, !newcol))
+head(select(ER_30, !newcol))
 ```
 
 **Or, you can simply select the columns you want to keep, ignoring the ones you want to remove.**
@@ -828,9 +776,9 @@ head(select(AD, !newcol))
 
 You can use `c()` to list the columns to remove.
 
-Remove `newcol` and `drat`:
+Remove `newcol` and `year`:
 ```{r}
-select(AD, !c(newcol, year))
+select(ER_30, !c(newcol, year))
 ```
 
 
@@ -840,8 +788,8 @@ select(AD, !c(newcol, year))
 
 The `select` function can reorder columns.
 ```{r}
-head(AD, 2)
-AD %>% select(year, count, BUYER_STATE, BUYER_COUNTY) %>%
+head(ER_30, 2)
+ER_30 %>% select(year, rate, county) %>%
 head(2)
 ```
 
@@ -849,11 +797,11 @@ head(2)
 
 The `select` function can reorder columns.  Put `newcol` first, then select the rest of columns:
 ```{r, eval = FALSE}
-select(AD, newcol, everything())
+select(ER_30, newcol, everything())
 ```
 
 ```{r, echo = FALSE}
-head(select(AD, newcol, everything()), 3)
+head(select(ER_30, newcol, everything()), 3)
 ```
 
 ## Ordering the columns of a data frame: dplyr {.codesmall}
@@ -861,11 +809,11 @@ head(select(AD, newcol, everything()), 3)
 Put `year` at the end ("remove, everything, then add back in"):
 
 ```{r, eval = FALSE}
-select(AD, !year, everything(), year)
+select(ER_30, !year, everything(), year)
 ```
 
 ```{r, echo = FALSE}
-head(select(AD, !year, everything(), year), 3)
+head(select(ER_30, !year, everything(), year), 3)
 ```
 
 
@@ -874,8 +822,8 @@ head(select(AD, !year, everything(), year), 3)
 Using the base R `order()` function.
 
 ```{r}
-order(colnames(AD))
-AD %>% select(order(colnames(AD)))
+order(colnames(ER_30))
+ER_30 %>% select(order(colnames(ER_30)))
 ```
 
 
@@ -887,9 +835,9 @@ For example, let say we just wanted `year` to be before `BUYER_STATE`.
 
 ```{r}
 
-head(AD, 1)
+head(ER_30, 1)
 
-tb_carb <- relocate(AD, year, .before = BUYER_STATE)
+tb_carb <- relocate(ER_30, year, .before = rate)
 
 head(tb_carb, 1)
 ```
@@ -902,23 +850,23 @@ head(tb_carb, 1)
 
 The `arrange` function can reorder rows  By default, `arrange` orders in increasing order:
 ```{r}
-arrange(AD, year)
+arrange(ER_30, year)
 ```
 
 ## Ordering the rows of a data frame: dplyr
 
 Use the `desc` to arrange the rows in descending order:
 ```{r}
-arrange(AD, desc(year))
+arrange(ER_30, desc(year))
 ```
 
 ## Ordering the rows of a data frame: dplyr
 
 You can combine increasing and decreasing orderings:
 ```{r}
-arrange(AD, count, desc(year)) %>% head(n = 2)
+arrange(ER_30, rate, desc(year)) %>% head(n = 2)
 
-arrange(AD, desc(year), count) %>% head(n = 2)
+arrange(ER_30, desc(year), rate) %>% head(n = 2)
 ```
 
 
@@ -949,7 +897,7 @@ arrange(AD, desc(year), count) %>% head(n = 2)
 </div>
 
 ```{r, eval = FALSE}
-AD <- mutate(AD, newcol = count/2.2)
+ER_30 <- mutate(ER_30, newcol = count/2.2)
 ```
 
 ## A note about base R: 
@@ -957,7 +905,7 @@ AD <- mutate(AD, newcol = count/2.2)
 The `$` operator is similar to `pull()`. This is the base R way to do this:
 
 ```{r}
-AD$year
+ER_30$year
 ```
 
 Although it is easier (for this one task), mixing and matching the `$` operator with tidyverse functions usually doesn't work. Therefore, we want to let you know about it in case you see it, but we suggest that you try working with the tidyverse way.
@@ -969,15 +917,15 @@ You can add a new column (or modify an existing one) using the `$` operator inst
 Just want you to be aware of this as it is very common.
 
 ```{r}
-AD$newcol <- AD$count/2.2
-head(AD,3)
+ER_30$newcol <- ER_30$rate/2.2
+head(ER_30,3)
 ```
 
 Even though `$` is easier for creating new columns, `mutate` is really powerful, so it's worth getting used to.
 
 ## Lab Part 3
 
-🏠 [Class Website](https://daseh.org/)
+🏠 [Class Website](https://daseh.org)
 
 💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
 
@@ -996,14 +944,14 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
 Instead of removing rows like filter, `which()` simply shows where the values occur if they pass a specific condition. We will see that this can be helpful later when we want to select and filter in more complicated ways.
 
 ```{r}
-which(select(AD, year) == 2014)
-select(AD, year) == 2014 %>% head(10)
+which(select(ER_30, year) == 2014)
+select(ER_30, year) == 2014 %>% head(10)
 ```
 
 ## Remove a column in base R
 
 ```{r, eval = FALSE}
-AD$year <- NULL
+ER_30$year <- NULL
 ```
 
 ## Renaming Columns of a data frame: base R
@@ -1011,9 +959,9 @@ AD$year <- NULL
 We can use the `colnames` function to extract and/or directly reassign column names of `df`:
 
 ```{r}
-colnames(AD) # just prints
-colnames(AD)[1:3] <- c("County", "State", "Year") # reassigns
-head(AD)
+colnames(ER_30) # just prints
+colnames(ER_30)[1:2] <- c("County", "Rate") # reassigns
+head(ER_30)
 ```
 
 ## Subset rows of a data frame with indices: 
@@ -1021,7 +969,7 @@ head(AD)
 Let's select **rows** 1 and 3 from `df` using brackets:
 
 ```{r}
-AD[ c(1, 3), ]
+ER_30[ c(1, 3), ]
 ```
 
 ## Subset columns of a data frame: 
@@ -1031,8 +979,8 @@ We can also subset a data frame using the bracket `[, ]` subsetting.
 For data frames and matrices (2-dimensional objects), the brackets are `[rows, columns]` subsetting.  We can grab the `x` column using the index of the column or the column name ("`year`") 
 
 ```{r}
-AD[, 3]
-AD[, "count"]
+ER_30[, 6]
+ER_30[, "year"]
 ```
 
 ## Subset columns of a data frame: 
@@ -1040,7 +988,7 @@ AD[, "count"]
 We can select multiple columns using multiple column names:
 
 ```{r}
-AD[, c("State", "count")]
+ER_30[, c("County", "Rate")]
 
 ```
 

@@ -360,18 +360,32 @@ package using <code>install.packages</code> and
 install.packages(&quot;ggplot2&quot;)</code></pre>
 <pre class="r"><code>library(esquisse)
 library(ggplot2)
-library(jhur)</code></pre>
+library(dplyr)
+library(dasehr)</code></pre>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>Try creating a plot using the <code>Orange</code> data that
-automatically comes with R using the <code>esquisse</code> package.</p>
+<p>Try creating a plot in <code>esquisse</code> using the
+<code>calenviroscreen</code> data from the <code>dasehr</code> packaged.
+This dataset has a lot of variables, so first run the below code to
+subset it so that you’re only working with these variables:
+<code>CES4.0Percentile</code>, <code>Asthma</code>, and
+<code>ChildrenPercLess10</code>. We will also categorize
+<code>CES4.0Percentile</code> into three categories (high, middle, and
+low) to make visualization a little easier!</p>
+<pre class="r"><code>ces_sub &lt;- select(calenviroscreen, c(&quot;CES4.0Percentile&quot;, &quot;Asthma&quot;, &quot;ChildrenPercLess10&quot;))
+
+ces_sub &lt;- ces_sub %&gt;% 
+            mutate(CES4.0Perc_cat = 
+              case_when(CES4.0Percentile &gt; 75  ~ &quot;High&quot;, 
+                        CES4.0Percentile &lt;= 75 &amp; CES4.0Percentile &gt;25 ~ &quot;Middle&quot;,
+                        CES4.0Percentile &lt;= 25 ~ &quot;Low&quot;))</code></pre>
 <ul>
-<li>Drag and drop the <code>age</code> variable to be plotted on the
-x-axis.</li>
-<li>Drag and drop the <code>circumference</code> variable to be plotted
-on the y-axis.</li>
-<li>What happens when you drag <code>tree</code> to the facet region of
-the esquisse GUI?</li>
+<li>Drag and drop the <code>ChildrenPercLess10</code> variable to be
+plotted on the x-axis.</li>
+<li>Drag and drop the <code>Asthma</code> variable to be plotted on the
+y-axis.</li>
+<li>What happens when you drag <code>CES4.0Perc_cat</code> to the facet
+region of the esquisse GUI?</li>
 <li>What happens if you move this to color?</li>
 <li>Copy and paste the code from both options into the chunk below:</li>
 </ul>
@@ -389,36 +403,126 @@ Close Esquisse and run the chunk below to generate a ggplot.</p>
 <h3>P.1</h3>
 <p>Launch Esquisse on any selection of the following datasets we have
 worked with before and explore!</p>
-<pre class="r"><code>yts &lt;- read_yts()
-tb &lt;- read_tb()
-bike &lt;- read_bike()</code></pre>
-<pre><code>## Rows: 1631 Columns: 9
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (6): subType, name, block, type, project, route
-## dbl (3): numLanes, length, dateInstalled
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>circ &lt;- read_circulator()</code></pre>
-<pre><code>## Rows: 1146 Columns: 15
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr  (2): day, date
-## dbl (13): orangeBoardings, orangeAlightings, orangeAverage, purpleBoardings,...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>vacc &lt;- read_csv(&quot;https://daseh.org/data/USA_covid19_vaccinations.csv&quot;)</code></pre>
-<pre><code>## Rows: 64 Columns: 125
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr   (1): State/Territory/Federal Entity
-## dbl (121): Total Doses Delivered, Doses Delivered per 100K, 18+ Doses Delive...
-## lgl   (3): People with 2 Doses by State of Residence, People 18+ with 1+ Dos...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>covid_wastewater</code></pre>
+<pre><code>## # A tibble: 776,059 × 12
+##    reporting_jurisdiction sample_location key_plot_id               county_names
+##    &lt;chr&gt;                  &lt;chr&gt;           &lt;chr&gt;                     &lt;chr&gt;       
+##  1 Missouri               Treatment plant NWSS_mo_259_Treatment pl… Barry,Lawre…
+##  2 Missouri               Treatment plant NWSS_mo_259_Treatment pl… Barry,Lawre…
+##  3 Missouri               Treatment plant NWSS_mo_259_Treatment pl… Barry,Lawre…
+##  4 Missouri               Treatment plant NWSS_mo_259_Treatment pl… Barry,Lawre…
+##  5 Missouri               Treatment plant NWSS_mo_259_Treatment pl… Barry,Lawre…
+##  6 Missouri               Treatment plant NWSS_mo_259_Treatment pl… Barry,Lawre…
+##  7 Missouri               Treatment plant NWSS_mo_259_Treatment pl… Barry,Lawre…
+##  8 Missouri               Treatment plant NWSS_mo_259_Treatment pl… Barry,Lawre…
+##  9 Missouri               Treatment plant NWSS_mo_259_Treatment pl… Barry,Lawre…
+## 10 Missouri               Treatment plant NWSS_mo_259_Treatment pl… Barry,Lawre…
+## # ℹ 776,049 more rows
+## # ℹ 8 more variables: population_served &lt;dbl&gt;, date_start &lt;chr&gt;,
+## #   date_end &lt;chr&gt;, rna_pct_change_15d &lt;dbl&gt;, pos_PCR_prop_15d &lt;dbl&gt;,
+## #   percentile &lt;dbl&gt;, sampling_prior &lt;chr&gt;, first_sample_date &lt;chr&gt;</code></pre>
+<pre class="r"><code>CO_heat_ER</code></pre>
+<pre><code>## # A tibble: 2,340 × 7
+##    county     rate lower95cl upper95cl visits  year gender      
+##    &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
+##  1 Statewide  5.64      4.70      6.59    140  2011 Female      
+##  2 Statewide  7.39      6.30      8.47    183  2011 Male        
+##  3 Statewide  6.51      5.80      7.23    323  2011 Both genders
+##  4 Statewide  5.64      4.72      6.57    146  2012 Female      
+##  5 Statewide  7.56      6.48      8.65    193  2012 Male        
+##  6 Statewide  6.58      5.88      7.29    339  2012 Both genders
+##  7 Statewide  4.94      4.06      5.82    124  2013 Female      
+##  8 Statewide  6.72      5.72      7.72    178  2013 Male        
+##  9 Statewide  5.82      5.16      6.49    302  2013 Both genders
+## 10 Statewide  3.52      2.80      4.25     92  2014 Female      
+## # ℹ 2,330 more rows</code></pre>
+<pre class="r"><code>CO_heat_ER_byage</code></pre>
+<pre><code>## # A tibble: 216 × 7
+##     YEAR GENDER AGE              RATE L95CL U95CL VISITS
+##    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1  2011 Female 0-4 years old   NA    NA    NA        NA
+##  2  2011 Female 15-34 years old  5.59  3.84  7.34     39
+##  3  2011 Female 35-64 years old  5.51  4.08  6.94     57
+##  4  2011 Female 5-14 years old   4.43  2.48  7.30     15
+##  5  2011 Female 65+ years old    6.60  3.78  9.42     21
+##  6  2011 Female All ages         5.48  4.57  6.39    140
+##  7  2011 Male   0-4 years old   NA    NA    NA        NA
+##  8  2011 Male   15-34 years old  8.99  6.84 11.1      67
+##  9  2011 Male   35-64 years old  6.17  4.66  7.68     64
+## 10  2011 Male   5-14 years old   5.94  3.40  8.48     21
+## # ℹ 206 more rows</code></pre>
+<pre class="r"><code>CO_heat_ER_bygender</code></pre>
+<pre><code>## # A tibble: 240 × 7
+##    county  rate lower95cl upper95cl visits  year gender
+##    &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
+##  1 Adams   7.60      4.38     11.7      17  2011 Female
+##  2 Adams  NA        NA        NA        NA  2012 Female
+##  3 Adams   6.22      3.37      9.93     14  2013 Female
+##  4 Adams  NA        NA        NA        NA  2014 Female
+##  5 Adams  NA        NA        NA        NA  2015 Female
+##  6 Adams   6.16      3.35      9.82     14  2016 Female
+##  7 Adams   4.69      2.31      7.88     11  2017 Female
+##  8 Adams   6.39      3.62      9.93     16  2018 Female
+##  9 Adams   6.64      3.85     10.2      17  2019 Female
+## 10 Adams  NA        NA        NA        NA  2020 Female
+## # ℹ 230 more rows</code></pre>
+<pre class="r"><code>yearly_co2_emissions</code></pre>
+<pre><code>## # A tibble: 192 × 265
+##    country `1751` `1752` `1753` `1754` `1755` `1756` `1757` `1758` `1759` `1760`
+##    &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Afghan…     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
+##  2 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
+##  3 Algeria     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
+##  4 Andorra     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
+##  5 Angola      NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
+##  6 Antigu…     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
+##  7 Argent…     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
+##  8 Armenia     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
+##  9 Austra…     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
+## 10 Austria     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
+## # ℹ 182 more rows
+## # ℹ 254 more variables: `1761` &lt;dbl&gt;, `1762` &lt;dbl&gt;, `1763` &lt;dbl&gt;, `1764` &lt;dbl&gt;,
+## #   `1765` &lt;dbl&gt;, `1766` &lt;dbl&gt;, `1767` &lt;dbl&gt;, `1768` &lt;dbl&gt;, `1769` &lt;dbl&gt;,
+## #   `1770` &lt;dbl&gt;, `1771` &lt;dbl&gt;, `1772` &lt;dbl&gt;, `1773` &lt;dbl&gt;, `1774` &lt;dbl&gt;,
+## #   `1775` &lt;dbl&gt;, `1776` &lt;dbl&gt;, `1777` &lt;dbl&gt;, `1778` &lt;dbl&gt;, `1779` &lt;dbl&gt;,
+## #   `1780` &lt;dbl&gt;, `1781` &lt;dbl&gt;, `1782` &lt;dbl&gt;, `1783` &lt;dbl&gt;, `1784` &lt;dbl&gt;,
+## #   `1785` &lt;dbl&gt;, `1786` &lt;dbl&gt;, `1787` &lt;dbl&gt;, `1788` &lt;dbl&gt;, `1789` &lt;dbl&gt;, …</code></pre>
+<pre class="r"><code>nitrate</code></pre>
+<pre><code>## # A tibble: 88 × 11
+##     year quarter pop_on_sampled_PWS `pop_0-3ug/L` `pop_&gt;3-5ug/L` `pop_&gt;5-10ug/L`
+##    &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;         &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt;
+##  1  1999 Q1                  106720         67775              0              32
+##  2  1999 Q2                   85541         55476              0             212
+##  3  1999 Q3                  559137        319252         231186             212
+##  4  1999 Q4                   26995         25969            420               0
+##  5  2000 Q1                   34793          5904              0              92
+##  6  2000 Q2                  184521        157396              0              32
+##  7  2000 Q3                   42081         20407            345               0
+##  8  2000 Q4                  407219        358828            995             412
+##  9  2001 Q1                   90054         49552            150               0
+## 10  2001 Q2                   83521         43633           2536              90
+## # ℹ 78 more rows
+## # ℹ 5 more variables: `pop_&gt;10-20ug/L` &lt;dbl&gt;, `pop_&gt;20ug/L` &lt;dbl&gt;,
+## #   `pop_on_PWS_with_non-detect` &lt;dbl&gt;, pop_exposed_to_exceedances &lt;dbl&gt;,
+## #   perc_pop_exposed_to_exceedances &lt;dbl&gt;</code></pre>
+<pre class="r"><code>haa5</code></pre>
+<pre><code>## # A tibble: 33 × 11
+##    year  pop_on_sampled_PWS `pop_0-15µg/L` `pop_&gt;15-30µg/L` `pop_&gt;30-45µg/L`
+##    &lt;chr&gt;              &lt;dbl&gt;          &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+##  1 1999              367633          59550           149906           105097
+##  2 2000             1197054         299306           122665           470362
+##  3 2001             1228179         341227           551559           100539
+##  4 2002             2344171         461360          1560551            68158
+##  5 2003             2536748         973263          1296957           263403
+##  6 2004             4335514        1716193          1714404           139075
+##  7 2005             4100329        1670136          1711888            91667
+##  8 2006             4401035        1576037          2192933           207336
+##  9 2007             4726314        1771815          2063751           176017
+## 10 2008             4678903        1958654          2006626           121242
+## # ℹ 23 more rows
+## # ℹ 6 more variables: `pop_&gt;45-60µg/L` &lt;dbl&gt;, `pop_&gt;60-75µg/L` &lt;dbl&gt;,
+## #   `pop_&gt;75µg/L` &lt;dbl&gt;, `pop_on_PWS_with_non-detects` &lt;dbl&gt;,
+## #   pop_exposed_to_exceedances &lt;dbl&gt;, perc_pop_exposed_to_exceedances &lt;dbl&gt;</code></pre>
 </div>
 </div>
 

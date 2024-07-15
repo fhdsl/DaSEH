@@ -143,36 +143,39 @@ knitr::include_graphics("images/stop.png")
 
 ## Wide & Long Data Example
 
+Let's examine a subset of the dataset for heat-related ER visits in Colorado, showing only data for Boulder and Denver counties.
+
 ```{r message=FALSE}
-library(jhur)
+library(dasehr)
 library(dplyr)
-wide_circ <- read_circulator()
-glimpse(wide_circ)
+
+wide_heat <- CO_heat_ER_wide
+glimpse(wide_heat)
 ```
 
 ## Long Data
 
 ```{r}
 library(tidyr)
-long_circ <- wide_circ %>%
+long_heat <- wide_heat %>%
   pivot_longer(
-    cols = contains(c("boarding")),
-    names_to = "Route",
-    values_to = "Boardings"
+    cols = starts_with("20"),
+    names_to = "year",
+    values_to = "visit_rate"
   )
 ```
 
 ## Long Data
 
 ```{r}
-glimpse(long_circ)
+glimpse(long_heat)
 ```
 
-## Make a plot of boardings by day for different routes
+## Make a plot of visit rates by year for different counties
 
 ```{r, eval = FALSE}
-esquisser(wide_circ) # days as x...? Tricky!
-esquisser(long_circ) # day as x, Boardings as y, Route as fill
+esquisser(wide_heat) # county as x...? Tricky!
+esquisser(long_heat) #county as x, visit rate as y, year as fill
 ```
 
 ## Some Alternatives to `esquisse`

@@ -17,15 +17,19 @@ bioinformatics
 Biostatistics
 Biostats
 Birla
+birthweight
 boardings
 Boardings
 Bonferroni
 bp
 BSPH
+bw
+byquarter
 CalEnviroScreen
 CDS
 CES
 ces
+CESPctlMoreThan
 ChatGPT
 cheatsheet
 circ
@@ -52,6 +56,7 @@ custimization
 customizable
 cwrigh
 daseh
+dasehr
 DaSEH
 DaSEH's
 Dataquest
@@ -79,6 +84,7 @@ FALSEs
 FASAP
 fct
 Fewings
+fhdsl
 Fleetwood
 forcats
 fredhutch
@@ -98,6 +104,7 @@ GitHub
 HAA
 Hadley
 Haloacetic
+haloacetic
 healthdata
 hoffman
 Hotline
@@ -136,6 +143,7 @@ lightblue
 lightgreen
 Linetype
 lmfit
+LowBirthWeightPctl
 LocationAbbr
 logfit
 longdash
@@ -173,6 +181,7 @@ OTTR
 oxycodone
 Padmashri
 pch
+Pctl
 Pilani
 Pixabay
 PLoS
@@ -244,9 +253,11 @@ TRUEs
 TSV
 twodash
 UHS
+ug
 Un
 Uncheck
 Ungroup
+uri
 Unsplash
 UseR
 useR
@@ -261,6 +272,7 @@ VehOdo
 VehYear
 wastewater
 wb
+WhitePerc
 Wickham
 Wickham's
 wikipedia

@@ -383,14 +383,16 @@ details below.</p>
 <h3>P.1</h3>
 <p>Create a vector <code>z</code> with the numbers 0 to 9. Set the seed
 for the R random number generator to 1234. Draw 5 numbers at random from
-<code>z</code> using the <code>sample()</code> function with
-<code>replace = TRUE</code>. Repeatedly run the code 3 times and note
-what you observe.</p>
+<code>z</code> using
+<code>sample(x = z, size = 5, replace = TRUE)</code>. If you repeat the
+seed code and sample code multiple times in the same chunk, what do you
+observe?</p>
 </div>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
-<p>Run the <code>sample()</code> statement again, but this time without
-running the <code>set.seed()</code> line. What do you notice about the 5
+<p>Run the <code>sample(x = z, size = 5, replace = TRUE)</code>
+statement again, but this time without running the
+<code>set.seed()</code> line. What do you notice about the 5
 numbers?</p>
 </div>
 </div>

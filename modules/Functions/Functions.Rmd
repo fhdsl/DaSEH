@@ -8,7 +8,7 @@ output:
 
 ```{r, echo = FALSE, message = FALSE}
 library(dplyr)
-library(jhur)
+library(dasehr)
 library(knitr)
 library(stringr)
 library(tidyr)
@@ -189,13 +189,13 @@ We can use `filter(row_number() == n)` to extract a row of a tibble:
 ```{r message=FALSE}
 get_row <- function(dat, row) dat %>% filter(row_number() == row)
 
-cars <- read_kaggle()
-cars_1_8 <- cars %>% select(1:8)
+ces <- calenviroscreen
+ces_1_8 <- ces %>% select(1:8)
 ```
 
 ```{r}
-get_row(dat = cars, row = 10)
-get_row(dat = iris, row = 4)
+get_row(dat = ces, row = 10)
+get_row(dat = ces, row = 4)
 ```
 
 
@@ -210,7 +210,7 @@ get_index <- function(dat, row, col) {
     select(all_of(col))
 }
 
-get_index(dat = cars, row = 10, col = 8)
+get_index(dat = ces, row = 10, col = 7)
 ```
 
 
@@ -225,7 +225,7 @@ get_top <- function(dat, row = 1, col = 1) {
     select(all_of(col))
 }
 
-get_top(dat = cars)
+get_top(dat = ces)
 ```
 
 ## Functions for tibbles
@@ -239,7 +239,7 @@ clean_dataset <- function(dataset, col_name) {
   return(my_data_out)
 }
 
-clean_dataset(dataset = mtcars, col_name = "cyl")
+clean_dataset(dataset = ces, col_name = "CES4.0Score")
 ```
 
 ## Summary
@@ -278,17 +278,19 @@ sapply(<a vector, list, data frame>, some_function)
 You can also pipe into your function.
 
 ```{r comment=""}
-head(iris, n = 2)
-sapply(iris, class)
-iris %>% sapply(class)
+er_visits <- CO_heat_ER
+
+head(er_visits, n = 2)
+sapply(er_visits, class)
+er_visits %>% sapply(class)
 ```
 
 
 ## Using your custom functions: `sapply()`
 
 ```{r}
-select(cars, VehYear:VehicleAge) %>% head()
-select(cars, VehYear:VehicleAge) %>%
+select(er_visits, rate:upper95cl) %>% head()
+select(er_visits, rate:upper95cl) %>%
   sapply(times_2) %>%
   head()
 ```
@@ -297,7 +299,7 @@ select(cars, VehYear:VehicleAge) %>%
 ## Using your custom functions "on the fly" to iterate
 
 ```{r comment=""}
-select(cars, VehYear:VehicleAge) %>%
+select(er_visits, rate:upper95cl) %>%
   sapply(function(x) x / 1000) %>%
   head()
 ```
@@ -310,10 +312,10 @@ select(cars, VehYear:VehicleAge) %>%
 Already know how to use functions to modify columns using `mutate()` or calculate summary statistics using `summarize()`.
 
 ```{r}
-cars %>%
-  mutate(VehOdo_round = round(VehOdo, -3)) %>%
-  summarize(max_Odo_round = max(VehOdo_round),
-            max_Odo = max(VehOdo))
+er_visits %>%
+  mutate(rate_round = round(rate, 2)) %>%
+  summarize(max_rate_round = max(rate_round, na.rm = T),
+            max_rate = max(rate, na.rm = T))
 ```
 
 
@@ -339,21 +341,20 @@ mutate(across(.cols = <columns>, .fns = function))
 Combining with `summarize()`
 
 ```{r warning=FALSE}
-cars_dbl <- cars %>% select(Make, starts_with("Veh"))
+ces_dbl <- ces %>% select(CaliforniaCounty, CES4.0Score, CES4.0Percentile)
 
-cars_dbl %>%
-  summarize(across(.cols = everything(), .fns = mean))
+ces_dbl %>%
+  summarize(across(.cols = everything(), .fns = mean, na.rm=T))
 ```
-
 
 ## Applying functions with `across` from `dplyr`
 
 Can use with other tidyverse functions like `group_by`!
 
 ```{r}
-cars_dbl %>%
-  group_by(Make) %>%
-  summarize(across(.cols = everything(), .fns = mean))
+ces_dbl %>%
+  group_by(CaliforniaCounty) %>%
+  summarize(across(.cols = everything(), .fns = mean, na.rm=T))
 ```
 
 
@@ -362,8 +363,8 @@ cars_dbl %>%
 To add arguments to functions, may need to use anonymous function. In this syntax, the shorthand `\(x)` is equivalent to `function(x)`.
 
 ```{r warning=FALSE}
-cars_dbl %>%
-  group_by(Make) %>%
+ces_dbl %>%
+  group_by(CaliforniaCounty) %>%
   summarize(across(.cols = everything(), .fns = \(x) mean(x, na.rm = TRUE)))
 ```
 
@@ -373,9 +374,9 @@ cars_dbl %>%
 Using different `tidyselect()` options (e.g., `starts_with()`, `ends_with()`, `contains()`)
 
 ```{r warning=FALSE}
-cars_dbl %>%
-  group_by(Make) %>%
-  summarize(across(.cols = starts_with("Veh"), .fns = mean))
+ces_dbl %>%
+  group_by(CaliforniaCounty) %>%
+  summarize(across(.cols = contains("Perc"), .fns = mean))
 ```
 
 
@@ -384,11 +385,11 @@ cars_dbl %>%
 Combining with `mutate()`: rounding to the nearest power of 10 (with negative digits value)
 
 ```{r}
-cars_dbl %>%
+ces_dbl %>%
   mutate(across(
-    .cols = starts_with("Veh"),
+    .cols = starts_with("CES"),
     .fns = round,
-    digits = -3
+    digits = 3
   ))
 ```
 
@@ -402,10 +403,7 @@ or
 ```replace_na({vector}, {single value})```
 
 ```{r warning=FALSE, message=FALSE}
-# Child mortality data
-mort <- read_mortality() %>% rename(country = `...1`)
-
-mort %>%
+yearly_co2_emissions %>%
   select(country, starts_with("194")) %>%
   mutate(across(
     .cols = c(`1943`, `1944`, `1945`),

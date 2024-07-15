@@ -353,238 +353,149 @@ display: none;
 </div>
 
 
-<p>Data in this lab comes from the CDC (<a href="https://covid.cdc.gov/covid-data-tracker/#vaccinations_vacc-total-admin-rate-total" class="uri">https://covid.cdc.gov/covid-data-tracker/#vaccinations_vacc-total-admin-rate-total</a>
-- snapshot from January 12, 2022) and the Bureau of Economic Analysis
-(<a href="https://www.bea.gov/data/income-saving/personal-income-by-state" class="uri">https://www.bea.gov/data/income-saving/personal-income-by-state</a>).</p>
+<p>Data in this lab comes from the OCS “Exploring CO2 emissions across
+time” activity (<a href="https://www.opencasestudies.org/ocs-bp-co2-emissions/" class="uri">https://www.opencasestudies.org/ocs-bp-co2-emissions/</a>)
+and the CO Department of Health (<a href="https://coepht.colorado.gov/heat-related-illness" class="uri">https://coepht.colorado.gov/heat-related-illness</a>). Both
+datasets are available in the <code>dasehr</code> package.</p>
 <pre class="r"><code>library(readr)
 library(dplyr)
-library(tidyr)</code></pre>
+library(tidyr)
+library(dasehr)</code></pre>
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>Read in the SARS-CoV-2 Vaccination data from <a href="https://daseh.org/data/USA_covid19_vaccinations.csv" class="uri">https://daseh.org/data/USA_covid19_vaccinations.csv</a>. You
-can use the url or download the data. Assign the data the name “vacc”.
-We will be reviewing new concepts here and incorporating some from week
-1.</p>
+<p>Open the <code>yearly_co2_emissions</code> dataset from the
+<code>dasehr</code> package and assign it to an object called
+<code>co2</code>. (You can also use <code>read_csv()</code> from the
+<code>readr</code> package and download the dataset directly from the
+daseh.org website: “<a href="https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv" class="uri">https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv</a>”)</p>
 <ul>
 <li>Remember to use <code>read_csv()</code> from the <code>readr</code>
 package.</li>
 <li>Do NOT use <code>read.csv()</code>.</li>
 </ul>
-<pre class="r"><code>vacc &lt;- read_csv(&quot;https://daseh.org/data/USA_covid19_vaccinations.csv&quot;)</code></pre>
-<pre><code>## Rows: 64 Columns: 125
+<pre class="r"><code>co2 &lt;- yearly_co2_emissions
+
+co2 &lt;- read_csv(&quot;https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv&quot;)</code></pre>
+<pre><code>## Rows: 192 Columns: 265
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr   (1): State/Territory/Federal Entity
-## dbl (121): Total Doses Delivered, Doses Delivered per 100K, 18+ Doses Delive...
-## lgl   (3): People with 2 Doses by State of Residence, People 18+ with 1+ Dos...
+## chr   (1): country
+## dbl (264): 1751, 1752, 1753, 1754, 1755, 1756, 1757, 1758, 1759, 1760, 1761,...
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code># If downloaded
-# vacc &lt;- read_csv(&quot;USA_covid19_vaccinations.csv&quot;)</code></pre>
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
 <p>Look at the column names using <code>colnames</code> - do you notice
 any patterns?</p>
-<pre class="r"><code>colnames(vacc)</code></pre>
-<pre><code>##   [1] &quot;State/Territory/Federal Entity&quot;                                    
-##   [2] &quot;Total Doses Delivered&quot;                                             
-##   [3] &quot;Doses Delivered per 100K&quot;                                          
-##   [4] &quot;18+ Doses Delivered per 100K&quot;                                      
-##   [5] &quot;Total Doses Administered by State where Administered&quot;              
-##   [6] &quot;Doses Administered per 100k by State where Administered&quot;           
-##   [7] &quot;18+ Doses Administered by State where Administered&quot;                
-##   [8] &quot;18+ Doses Administered per 100K by State where Administered&quot;       
-##   [9] &quot;People with at least One Dose by State of Residence&quot;               
-##  [10] &quot;Percent of Total Pop with at least One Dose by State of Residence&quot; 
-##  [11] &quot;People 18+ with at least One Dose by State of Residence&quot;           
-##  [12] &quot;Percent of 18+ Pop with at least One Dose by State of Residence&quot;   
-##  [13] &quot;People Fully Vaccinated by State of Residence&quot;                     
-##  [14] &quot;Percent of Total Pop Fully Vaccinated by State of Residence&quot;       
-##  [15] &quot;People 18+ Fully Vaccinated by State of Residence&quot;                 
-##  [16] &quot;Percent of 18+ Pop Fully Vaccinated by State of Residence&quot;         
-##  [17] &quot;Total Number of Pfizer doses delivered&quot;                            
-##  [18] &quot;Total Number of Moderna doses delivered&quot;                           
-##  [19] &quot;Total Number of Janssen doses delivered&quot;                           
-##  [20] &quot;Total Number of doses from Other manufacturer delivered&quot;           
-##  [21] &quot;Total Number of Janssen doses administered&quot;                        
-##  [22] &quot;Total Number of Moderna doses administered&quot;                        
-##  [23] &quot;Total Number of Pfizer doses adminstered&quot;                          
-##  [24] &quot;Total Number of doses from Other manufacturer administered&quot;        
-##  [25] &quot;People Fully Vaccinated Moderna Resident&quot;                          
-##  [26] &quot;People Fully Vaccinated Pfizer Resident&quot;                           
-##  [27] &quot;People Fully Vaccinated Janssen Resident&quot;                          
-##  [28] &quot;People Fully Vaccinated Other 2-dose manufacturer Resident&quot;        
-##  [29] &quot;People 18+ Fully Vaccinated Moderna Resident&quot;                      
-##  [30] &quot;People 18+ Fully Vaccinated Pfizer Resident&quot;                       
-##  [31] &quot;People 18+ Fully Vaccinated Janssen Resident&quot;                      
-##  [32] &quot;People 18+ Fully Vaccinated Other 2-dose manufacturer Resident&quot;    
-##  [33] &quot;People with 2 Doses by State of Residence&quot;                         
-##  [34] &quot;Percent of Total Pop with 1+ Doses by State of Residence&quot;          
-##  [35] &quot;People 18+ with 1+ Doses by State of Residence&quot;                    
-##  [36] &quot;Percent of 18+ Pop with 1+ Doses by State of Residence&quot;            
-##  [37] &quot;Percent of Total Pop with 2 Doses by State of Residence&quot;           
-##  [38] &quot;People 18+ with 2 Doses by State of Residence&quot;                     
-##  [39] &quot;Percent of 18+ Pop with 2 Doses by State of Residence&quot;             
-##  [40] &quot;People with 1+ Doses by State of Residence&quot;                        
-##  [41] &quot;People 65+ with at least One Dose by State of Residence&quot;           
-##  [42] &quot;Percent of 65+ Pop with at least One Dose by State of Residence&quot;   
-##  [43] &quot;People 65+ Fully Vaccinated by State of Residence&quot;                 
-##  [44] &quot;Percent of 65+ Pop Fully Vaccinated by State of Residence&quot;         
-##  [45] &quot;People 65+ Fully Vaccinated_Moderna_Resident&quot;                      
-##  [46] &quot;People 65+ Fully Vaccinated_Pfizer_Resident&quot;                       
-##  [47] &quot;People 65+ Fully Vaccinated_Janssen_Resident&quot;                      
-##  [48] &quot;People 65+ Fully Vaccinated_Other 2-dose Manuf_Resident&quot;           
-##  [49] &quot;65+ Doses Administered by State where Administered&quot;                
-##  [50] &quot;Doses Administered per 100k of 65+ pop by State where Administered&quot;
-##  [51] &quot;Doses Delivered per 100k of 65+ pop&quot;                               
-##  [52] &quot;People 12+ with at least One Dose by State of Residence&quot;           
-##  [53] &quot;Percent of 12+ Pop with at least One Dose by State of Residence&quot;   
-##  [54] &quot;People 12+ Fully Vaccinated by State of Residence&quot;                 
-##  [55] &quot;Percent of 12+ Pop Fully Vaccinated by State of Residence&quot;         
-##  [56] &quot;People 12+ Fully Vaccinated_Moderna_Resident&quot;                      
-##  [57] &quot;People 12+ Fully Vaccinated_Pfizer_Resident&quot;                       
-##  [58] &quot;People 12+ Fully Vaccinated_Janssen_Resident&quot;                      
-##  [59] &quot;People 12+ Fully Vaccinated_Other 2-dose Manuf_Resident&quot;           
-##  [60] &quot;12+ Doses Administered by State where Administered&quot;                
-##  [61] &quot;Doses Administered per 100k of 12+ pop by State where Administered&quot;
-##  [62] &quot;Doses Delivered per 100k of 12+ pop&quot;                               
-##  [63] &quot;People 5+ with at least One Dose by State of Residence&quot;            
-##  [64] &quot;Percent of 5+ Pop with at least One Dose by State of Residence&quot;    
-##  [65] &quot;People 5+ Fully Vaccinated by State of Residence&quot;                  
-##  [66] &quot;Percent of 5+ Pop Fully Vaccinated by State of Residence&quot;          
-##  [67] &quot;People 5+ Fully Vaccinated_Moderna_Resident&quot;                       
-##  [68] &quot;People 5+ Fully Vaccinated_Pfizer_Resident&quot;                        
-##  [69] &quot;People 5+ Fully Vaccinated_Janssen_Resident&quot;                       
-##  [70] &quot;People 5+ Fully Vaccinated_Other 2-dose Manuf_Resident&quot;            
-##  [71] &quot;5+ Doses Administered by State where Administered&quot;                 
-##  [72] &quot;Doses Administered per 100k of 5+ pop  by State where Administered&quot;
-##  [73] &quot;Doses Delivered per 100k of 5+ pop&quot;                                
-##  [74] &quot;People who have received a booster dose&quot;                           
-##  [75] &quot;Percent of fully vaccinated people with booster doses&quot;             
-##  [76] &quot;People 18+ who have received a booster dose&quot;                       
-##  [77] &quot;Percent of fully vaccinated people 18+ with booster doses&quot;         
-##  [78] &quot;People 50+ who have received a booster dose&quot;                       
-##  [79] &quot;Percent of fully vaccinated people 50+ with booster doses&quot;         
-##  [80] &quot;People 65+ who have received a booster dose&quot;                       
-##  [81] &quot;Percent of fully vaccinated people 65+ with booster doses&quot;         
-##  [82] &quot;People with Moderna booster dose&quot;                                  
-##  [83] &quot;People with Pfizer booster dose&quot;                                   
-##  [84] &quot;People with Janssen booster dose&quot;                                  
-##  [85] &quot;People with booster dose of an Other manufacturer&quot;                 
-##  [86] &quot;Total Count People w/Booster Primary Pfizer Minus TX&quot;              
-##  [87] &quot;Total Count People w/Booster Primary Moderna Minus TX&quot;             
-##  [88] &quot;Total Count People w/Booster Primary J&amp;J Minus TX&quot;                 
-##  [89] &quot;Total Count People w/Booster Primary Other Minus TX&quot;               
-##  [90] &quot;Total Count People w/Booster Booster Pfizer Minus TX&quot;              
-##  [91] &quot;Total Count People w/Booster Booster Moderna Minus TX&quot;             
-##  [92] &quot;Total Count People w/Booster Booster J&amp;J Minus TX&quot;                 
-##  [93] &quot;Total Count People w/Booster Booster Other Minus TX&quot;               
-##  [94] &quot;Count People Primary Pfizer Booster Pfizer&quot;                        
-##  [95] &quot;Count People Primary Pfizer Booster Moderna&quot;                       
-##  [96] &quot;Count People Primary Pfizer Booster J&amp;J&quot;                           
-##  [97] &quot;Count People Primary Pfizer Booster Uknown&quot;                        
-##  [98] &quot;Count People Primary Moderna Booster Pfizer&quot;                       
-##  [99] &quot;Count People Primary Moderna Booster Moderna&quot;                      
-## [100] &quot;Count People Primary Moderna Booster J&amp;J&quot;                          
-## [101] &quot;Count People Primary Moderna Booster Uknown&quot;                       
-## [102] &quot;Count People Primary J&amp;J Booster Pfizer&quot;                           
-## [103] &quot;Count People Primary J&amp;J Booster Moderna&quot;                          
-## [104] &quot;Count People Primary J&amp;J Booster J&amp;J&quot;                              
-## [105] &quot;Count People Primary J&amp;J Booster Other&quot;                            
-## [106] &quot;Count People Primary Other Booster Pfizer&quot;                         
-## [107] &quot;Count People Primary Other Booster Moderna&quot;                        
-## [108] &quot;Count People Primary Other Booster J&amp;J&quot;                            
-## [109] &quot;Count People Primary Other Booster Other&quot;                          
-## [110] &quot;Percent People Primary Pfizer Booster Pfizer&quot;                      
-## [111] &quot;Percent People Primary Pfizer Booster Moderna&quot;                     
-## [112] &quot;Percent People Primary Pfizer Booster J&amp;J&quot;                         
-## [113] &quot;Percent People Primary Pfizer Booster Other&quot;                       
-## [114] &quot;Percent People Primary Moderna Booster Pfizer&quot;                     
-## [115] &quot;Percent People Primary Moderna Booster Moderna&quot;                    
-## [116] &quot;Percent People Primary Moderna Booster J&amp;J&quot;                        
-## [117] &quot;Percent People Primary Moderna Booster Other&quot;                      
-## [118] &quot;Percent People Primary J&amp;J Booster Pfizer&quot;                         
-## [119] &quot;Percent People Primary J&amp;J Booster Moderna&quot;                        
-## [120] &quot;Percent People Primary J&amp;J Booster J&amp;J&quot;                            
-## [121] &quot;Percent People Primary J&amp;J Booster Other&quot;                          
-## [122] &quot;Percent People Primary Other Booster Pfizer&quot;                       
-## [123] &quot;Percent People Primary Other Booster Moderna&quot;                      
-## [124] &quot;Percent People Primary Other Booster J&amp;J&quot;                          
-## [125] &quot;Percent People Primary Other Booster Uknown&quot;</code></pre>
-<pre class="r"><code># Looks like many start with &quot;Percent&quot; and some start with &quot;Total&quot; - this indicates there are different units of measure for these different variables!</code></pre>
+<pre class="r"><code>colnames(co2)</code></pre>
+<pre><code>##   [1] &quot;country&quot; &quot;1751&quot;    &quot;1752&quot;    &quot;1753&quot;    &quot;1754&quot;    &quot;1755&quot;    &quot;1756&quot;   
+##   [8] &quot;1757&quot;    &quot;1758&quot;    &quot;1759&quot;    &quot;1760&quot;    &quot;1761&quot;    &quot;1762&quot;    &quot;1763&quot;   
+##  [15] &quot;1764&quot;    &quot;1765&quot;    &quot;1766&quot;    &quot;1767&quot;    &quot;1768&quot;    &quot;1769&quot;    &quot;1770&quot;   
+##  [22] &quot;1771&quot;    &quot;1772&quot;    &quot;1773&quot;    &quot;1774&quot;    &quot;1775&quot;    &quot;1776&quot;    &quot;1777&quot;   
+##  [29] &quot;1778&quot;    &quot;1779&quot;    &quot;1780&quot;    &quot;1781&quot;    &quot;1782&quot;    &quot;1783&quot;    &quot;1784&quot;   
+##  [36] &quot;1785&quot;    &quot;1786&quot;    &quot;1787&quot;    &quot;1788&quot;    &quot;1789&quot;    &quot;1790&quot;    &quot;1791&quot;   
+##  [43] &quot;1792&quot;    &quot;1793&quot;    &quot;1794&quot;    &quot;1795&quot;    &quot;1796&quot;    &quot;1797&quot;    &quot;1798&quot;   
+##  [50] &quot;1799&quot;    &quot;1800&quot;    &quot;1801&quot;    &quot;1802&quot;    &quot;1803&quot;    &quot;1804&quot;    &quot;1805&quot;   
+##  [57] &quot;1806&quot;    &quot;1807&quot;    &quot;1808&quot;    &quot;1809&quot;    &quot;1810&quot;    &quot;1811&quot;    &quot;1812&quot;   
+##  [64] &quot;1813&quot;    &quot;1814&quot;    &quot;1815&quot;    &quot;1816&quot;    &quot;1817&quot;    &quot;1818&quot;    &quot;1819&quot;   
+##  [71] &quot;1820&quot;    &quot;1821&quot;    &quot;1822&quot;    &quot;1823&quot;    &quot;1824&quot;    &quot;1825&quot;    &quot;1826&quot;   
+##  [78] &quot;1827&quot;    &quot;1828&quot;    &quot;1829&quot;    &quot;1830&quot;    &quot;1831&quot;    &quot;1832&quot;    &quot;1833&quot;   
+##  [85] &quot;1834&quot;    &quot;1835&quot;    &quot;1836&quot;    &quot;1837&quot;    &quot;1838&quot;    &quot;1839&quot;    &quot;1840&quot;   
+##  [92] &quot;1841&quot;    &quot;1842&quot;    &quot;1843&quot;    &quot;1844&quot;    &quot;1845&quot;    &quot;1846&quot;    &quot;1847&quot;   
+##  [99] &quot;1848&quot;    &quot;1849&quot;    &quot;1850&quot;    &quot;1851&quot;    &quot;1852&quot;    &quot;1853&quot;    &quot;1854&quot;   
+## [106] &quot;1855&quot;    &quot;1856&quot;    &quot;1857&quot;    &quot;1858&quot;    &quot;1859&quot;    &quot;1860&quot;    &quot;1861&quot;   
+## [113] &quot;1862&quot;    &quot;1863&quot;    &quot;1864&quot;    &quot;1865&quot;    &quot;1866&quot;    &quot;1867&quot;    &quot;1868&quot;   
+## [120] &quot;1869&quot;    &quot;1870&quot;    &quot;1871&quot;    &quot;1872&quot;    &quot;1873&quot;    &quot;1874&quot;    &quot;1875&quot;   
+## [127] &quot;1876&quot;    &quot;1877&quot;    &quot;1878&quot;    &quot;1879&quot;    &quot;1880&quot;    &quot;1881&quot;    &quot;1882&quot;   
+## [134] &quot;1883&quot;    &quot;1884&quot;    &quot;1885&quot;    &quot;1886&quot;    &quot;1887&quot;    &quot;1888&quot;    &quot;1889&quot;   
+## [141] &quot;1890&quot;    &quot;1891&quot;    &quot;1892&quot;    &quot;1893&quot;    &quot;1894&quot;    &quot;1895&quot;    &quot;1896&quot;   
+## [148] &quot;1897&quot;    &quot;1898&quot;    &quot;1899&quot;    &quot;1900&quot;    &quot;1901&quot;    &quot;1902&quot;    &quot;1903&quot;   
+## [155] &quot;1904&quot;    &quot;1905&quot;    &quot;1906&quot;    &quot;1907&quot;    &quot;1908&quot;    &quot;1909&quot;    &quot;1910&quot;   
+## [162] &quot;1911&quot;    &quot;1912&quot;    &quot;1913&quot;    &quot;1914&quot;    &quot;1915&quot;    &quot;1916&quot;    &quot;1917&quot;   
+## [169] &quot;1918&quot;    &quot;1919&quot;    &quot;1920&quot;    &quot;1921&quot;    &quot;1922&quot;    &quot;1923&quot;    &quot;1924&quot;   
+## [176] &quot;1925&quot;    &quot;1926&quot;    &quot;1927&quot;    &quot;1928&quot;    &quot;1929&quot;    &quot;1930&quot;    &quot;1931&quot;   
+## [183] &quot;1932&quot;    &quot;1933&quot;    &quot;1934&quot;    &quot;1935&quot;    &quot;1936&quot;    &quot;1937&quot;    &quot;1938&quot;   
+## [190] &quot;1939&quot;    &quot;1940&quot;    &quot;1941&quot;    &quot;1942&quot;    &quot;1943&quot;    &quot;1944&quot;    &quot;1945&quot;   
+## [197] &quot;1946&quot;    &quot;1947&quot;    &quot;1948&quot;    &quot;1949&quot;    &quot;1950&quot;    &quot;1951&quot;    &quot;1952&quot;   
+## [204] &quot;1953&quot;    &quot;1954&quot;    &quot;1955&quot;    &quot;1956&quot;    &quot;1957&quot;    &quot;1958&quot;    &quot;1959&quot;   
+## [211] &quot;1960&quot;    &quot;1961&quot;    &quot;1962&quot;    &quot;1963&quot;    &quot;1964&quot;    &quot;1965&quot;    &quot;1966&quot;   
+## [218] &quot;1967&quot;    &quot;1968&quot;    &quot;1969&quot;    &quot;1970&quot;    &quot;1971&quot;    &quot;1972&quot;    &quot;1973&quot;   
+## [225] &quot;1974&quot;    &quot;1975&quot;    &quot;1976&quot;    &quot;1977&quot;    &quot;1978&quot;    &quot;1979&quot;    &quot;1980&quot;   
+## [232] &quot;1981&quot;    &quot;1982&quot;    &quot;1983&quot;    &quot;1984&quot;    &quot;1985&quot;    &quot;1986&quot;    &quot;1987&quot;   
+## [239] &quot;1988&quot;    &quot;1989&quot;    &quot;1990&quot;    &quot;1991&quot;    &quot;1992&quot;    &quot;1993&quot;    &quot;1994&quot;   
+## [246] &quot;1995&quot;    &quot;1996&quot;    &quot;1997&quot;    &quot;1998&quot;    &quot;1999&quot;    &quot;2000&quot;    &quot;2001&quot;   
+## [253] &quot;2002&quot;    &quot;2003&quot;    &quot;2004&quot;    &quot;2005&quot;    &quot;2006&quot;    &quot;2007&quot;    &quot;2008&quot;   
+## [260] &quot;2009&quot;    &quot;2010&quot;    &quot;2011&quot;    &quot;2012&quot;    &quot;2013&quot;    &quot;2014&quot;</code></pre>
+<pre class="r"><code># Most column names are years</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
-<p>Let’s rename the column “State/Territory/Federal Entity” in “vacc” to
-“Entity” using <code>rename</code>. Make sure to reassign to
-<code>vacc</code> here and in subsequent steps.</p>
+<p>Let’s rename the column “2011” in “co2” to “CO2_2011” using
+<code>rename</code>. Repeat this for the years 2012, 2013, and 2014.
+Make sure to reassign to <code>co2</code> here and in subsequent
+steps.</p>
 <pre><code># General format
 new_data &lt;- old_data %&gt;% rename(newname = oldname)</code></pre>
-<pre class="r"><code>vacc &lt;- vacc %&gt;% rename(Entity = `State/Territory/Federal Entity`)</code></pre>
+<pre class="r"><code>co2 &lt;- co2 %&gt;% rename(
+  CO2_2011 = `2011`,
+  CO2_2012 = `2012`,
+  CO2_2013 = `2013`,
+  CO2_2014 = `2014`
+)</code></pre>
 </div>
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
-<p>Select only the columns “Entity”, and those that start with
-“Percent”. Use <code>select</code> and
-<code>starts_with(&quot;Percent&quot;)</code>.</p>
+<p>Select only the columns “country”, and those that start with “CO2_”.
+Use <code>select</code> and <code>starts_with(&quot;CO2_&quot;)</code>.</p>
 <pre><code># General format
 new_data &lt;- old_data %&gt;% select(colname1, colname2, ...)</code></pre>
-<pre class="r"><code>vacc &lt;- vacc %&gt;% select(Entity, starts_with(&quot;Percent&quot;))</code></pre>
+<pre class="r"><code>co2 &lt;- co2 %&gt;% select(country, starts_with(&quot;CO2_&quot;))</code></pre>
 </div>
 <div id="section-4" class="section level3">
 <h3>1.5</h3>
-<p>Create a new dataset “vacc_long” that does
-<code>pivot_longer()</code> on all columns except “Entity”. Remember
-that <code>!Entity</code> means all columns except “Entity”.</p>
+<p>Create a new dataset “co2_long” that does <code>pivot_longer()</code>
+on all columns except “country”. Remember that <code>!country</code>
+means all columns except “country”.</p>
 <pre><code># General format
 new_data &lt;- old_data %&gt;% pivot_longer(cols = colname(s))</code></pre>
-<pre class="r"><code>vacc_long &lt;- vacc %&gt;% pivot_longer(cols = !Entity)</code></pre>
+<pre class="r"><code>co2_long &lt;- co2 %&gt;% pivot_longer(cols = !country)</code></pre>
 </div>
 <div id="section-5" class="section level3">
 <h3>1.6</h3>
-<p>Using <code>vacc_long</code>, filter the “Entity” column so it only
-includes values in the following list:
-“Maryland”,“Virginia”,“Florida”,“Massachusetts”, “United States”.
-<strong>Hint</strong>: use <code>filter</code> and
-<code>%in%</code>.</p>
+<p>Using <code>co2_long</code>, filter the “country” column so it only
+includes values from Indonesia and Canada. <strong>Hint</strong>: use
+<code>filter</code> and <code>%in%</code>.</p>
 <pre><code># General format
-new_data &lt;- old_data %&gt;% filter(colname %in% c(1, 2, 3, ...))</code></pre>
-<pre class="r"><code>vacc_long &lt;- vacc_long %&gt;%
-  filter(Entity %in% c(&quot;Maryland&quot;, &quot;Virginia&quot;, &quot;Mississippi&quot;, &quot;Massachusetts&quot;, &quot;United States&quot;))</code></pre>
+new_data &lt;- old_data %&gt;% filter(colname %in% c(...))</code></pre>
+<pre class="r"><code>co2_long &lt;- co2_long %&gt;%
+  filter(country %in% c(&quot;Indonesia&quot;, &quot;Canada&quot;))</code></pre>
 </div>
 <div id="section-6" class="section level3">
 <h3>1.7</h3>
-<p>Use <code>pivot_wider</code> to reshape “vacc_long”. Use “Entity” for
+<p>Use <code>pivot_wider</code> to reshape “co2_long”. Use “county” for
 the <code>names_from</code> argument. Use “value” for the
 <code>values_from</code> argument. Call this new data
-<code>vacc_wide</code>. Look at the data. How do these states compare to
-one another.</p>
+<code>co2_wide</code>. Look at the data. How do these years compare to
+one another?</p>
 <pre><code># General format
 new_data &lt;- old_data %&gt;% pivot_wider(names_from = column1, values_from = column2)</code></pre>
-<pre class="r"><code>vacc_wide &lt;- vacc_long %&gt;%
+<pre class="r"><code>co2_wide &lt;- co2_long %&gt;%
   pivot_wider(
-    names_from = Entity,
+    names_from = country,
     values_from = value
   )
-vacc_wide</code></pre>
-<pre><code>## # A tibble: 34 × 6
-##    name              `United States` Massachusetts Maryland Mississippi Virginia
-##    &lt;chr&gt;                       &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;
-##  1 Percent of Total…            74.6          92.4     81.6        56.4     80.2
-##  2 Percent of 18+ P…            86.6          95       92.9        68.1     91.3
-##  3 Percent of Total…            62.7          75.3     71.1        48.8     68.7
-##  4 Percent of 18+ P…            73.4          84       81.6        59.5     78.5
-##  5 Percent of Total…            74.6          92.4     81.6        56.4     80.2
-##  6 Percent of 18+ P…            86.6          95       92.9        68.1     91.3
-##  7 Percent of Total…            59.1          71.9     68          46.7     65.4
-##  8 Percent of 18+ P…            68.7          79.7     77.6        56.7     74.3
-##  9 Percent of 65+ P…            95            95       95          89.8     95  
-## 10 Percent of 65+ P…            88            93       92.6        82.1     90.1
-## # ℹ 24 more rows</code></pre>
+co2_wide</code></pre>
+<pre><code>## # A tibble: 4 × 3
+##   name     Canada Indonesia
+##   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 CO2_2011 537000    604000
+## 2 CO2_2012 517000    637000
+## 3 CO2_2013 517000    490000
+## 4 CO2_2014 537000    464000</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
@@ -593,207 +504,229 @@ vacc_wide</code></pre>
 <h3>P.1</h3>
 <p>Take the code from Questions 1.1 and 1.3-1.7. Chain all of this code
 together using the pipe <code>%&gt;%</code>. Call your data
-<code>vacc_compare</code>.</p>
-<pre class="r"><code>vacc_compare &lt;-
-  read_csv(&quot;https://daseh.org/data/USA_covid19_vaccinations.csv&quot;) %&gt;%
-  rename(Entity = `State/Territory/Federal Entity`) %&gt;%
-  select(Entity, starts_with(&quot;Percent&quot;)) %&gt;%
-  pivot_longer(cols = !Entity) %&gt;%
-  filter(Entity %in% c(&quot;Maryland&quot;, &quot;Virginia&quot;, &quot;Mississippi&quot;, &quot;Massachusetts&quot;, &quot;United States&quot;)) %&gt;%
-  pivot_wider(names_from = Entity, values_from = value)</code></pre>
-<pre><code>## Rows: 64 Columns: 125
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr   (1): State/Territory/Federal Entity
-## dbl (121): Total Doses Delivered, Doses Delivered per 100K, 18+ Doses Delive...
-## lgl   (3): People with 2 Doses by State of Residence, People 18+ with 1+ Dos...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>vacc_compare</code></pre>
-<pre><code>## # A tibble: 34 × 6
-##    name              `United States` Massachusetts Maryland Mississippi Virginia
-##    &lt;chr&gt;                       &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;
-##  1 Percent of Total…            74.6          92.4     81.6        56.4     80.2
-##  2 Percent of 18+ P…            86.6          95       92.9        68.1     91.3
-##  3 Percent of Total…            62.7          75.3     71.1        48.8     68.7
-##  4 Percent of 18+ P…            73.4          84       81.6        59.5     78.5
-##  5 Percent of Total…            74.6          92.4     81.6        56.4     80.2
-##  6 Percent of 18+ P…            86.6          95       92.9        68.1     91.3
-##  7 Percent of Total…            59.1          71.9     68          46.7     65.4
-##  8 Percent of 18+ P…            68.7          79.7     77.6        56.7     74.3
-##  9 Percent of 65+ P…            95            95       95          89.8     95  
-## 10 Percent of 65+ P…            88            93       92.6        82.1     90.1
-## # ℹ 24 more rows</code></pre>
+<code>co2_compare</code>.</p>
+<pre class="r"><code>co2_compare &lt;-
+  yearly_co2_emissions %&gt;%
+  rename(
+    CO2_2011 = `2011`,
+    CO2_2012 = `2012`,
+    CO2_2013 = `2013`,
+    CO2_2014 = `2014`
+  ) %&gt;% select(country, starts_with(&quot;CO2_&quot;)) %&gt;%
+  pivot_longer(cols = !country) %&gt;%
+  filter(country %in% c(&quot;Indonesia&quot;, &quot;Canada&quot;)) %&gt;%
+  pivot_wider(names_from = country, values_from = value)
+
+co2_compare</code></pre>
+<pre><code>## # A tibble: 4 × 3
+##   name     Canada Indonesia
+##   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 CO2_2011 537000    604000
+## 2 CO2_2012 517000    637000
+## 3 CO2_2013 517000    490000
+## 4 CO2_2014 537000    464000</code></pre>
 </div>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
 <p>Modify the code from Question P.1:</p>
 <ul>
-<li>Look for columns that start with “Total” (instead of “Percent”)
-and</li>
-<li>Select different states/Entities to compare</li>
-<li>Call your data <code>vacc_compare2</code></li>
+<li>Choose 4 different years to examine</li>
+<li>Select different countries to compare</li>
+<li>Call your data <code>co2_compare2</code></li>
 </ul>
-<pre class="r"><code>vacc_compare2 &lt;-
-  read_csv(&quot;https://daseh.org/data/USA_covid19_vaccinations.csv&quot;) %&gt;%
-  rename(Entity = `State/Territory/Federal Entity`) %&gt;%
-  select(Entity, starts_with(&quot;Total&quot;)) %&gt;%
-  pivot_longer(cols = !Entity) %&gt;%
-  filter(Entity %in% c(&quot;Alaska&quot;, &quot;Kansas&quot;, &quot;California&quot;, &quot;United States&quot;)) %&gt;%
-  pivot_wider(names_from = Entity, values_from = value)</code></pre>
-<pre><code>## Rows: 64 Columns: 125
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr   (1): State/Territory/Federal Entity
-## dbl (121): Total Doses Delivered, Doses Delivered per 100K, 18+ Doses Delive...
-## lgl   (3): People with 2 Doses by State of Residence, People 18+ with 1+ Dos...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>vacc_compare2</code></pre>
-<pre><code>## # A tibble: 18 × 5
-##    name                               `United States`  Alaska California  Kansas
-##    &lt;chr&gt;                                        &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Total Doses Delivered                    644652095 1357405   79693945 5368725
-##  2 Total Doses Administered by State…       522482674 1043804   67991446 4182762
-##  3 Total Number of Pfizer doses deli…       377143375  747845   47476225 3066565
-##  4 Total Number of Moderna doses del…       237709320  526160   28618920 2051060
-##  5 Total Number of Janssen doses del…        29799400   83400    3598800  251100
-##  6 Total Number of doses from Other …               0       0          0       0
-##  7 Total Number of Janssen doses adm…        17863666   41559    2230377  129839
-##  8 Total Number of Moderna doses adm…       198923979  405736   25742821 1607286
-##  9 Total Number of Pfizer doses admi…       305145563  595640   40002071 2442144
-## 10 Total Number of doses from Other …          549466     869      16177    3493
-## 11 Total Count People w/Booster Prim…        37991785      NA         NA      NA
-## 12 Total Count People w/Booster Prim…        29736587      NA         NA      NA
-## 13 Total Count People w/Booster Prim…         4007501      NA         NA      NA
-## 14 Total Count People w/Booster Prim…              NA      NA         NA      NA
-## 15 Total Count People w/Booster Boos…        38875578      NA         NA      NA
-## 16 Total Count People w/Booster Boos…        31851324      NA         NA      NA
-## 17 Total Count People w/Booster Boos…         1069038      NA         NA      NA
-## 18 Total Count People w/Booster Boos…           16852      NA         NA      NA</code></pre>
+<pre class="r"><code>co2_compare2 &lt;-
+  yearly_co2_emissions %&gt;%
+  rename(
+    CO2_1950 = `1950`,
+    CO2_1960 = `1960`,
+    CO2_1970 = `1970`,
+    CO2_1980 = `1980`
+  ) %&gt;% select(country, starts_with(&quot;CO2_&quot;)) %&gt;%
+  pivot_longer(cols = !country) %&gt;%
+  filter(country %in% c(&quot;Brazil&quot;, &quot;Mexico&quot;)) %&gt;%
+  pivot_wider(names_from = country, values_from = value)
+
+co2_compare2</code></pre>
+<pre><code>## # A tibble: 4 × 3
+##   name     Brazil Mexico
+##   &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+## 1 CO2_1950  19700  30500
+## 2 CO2_1960  46900  63100
+## 3 CO2_1970  93800 114000
+## 4 CO2_1980 187000 268000</code></pre>
 </div>
 </div>
 <div id="part-2" class="section level1">
 <h1>Part 2</h1>
 <div id="section-7" class="section level3">
 <h3>2.1</h3>
-<p>Read in the GDP and Personal Income Data from <a href="https://daseh.org/data/gdp_personal_income.csv" class="uri">https://daseh.org/data/gdp_personal_income.csv</a>. You can
-use the url or download the data. Call it “gdp”.</p>
-<pre class="r"><code>gdp &lt;- read_csv(&quot;https://daseh.org/data/gdp_personal_income.csv&quot;)</code></pre>
-<pre><code>## Rows: 180 Columns: 3
+<p>Open the <code>Yearly_CC_Disasters</code> dataset using the url
+below. Save the dataset as an object called “cc”. rename the column
+“Country” to “country”.</p>
+<p>“<a href="https://daseh.org/data/Yearly_CC_Disasters.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters.csv</a>”</p>
+<pre class="r"><code>cc &lt;- read_csv(&quot;https://daseh.org/data/Yearly_CC_Disasters.csv&quot;) %&gt;% 
+  rename(country = Country)</code></pre>
+<pre><code>## Rows: 970 Columns: 53
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr (2): GeoName, Description
-## dbl (1): 2020
+## chr  (9): Country, ISO2, ISO3, Indicator, Unit, Source, CTS Code, CTS Name, ...
+## dbl (44): ObjectId, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 19...
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code># If downloaded
-# gdp &lt;- read_csv(&quot;gdp_personal_income.csv&quot;)</code></pre>
 </div>
 <div id="section-8" class="section level3">
 <h3>2.2</h3>
-<p>Use <code>pivot_wider</code> to reshape “gdp”. Use “Description” for
-the <code>names_from</code> argument. Use “<code>2020</code>” for the
-<code>values_from</code> argument. Reassign this data to “gdp”.</p>
+<p>Join the datasets “co2” and “cc” by “country”. Keep all rows, even if
+there is no match. How many rows are there?</p>
 <pre><code># General format
-new_data &lt;- old_data %&gt;% pivot_wider(names_from = column1, values_from = column2)</code></pre>
-<pre class="r"><code>gdp &lt;- gdp %&gt;%
-  pivot_wider(
-    names_from = Description,
-    values_from = `2020`
-  )</code></pre>
+full_join(data1, data2, by = &quot;&quot;)</code></pre>
+<pre class="r"><code>full_join(co2, cc, by = &quot;country&quot;)</code></pre>
+<pre><code>## # A tibble: 1,032 × 57
+##    country    CO2_2011 CO2_2012 CO2_2013 CO2_2014 ObjectId ISO2  ISO3  Indicator
+##    &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    
+##  1 Afghanist…    12200    10800    10000     9810       NA &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;     
+##  2 Albania        5240     4910     5060     5720        8 AL    ALB   Climate …
+##  3 Albania        5240     4910     5060     5720        9 AL    ALB   Climate …
+##  4 Albania        5240     4910     5060     5720       10 AL    ALB   Climate …
+##  5 Albania        5240     4910     5060     5720       11 AL    ALB   Climate …
+##  6 Albania        5240     4910     5060     5720       12 AL    ALB   Climate …
+##  7 Albania        5240     4910     5060     5720       13 AL    ALB   Climate …
+##  8 Albania        5240     4910     5060     5720       14 AL    ALB   Climate …
+##  9 Algeria      121000   130000   134000   145000       15 DZ    DZA   Climate …
+## 10 Algeria      121000   130000   134000   145000       16 DZ    DZA   Climate …
+## # ℹ 1,022 more rows
+## # ℹ 48 more variables: Unit &lt;chr&gt;, Source &lt;chr&gt;, `CTS Code` &lt;chr&gt;,
+## #   `CTS Name` &lt;chr&gt;, `CTS Full Descriptor` &lt;chr&gt;, `1980` &lt;dbl&gt;, `1981` &lt;dbl&gt;,
+## #   `1982` &lt;dbl&gt;, `1983` &lt;dbl&gt;, `1984` &lt;dbl&gt;, `1985` &lt;dbl&gt;, `1986` &lt;dbl&gt;,
+## #   `1987` &lt;dbl&gt;, `1988` &lt;dbl&gt;, `1989` &lt;dbl&gt;, `1990` &lt;dbl&gt;, `1991` &lt;dbl&gt;,
+## #   `1992` &lt;dbl&gt;, `1993` &lt;dbl&gt;, `1994` &lt;dbl&gt;, `1995` &lt;dbl&gt;, `1996` &lt;dbl&gt;,
+## #   `1997` &lt;dbl&gt;, `1998` &lt;dbl&gt;, `1999` &lt;dbl&gt;, `2000` &lt;dbl&gt;, `2001` &lt;dbl&gt;, …</code></pre>
+<pre class="r"><code># 1,032 rows</code></pre>
 </div>
 <div id="section-9" class="section level3">
 <h3>2.3</h3>
-<p>Join the data. Keep only data that is found in both “vacc” and
-“gdp”.</p>
-<ul>
-<li>First, try joining without using the <code>by</code> argument - what
-happens?</li>
-<li>Next, try joining using
-<code>by = c(&quot;Entity&quot; = &quot;GeoName&quot;)</code>.</li>
-<li>Call the output “merged”. How many observations (rows) are
-there?</li>
-</ul>
+<p>Join the datasets “co2” and “cc” by “country”. Keep only rows that
+match both datasets. How many rows are there?</p>
 <pre><code># General format
-new_data &lt;- inner_join(x, y, by = c(&quot;colname1&quot; = &quot;colname2&quot;))</code></pre>
-<pre class="r"><code># merged &lt;- inner_join(vacc, gdp) does not work!
-merged &lt;- inner_join(vacc, gdp, by = c(&quot;Entity&quot; = &quot;GeoName&quot;))
-nrow(merged)</code></pre>
-<pre><code>## [1] 51</code></pre>
+inner_join(data1, data2, by = &quot;&quot;)</code></pre>
+<pre class="r"><code>inner_join(co2, cc, by = &quot;country&quot;)</code></pre>
+<pre><code>## # A tibble: 628 × 57
+##    country CO2_2011 CO2_2012 CO2_2013 CO2_2014 ObjectId ISO2  ISO3  Indicator   
+##    &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;       
+##  1 Albania     5240     4910     5060     5720        8 AL    ALB   Climate rel…
+##  2 Albania     5240     4910     5060     5720        9 AL    ALB   Climate rel…
+##  3 Albania     5240     4910     5060     5720       10 AL    ALB   Climate rel…
+##  4 Albania     5240     4910     5060     5720       11 AL    ALB   Climate rel…
+##  5 Albania     5240     4910     5060     5720       12 AL    ALB   Climate rel…
+##  6 Albania     5240     4910     5060     5720       13 AL    ALB   Climate rel…
+##  7 Albania     5240     4910     5060     5720       14 AL    ALB   Climate rel…
+##  8 Algeria   121000   130000   134000   145000       15 DZ    DZA   Climate rel…
+##  9 Algeria   121000   130000   134000   145000       16 DZ    DZA   Climate rel…
+## 10 Algeria   121000   130000   134000   145000       17 DZ    DZA   Climate rel…
+## # ℹ 618 more rows
+## # ℹ 48 more variables: Unit &lt;chr&gt;, Source &lt;chr&gt;, `CTS Code` &lt;chr&gt;,
+## #   `CTS Name` &lt;chr&gt;, `CTS Full Descriptor` &lt;chr&gt;, `1980` &lt;dbl&gt;, `1981` &lt;dbl&gt;,
+## #   `1982` &lt;dbl&gt;, `1983` &lt;dbl&gt;, `1984` &lt;dbl&gt;, `1985` &lt;dbl&gt;, `1986` &lt;dbl&gt;,
+## #   `1987` &lt;dbl&gt;, `1988` &lt;dbl&gt;, `1989` &lt;dbl&gt;, `1990` &lt;dbl&gt;, `1991` &lt;dbl&gt;,
+## #   `1992` &lt;dbl&gt;, `1993` &lt;dbl&gt;, `1994` &lt;dbl&gt;, `1995` &lt;dbl&gt;, `1996` &lt;dbl&gt;,
+## #   `1997` &lt;dbl&gt;, `1998` &lt;dbl&gt;, `1999` &lt;dbl&gt;, `2000` &lt;dbl&gt;, `2001` &lt;dbl&gt;, …</code></pre>
+<pre class="r"><code># 628 rows</code></pre>
 </div>
 <div id="section-10" class="section level3">
 <h3>2.4</h3>
-<p>Change your code from Question 10 to do a <code>full_join.</code>
-Call the output “full”. How many observations (rows) are there?</p>
+<p>What countries are present in “co2” that are not present in “cc”? Use
+<code>anti_join</code>. What countries are present in “cc” that are not
+present in “co2”?</p>
 <pre><code># General format
-new_data &lt;- full_join(x, y, by = c(&quot;colname1&quot; = &quot;colname2&quot;))</code></pre>
-<pre class="r"><code>full &lt;- full_join(vacc, gdp, by = c(&quot;Entity&quot; = &quot;GeoName&quot;))
-nrow(full)</code></pre>
-<pre><code>## [1] 73</code></pre>
+anti_join(data1, data2, by = &quot;&quot;) %&gt;% select(index)</code></pre>
+<pre class="r"><code>anti_join(co2, cc, by = &quot;country&quot;) %&gt;% select(country)</code></pre>
+<pre><code>## # A tibble: 62 × 1
+##    country                 
+##    &lt;chr&gt;                   
+##  1 Afghanistan             
+##  2 Andorra                 
+##  3 Armenia                 
+##  4 Azerbaijan              
+##  5 Bahamas                 
+##  6 Bahrain                 
+##  7 Belarus                 
+##  8 Brunei                  
+##  9 Cape Verde              
+## 10 Central African Republic
+## # ℹ 52 more rows</code></pre>
+<pre class="r"><code>anti_join(cc, co2, by = &quot;country&quot;) %&gt;% select(country) %&gt;% distinct()</code></pre>
+<pre><code>## # A tibble: 85 × 1
+##    country                     
+##    &lt;chr&gt;                       
+##  1 Afghanistan, Islamic Rep. of
+##  2 American Samoa              
+##  3 Anguilla                    
+##  4 Armenia, Rep. of            
+##  5 Azerbaijan, Rep. of         
+##  6 Azores Island               
+##  7 Bahamas, The                
+##  8 Belarus, Rep. of            
+##  9 Bermuda                     
+## 10 British Virgin Islands      
+## # ℹ 75 more rows</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own-1" class="section level1">
 <h1>Practice on Your Own!</h1>
 <div id="p.3" class="section level3">
 <h3>P.3</h3>
-<p>Do a left join of “vacc” and “gdp”. Call the output “left”. How many
-observations are there?</p>
-<pre class="r"><code>left &lt;- left_join(vacc, gdp, by = c(&quot;Entity&quot; = &quot;GeoName&quot;))
-nrow(left)</code></pre>
-<pre><code>## [1] 64</code></pre>
+<p>Take the code from 2.2 and save the output as an object “co2_cc”.
+Filter the dataset. Filter so that you only keep Indonesia and
+Canada.</p>
+<pre class="r"><code>co2_cc &lt;- full_join(co2, cc, by = &quot;country&quot;) %&gt;% 
+  filter(country %in% c(&quot;Indonesia&quot;, &quot;Canada&quot;))</code></pre>
 </div>
 <div id="p.4" class="section level3">
 <h3>P.4</h3>
-<p>Copy your code from Question P.3 and change it to a
-<code>right_join</code> with the same order of the arguments. Call the
-output “right”. How many observations are there?</p>
-<pre class="r"><code>right &lt;- right_join(vacc, gdp, by = c(&quot;Entity&quot; = &quot;GeoName&quot;))
-nrow(right)</code></pre>
-<pre><code>## [1] 60</code></pre>
+<p>Select:</p>
+<ul>
+<li>the “country” column</li>
+<li>data from the years 2014 originally in BOTH DATASETS (columns
+“CO2_2014” and <code>2014</code>)</li>
+<li>the “Indicator” column</li>
+</ul>
+<p>Rename:</p>
+<ul>
+<li>emissions = CO2_2014</li>
+<li>disasters = <code>2014</code></li>
+</ul>
+<p>Reassign to “co2_cc”.</p>
+<pre class="r"><code>co2_cc &lt;- co2_cc %&gt;% select(country, CO2_2014, Indicator, `2014`) %&gt;%
+  rename(emissions = CO2_2014, disasters = `2014`)</code></pre>
 </div>
 <div id="p.5" class="section level3">
 <h3>P.5</h3>
-<p>Perform two <code>anti_join</code> operations on “vacc” and “gdp” to
-determine what Entities are missing from the GDP data and which are
-missing from the vaccine data.</p>
-<pre><code># General format
-anti_join(L, R, by = c(&quot;name_L&quot; = &quot;name_R&quot;)) %&gt;% select(name_L)</code></pre>
-<pre class="r"><code>in_vacc_only &lt;- anti_join(vacc, gdp, by = c(&quot;Entity&quot; = &quot;GeoName&quot;)) %&gt;% select(Entity)
-in_gdp_only &lt;- anti_join(gdp, vacc, by = c(&quot;GeoName&quot; = &quot;Entity&quot;)) %&gt;% select(GeoName)
-in_vacc_only</code></pre>
-<pre><code>## # A tibble: 13 × 1
-##    Entity                        
-##    &lt;chr&gt;                         
-##  1 American Samoa                
-##  2 Bureau of Prisons             
-##  3 Dept of Defense               
-##  4 Federated States of Micronesia
-##  5 Guam                          
-##  6 Indian Health Svc             
-##  7 Marshall Islands              
-##  8 Northern Mariana Islands      
-##  9 New York State                
-## 10 Puerto Rico                   
-## 11 Republic of Palau             
-## 12 Veterans Health               
-## 13 Virgin Islands</code></pre>
-<pre class="r"><code>in_gdp_only</code></pre>
-<pre><code>## # A tibble: 9 × 1
-##   GeoName       
-##   &lt;chr&gt;         
-## 1 New York      
-## 2 New England   
-## 3 Mideast       
-## 4 Great Lakes   
-## 5 Plains        
-## 6 Southeast     
-## 7 Southwest     
-## 8 Rocky Mountain
-## 9 Far West</code></pre>
+<p>Use <code>stringr</code> to trim the piece of text, “Climate related
+disasters frequency, Number of Disasters:”, from the “Indicator” column.
+You will use the function <code>str_remove()</code> to do this. It works
+similarly to other <code>stringr</code> functions. Try to intuit how it
+works by using the documentation page (<code>?str_remove</code>).</p>
+<pre class="r"><code>library(stringr)
+co2_cc &lt;- co2_cc %&gt;% mutate(Indicator = str_remove(
+  Indicator,
+  &quot;Climate related disasters frequency, Number of Disasters: &quot;
+))</code></pre>
+</div>
+<div id="p.6" class="section level3">
+<h3>P.6</h3>
+<p>Pivot the dataset so that there are columns for country, emissions,
+and a column for each “Indicator”.</p>
+<pre class="r"><code>co2_cc %&gt;% pivot_wider(
+  names_from = Indicator, 
+  values_from = disasters
+)</code></pre>
+<pre><code>## # A tibble: 2 × 9
+##   country   emissions Drought `Extreme temperature` Flood Storm TOTAL Wildfire
+##   &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;                 &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Canada       537000      NA                     1     1    NA     2       NA
+## 2 Indonesia    464000      NA                    NA     6    NA     8       NA
+## # ℹ 1 more variable: Landslide &lt;dbl&gt;</code></pre>
 </div>
 </div>
 

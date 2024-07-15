@@ -357,21 +357,19 @@ display: none;
 <h1>Part 1</h1>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>Load all the libraries we will use in this lab.</p>
-<pre class="r"><code>library(readr)
-library(tidyverse)</code></pre>
+<p>Load all the packages we will use in this lab.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ purrr     1.0.2
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ ggplot2   3.5.0     ✔ tibble    3.2.1
 ## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(dplyr)
-library(lubridate)
-library(dasehr)</code></pre>
+<pre class="r"><code>library(dasehr)</code></pre>
 <p>Create some data to work with by running the following code
 chunk.</p>
 <pre class="r"><code>set.seed(1234)
@@ -408,20 +406,11 @@ Why or why not?</p>
 <p>Read in the National Wastewater Surveillance System (NWSS) SARS-CoV-2
 Wastewater data from <code>dasehr</code> package using the code supplied
 in the chunk. Alternatively using the url link.</p>
-<pre class="r"><code>covidww &lt;- read_csv(file = &quot;https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv&quot;)</code></pre>
-<pre><code>## Warning: One or more parsing issues, call `problems()` on your data frame for details,
-## e.g.:
-##   dat &lt;- vroom(...)
-##   problems(dat)</code></pre>
-<pre><code>## Rows: 776059 Columns: 12
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (12): reporting_jurisdiction, sample_location, key_plot_id, county_names...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>Use the <code>str()</code> function to take a look at the data and
-learn about the column types.</p>
+<p>The NWSS uses water from different sewage treatment plants to test
+for covid, as a way to estimate how many covid infections a community is
+experiencing.</p>
+<pre class="r"><code>covidww &lt;- covid_wastewater
+# covidww &lt;- read_csv(file = &quot;https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv&quot;)</code></pre>
 </div>
 <div id="section-6" class="section level3">
 <h3>1.7</h3>

@@ -16,16 +16,16 @@ library(forcats)
 
 # One dimensional vectors
 
-## Data classes/types
+<!-- ## Data classes/types -->
 
-    * Character: strings or individual characters, quoted
-    * Numeric: any real number(s)
-    * Integer: any integer(s)/whole numbers (1,2,3)
-    * Double: any number with fractional values (1.2, 4.01, 1.00004)
-    * Factor: categorical/qualitative variables
-    * Logical: variables composed of TRUE or FALSE
-    * Date/POSIXct: represents calendar dates and times
-    
+<!--     * Character: strings or individual characters, quoted -->
+<!--     * Numeric: any real number(s) -->
+<!--     * Integer: any integer(s)/whole numbers (1,2,3) -->
+<!--     * Double: any number with fractional values (1.2, 4.01, 1.00004) -->
+<!--     * Factor: categorical/qualitative variables -->
+<!--     * Logical: variables composed of TRUE or FALSE -->
+<!--     * Date/POSIXct: represents calendar dates and times -->
+
 
 ## Character and numeric
 
@@ -38,16 +38,12 @@ class(c(1, 4, 7))
 
 ## Character and numeric
 
-This can also be a bit tricky.
+Character predominates if there are mixed classes.
 
 ```{r numChar2}
 class(c(1, 2, "tree"))
 class(c("1", "4", "7"))
 ```
-
-
-
-
 
 ## Logical
 
@@ -58,12 +54,7 @@ x <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
 class(x)
 ```
 
-Note that `logical` elements are NOT in quotes. 
-```{r logical2}
-z <- c("TRUE", "FALSE", "TRUE", "FALSE")
-class(z)
-```
-
+`logical` elements are NOT in quotes. 
 
 ## General Class Information
 
@@ -76,12 +67,6 @@ Examples:
 - `as.numeric()`
 - `as.character()`
 - `as.logical()`
-- `as.double()`
-- `as.integer()`
-- `as.Date()`
-- `as.factor()` (More on this one later!)
-
-
 
 ## Coercing: seamless transition
 
@@ -101,7 +86,6 @@ When interpretation is ambiguous, R will return `NA` (an R constant representing
 ```{r logical_coercions4}
 as.numeric(c("1", "4", "7a"))
 as.logical(c("TRUE", "FALSE", "UNKNOWN"))
-as.Date(c("2021-06-15", "2021-06-32"))
 ```
 
 ## Number Subclasses
@@ -111,56 +95,17 @@ There are two major number subclasses or types
 1) Double (1.003)
 2) Integer (1)
 
-## Double
+## Number Subclasses
 
 `Double` is equivalent to `numeric`. It is a number that contains <span style="color: red;">fractional values </span>. Can be any amount of places after the decimal.
 
 `Double` stands for [double-precision](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)
 
-```{r double}
-y <- c(1.1, 2.0, 3.21, 4.5, 5.62)
-y
-class(y)
-typeof(y)
-```
+For most purposes, the difference between integers and doubles doesn't matter.
 
 ## Significant figures and other formats
 
 The `num` function of the `tibble` package can be used to change format. See here for more: https://tibble.tidyverse.org/articles/numbers.html 
-
-
-
-## Integer
-
-`Integer` is a special number that contains only <span style="color: red;">whole numbers</span>.
-
-```{r seq}
-y
-y_int <- as.integer(y)
-y_int
-class(y_int)
-typeof(y_int)
-```
-
-## Integer
-
-Can use `as.integer()` function to create integers (unless they are read in as integers or created as such with `seq` and `sample`). Otherwise, will be double by default.
-
-```{r}
-x <- c(1, 2, 3, 4, 5) # technically integers
-class(x)
-typeof(x)
-```
-
-## Checking double vs integer
-
-A `tibble` will show the difference (as does `glimpse()`).
-
-```{r}
-my_data <- tibble(double_var = y, int_var = y_int)
-my_data
-glimpse(my_data)
-```
 
 ## Factors
 
@@ -174,71 +119,7 @@ Examples:
 - Strongly Agree, Agree, Neutral, Disagree, Strongly Disagree
 - beginner, novice, intermediate, expert
 
-## Factors
-
-Use the `factor()` function to create factors.
-
-```{r factor1}
-x <- c("small", "medium", "large", "medium", "large")
-class(x)
-
-x_fact <- factor(x)
-class(x_fact)
-x_fact
-```
-
-Note that levels are, by default, in **alphanumerical** order!
-
-
-## Factors
-
-**Q:** Why not use `as.factor()` ?
-
-**A:** You can coerce with `as.factor()`. But you can't specify levels! More on this soon. 
-
-## Factors
-
-You can learn what are the unique levels of a `factor` vector
-
-```{r factor1b}
-levels(x_fact)
-```
-
-More on how to change the levels ordering in a lecture coming up! 
-
-
-## Factors
-
-Factors can be converted to `numeric` or `character` very easily.
-
-```{r factor3}
-x_fact
-
-as.character(x_fact)
-as.numeric(x_fact)
-```
-
-## Class conversion in with a dataset
-
-```{r, results='hide'}
-library(dasehr)
-covidww <- covid_wastewater
-```
-
-```{r}
-head(covidww)
-```
-
-## Class conversion in with a dataset
-
-Say we want to change `daily` to be an integer. We would need to use mutate to help us modify that column or create a new column. Let's create a new one so it is easier to see what is happening. 
-
-```{r}
-covidww_updated <- mutate(covidww, pop_int= as.integer(population_served))
-
-covidww_updated %>% select(population_served, pop_int)
-```
-
+** We will learn more about factors in a later module. **
 
 ## Classes Overview
 
@@ -250,17 +131,96 @@ covidww_updated %>% select(population_served, pop_int)
 | FALSE, TRUE 	| logical 	| logical 	| No quotes 	|
 | "Small", "Large" 	| Factor 	| Factor 	| Need to coerce to factor with factor() 	|
 
-## Summary
+# Special data classes
 
-- There are two types of number class objects: integer and double
-- Logic class objects only have `TRUE` or `FALSE` (without quotes)
-- `class()` can be used to test the class of an object x
-- `as.CLASS_NAME(x)` can be used to change the class of an object x
-- Factors are a special character class that has levels - more on that soon!
-- tibbles show column classes!
+## Dates
+
+There are two most popular R classes used when working with dates and times: 
+
+- `Date` class representing a calendar date
+- `POSIXct` class representing a calendar date with hours, minutes, seconds
+
+We convert data from character to `Date`/`POSIXct` to use functions to manipulate date/date and time
+
+`lubridate` is a powerful, widely used R package from "tidyverse" family to work with `Date` / `POSIXct` class objects 
+
+## Creating `Date` class object  
+
+```{r, message = FALSE}
+class("2021-06-15")
+
+library(lubridate)
+
+x <- ymd("2021-06-15") # lubridate package Year Month Day
+class(x)
+```
+
+Note for function `ymd`: **y**ear **m**onth **d**ay  
+
+## Dates are useful!
+
+```{r}
+a <- ymd("2021-06-15")
+b <- ymd("2021-06-18")
+a - b
+```
+
+## The function matches the format
+
+```{r}
+mdy("06/15/2021")
+dmy("15-June-2021")
+ymd("2021-06-15")
+```
+
+<!-- Note for  function `mdy`: **m**onth **d**ay  **y**ear -->
+
+<!-- ## They right lubridate function needs to be used -->
+
+<!-- Must match the data format! -->
+
+<!-- ```{r} -->
+<!-- ymd("06/15/2021") # This doesn't work - gives NA -->
+<!-- mdy("06/15/2021") # This works -->
+<!-- ``` -->
 
 
-# Two-dimensional data classes
+<!-- ## Creating `POSIXct` class object   -->
+
+<!-- ```{r} -->
+<!-- class("2013-01-24 19:39:07") -->
+<!-- ymd_hms("2013-01-24 19:39:07") # lubridate package -->
+<!-- class(ymd_hms("2013-01-24 19:39:07")) # lubridate package -->
+<!-- ``` -->
+
+<!-- UTC represents time zone, by default: Coordinated Universal Time -->
+
+<!-- Note for  function `ymd_hms`: year month day hour minute second.  -->
+
+<!-- There are functions in case your data have only date, hour and minute (`ymd_hm()`) or only date and hour (`ymd_h()`).  -->
+
+
+## Class conversion in with a dataset
+
+```{r, results='hide'}
+library(dasehr)
+covidww <- covid_wastewater %>% select(contains("date"))
+```
+
+```{r}
+head(covidww)
+```
+
+## Class conversion in with a dataset
+
+We would need to use mutate to help us modify that column.
+
+```{r}
+covidww %>% 
+  mutate(date_start = mdy(date_start))
+```
+
+# Other two-dimensional data classes
 
 ## Two-dimensional data classes
 
@@ -289,106 +249,6 @@ Two-dimensional classes are those we would often use to store data read from a f
 mylist <- list(c("A", "b", "c"), c(1, 2, 3))
 mylist
 class(mylist)
-```
-
-
-
-# Special data classes
-
-## Dates
-
-There are two most popular R classes used when working with dates and times: 
-
-- `Date` class representing a calendar date
-- `POSIXct` class representing a calendar date with hours, minutes, seconds
-
-We convert data from character to `Date`/`POSIXct` to use functions to manipulate date/date and time
-
-`lubridate` is a powerful, widely used R package from "tidyverse" family to work with `Date` / `POSIXct` class objects 
-
-## Creating `Date` class object  
-
-```{r, message = FALSE}
-class("2021-06-15")
-
-library(lubridate)
-
-ymd("2021-06-15") # lubridate package Year Month Day
-class(ymd("2021-06-15")) # lubridate package
-class(date("2021-06-15")) # lubridate package
-```
-
-Note for  function `ymd`: **y**ear **m**onth **d**ay  
-
-## Dates are useful!
-
-```{r}
-a <- ymd("2021-06-15")
-b <- ymd("2021-06-18")
-a - b
-```
-
-
-## Creating `Date` class object 
-
-`date()` is picky...
-
-
-```{r, error = TRUE}
-date("06/15/2021") # This doesn't work, needs to be year month day
-```
-
-## But we can use the month day year function `mdy`
-
-```{r, error = TRUE}
-mdy("06/15/2021") # This works
-mdy("06/15/21") # This works
-```
-
-Note for  function `mdy`: **m**onth **d**ay  **y**ear
-
-## They right lubridate function needs to be used
-
-Must match the data format!
-
-```{r}
-ymd("06/15/2021") # This doesn't work - gives NA
-mdy("06/15/2021") # This works
-```
-
-
-## Creating `POSIXct` class object  
-
-```{r}
-class("2013-01-24 19:39:07")
-ymd_hms("2013-01-24 19:39:07") # lubridate package
-class(ymd_hms("2013-01-24 19:39:07")) # lubridate package
-```
-
-UTC represents time zone, by default: Coordinated Universal Time
-
-Note for  function `ymd_hms`: year month day hour minute second. 
-
-There are functions in case your data have only date, hour and minute (`ymd_hm()`) or only date and hour (`ymd_h()`). 
-
-
-
-## In a dataframe
-
-Note dates are always displayed year month day, even if made with `mdy`!
-```{r}
-covidww <- mutate(covidww, date_start_formatted = mdy(date_start)) %>% 
-  relocate(date_start_formatted, .before = date_end) 
-glimpse(covidww)
-```
-## Once a variable is a date type we can convert to other types
-
-
-```{r}
-covidww %>% mutate(year = year(date_start_formatted)) %>%
-         mutate(month = month(date_start_formatted)) %>%
-         relocate(c(year, month), .before = date_end) %>%
-  glimpse()
 ```
 
 ## Summary

@@ -37,7 +37,7 @@ Check your R session info. Which version of R are you running? Which version of 
 
 ### P.1
 
-Create a vector `z` with the numbers 0 to 9. Set the seed for the R random number generator to 1234. Draw 5 numbers at random from `z` using the `sample()` function with `replace = TRUE`. Repeatedly run the code 3 times and note what you observe.
+Create a vector `z` with the numbers 0 to 9. Set the seed for the R random number generator to 1234. Draw 5 numbers at random from `z` using `sample(x = z, size = 5, replace = TRUE)`. If you repeat the seed code and sample code multiple times in the same chunk, what do you observe?
 
 ```{r P.1response}
 
@@ -45,7 +45,7 @@ Create a vector `z` with the numbers 0 to 9. Set the seed for the R random numbe
 
 ### P.2
 
-Run the `sample()` statement again, but this time without running the `set.seed()` line. What do you notice about the 5 numbers?
+Run the `sample(x = z, size = 5, replace = TRUE)` statement again, but this time without running the `set.seed()` line. What do you notice about the 5 numbers?
 
 ```{r P.2response}
 

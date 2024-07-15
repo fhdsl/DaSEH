@@ -9,13 +9,10 @@ editor_options:
 
 ### 1.1
 
-Load all the libraries we will use in this lab. 
+Load all the packages we will use in this lab. 
 
 ```{r}
-library(readr)
 library(tidyverse)
-library(dplyr)
-library(lubridate)
 library(dasehr)
 ```
 
@@ -69,16 +66,13 @@ rand_char_vect # Numbers now have quotation marks
 
 ### 1.6
 
-Read in the National Wastewater Surveillance System (NWSS) SARS-CoV-2 Wastewater data from `dasehr` package using the code supplied in the chunk. Alternatively using the url link.
+Read in the National Wastewater Surveillance System (NWSS) SARS-CoV-2 Wastewater data from `dasehr` package using the code supplied in the chunk. Alternatively using the url link. 
+
+The NWSS uses water from different sewage treatment plants to test for covid, as a way to estimate how many covid infections a community is experiencing.
 
 ```{r}
-covidww <- read_csv(file = "https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv")
-```
-
-Use the `str()` function to take a look at the data and learn about the column types.
-
-```{r 1.6response}
-str(covidww)
+covidww <- covid_wastewater
+# covidww <- read_csv(file = "https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv")
 ```
 
 ### 1.7
@@ -91,7 +85,7 @@ NEWDATA <- OLD_DATA %>% mutate(NEW_COLUMN = OLD_COLUMN)
 ```
 
 ```{r 1.7response}
-covidww <- mutate(covidww, date_formatted = mdy(first_sample_date))
+covidww <- covidww %>% mutate(date_formatted = mdy(first_sample_date))
 ```
 
 
