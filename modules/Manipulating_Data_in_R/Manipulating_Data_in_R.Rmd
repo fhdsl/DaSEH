@@ -3,7 +3,8 @@ title: "Manipulating Data in R"
 output:
   ioslides_presentation:
     css: ../../docs/styles.css
-    widescreen: yes
+    widescreen: true
+  beamer_presentation: default
 ---
 
 ```{r, echo = FALSE, include=FALSE}
@@ -188,9 +189,11 @@ long_vacc
 
 Newly created column names are enclosed in quotation marks.
 
-## Data used: CO Heat-related ER visits
+## Data used: Nitrate exposure 
 
-https://daseh.org/data/CO_heat_er_visits_DenverBoulder_wide.csv
+Nitrate exposure by quarter for populations on public water systems in the state of Washington for 1999-2020.
+
+https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv
 
 ```{r, message = FALSE}
 library(dasehr)
@@ -198,7 +201,7 @@ wide <- nitrate
 head(nitrate)
 ```
 
-## Mission: Taking the average proportion of the population exposed by concentration
+## Mission: Average population exposed by concentration
 
 Let's imagine we want to see what proportion of population exposed to different nitrate concentrations. Results should look something like:
 
@@ -210,11 +213,18 @@ example <- tibble(
 example
 ```
 
+## Remove some columns we don't need
+
+```{r}
+wide <- wide %>%
+  select(!ends_with("exceedances"))
+wide
+```
+
 ## Reshaping data from **wide to long**
 
 ```{r}
 long <- wide %>%
-  select(!ends_with("exceedances")) %>% 
   pivot_longer(!c(year, quarter, pop_on_sampled_PWS),
                names_to = "conc_cat",
                values_to = "conc_count")
@@ -223,13 +233,13 @@ long
 
 ## Reshaping data from **wide to long**
 
-Un-pivoted columns (`year`, `quarter`, `pop_on_sampled_PWS`) are similar
+Un-pivoted columns (`year`, `quarter`, `pop_on_sampled_PWS`) are still columns.
 
 ```{r}
 long
 ```
 
-## Cleaning up long data
+## Cleaning up long data{.codesmall} 
 
 Let's make the `conc_count` into a proportion.
 
@@ -239,7 +249,7 @@ long <- long %>%
 long
 ```
 
-## Mission: Taking the average proportion of the population exposed by concentration
+## Mission: Average population exposed by concentration
 
 Now our data is more tidy, and we can take the averages easily!
 
@@ -280,13 +290,15 @@ wide_vacc <- long_vacc %>% pivot_wider(names_from = "Month",
 wide_vacc
 ```
 
-## Reshaping CO Heat-related ER Visits data
+## Reshaping nitrate exposure data{.codesmall} 
+
+What if we wanted different columns for each quarter?
 
 ```{r}
 long
 ```
 
-## Reshaping CO Heat-related ER Visits data
+## Reshaping nitrate exposure data
 
 ```{r}
 wide <- long %>%
@@ -294,18 +306,6 @@ wide <- long %>%
   pivot_wider(names_from = "quarter", values_from = "conc_prop")
 wide
 ```
-
-## Reshaping Summary `tibbles`
-
-Reshaping can be helpful for your assessment of two `group_by()` categories.
-
-```{r}
-long %>% 
-  group_by(conc_cat, quarter) %>% 
-  summarize("avg_prop" = mean(conc_prop)) %>% 
-  pivot_wider(names_from = "quarter", values_from = "avg_prop")
-```
-
 
 ## Summary
 
