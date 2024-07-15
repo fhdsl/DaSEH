@@ -286,10 +286,11 @@ ggplot(er_state, aes(x = year, y = rate)) +
 ## Adding color - can map color to a variable
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
+set.seed(123)
+er_visits_4 <- er_CO_county %>% 
+  filter(county %in% c("Denver", "Weld", "Pueblo", "Jackson"))
 
-er_visits_all <- er_CO_county
-
-ggplot(er_visits_all, aes(x = year, y = rate, color = county)) +
+ggplot(er_visits_4, aes(x = year, y = rate, color = county)) +
   geom_point() +
   geom_line()
 ```
@@ -362,23 +363,23 @@ Line breaks can be specified using `\n` within the `labs()` function to have a l
 ```{r, fig.width=4, fig.height=2.5, fig.align='center'}
 ggplot(er_state, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "red", alpha = 0.5) +
-            geom_line(size = 0.8, color = "brown", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO: \n age-adjusted visit rate by year",
+            geom_line(size = 0.8, color = "brown", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO: \n age-adjusted visit rate by year",
               x = "Year",
               y = "Age-adjusted Visit Rate")
 ```
 
 ## Changing axis: specifying axis scale {.codesmall}
 
-`scale_x_continuous()` and `scale_y_continuous()` can change how the axis is plotted. Can use the `breaks` argument to specify how you want the axis ticks to be.
+`scale_x_continuous()` and `scale_y_continuous()` can change how the axis is plotted. Can use the `breaks` argument to specify how you want the axis ticks.
 
-```{r, fig.width=5, fig.height=3, fig.align='center'}
-range(pull(er_visits_all, year))
+```{r, fig.height=2.5, fig.align='center'}
+range(pull(er_visits_4, year))
 
-plot_scale <- ggplot(er_state, aes(x = year, y = rate)) +
-                geom_point(size = 5, color = "green", alpha = 0.5) +
+plot_scale <- ggplot(er_state, aes(x = year, y = rate)) + 
+                geom_point(size = 5, color = "green", alpha = 0.5) + 
                 geom_line(size = 0.8, color = "blue", linetype = 2) +
                 scale_x_continuous(breaks = seq(from = 2011, to = 2022, by = 1))
-
 plot_scale
 ```
 
@@ -390,51 +391,27 @@ plot_scale
 
 ggplot(er_state, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
-            geom_line(size = 0.8, color = "blue", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO",
+            geom_line(size = 0.8, color = "blue", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO",
               x = "Year",
               y = "Age-adjusted Visit Rate") +
-  ylim(0, max(pull(er_visits_all, rate)))
+  ylim(0, max(pull(er_visits_4, rate)))
 
 ```
 
-## Changing axis: specifying axis scale {.codesmall}
-
-```{r, fig.width=5, fig.height=1.8, fig.align='center'}
-plot_scale
-```
-
-```{r, fig.width=5, fig.height=1.8, fig.align='center', echo = TRUE}
-ggplot(er_state, aes(x = year, y = rate)) +
-                geom_point(size = 5, color = "green", alpha = 0.5) +
-                geom_line(size = 0.8, color = "blue", linetype = 2)
-```
 
 
-## Modifying plot objects
+## Modifying plot objects {.codesmall}
 
 You can add to a plot object to make changes! Note that we can save our plots as an object like `plt1` below. And now if we reference `plt1` again our plot will print out!
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 
 plt1 <- ggplot(er_state, aes(x = year, y = rate,)) +
-            geom_point(size = 5, color = "green", alpha = 0.5) +
-            geom_line(size = 0.8, color = "blue", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO",
-              x = "Year",
-              y = "Age-adjusted Visit Rate") +
-  ylim(0, max(pull(er_visits_all, rate)))
+            geom_point(size = 5, color = "green", alpha = 0.5) +geom_line(size = 0.8, color = "blue", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO", x = "Year", y = "Age-adjusted Visit Rate")
 
 plt1 + theme_minimal()
-```
-
-## Overwriting specifications
-
-It's possible to go in and change specifications with newer layers
-
-```{r, fig.width=5, fig.height=3, fig.align='center'}
-er_visits_all %>% ggplot(aes(x = year,
-                      y = rate,
-                      color = county)) +
-  geom_line(size = 0.8)
 ```
 
 ## Removing the legend label
@@ -443,19 +420,34 @@ You can use `theme(legend.position = "none")` to remove the legend.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 
-er_visits_all %>% ggplot(aes(x = year,
+er_visits_4 %>% ggplot(aes(x = year,
                       y = rate,
                       color = county)) +
   geom_line(size = 0.8) + 
   theme(legend.position = "none")
 ```
 
+
+
+## Overwriting specifications
+
+It's possible to go in and change specifications with newer layers
+Here is our original plot. 
+
+```{r, fig.width=5, fig.height=3, fig.align='center'}
+er_visits_4 %>% ggplot(aes(x = year,
+                      y = rate,
+                      color = county)) +
+  geom_line(size = 0.8)
+```
+
+
 ## Overwriting specifications
 
 It's possible to go in and change specifications with newer layers
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-er_visits_all %>% ggplot(aes(x = year,
+er_visits_4 %>% ggplot(aes(x = year,
                       y = rate,
                       color = county)) +
   geom_line(size = 0.8, color = "black")
@@ -487,7 +479,8 @@ The `theme()` function can help you modify various elements of your plot. Here w
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 ggplot(er_state, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
-            geom_line(size = 0.8, color = "blue", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO") +
+            geom_line(size = 0.8, color = "blue", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO") +
   theme(plot.title = element_text(size = 20))
 
 ```
@@ -511,7 +504,8 @@ The `theme()` function can help you modify various elements of your plot. Here w
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 ggplot(er_state, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
-            geom_line(size = 0.8, color = "blue", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO") +
+            geom_line(size = 0.8, color = "blue", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO") +
   theme(plot.title = element_text(hjust = 0.5, size = 20))
 
 ```
@@ -521,7 +515,8 @@ ggplot(er_state, aes(x = year, y = rate)) +
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 ggplot(er_state, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
-            geom_line(size = 0.8, color = "blue", linetype = 2) + labs(title = "My plot of Heat-Related ER Visits in CO") +
+            geom_line(size = 0.8, color = "blue", linetype = 2) + 
+  labs(title = "My plot of Heat-Related ER Visits in CO") +
   theme(plot.title = element_text(hjust = 0.5, size = 20),
         axis.title = element_text(size = 16))
 ```
@@ -531,10 +526,10 @@ ggplot(er_state, aes(x = year, y = rate)) +
 If specifying position - use: "top", "bottom", "right", "left", "none"
 
 ```{r, fig.show="hold", out.width="40%"}
-ggplot(er_visits_all, aes(x = year, y = rate, color = county)) +
+ggplot(er_visits_4, aes(x = year, y = rate, color = county)) +
   geom_line()
 
-ggplot(er_visits_all, aes(x = year, y = rate, color = county)) +
+ggplot(er_visits_4, aes(x = year, y = rate, color = county)) +
   geom_line() +
   theme(legend.position = "bottom")
 ```
@@ -597,26 +592,27 @@ er_state %>% ggplot(aes(x = year,
 Guide on how to: <https://rpubs.com/mclaire19/ggplot2-custom-themes>
 
 
-## Group and/or color by variable's values
+<!-- ## Group and/or color by variable's values -->
 
-Let's work with two slightly different versions of the CO ER visits dataset. We used the first one, `er_visits_all`, a little earlier in this lecture. This dataset includes county-level data on the number of visits to the ER for heat-related illness, as well as the age-adjusted rate and the 95% confidence bounds. The dataset includes:
+<!-- Let's work with two slightly different versions of the CO ER visits dataset. We used the first one, `er_visits_4`, a little earlier in this lecture. This dataset includes county-level data on the number of visits to the ER for heat-related illness, as well as the age-adjusted rate and the 95% confidence bounds. The dataset includes: -->
 
--   17 different CO counties (plus the statewide data)
--   12 different years 
+<!-- -   17 different CO counties (plus the statewide data) -->
+<!-- -   12 different years  -->
 
-We can also work with a dataset which we'll call `er_visits_gender`. This dataset contains the number of visits to the ER for heat-related illnesses, as well as the age-adjusted rate and the 95% confidence bounds around the rate, for:
+<!-- We can also work with a dataset which we'll call `er_visits_gender`. This dataset contains the number of visits to the ER for heat-related illnesses, as well as the age-adjusted rate and the 95% confidence bounds around the rate, for: -->
 
--   two genders (male, female)
--   9 different CO counties (plus the statewide data)
--   12 different years 
+<!-- -   two genders (male, female) -->
+<!-- -   9 different CO counties (plus the statewide data) -->
+<!-- -   12 different years  -->
+
 
 
 ## Starting a plot
 
-Let's start with `er_visits_all`.
+Let's start with `er_visits_4`.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(er_visits_all, aes(x = year,
+ggplot(er_visits_4, aes(x = year,
                  y = rate)) +
   geom_line()
 ```
@@ -632,7 +628,7 @@ knitr::include_graphics("https://media.giphy.com/media/xT0xeuOy2Fcl9vDGiA/giphy.
 You can use `group` element in a mapping to indicate that each `county` will have a rate line.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(er_visits_all, aes(x = year,
+ggplot(er_visits_4, aes(x = year,
                            y = rate,
                            group = county)) +
   geom_line()
@@ -641,7 +637,7 @@ ggplot(er_visits_all, aes(x = year,
 ## Adding color will automatically group the data
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(er_visits_all, aes(x = year,
+ggplot(er_visits_4, aes(x = year,
                            y = rate,
                        color = county)) +
   geom_line()+
@@ -649,42 +645,12 @@ ggplot(er_visits_all, aes(x = year,
 ```
 
 
-## Adding a facet can help make it easier to see what is happening {.codesmall}
-
-But what if we wanted to look at rates by county for different genders? Let's work a little with the `CO_heat_ER_bygender` dataset. This is a subset of the larger CO ER visits dataset.
-
-Two options: `facet_grid()`- creates a grid shape `facet_wrap()` -more flexible
-
-Need to specify how you are faceting with the `~` sign.
-
-```{r, fig.width=4, fig.height=3, fig.align='center'}
-er_visits_gender <- CO_heat_ER_bygender
-
-ggplot(er_visits_gender, aes(x = year,
-                 y = rate,
-                 color = county)) +
-  geom_line() +
-  facet_grid( ~ gender)+
-  theme(legend.position = "bottom")
-```
-
-## facet_wrap() {.codesmall}
-
--   more flexible - arguments `ncol` and `nrow` can specify layout
--   can have different scales for axes using `scales = "free_x"`, `scales = "free_y"`, or `scales = "free"`
-
-```{r, fig.width=4, fig.height=2.7, fig.align='center'}
-rp_fac_plot <- ggplot(er_visits_gender, aes(x = year, y = rate,color = county)) +
-                  geom_line()  +
-                  geom_point() +
-                  facet_wrap( ~ gender, ncol = 1, scales = "free")
-rp_fac_plot
-```
-
-
 ## Tips!
 
 Let's talk additional tricks and tips for making ggplots!
+
+We are going to use some other data about ER visits that has to do with gender.
+Note that gender was recorded as binary, which we know isn’t really accurate. This is something you might encounter. Please see this article about ways to measure gender in a more inclusive way: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6526522/.
 
 
 ## Tips - Color vs Fill {.codesmall}
@@ -693,6 +659,7 @@ Let's talk additional tricks and tips for making ggplots!
 -   `fill` is generally needed for boxes and bars
 
 ```{r, out.width="30%", fig.show='hold'}
+er_visits_gender <- CO_heat_ER_bygender
 ggplot(er_visits_gender, aes(x = gender,
                  y = rate,
                  color = gender)) + #color creates an outline
@@ -848,8 +815,85 @@ icecream2 <- icecream %>% drop_na(flavor)  %>%
 icecream1 # fig.show = "hold" makes plots appear
 icecream2 # next to one another in the chunk settings
 ```
+## Sometimes we have many lines and it is hard to see what is happening{.codesmall}
+
+```{r, fig.width=5, fig.height=3, fig.align='center'}
+
+er_visits_9 <- er_CO_county %>% 
+  filter(county %in% c("Denver", "Weld", "Pueblo", "Jackson", 
+                       "San Juan", "Mesa", "Jefferson", "Larimer", "Statewide"))
+
+lots_of_lines <- ggplot(er_visits_9, aes(x = year,
+                 y = rate,
+                 color = county)) +
+                 geom_line()
+lots_of_lines 
+```
+
+## Adding a facet can help make it easier to see what is happening {.codesmall}
+
+Sometimes we have two many lines and can git difficult to see what is happening, facets can help!
+
+Two options: `facet_grid()`- creates a grid shape `facet_wrap()` -more flexible
+
+Need to specify how you are faceting with the `~` sign.
+
+```{r,  fig.align='center', eval = FALSE}
+
+lots_of_lines +
+facet_grid( ~ county) +
+theme(legend.position = "bottom")
+
+```
+
+## Adding a facet can help make it easier to see what is happening
+
+```{r, fig.width= 10, fig.align='center'}
+
+
+lots_of_lines +
+facet_grid( ~ county) +
+theme(legend.position = "none") + 
+theme(axis.text.x = element_text(angle = 90))
+
+```
+
+## facet_wrap() {.codesmall}
+
+-   more flexible - arguments `ncol` and `nrow` can specify layout
+-   can have different scales for axes using `scales = "free"`
+
+```{r, fig.height = 5, fig.align='center', echo= TRUE}
+
+rp_fac_plot <- lots_of_lines +
+               facet_wrap( ~ county, ncol = 4, scales = "free") +
+               theme(legend.position = "none")
+```
+
+```{r, echo = FALSE, eval = TRUE}
+rp_fac_plot <- lots_of_lines +
+               facet_wrap( ~ county, ncol = 4, scales = "free") +
+               theme(legend.position = "none")
+```
+
+
+```{r, fig.height = 3.5, fig.width = 10, fig.align='center', comment=FALSE}
+rp_fac_plot
+```
+
+
 
 # Extensions
+
+## `directlabels` package
+
+Great for adding labels directly onto plots <https://www.opencasestudies.org/ocs-bp-co2-emissions/>
+
+```{r, out.width="50%", fig.align="center"}
+#install.packages("directlabels")
+library(directlabels)
+direct.label(lots_of_lines, method = list("angled.boxes"))
+```
 
 ## `patchwork` package
 
@@ -861,18 +905,8 @@ Also check out the [`patchwork` package](https://patchwork.data-imaginist.com/)
 #install.packages("patchwork")
 library(patchwork)
 (plt1 + plt2)/plt2
+
 ```
-
-## `directlabels` package
-
-Great for adding labels directly onto plots <https://www.opencasestudies.org/ocs-bp-co2-emissions/>
-
-```{r, out.width="50%", fig.align="center"}
-#install.packages("directlabels")
-library(directlabels)
-direct.label(rp_fac_plot, method = list("angled.boxes"))
-```
-
 <!-- ## `ggpubr` package -->
 
 <!-- Great for adding p-values and significance levels <https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf>  -->
@@ -898,7 +932,7 @@ direct.label(rp_fac_plot, method = list("angled.boxes"))
 ```{r}
 #install.packages("plotly")
 library("plotly") # creates interactive plots!
-ggplotly(rp_fac_plot)
+ggplotly(lots_of_lines)
 ```
 
 Also check out the [`ggiraph` package](https://www.rdocumentation.org/packages/ggiraph/versions/0.6.1)
