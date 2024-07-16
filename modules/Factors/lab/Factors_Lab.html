@@ -353,15 +353,24 @@ display: none;
 </div>
 
 
-<p>Load all the libraries we will use in this lab.</p>
-<pre class="r"><code>library(dplyr)
-library(ggplot2)</code></pre>
+<p>Load all the packages we will use in this lab.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
 <div id="section" class="section level3">
 <h3>1.0</h3>
-<p>Load the Youth Tobacco Survey data (using the <code>jhur</code>
-library function <code>read_yts()</code>). <code>select</code>
+<p>Load the Youth Tobacco Survey data and <code>select</code>
 “Sample_Size”, “Education”, and “LocationAbbr”. Name this data
 “yts”.</p>
+<pre class="r"><code>yts &lt;- 
+  read_csv(&quot;https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv&quot;) %&gt;% 
+  select(Sample_Size, Education, LocationAbbr)</code></pre>
+<pre><code>## Rows: 9794 Columns: 31
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (24): LocationAbbr, LocationDesc, TopicType, TopicDesc, MeasureDesc, Dat...
+## dbl  (7): YEAR, Data_Value, Data_Value_Std_Err, Low_Confidence_Limit, High_C...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div id="section-1" class="section level3">
 <h3>1.1</h3>
