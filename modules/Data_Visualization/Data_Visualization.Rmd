@@ -295,17 +295,17 @@ ggplot(er_visits_4, aes(x = year, y = rate, color = county)) +
   geom_line()
 ```
 
-## Adding color - or change the color of each plot layer
+<!-- ## Adding color - or change the color of each plot layer -->
 
-You can change look of each layer separately. Note the arguments like `linetype` and `alpha` that allow us to change the opacity of the points and style of the line respectively. 
+<!-- You can change look of each layer separately. Note the arguments like `linetype` and `alpha` that allow us to change the opacity of the points and style of the line respectively.  -->
 
-```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
-  geom_point(size = 5, color = "red", alpha = 0.5) +
-  geom_line(size = 0.8, color = "black", linetype = 2)
-```
+<!-- ```{r, fig.width=5, fig.height=3, fig.align='center'} -->
+<!-- ggplot(er_state, aes(x = year, y = rate)) + -->
+<!--   geom_point(size = 5, color = "red", alpha = 0.5) + -->
+<!--   geom_line(size = 0.8, color = "black", linetype = 2) -->
+<!-- ``` -->
 
-`linetype` can be given as a number. See the docs for what numbers correspond to what `linetype`!
+<!-- `linetype` can be given as a number. See the docs for what numbers correspond to what `linetype`! -->
 
 # Customize the look of the plot
 
@@ -316,6 +316,8 @@ knitr::include_graphics("img/frosting.png")
 ## Customize the look of the plot {.codesmall}
 
 You can change the look of whole plot using [`theme_*()` functions](https://ggplot2.tidyverse.org/reference/ggtheme.html).
+
+There are also `size`, `color`, `alpha`, and `linetype` arguments.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 ggplot(er_state, aes(x = year, y = rate)) +
@@ -331,17 +333,17 @@ There's not only the built in ggplot2 themes but all kinds of themes from other 
 - [ThemePark package](https://github.com/MatthewBJane/ThemePark)
 - [hrbr themes](https://github.com/hrbrmstr/hrbrthemes)
 
-## Customize the look of the plot
+<!-- ## Customize the look of the plot -->
 
-You can change the look of whole plot - **specific elements, too** - like changing [font](http://www.cookbook-r.com/Graphs/Fonts/) and font size - or even more [fonts](https://blog.revolutionanalytics.com/2012/09/how-to-use-your-favorite-fonts-in-r-charts.html)
+<!-- You can change the look of whole plot - **specific elements, too** - like changing [font](http://www.cookbook-r.com/Graphs/Fonts/) and font size - or even more [fonts](https://blog.revolutionanalytics.com/2012/09/how-to-use-your-favorite-fonts-in-r-charts.html) -->
 
-```{r, fig.width=6, fig.height=3.5, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
-  geom_point(size = 5, color = "green", alpha = 0.5) +
-  geom_line(size = 0.8, color = "blue", linetype = 2) +
-  theme_bw() +
-  theme(text=element_text(size=16,  family="Comic Sans MS"))
-```
+<!-- ```{r, fig.width=6, fig.height=3.5, fig.align='center'} -->
+<!-- ggplot(er_state, aes(x = year, y = rate)) + -->
+<!--   geom_point(size = 5, color = "green", alpha = 0.5) + -->
+<!--   geom_line(size = 0.8, color = "blue", linetype = 2) + -->
+<!--   theme_bw() + -->
+<!--   theme(text=element_text(size=16,  family="Comic Sans MS")) -->
+<!-- ``` -->
 
 ## Adding labels {.codesmall}
 
@@ -356,18 +358,18 @@ ggplot(er_state, aes(x = year, y = rate)) +
               y = "Age-adjusted Visit Rate")
 ```
 
-## Adding labels line break {.codesmall}
+<!-- ## Adding labels line break {.codesmall} -->
 
-Line breaks can be specified using `\n` within the `labs()` function to have a label with multiple lines.
+<!-- Line breaks can be specified using `\n` within the `labs()` function to have a label with multiple lines. -->
 
-```{r, fig.width=4, fig.height=2.5, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
-            geom_point(size = 5, color = "red", alpha = 0.5) +
-            geom_line(size = 0.8, color = "brown", linetype = 2) + 
-  labs(title = "My plot of Heat-Related ER Visits in CO: \n age-adjusted visit rate by year",
-              x = "Year",
-              y = "Age-adjusted Visit Rate")
-```
+<!-- ```{r, fig.width=4, fig.height=2.5, fig.align='center'} -->
+<!-- ggplot(er_state, aes(x = year, y = rate)) + -->
+<!--             geom_point(size = 5, color = "red", alpha = 0.5) + -->
+<!--             geom_line(size = 0.8, color = "brown", linetype = 2) +  -->
+<!--   labs(title = "My plot of Heat-Related ER Visits in CO: \n age-adjusted visit rate by year", -->
+<!--               x = "Year", -->
+<!--               y = "Age-adjusted Visit Rate") -->
+<!-- ``` -->
 
 ## Changing axis: specifying axis scale {.codesmall}
 
@@ -383,21 +385,21 @@ plot_scale <- ggplot(er_state, aes(x = year, y = rate)) +
 plot_scale
 ```
 
-## Changing axis: specifying axis limits
+<!-- ## Changing axis: specifying axis limits -->
 
-`xlim()` and `ylim()` can specify the limits for each axis
+<!-- `xlim()` and `ylim()` can specify the limits for each axis -->
 
-```{r, fig.width=5, fig.height=3, fig.align='center'}
+<!-- ```{r, fig.width=5, fig.height=3, fig.align='center'} -->
 
-ggplot(er_state, aes(x = year, y = rate)) +
-            geom_point(size = 5, color = "green", alpha = 0.5) +
-            geom_line(size = 0.8, color = "blue", linetype = 2) + 
-  labs(title = "My plot of Heat-Related ER Visits in CO",
-              x = "Year",
-              y = "Age-adjusted Visit Rate") +
-  ylim(0, max(pull(er_visits_4, rate)))
+<!-- ggplot(er_state, aes(x = year, y = rate)) + -->
+<!--             geom_point(size = 5, color = "green", alpha = 0.5) + -->
+<!--             geom_line(size = 0.8, color = "blue", linetype = 2) +  -->
+<!--   labs(title = "My plot of Heat-Related ER Visits in CO", -->
+<!--               x = "Year", -->
+<!--               y = "Age-adjusted Visit Rate") + -->
+<!--   ylim(0, max(pull(er_visits_4, rate))) -->
 
-```
+<!-- ``` -->
 
 
 
@@ -431,8 +433,7 @@ er_visits_4 %>% ggplot(aes(x = year,
 
 ## Overwriting specifications
 
-It's possible to go in and change specifications with newer layers
-Here is our original plot. 
+It's possible to go in and change specifications with newer layers. Here is our original plot. 
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 er_visits_4 %>% ggplot(aes(x = year,
@@ -444,7 +445,7 @@ er_visits_4 %>% ggplot(aes(x = year,
 
 ## Overwriting specifications
 
-It's possible to go in and change specifications with newer layers
+It's possible to go in and change specifications with newer layers.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 er_visits_4 %>% ggplot(aes(x = year,
@@ -462,8 +463,9 @@ er_visits_4 %>% ggplot(aes(x = year,
 -   layers of plots can be combined using the `+` at the **end** of lines
 -   special [`theme_*()` functions](https://ggplot2.tidyverse.org/reference/ggtheme.html) can change the overall look
 -   individual layers can be customized using arguments like: `size`, `color` `alpha` (more transparent is closer to 0), and `linetype`
--   labels can be added with the `labs()` function and `x`, `y`, `title` arguments - the `\n` can be used for line breaks
--   `xlim()` and `ylim()` can limit or expand the plot area
+-   labels can be added with the `labs()` function and `x`, `y`, `title` arguments 
+<!-- -   the `\n` can be used for line breaks -->
+<!-- -   `xlim()` and `ylim()` can limit or expand the plot area -->
 -   `scale_x_continuous()` and `scale_y_continuous()` can modify the scale of the axes
 -   by default, `ggplot()` removes points with missing values from plots.
 
@@ -521,18 +523,18 @@ ggplot(er_state, aes(x = year, y = rate)) +
         axis.title = element_text(size = 16))
 ```
 
-## theme() function: moving (or removing) legend {.codesmall}
+<!-- ## theme() function: moving (or removing) legend {.codesmall} -->
 
-If specifying position - use: "top", "bottom", "right", "left", "none"
+<!-- If specifying position - use: "top", "bottom", "right", "left", "none" -->
 
-```{r, fig.show="hold", out.width="40%"}
-ggplot(er_visits_4, aes(x = year, y = rate, color = county)) +
-  geom_line()
+<!-- ```{r, fig.show="hold", out.width="40%"} -->
+<!-- ggplot(er_visits_4, aes(x = year, y = rate, color = county)) + -->
+<!--   geom_line() -->
 
-ggplot(er_visits_4, aes(x = year, y = rate, color = county)) +
-  geom_line() +
-  theme(legend.position = "bottom")
-```
+<!-- ggplot(er_visits_4, aes(x = year, y = rate, color = county)) + -->
+<!--   geom_line() + -->
+<!--   theme(legend.position = "bottom") -->
+<!-- ``` -->
 
 ## Cheatsheet about theme
 
@@ -542,54 +544,54 @@ ggplot(er_visits_4, aes(x = year, y = rate, color = county)) +
 knitr::include_graphics("img/theme_sheet.png")
 ```
 
-## Keys for specifications
+<!-- ## Keys for specifications -->
 
-`linetype`
+<!-- `linetype` -->
 
-```{r, echo = FALSE, fig.align='center', out.width= "60%"}
-knitr::include_graphics("img/line_types.png")
-```
+<!-- ```{r, echo = FALSE, fig.align='center', out.width= "60%"} -->
+<!-- knitr::include_graphics("img/line_types.png") -->
+<!-- ``` -->
 
-[source](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/figure/line_types-1.png)
+<!-- [source](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/figure/line_types-1.png) -->
 
-## Linetype key
+<!-- ## Linetype key -->
 
--   *geoms* that draw lines have a `linetype` parameter
--   these include values that are strings like "blank", "solid", "dashed", "dotdash", "longdash", and "twodash"
+<!-- -   *geoms* that draw lines have a `linetype` parameter -->
+<!-- -   these include values that are strings like "blank", "solid", "dashed", "dotdash", "longdash", and "twodash" -->
 
-```{r, fig.width=5, fig.height=3, fig.align='center'}
-er_state %>% ggplot(aes(x = year,
-                      y = rate)) +
-  geom_line(size = 0.8, linetype = "twodash")
-```
-
-
-## Keys for specifications
-
-`shape`
-
-```{r, echo = FALSE, fig.align='center', out.width= "50%"}
-knitr::include_graphics("img/shape.png")
-```
-
-[source](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/figure/unnamed-chunk-2-1.png)
-
-## shape key
-
--   *geoms* that draw have points have a `shape` parameter
--   these include numeric values (don't need quotes for these) and some characters values (need quotes for these)
+<!-- ```{r, fig.width=5, fig.height=3, fig.align='center'} -->
+<!-- er_state %>% ggplot(aes(x = year, -->
+<!--                       y = rate)) + -->
+<!--   geom_line(size = 0.8, linetype = "twodash") -->
+<!-- ``` -->
 
 
-```{r, fig.width=5, fig.height=3, fig.align='center'}
-er_state %>% ggplot(aes(x = year,
-                      y = rate)) +
-  geom_point(size = 2, shape = 12)
-```
+<!-- ## Keys for specifications -->
+
+<!-- `shape` -->
+
+<!-- ```{r, echo = FALSE, fig.align='center', out.width= "50%"} -->
+<!-- knitr::include_graphics("img/shape.png") -->
+<!-- ``` -->
+
+<!-- [source](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/figure/unnamed-chunk-2-1.png) -->
+
+<!-- ## shape key -->
+
+<!-- -   *geoms* that draw have points have a `shape` parameter -->
+<!-- -   these include numeric values (don't need quotes for these) and some characters values (need quotes for these) -->
 
 
-## Can make your own theme to use on plots!
+<!-- ```{r, fig.width=5, fig.height=3, fig.align='center'} -->
+<!-- er_state %>% ggplot(aes(x = year, -->
+<!--                       y = rate)) + -->
+<!--   geom_point(size = 2, shape = 12) -->
+<!-- ``` -->
 
-Guide on how to: <https://rpubs.com/mclaire19/ggplot2-custom-themes>
+
+<!-- ## Can make your own theme to use on plots! -->
+
+<!-- Guide on how to: <https://rpubs.com/mclaire19/ggplot2-custom-themes> -->
 
 
 <!-- ## Group and/or color by variable's values -->
@@ -774,47 +776,48 @@ er_bar +
 
 ```
 
-## Tip- if you need you can remove outliers
+<!-- ## Tip- if you need you can remove outliers -->
 
-Set `outlier.shape = NA` to get ride of outliers. Be careful about if you really should remove these!
+<!-- Set `outlier.shape = NA` to get ride of outliers. Be careful about if you really should remove these! -->
 
-However, if can be helpful if your plot is getting stretched to accommodate plotting an outlier. You can always say in the figure legend what you removed.
+<!-- However, if can be helpful if your plot is getting stretched to accommodate plotting an outlier. You can always say in the figure legend what you removed. -->
 
-```{r}
-er_no_out1 <- ggplot(er_visits_gender, aes(y = visits, x = gender)) +
-  geom_boxplot()
+<!-- ```{r} -->
+<!-- er_no_out1 <- ggplot(er_visits_gender, aes(y = visits, x = gender)) + -->
+<!--   geom_boxplot() -->
 
-er_no_out2 <- ggplot(er_visits_gender, aes(y = visits, x = gender)) +
-  geom_boxplot(outlier.shape = NA) +
-  ylim(0,40)
-```
+<!-- er_no_out2 <- ggplot(er_visits_gender, aes(y = visits, x = gender)) + -->
+<!--   geom_boxplot(outlier.shape = NA) + -->
+<!--   ylim(0,40) -->
+<!-- ``` -->
 
-```{r, fig.show="hold", out.width="40%", echo = FALSE}
-er_no_out1 # fig.show = "hold" makes plots appear
-er_no_out2 # next to one another in the chunk settings
-```
+<!-- ```{r, fig.show="hold", out.width="40%", echo = FALSE} -->
+<!-- er_no_out1 # fig.show = "hold" makes plots appear -->
+<!-- er_no_out2 # next to one another in the chunk settings -->
+<!-- ``` -->
 
-## NA Values {.codesmall}
+<!-- ## NA Values {.codesmall} -->
 
--   if it is a numeric value it will just get dropped from the graph and you will see a warning
--   it is categorical you will see it on the graph and will need to filter to remove the NA category
+<!-- -   if it is a numeric value it will just get dropped from the graph and you will see a warning -->
+<!-- -   it is categorical you will see it on the graph and will need to filter to remove the NA category -->
 
-```{r}
-icecream <-tibble(flavor =
-            rep(c("chocolate", "vanilla", NA,"chocolate", "vanilla"), 8))
+<!-- ```{r} -->
+<!-- icecream <-tibble(flavor = -->
+<!--             rep(c("chocolate", "vanilla", NA,"chocolate", "vanilla"), 8)) -->
 
-icecream1 <- ggplot(icecream, aes(x = flavor)) + geom_bar() +
-              theme(text=element_text(size=24))
+<!-- icecream1 <- ggplot(icecream, aes(x = flavor)) + geom_bar() + -->
+<!--               theme(text=element_text(size=24)) -->
 
-icecream2 <- icecream %>% drop_na(flavor)  %>%
-                ggplot( aes(x = flavor)) + geom_bar() +
-                  theme(text=element_text(size=24))
-```
+<!-- icecream2 <- icecream %>% drop_na(flavor)  %>% -->
+<!--                 ggplot( aes(x = flavor)) + geom_bar() + -->
+<!--                   theme(text=element_text(size=24)) -->
+<!-- ``` -->
 
-```{r, fig.show="hold", out.width="30%", echo = FALSE}
-icecream1 # fig.show = "hold" makes plots appear
-icecream2 # next to one another in the chunk settings
-```
+<!-- ```{r, fig.show="hold", out.width="30%", echo = FALSE} -->
+<!-- icecream1 # fig.show = "hold" makes plots appear -->
+<!-- icecream2 # next to one another in the chunk settings -->
+<!-- ``` -->
+
 ## Sometimes we have many lines and it is hard to see what is happening{.codesmall}
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
@@ -881,32 +884,30 @@ rp_fac_plot <- lots_of_lines +
 rp_fac_plot
 ```
 
+<!-- # Extensions -->
 
+<!-- ## `directlabels` package -->
 
-# Extensions
+<!-- Great for adding labels directly onto plots <https://www.opencasestudies.org/ocs-bp-co2-emissions/> -->
 
-## `directlabels` package
+<!-- ```{r, out.width="50%", fig.align="center"} -->
+<!-- #install.packages("directlabels") -->
+<!-- library(directlabels) -->
+<!-- direct.label(lots_of_lines, method = list("angled.boxes")) -->
+<!-- ``` -->
 
-Great for adding labels directly onto plots <https://www.opencasestudies.org/ocs-bp-co2-emissions/>
+<!-- ## `patchwork` package -->
 
-```{r, out.width="50%", fig.align="center"}
-#install.packages("directlabels")
-library(directlabels)
-direct.label(lots_of_lines, method = list("angled.boxes"))
-```
+<!-- Great for combining plots together -->
 
-## `patchwork` package
+<!-- Also check out the [`patchwork` package](https://patchwork.data-imaginist.com/) -->
 
-Great for combining plots together
+<!-- ```{r, out.width= "50%", fig.align='center'} -->
+<!-- #install.packages("patchwork") -->
+<!-- library(patchwork) -->
+<!-- (plt1 + plt2)/plt2 -->
 
-Also check out the [`patchwork` package](https://patchwork.data-imaginist.com/)
-
-```{r, out.width= "50%", fig.align='center'}
-#install.packages("patchwork")
-library(patchwork)
-(plt1 + plt2)/plt2
-
-```
+<!-- ``` -->
 <!-- ## `ggpubr` package -->
 
 <!-- Great for adding p-values and significance levels <https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf>  -->
@@ -979,3 +980,186 @@ knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
 
 Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
+
+# Extra Slides
+
+## Adding color - or change the color of each plot layer
+
+You can change look of each layer separately. Note the arguments like `linetype` and `alpha` that allow us to change the opacity of the points and style of the line respectively.
+
+```{r, fig.width=5, fig.height=3, fig.align='center'}
+ggplot(er_state, aes(x = year, y = rate)) +
+  geom_point(size = 5, color = "red", alpha = 0.5) +
+  geom_line(size = 0.8, color = "black", linetype = 2)
+```
+
+`linetype` can be given as a number. See the docs for what numbers correspond to what `linetype`!
+
+## Customize the look of the plot
+
+You can change the look of whole plot - **specific elements, too** - like changing [font](http://www.cookbook-r.com/Graphs/Fonts/) and font size - or even more [fonts](https://blog.revolutionanalytics.com/2012/09/how-to-use-your-favorite-fonts-in-r-charts.html)
+
+```{r, fig.width=6, fig.height=3.5, fig.align='center'}
+ggplot(er_state, aes(x = year, y = rate)) +
+  geom_point(size = 5, color = "green", alpha = 0.5) +
+  geom_line(size = 0.8, color = "blue", linetype = 2) +
+  theme_bw() +
+  theme(text=element_text(size=16,  family="Comic Sans MS"))
+```
+
+## Adding labels line break {.codesmall}
+
+Line breaks can be specified using `\n` within the `labs()` function to have a label with multiple lines.
+
+```{r, fig.width=4, fig.height=2.5, fig.align='center'}
+ggplot(er_state, aes(x = year, y = rate)) +
+            geom_point(size = 5, color = "red", alpha = 0.5) +
+            geom_line(size = 0.8, color = "brown", linetype = 2) +
+  labs(title = "My plot of Heat-Related ER Visits in CO: \n age-adjusted visit rate by year",
+              x = "Year",
+              y = "Age-adjusted Visit Rate")
+```
+
+## Changing axis: specifying axis limits
+
+`xlim()` and `ylim()` can specify the limits for each axis
+
+```{r, fig.width=5, fig.height=3, fig.align='center'}
+
+ggplot(er_state, aes(x = year, y = rate)) +
+            geom_point(size = 5, color = "green", alpha = 0.5) +
+            geom_line(size = 0.8, color = "blue", linetype = 2) +
+  labs(title = "My plot of Heat-Related ER Visits in CO",
+              x = "Year",
+              y = "Age-adjusted Visit Rate") +
+  ylim(0, max(pull(er_visits_4, rate)))
+
+```
+
+## theme() function: moving (or removing) legend {.codesmall}
+
+If specifying position - use: "top", "bottom", "right", "left", "none"
+
+```{r, fig.show="hold", out.width="40%"}
+ggplot(er_visits_4, aes(x = year, y = rate, color = county)) +
+  geom_line()
+
+ggplot(er_visits_4, aes(x = year, y = rate, color = county)) +
+  geom_line() +
+  theme(legend.position = "bottom")
+```
+
+## Keys for specifications
+
+`linetype`
+
+```{r, echo = FALSE, fig.align='center', out.width= "60%"}
+knitr::include_graphics("img/line_types.png")
+```
+
+[source](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/figure/line_types-1.png)
+
+## Linetype key
+
+-   *geoms* that draw lines have a `linetype` parameter
+-   these include values that are strings like "blank", "solid", "dashed", "dotdash", "longdash", and "twodash"
+
+```{r, fig.width=5, fig.height=3, fig.align='center'}
+er_state %>% ggplot(aes(x = year,
+                      y = rate)) +
+  geom_line(size = 0.8, linetype = "twodash")
+```
+
+
+## Keys for specifications
+
+`shape`
+
+```{r, echo = FALSE, fig.align='center', out.width= "50%"}
+knitr::include_graphics("img/shape.png")
+```
+
+[source](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/figure/unnamed-chunk-2-1.png)
+
+## shape key
+
+-   *geoms* that draw have points have a `shape` parameter
+-   these include numeric values (don't need quotes for these) and some characters values (need quotes for these)
+
+
+```{r, fig.width=5, fig.height=3, fig.align='center'}
+er_state %>% ggplot(aes(x = year,
+                      y = rate)) +
+  geom_point(size = 2, shape = 12)
+```
+
+## Can make your own theme to use on plots!
+
+Guide on how to: <https://rpubs.com/mclaire19/ggplot2-custom-themes>
+
+## Tip- if you need you can remove outliers
+
+Set `outlier.shape = NA` to get ride of outliers. Be careful about if you really should remove these!
+
+However, if can be helpful if your plot is getting stretched to accommodate plotting an outlier. You can always say in the figure legend what you removed.
+
+```{r}
+er_no_out1 <- ggplot(er_visits_gender, aes(y = visits, x = gender)) +
+  geom_boxplot()
+
+er_no_out2 <- ggplot(er_visits_gender, aes(y = visits, x = gender)) +
+  geom_boxplot(outlier.shape = NA) +
+  ylim(0,40)
+```
+
+```{r, fig.show="hold", out.width="40%", echo = FALSE}
+er_no_out1 # fig.show = "hold" makes plots appear
+er_no_out2 # next to one another in the chunk settings
+```
+
+## Tip - NA Values {.codesmall}
+
+-   if it is a numeric value it will just get dropped from the graph and you will see a warning
+-   it is categorical you will see it on the graph and will need to filter to remove the NA category
+
+```{r}
+icecream <-tibble(flavor =
+            rep(c("chocolate", "vanilla", NA,"chocolate", "vanilla"), 8))
+
+icecream1 <- ggplot(icecream, aes(x = flavor)) + geom_bar() +
+              theme(text=element_text(size=24))
+
+icecream2 <- icecream %>% drop_na(flavor)  %>%
+                ggplot( aes(x = flavor)) + geom_bar() +
+                  theme(text=element_text(size=24))
+```
+
+```{r, fig.show="hold", out.width="30%", echo = FALSE}
+icecream1 # fig.show = "hold" makes plots appear
+icecream2 # next to one another in the chunk settings
+```
+
+# Extensions
+
+## `directlabels` package
+
+Great for adding labels directly onto plots <https://www.opencasestudies.org/ocs-bp-co2-emissions/>
+
+```{r, out.width="50%", fig.align="center"}
+#install.packages("directlabels")
+library(directlabels)
+direct.label(lots_of_lines, method = list("angled.boxes"))
+```
+
+## `patchwork` package
+
+Great for combining plots together
+
+Also check out the [`patchwork` package](https://patchwork.data-imaginist.com/)
+
+```{r, out.width= "50%", fig.align='center'}
+#install.packages("patchwork")
+library(patchwork)
+(plt1 + plt2)/plt2
+
+```
