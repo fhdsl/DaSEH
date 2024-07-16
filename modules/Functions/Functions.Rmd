@@ -379,6 +379,8 @@ ces_dbl %>%
 
 Combining with `mutate()` - the `replace_na` function
 
+Here we will use the `yearly_co2_emissions` data from `dasehr`
+
 ```replace_na({data frame}, {list of values})```
 or
 ```replace_na({vector}, {single value})```
