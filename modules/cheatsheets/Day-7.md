@@ -1,3 +1,8 @@
+---
+classoption:
+- landscape
+---
+
 # Day 7 Cheatsheet
 
 ## Data Visualization

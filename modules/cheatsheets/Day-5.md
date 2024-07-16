@@ -1,3 +1,8 @@
+---
+classoption:
+- landscape
+---
+
 # Day 5 Cheatsheet
 
 ## Data Cleaning

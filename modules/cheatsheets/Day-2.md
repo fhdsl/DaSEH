@@ -1,3 +1,8 @@
+---
+classoption:
+- landscape
+---
+
 # Day 2 Cheatsheet
 
 ## Basic R

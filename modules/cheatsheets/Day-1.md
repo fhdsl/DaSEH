@@ -1,3 +1,8 @@
+---
+classoption:
+- landscape
+---
+
 # Day 1 Cheatsheet
 
 ## Intro
