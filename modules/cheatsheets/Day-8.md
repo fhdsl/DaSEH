@@ -1,3 +1,8 @@
+---
+classoption:
+- landscape
+---
+
 # Day 8 Cheatsheet
 
 ## Statistics

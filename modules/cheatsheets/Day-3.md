@@ -1,3 +1,8 @@
+---
+classoption:
+- landscape
+---
+
 # Day 3 Cheatsheet
 
 ## Subsetting Data in R

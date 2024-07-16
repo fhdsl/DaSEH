@@ -1,3 +1,8 @@
+---
+classoption:
+- landscape
+---
+
 # Day 9 Cheatsheet
 
 ## Functions

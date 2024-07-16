@@ -1,8 +1,8 @@
 ---
-output:
-  pdf_document: default
-  html_document: default
+classoption:
+- landscape
 ---
+
 # Day 6 Cheatsheet
 
 ## Data Manipulation

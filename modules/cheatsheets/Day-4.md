@@ -1,3 +1,8 @@
+---
+classoption:
+- landscape
+---
+
 # Day 4 Cheatsheet
 
 ## Data Summarization
