@@ -124,7 +124,7 @@ Let's make a plot first.
 er_visits_age_subset %>%
   ggplot(mapping = aes(x = AGE, y = RATE)) +
   geom_boxplot() +
-  theme_bw(base_size = 8) # make all labels size 8
+  theme_bw(base_size = 12) # make all labels size 12
 ```
 
 OK this is very useful, but it is a bit difficult to read. We expect the values to be plotted by the order that we know, not by alphabetical order.
@@ -159,7 +159,7 @@ Now let's make our plot again:
 er_visits_age_fct %>%
   ggplot(mapping = aes(x = AGE, y = RATE)) +
   geom_boxplot() +
-  theme_bw(base_size = 8)
+  theme_bw(base_size = 12)
 ```
 
 Now that's more like it! Notice how the data is automatically plotted in the order we would like.
@@ -216,7 +216,7 @@ library(forcats)
 er_visits_age_fct %>%
   ggplot(mapping = aes(x = AGE, y = RATE)) +
   geom_boxplot() +
-  theme_bw(base_size = 8)
+  theme_bw(base_size = 12)
 ```
 
 This would be useful for identifying easily which age group to focus on.
@@ -242,7 +242,7 @@ er_visits_age_fct %>%
   ggplot(mapping = aes(x = fct_reorder(AGE, RATE, mean), y = RATE)) +
   geom_boxplot() +
   labs(x = "Age Category") +
-  theme_bw(base_size = 8)
+  theme_bw(base_size = 12)
 ```
 
 ## forcats for ordering.. with `.desc = ` argument{.smaller}
@@ -254,7 +254,7 @@ er_visits_age_fct %>%
   ggplot(mapping = aes(x = fct_reorder(AGE, RATE, mean, .desc = TRUE), y = RATE)) +
   geom_boxplot() +
   labs(x = "Age Category") +
-  theme_bw(base_size = 8)
+  theme_bw(base_size = 12)
 ```
 
 ## forcats for ordering.. can be used to sort datasets
