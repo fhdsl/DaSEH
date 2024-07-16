@@ -57,11 +57,11 @@ Amend the function `has_n` from question 1.2 so that it takes a default value of
 
 ```
 
-### 1.4
+### P.1
 
 Create a new number `b_num` that is not contained with `nums`. Use your updated `has_n` function with the default value and add `b_num` as the `n` argument when calling the function. What is the outcome?
 
-```{r 1.4response}
+```{r P.1response}
 
 ```
 
@@ -73,7 +73,9 @@ Create a new number `b_num` that is not contained with `nums`. Use your updated 
 Read in the CalEnviroScreen from https://daseh.org/data/CalEnviroScreen_data.csv. Assign the data the name "ces".
 
 ```{r message = FALSE, label = '2.1response'}
-
+ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
+# If downloaded
+# ces <- read_csv("CalEnviroScreen_data.csv")
 ```
 
 ### 2.2
@@ -94,26 +96,38 @@ data %>%
 
 ```
 
+
 ### 2.3
 
-Use `across` and `mutate` to convert all columns containing the word "Pctl" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use a "function on the fly" to divide by 100. It will also be easier to check your work if you `select()` columns that match "Pctl".
+Use `across` and `mutate` to convert all columns containing the word "Pctl" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use a "function on the fly" to divide by 100 (`function(x) x / 100`). It will also be easier to check your work if you `select()` columns that match "Pctl".
+
+```
+# General format
+data %>%
+  mutate(across(
+    .cols = {vector or tidyselect},
+    .fns = {some function}
+  ))
+```
 
 ```{r 2.3response}
 
 ```
 
-### 2.4
+# Practice on Your Own!
+
+### P.1
+
+
 
 Use `across` and `mutate` to convert all columns starting with the string "PM" into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. **Hint**: use `starts_with()` to select the columns that start with "PM". Use a "function on the fly" to do a logical test if the value is greater than 10.
 
-```{r 2.4response}
+```{r P.1response}
 
 ```
 
 
-# Practice on Your Own!
-
-### P.1
+### P.2 
 
 Take your code from question 2.4 and assign it to the variable `ces_dat`. 
 
@@ -121,6 +135,6 @@ Take your code from question 2.4 and assign it to the variable `ces_dat`.
 - Create a ggplot boxplot (`geom_boxplot()`) where (1) the x-axis is `PM2.5` and (2) the y-axis is `Asthma`.
 - You change the `labs()` layer so that the x-axis is "ER Visits for Asthma: PM2.5 greater than 10"
 
-```{r P.1response}
+```{r P.2response}
 
 ```
