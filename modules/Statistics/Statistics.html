@@ -4111,6 +4111,10 @@ AIC: 671.93
 
 Number of Fisher Scoring iterations: 16</pre>
 
+</article></slide><slide class=""><hgroup><h2>Logistic Regression</h2></hgroup><article  id="logistic-regression-2">
+
+<p>See this <a href='https://www.opencasestudies.org/ocs-bp-vaping-case-study/#Logistic_regression_%E2%80%9Cby_hand%E2%80%9D_and_by_model' title=''>case study</a> for more information.</p>
+
 </article></slide><slide class=""><hgroup><h2>Odds ratios</h2></hgroup><article  id="odds-ratios">
 
 <blockquote>
@@ -4135,8 +4139,15 @@ calenviroscreen &lt;-
         TrafficPctl &lt;= 0.75 ~ 0))
 
 response &lt;- calenviroscreen %&gt;% pull(DieselPM_level)
-predictor &lt;- calenviroscreen %&gt;% pull(Traffic_level)
-oddsratio(predictor, response)</pre>
+predictor &lt;- calenviroscreen %&gt;% pull(Traffic_level)</pre>
+
+</article></slide><slide class=""><hgroup><h2>Odds ratios</h2></hgroup><article  id="odds-ratios-2" class="smaller">
+
+<p>Use <code>oddsratio(x, y)</code> from the <code>epitools()</code> package to calculate odds ratios.</p>
+
+<p>In this case, we’re calculating the odds ratio for whether living in a high traffic area predicts high levels of DieselPM.</p>
+
+<pre class = 'prettyprint lang-r'>oddsratio(predictor, response)</pre>
 
 <pre >$data
          Outcome
@@ -4166,8 +4177,6 @@ $correction
 
 attr(,&quot;method&quot;)
 [1] &quot;median-unbiased estimate &amp; mid-p exact CI&quot;</pre>
-
-<p>See this <a href='https://www.opencasestudies.org/ocs-bp-vaping-case-study/#Logistic_regression_%E2%80%9Cby_hand%E2%80%9D_and_by_model' title=''>case study</a> for more information.</p>
 
 </article></slide><slide class=""><hgroup><h2>Final note</h2></hgroup><article  id="final-note">
 

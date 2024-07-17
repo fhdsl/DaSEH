@@ -638,6 +638,11 @@ binom_fit <- glm(DieselPM_level ~ PovertyPctl_level, data = calenviroscreen, fam
 summary(binom_fit)
 ```
 
+## Logistic Regression
+
+See this [case study](https://www.opencasestudies.org/ocs-bp-vaping-case-study/#Logistic_regression_%E2%80%9Cby_hand%E2%80%9D_and_by_model) for more information.
+
+
 ## Odds ratios
 
 > An odds ratio (OR) is a measure of association between an exposure and an outcome. The OR represents the odds that an outcome will occur given a particular exposure, compared to the odds of the outcome occurring in the absence of that exposure.
@@ -663,10 +668,17 @@ calenviroscreen <-
 
 response <- calenviroscreen %>% pull(DieselPM_level)
 predictor <- calenviroscreen %>% pull(Traffic_level)
-oddsratio(predictor, response)
 ```
 
-See this [case study](https://www.opencasestudies.org/ocs-bp-vaping-case-study/#Logistic_regression_%E2%80%9Cby_hand%E2%80%9D_and_by_model) for more information.
+## Odds ratios {.smaller}
+
+Use `oddsratio(x, y)` from the `epitools()` package to calculate odds ratios.
+
+In this case, we're calculating the odds ratio for whether living in a high traffic area predicts high levels of DieselPM.
+
+```{r}
+oddsratio(predictor, response)
+```
 
 ## Final note
 
