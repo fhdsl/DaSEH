@@ -21,7 +21,7 @@ library(ggplot2)
 
 ### 1.1
 
-Create a function that takes one argument, a vector, and returns the sum of the vector and squares the result. Call it "sum_squared". Test your function on the vector `c(2,7,21,30,90)` - you should get the answer 22500.
+Create a function that takes one argument, a vector, and returns the sum of the vector and then squares the result. Call it "sum_squared". Test your function on the vector `c(2,7,21,30,90)` - you should get the answer 22500.
 
 ```
 # General format
@@ -74,11 +74,11 @@ has_n <- function(x, n = 21) n %in% x
 has_n(x = nums)
 ```
 
-### 1.4
+### P.1
 
 Create a new number `b_num` that is not contained with `nums`. Use your updated `has_n` function with the default value and add `b_num` as the `n` argument when calling the function. What is the outcome?
 
-```{r 1.4response}
+```{r P.1response}
 b_num <- 11
 has_n(x = nums, n = b_num)
 ```
@@ -124,9 +124,19 @@ ces %>%
   ))
 ```
 
+
 ### 2.3
 
-Use `across` and `mutate` to convert all columns containing the word "Pctl" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use a "function on the fly" to divide by 100. It will also be easier to check your work if you `select()` columns that match "Pctl".
+Use `across` and `mutate` to convert all columns containing the word "Pctl" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use a "function on the fly" to divide by 100 (`function(x) x / 100`). It will also be easier to check your work if you `select()` columns that match "Pctl".
+
+```
+# General format
+data %>%
+  mutate(across(
+    .cols = {vector or tidyselect},
+    .fns = {some function}
+  ))
+```
 
 ```{r 2.3response}
 ces %>%
@@ -137,11 +147,15 @@ ces %>%
   select(contains("Pctl"))
 ```
 
-### 2.4
+# Practice on Your Own!
+
+### P.2
+
+
 
 Use `across` and `mutate` to convert all columns starting with the string "PM" into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. **Hint**: use `starts_with()` to select the columns that start with "PM". Use a "function on the fly" to do a logical test if the value is greater than 10.
 
-```{r 2.4response}
+```{r P.2response}
 ces %>%
   mutate(across(
     .cols = starts_with("PM"),
@@ -150,9 +164,7 @@ ces %>%
 ```
 
 
-# Practice on Your Own!
-
-### P.1
+### P.3
 
 Take your code from question 2.4 and assign it to the variable `ces_dat`. 
 
@@ -160,7 +172,7 @@ Take your code from question 2.4 and assign it to the variable `ces_dat`.
 - Create a ggplot boxplot (`geom_boxplot()`) where (1) the x-axis is `PM2.5` and (2) the y-axis is `Asthma`.
 - You change the `labs()` layer so that the x-axis is "ER Visits for Asthma: PM2.5 greater than 10"
 
-```{r P.1response}
+```{r P.3response}
 ces_dat <-
   ces %>%
   mutate(across(

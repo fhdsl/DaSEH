@@ -201,47 +201,28 @@ get_row(dat = ces, row = 4)
 
 ## Functions for tibbles
 
-`select(n)` will choose column `n`:
-
-```{r message=FALSE}
-get_index <- function(dat, row, col) {
-  dat %>%
-    filter(row_number() == row) %>%
-    select(all_of(col))
-}
-
-get_index(dat = ces, row = 10, col = 7)
-```
-
-
-## Functions for tibbles
-
-Including default values for arguments:
-
-```{r message=FALSE}
-get_top <- function(dat, row = 1, col = 1) {
-  dat %>%
-    filter(row_number() == row) %>%
-    select(all_of(col))
-}
-
-get_top(dat = ces)
-```
-
-## Functions for tibbles
-
 Can create function with an argument that allows inputting a column name for `select` or other `dplyr` operation:
 
 ```{r}
 clean_dataset <- function(dataset, col_name) {
   my_data_out <- dataset %>% select({{col_name}}) # Note the curly braces
-  write_csv(my_data_out, "clean_data.csv")
   return(my_data_out)
 }
 
 clean_dataset(dataset = ces, col_name = "CES4.0Score")
 ```
+```{r}
+get_mean <- function(dat, county_name, col_name) {
+  my_data_out <- dat %>% 
+    filter(str_detect(CaliforniaCounty, county_name)) %>%  
+    summarise(mean = mean({{col_name}}, na.rm = TRUE))
+    return(my_data_out)
+}
 
+get_mean(dat = ces, county_name = "Alameda", col_name = CES4.0Score)
+get_mean(dat = ces, county_name = "Fresno", col_name = CES4.0Score)
+
+```
 ## Summary
 
 - Simple functions take the form:
@@ -397,6 +378,8 @@ ces_dbl %>%
 ## Applying functions with `across` from `dplyr` {.smaller}
 
 Combining with `mutate()` - the `replace_na` function
+
+Here we will use the `yearly_co2_emissions` data from `dasehr`
 
 ```replace_na({data frame}, {list of values})```
 or
