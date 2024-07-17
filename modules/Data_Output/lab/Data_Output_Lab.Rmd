@@ -29,7 +29,7 @@ library(readr)
 
 ### 1.2
 
-Filter the dataset so that the "reporting_jurisdiction" column is equal to "Maryland" (aka the entire USA). Store the modified dataset as `covid_filtered`.
+Filter the dataset so that the "reporting_jurisdiction" column is equal to "Maryland". Store the modified dataset as `covid_filtered`.
 
 ```
 # General format
