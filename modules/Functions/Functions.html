@@ -3117,7 +3117,7 @@ div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -3473,45 +3473,10 @@ ces_1_8 &lt;- ces %&gt;% select(1:8)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Functions for tibbles</h2></hgroup><article  id="functions-for-tibbles-1">
 
-<p><code>select(n)</code> will choose column <code>n</code>:</p>
-
-<pre class = 'prettyprint lang-r'>get_index &lt;- function(dat, row, col) {
-  dat %&gt;%
-    filter(row_number() == row) %&gt;%
-    select(all_of(col))
-}
-
-get_index(dat = ces, row = 10, col = 7)</pre>
-
-<pre ># A tibble: 1 × 1
-  CES4.0Score
-        &lt;dbl&gt;
-1        43.7</pre>
-
-</article></slide><slide class=""><hgroup><h2>Functions for tibbles</h2></hgroup><article  id="functions-for-tibbles-2">
-
-<p>Including default values for arguments:</p>
-
-<pre class = 'prettyprint lang-r'>get_top &lt;- function(dat, row = 1, col = 1) {
-  dat %&gt;%
-    filter(row_number() == row) %&gt;%
-    select(all_of(col))
-}
-
-get_top(dat = ces)</pre>
-
-<pre ># A tibble: 1 × 1
-  CensusTract
-        &lt;dbl&gt;
-1  6001400100</pre>
-
-</article></slide><slide class=""><hgroup><h2>Functions for tibbles</h2></hgroup><article  id="functions-for-tibbles-3">
-
 <p>Can create function with an argument that allows inputting a column name for <code>select</code> or other <code>dplyr</code> operation:</p>
 
 <pre class = 'prettyprint lang-r'>clean_dataset &lt;- function(dataset, col_name) {
   my_data_out &lt;- dataset %&gt;% select({{col_name}}) # Note the curly braces
-  write_csv(my_data_out, &quot;clean_data.csv&quot;)
   return(my_data_out)
 }
 
@@ -3531,6 +3496,27 @@ clean_dataset(dataset = ces, col_name = &quot;CES4.0Score&quot;)</pre>
  9       40.7 
 10       43.7 
 # ℹ 8,025 more rows</pre>
+
+<pre class = 'prettyprint lang-r'>get_mean &lt;- function(dat, county_name, col_name) {
+  my_data_out &lt;- dat %&gt;% 
+    filter(str_detect(CaliforniaCounty, county_name)) %&gt;%  
+    summarise(mean = mean({{col_name}}, na.rm = TRUE))
+    return(my_data_out)
+}
+
+get_mean(dat = ces, county_name = &quot;Alameda&quot;, col_name = CES4.0Score)</pre>
+
+<pre ># A tibble: 1 × 1
+   mean
+  &lt;dbl&gt;
+1  22.9</pre>
+
+<pre class = 'prettyprint lang-r'>get_mean(dat = ces, county_name = &quot;Fresno&quot;, col_name = CES4.0Score)</pre>
+
+<pre ># A tibble: 1 × 1
+   mean
+  &lt;dbl&gt;
+1  40.9</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summary</h2></hgroup><article  id="summary">
 
@@ -3774,6 +3760,8 @@ ces_dbl %&gt;%
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-6" class="smaller">
 
 <p>Combining with <code>mutate()</code> - the <code>replace_na</code> function</p>
+
+<p>Here we will use the <code>yearly_co2_emissions</code> data from <code>dasehr</code></p>
 
 <p><code>replace_na({data frame}, {list of values})</code> or <code>replace_na({vector}, {single value})</code></p>
 
