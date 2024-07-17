@@ -125,31 +125,25 @@ head(yearly_co2_emissions)
 
 First, we compute correlation by providing two vectors.
 
+```{r}
+# x and y must be numeric vectors
+y1980 <- yearly_co2_emissions %>% pull(`1980`)
+y1985 <- yearly_co2_emissions %>% pull(`1985`)
+```
+
+<br>
+
 Like other functions, if there are `NA`s, you get `NA` as the result.  But if you specify use only the complete observations, then it will give you correlation using the non-missing data.
 
 ```{r}
-# x and y must be numeric vectors
-
-co2long <- yearly_co2_emissions %>% pivot_longer(-country)
-co2wide <-co2long %>% pivot_wider(names_from = country, values_from = value)
-
-US <- co2wide %>% pull(`United States`)
-UK <- co2wide %>% pull(`United Kingdom`)
+cor(y1980, y1985, use = "complete.obs")
 ```
 
-```{r,fig.width=3, fig.height=3}
-# have to specify which data on each axis
-# can accomodate missing data
-plot(US, UK)
-```
 
 ## Correlation coefficient calculation and test
 
 ```{r}
-library(broom)
-cor(US, UK)
-cor(US, UK, use = "complete.obs")
-cor.test(US, UK)
+cor.test(y1980, y1985)
 ```
 
 ## Broom package
@@ -157,22 +151,21 @@ cor.test(US, UK)
 The `broom` package helps make stats results look tidy
 
 ```{r}
-cor_result <- tidy(cor.test(US, UK))
+library(broom)
+cor_result <- tidy(cor.test(y1980, y1985))
 glimpse(cor_result)
 ```
 
-## Correlation for two vectors with plot
+## Correlation for two vectors with plot{.codesmall}
 
 In plot form... `geom_smooth()` and `annotate()` can help.
 
 ```{r, warning = F}
 corr_value <- pull(cor_result, estimate) %>% round(digits = 4)
 cor_label <- paste0("R = ", corr_value)
-co2wide %>%
-  ggplot(aes(x = US, y = UK)) +
-  geom_point(size = 0.3) +
-  geom_smooth() +
-  annotate("text", x = 2000, y = 7500, label = cor_label)
+yearly_co2_emissions %>%
+  ggplot(aes(x = `1980`, y = `1985`)) + geom_point(size = 1) + geom_smooth() +
+  annotate("text", x = 2000000, y = 4000000, label = cor_label)
 ```
 
 <!-- ## Plotting with `ggpubr` -->
@@ -198,7 +191,8 @@ We can compute correlation for all pairs of columns of a data frame / matrix. Th
 Columns must be all numeric!
 
 ```{r}
-co2_subset <- co2wide %>% select(c(`United States`, `United Kingdom`, Canada))
+co2_subset <- yearly_co2_emissions %>%
+  select(c(`1950`, `1980`, `1985`, `2010`))
 
 head(co2_subset)
 ```
@@ -257,13 +251,10 @@ It tests the mean of a variable in one group. By default (i.e., without us expli
 - returns result assuming confidence level 0.95 (`conf.level = 0.95`)
 - omits `NA` values in data
 
-Let's look at the UK and US CO2 emissions data again. 
+Let's look at the CO2 emissions data again. 
 
 ```{r}
-
-sum(is.na(US)) # count NAs in x
-
-t.test(US)
+t.test(y1980)
 ```
 
 ## Running two-sample t-test {.small}
@@ -282,10 +273,7 @@ Check out this this [case study](https://www.opencasestudies.org/ocs-bp-rural-an
 ## Running two-sample t-test in R
 
 ```{r}
-sum(is.na(US))
-sum(is.na(UK)) # count NAs in x and y
-
-t.test(US, UK)
+t.test(y1980, y1985)
 ```
 
 ## T-test: retrieving information from the result with `broom` package
@@ -293,7 +281,7 @@ t.test(US, UK)
 The `broom` package has a `tidy()` function that can organize results into a data frame so that they are easily manipulated (or nicely printed)
 
 ```{r broom, comment=""}
-result <- t.test(US, UK)
+result <- t.test(y1980, y1985)
 result_tidy <- tidy(result)
 glimpse(result_tidy)
 ```
@@ -470,11 +458,12 @@ For example, if we want to fit a regression model where outcome is `income` and 
 We will use our the calenviroscreen dataset from the `dasehr` package to examine how traffic estimates predict diesel particulate emissions.
 
 
-## Linear regression: model fitting
+## Linear regression: model fitting{.codesmall}
 
 For this model, we will use two variables:
-**DieselPM** - estimated diesel particulate emissions from on-road and non-road sources
-**TrafficPctl** - percentile ranking of traffic density
+
+- **DieselPM** - estimated diesel particulate emissions from on-road and non-road sources
+- **TrafficPctl** - percentile ranking of traffic density
 
 ```{r}
 fit <- glm(DieselPM ~ TrafficPctl, data = calenviroscreen)
@@ -490,8 +479,12 @@ summary(fit)
 ```
 
 ## tidy results
+
 The broom package can help us here too!
-The estimate is the coefficient or slope - for one change in the traffic percentile, we see 0.003637 more Diesel particulate emissions. The error for this estimate is relatively small at 0.00009. This relationship appears to be significant with a small p value < 2e-16.
+
+The estimate is the coefficient or slope.
+
+for one change in the traffic percentile, we see 0.003637 more Diesel particulate emissions. The error for this estimate is relatively small at 0.00009. This relationship appears to be significant with a small p value < 2e-16.
 
 ```{r}
 tidy(fit) %>% glimpse()
@@ -499,7 +492,7 @@ tidy(fit) %>% glimpse()
 
 ## Linear regression: multiple predictors {.smaller}
 
-Let's try adding another explanatory variable to our model, amount of daily Ozone concentration (`Ozone`). Ozone is usually inversely related to particulate measures. The tidy function will not work with this unfortunately. The meaning of coefficients is more complicated here.
+Let's try adding another explanatory variable to our model, amount of daily Ozone concentration (`Ozone`). Ozone is usually inversely related to particulate measures.
 
 ```{r}
 fit2 <- glm(DieselPM ~ TrafficPctl + Ozone, data = calenviroscreen)
@@ -523,12 +516,14 @@ Factors get special treatment in regression models - lowest level of the factor 
 Let's create a variable that tells us whether a census tract has a high, middle, or low percentage of the population below the poverty line.
 
 ```{r}
-calenviroscreen <- calenviroscreen %>% mutate(PovertyPctl_level = case_when(
-                    PovertyPctl > 0.75 ~ "high",
-                    PovertyPctl >0.25 & PovertyPctl<=0.75 ~ "middle",
-                    PovertyPctl <=0.25 ~ "low",
-                    TRUE ~ "unknown"
-))
+calenviroscreen <- calenviroscreen %>% mutate(
+  PovertyPctl_level = case_when(
+    PovertyPctl > 0.75 ~ "high",
+    PovertyPctl > 0.25 & PovertyPctl <= 0.75 ~ "middle",
+    PovertyPctl <= 0.25 ~ "low",
+    TRUE ~ NA
+  )
+)
 ```
 
 
@@ -548,19 +543,23 @@ summary(fit3)
 Relative to the level is not listed.
 
 ```{r}
-calenviroscreen <- calenviroscreen %>% mutate(PovertyPctl_level = factor(PovertyPctl_level,
-  levels =
-    c(
-      "low", "middle", "high", "unknown"
-    )
-))
+calenviroscreen <-
+  calenviroscreen %>%
+  mutate(PovertyPctl_level = factor(
+    PovertyPctl_level, 
+    levels = c("low", "middle", "high")
+  ))
 fit4 <- glm(DieselPM ~ TrafficPctl + Ozone + PovertyPctl_level, data = calenviroscreen)
 summary(fit4)
 ```
 
 ## Linear regression: factors {.smaller}
 
-You can view estimates for the comparison group by removing the intercept in the GLM formula `y ~ x - 1`. *Caveat* is that the p-values change.
+You can view estimates for the comparison group by removing the intercept in the GLM formula 
+
+`y ~ x - 1`
+
+*Caveat* is that the p-values change.
 
 ```{r regress9, comment="", fig.height=4, fig.width=8}
 fit5 <- glm(DieselPM ~ TrafficPctl + Ozone + PovertyPctl_level - 1, data = calenviroscreen)
@@ -572,7 +571,10 @@ summary(fit5)
 You can also specify interactions between variables in a formula `y ~ x1 + x2 + x1 * x2`. This allows for not only the intercepts between factors to differ, but also the slopes with regard to the interacting variable.
 
 ```{r fig.height=4, fig.width=8}
-fit6 <- glm(DieselPM ~ TrafficPctl + Ozone + PovertyPctl_level + TrafficPctl*PovertyPctl_level, data = calenviroscreen) 
+fit6 <- glm(
+  DieselPM ~ TrafficPctl + Ozone + PovertyPctl_level + TrafficPctl * PovertyPctl_level,
+  data = calenviroscreen
+) 
 tidy(fit6)
 ```
 
