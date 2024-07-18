@@ -46,13 +46,13 @@ function_name <- function(arg1, arg2, ...) {
 Here we will write a function that multiplies some number `x` by 2:
 
 ```{r}
-times_2 <- function(x) x * 2
+div_100 <- function(x) x / 100
 ```
 
 When you run the line of code above, you make it ready to use (no output yet!). Let's test it!
 
 ```{r comment=""}
-times_2(x = 10)
+div_100(x = 600)
 ```
 
 
@@ -61,16 +61,10 @@ times_2(x = 10)
 Adding the curly brackets - `{}` - allows you to use functions spanning multiple lines:
 
 ```{r comment=""}
-times_2 <- function(x) {
-  x * 2
+div_100 <- function(x) {
+  x / 100
 }
-times_2(x = 10)
-
-is_even <- function(x) {
-  x %% 2 == 0
-}
-is_even(x = 11)
-is_even(x = times_2(x = 10))
+div_100(x = 10)
 ```
 
 
@@ -79,35 +73,35 @@ is_even(x = times_2(x = 10))
 If we want something specific for the function's output, we use `return()`:
 
 ```{r comment=""}
-times_2_plus_4 <- function(x) {
-  output_int <- x * 2
+div_100_plus_4 <- function(x) {
+  output_int <- x / 100
   output <- output_int + 4
   return(output)
 }
-times_2_plus_4(x = 10)
+div_100_plus_4(x = 10)
 ```
 
-## Writing your own functions: print intermediate steps
+<!-- ## Writing your own functions: print intermediate steps -->
 
- - printed results do not stay around but can show what a function is doing
- - returned results stay around
- - can only return one result but can print many
- - if `return` not called, last evaluated expression is returned
- - `return` should be the last step (steps after may be skipped)
+<!--  - printed results do not stay around but can show what a function is doing -->
+<!--  - returned results stay around -->
+<!--  - can only return one result but can print many -->
+<!--  - if `return` not called, last evaluated expression is returned -->
+<!--  - `return` should be the last step (steps after may be skipped) -->
 
-## Adding print
+<!-- ## Adding print -->
 
-```{r comment=""}
-times_2_plus_4 <- function(x) {
-  output_int <- x * 2
-  output <- output_int + 4
-  print(paste("times2 result = ", output_int))
-  return(output)
-}
+<!-- ```{r comment=""} -->
+<!-- div_100_plus_4 <- function(x) { -->
+<!--   output_int <- x / 100 -->
+<!--   output <- output_int + 4 -->
+<!--   print(paste("div_100 result = ", output_int)) -->
+<!--   return(output) -->
+<!-- } -->
 
-result <- times_2_plus_4(x = 10)
-result
-```
+<!-- result <- div_100_plus_4(x = 10) -->
+<!-- result -->
+<!-- ``` -->
 
 
 ## Writing your own functions: multiple inputs
@@ -115,14 +109,14 @@ result
 Functions can take multiple inputs:
 
 ```{r comment=""}
-times_2_plus_y <- function(x, y) x * 2 + y
-times_2_plus_y(x = 10, y = 3)
+div_100_plus_y <- function(x, y) x / 100 + y
+div_100_plus_y(x = 10, y = 3)
 ```
 
 
 ## Writing your own functions: multiple outputs
 
-Functions can have one returned result with multiple outputs.
+Functions can return a vector (or other object) with multiple outputs.
 
 ```{r comment=""}
 x_and_y_plus_2 <- function(x, y) {
@@ -141,9 +135,9 @@ result
 Functions can have "default" arguments. This lets us use the function without using an argument later:
 
 ```{r comment=""}
-times_2_plus_y <- function(x = 10, y = 3) x * 2 + y
-times_2_plus_y()
-times_2_plus_y(x = 11, y = 4)
+div_100_plus_y <- function(x = 10, y = 3) x / 100 + y
+div_100_plus_y()
+div_100_plus_y(x = 11, y = 4)
 ```
 
 
@@ -182,47 +176,41 @@ loud(word = "hooray!")
 ```
 
 
-## Functions for tibbles
+<!-- ## Functions for tibbles -->
 
-We can use `filter(row_number() == n)` to extract a row of a tibble:
+<!-- We can use `filter(row_number() == n)` to extract a row of a tibble: -->
 
-```{r message=FALSE}
-get_row <- function(dat, row) dat %>% filter(row_number() == row)
+<!-- ```{r message=FALSE} -->
+<!-- get_row <- function(dat, row) dat %>% filter(row_number() == row) -->
 
-ces <- calenviroscreen
-ces_1_8 <- ces %>% select(1:8)
-```
+<!-- ces <- calenviroscreen -->
+<!-- ces_1_8 <- ces %>% select(1:8) -->
+<!-- ``` -->
 
-```{r}
-get_row(dat = ces, row = 10)
-get_row(dat = ces, row = 4)
-```
+<!-- ```{r} -->
+<!-- get_row(dat = ces, row = 10) -->
+<!-- get_row(dat = ces, row = 4) -->
+<!-- ``` -->
 
 
-## Functions for tibbles
-
-Can create function with an argument that allows inputting a column name for `select` or other `dplyr` operation:
+## Functions for tibbles - curly braces{.codesmall}
 
 ```{r}
-clean_dataset <- function(dataset, col_name) {
-  my_data_out <- dataset %>% select({{col_name}}) # Note the curly braces
-  return(my_data_out)
+# get means and missing for a specific column
+get_summary <- function(dataset, col_name) {
+    dataset %>%  
+    summarise(mean = mean({{col_name}}, na.rm = TRUE),
+              na_count = sum(is.na({{col_name}})))
 }
-
-clean_dataset(dataset = ces, col_name = "CES4.0Score")
 ```
+
+Examples:
+
 ```{r}
-get_mean <- function(dat, county_name, col_name) {
-  my_data_out <- dat %>% 
-    filter(str_detect(CaliforniaCounty, county_name)) %>%  
-    summarise(mean = mean({{col_name}}, na.rm = TRUE))
-    return(my_data_out)
-}
-
-get_mean(dat = ces, county_name = "Alameda", col_name = CES4.0Score)
-get_mean(dat = ces, county_name = "Fresno", col_name = CES4.0Score)
-
+get_summary(calenviroscreen, CES4.0Score)
+get_summary(haa5, perc_pop_exposed_to_exceedances)
 ```
+
 ## Summary
 
 - Simple functions take the form:
@@ -251,6 +239,14 @@ These functions take the form:
 sapply(<a vector, list, data frame>, some_function)
 ```
 
+## CalEnviroScreen
+
+This dataset was gathered by the California Office of Environmental Health Hazard Assessment. CalEnviroScreen ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. Read more at https://calenviroscreen-oehha.hub.arcgis.com/.
+
+```{r}
+head(calenviroscreen)
+```
+
 
 ## Using your custom functions: `sapply()`
 
@@ -259,29 +255,40 @@ sapply(<a vector, list, data frame>, some_function)
 You can also pipe into your function.
 
 ```{r comment=""}
-er_visits <- CO_heat_ER
-
-head(er_visits, n = 2)
-sapply(er_visits, class)
-er_visits %>% sapply(class)
+sapply(calenviroscreen, class) # also: calenviroscreen %>% sapply(class)
 ```
 
 
 ## Using your custom functions: `sapply()`
 
+Use the `div_100` function we created earlier to convert 0-100 percentiles to proportions.
+
 ```{r}
-select(er_visits, rate:upper95cl) %>% head()
-select(er_visits, rate:upper95cl) %>%
-  sapply(times_2) %>%
+calenviroscreen %>%
+  select(ends_with("Pctl")) %>%
+  sapply(div_100) %>%
   head()
 ```
 
 
 ## Using your custom functions "on the fly" to iterate
 
+Also called "anonymous function".
+
 ```{r comment=""}
-select(er_visits, rate:upper95cl) %>%
-  sapply(function(x) x / 1000) %>%
+calenviroscreen %>%
+  select(ends_with("Pctl")) %>%
+  sapply(function(x) x / 100) %>%
+  head()
+```
+
+
+## Anonymous functions: alternative syntax
+
+```{r comment=""}
+calenviroscreen %>%
+  select(ends_with("Pctl")) %>%
+  sapply(\(x) x / 100) %>%
   head()
 ```
 
@@ -292,11 +299,15 @@ select(er_visits, rate:upper95cl) %>%
 
 Already know how to use functions to modify columns using `mutate()` or calculate summary statistics using `summarize()`.
 
+- Pesticides - pounds of selected active pesticide / square mile  
+- Poverty - percent of population living below two times the federal poverty level  
+- LowBirthWeight - Percent low birth weight
+
 ```{r}
-er_visits %>%
-  mutate(rate_round = round(rate, 2)) %>%
-  summarize(max_rate_round = max(rate_round, na.rm = T),
-            max_rate = max(rate, na.rm = T))
+calenviroscreen %>%
+  summarize(max_pest = max(Pesticides, na.rm = T),
+            max_pov = max(Poverty, na.rm = T),
+            low_bw = max(LowBirthWeight, na.rm = T))
 ```
 
 
@@ -305,16 +316,16 @@ er_visits %>%
 `across()` makes it easy to apply the same transformation to multiple columns. Usually used with `summarize()` or `mutate()`.
 
 ```
-summarize(across( .cols = <columns>, .fns = function)) 
+summarize(across(<columns>,function)) 
 ```
 or
 ```
-mutate(across(.cols = <columns>, .fns = function))
+mutate(across(<columns>,function))
 ```
 
 - List columns first : `.cols = `
 - List function next: `.fns = `
-- If there are arguments to a function (e.g., `na.rm = TRUE`), the function may need to be modified to an anonymous function, e.g., `\(x) mean(x, na.rm = TRUE)`
+- If there are arguments to a function (e.g., `na.rm = TRUE`), use an anonymous function.
 
 
 ## Applying functions with `across` from `dplyr`
@@ -322,10 +333,23 @@ mutate(across(.cols = <columns>, .fns = function))
 Combining with `summarize()`
 
 ```{r warning=FALSE}
-ces_dbl <- ces %>% select(CaliforniaCounty, CES4.0Score, CES4.0Percentile)
+calenviroscreen %>%
+  summarize(across(
+    c(Pesticides, Poverty, LowBirthWeight),
+    mean # no parentheses
+  ))
+```
 
-ces_dbl %>%
-  summarize(across(.cols = everything(), .fns = mean, na.rm=T))
+## Applying functions with `across` from `dplyr`
+
+Add anonymous function to include additional arguments (e.g., `na.rm = T`).
+
+```{r warning=FALSE}
+calenviroscreen %>%
+  summarize(across(
+    c(Pesticides, Poverty, LowBirthWeight),
+    function(x) mean(x, na.rm = T)
+  ))
 ```
 
 ## Applying functions with `across` from `dplyr`
@@ -333,20 +357,12 @@ ces_dbl %>%
 Can use with other tidyverse functions like `group_by`!
 
 ```{r}
-ces_dbl %>%
-  group_by(CaliforniaCounty) %>%
-  summarize(across(.cols = everything(), .fns = mean, na.rm=T))
-```
-
-
-## Applying functions with `across` from `dplyr`
-
-To add arguments to functions, may need to use anonymous function. In this syntax, the shorthand `\(x)` is equivalent to `function(x)`.
-
-```{r warning=FALSE}
-ces_dbl %>%
-  group_by(CaliforniaCounty) %>%
-  summarize(across(.cols = everything(), .fns = \(x) mean(x, na.rm = TRUE)))
+calenviroscreen %>%
+  group_by(CaliforniaCounty) %>% 
+  summarize(across(
+    c(Pesticides, Poverty, LowBirthWeight),
+    function(x) mean(x, na.rm = T)
+  ))
 ```
 
 
@@ -355,24 +371,23 @@ ces_dbl %>%
 Using different `tidyselect()` options (e.g., `starts_with()`, `ends_with()`, `contains()`)
 
 ```{r warning=FALSE}
-ces_dbl %>%
+calenviroscreen %>% 
   group_by(CaliforniaCounty) %>%
-  summarize(across(.cols = contains("Perc"), .fns = mean))
+  summarize(across(contains("PM"), mean))
 ```
 
 
-## Applying functions with `across` from `dplyr`
+<!-- ## Applying functions with `across` from `dplyr`{.codesmall} -->
 
-Combining with `mutate()`: rounding to the nearest power of 10 (with negative digits value)
+<!-- `mutate()` across to round across many columns at once! -->
 
-```{r}
-ces_dbl %>%
-  mutate(across(
-    .cols = starts_with("CES"),
-    .fns = round,
-    digits = 3
-  ))
-```
+<!-- ```{r} -->
+<!-- calenviroscreen %>% -->
+<!--   mutate(across( -->
+<!--     where(is.numeric),  -->
+<!--     function(x) round(x, digits = 0) -->
+<!--   )) %>% select(7:13) -->
+<!-- ``` -->
 
 
 ## Applying functions with `across` from `dplyr` {.smaller}
@@ -389,34 +404,33 @@ or
 yearly_co2_emissions %>%
   select(country, starts_with("194")) %>%
   mutate(across(
-    .cols = c(`1943`, `1944`, `1945`),
-    .fns = replace_na,
-    replace = 0
+    c(`1943`, `1944`, `1945`),
+    function(x) replace_na(x, replace = 0)
   ))
 ```
 
 
-## Use custom functions within `mutate` and `across`
+<!-- ## Use custom functions within `mutate` and `across` -->
 
-If your function needs to span more than one line, better to define it first before using inside `mutate()` and `across()`.
+<!-- If your function needs to span more than one line, better to define it first before using inside `mutate()` and `across()`. -->
 
-```{r}
-times1000 <- function(x) x * 1000
+<!-- ```{r} -->
+<!-- times1000 <- function(x) x * 1000 -->
 
-airquality %>%
-  mutate(across(
-    .cols = everything(),
-    .fns  = times1000
-  )) %>%
-  head(n = 2)
+<!-- airquality %>% -->
+<!--   mutate(across( -->
+<!--     everything(), -->
+<!--     .fns  = times1000 -->
+<!--   )) %>% -->
+<!--   head(n = 2) -->
 
-airquality %>%
-  mutate(across(
-    .cols = everything(),
-    .fns  = function(x) x * 1000
-  )) %>%
-  head(n = 2)
-```
+<!-- airquality %>% -->
+<!--   mutate(across( -->
+<!--     everything(), -->
+<!--     .fns  = function(x) x * 1000 -->
+<!--   )) %>% -->
+<!--   head(n = 2) -->
+<!-- ``` -->
 
 
 ## `purrr` package

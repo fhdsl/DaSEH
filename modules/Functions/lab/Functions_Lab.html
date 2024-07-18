@@ -356,15 +356,13 @@ display: none;
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
 <p>Load all the libraries we will use in this lab.</p>
-<pre class="r"><code>library(readr)
-library(dplyr)
-library(ggplot2)</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
 <div id="section" class="section level3">
 <h3>1.1</h3>
 <p>Create a function that takes one argument, a vector, and returns the
-sum of the vector and squares the result. Call it “sum_squared”. Test
-your function on the vector <code>c(2,7,21,30,90)</code> - you should
-get the answer 22500.</p>
+sum of the vector and then squares the result. Call it “sum_squared”.
+Test your function on the vector <code>c(2,7,21,30,90)</code> - you
+should get the answer 22500.</p>
 <pre><code># General format
 NEW_FUNCTION &lt;- function(x, y) x + y </code></pre>
 <p>or</p>
@@ -388,8 +386,8 @@ the answer TRUE.</p>
 <p>Amend the function <code>has_n</code> from question 1.2 so that it
 takes a default value of <code>21</code> for the numeric argument.</p>
 </div>
-<div id="section-3" class="section level3">
-<h3>1.4</h3>
+<div id="p.1" class="section level3">
+<h3>P.1</h3>
 <p>Create a new number <code>b_num</code> that is not contained with
 <code>nums</code>. Use your updated <code>has_n</code> function with the
 default value and add <code>b_num</code> as the <code>n</code> argument
@@ -398,12 +396,12 @@ when calling the function. What is the outcome?</p>
 </div>
 <div id="part-2" class="section level1">
 <h1>Part 2</h1>
-<div id="section-4" class="section level3">
+<div id="section-3" class="section level3">
 <h3>2.1</h3>
 <p>Read in the CalEnviroScreen from <a href="https://daseh.org/data/CalEnviroScreen_data.csv" class="uri">https://daseh.org/data/CalEnviroScreen_data.csv</a>. Assign
 the data the name “ces”.</p>
 </div>
-<div id="section-5" class="section level3">
+<div id="section-4" class="section level3">
 <h3>2.2</h3>
 <p>We want to get some summary statistics on water contamination. Use
 <code>across</code> inside <code>summarize</code> to get the sum total
@@ -415,34 +413,40 @@ calculations.</p>
 <pre><code># General format
 data %&gt;%
   summarize(across(
-    .cols = {vector or tidyselect},
-    .fns = {some function},
-    {additional arguments}
+    {vector or tidyselect},
+    {some function}
   ))</code></pre>
 </div>
-<div id="section-6" class="section level3">
+<div id="section-5" class="section level3">
 <h3>2.3</h3>
 <p>Use <code>across</code> and <code>mutate</code> to convert all
 columns containing the word “Pctl” into proportions (i.e., divide that
 value by 100). <strong>Hint</strong>: use <code>contains()</code> to
-select the right columns within <code>across()</code>. Use a “function
-on the fly” to divide by 100. It will also be easier to check your work
-if you <code>select()</code> columns that match “Pctl”.</p>
-</div>
-<div id="section-7" class="section level3">
-<h3>2.4</h3>
-<p>Use <code>across</code> and <code>mutate</code> to convert all
-columns starting with the string “PM” into a binary variable: TRUE if
-the value is greater than 10 and FALSE if less than or equal to 10.
-<strong>Hint</strong>: use <code>starts_with()</code> to select the
-columns that start with “PM”. Use a “function on the fly” to do a
-logical test if the value is greater than 10.</p>
+select the right columns within <code>across()</code>. Use an anonymous
+function (“function on the fly”) to divide by 100
+(<code>function(x) x / 100</code>). It will also be easier to check your
+work if you <code>select()</code> columns that match “Pctl”.</p>
+<pre><code># General format
+data %&gt;%
+  mutate(across(
+    {vector or tidyselect},
+    {some function}
+  ))</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
 <h1>Practice on Your Own!</h1>
-<div id="p.1" class="section level3">
-<h3>P.1</h3>
+<div id="p.2" class="section level3">
+<h3>P.2</h3>
+<p>Use <code>across</code> and <code>mutate</code> to convert all
+columns starting with the string “PM” into a binary variable: TRUE if
+the value is greater than 10 and FALSE if less than or equal to 10.
+<strong>Hint</strong>: use <code>starts_with()</code> to select the
+columns that start with “PM”. Use an anonymous function (“function on
+the fly”) to do a logical test if the value is greater than 10.</p>
+</div>
+<div id="p.3" class="section level3">
+<h3>P.3</h3>
 <p>Take your code from question 2.4 and assign it to the variable
 <code>ces_dat</code>.</p>
 <ul>
