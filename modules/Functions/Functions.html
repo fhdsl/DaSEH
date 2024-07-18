@@ -3284,88 +3284,84 @@ background-color: lightgreen;
 
 <p>Here we will write a function that multiplies some number <code>x</code> by 2:</p>
 
-<pre class = 'prettyprint lang-r'>times_2 &lt;- function(x) x * 2</pre>
+<pre class = 'prettyprint lang-r'>div_100 &lt;- function(x) x / 100</pre>
 
 <p>When you run the line of code above, you make it ready to use (no output yet!). Let’s test it!</p>
 
-<pre class = 'prettyprint lang-r'>times_2(x = 10)</pre>
+<pre class = 'prettyprint lang-r'>div_100(x = 600)</pre>
 
-<pre >[1] 20</pre>
+<pre >[1] 6</pre>
 
 </article></slide><slide class=""><hgroup><h2>Writing your own functions: <code>{ }</code></h2></hgroup><article  id="writing-your-own-functions-3">
 
 <p>Adding the curly brackets - <code>{}</code> - allows you to use functions spanning multiple lines:</p>
 
-<pre class = 'prettyprint lang-r'>times_2 &lt;- function(x) {
-  x * 2
+<pre class = 'prettyprint lang-r'>div_100 &lt;- function(x) {
+  x / 100
 }
-times_2(x = 10)</pre>
+div_100(x = 10)</pre>
 
-<pre >[1] 20</pre>
-
-<pre class = 'prettyprint lang-r'>is_even &lt;- function(x) {
-  x %% 2 == 0
-}
-is_even(x = 11)</pre>
-
-<pre >[1] FALSE</pre>
-
-<pre class = 'prettyprint lang-r'>is_even(x = times_2(x = 10))</pre>
-
-<pre >[1] TRUE</pre>
+<pre >[1] 0.1</pre>
 
 </article></slide><slide class=""><hgroup><h2>Writing your own functions: <code>return</code></h2></hgroup><article  id="writing-your-own-functions-return">
 
 <p>If we want something specific for the function’s output, we use <code>return()</code>:</p>
 
-<pre class = 'prettyprint lang-r'>times_2_plus_4 &lt;- function(x) {
-  output_int &lt;- x * 2
+<pre class = 'prettyprint lang-r'>div_100_plus_4 &lt;- function(x) {
+  output_int &lt;- x / 100
   output &lt;- output_int + 4
   return(output)
 }
-times_2_plus_4(x = 10)</pre>
+div_100_plus_4(x = 10)</pre>
 
-<pre >[1] 24</pre>
+<pre >[1] 4.1</pre>
 
-</article></slide><slide class=""><hgroup><h2>Writing your own functions: print intermediate steps</h2></hgroup><article  id="writing-your-own-functions-print-intermediate-steps">
+<!-- ## Writing your own functions: print intermediate steps -->
 
-<ul>
-<li>printed results do not stay around but can show what a function is doing</li>
-<li>returned results stay around</li>
-<li>can only return one result but can print many</li>
-<li>if <code>return</code> not called, last evaluated expression is returned</li>
-<li><code>return</code> should be the last step (steps after may be skipped)</li>
-</ul>
+<!--  - printed results do not stay around but can show what a function is doing -->
 
-</article></slide><slide class=""><hgroup><h2>Adding print</h2></hgroup><article  id="adding-print">
+<!--  - returned results stay around -->
 
-<pre class = 'prettyprint lang-r'>times_2_plus_4 &lt;- function(x) {
-  output_int &lt;- x * 2
-  output &lt;- output_int + 4
-  print(paste(&quot;times2 result = &quot;, output_int))
-  return(output)
-}
+<!--  - can only return one result but can print many -->
 
-result &lt;- times_2_plus_4(x = 10)</pre>
+<!--  - if `return` not called, last evaluated expression is returned -->
 
-<pre >[1] &quot;times2 result =  20&quot;</pre>
+<!--  - `return` should be the last step (steps after may be skipped) -->
 
-<pre class = 'prettyprint lang-r'>result</pre>
+<!-- ## Adding print -->
 
-<pre >[1] 24</pre>
+<!-- ```{r comment=""} -->
+
+<!-- div_100_plus_4 <- function(x) { -->
+
+<!--   output_int <- x / 100 -->
+
+<!--   output <- output_int + 4 -->
+
+<!--   print(paste("div_100 result = ", output_int)) -->
+
+<!--   return(output) -->
+
+<!-- } -->
+
+<!-- result <- div_100_plus_4(x = 10) -->
+
+<!-- result -->
+
+<!-- ``` -->
 
 </article></slide><slide class=""><hgroup><h2>Writing your own functions: multiple inputs</h2></hgroup><article  id="writing-your-own-functions-multiple-inputs">
 
 <p>Functions can take multiple inputs:</p>
 
-<pre class = 'prettyprint lang-r'>times_2_plus_y &lt;- function(x, y) x * 2 + y
-times_2_plus_y(x = 10, y = 3)</pre>
+<pre class = 'prettyprint lang-r'>div_100_plus_y &lt;- function(x, y) x / 100 + y
+div_100_plus_y(x = 10, y = 3)</pre>
 
-<pre >[1] 23</pre>
+<pre >[1] 3.1</pre>
 
 </article></slide><slide class=""><hgroup><h2>Writing your own functions: multiple outputs</h2></hgroup><article  id="writing-your-own-functions-multiple-outputs">
 
-<p>Functions can have one returned result with multiple outputs.</p>
+<p>Functions can return a vector (or other object) with multiple outputs.</p>
 
 <pre class = 'prettyprint lang-r'>x_and_y_plus_2 &lt;- function(x, y) {
   output1 &lt;- x + 2
@@ -3382,14 +3378,14 @@ result</pre>
 
 <p>Functions can have &ldquo;default&rdquo; arguments. This lets us use the function without using an argument later:</p>
 
-<pre class = 'prettyprint lang-r'>times_2_plus_y &lt;- function(x = 10, y = 3) x * 2 + y
-times_2_plus_y()</pre>
+<pre class = 'prettyprint lang-r'>div_100_plus_y &lt;- function(x = 10, y = 3) x / 100 + y
+div_100_plus_y()</pre>
 
-<pre >[1] 23</pre>
+<pre >[1] 3.1</pre>
 
-<pre class = 'prettyprint lang-r'>times_2_plus_y(x = 11, y = 4)</pre>
+<pre class = 'prettyprint lang-r'>div_100_plus_y(x = 11, y = 4)</pre>
 
-<pre >[1] 26</pre>
+<pre >[1] 4.11</pre>
 
 </article></slide><slide class=""><hgroup><h2>Writing another simple function</h2></hgroup><article  id="writing-another-simple-function">
 
@@ -3434,89 +3430,52 @@ loud(word = &quot;hooray!&quot;)</pre>
 
 <pre >[1] &quot;HOORAY!&quot; &quot;HOORAY!&quot; &quot;HOORAY!&quot; &quot;HOORAY!&quot; &quot;HOORAY!&quot;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Functions for tibbles</h2></hgroup><article  id="functions-for-tibbles">
+<!-- ## Functions for tibbles -->
 
-<p>We can use <code>filter(row_number() == n)</code> to extract a row of a tibble:</p>
+<!-- We can use `filter(row_number() == n)` to extract a row of a tibble: -->
 
-<pre class = 'prettyprint lang-r'>get_row &lt;- function(dat, row) dat %&gt;% filter(row_number() == row)
+<!-- ```{r message=FALSE} -->
 
-ces &lt;- calenviroscreen
-ces_1_8 &lt;- ces %&gt;% select(1:8)</pre>
+<!-- get_row <- function(dat, row) dat %>% filter(row_number() == row) -->
 
-<pre class = 'prettyprint lang-r'>get_row(dat = ces, row = 10)</pre>
+<!-- ces <- calenviroscreen -->
 
-<pre ># A tibble: 1 × 67
-  CensusTract CaliforniaCounty   ZIP Longitude Latitude ApproxLocation
-        &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
-1  6001401000 &quot;Alameda &quot;       94608     -122.     37.8 Oakland       
-# ℹ 61 more variables: CES4.0Score &lt;dbl&gt;, CES4.0Percentile &lt;dbl&gt;,
-#   CES4.0PercRange &lt;chr&gt;, Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;,
-#   PM2.5.Pctl &lt;dbl&gt;, DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
-#   DrinkingWaterPctl &lt;dbl&gt;, Lead &lt;dbl&gt;, LeadPctl &lt;dbl&gt;, Pesticides &lt;dbl&gt;,
-#   PesticidesPctl &lt;dbl&gt;, ToxRelease &lt;dbl&gt;, ToxReleasePctl &lt;dbl&gt;,
-#   Traffic &lt;dbl&gt;, TrafficPctl &lt;dbl&gt;, CleanupSites &lt;dbl&gt;,
-#   CleanupSitesPctl &lt;dbl&gt;, GroundwaterThreats &lt;dbl&gt;, …</pre>
+<!-- ces_1_8 <- ces %>% select(1:8) -->
 
-<pre class = 'prettyprint lang-r'>get_row(dat = ces, row = 4)</pre>
+<!-- ``` -->
 
-<pre ># A tibble: 1 × 67
-  CensusTract CaliforniaCounty   ZIP Longitude Latitude ApproxLocation
-        &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
-1  6001400400 &quot;Alameda &quot;       94609     -122.     37.8 Oakland       
-# ℹ 61 more variables: CES4.0Score &lt;dbl&gt;, CES4.0Percentile &lt;dbl&gt;,
-#   CES4.0PercRange &lt;chr&gt;, Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;,
-#   PM2.5.Pctl &lt;dbl&gt;, DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
-#   DrinkingWaterPctl &lt;dbl&gt;, Lead &lt;dbl&gt;, LeadPctl &lt;dbl&gt;, Pesticides &lt;dbl&gt;,
-#   PesticidesPctl &lt;dbl&gt;, ToxRelease &lt;dbl&gt;, ToxReleasePctl &lt;dbl&gt;,
-#   Traffic &lt;dbl&gt;, TrafficPctl &lt;dbl&gt;, CleanupSites &lt;dbl&gt;,
-#   CleanupSitesPctl &lt;dbl&gt;, GroundwaterThreats &lt;dbl&gt;, …</pre>
+<!-- ```{r} -->
 
-</article></slide><slide class=""><hgroup><h2>Functions for tibbles</h2></hgroup><article  id="functions-for-tibbles-1">
+<!-- get_row(dat = ces, row = 10) -->
 
-<p>Can create function with an argument that allows inputting a column name for <code>select</code> or other <code>dplyr</code> operation:</p>
+<!-- get_row(dat = ces, row = 4) -->
 
-<pre class = 'prettyprint lang-r'>clean_dataset &lt;- function(dataset, col_name) {
-  my_data_out &lt;- dataset %&gt;% select({{col_name}}) # Note the curly braces
-  return(my_data_out)
-}
+<!-- ``` -->
 
-clean_dataset(dataset = ces, col_name = &quot;CES4.0Score&quot;)</pre>
+</article></slide><slide class=""><hgroup><h2>Functions for tibbles - curly braces</h2></hgroup><article  id="functions-for-tibbles---curly-braces" class="codesmall">
 
-<pre ># A tibble: 8,035 × 1
-   CES4.0Score
-         &lt;dbl&gt;
- 1        4.85
- 2        4.88
- 3       11.2 
- 4       12.4 
- 5       16.7 
- 6       20.0 
- 7       36.7 
- 8       37.1 
- 9       40.7 
-10       43.7 
-# ℹ 8,025 more rows</pre>
+<pre class = 'prettyprint lang-r'># get means and missing for a specific column
+get_summary &lt;- function(dataset, col_name) {
+    dataset %&gt;%  
+    summarise(mean = mean({{col_name}}, na.rm = TRUE),
+              na_count = sum(is.na({{col_name}})))
+}</pre>
 
-<pre class = 'prettyprint lang-r'>get_mean &lt;- function(dat, county_name, col_name) {
-  my_data_out &lt;- dat %&gt;% 
-    filter(str_detect(CaliforniaCounty, county_name)) %&gt;%  
-    summarise(mean = mean({{col_name}}, na.rm = TRUE))
-    return(my_data_out)
-}
+<p>Examples:</p>
 
-get_mean(dat = ces, county_name = &quot;Alameda&quot;, col_name = CES4.0Score)</pre>
+<pre class = 'prettyprint lang-r'>get_summary(calenviroscreen, CES4.0Score)</pre>
 
-<pre ># A tibble: 1 × 1
-   mean
-  &lt;dbl&gt;
-1  22.9</pre>
+<pre ># A tibble: 1 × 2
+   mean na_count
+  &lt;dbl&gt;    &lt;int&gt;
+1  28.3      103</pre>
 
-<pre class = 'prettyprint lang-r'>get_mean(dat = ces, county_name = &quot;Fresno&quot;, col_name = CES4.0Score)</pre>
+<pre class = 'prettyprint lang-r'>get_summary(haa5, perc_pop_exposed_to_exceedances)</pre>
 
-<pre ># A tibble: 1 × 1
-   mean
-  &lt;dbl&gt;
-1  40.9</pre>
+<pre ># A tibble: 1 × 2
+    mean na_count
+   &lt;dbl&gt;    &lt;int&gt;
+1 0.0591       11</pre>
 
 </article></slide><slide class=""><hgroup><h2>Summary</h2></hgroup><article  id="summary">
 
@@ -3546,75 +3505,237 @@ get_mean(dat = ces, county_name = &quot;Alameda&quot;, col_name = CES4.0Score)</
 
 <pre >sapply(&lt;a vector, list, data frame&gt;, some_function)</pre>
 
+</article></slide><slide class=""><hgroup><h2>CalEnviroScreen</h2></hgroup><article  id="calenviroscreen">
+
+<p>This dataset was gathered by the California Office of Environmental Health Hazard Assessment. CalEnviroScreen ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. Read more at <a href='https://calenviroscreen-oehha.hub.arcgis.com/' title=''>https://calenviroscreen-oehha.hub.arcgis.com/</a>.</p>
+
+<pre class = 'prettyprint lang-r'>head(calenviroscreen)</pre>
+
+<pre ># A tibble: 6 × 67
+  CensusTract CaliforniaCounty   ZIP Longitude Latitude ApproxLocation
+        &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
+1  6001400100 &quot;Alameda &quot;       94704     -122.     37.9 Oakland       
+2  6001400200 &quot;Alameda &quot;       94618     -122.     37.8 Oakland       
+3  6001400300 &quot;Alameda &quot;       94618     -122.     37.8 Oakland       
+4  6001400400 &quot;Alameda &quot;       94609     -122.     37.8 Oakland       
+5  6001400500 &quot;Alameda &quot;       94609     -122.     37.8 Oakland       
+6  6001400600 &quot;Alameda &quot;       94609     -122.     37.8 Oakland       
+# ℹ 61 more variables: CES4.0Score &lt;dbl&gt;, CES4.0Percentile &lt;dbl&gt;,
+#   CES4.0PercRange &lt;chr&gt;, Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;,
+#   PM2.5.Pctl &lt;dbl&gt;, DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
+#   DrinkingWaterPctl &lt;dbl&gt;, Lead &lt;dbl&gt;, LeadPctl &lt;dbl&gt;, Pesticides &lt;dbl&gt;,
+#   PesticidesPctl &lt;dbl&gt;, ToxRelease &lt;dbl&gt;, ToxReleasePctl &lt;dbl&gt;,
+#   Traffic &lt;dbl&gt;, TrafficPctl &lt;dbl&gt;, CleanupSites &lt;dbl&gt;,
+#   CleanupSitesPctl &lt;dbl&gt;, GroundwaterThreats &lt;dbl&gt;, …</pre>
+
 </article></slide><slide class=""><hgroup><h2>Using your custom functions: <code>sapply()</code></h2></hgroup><article  id="using-your-custom-functions-sapply">
 
 <p>🚨 There are no parentheses on the functions! 🚨</p>
 
 <p>You can also pipe into your function.</p>
 
-<pre class = 'prettyprint lang-r'>er_visits &lt;- CO_heat_ER
+<pre class = 'prettyprint lang-r'>sapply(calenviroscreen, class) # also: calenviroscreen %&gt;% sapply(class)</pre>
 
-head(er_visits, n = 2)</pre>
-
-<pre ># A tibble: 2 × 7
-  county     rate lower95cl upper95cl visits  year gender
-  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
-1 Statewide  5.64      4.70      6.59    140  2011 Female
-2 Statewide  7.39      6.30      8.47    183  2011 Male  </pre>
-
-<pre class = 'prettyprint lang-r'>sapply(er_visits, class)</pre>
-
-<pre >     county        rate   lower95cl   upper95cl      visits        year 
-&quot;character&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot; 
-     gender 
-&quot;character&quot; </pre>
-
-<pre class = 'prettyprint lang-r'>er_visits %&gt;% sapply(class)</pre>
-
-<pre >     county        rate   lower95cl   upper95cl      visits        year 
-&quot;character&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot; 
-     gender 
-&quot;character&quot; </pre>
+<pre >              CensusTract          CaliforniaCounty                       ZIP 
+                &quot;numeric&quot;               &quot;character&quot;                 &quot;integer&quot; 
+                Longitude                  Latitude            ApproxLocation 
+                &quot;numeric&quot;                 &quot;numeric&quot;               &quot;character&quot; 
+              CES4.0Score          CES4.0Percentile           CES4.0PercRange 
+                &quot;numeric&quot;                 &quot;numeric&quot;               &quot;character&quot; 
+                    Ozone                 OzonePctl                     PM2.5 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+               PM2.5.Pctl                  DieselPM              DieselPMPctl 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+            DrinkingWater         DrinkingWaterPctl                      Lead 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+                 LeadPctl                Pesticides            PesticidesPctl 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+               ToxRelease            ToxReleasePctl                   Traffic 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+              TrafficPctl              CleanupSites          CleanupSitesPctl 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+       GroundwaterThreats    GroundwaterThreatsPctl                  HazWaste 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+             HazWastePctl            ImpWaterBodies        ImpWaterBodiesPctl 
+                &quot;numeric&quot;                 &quot;integer&quot;                 &quot;numeric&quot; 
+               SolidWaste            SolidWastePctl           PollutionBurden 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+     PollutionBurdenScore       PollutionBurdenPctl                    Asthma 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+               AsthmaPctl            LowBirthWeight        LowBirthWeightPctl 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+    CardiovascularDisease CardiovascularDiseasePctl                  TotalPop 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;integer&quot; 
+       ChildrenPercLess10             PopPerc10to64             ElderlyMore64 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+             HispanicPerc                 WhitePerc            AfAmericanPerc 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+       NativeAmericanPerc         AsianAmericanPerc         OtherMultiplePerc 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+                  PopChar              PopCharScore               PopCharPctl 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+                Education             EducationPctl            LinguisticIsol 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+       LinguisticIsolPctl                   Poverty               PovertyPctl 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+             Unemployment          UnemploymentPctl             HousingBurden 
+                &quot;numeric&quot;                 &quot;numeric&quot;                 &quot;numeric&quot; 
+        HousingBurdenPctl 
+                &quot;numeric&quot; </pre>
 
 </article></slide><slide class=""><hgroup><h2>Using your custom functions: <code>sapply()</code></h2></hgroup><article  id="using-your-custom-functions-sapply-1">
 
-<pre class = 'prettyprint lang-r'>select(er_visits, rate:upper95cl) %&gt;% head()</pre>
+<p>Use the <code>div_100</code> function we created earlier to convert 0-100 percentiles to proportions.</p>
 
-<pre ># A tibble: 6 × 3
-   rate lower95cl upper95cl
-  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1  5.64      4.70      6.59
-2  7.39      6.30      8.47
-3  6.51      5.80      7.23
-4  5.64      4.72      6.57
-5  7.56      6.48      8.65
-6  6.58      5.88      7.29</pre>
-
-<pre class = 'prettyprint lang-r'>select(er_visits, rate:upper95cl) %&gt;%
-  sapply(times_2) %&gt;%
+<pre class = 'prettyprint lang-r'>calenviroscreen %&gt;%
+  select(ends_with(&quot;Pctl&quot;)) %&gt;%
+  sapply(div_100) %&gt;%
   head()</pre>
 
-<pre >         rate lower95cl upper95cl
-[1,] 11.28546  9.395283  13.17564
-[2,] 14.77374 12.597645  16.94983
-[3,] 13.02989 11.593179  14.46660
-[4,] 11.28268  9.430621  13.13474
-[5,] 15.12880 12.959418  17.29817
-[6,] 13.16714 11.750214  14.58407</pre>
+<pre >     OzonePctl PM2.5.Pctl DieselPMPctl DrinkingWaterPctl LeadPctl
+[1,]    0.0312     0.3627       0.3476            0.0421   0.0774
+[2,]    0.0312     0.4197       0.9271            0.0421   0.6820
+[3,]    0.0312     0.4390       0.8977            0.0421   0.6418
+[4,]    0.0312     0.4281       0.7910            0.0421   0.6708
+[5,]    0.0312     0.4281       0.6758            0.0421   0.6795
+[6,]    0.0312     0.4281       0.8376            0.0421   0.6970
+     PesticidesPctl ToxReleasePctl TrafficPctl CleanupSitesPctl
+[1,]              0         0.5603      0.5594           0.5817
+[2,]              0         0.5543      0.3749           0.0000
+[3,]              0         0.5504      0.4248           0.1183
+[4,]              0         0.5590      0.3800           0.0000
+[5,]              0         0.5648      0.4868           0.3387
+[6,]              0         0.5565      0.6706           0.2262
+     GroundwaterThreatsPctl HazWastePctl ImpWaterBodiesPctl SolidWastePctl
+[1,]                 0.5242       0.9252             0.2388         0.3572
+[2,]                 0.8793       0.2851             0.0000         0.0000
+[3,]                 0.8529       0.7407             0.0000         0.0000
+[4,]                 0.9256       0.5189             0.0000         0.0000
+[5,]                 0.8434       0.5640             0.0000         0.0000
+[6,]                 0.7906       0.5827             0.0000         0.0000
+     PollutionBurdenPctl AsthmaPctl LowBirthWeightPctl
+[1,]              0.2662     0.0444             0.2306
+[2,]              0.2418     0.0980             0.2792
+[3,]              0.3337     0.2657             0.2162
+[4,]              0.2624     0.5598             0.3702
+[5,]              0.3140     0.8838             0.1900
+[6,]              0.3694     0.9307             0.0503
+     CardiovascularDiseasePctl PopCharPctl EducationPctl LinguisticIsolPctl
+[1,]                    0.0142      0.0153        0.1255             0.0849
+[2,]                    0.1453      0.0165        0.0042             0.0000
+[3,]                    0.2011      0.1227        0.2412             0.5336
+[4,]                    0.1428      0.1843        0.2029             0.0564
+[5,]                    0.3887      0.3016        0.0740             0.1330
+[6,]                    0.5278      0.3770        0.0973             0.0627
+     PovertyPctl UnemploymentPctl HousingBurdenPctl
+[1,]      0.1103               NA            0.1939
+[2,]      0.1144           0.1711            0.0067
+[3,]      0.1090           0.2941            0.0981
+[4,]      0.3642           0.1066            0.3748
+[5,]      0.3813           0.2820            0.3748
+[6,]      0.2442           0.7167            0.5407</pre>
 
 </article></slide><slide class=""><hgroup><h2>Using your custom functions &ldquo;on the fly&rdquo; to iterate</h2></hgroup><article  id="using-your-custom-functions-on-the-fly-to-iterate">
 
-<pre class = 'prettyprint lang-r'>select(er_visits, rate:upper95cl) %&gt;%
-  sapply(function(x) x / 1000) %&gt;%
+<p>Also called &ldquo;anonymous function&rdquo;.</p>
+
+<pre class = 'prettyprint lang-r'>calenviroscreen %&gt;%
+  select(ends_with(&quot;Pctl&quot;)) %&gt;%
+  sapply(function(x) x / 100) %&gt;%
   head()</pre>
 
-<pre >            rate   lower95cl   upper95cl
-[1,] 0.005642730 0.004697642 0.006587819
-[2,] 0.007386868 0.006298822 0.008474914
-[3,] 0.006514945 0.005796590 0.007233300
-[4,] 0.005641341 0.004715311 0.006567371
-[5,] 0.007564398 0.006479709 0.008649086
-[6,] 0.006583570 0.005875107 0.007292033</pre>
+<pre >     OzonePctl PM2.5.Pctl DieselPMPctl DrinkingWaterPctl LeadPctl
+[1,]    0.0312     0.3627       0.3476            0.0421   0.0774
+[2,]    0.0312     0.4197       0.9271            0.0421   0.6820
+[3,]    0.0312     0.4390       0.8977            0.0421   0.6418
+[4,]    0.0312     0.4281       0.7910            0.0421   0.6708
+[5,]    0.0312     0.4281       0.6758            0.0421   0.6795
+[6,]    0.0312     0.4281       0.8376            0.0421   0.6970
+     PesticidesPctl ToxReleasePctl TrafficPctl CleanupSitesPctl
+[1,]              0         0.5603      0.5594           0.5817
+[2,]              0         0.5543      0.3749           0.0000
+[3,]              0         0.5504      0.4248           0.1183
+[4,]              0         0.5590      0.3800           0.0000
+[5,]              0         0.5648      0.4868           0.3387
+[6,]              0         0.5565      0.6706           0.2262
+     GroundwaterThreatsPctl HazWastePctl ImpWaterBodiesPctl SolidWastePctl
+[1,]                 0.5242       0.9252             0.2388         0.3572
+[2,]                 0.8793       0.2851             0.0000         0.0000
+[3,]                 0.8529       0.7407             0.0000         0.0000
+[4,]                 0.9256       0.5189             0.0000         0.0000
+[5,]                 0.8434       0.5640             0.0000         0.0000
+[6,]                 0.7906       0.5827             0.0000         0.0000
+     PollutionBurdenPctl AsthmaPctl LowBirthWeightPctl
+[1,]              0.2662     0.0444             0.2306
+[2,]              0.2418     0.0980             0.2792
+[3,]              0.3337     0.2657             0.2162
+[4,]              0.2624     0.5598             0.3702
+[5,]              0.3140     0.8838             0.1900
+[6,]              0.3694     0.9307             0.0503
+     CardiovascularDiseasePctl PopCharPctl EducationPctl LinguisticIsolPctl
+[1,]                    0.0142      0.0153        0.1255             0.0849
+[2,]                    0.1453      0.0165        0.0042             0.0000
+[3,]                    0.2011      0.1227        0.2412             0.5336
+[4,]                    0.1428      0.1843        0.2029             0.0564
+[5,]                    0.3887      0.3016        0.0740             0.1330
+[6,]                    0.5278      0.3770        0.0973             0.0627
+     PovertyPctl UnemploymentPctl HousingBurdenPctl
+[1,]      0.1103               NA            0.1939
+[2,]      0.1144           0.1711            0.0067
+[3,]      0.1090           0.2941            0.0981
+[4,]      0.3642           0.1066            0.3748
+[5,]      0.3813           0.2820            0.3748
+[6,]      0.2442           0.7167            0.5407</pre>
+
+</article></slide><slide class=""><hgroup><h2>Anonymous functions: alternative syntax</h2></hgroup><article  id="anonymous-functions-alternative-syntax">
+
+<pre class = 'prettyprint lang-r'>calenviroscreen %&gt;%
+  select(ends_with(&quot;Pctl&quot;)) %&gt;%
+  sapply(\(x) x / 100) %&gt;%
+  head()</pre>
+
+<pre >     OzonePctl PM2.5.Pctl DieselPMPctl DrinkingWaterPctl LeadPctl
+[1,]    0.0312     0.3627       0.3476            0.0421   0.0774
+[2,]    0.0312     0.4197       0.9271            0.0421   0.6820
+[3,]    0.0312     0.4390       0.8977            0.0421   0.6418
+[4,]    0.0312     0.4281       0.7910            0.0421   0.6708
+[5,]    0.0312     0.4281       0.6758            0.0421   0.6795
+[6,]    0.0312     0.4281       0.8376            0.0421   0.6970
+     PesticidesPctl ToxReleasePctl TrafficPctl CleanupSitesPctl
+[1,]              0         0.5603      0.5594           0.5817
+[2,]              0         0.5543      0.3749           0.0000
+[3,]              0         0.5504      0.4248           0.1183
+[4,]              0         0.5590      0.3800           0.0000
+[5,]              0         0.5648      0.4868           0.3387
+[6,]              0         0.5565      0.6706           0.2262
+     GroundwaterThreatsPctl HazWastePctl ImpWaterBodiesPctl SolidWastePctl
+[1,]                 0.5242       0.9252             0.2388         0.3572
+[2,]                 0.8793       0.2851             0.0000         0.0000
+[3,]                 0.8529       0.7407             0.0000         0.0000
+[4,]                 0.9256       0.5189             0.0000         0.0000
+[5,]                 0.8434       0.5640             0.0000         0.0000
+[6,]                 0.7906       0.5827             0.0000         0.0000
+     PollutionBurdenPctl AsthmaPctl LowBirthWeightPctl
+[1,]              0.2662     0.0444             0.2306
+[2,]              0.2418     0.0980             0.2792
+[3,]              0.3337     0.2657             0.2162
+[4,]              0.2624     0.5598             0.3702
+[5,]              0.3140     0.8838             0.1900
+[6,]              0.3694     0.9307             0.0503
+     CardiovascularDiseasePctl PopCharPctl EducationPctl LinguisticIsolPctl
+[1,]                    0.0142      0.0153        0.1255             0.0849
+[2,]                    0.1453      0.0165        0.0042             0.0000
+[3,]                    0.2011      0.1227        0.2412             0.5336
+[4,]                    0.1428      0.1843        0.2029             0.0564
+[5,]                    0.3887      0.3016        0.0740             0.1330
+[6,]                    0.5278      0.3770        0.0973             0.0627
+     PovertyPctl UnemploymentPctl HousingBurdenPctl
+[1,]      0.1103               NA            0.1939
+[2,]      0.1144           0.1711            0.0067
+[3,]      0.1090           0.2941            0.0981
+[4,]      0.3642           0.1066            0.3748
+[5,]      0.3813           0.2820            0.3748
+[6,]      0.2442           0.7167            0.5407</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>across</h2></hgroup><article  id="across">
 
@@ -3622,142 +3743,136 @@ head(er_visits, n = 2)</pre>
 
 <p>Already know how to use functions to modify columns using <code>mutate()</code> or calculate summary statistics using <code>summarize()</code>.</p>
 
-<pre class = 'prettyprint lang-r'>er_visits %&gt;%
-  mutate(rate_round = round(rate, 2)) %&gt;%
-  summarize(max_rate_round = max(rate_round, na.rm = T),
-            max_rate = max(rate, na.rm = T))</pre>
+<ul>
+<li>Pesticides - pounds of selected active pesticide / square mile<br/></li>
+<li>Poverty - percent of population living below two times the federal poverty level<br/></li>
+<li>LowBirthWeight - Percent low birth weight</li>
+</ul>
 
-<pre ># A tibble: 1 × 2
-  max_rate_round max_rate
-           &lt;dbl&gt;    &lt;dbl&gt;
-1           89.3     89.3</pre>
+<pre class = 'prettyprint lang-r'>calenviroscreen %&gt;%
+  summarize(max_pest = max(Pesticides, na.rm = T),
+            max_pov = max(Poverty, na.rm = T),
+            low_bw = max(LowBirthWeight, na.rm = T))</pre>
+
+<pre ># A tibble: 1 × 3
+  max_pest max_pov low_bw
+     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1   80811.    96.7   13.7</pre>
 
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr">
 
 <p><code>across()</code> makes it easy to apply the same transformation to multiple columns. Usually used with <code>summarize()</code> or <code>mutate()</code>.</p>
 
-<pre >summarize(across( .cols = &lt;columns&gt;, .fns = function)) </pre>
+<pre >summarize(across(&lt;columns&gt;,function)) </pre>
 
 <p>or</p>
 
-<pre >mutate(across(.cols = &lt;columns&gt;, .fns = function))</pre>
+<pre >mutate(across(&lt;columns&gt;,function))</pre>
 
 <ul>
 <li>List columns first : <code>.cols =</code></li>
 <li>List function next: <code>.fns =</code></li>
-<li>If there are arguments to a function (e.g., <code>na.rm = TRUE</code>), the function may need to be modified to an anonymous function, e.g., <code>\(x) mean(x, na.rm = TRUE)</code></li>
+<li>If there are arguments to a function (e.g., <code>na.rm = TRUE</code>), use an anonymous function.</li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-1">
 
 <p>Combining with <code>summarize()</code></p>
 
-<pre class = 'prettyprint lang-r'>ces_dbl &lt;- ces %&gt;% select(CaliforniaCounty, CES4.0Score, CES4.0Percentile)
-
-ces_dbl %&gt;%
-  summarize(across(.cols = everything(), .fns = mean, na.rm=T))</pre>
+<pre class = 'prettyprint lang-r'>calenviroscreen %&gt;%
+  summarize(across(
+    c(Pesticides, Poverty, LowBirthWeight),
+    mean # no parentheses
+  ))</pre>
 
 <pre ># A tibble: 1 × 3
-  CaliforniaCounty CES4.0Score CES4.0Percentile
-             &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;
-1               NA        28.3             50.0</pre>
+  Pesticides Poverty LowBirthWeight
+       &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+1       268.      NA             NA</pre>
 
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-2">
 
-<p>Can use with other tidyverse functions like <code>group_by</code>!</p>
+<p>Add anonymous function to include additional arguments (e.g., <code>na.rm = T</code>).</p>
 
-<pre class = 'prettyprint lang-r'>ces_dbl %&gt;%
-  group_by(CaliforniaCounty) %&gt;%
-  summarize(across(.cols = everything(), .fns = mean, na.rm=T))</pre>
+<pre class = 'prettyprint lang-r'>calenviroscreen %&gt;%
+  summarize(across(
+    c(Pesticides, Poverty, LowBirthWeight),
+    function(x) mean(x, na.rm = T)
+  ))</pre>
 
-<pre ># A tibble: 58 × 3
-   CaliforniaCounty CES4.0Score CES4.0Percentile
-   &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;
- 1 &quot;Alameda &quot;              22.9             41.3
- 2 &quot;Alpine &quot;               13.6             22  
- 3 &quot;Amador &quot;               20.7             38.8
- 4 &quot;Butte &quot;                21.7             39.8
- 5 &quot;Calaveras &quot;            16.1             28.0
- 6 &quot;Colusa &quot;               27.0             52.2
- 7 &quot;Contra Costa&quot;          21.0             36.7
- 8 &quot;Del Norte&quot;             21.4             40.3
- 9 &quot;El Dorado&quot;             10.2             14.6
-10 &quot;Fresno &quot;               40.9             69.5
-# ℹ 48 more rows</pre>
+<pre ># A tibble: 1 × 3
+  Pesticides Poverty LowBirthWeight
+       &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+1       268.    31.3           5.00</pre>
 
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-3">
 
-<p>To add arguments to functions, may need to use anonymous function. In this syntax, the shorthand <code>\(x)</code> is equivalent to <code>function(x)</code>.</p>
+<p>Can use with other tidyverse functions like <code>group_by</code>!</p>
 
-<pre class = 'prettyprint lang-r'>ces_dbl %&gt;%
-  group_by(CaliforniaCounty) %&gt;%
-  summarize(across(.cols = everything(), .fns = \(x) mean(x, na.rm = TRUE)))</pre>
+<pre class = 'prettyprint lang-r'>calenviroscreen %&gt;%
+  group_by(CaliforniaCounty) %&gt;% 
+  summarize(across(
+    c(Pesticides, Poverty, LowBirthWeight),
+    function(x) mean(x, na.rm = T)
+  ))</pre>
 
-<pre ># A tibble: 58 × 3
-   CaliforniaCounty CES4.0Score CES4.0Percentile
-   &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;
- 1 &quot;Alameda &quot;              22.9             41.3
- 2 &quot;Alpine &quot;               13.6             22  
- 3 &quot;Amador &quot;               20.7             38.8
- 4 &quot;Butte &quot;                21.7             39.8
- 5 &quot;Calaveras &quot;            16.1             28.0
- 6 &quot;Colusa &quot;               27.0             52.2
- 7 &quot;Contra Costa&quot;          21.0             36.7
- 8 &quot;Del Norte&quot;             21.4             40.3
- 9 &quot;El Dorado&quot;             10.2             14.6
-10 &quot;Fresno &quot;               40.9             69.5
+<pre ># A tibble: 58 × 4
+   CaliforniaCounty Pesticides Poverty LowBirthWeight
+   &lt;chr&gt;                 &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+ 1 &quot;Alameda &quot;            0.948    22.1           5.26
+ 2 &quot;Alpine &quot;             0        38.9         NaN   
+ 3 &quot;Amador &quot;             2.01     25.2           4.45
+ 4 &quot;Butte &quot;            736.       39.9           4.64
+ 5 &quot;Calaveras &quot;          1.20     28.2           3.55
+ 6 &quot;Colusa &quot;          1186.       36.5           4.11
+ 7 &quot;Contra Costa&quot;       10.5      20.6           4.71
+ 8 &quot;Del Norte&quot;          47.4      48.4         NaN   
+ 9 &quot;El Dorado&quot;           5.50     20.9           4.28
+10 &quot;Fresno &quot;           586.       45.8           5.96
 # ℹ 48 more rows</pre>
 
 </article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-4">
 
 <p>Using different <code>tidyselect()</code> options (e.g., <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code>)</p>
 
-<pre class = 'prettyprint lang-r'>ces_dbl %&gt;%
+<pre class = 'prettyprint lang-r'>calenviroscreen %&gt;% 
   group_by(CaliforniaCounty) %&gt;%
-  summarize(across(.cols = contains(&quot;Perc&quot;), .fns = mean))</pre>
+  summarize(across(contains(&quot;PM&quot;), mean))</pre>
 
-<pre ># A tibble: 58 × 2
-   CaliforniaCounty CES4.0Percentile
-   &lt;chr&gt;                       &lt;dbl&gt;
- 1 &quot;Alameda &quot;                   NA  
- 2 &quot;Alpine &quot;                    22  
- 3 &quot;Amador &quot;                    38.8
- 4 &quot;Butte &quot;                     39.8
- 5 &quot;Calaveras &quot;                 NA  
- 6 &quot;Colusa &quot;                    52.2
- 7 &quot;Contra Costa&quot;               36.7
- 8 &quot;Del Norte&quot;                  40.3
- 9 &quot;El Dorado&quot;                  14.6
-10 &quot;Fresno &quot;                    NA  
+<pre ># A tibble: 58 × 5
+   CaliforniaCounty PM2.5 PM2.5.Pctl DieselPM DieselPMPctl
+   &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;
+ 1 &quot;Alameda &quot;        8.87      31.9    0.350         66.4 
+ 2 &quot;Alpine &quot;         3.05       0.07   0.003          1.02
+ 3 &quot;Amador &quot;         8.01      18.9    0.0111         4.18
+ 4 &quot;Butte &quot;          8.22      23.0    0.106         33.1 
+ 5 &quot;Calaveras &quot;      8.12      22.6    0.0079         3.08
+ 6 &quot;Colusa &quot;         7.54      13.3    0.0292        10.6 
+ 7 &quot;Contra Costa&quot;    8.76      31.0    0.210         48.6 
+ 8 &quot;Del Norte&quot;       5.71       2.93   0.0301        11.1 
+ 9 &quot;El Dorado&quot;       6.78       8.91   0.0380        13.6 
+10 &quot;Fresno &quot;        13.2       91.4    0.181         44.8 
 # ℹ 48 more rows</pre>
 
-</article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-5">
+<!-- ## Applying functions with `across` from `dplyr`{.codesmall} -->
 
-<p>Combining with <code>mutate()</code>: rounding to the nearest power of 10 (with negative digits value)</p>
+<!-- `mutate()` across to round across many columns at once! -->
 
-<pre class = 'prettyprint lang-r'>ces_dbl %&gt;%
-  mutate(across(
-    .cols = starts_with(&quot;CES&quot;),
-    .fns = round,
-    digits = 3
-  ))</pre>
+<!-- ```{r} -->
 
-<pre ># A tibble: 8,035 × 3
-   CaliforniaCounty CES4.0Score CES4.0Percentile
-   &lt;chr&gt;                  &lt;dbl&gt;            &lt;dbl&gt;
- 1 &quot;Alameda &quot;              4.85             2.8 
- 2 &quot;Alameda &quot;              4.88             2.87
- 3 &quot;Alameda &quot;             11.2             15.9 
- 4 &quot;Alameda &quot;             12.4             19.0 
- 5 &quot;Alameda &quot;             16.7             29.7 
- 6 &quot;Alameda &quot;             20.0             37.6 
- 7 &quot;Alameda &quot;             36.7             70.1 
- 8 &quot;Alameda &quot;             37.1             70.7 
- 9 &quot;Alameda &quot;             40.7             76.2 
-10 &quot;Alameda &quot;             43.7             80.4 
-# ℹ 8,025 more rows</pre>
+<!-- calenviroscreen %>% -->
 
-</article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-6" class="smaller">
+<!--   mutate(across( -->
+
+<!--     where(is.numeric),  -->
+
+<!--     function(x) round(x, digits = 0) -->
+
+<!--   )) %>% select(7:13) -->
+
+<!-- ``` -->
+
+</article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-5" class="smaller">
 
 <p>Combining with <code>mutate()</code> - the <code>replace_na</code> function</p>
 
@@ -3768,9 +3883,8 @@ ces_dbl %&gt;%
 <pre class = 'prettyprint lang-r'>yearly_co2_emissions %&gt;%
   select(country, starts_with(&quot;194&quot;)) %&gt;%
   mutate(across(
-    .cols = c(`1943`, `1944`, `1945`),
-    .fns = replace_na,
-    replace = 0
+    c(`1943`, `1944`, `1945`),
+    function(x) replace_na(x, replace = 0)
   ))</pre>
 
 <pre ># A tibble: 192 × 11
@@ -3789,33 +3903,39 @@ ces_dbl %&gt;%
 # ℹ 182 more rows
 # ℹ 1 more variable: `1949` &lt;dbl&gt;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Use custom functions within <code>mutate</code> and <code>across</code></h2></hgroup><article  id="use-custom-functions-within-mutate-and-across">
+<!-- ## Use custom functions within `mutate` and `across` -->
 
-<p>If your function needs to span more than one line, better to define it first before using inside <code>mutate()</code> and <code>across()</code>.</p>
+<!-- If your function needs to span more than one line, better to define it first before using inside `mutate()` and `across()`. -->
 
-<pre class = 'prettyprint lang-r'>times1000 &lt;- function(x) x * 1000
+<!-- ```{r} -->
 
-airquality %&gt;%
-  mutate(across(
-    .cols = everything(),
-    .fns  = times1000
-  )) %&gt;%
-  head(n = 2)</pre>
+<!-- times1000 <- function(x) x * 1000 -->
 
-<pre >  Ozone Solar.R Wind  Temp Month  Day
-1 41000  190000 7400 67000  5000 1000
-2 36000  118000 8000 72000  5000 2000</pre>
+<!-- airquality %>% -->
 
-<pre class = 'prettyprint lang-r'>airquality %&gt;%
-  mutate(across(
-    .cols = everything(),
-    .fns  = function(x) x * 1000
-  )) %&gt;%
-  head(n = 2)</pre>
+<!--   mutate(across( -->
 
-<pre >  Ozone Solar.R Wind  Temp Month  Day
-1 41000  190000 7400 67000  5000 1000
-2 36000  118000 8000 72000  5000 2000</pre>
+<!--     everything(), -->
+
+<!--     .fns  = times1000 -->
+
+<!--   )) %>% -->
+
+<!--   head(n = 2) -->
+
+<!-- airquality %>% -->
+
+<!--   mutate(across( -->
+
+<!--     everything(), -->
+
+<!--     .fns  = function(x) x * 1000 -->
+
+<!--   )) %>% -->
+
+<!--   head(n = 2) -->
+
+<!-- ``` -->
 
 </article></slide><slide class=""><hgroup><h2><code>purrr</code> package</h2></hgroup><article  id="purrr-package">
 

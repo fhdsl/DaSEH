@@ -14,9 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Load all the libraries we will use in this lab. 
 
 ```{r message=FALSE}
-library(readr)
-library(dplyr)
-library(ggplot2)
+library(tidyverse)
 ```
 
 ### 1.1
@@ -104,45 +102,43 @@ We want to get some summary statistics on water contamination. Use `across` insi
 # General format
 data %>%
   summarize(across(
-    .cols = {vector or tidyselect},
-    .fns = {some function},
-    {additional arguments}
+    {vector or tidyselect},
+    {some function}
   ))
 ```
 
 ```{r 2.2response}
 ces %>%
   summarize(across(
-    .cols = contains("Water") & ends_with("Pctl"),
-    .fns = sum
+    contains("Water") & ends_with("Pctl"),
+    sum
   ))
 ces %>%
   summarize(across(
-    .cols = contains("Water") & ends_with("Pctl"),
-    .fns = sum,
-    na.rm = TRUE
+    contains("Water") & ends_with("Pctl"),
+    function(x) sum(x, na.rm = T)
   ))
 ```
 
 
 ### 2.3
 
-Use `across` and `mutate` to convert all columns containing the word "Pctl" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use a "function on the fly" to divide by 100 (`function(x) x / 100`). It will also be easier to check your work if you `select()` columns that match "Pctl".
+Use `across` and `mutate` to convert all columns containing the word "Pctl" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use an anonymous function ("function on the fly") to divide by 100 (`function(x) x / 100`). It will also be easier to check your work if you `select()` columns that match "Pctl".
 
 ```
 # General format
 data %>%
   mutate(across(
-    .cols = {vector or tidyselect},
-    .fns = {some function}
+    {vector or tidyselect},
+    {some function}
   ))
 ```
 
 ```{r 2.3response}
 ces %>%
   mutate(across(
-    .cols = contains("Pctl"),
-    .fns = function(x) x / 100
+    contains("Pctl"),
+    function(x) x / 100
   )) %>%
   select(contains("Pctl"))
 ```
@@ -151,15 +147,13 @@ ces %>%
 
 ### P.2
 
-
-
-Use `across` and `mutate` to convert all columns starting with the string "PM" into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. **Hint**: use `starts_with()` to select the columns that start with "PM". Use a "function on the fly" to do a logical test if the value is greater than 10.
+Use `across` and `mutate` to convert all columns starting with the string "PM" into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. **Hint**: use `starts_with()` to select the columns that start with "PM". Use an anonymous function ("function on the fly") to do a logical test if the value is greater than 10.
 
 ```{r P.2response}
 ces %>%
   mutate(across(
-    .cols = starts_with("PM"),
-    .fns = function(x) x > 10
+    starts_with("PM"),
+    function(x) x > 10
   ))
 ```
 
@@ -176,8 +170,8 @@ Take your code from question 2.4 and assign it to the variable `ces_dat`.
 ces_dat <-
   ces %>%
   mutate(across(
-    .cols = starts_with("PM"),
-    .fns = function(x) x > 10
+    starts_with("PM"),
+    function(x) x > 10
   )) %>%
   filter(ApproxLocation != "Oakland")
 

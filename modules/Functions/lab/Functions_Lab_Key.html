@@ -356,9 +356,7 @@ display: none;
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
 <p>Load all the libraries we will use in this lab.</p>
-<pre class="r"><code>library(readr)
-library(dplyr)
-library(ggplot2)</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
 <div id="section" class="section level3">
 <h3>1.1</h3>
 <p>Create a function that takes one argument, a vector, and returns the
@@ -444,14 +442,13 @@ calculations.</p>
 <pre><code># General format
 data %&gt;%
   summarize(across(
-    .cols = {vector or tidyselect},
-    .fns = {some function},
-    {additional arguments}
+    {vector or tidyselect},
+    {some function}
   ))</code></pre>
 <pre class="r"><code>ces %&gt;%
   summarize(across(
-    .cols = contains(&quot;Water&quot;) &amp; ends_with(&quot;Pctl&quot;),
-    .fns = sum
+    contains(&quot;Water&quot;) &amp; ends_with(&quot;Pctl&quot;),
+    sum
   ))</code></pre>
 <pre><code>## # A tibble: 1 × 3
 ##   DrinkingWaterPctl GroundwaterThreatsPctl ImpWaterBodiesPctl
@@ -459,21 +456,9 @@ data %&gt;%
 ## 1                NA                304029.            256802.</code></pre>
 <pre class="r"><code>ces %&gt;%
   summarize(across(
-    .cols = contains(&quot;Water&quot;) &amp; ends_with(&quot;Pctl&quot;),
-    .fns = sum,
-    na.rm = TRUE
+    contains(&quot;Water&quot;) &amp; ends_with(&quot;Pctl&quot;),
+    function(x) sum(x, na.rm = T)
   ))</code></pre>
-<pre><code>## Warning: There was 1 warning in `summarize()`.
-## ℹ In argument: `across(...)`.
-## Caused by warning:
-## ! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
-## Supply arguments directly to `.fns` through an anonymous function instead.
-## 
-##   # Previously
-##   across(a:b, mean, na.rm = TRUE)
-## 
-##   # Now
-##   across(a:b, \(x) mean(x, na.rm = TRUE))</code></pre>
 <pre><code>## # A tibble: 1 × 3
 ##   DrinkingWaterPctl GroundwaterThreatsPctl ImpWaterBodiesPctl
 ##               &lt;dbl&gt;                  &lt;dbl&gt;              &lt;dbl&gt;
@@ -484,20 +469,20 @@ data %&gt;%
 <p>Use <code>across</code> and <code>mutate</code> to convert all
 columns containing the word “Pctl” into proportions (i.e., divide that
 value by 100). <strong>Hint</strong>: use <code>contains()</code> to
-select the right columns within <code>across()</code>. Use a “function
-on the fly” to divide by 100 (<code>function(x) x / 100</code>). It will
-also be easier to check your work if you <code>select()</code> columns
-that match “Pctl”.</p>
+select the right columns within <code>across()</code>. Use an anonymous
+function (“function on the fly”) to divide by 100
+(<code>function(x) x / 100</code>). It will also be easier to check your
+work if you <code>select()</code> columns that match “Pctl”.</p>
 <pre><code># General format
 data %&gt;%
   mutate(across(
-    .cols = {vector or tidyselect},
-    .fns = {some function}
+    {vector or tidyselect},
+    {some function}
   ))</code></pre>
 <pre class="r"><code>ces %&gt;%
   mutate(across(
-    .cols = contains(&quot;Pctl&quot;),
-    .fns = function(x) x / 100
+    contains(&quot;Pctl&quot;),
+    function(x) x / 100
   )) %&gt;%
   select(contains(&quot;Pctl&quot;))</code></pre>
 <pre><code>## # A tibble: 8,035 × 23
@@ -530,12 +515,12 @@ data %&gt;%
 columns starting with the string “PM” into a binary variable: TRUE if
 the value is greater than 10 and FALSE if less than or equal to 10.
 <strong>Hint</strong>: use <code>starts_with()</code> to select the
-columns that start with “PM”. Use a “function on the fly” to do a
-logical test if the value is greater than 10.</p>
+columns that start with “PM”. Use an anonymous function (“function on
+the fly”) to do a logical test if the value is greater than 10.</p>
 <pre class="r"><code>ces %&gt;%
   mutate(across(
-    .cols = starts_with(&quot;PM&quot;),
-    .fns = function(x) x &gt; 10
+    starts_with(&quot;PM&quot;),
+    function(x) x &gt; 10
   ))</code></pre>
 <pre><code>## # A tibble: 8,035 × 68
 ##     ...1 CensusTract CaliforniaCounty   ZIP Longitude Latitude ApproxLocation
@@ -575,8 +560,8 @@ Visits for Asthma: PM2.5 greater than 10”</li>
 <pre class="r"><code>ces_dat &lt;-
   ces %&gt;%
   mutate(across(
-    .cols = starts_with(&quot;PM&quot;),
-    .fns = function(x) x &gt; 10
+    starts_with(&quot;PM&quot;),
+    function(x) x &gt; 10
   )) %&gt;%
   filter(ApproxLocation != &quot;Oakland&quot;)
 
