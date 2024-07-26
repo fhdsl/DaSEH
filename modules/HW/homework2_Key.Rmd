@@ -201,7 +201,7 @@ sample(pull(mars, mean_pressure), size = 20)
 - `sum()`
 
 ```{r 13response}
-# How many data points are from days where the maximum ground temperature got above 0 degrees Celsius?
+# How many data points are from days where the maximum ground temperature got above or equal to 0 degrees Celsius?
 nrow(mars %>% filter(max_ground_temp >= 0))
 # OR
 mars %>%
