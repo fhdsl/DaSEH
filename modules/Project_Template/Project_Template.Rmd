@@ -36,7 +36,7 @@ You might also research other methods to include here, especially if your data i
 
 # Data Visualization
 
-Create some visualizations of your data using the equisse app or the ggplot2 package.
+Create some visualizations of your data using the esquisse app or the ggplot2 package.
 
 ```{r}
 
