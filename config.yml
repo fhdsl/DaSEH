@@ -5,6 +5,7 @@ default:
       * **Fall Session ** : September 30 - October 10 (online/virtual course) + October 23-25 (in person in Seattle)
   course_time: "1:30 p.m. - 4:50 p.m. ET"
   register_link: "https://forms.gle/BNrdKJJ8PHpQtKMS8"
+  codeathon_schedule: "https://docs.google.com/document/d/182XiteW4-VOWLesVBU6TH1hhyDH7dHkGAXf6P8WYyjg/edit?usp=sharing"
   #final_due_date: "January 24th at 11:59pm ET"
   #grades_due: "January 26"
   holiday: "In recognition of [Martin Luther King Jr. Day](https://en.wikipedia.org/wiki/Martin_Luther_King_Jr._Day), there will be **no class on Monday January 15th, 2024**."
