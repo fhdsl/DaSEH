@@ -45,7 +45,7 @@ pander::pandoc.table(
 
 - [Schedule](`r config::get("codeathon_schedule")`)
 - [Instructor Slides](`r config::get("instructor_slides")`)
-- [Lightning Talk Folder](`r config::get("lightning_talk_folder")`)
+- [Lightning Talk Upload Folder](`r config::get("lightning_talk_folder")`)
 - [Project Template](modules/Project_Template/Project_Template.Rmd)
 - [Project Example](modules/Project_Example/Project_Example.Rmd)
 - [Project Example (rendered)](modules/Project_Example/Project_Example.html)
