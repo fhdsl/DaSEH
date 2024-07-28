@@ -44,8 +44,8 @@ pander::pandoc.table(
 ## In-person Code-a-thon Schedule + Materials
 
 - [Schedule](`r config::get("codeathon_schedule")`)
-- [Instructor Slides]()
-- [Lightning Talk Folder]()
+- [Instructor Slides](`r config::get("instructor_slides")`)
+- [Lightning Talk Folder](`r config::get("lightning_talk_folder")`)
 - [Project Template](modules/Project_Template/Project_Template.Rmd)
 - [Project Example](modules/Project_Example/Project_Example.Rmd)
 - [Project Example (rendered)](modules/Project_Example/Project_Example.html)
