@@ -76,7 +76,7 @@ Read in the CalEnviroScreen from https://daseh.org/data/CalEnviroScreen_data.csv
 
 ### 2.2
 
-We want to get some summary statistics on water contamination. Use `across` inside `summarize` to get the sum total for any variable containing the string "water" AND ending with "Pctl". **Hint**: use `contains()` AND `ends_with()` to select the right columns inside `across`. Remember that `NA` values can influence calculations.
+We want to get some summary statistics on water contamination. Use `across` inside `summarize` to get the sum total variable containing the string "water" AND ending with "Pctl". **Hint**: use `contains()` AND `ends_with()` to select the right columns inside `across`. Remember that `NA` values can influence calculations.
 
 ```
 # General format
