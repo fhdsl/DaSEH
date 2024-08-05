@@ -39,9 +39,15 @@ This training initiative is funded by National Institute of Environmental Health
 
 ### Two-week course
 
+_September 30 - October 10_  
+_10:30am - 2pm Pacific Time_  
+
 DaSEH begins with a two-week online course that solidifies R programming foundations. Participants learn best practices and ingrain programming skills via active hands-on lab activities. We will practice new skills one topic at a time to make the content more manageable! 
 
 ### Code-a-thon
+
+_October 23-25 (in person in Seattle)_  
+_9:30am - 4pm Pacific Time_  
 
 The two-week foundation prepares participants a three-day in-person intensive “Code-a-thon”. Here, we'll work on authentic environmental health projects. We'll also practice data ethics skills in peer code review, reproducibility, and transparency in a supportive environment. 
 
@@ -58,13 +64,9 @@ We're also supported by our data scientist, `r config::get("ds")`.
 ## Sign Up!
 ***
 
-Our upcoming session(s) of DaSEH will be: 
+Please apply for the Fall Session using [this form](`r config::get("register_link")`) by **August 16, 2024**. 
 
-`r config::get("course_dates")`
-
-Our Summer Session applications are closed. Please apply for the Fall Session using [this form](`r config::get("register_link")`) by **July 31, 2024**. 
-
-Please reach out to daseh @ fredhutch.org with any questions.
+You can reach out to daseh @ fredhutch.org with any questions.
 
 <br>
 
