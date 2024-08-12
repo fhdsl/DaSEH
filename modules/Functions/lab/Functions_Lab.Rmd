@@ -1,7 +1,7 @@
 ---
 title: "Functions Lab"
 output: html_document
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Part 1
 
-Load all the libraries we will use in this lab. 
+Load all the libraries we will use in this lab.
 
 ```{r message=FALSE}
 library(tidyverse)
@@ -23,14 +23,14 @@ Create a function that takes one argument, a vector, and returns the sum of the 
 
 ```
 # General format
-NEW_FUNCTION <- function(x, y) x + y 
+NEW_FUNCTION <- function(x, y) x + y
 ```
 or
 
 ```
 # General format
 NEW_FUNCTION <- function(x, y){
-result <- x + y 
+result <- x + y
 return(result)
 }
 ```
@@ -122,10 +122,10 @@ Use `across` and `mutate` to convert all columns starting with the string "PM" i
 
 ### P.3
 
-Take your code from question 2.4 and assign it to the variable `ces_dat`. 
+Take your code from previous question and assign it to the variable `ces_dat`.
 
-- use `filter()` to drop any rows where "Oakland" appears in `ApproxLocation`. Make sure to reassign this to `ces_dat`.
-- Create a ggplot boxplot (`geom_boxplot()`) where (1) the x-axis is `PM2.5` and (2) the y-axis is `Asthma`.
+- Use `filter()` to drop any rows where "Oakland" appears in `ApproxLocation`. Make sure to reassign this to `ces_dat`.
+- Create a ggplot boxplot (`geom_boxplot()`) where (1) the x-axis is `Asthma`  and (2) the y-axis is `PM2.5`.
 - You change the `labs()` layer so that the x-axis is "ER Visits for Asthma: PM2.5 greater than 10"
 
 ```{r P.3response}
