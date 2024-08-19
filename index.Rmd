@@ -29,6 +29,10 @@ Data Science for Environmental Health (DaSEH) is a short course that combines **
 
 This training initiative is funded by National Institute of Environmental Health Sciences [1R25ES035590-01](https://reporter.nih.gov/search/cMEAgQFeo025gUX1DDzH9g/project-details/10746327). 
 
+```{r, fig.alt = "DaSEH participants in person in a classroom learning about reproducibility.", out.width="80%"}
+knitr::include_graphics("images/class.jpg")
+```
+
 <br>
 
 ## Format
