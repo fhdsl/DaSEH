@@ -100,7 +100,7 @@ By the end of the course, learners should be comfortable:
 #### When & Where
 
 - **Dates:** October 23-25  
-- **Time:** F9:30 am - 4 pm Pacific Time  
+- **Time:** 9:30 am - 4 pm Pacific Time  
 - The Code-a-thon will take place at [Fred Hutch Cancer Center](https://maps.app.goo.gl/LRV4D4mELB5VzbWm8) in Seattle, WA.  
 
 <br>
@@ -109,6 +109,8 @@ By the end of the course, learners should be comfortable:
 
 - Although DaSEH itself is free, participants will need to pay travel costs to get to Seattle (flight, train, hotel, etc.). Please select whatever mode of transportation works best for you.
 - Travel stipends are available for select participants. **You must indicate whether you would like to be considered for a travel stipend in the application.** If selected for a travel stipend, Fred Hutch and DaSEH will work with you to book travel.
+
+<br>
 
 #### Format
 
