@@ -120,7 +120,6 @@ ces %>%
   ))
 ```
 
-
 ### 2.3
 
 Use `across` and `mutate` to convert all columns containing the word "water" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use an anonymous function ("function on the fly") to divide by 100 (`function(x) x / 100`). It will also be easier to check your work if you `select()` columns that match "Pctl".
@@ -143,6 +142,7 @@ ces %>%
   select(contains("Pctl"))
 ```
 
+
 # Practice on Your Own!
 
 ### P.2
@@ -160,7 +160,6 @@ ces %>%
     function(x) x > 10
   ))
 ```
-
 
 ### P.3
 
