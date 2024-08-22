@@ -147,7 +147,11 @@ ces %>%
 
 ### P.2
 
-Use `across` and `mutate` to convert all columns starting with the string "PM" into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. **Hint**: use `starts_with()` to select the columns that start with "PM". Use an anonymous function ("function on the fly") to do a logical test if the value is greater than 10.
+Use `across` and `mutate` to convert all columns starting with the string "PM" into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. 
+
+- **Hint**: use `starts_with()` to select the columns that start with "PM". 
+- Use an anonymous function ("function on the fly") to do a logical test if the value is greater than 10.
+- A logical test with `mutate` will automatically fill a column with TRUE/FALSE.
 
 ```{r P.2response}
 ces %>%
