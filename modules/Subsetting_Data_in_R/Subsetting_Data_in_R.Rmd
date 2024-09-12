@@ -152,7 +152,7 @@ Tibbles are a **fancier** version of data frames:
 - We see the data types for each column
 
 ```{r}
-ER
+er
 
 ```
 
