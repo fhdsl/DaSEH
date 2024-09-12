@@ -924,7 +924,7 @@ Just want you to be aware of this as it is very common.
 
 ```{r}
 er_30$newcol <- er_30$rate/2.2
-head(ER_30,3)
+head(er_30,3)
 ```
 
 Even though `$` is easier for creating new columns, `mutate` is really powerful, so it's worth getting used to.
