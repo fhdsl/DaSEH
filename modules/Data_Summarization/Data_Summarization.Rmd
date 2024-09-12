@@ -97,7 +97,11 @@ knitr::include_graphics("images/Manip_cheatsheet.png")
 
 ## Some examples
 
-We can use the `CO_heat_ER` object from the `dasehr` package to explore different ways of summarizing data. (This dataset contains information about the number and rate of visits for heat-related illness to ERs in Colorado from 2011-2022, adjusted for age.)  The `head` command displays the first rows of an object:
+We can use the `CO_heat_ER` object from the `dasehr` package to explore different ways of summarizing data. 
+
+(*Reminder* This dataset contains information about the number and rate of visits for heat-related illness to ERs in Colorado from 2011-2022, adjusted for age.)  
+
+The `head` command displays the first rows of an object:
 
 ```{r}
 library(dasehr)
@@ -276,7 +280,7 @@ summary(CO_heat_ER)
 
 ```{r, message = FALSE}
 CO_heat_ER %>%
-  distinct(gender)
+  distinct(county)
 ```
 
 
@@ -286,7 +290,7 @@ CO_heat_ER %>%
 
 ```{r}
 CO_heat_ER %>%
-  pull(gender) %>% 
+  pull(county) %>% 
   n_distinct()
 ```
 
@@ -301,7 +305,7 @@ options(max.print = 1000)
 Use `count` to return row count by category.
 
 ```{r, message = FALSE}
-CO_heat_ER %>% count(gender)
+CO_heat_ER %>% count(county)
 ```
 
 
@@ -310,7 +314,7 @@ CO_heat_ER %>% count(gender)
 Multiple columns listed further subdivides the count.
 
 ```{r, message = FALSE}
-CO_heat_ER %>% count(county, gender)
+CO_heat_ER %>% count(county, year)
 ```
 
 
@@ -322,7 +326,7 @@ CO_heat_ER %>% count(county, gender)
 `group_by` allows you group the data set by variables/columns you specify:
 
 ```{r}
-CO_heat_ER_grouped <- CO_heat_ER %>% group_by(gender)
+CO_heat_ER_grouped <- CO_heat_ER %>% group_by(year)
 CO_heat_ER_grouped
 ```
 
@@ -343,17 +347,17 @@ Pipe `CO_heat_ER` into `group_by`, then pipe that into `summarize`:
 
 ```{r}
 CO_heat_ER %>%
-  group_by(gender) %>%
+  group_by(year) %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
 
 ## Group by as many variables as you want
 
-`group_by` gender and year:
+`group_by` county and year:
 
 ```{r, warnings = F}
 CO_heat_ER %>%
-  group_by(year, gender) %>%
+  group_by(year, county) %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
 
@@ -363,7 +367,7 @@ There are other functions, such as `n()` count the number of observations (NAs i
 
 ```{r}
 CO_heat_ER %>%
-  group_by(gender) %>%
+  group_by(year) %>%
   summarize(n = n(),
             mean = mean(visits, na.rm = TRUE))
 ```
@@ -374,8 +378,8 @@ CO_heat_ER %>%
 `count()` and `n()` can give very similar information.
 
 ```{r}
-CO_heat_ER %>% count(gender)
-CO_heat_ER %>% group_by(gender) %>% summarize(n()) # n() typically used with summarize
+CO_heat_ER %>% count(year)
+CO_heat_ER %>% group_by(year) %>% summarize(n()) # n() typically used with summarize
 ```
 
 
@@ -387,8 +391,8 @@ CO_heat_ER %>% group_by(gender) %>% summarize(n()) # n() typically used with sum
 These functions require a column as a vector using `pull()`.
 
 ```{r, message = FALSE}
-CO_heat_ER_gen <- CO_heat_ER %>% pull(gender) # pull() to make a vector
-CO_heat_ER_gen %>% unique() # similar to distinct()
+CO_heat_ER_year <- CO_heat_ER %>% pull(year) # pull() to make a vector
+CO_heat_ER_year %>% unique() # similar to distinct()
 ```
 
 ## Base R functions you might see: `length` and `unique`
@@ -396,7 +400,7 @@ CO_heat_ER_gen %>% unique() # similar to distinct()
 These functions require a column as a vector using `pull()`.
 
 ```{r, message = FALSE}
-CO_heat_ER_gen %>% unique() %>% length() # similar to n_distinct()
+CO_heat_ER_year %>% unique() %>% length() # similar to n_distinct()
 ```
 
 ## * New! * Many dplyr functions now have a `.by=` argument
@@ -405,7 +409,7 @@ Pipe `CO_heat_ER` into `group_by`, then pipe that into `summarize`:
 
 ```{r eval = FALSE}
 CO_heat_ER %>%
-  group_by(gender) %>%
+  group_by(year) %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE),
             max_visits = max(visits, na.rm = TRUE))
 ```
@@ -416,7 +420,7 @@ is the same as..
 CO_heat_ER %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE),
             max_visits = max(visits, na.rm = TRUE),
-            .by = county)
+            .by = year)
 ```
 
 
