@@ -90,7 +90,7 @@ library(tidyverse) # loads dplyr and other packages!
 
 ## Getting data to work with
 
-We will work with data called `ER` about heat-related ER visits between 2011 and 2022, as reported by the state of Colorado, specifically made available by the Colorado Environmental Public Health Tracking program website. Full dataset available at https://coepht.colorado.gov/heat-related-illness.
+We will work with data called `er` about heat-related ER visits between 2011 and 2022, as reported by the state of Colorado, specifically made available by the Colorado Environmental Public Health Tracking program website. Full dataset available at https://coepht.colorado.gov/heat-related-illness.
 
 
 ```{r}
@@ -98,7 +98,7 @@ library(dasehr)
 er <- CO_heat_ER
 #or we could do this:
 er <- 
-  read_csv("https://daseh.org/data/Colorado_ER_heat_visit.csv")
+  read_csv("https://daseh.org/data/CO_ER_heat_visit.csv")
 
 ```
 
@@ -397,7 +397,7 @@ clean_names(test)
 
 ## Let's get our data again
 
-We'll work with the CO heat-related ER visits dataset.
+We'll work with the CO heat-related ER visits dataset again.
 
 This time lets also make it a smaller subset so it is easier for us to see the full dataset as we work through examples. 
 
@@ -405,7 +405,7 @@ This time lets also make it a smaller subset so it is easier for us to see the f
 #library(dasehr)
 #er <- CO_heat_ER
 #or this:
-#read_csv("https://daseh.org/data/Colorado_ER_heat_visits.csv")
+#read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
 set.seed(1234)
 er_30 <-slice_sample(er, n = 30)
 ```
@@ -563,9 +563,9 @@ filter(er_30, rate > 9 | year == 2012)
 The `%in%` operator can be used find values from a pre-made list (using `c()`) for a **single column** at a time. 
 
 ```{r}
-filter(er_30,  county %in% c("Denver","Weld","Arapahoe"))
+filter(er_30,  county %in% c("Denver","Larimer","Pueblo"))
 
-filter(er_30,  county == "Denver"| county == "Weld"| county == "Arapahoe") #equivalent
+filter(er_30,  county == "Denver"| county == "Larimer"| county == "Pueblo") #equivalent
 ```
 
 ## Subset rows of a data frame: dplyr {.codesmall}
