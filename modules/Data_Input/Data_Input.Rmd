@@ -45,12 +45,11 @@ https://daseh.org/resources/R_Projects.html
 
 
 ## Data Input
+CO Heat-related ER visits dataset:
 
-CalEnviroScreen Dataset: 
+We're going to load a dataset from the Colorado Environmental Public Health Tracking Program. This dataset has age-adjusted visit rates and total number of visits for all genders by Colorado county for 2011-2023.
 
-CalEnviroScreen is a project that ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. Data used in the CalEnviroScreen model come from national and state sources.
-
-* Check out the data at: https://calenviroscreen-oehha.hub.arcgis.com/#Data
+* Check out the data at: https://coepht.colorado.gov/heat-related-illness
 
 
 ## Import Dataset
@@ -58,7 +57,7 @@ CalEnviroScreen is a project that ranks census tracts in California based on pot
 -  `>` File
 -  `>` Import Dataset
 -  `>` From Text (`readr`)
--  `>` paste the url (https://daseh.org/data/CalEnviroScreen_data.csv)
+-  `>` paste the url (https://daseh.org/data/CO_ER_heat_visit.csv)
 -  `>` click "Update" and "Import"
 
 
@@ -73,7 +72,7 @@ knitr::include_graphics("images/Data_Input_data_imported.png")
 
 ## What Just Happened?
 
-You see a new object called `CalEnviroScreen_data` in your environment pane (top right). The table button opens the data for you to view.
+You see a new object called `CO_ER_heat_visit` in your environment pane (top right). The table button opens the data for you to view.
 
 ```{r, fig.alt="The image shows the data in preview form. It is organized like a spreadsheet one might see in Excel.", out.width = "80%", echo = FALSE, align = "center"}
 knitr::include_graphics("images/Data_Input_data_imported.png")
@@ -119,7 +118,7 @@ Cons: obscures some of what's happening, others will have difficulty running you
 # load library `readr` that contains function `read_csv`
 library(readr)
 dat <- read_csv(
-  file = "https://daseh.org/data/CalEnviroScreen_data.csv"
+  file = "https://daseh.org/data/CO_ER_heat_visit.csv"
 )
 
 # `head` displays first few rows of a data frame. `tail()` works the same way.
@@ -131,11 +130,11 @@ head(dat, n = 5)
 
 ```{r message = FALSE}
 dat <- read_csv(
-  file = "https://daseh.org/data/CalEnviroScreen_data.csv"
+  file = "https://daseh.org/data/CO_ER_heat_visit.csv"
 )
 # EQUIVALENT TO
 dat <- read_csv(
-  "https://daseh.org/data/CalEnviroScreen_data.csv"
+  "https://daseh.org/data/CO_ER_heat_visit.csv"
 )
 ```
 
@@ -153,9 +152,9 @@ dat <- read_csv(
 
 dat <- read_csv(file = "www.someurl.com/table1.csv")
 
-dat <- read_csv(file = "/Users/avahoffman/Downloads/CalEnviroScreen_data.csv")
+dat <- read_csv(file = "/Users/avahoffman/Downloads/CO_ER_heat_visit.csv")
 
-dat <- read_csv(file = "CalEnviroScreen_data.csv")
+dat <- read_csv(file = "CO_ER_heat_visit.csv")
 ```
 
 
