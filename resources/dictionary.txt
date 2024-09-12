@@ -25,6 +25,7 @@ bp
 BSPH
 bw
 byquarter
+calenviroscreen
 CalEnviroScreen
 CDS
 CES
@@ -65,6 +66,8 @@ de
 DESeq
 df
 Diedrich
+dieselPM
+DieselPL
 dotdash
 dplyr
 dropdown
@@ -143,6 +146,7 @@ lightblue
 lightgreen
 Linetype
 lmfit
+LowBirthWeight
 LowBirthWeightPctl
 LocationAbbr
 logfit
@@ -152,6 +156,7 @@ macosx
 McKenna
 mclaire
 MHS
+microplastics
 misspecification
 Moderna
 MonthlyPrice
@@ -226,6 +231,7 @@ Sagar
 Saravanan
 SARS
 Savonen
+sessionInfo
 setosa
 ShareAlike
 skimr
@@ -249,6 +255,7 @@ tidyr
 tidyselect
 tidyverse
 Tidyverse
+TrafficPctl
 TRUEs
 TSV
 twodash
