@@ -98,7 +98,7 @@ library(dasehr)
 er <- CO_heat_ER
 #or we could do this:
 er <- 
-  read_csv("https://daseh.org/data/CO_ER_heat_visit.csv")
+  read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
 
 ```
 
