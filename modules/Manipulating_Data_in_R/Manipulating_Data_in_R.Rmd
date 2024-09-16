@@ -57,6 +57,8 @@ knitr::include_graphics("images/pivot.jpg")
 
 Data is stored *differently* in the tibble.
 
+Here's a small dataset looking at vaccination rates over three months in Alabama.
+
 ```{r, echo = FALSE}
 ex_wide <- tibble(State = "Alabama",
                  June_vacc_rate = 0.516,
@@ -150,15 +152,10 @@ You might see old functions `gather` and `spread` when googling. These are older
 
 ## Reshaping data from **wide to long**
 
-```{r, message = FALSE}
-wide_vacc <- read_csv(
-  file = "https://daseh.org/data/wide_vacc.csv")
-```
-
 ```{r}
-wide_vacc
-long_vacc <- wide_vacc %>% pivot_longer(cols = everything())
-long_vacc
+ex_wide
+ex_long <- ex_wide %>% pivot_longer(cols = !ends_with("State"))
+ex_long
 ```
 
 ## Reshaping wide to long: Better column names {.codesmall} 
@@ -180,35 +177,32 @@ long_vacc
 ## Reshaping data from **wide to long**
 
 ```{r}
-wide_vacc
-long_vacc <- wide_vacc %>% pivot_longer(cols = everything(),
+ex_wide
+ex_long <- ex_wide %>% pivot_longer(cols = !ends_with("State"),
                                         names_to = "Month",
                                         values_to = "Rate")
-long_vacc
+ex_long
 ```
 
 Newly created column names are enclosed in quotation marks.
 
 ## Data used: Nitrate exposure 
 
-Nitrate exposure by quarter for populations on public water systems in the state of Washington for 1999-2020.
-
-https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv
+Let's look at some data on levels of nitrate in water from Washington. This dataset reports the amount of people in Washington exposed to excess levels of nitrate in their water between 1999 and 2020.
 
 ```{r, message = FALSE}
-library(dasehr)
-wide <- nitrate
-head(nitrate)
+wide_nitrate <- read_csv(file = "https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv")
+head(wide_nitrate)
 ```
 
 ## Mission: Average population exposed by concentration
 
-Let's imagine we want to see what proportion of population exposed to different nitrate concentrations. Results should look something like:
+Let's imagine we want to see what proportion of the population was exposed to different nitrate concentrations. Results should look something like:
 
 ```{r, message = FALSE, echo = FALSE}
 example <- tibble(
-  conc_cat = c("pop_0-3ug/L", "pop_>10-20ug/L", "pop_>20ug/L"),
-  avg_prop = c(0.593, 0.000678, 0.000129)
+  concentration_cat = c("0-3ug/L", "10-20ug/L", "more_than_20ug/L"),
+  avg_prop_exposedpop = c(0.593, 0.000678, 0.000129)
 )
 example
 ```
@@ -216,19 +210,19 @@ example
 ## Remove some columns we don't need
 
 ```{r}
-wide <- wide %>%
+wide_nitrate <- wide_nitrate %>%
   select(!ends_with("exceedances"))
-wide
+wide_nitrate
 ```
 
 ## Reshaping data from **wide to long**
 
 ```{r}
-long <- wide %>%
+long_nitrate <- wide_nitrate %>%
   pivot_longer(!c(year, quarter, pop_on_sampled_PWS),
                names_to = "conc_cat",
                values_to = "conc_count")
-long
+long_nitrate
 ```
 
 ## Reshaping data from **wide to long**
@@ -236,7 +230,7 @@ long
 Un-pivoted columns (`year`, `quarter`, `pop_on_sampled_PWS`) are still columns.
 
 ```{r}
-long
+long_nitrate
 ```
 
 ## Cleaning up long data{.codesmall} 
@@ -244,9 +238,9 @@ long
 Let's make the `conc_count` into a proportion.
 
 ```{r}
-long <- long %>%
+long_nitrate <- long_nitrate %>%
   mutate(conc_prop = conc_count / pop_on_sampled_PWS)
-long
+long_nitrate
 ```
 
 ## Mission: Average population exposed by concentration
@@ -254,9 +248,9 @@ long
 Now our data is more tidy, and we can take the averages easily!
 
 ```{r}
-long %>% 
+long_nitrate %>% 
   group_by(conc_cat) %>% 
-  summarize("avg_prop" = mean(conc_prop))
+  summarize("avg_prop_exposedpop" = mean(conc_prop))
 ```
 
 ## Reshaping data from **wide to long**
@@ -283,28 +277,30 @@ There are many ways to **select** the columns we want. Check out https://dplyr.t
 
 ## Reshaping data from **long to wide**
 
+We can use `pivot_wider` to convert long data to wide format. Let's try it with the vaccine data from earlier.
+
 ```{r}
-long_vacc
-wide_vacc <- long_vacc %>% pivot_wider(names_from = "Month", 
+ex_long
+ex_wide2 <- ex_long %>% pivot_wider(names_from = "Month", 
                                        values_from = "Rate") 
-wide_vacc
+ex_wide2
 ```
 
 ## Reshaping nitrate exposure data{.codesmall} 
 
-What if we wanted different columns for each quarter?
+Let's go back to the nitrate exposure dataset. What if we wanted to make a wide version of the data that displayed the number of people at each level of nitrate exposure for each quarter?
 
 ```{r}
-long
+long_nitrate
 ```
 
 ## Reshaping nitrate exposure data
 
 ```{r}
-wide <- long %>%
+wide_nitrate <- long_nitrate %>%
   select(!c(pop_on_sampled_PWS, conc_count)) %>%
   pivot_wider(names_from = "quarter", values_from = "conc_prop")
-wide
+wide_nitrate
 ```
 
 ## Summary
@@ -341,6 +337,7 @@ knitr::include_graphics("images/joins.png")
 * `anti_join(x, y)` - all rows from `x` not in `y` keeping just columns from `x`.
 
 ## Merging: Simple Data
+Let's load in some datasets about vaccination rates by state. These data are saved in two different files.
 
 ```{r message=FALSE}
 data_As <- read_csv(
@@ -451,6 +448,7 @@ fj
 <IMG style="position:absolute;bottom:10.5%;left:85%;width:120px;"SRC="images/full.png">
 
 ## Watch out for "`includes duplicates`"
+
 
 ```{r message=FALSE}
 data_As <- read_csv(
