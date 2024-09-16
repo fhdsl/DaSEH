@@ -1,0 +1,13 @@
+Diet,microplastic,blood_level_start_nM,blood_level_change_nM
+A,Dioxin,1,2.5
+B,Dioxin,7,2.5
+B,Other,2,0.5
+A,Bisphenol A,3,-0.5
+B,BPA,5,0.5
+B,dioxin,8,0.5
+A,bpa,6,2.5
+B,O,5,3.5
+B,dioxin,2,0.5
+A,bpa,1,1.5
+B,BPA,7,1.5
+B,O,3,2.5
