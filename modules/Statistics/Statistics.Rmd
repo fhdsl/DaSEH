@@ -113,12 +113,10 @@ cor.test(x, y = NULL, alternative(c("two.sided", "less", "greater")),
 
 ## Correlation {.small}
 
-https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv
+Let's look at the dataset of yearly CO2 emissions by country.
 
 ```{r cor1, comment="", message = FALSE}
-library(dasehr)
-
-head(yearly_co2_emissions)
+yearly_co2 <- read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
 ```
 
 ## Correlation for two vectors
