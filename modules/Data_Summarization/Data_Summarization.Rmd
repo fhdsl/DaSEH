@@ -106,6 +106,8 @@ The `head` command displays the first rows of an object:
 ```{r}
 er <- 
   read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
+
+head(er)
 ```
 
 
