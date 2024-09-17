@@ -516,7 +516,7 @@ ggplot(er_Boulder, aes(x = year, y = rate)) +
 ## theme() function: change title and axis format
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
+ggplot(er_Boulder, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
             geom_line(size = 0.8, color = "blue", linetype = 2) + 
   labs(title = "Heat-Related ER Visits: Boulder") +
