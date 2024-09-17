@@ -463,7 +463,7 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
     * `colSums(x)`: takes the sum of each column of x
 
 ```{r}
-yearly_co2 <- read_csv(file = "data/Yearly_CO2_Emissions_1000_tonnes.csv")
+yearly_co2 <- read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
 ```
 
 
