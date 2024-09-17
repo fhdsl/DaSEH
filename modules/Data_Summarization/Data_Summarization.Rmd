@@ -471,7 +471,7 @@ yearly_co2 <- read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_
 
 Get means for each row.
 
-Let's see what the mean CO2 emissions is across years for each row (country):
+Let's see what the mean CO2 emissions is across the years 2010-2014 for each row (country):
 
 ```{r}
 yearly_co2 %>%
