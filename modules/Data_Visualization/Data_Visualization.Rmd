@@ -987,7 +987,7 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
 You can change look of each layer separately. Note the arguments like `linetype` and `alpha` that allow us to change the opacity of the points and style of the line respectively.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
+ggplot(er_Boulder, aes(x = year, y = rate)) +
   geom_point(size = 5, color = "red", alpha = 0.5) +
   geom_line(size = 0.8, color = "black", linetype = 2)
 ```
@@ -999,7 +999,7 @@ ggplot(er_state, aes(x = year, y = rate)) +
 You can change the look of whole plot - **specific elements, too** - like changing [font](http://www.cookbook-r.com/Graphs/Fonts/) and font size - or even more [fonts](https://blog.revolutionanalytics.com/2012/09/how-to-use-your-favorite-fonts-in-r-charts.html)
 
 ```{r, fig.width=6, fig.height=3.5, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
+ggplot(er_Boulder, aes(x = year, y = rate)) +
   geom_point(size = 5, color = "green", alpha = 0.5) +
   geom_line(size = 0.8, color = "blue", linetype = 2) +
   theme_bw() +
@@ -1011,10 +1011,10 @@ ggplot(er_state, aes(x = year, y = rate)) +
 Line breaks can be specified using `\n` within the `labs()` function to have a label with multiple lines.
 
 ```{r, fig.width=4, fig.height=2.5, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
+ggplot(er_Boulder, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "red", alpha = 0.5) +
             geom_line(size = 0.8, color = "brown", linetype = 2) +
-  labs(title = "My plot of Heat-Related ER Visits in CO: \n age-adjusted visit rate by year",
+  labs(title = "Heat-Related ER Visits in Boulder Co.: \n age-adjusted visit rate by year",
               x = "Year",
               y = "Age-adjusted Visit Rate")
 ```
@@ -1025,10 +1025,10 @@ ggplot(er_state, aes(x = year, y = rate)) +
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 
-ggplot(er_state, aes(x = year, y = rate)) +
+ggplot(er_Boulder, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
             geom_line(size = 0.8, color = "blue", linetype = 2) +
-  labs(title = "My plot of Heat-Related ER Visits in CO",
+  labs(title = "Heat-Related ER Visits in Boulder Co.",
               x = "Year",
               y = "Age-adjusted Visit Rate") +
   ylim(0, max(pull(er_visits_4, rate)))
@@ -1064,7 +1064,7 @@ knitr::include_graphics("img/line_types.png")
 -   these include values that are strings like "blank", "solid", "dashed", "dotdash", "longdash", and "twodash"
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-er_state %>% ggplot(aes(x = year,
+er_Boulder %>% ggplot(aes(x = year,
                       y = rate)) +
   geom_line(size = 0.8, linetype = "twodash")
 ```
@@ -1087,7 +1087,7 @@ knitr::include_graphics("img/shape.png")
 
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-er_state %>% ggplot(aes(x = year,
+er_Boulder %>% ggplot(aes(x = year,
                       y = rate)) +
   geom_point(size = 2, shape = 12)
 ```
@@ -1103,10 +1103,10 @@ Set `outlier.shape = NA` to get ride of outliers. Be careful about if you really
 However, if can be helpful if your plot is getting stretched to accommodate plotting an outlier. You can always say in the figure legend what you removed.
 
 ```{r}
-er_no_out1 <- ggplot(er_visits_gender, aes(y = visits, x = gender)) +
+er_no_out1 <- ggplot(er_visits_4, aes(y = visits, x = county)) +
   geom_boxplot()
 
-er_no_out2 <- ggplot(er_visits_gender, aes(y = visits, x = gender)) +
+er_no_out2 <- ggplot(er_visits_4, aes(y = visits, x = county)) +
   geom_boxplot(outlier.shape = NA) +
   ylim(0,40)
 ```
