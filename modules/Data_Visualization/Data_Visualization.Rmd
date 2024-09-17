@@ -756,12 +756,12 @@ er_visits_4 %>% group_by(county) %>%
 ## Try that again {.codesmall}
 
 ```{r}
-er_visits_gender %>% group_by(gender, county) %>%
+er_visits_4 %>% group_by(county) %>%
   summarize(mean_visits = mean(visits, na.rm=T)) %>%
 
-ggplot(aes(x = gender,
+ggplot(aes(x = county,
            y = mean_visits,
-           fill = gender)) +
+           fill = county)) +
   geom_col()
 ```
 
