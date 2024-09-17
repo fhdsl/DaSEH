@@ -94,12 +94,8 @@ We will work with data called `er` about heat-related ER visits between 2011 and
 
 
 ```{r}
-library(dasehr)
-er <- CO_heat_ER
-#or we could do this:
 er <- 
   read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
-
 ```
 
 
