@@ -148,15 +148,17 @@ Read more about tidy data and see other examples: [Tidy Data](https://vita.had.c
 
 ## Data to plot
 
-Type `?er_CO_statewide` for more information.
+Let's plot the CO heat-related ER visits dataset we've been working with. First, we'll only consider data from Boulder county.
 
 Is the data in tidy? Is it in long format?
 
 ```{r}
 
-er_state <- er_CO_statewide
+er <- 
+  read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
+er_Boulder <- er %>% filter(county == "Boulder")
 
-head(er_state)
+head(er_Boulder)
 ```
 
 # First plot with `ggplot2` package
@@ -183,7 +185,7 @@ ggplot({data_to plot}, aes(x = {var in data to plot},
 :::
 
 ```{r, fig.width=3, fig.height=2.5, fig.align='center', class.source = "codereg"}
-ggplot(er_state, aes(x = year, y = rate))
+ggplot(er_Boulder, aes(x = year, y = rate))
 ```
 
 ## Next layer code with `ggplot2` package
@@ -225,7 +227,7 @@ ggplot({data_to plot}, aes(x = {var in data to plot},
 :::
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
+ggplot(er_Boulder, aes(x = year, y = rate)) +
   geom_point()
 ```
 
@@ -236,7 +238,7 @@ Read as: *using CO statewide ER heat visits data, and provided aesthetic mapping
 Having the + sign at the beginning of a line will not work!
 
 ```{r, eval = FALSE}
-ggplot(er_state, aes(x = year,
+ggplot(er_Boulder, aes(x = year,
                            y = rate,
                            fill = item_categ))  
  + geom_boxplot()
@@ -245,7 +247,7 @@ ggplot(er_state, aes(x = year,
 Pipes will also not work in place of `+`!
 
 ```{r,eval = FALSE}
-ggplot(er_state, aes(x = year,
+ggplot(er_Boulder, aes(x = year,
                            y = rate,
                            fill = item_categ))  %>%
 geom_boxplot()
@@ -254,7 +256,7 @@ geom_boxplot()
 ## Plots can be assigned as an object {.mall}
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
-plt1 <- ggplot(er_state, aes(x = year, y = rate)) +
+plt1 <- ggplot(er_Boulder, aes(x = year, y = rate)) +
           geom_point()
 
 plt1
@@ -263,10 +265,10 @@ plt1
 ## Examples of different geoms
 
 ```{r, fig.show="hold", out.width="40%"}
-plt1 <- ggplot(er_state, aes(x = year, y = rate)) +
+plt1 <- ggplot(er_Boulder, aes(x = year, y = rate)) +
           geom_point()
 
-plt2 <- ggplot(er_state, aes(x = year, y = rate)) +
+plt2 <- ggplot(er_Boulder, aes(x = year, y = rate)) +
           geom_line()
 
 plt1 # fig.show = "hold" makes plots appear
@@ -278,16 +280,17 @@ plt2 # next to one another in the chunk settings
 Layer a plot on top of another plot with `+`
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
+ggplot(er_Boulder, aes(x = year, y = rate)) +
   geom_point() +
   geom_line()
 ```
 
 ## Adding color - can map color to a variable
+Let's map ER visit rates for four CO counties on the same plot
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
 set.seed(123)
-er_visits_4 <- er_CO_county %>% 
+er_visits_4 <- er %>% 
   filter(county %in% c("Denver", "Weld", "Pueblo", "Jackson"))
 
 ggplot(er_visits_4, aes(x = year, y = rate, color = county)) +
@@ -320,7 +323,7 @@ You can change the look of whole plot using [`theme_*()` functions](https://ggpl
 There are also `size`, `color`, `alpha`, and `linetype` arguments.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
+ggplot(er_Boulder, aes(x = year, y = rate)) +
   geom_point(size = 5, color = "green", alpha = 0.5) +
   geom_line(size = 0.8, color = "blue", linetype = 2) +
   theme_dark()
@@ -350,10 +353,10 @@ There's not only the built in ggplot2 themes but all kinds of themes from other 
 The `labs()` function can help you add or modify titles on your plot. The `title` argument specifies the title. The `x` argument specifies the x axis label. The `y` argument specifies the y axis label.
 
 ```{r, fig.width=4, fig.height=2.5, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
+ggplot(er_Boulder, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "red", alpha = 0.5) +
             geom_line(size = 0.8, color = "brown", linetype = 2) +
-            labs(title = "My plot of Heat-Related ER Visits in CO",
+            labs(title = "Heat-Related ER Visits:Boulder",
               x = "Year",
               y = "Age-adjusted Visit Rate")
 ```
@@ -376,9 +379,7 @@ ggplot(er_state, aes(x = year, y = rate)) +
 `scale_x_continuous()` and `scale_y_continuous()` can change how the axis is plotted. Can use the `breaks` argument to specify how you want the axis ticks.
 
 ```{r, fig.height=2.5, fig.align='center'}
-range(pull(er_visits_4, year))
-
-plot_scale <- ggplot(er_state, aes(x = year, y = rate)) + 
+plot_scale <- ggplot(er_Boulder, aes(x = year, y = rate)) + 
                 geom_point(size = 5, color = "green", alpha = 0.5) + 
                 geom_line(size = 0.8, color = "blue", linetype = 2) +
                 scale_x_continuous(breaks = seq(from = 2011, to = 2022, by = 1))
@@ -409,9 +410,9 @@ You can add to a plot object to make changes! Note that we can save our plots as
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 
-plt1 <- ggplot(er_state, aes(x = year, y = rate,)) +
+plt1 <- ggplot(er_Boulder, aes(x = year, y = rate,)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +geom_line(size = 0.8, color = "blue", linetype = 2) + 
-  labs(title = "My plot of Heat-Related ER Visits in CO", x = "Year", y = "Age-adjusted Visit Rate")
+  labs(title = "Heat-Related ER Visits:Boulder", x = "Year", y = "Age-adjusted Visit Rate")
 
 plt1 + theme_minimal()
 ```
@@ -479,10 +480,10 @@ er_visits_4 %>% ggplot(aes(x = year,
 The `theme()` function can help you modify various elements of your plot. Here we will adjust the font size of the plot title.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
+ggplot(er_Boulder, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
             geom_line(size = 0.8, color = "blue", linetype = 2) + 
-  labs(title = "My plot of Heat-Related ER Visits in CO") +
+  labs(title = "Heat-Related ER Visits:Boulder") +
   theme(plot.title = element_text(size = 20))
 
 ```
@@ -504,10 +505,10 @@ The `theme()` function always takes:
 The `theme()` function can help you modify various elements of your plot. Here we will adjust the horizontal justification (`hjust`) of the plot title.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-ggplot(er_state, aes(x = year, y = rate)) +
+ggplot(er_Boulder, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
             geom_line(size = 0.8, color = "blue", linetype = 2) + 
-  labs(title = "My plot of Heat-Related ER Visits in CO") +
+  labs(title = "Heat-Related ER Visits:Boulder") +
   theme(plot.title = element_text(hjust = 0.5, size = 20))
 
 ```
@@ -518,7 +519,7 @@ ggplot(er_state, aes(x = year, y = rate)) +
 ggplot(er_state, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
             geom_line(size = 0.8, color = "blue", linetype = 2) + 
-  labs(title = "My plot of Heat-Related ER Visits in CO") +
+  labs(title = "Heat-Related ER Visits: Boulder") +
   theme(plot.title = element_text(hjust = 0.5, size = 20),
         axis.title = element_text(size = 16))
 ```
@@ -651,9 +652,6 @@ ggplot(er_visits_4, aes(x = year,
 
 Let's talk additional tricks and tips for making ggplots!
 
-We are going to use some other data about ER visits that has to do with gender.
-Note that gender was recorded as binary, which we know isn’t really accurate. This is something you might encounter. Please see this article about ways to measure gender in a more inclusive way: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6526522/.
-
 
 ## Tips - Color vs Fill {.codesmall}
 
@@ -661,15 +659,14 @@ Note that gender was recorded as binary, which we know isn’t really accurate. 
 -   `fill` is generally needed for boxes and bars
 
 ```{r, out.width="30%", fig.show='hold'}
-er_visits_gender <- CO_heat_ER_bygender
-ggplot(er_visits_gender, aes(x = gender,
-                 y = rate,
-                 color = gender)) + #color creates an outline
+ggplot(er_visits_4, aes(x = county,
+                 y = visits,
+                 color = county)) + #color creates an outline
   geom_boxplot()
 
-ggplot(er_visits_gender, aes(x = gender,
+ggplot(er_visits_4, aes(x = county,
                  y = rate,
-                 fill = gender)) + # fills the boxplot
+                 fill = county)) + # fills the boxplot
   geom_boxplot()
 ```
 
@@ -678,9 +675,9 @@ ggplot(er_visits_gender, aes(x = gender,
 Can add `width` argument to make the jitter more narrow.
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
-ggplot(er_visits_gender, aes(x = gender,
+ggplot(er_visits_4, aes(x = county,
                  y = rate,
-                 fill = gender)) +
+                 fill = county)) +
   geom_boxplot() +
   geom_jitter(width = .06)
 ```
@@ -690,9 +687,9 @@ ggplot(er_visits_gender, aes(x = gender,
 `scale_fill_viridis_d()` for discrete /categorical data `scale_fill_viridis_c()` for continuous data
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
-ggplot(er_visits_gender, aes(x = gender,
+ggplot(er_visits_4, aes(x = county,
                  y = rate,
-                 fill = gender)) +
+                 fill = county)) +
   geom_boxplot() +
   geom_jitter(width = .06) +
   scale_fill_viridis_d()
@@ -702,13 +699,13 @@ ggplot(er_visits_gender, aes(x = gender,
 
 ```{r, fig.width=5 , fig.height=2.5, fig.align='center'}
 
-er_bar <- er_visits_gender %>%
-  group_by(gender) %>%
+er_bar <- er_visits_4 %>%
+  group_by(county) %>%
   summarize("max_rate" = max(rate, na.rm=T)) %>%
 
-ggplot(aes(x = gender,
+ggplot(aes(x = county,
            y = max_rate,
-           fill = gender)) +
+           fill = county)) +
   scale_fill_viridis_d()+
   geom_col() +
   theme(legend.position = "none")
@@ -734,25 +731,25 @@ er_bar +
 `r emo::ji("warning")` May not be plotting what you think you are! `r emo::ji("warning")`
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
-ggplot(er_visits_gender, aes(x = gender,
+ggplot(er_visits_4, aes(x = county,
                  y = visits,
-                 fill = gender)) +
+                 fill = county)) +
   geom_col()
 ```
 
 ## What did we plot? Always good to check it is correct! {.codesmall}
 
 ```{r}
-head(er_visits_gender, n = 3)
+head(er_visits_4, n = 3)
 
-er_visits_gender %>% group_by(gender) %>%
+er_visits_4 %>% group_by(county) %>%
   summarize(sum = sum(visits, na.rm=T))
 ```
 
 ## Try that again {.codesmall}
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
-er_visits_gender %>% group_by(gender, county) %>%
+er_visits_4 %>% group_by(county) %>%
   summarize(mean_visits = mean(visits, na.rm=T))
 ```
 
@@ -820,11 +817,13 @@ er_bar +
 
 ## Sometimes we have many lines and it is hard to see what is happening{.codesmall}
 
+Let's look at visit rates for 9 CO counties.
+
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 
-er_visits_9 <- er_CO_county %>% 
+er_visits_9 <- er %>% 
   filter(county %in% c("Denver", "Weld", "Pueblo", "Jackson", 
-                       "San Juan", "Mesa", "Jefferson", "Larimer", "Statewide"))
+                       "San Juan", "Mesa", "Jefferson", "Larimer", "Boulder"))
 
 lots_of_lines <- ggplot(er_visits_9, aes(x = year,
                  y = rate,
