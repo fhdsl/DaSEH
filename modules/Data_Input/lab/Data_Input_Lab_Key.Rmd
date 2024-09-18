@@ -101,14 +101,16 @@ library(readxl)
 ```
 
 ### P.2
-Let's look at a dataset about nitrate levels in the WA public water system.
+Let's try loading an Excel file of CalEnviroScreen measures for just Alameda County, CA.
 
-Download this dataset using the url https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_data.xlsx file.  Assign it to the object name `nitrate.xlsx` by running the following code chunk. This only downloads the file, it does NOT bring the file into R.
+Download this dataset using the url https://daseh.org/data/CalEnviroScreen_data_AlamedaCounty.xlsx
+
+Assign it to the object name `ces_alameda.xlsx` by running the following code chunk. This only downloads the file, it does NOT bring the file into R.
 
 ```{r}
 download.file(
-  url = "https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_data.xlsx",
-  destfile = "nitrate.xlsx",
+  url = "https://daseh.org/data/CalEnviroScreen_data_AlamedaCounty.xlsx",
+  destfile = "ces_Alameda.xlsx",
   overwrite = TRUE,
   mode = "wb"
 )
@@ -121,7 +123,7 @@ Note: the "wb" option makes sure the file can be read correctly on Windows and A
 Use the `read_excel()` function in the `readxl` package to read the `nitrate.xlsx` file and call the output `nitrate`. 
 
 ```{r P.3response}
-nitrate <- read_excel(path = "nitrate.xlsx")
+ces_Alameda <- read_excel(path = "ces_Alameda.xlsx")
 ```
 
 ### P.4
@@ -129,11 +131,11 @@ nitrate <- read_excel(path = "nitrate.xlsx")
 Run the following code - is there a problem? How do you know?
 
 ```{r}
-exposure <- read_delim("https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv", delim = "\t")
-exposure
+test <- read_delim("https://daseh.org/data/CalEnviroScreen_data_AlamedaCounty.xlsx", delim = "\t")
+test
 ```
 
 ```{r P.4response}
-# It should be a red flag to see that there is only one column that looks like: `year,pop_on_sampled_PWS,pop_0-15µg/L,pop_>15-30µg/L,pop_>30-45µg/L,pop
+# It should be a red flag to see that there is only one column 
 # This file is comma delimited, not tab delimited!
 ```
