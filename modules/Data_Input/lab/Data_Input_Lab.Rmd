@@ -32,11 +32,11 @@ library(readr)
 
 ### 1.1
 
-Use the manual import method (File > Import Dataset > From Text (`readr`)) to read in Haloacetic Acids (HAA5) Exposure for WA Populations on Public Water Systems data from this URL:
+Use the manual import method (File > Import Dataset > From Text (`readr`)) to read in the CalEnviroScreen data from this URL:
 
-https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv.
+https://daseh.org/data/CalEnviroScreen_data.csv
 
-These data were collected by the Washington Tracking Network. You can learn more about the data here: https://fortress.wa.gov/doh/wtn/WTNPortal/#!q0=674
+These data were collected by California Office of Health Hazard Assessment to track environmental measures (like pollution, water contamination, etc.) that can impact human health. You can read more about the project [here](https://calenviroscreen-oehha.hub.arcgis.com/)
 
 ### 1.2
 
@@ -56,8 +56,8 @@ Preview the data by clicking the table button in the Environment. How many obser
 
 ### 1.4
 
-Read Haloacetic Acids (HAA5) Exposure for WA Populations on Public Water Systems data from https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv.
-and assign it to an object named `exposure`. Use the code structure below.
+Read in the CalEnviroScreen data from https://daseh.org/data/CalEnviroScreen_data.csv
+and assign it to an object named `ces`. Use the code structure below.
 
 ```
 # General format
@@ -71,7 +71,7 @@ library(readr)
 
 ### 1.5
 
-Take a look at the data. Do these data objects (`HAA5_Exposure_for_WA_Public_Water_Systems_data` and `exposure`) appear to be the same? Why or why not?
+Take a look at the data. Do these data objects (`CalEnviroScreen_data` and `ces`) appear to be the same? Why or why not?
 
 ```{r 1.5response}
 
@@ -99,8 +99,9 @@ If it is not installed, install it via: `RStudio --> Tools --> Install Packages`
 ```
 
 ### P.2
+Let's look at a dataset about nitrate levels in the WA public water system.
 
-Download the dataset of nitrate levels in the public water systems: https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_data.xlsx file to `nitrate.xlsx` by running the following code chunk. This only downloads the file, it does NOT bring the file into R.
+Download this dataset using the url https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_data.xlsx file.  Assign it to the object name `nitrate.xlsx` by running the following code chunk. This only downloads the file, it does NOT bring the file into R.
 
 ```{r}
 download.file(
