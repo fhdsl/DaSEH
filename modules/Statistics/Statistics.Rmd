@@ -453,18 +453,30 @@ For example, if we want to fit a regression model where outcome is `income` and 
 
 ## Linear regression
 
-We will use our the calenviroscreen dataset from the `dasehr` package to examine how traffic estimates predict diesel particulate emissions.
+Let's look variables that might be able to predict the number of heat-related ER visits in Colorado.
 
+We'll use the dataset that has ER visits separated out by age category.
+
+We'll combine this with a new dataset that has some weather information about summer temperatures in Denver, downloaded from [https://www.weather.gov/bou/DenverSummerHeat](https://www.weather.gov/bou/DenverSummerHeat). We will use this as a proxy for temperatures for the state of CO as a whole for this example.
+
+```{r}
+er <- read_csv(file = "https://daseh.org/data/CO_ER_heat_visits_by_age.csv")
+
+temps <- read_csv(file = "https://daseh.org/data/Denver_heat_data.csv")
+
+er_temps <- full_join(er, temps)
+er_temps
+```
 
 ## Linear regression: model fitting{.codesmall}
 
 For this model, we will use two variables:
 
-- **DieselPM** - estimated diesel particulate emissions from on-road and non-road sources
-- **TrafficPctl** - percentile ranking of traffic density
+- **visits** - number of visits to the ER for heat-related illness
+- **highest_temp** - the highest recorded temperature of the summer
 
 ```{r}
-fit <- glm(DieselPM ~ TrafficPctl, data = calenviroscreen)
+fit <- glm(visits ~ highest_temp, data = er_temps)
 fit
 ```
 
@@ -482,7 +494,7 @@ The broom package can help us here too!
 
 The estimate is the coefficient or slope.
 
-for one change in the traffic percentile, we see 0.003637 more Diesel particulate emissions. The error for this estimate is relatively small at 0.00009. This relationship appears to be significant with a small p value < 2e-16.
+for every 1 degree increase in the highest temperature, we see 1.134 more heat-related ER visits. The error for this estimate is pretty big at 3.328. This relationship appears to be insignificant with a p value = 0.735.
 
 ```{r}
 tidy(fit) %>% glimpse()
@@ -490,10 +502,10 @@ tidy(fit) %>% glimpse()
 
 ## Linear regression: multiple predictors {.smaller}
 
-Let's try adding another explanatory variable to our model, amount of daily Ozone concentration (`Ozone`). Ozone is usually inversely related to particulate measures.
+Let's try adding another other explanatory variable to our model, year (`year`).
 
 ```{r}
-fit2 <- glm(DieselPM ~ TrafficPctl + Ozone, data = calenviroscreen)
+fit2 <- glm(visits ~ highest_temp + year, data = er_temps)
 summary(fit2)
 ```
 
@@ -511,17 +523,10 @@ fit2 %>%
 
 Factors get special treatment in regression models - lowest level of the factor is the comparison group, and all other factors are **relative** to its values.
 
-Let's create a variable that tells us whether a census tract has a high, middle, or low percentage of the population below the poverty line.
+Let's add age category (`age`) as a factor into our model. We'll need to convert it to a factor first.
 
 ```{r}
-calenviroscreen <- calenviroscreen %>% mutate(
-  PovertyPctl_level = case_when(
-    PovertyPctl > 0.75 ~ "high",
-    PovertyPctl > 0.25 & PovertyPctl <= 0.75 ~ "middle",
-    PovertyPctl <= 0.25 ~ "low",
-    TRUE ~ NA
-  )
-)
+er_temps <- er_temps %>% mutate(age = factor(age))
 ```
 
 
@@ -532,22 +537,22 @@ The comparison group that is not listed is treated as intercept. All other estim
 
 ```{r regressbaseline, comment="", fig.height=4,fig.width=8}
 
-fit3 <- glm(DieselPM ~ TrafficPctl + Ozone + factor(PovertyPctl_level), data = calenviroscreen)
+fit3 <- glm(visits ~ highest_temp + year + age, data = er_temps)
 summary(fit3)
 ```
 
 ## Linear regression: factors {.smaller}
 
+Maybe we want to use the age group "65+ years" as our reference. We can relevel the factor.
+
 Relative to the level is not listed.
 
 ```{r}
-calenviroscreen <-
-  calenviroscreen %>%
-  mutate(PovertyPctl_level = factor(
-    PovertyPctl_level, 
-    levels = c("low", "middle", "high")
+er_temps <- er_temps %>% mutate(age = factor(age,
+    levels = c("65+ years old", "35-64 years old", "15-34 years old", "5-14 years old", "0-4 years old")
   ))
-fit4 <- glm(DieselPM ~ TrafficPctl + Ozone + PovertyPctl_level, data = calenviroscreen)
+  
+fit4 <- glm(visits ~ highest_temp + year + age, data = er_temps)
 summary(fit4)
 ```
 
@@ -560,7 +565,7 @@ You can view estimates for the comparison group by removing the intercept in the
 *Caveat* is that the p-values change.
 
 ```{r regress9, comment="", fig.height=4, fig.width=8}
-fit5 <- glm(DieselPM ~ TrafficPctl + Ozone + PovertyPctl_level - 1, data = calenviroscreen)
+fit5 <- glm(visits ~ highest_temp + year + age - 1, data = er_temps)
 summary(fit5)
 ```
 
@@ -569,9 +574,7 @@ summary(fit5)
 You can also specify interactions between variables in a formula `y ~ x1 + x2 + x1 * x2`. This allows for not only the intercepts between factors to differ, but also the slopes with regard to the interacting variable.
 
 ```{r fig.height=4, fig.width=8}
-fit6 <- glm(
-  DieselPM ~ TrafficPctl + Ozone + PovertyPctl_level + TrafficPctl * PovertyPctl_level,
-  data = calenviroscreen
+fit6 <- glm(visits ~ highest_temp + year + age + age*highest_temp, data = er_temps
 ) 
 tidy(fit6)
 ```
@@ -581,13 +584,10 @@ tidy(fit6)
 By default, `ggplot` with a factor added as a color will look include the interaction term. Notice the different intercept and slope of the lines.
 
 ```{r fig.height=3.5, fig.width=7, warning=FALSE}
-ggplot(calenviroscreen, aes(x = DieselPM, y = TrafficPctl, color = PovertyPctl_level)) +
+ggplot(er_temps, aes(x = highest_temp, y = visits, color = age)) +
   geom_point(size = 1, alpha = 0.1) +
   geom_smooth(method = "glm", se = FALSE) +
-  scale_color_manual(values = c("black", "grey45", "grey65", "grey85")) +
-  theme_classic() +
-  ylim(0,100) +
-  xlim(0, 3)
+  theme_classic()
 ```
 
 ## Generalized linear models (GLMs)
@@ -608,23 +608,25 @@ See `?family` documentation for details of family functions.
 
 ## Logistic regression {.smaller}
 
-Let's look at a logistic regression example. We'll use the `calenviroscreen` dataset again. We will create a new binary variable based on the DieselPM percentile variable, so we can tell whether a census tract has high or low DieselPM emissions compared to the others.
+Let's look at a logistic regression example. We'll use the `er_temps` dataset again. 
+
+We will create a new binary variable `high_rate`. We will say a visit rate of more than 8 qualifies as a high visit rate.
 
 ```{r}
-calenviroscreen <-
-  calenviroscreen %>%
+er_temps <-
+  er_temps %>%
     mutate(
-      DieselPM_level = case_when
-      (DieselPMPctl > 0.75 ~ 1,
-        DieselPMPctl <= 0.75 ~ 0))
+      high_rate = case_when(
+      rate > 8 ~ 1,
+      TRUE ~ 0))
 ```
 
 
 ## Logistic regression {.smaller}
 
-Now that we've created the `DieselPM_level` variable (where a `1` indicates the census tract is one of the top 75% when it comes to dieselPM emissions), we can run a logistic regression.
+Now that we've created the `high_rate` variable (where a 1 indicates that there was a visit rate greater than 8), we can run a logistic regression.
 
-Let's explore how `PovertyPctl_level` might predict `DieselPM_level`.
+Let's explore how `highest_temp`, `year`, and `age` might predict `high rate`.
 
 ```
 # General format
@@ -632,7 +634,7 @@ glm(y ~ x, data = DATASET_NAME, family = binomial(link = "logit"))
 ```
 
 ```{r regress7, comment="", fig.height=4,fig.width=8}
-binom_fit <- glm(DieselPM_level ~ PovertyPctl_level, data = calenviroscreen, family = binomial(link = "logit"))
+binom_fit <- glm(high_rate ~ highest_temp + year + age, data = er_temps, family = binomial(link = "logit"))
 summary(binom_fit)
 ```
 
@@ -652,27 +654,32 @@ Check out [this paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2938757/).
 
 Use `oddsratio(x, y)` from the `epitools()` package to calculate odds ratios.
 
-In this case, we're calculating the odds ratio for whether living in a high traffic area predicts high levels of DieselPM.
+During the years 2012, 2018, 2021, and 2022, there were multiple consecutive days with temperatures above 100 degrees. We will code this as `heatwave`.
+
+In this case, we're calculating the odds ratio for whether a heatwave is associated with having a visit rate greater than 8.
 
 ```{r}
 library(epitools)
 
-calenviroscreen <-
-  calenviroscreen %>%
+er_temps <-
+  er_temps %>%
     mutate(
-      Traffic_level = case_when
-      (TrafficPctl > 0.75 ~ 1,
-        TrafficPctl <= 0.75 ~ 0))
+      heatwave = case_when(
+      year == 2012 ~ 1,
+      year == 2018 ~ 1,
+      year == 2021 ~ 1,
+      year == 2022 ~ 1,
+      TRUE ~ 0))
 
-response <- calenviroscreen %>% pull(DieselPM_level)
-predictor <- calenviroscreen %>% pull(Traffic_level)
+response <- er_temps %>% pull(high_rate)
+predictor <- er_temps %>% pull(heatwave)
 ```
 
 ## Odds ratios {.smaller}
 
 Use `oddsratio(x, y)` from the `epitools()` package to calculate odds ratios.
 
-In this case, we're calculating the odds ratio for whether living in a high traffic area predicts high levels of DieselPM.
+In this case, we're calculating the odds ratio for whether a heatwave is associated with having a visit rate greater than 8. 
 
 ```{r}
 oddsratio(predictor, response)
