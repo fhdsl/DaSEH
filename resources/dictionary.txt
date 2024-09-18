@@ -1,6 +1,7 @@
 aes
 airquality
 al
+Alameda
 AlexsLemonade
 Alightings
 Altmann
@@ -67,7 +68,7 @@ DESeq
 df
 Diedrich
 dieselPM
-DieselPL
+DieselPM
 dotdash
 dplyr
 dropdown
