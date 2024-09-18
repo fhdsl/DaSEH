@@ -129,7 +129,7 @@ Use the `read_excel()` function in the `readxl` package to read the `nitrate.xls
 Run the following code - is there a problem? How do you know?
 
 ```{r}
-test <- read_delim("https://daseh.org/data/CalEnviroScreen_data_AlamedaCounty.xlsx", delim = "\t")
+test <- read_delim("https://daseh.org/data/CalEnviroScreen_data.csv", delim = "\t")
 test
 ```
 

@@ -131,7 +131,7 @@ ces_Alameda <- read_excel(path = "ces_Alameda.xlsx")
 Run the following code - is there a problem? How do you know?
 
 ```{r}
-test <- read_delim("https://daseh.org/data/CalEnviroScreen_data_AlamedaCounty.xlsx", delim = "\t")
+test <- read_delim("https://daseh.org/data/CalEnviroScreen_data.csv", delim = "\t")
 test
 ```
 
