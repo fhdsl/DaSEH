@@ -20,24 +20,19 @@ First let's get load our packages.
 # don't forget to load the packages that you will need!
 library(dplyr)
 library(tidyverse)
-library(dasehr)
 ```
 
-Now let's load the ER dataset by running one of these chunks. We can either load the data from the website or from the `dasehr` package.
+We'll again work with the CalEnviroScreen dataset, which contains information about environmental factors associated with human health in California.
+
+First, load the data from the website, either manually or by using the Data Import menu (find it by clicking on File).
 
 ```{r}
 library(dasehr)
-ER <- CO_heat_ER_bygender
+ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
 ```
 
-Or
-```{r}
-ER <- 
-  read_csv("https://daseh.org/data/Colorado_ER_heat_visits_by_county_gender.csv")
 
-```
-
-Check that it worked by seeing if you have the `ER` data.
+Check that it worked by seeing if you have the `ces` data.
 
 ```{r 0response}
 
@@ -61,7 +56,7 @@ How many observations (rows) and variables (columns) are in the dataset - try th
 
 ### 1.3
 
-Next, rename the column `lower95cl`  to be `lower_limit` (hint - use `rename()` and watch out for the order of the new and old names!). 
+Next, rename the column `CaliforniaCounty` to `CA_county` (hint - use `rename()` and watch out for the order of the new and old names!). 
 
 ```{r 1.3response}
 
@@ -69,7 +64,7 @@ Next, rename the column `lower95cl`  to be `lower_limit` (hint - use `rename()` 
 
 ### 1.4
 
-Convert the column names of `ER` to be all upper case. Use `rename_with()`, and the `toupper` command. Save this as a new dataset called `ER_upper`.
+Convert the column names of `ces` to be all upper case. Use `rename_with()`, and the `toupper` command. Save this as a new dataset called `ces_upper`.
 
 ```{r 1.4response}
 
@@ -81,7 +76,7 @@ Convert the column names of `ER` to be all upper case. Use `rename_with()`, and 
 
 ### P.1
 
-How can you print the first 3 rows and the last 3 rows of `ER` (in two lines of code)?
+How can you print the first 3 rows and the last 3 rows of `ces` (in two lines of code)?
 
 ```{r P.1response}
 
@@ -92,7 +87,13 @@ How can you print the first 3 rows and the last 3 rows of `ER` (in two lines of 
 
 ### 2.1
 
-Create a subset of the `ER` that only contains the columns: `county`, `year`, and `rate` and assign this object to `ER_sub` - what are the dimensions of this dataset?
+Create a subset of the `ces` that only contains the columns: `CensusTract`, `Traffic`, and `Asthma` and assign this object to `ces_sub` - what are the dimensions of this dataset?
+
+`CensusTract`: this is a small, relatively permanent area within a county used to present data from the census and other statistical programs
+
+`Traffic`: Traffic density in vehicle-kilometers per hour per road length, within 150 meters of the census tract boundary
+
+`Asthma`: Age-adjusted rate of emergency department visits for asthma
 
 ```{r 2.1response}
 
@@ -100,7 +101,9 @@ Create a subset of the `ER` that only contains the columns: `county`, `year`, an
 
 ### 2.2
 
-Start with `ER` again instead of the dataset you just made. Subset the data to only include the `rate` column and the columns that end with "cl". Hint: use  `select()` and `ends_with()`. Assign this subset of the data to be `ER2`. Again take a look at the data and check the dimensions.
+Start with `ces` again instead of the dataset you just made. Subset the data to only include the `CensusTract` column and the columns that end with "Pctl". Hint: use  `select()` and `ends_with()`. Assign this subset of the data to be `ces2`. Again take a look at the data and check the dimensions.
+
+"Pctl" stands for "percentile".
 
 ```{r 2.2response}
 
@@ -108,7 +111,7 @@ Start with `ER` again instead of the dataset you just made. Subset the data to o
 
 ### 2.3
 
-Pull the variable `rate` from `ER2`. How does this differ form selecting it? Use head() to take a look at both options.
+Pull the variable `Asthma` from `ces_sub`. How does this differ form selecting it? Use head() to take a look at both options.
 
 ```{r 2.3response}
 
@@ -116,7 +119,7 @@ Pull the variable `rate` from `ER2`. How does this differ form selecting it? Use
 
 ### 2.4
 
-Subset the rows of `ER2` that have **more** than 10 for rate - how many rows are there? Use `filter()`.
+Subset the rows of `ces2` that have **more** than 100 for `Asthma` - how many rows are there? Use `filter()`.
 
 ```{r 2.4response}
 
@@ -124,7 +127,8 @@ Subset the rows of `ER2` that have **more** than 10 for rate - how many rows are
 
 ### 2.5
 
-Subset the rows of `ER` that have a year value **less** than 2012 and **more** than 10 rate - how many are there?
+Subset the rows of `ces` that have an `Traffic` value **less** than 500 and an `Asthma` value **more** than 100  - how many are there?
+
 
 ```{r 2.5response}
 
@@ -132,7 +136,7 @@ Subset the rows of `ER` that have a year value **less** than 2012 and **more** t
 
 ### 2.6
 
-Subset the rows of `ER` that have a year value of **less than or equal to ** 2012 and **more** than 10 rate - how many are there?
+Subset the rows of `ces` that have an `Traffic` value **less than or equal to**  500 and an `Asthma` value **more** than 100  - how many are there?
 
 ```{r 2.6response}
 
@@ -140,7 +144,7 @@ Subset the rows of `ER` that have a year value of **less than or equal to ** 201
 
 ### 2.7
 
-Why do the answers for 2.5 and 2.6 differ?
+Why don't the answers for 2.5 and 2.6 differ?
 
 ```{r 2.7response}
 
@@ -151,7 +155,8 @@ Why do the answers for 2.5 and 2.6 differ?
 
 ### P.2
 
-Subset the rows of `ER` for rows that have `county` of `Denver`,  **or** **less** than 4 `rate``.
+Subset the rows of `ces` for rows that have `CA_county` of "Los Angeles",  **or** a `Traffic` value **less** than 300.
+
 How many rows have both?
 
 ```{r P.2response}
@@ -160,7 +165,7 @@ How many rows have both?
 
 ### P.3
 
-Select the variables that contain the letter "a" from `ER`.
+Select the variables that contain the letter "a" from `ces`.
 
 ```{r P.3response}
 
@@ -171,8 +176,9 @@ Select the variables that contain the letter "a" from `ER`.
 
 ### 3.1
 
-Create a subset called `ER_2012` from `ER` that only contains the rows for the year 2012 and only the columns: `county` and	`rate`. `year` should not be included in `ER_sub`.
-	What are the dimensions of this dataset? Don't use pipes (`%>%`) and instead do this in two steps creating the `ER_2012` object with `filter` and updating it with `select`.
+Create a subset called `ces_Alameda` from `ces` that only contains the rows for Alameda and only the columns: `Traffic` and	`Asthma`. `CA_county` should not be included in `ces_Alameda`.
+
+What are the dimensions of this dataset? Don't use pipes (`%>%`) and instead do this in two steps creating the `ces_Alameda` object with `filter` and updating it with `select`.
 
 ```{r 3.1response}
 
@@ -194,7 +200,7 @@ What happens if you do the steps in a different order? Why does this not work?
 
 ### 1.3
 
-Re-order the rows of `ER_2012` by population in increasing order. Use `arrange()`. What is county with the smallest rate?
+Re-order the rows of `ces_Alameda` by `Traffic` value in increasing order. Use `arrange()`. What's the smallest value?
 
 ```{r 3.3response}
 
@@ -202,7 +208,7 @@ Re-order the rows of `ER_2012` by population in increasing order. Use `arrange()
 
 ### 1.4
 
-Create a new variable in `ER_2012` called `rate1000`, which  is equal to `rate` divided by 1000, using `mutate()`(don't forget to reassign `ER_2012`). Use pipes `%>%`.
+Create a new variable in `ces_Alameda` called `Asthma100`, which  is equal to `Asthma` divided by 100, using `mutate()`(don't forget to reassign `ces_Alameda`). Use pipes `%>%`.
 
 ```
 # General format
@@ -218,7 +224,7 @@ NEWDATA <- OLD_DATA %>% mutate(NEW_COLUMN = OLD_COLUMN)
 
 ### P.4
 
-Move the `rate1000` column to be before `county` in the `ER_2012` dataset. Use `relocate()`.
+Move the `Asthma100` column to be before `Traffic` in the `ces_Alameda` dataset. Use `relocate()`.
 
 ```{r P.4response}
 
@@ -226,9 +232,9 @@ Move the `rate1000` column to be before `county` in the `ER_2012` dataset. Use `
 
 ### P.5
 
-How can you find the value of `rate` in 2020 for Statewide for Females - using the initial ER data -  without just looking at the data manually and instead use functions we learned today?
+How can you find the values of `Traffic` for areas within zip code 90745 (in Los Angeles county) that also have a CES4.0 score in the second highest percentile range (90-95%) - using the initial ces data -  without just looking at the data manually and instead use functions we learned today?
 
-Note that gender was recorded as binary, which we know isn’t really accurate. This is something you might encounter. Please see this article about ways to measure gender in a more inclusive way: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6526522/. 
+`CES4.0PercRange`: Percentile of the CalEnviroScreen score, grouped by 5% increments. The CalEnviroScreen score is a measure of the negative environmental effects seen in a given region.
 
 ```{r P.5response}
 
