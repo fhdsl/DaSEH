@@ -12,10 +12,9 @@ Remember anything you type here can be "sent" to the console with Cmd-Enter (OS-
 # Part 1
 
 ### 1.1
-
-Read in the SARS-CoV-2 wastewater data from URL 
-https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv
-and assign it to an object named `covid`. 
+Load the tidyverse package. Then read in the CalEnviroScreen dataset from 
+https://daseh.org/data/CalEnviroScreen_data.csv
+and assign it to an object named `ces. 
 
 ```
 # General format
@@ -25,12 +24,12 @@ library(readr)
 
 ```{r 1.1response}
 library(tidyverse)
-covid <- read_csv(file = "https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv")
+ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
 ```
 
 ### 1.2
 
-Filter the dataset so that the "reporting_jurisdiction" column is equal to "Maryland". Store the modified dataset as `covid_filtered`.
+Filter the dataset so that the `CaliforniaCounty` column is equal to "Yuba". Store the modified dataset as `ces_Yuba`.
 
 ```
 # General format
@@ -38,15 +37,15 @@ NEW_OBJECT <- OBJECT %>% filter(COLUMNNAME == CRITERIA)
 ```
 
 ```{r 1.2response}
-covid_filtered <- covid %>% filter(reporting_jurisdiction == "Maryland")
+ces_Yuba <- ces %>% filter(CaliforniaCounty == "Yuba")
 ```
 
 ### 1.3
 
-Write out the `covid_filtered` object as a CSV file calling it "covid_filtered.csv", using `write_csv()`:
+Write out the `ces_Yuba` object as a CSV file calling it "ces_Yuba.csv", using `write_csv()`:
 
 ```{r 1.3response}
-write_csv(covid_filtered, file = "covid_filtered.csv")
+write_csv(ces_Yuba, file = "ces_Yuba.csv")
 ```
 
 
@@ -59,7 +58,7 @@ Copy your code from problem 1.3 and modify it to write to the data directory ins
 ```{r eval = FALSE, label = 'P.1response'}
 getwd()
 dir.create("data")
-write_csv(covid_filtered, file = "data/covid_filtered.csv")
+write_csv(ces_Yuba, file = "ces_Yuba.csv")
 ```
 
 ### P.2
