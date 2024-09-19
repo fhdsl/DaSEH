@@ -67,7 +67,7 @@ DESeq
 df
 Diedrich
 dieselPM
-DieselPL
+DieselPM
 dotdash
 dplyr
 dropdown
@@ -291,3 +291,4 @@ XLSX
 youtube
 yts
 YTS
+Yuba
