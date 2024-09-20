@@ -28,6 +28,7 @@ bw
 byquarter
 calenviroscreen
 CalEnviroScreen
+calenviroscreen
 CDS
 CES
 ces
@@ -234,6 +235,7 @@ SARS
 Savonen
 sessionInfo
 setosa
+sessionInfo
 ShareAlike
 skimr
 SRC
