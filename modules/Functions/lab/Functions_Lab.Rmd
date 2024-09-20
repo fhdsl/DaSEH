@@ -1,7 +1,7 @@
 ---
 title: "Functions Lab"
 output: html_document
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Part 1
 
-Load all the libraries we will use in this lab. 
+Load all the libraries we will use in this lab.
 
 ```{r message=FALSE}
 library(tidyverse)
@@ -23,14 +23,14 @@ Create a function that takes one argument, a vector, and returns the sum of the 
 
 ```
 # General format
-NEW_FUNCTION <- function(x, y) x + y 
+NEW_FUNCTION <- function(x, y) x + y
 ```
 or
 
 ```
 # General format
 NEW_FUNCTION <- function(x, y){
-result <- x + y 
+result <- x + y
 return(result)
 }
 ```
@@ -91,7 +91,6 @@ data %>%
 
 ```
 
-
 ### 2.3
 
 Use `across` and `mutate` to convert all columns containing the word "water" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use an anonymous function ("function on the fly") to divide by 100 (`function(x) x / 100`). It will also be easier to check your work if you `select()` columns that match "Pctl".
@@ -109,23 +108,27 @@ data %>%
 
 ```
 
+
 # Practice on Your Own!
 
 ### P.2
 
-Use `across` and `mutate` to convert all columns starting with the string "PM" into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. **Hint**: use `starts_with()` to select the columns that start with "PM". Use an anonymous function ("function on the fly") to do a logical test if the value is greater than 10.
+Use `across` and `mutate` to convert all columns starting with the string "PM" into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. 
+
+- **Hint**: use `starts_with()` to select the columns that start with "PM". 
+- Use an anonymous function ("function on the fly") to do a logical test if the value is greater than 10.
+- A logical test with `mutate` will automatically fill a column with TRUE/FALSE.
 
 ```{r P.2response}
 
 ```
 
-
 ### P.3
 
-Take your code from question 2.4 and assign it to the variable `ces_dat`. 
+Take your code from previous question and assign it to the variable `ces_dat`.
 
-- use `filter()` to drop any rows where "Oakland" appears in `ApproxLocation`. Make sure to reassign this to `ces_dat`.
-- Create a ggplot boxplot (`geom_boxplot()`) where (1) the x-axis is `PM2.5` and (2) the y-axis is `Asthma`.
+- Use `filter()` to drop any rows where "Oakland" appears in `ApproxLocation`. Make sure to reassign this to `ces_dat`.
+- Create a ggplot boxplot (`geom_boxplot()`) where (1) the x-axis is `Asthma`  and (2) the y-axis is `PM2.5`.
 - You change the `labs()` layer so that the x-axis is "ER Visits for Asthma: PM2.5 greater than 10"
 
 ```{r P.3response}
