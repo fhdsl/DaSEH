@@ -156,6 +156,7 @@ lubridate
 macosx
 McKenna
 mclaire
+Merced
 MHS
 microplastics
 misspecification
@@ -176,6 +177,7 @@ NWSS
 obert
 ocs
 OCSdata
+oldname
 olumn
 Ombudsperson
 onth
@@ -237,6 +239,7 @@ setosa
 sessionInfo
 ShareAlike
 skimr
+Sonoma
 SRC
 StackOverflow
 Stata
@@ -290,6 +293,7 @@ www
 xls
 xlsx
 XLSX
+Yolo
 youtube
 yts
 YTS
