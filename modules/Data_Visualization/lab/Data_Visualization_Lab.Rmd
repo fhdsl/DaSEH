@@ -1,7 +1,7 @@
 ---
 title: "Data Visualization Lab"
 output: html_document
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -24,7 +24,7 @@ Open the Nitrate exposure via WA public waterways data from the `dasehr` package
 
 (You can also access it at the link www.daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv)
 
-Then, use the provided code to compute a data frame `nitrate` with aggregate summary of exposure level: average exposed population  (`pop_exposed_to_exceedances`) for each year (`year`). 
+Then, use the provided code to compute a data frame `nitrate` with aggregate summary of exposure level: average exposed population  (`pop_exposed_to_exceedances`) for each year (`year`).
 
 ```{r}
 
@@ -54,7 +54,7 @@ ggplot(???, aes(x = ???, y = ???)) +
 
 ### 1.2
 
-"Update" your plot by adding a title and changing the x and y axis titles. 
+"Update" your plot by adding a title and changing the x and y axis titles.
 
 ```{r 1.2response}
 
@@ -62,12 +62,12 @@ ggplot(???, aes(x = ???, y = ???)) +
 
 ### 1.3
 
-Use the `scale_x_continuous()` function to plot the x axis with the following breaks `c(1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017, 2019)`. 
+Use the `scale_x_continuous()` function to plot the x axis with the following breaks `c(1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017, 2019)`.
 
 ```
 # General format
-my_plot<- my_plot +
-  scale_x_continuous(?????)
+my_plot <- my_plot +
+  scale_x_continuous(breaks = ???)
 ```
 
 ```{r 1.3response}
@@ -76,7 +76,7 @@ my_plot<- my_plot +
 
 ### 1.4
 
-Observe several different versions of the plot by displaying `my_plot` while adding a different "theme" to it. 
+Observe several different versions of the plot by displaying `my_plot` while adding a different "theme" to it.
 
 ```
 # General format
@@ -92,7 +92,7 @@ my_plot + theme_bw()
 
 ### P.1
 
-Create a boxplot (with the `geom_boxplot()` function) using the `nitrate` data, where `quarter` is plotted on the x axis and `pop_on_sampled_PWS` is plotted on the y axis. 
+Create a boxplot (with the `geom_boxplot()` function) using the `nitrate` data, where `quarter` is plotted on the x axis and `pop_on_sampled_PWS` is plotted on the y axis.
 
 ```{r P1response}
 
@@ -103,7 +103,7 @@ Create a boxplot (with the `geom_boxplot()` function) using the `nitrate` data, 
 
 ### 2.1
 
-Use the provided code to compute a data frame `nitrate_agg_2` with aggregate summary of WA Nitrate data: population exposed to less than 10 ug/L of nitrate in the water (sum of `pop_0-3ug/L`, `pop_>3-5ug/L`, and `pop_>5-10ug/L`) -- separately for each year (`year`) and for each quarter (`quarter`. 
+Use the provided code to compute a data frame `nitrate_agg_2` with aggregate summary of WA Nitrate data: population exposed to less than 10 ug/L of nitrate in the water (sum of `pop_0-3ug/L`, `pop_>3-5ug/L`, and `pop_>5-10ug/L`) -- separately for each year (`year`) and for each quarter (`quarter`.
 
 ```{r}
 
@@ -135,7 +135,7 @@ ggplot(???, aes(
 
 ### 2.3
 
-Redo the above plot by adding a faceting  (`+ facet_wrap( ~ quarter, ncol = 2)`) to have data for quarter in a separate plot panel. 
+Redo the above plot by adding a faceting  (`+ facet_wrap( ~ quarter, ncol = 2)`) to have data for quarter in a separate plot panel.
 
 Assign the new plot as an object called `facet_plot`.
 
@@ -156,7 +156,7 @@ Observe what happens when you remove either `geom_line()` OR `geom_point()` from
 
 ### P.2
 
-Modify `facet_plot` to remove the legend (hint use `theme()` and the `legend.position` argument) and change the names of the axis titles to be "Population exposed to less than 10 ug/L of nitrate in water" for the y axis and "Year" for the x axis. 
+Modify `facet_plot` to remove the legend (hint use `theme()` and the `legend.position` argument) and change the names of the axis titles to be "Population exposed to less than 10 ug/L of nitrate in water" for the y axis and "Year" for the x axis.
 
 ```{r P.2response}
 
@@ -164,7 +164,7 @@ Modify `facet_plot` to remove the legend (hint use `theme()` and the `legend.pos
 
 ### P.3
 
-Modify `facet_plot` one more time with a fun theme! Look into the [ThemePark package](https://github.com/MatthewBJane/ThemePark) It has lots of fun themes! Try one out! Remember you will need to install it using `remotes::install_github("MatthewBJane/ThemePark")`and load in the library. 
+Modify `facet_plot` one more time with a fun theme! Look into the [ThemePark package](https://github.com/MatthewBJane/ThemePark) It has lots of fun themes! Try one out! Remember you will need to install it using `remotes::install_github("MatthewBJane/ThemePark")`and load in the library.
 
 ```{r P.3response}
 
