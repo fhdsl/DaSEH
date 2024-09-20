@@ -35,7 +35,7 @@ library(tidyverse)
 
 📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-5.pdf)
 
-## Manipulating Data 
+## Manipulating Data
 
 In this module, we will show you how to:
 
@@ -91,7 +91,7 @@ ex_wide <- tibble(State = c("Alabama", "Alaska"),
 ex_long <- pivot_longer(ex_wide, cols = !State)
 ```
 
-Wide: multiple columns per individual, values spread across multiple columns 
+Wide: multiple columns per individual, values spread across multiple columns
 
 ```{r, echo = FALSE}
 ex_wide
@@ -138,7 +138,7 @@ You might see old functions `gather` and `spread` when googling. These are older
 
 # `pivot_longer`...
 
-## Reshaping data from **wide to long** {.codesmall} 
+## Reshaping data from **wide to long** {.codesmall}
 
 `pivot_longer()` - puts column data into rows (`tidyr` package)
 
@@ -158,7 +158,7 @@ ex_long <- ex_wide %>% pivot_longer(cols = !ends_with("State"))
 ex_long
 ```
 
-## Reshaping wide to long: Better column names {.codesmall} 
+## Reshaping wide to long: Better column names {.codesmall}
 
 `pivot_longer()` - puts column data into rows (`tidyr` package)
 
@@ -186,7 +186,7 @@ ex_long
 
 Newly created column names are enclosed in quotation marks.
 
-## Data used: Nitrate exposure 
+## Data used: Nitrate exposure
 
 Let's look at some data on levels of nitrate in water from Washington. This dataset reports the amount of people in Washington exposed to excess levels of nitrate in their water between 1999 and 2020.
 
@@ -233,7 +233,7 @@ Un-pivoted columns (`year`, `quarter`, `pop_on_sampled_PWS`) are still columns.
 long_nitrate
 ```
 
-## Cleaning up long data{.codesmall} 
+## Cleaning up long data{.codesmall}
 
 Let's make the `conc_count` into a proportion.
 
@@ -269,7 +269,7 @@ There are many ways to **select** the columns we want. Check out https://dplyr.t
 
 <div class = "codeexample">
 ```{r, eval=FALSE}
-{wide_data} <- {long_data} %>% 
+{wide_data} <- {long_data} %>%
   pivot_wider(names_from = {Old column name: contains new column names},
               values_from = {Old column name: contains new cell values})
 ```
@@ -286,7 +286,7 @@ ex_wide2 <- ex_long %>% pivot_wider(names_from = "Month",
 ex_wide2
 ```
 
-## Reshaping nitrate exposure data{.codesmall} 
+## Reshaping nitrate exposure data{.codesmall}
 
 Let's go back to the nitrate exposure dataset. What if we wanted to make a wide version of the data that displayed the number of people at each level of nitrate exposure for each quarter?
 
@@ -331,7 +331,7 @@ knitr::include_graphics("images/joins.png")
 * Merging/joining data sets together - usually on key variables, usually "id"
 * `?join` - see different types of joining for `dplyr`
 * `inner_join(x, y)` - only rows that match for `x` and `y` are kept
-* `full_join(x, y)` - all rows of `x` and `y` are kept 
+* `full_join(x, y)` - all rows of `x` and `y` are kept
 * `left_join(x, y)` - all rows of `x` are kept even if not merged with `y`
 * `right_join(x, y)` - all rows of `y` are kept even if not merged with `x`
 * `anti_join(x, y)` - all rows from `x` not in `y` keeping just columns from `x`.
@@ -543,11 +543,11 @@ anti_join(data_cold, data_As, by = "State") # order switched
 * Merging/joining data sets together - assumes all column names that overlap
      - use the `by = c("a" = "b")` if they differ
 * `inner_join(x, y)` - only rows that match for `x` and `y` are kept
-* `full_join(x, y)` - all rows of `x` and `y` are kept 
+* `full_join(x, y)` - all rows of `x` and `y` are kept
 * `left_join(x, y)` - all rows of `x` are kept even if not merged with `y`
 * `right_join(x, y)` - all rows of `y` are kept even if not merged with `x`
 * Use the `tidylog` package for a detailed summary
-* `antijoin(x, y)` shows what is only in `x` (missing from `y`)
+* `anti_join(x, y)` shows what is only in `x` (missing from `y`)
 
 ## Lab Part 2
 
@@ -594,7 +594,7 @@ dplyr::setdiff(cold_states, A_states)
 
 ## Getting the set difference with `setdiff`
 
-Why did we use `dplyr::setdiff`? 
+Why did we use `dplyr::setdiff`?
 
 There is a base R function, also called `setdiff` that requires vectors.
 

@@ -28,6 +28,7 @@ bw
 byquarter
 calenviroscreen
 CalEnviroScreen
+calenviroscreen
 CDS
 CES
 ces
@@ -69,7 +70,7 @@ DESeq
 df
 Diedrich
 dieselPM
-DieselPL
+DieselPM
 dotdash
 dplyr
 dropdown
@@ -236,6 +237,7 @@ SARS
 Savonen
 sessionInfo
 setosa
+sessionInfo
 ShareAlike
 skimr
 SRC

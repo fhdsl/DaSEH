@@ -289,6 +289,7 @@ ggplot(er_Boulder, aes(x = year, y = rate)) +
 Let's map ER visit rates for four CO counties on the same plot
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
+
 set.seed(123)
 er_visits_4 <- er %>% 
   filter(county %in% c("Denver", "Weld", "Pueblo", "Jackson"))
@@ -331,7 +332,7 @@ ggplot(er_Boulder, aes(x = year, y = rate)) +
 
 ## More themes!
 
-There's not only the built in ggplot2 themes but all kinds of themes from other packages! 
+There's not only the built in ggplot2 themes but all kinds of themes from other packages!
 - [ggthemes](https://jrnold.github.io/ggthemes/)
 - [ThemePark package](https://github.com/MatthewBJane/ThemePark)
 - [hrbr themes](https://github.com/hrbrmstr/hrbrthemes)
@@ -409,7 +410,6 @@ plot_scale
 You can add to a plot object to make changes! Note that we can save our plots as an object like `plt1` below. And now if we reference `plt1` again our plot will print out!
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-
 plt1 <- ggplot(er_Boulder, aes(x = year, y = rate,)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +geom_line(size = 0.8, color = "blue", linetype = 2) + 
   labs(title = "Heat-Related ER Visits:Boulder", x = "Year", y = "Age-adjusted Visit Rate")
@@ -419,14 +419,14 @@ plt1 + theme_minimal()
 
 ## Removing the legend label
 
-You can use `theme(legend.position = "none")` to remove the legend. 
+You can use `theme(legend.position = "none")` to remove the legend.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 
 er_visits_4 %>% ggplot(aes(x = year,
                       y = rate,
                       color = county)) +
-  geom_line(size = 0.8) + 
+  geom_line(size = 0.8) +
   theme(legend.position = "none")
 ```
 
@@ -434,7 +434,7 @@ er_visits_4 %>% ggplot(aes(x = year,
 
 ## Overwriting specifications
 
-It's possible to go in and change specifications with newer layers. Here is our original plot. 
+It's possible to go in and change specifications with newer layers. Here is our original plot.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 er_visits_4 %>% ggplot(aes(x = year,
@@ -464,7 +464,7 @@ er_visits_4 %>% ggplot(aes(x = year,
 -   layers of plots can be combined using the `+` at the **end** of lines
 -   special [`theme_*()` functions](https://ggplot2.tidyverse.org/reference/ggtheme.html) can change the overall look
 -   individual layers can be customized using arguments like: `size`, `color` `alpha` (more transparent is closer to 0), and `linetype`
--   labels can be added with the `labs()` function and `x`, `y`, `title` arguments 
+-   labels can be added with the `labs()` function and `x`, `y`, `title` arguments
 <!-- -   the `\n` can be used for line breaks -->
 <!-- -   `xlim()` and `ylim()` can limit or expand the plot area -->
 -   `scale_x_continuous()` and `scale_y_continuous()` can modify the scale of the axes
@@ -509,6 +509,7 @@ ggplot(er_Boulder, aes(x = year, y = rate)) +
             geom_point(size = 5, color = "green", alpha = 0.5) +
             geom_line(size = 0.8, color = "blue", linetype = 2) + 
   labs(title = "Heat-Related ER Visits:Boulder") +
+
   theme(plot.title = element_text(hjust = 0.5, size = 20))
 
 ```
@@ -820,7 +821,6 @@ er_bar +
 Let's look at visit rates for 9 CO counties.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-
 er_visits_9 <- er %>% 
   filter(county %in% c("Denver", "Weld", "Pueblo", "Jackson", 
                        "San Juan", "Mesa", "Jefferson", "Larimer", "Boulder"))
@@ -829,7 +829,7 @@ lots_of_lines <- ggplot(er_visits_9, aes(x = year,
                  y = rate,
                  color = county)) +
                  geom_line()
-lots_of_lines 
+lots_of_lines
 ```
 
 ## Adding a facet can help make it easier to see what is happening {.codesmall}
@@ -855,7 +855,7 @@ theme(legend.position = "bottom")
 
 lots_of_lines +
 facet_grid( ~ county) +
-theme(legend.position = "none") + 
+theme(legend.position = "none") +
 theme(axis.text.x = element_text(angle = 90))
 
 ```
@@ -931,7 +931,7 @@ rp_fac_plot
 
 ```{r}
 #install.packages("plotly")
-library("plotly") # creates interactive plots!
+library(plotly) # creates interactive plots!
 ggplotly(lots_of_lines)
 ```
 
