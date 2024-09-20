@@ -33,17 +33,25 @@ You may be asked a question in the console when you do this. If so, answer by ty
 
 ### 0.3
 
-The gray area below is a code chunk that will set up our packages and data (this will not show up in the rendered report when we press knit). You can also run the code within the editor area by pressing the green play button. Don't worry right now about what the code is doing, we will cover this later. We just want you to get used to RStudio and RMarkdowns.
+Now install a package that the instructors made that is not on CRAN but on GitHub, by copy and pasting the code into the console:
 
-This dataset is one we'll be working with quite a lot in the lectures. It contains county-level data about ER visits for heat-related illnesses in Colorado for the years 2011-2022. 
+install_github("fhdsl/dasehr")
+
+You may be asked a question in the console when you do this. If so, answer by typing Yes into the console.
+
+### 0.4
+
+The gray area below is a code chunk that will set up our packages and data (this will not show up in the rendered report when we press knit). You can also run the code within the editor area by pressing the green play button. Don't worry right now about what the code is doing, we will cover this later. We just want you to get used to RStudio and RMarkdowns.
 
 ```{r setup, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
+library(dasehr)
+library(ggplot2)
+library(dplyr)
 
-er <- read_csv(file = "https://daseh.org/data/CO_ER_heat_visits.csv")
+ER <- CO_heat_ER_bygender
 # keep non-missing data
-er_2 <- er %>%
+ER_2 <- ER %>%
   filter(!is.na(rate))
 ```
 
@@ -61,7 +69,7 @@ You can embed an R code chunk like this: Try pressing the green play button to s
 
 ```{r plot, out.width = "100%"}
 # keep only some counties
-er_3 <- er_2 %>%
+ER_3 <- ER_2 %>%
   filter(county %in% c("Arapahoe", "Denver", "Jefferson", "Larimer"))
 
 palette <- c(
@@ -71,14 +79,15 @@ palette <- c(
   Larimer = "purple"
 )
 
-ggplot(aes(x = year, y = rate, colour = county, group = county), data = er_3) +
+ggplot(aes(x = year, y = rate, colour = county, group = county), data = ER_3) +
   geom_line() +
+  facet_wrap(~gender) +
   scale_colour_manual(values = palette)
 ```
 
 ```{r out.width = "100%", label = '0response'}
 # keep only some counties
-er_3 <- er_2 %>%
+ER_3 <- ER_2 %>%
   filter(county %in% c("Arapahoe", "Denver", "Jefferson", "Larimer"))
 
 palette <- c(
@@ -88,8 +97,9 @@ palette <- c(
   Larimer = "salmon"
 )
 
-ggplot(aes(x = year, y = rate, colour = county, group = county), data = er_3) +
+ggplot(aes(x = year, y = rate, colour = county, group = county), data = ER_3) +
   geom_line() +
+  facet_wrap(~gender) +
   scale_colour_manual(values = palette)
 ```
 
