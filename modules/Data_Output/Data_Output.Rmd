@@ -21,7 +21,7 @@ pre { /* Code block - slightly smaller in this lecture */
 
 ## Data Output
 
-While its nice to be able to read in a variety of data formats, it's equally important to be able to output data somewhere.
+While it's nice to be able to read in a variety of data formats, it's equally important to be able to output data somewhere.
 
 The `readr` package provides data exporting functions which have the pattern `write_*`: 
 
@@ -39,7 +39,8 @@ write_csv(x, file,
 ```
 
 ```{r, echo = FALSE}
-dat <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
+er <- 
+  read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
 ```
 
 ## Data Output
@@ -56,9 +57,9 @@ dat <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
 ```{r, eval = FALSE}
 # Examples
 
-write_csv(dat, file = "CalEnviroScreen_newNames.csv")
+write_csv(dat, file = "CO_ER_heat_newNames.csv")
 
-write_delim(dat, file = "CalEnviroScreen_newNames.csv", delim = ",")
+write_delim(dat, file = "CO_ER_heat_newNames.csv", delim = ",")
 ```
 
 
@@ -72,7 +73,7 @@ Saving datasets in `.rds` format can save time if you have to read it back in la
 
 ```{r}
 # write an object: a data frame "dat"
-write_rds(dat, file = "ces_dataset.rds")
+write_rds(er, file = "CO_heat_dataset.rds")
 
 # write an object: vector "x"
 x <- c(1, 3, 3)
