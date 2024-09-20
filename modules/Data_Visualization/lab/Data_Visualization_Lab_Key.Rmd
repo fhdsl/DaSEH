@@ -17,29 +17,25 @@ Load the libraries
 library(readr)
 library(ggplot2)
 library(dplyr)
-library(dasehr)
 ```
 
-Open the Nitrate exposure via WA public waterways data from the `dasehr` package.
 
-(You can also access it at the link www.daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv)
-
-Then, use the provided code to compute a data frame `nitrate` with aggregate summary of exposure level: average exposed population  (`pop_exposed_to_exceedances`) for each year (`year`).
+Load the CalEnviroScreen data from  the link www.daseh.org/data/CalEnviroScreen_data.csv) and subset it so that you only have data from Fresno, Merced, Placer, Sonoma, and Yolo counties.
+>>>>>>> Stashed changes
 
 ```{r}
-
-nitrate_agg <- nitrate %>%
-  group_by(year) %>%
-  summarise(exposed_pop_avg = mean(pop_exposed_to_exceedances))
-
-nitrate_agg
+ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
+ces_sub <- ces %>% filter(CaliforniaCounty == c("Fresno", "Merced", "Placer", "Sonoma", "Yolo"))
 ```
 
 ### 1.1
 
-Use `ggplot2` package make plot of average exposed population (`exposed_pop_avg`; y-axis) for each year (`year`; x-axis). You can use lines layer (`+ geom_line()`) or points layer (`+ geom_point()`), or both!
+Use `ggplot2` package make plot of how diesel particulate concentration (`DieselPM`; y-axis) is associated with traffic density values (`Traffic`; x-axis). You can use lines layer (`+ geom_line()`) or points layer (`+ geom_point()`), or both!
 
 Assign the plot to variable `my_plot`. Type `my_plot` in the console to have it displayed.
+
+`DieselPM`: Diesel PM emissions from on-road and non-road sources
+`Traffic`: Traffic density in vehicle-kilometers per hour per road length, within 150 meters of the census tract boundary
 
 ```
 # General format
@@ -51,7 +47,7 @@ ggplot(???, aes(x = ???, y = ???)) +
 ```{r 1.1response}
 
 my_plot <-
-  ggplot(nitrate_agg, aes(x = year, y = exposed_pop_avg)) +
+  ggplot(ces_sub, aes(x = Traffic, y = DieselPM)) +
   geom_line() +
   geom_point()
 
@@ -65,9 +61,9 @@ my_plot
 ```{r 1.2response}
 my_plot <- my_plot +
   labs(
-    x = "Year",
-    y = "Average population exposed",
-    title = "Average population exposed to excess nitrate in public water sources, 1999-2020"
+    x = "Traffic density index",
+    y = "Diesel particulate matter",
+    title = "Relationship between traffic density and diesel particulate matter"
   )
 
 my_plot
@@ -75,7 +71,8 @@ my_plot
 
 ### 1.3
 
-Use the `scale_x_continuous()` function to plot the x axis with the following breaks `c(1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017, 2019)`.
+Use the `scale_x_continuous()` function to plot the x axis with the following breaks `c(250, 750, 1250, 1750, 2250)`. 
+
 
 ```
 # General format
@@ -86,7 +83,7 @@ my_plot <- my_plot +
 ```{r 1.3response}
 my_plot <- my_plot +
   scale_x_continuous(
-    breaks = c(1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017, 2019)
+    breaks = c(250, 750, 1250, 1750, 2250)
   )
 
 my_plot
@@ -114,11 +111,14 @@ my_plot + theme_void()
 
 ### P.1
 
-Create a boxplot (with the `geom_boxplot()` function) using the `nitrate` data, where `quarter` is plotted on the x axis and `pop_on_sampled_PWS` is plotted on the y axis.
+Create a boxplot (with the `geom_boxplot()` function) using the `ces_sub` data, where `CaliforniaCounty` is plotted on the x axis and `DrinkingWater` is plotted on the y axis. 
+
+`DrinkingWater`: Drinking water contaminant index for selected contaminants. A higher value means drinking water contains a greater volume of contaminants.
+
 
 ```{r P1response}
-nitrate %>%
-  ggplot(aes(x = quarter, y = pop_on_sampled_PWS)) +
+ces_sub %>%
+  ggplot(aes(x = CaliforniaCounty, y = DrinkingWater)) +
   geom_boxplot()
 ```
 
@@ -126,21 +126,10 @@ nitrate %>%
 # Part 2
 
 ### 2.1
+Let's look at the plot of traffic density and diesel particulate matter again,
 
-Use the provided code to compute a data frame `nitrate_agg_2` with aggregate summary of WA Nitrate data: population exposed to less than 10 ug/L of nitrate in the water (sum of `pop_0-3ug/L`, `pop_>3-5ug/L`, and `pop_>5-10ug/L`) -- separately for each year (`year`) and for each quarter (`quarter`.
+Use `ggplot2` package make plot of how diesel particulate concentration (`DieselPM`; y-axis) is associated with traffic density values (`Traffic`; x-axis), where each county (`CaliforniaCounty`) has a different color (hint: use `color = type` in mapping).
 
-```{r}
-
-nitrate_agg_2 <- nitrate %>%
-  group_by(year, quarter) %>%
-  summarise(pop_less_than_10ug_perL = sum(`pop_0-3ug/L`, `pop_>3-5ug/L`, `pop_>5-10ug/L`))
-
-nitrate_agg_2
-```
-
-### 2.2
-
-Use `ggplot2` package to make a plot showing trajectories of total population exposed to less than 10 ug/L of nitrate (`pop_less_than_10ug_perL`; y-axis) over year (`year`; x-axis), where each quarter type has a different color (hint: use `color = type` in mapping).
 
 ```
 # General format
@@ -153,41 +142,42 @@ ggplot(???, aes(
   geom_point()
 ```
 
-```{r 2.2response}
-ggplot(nitrate_agg_2, aes(
-  x = year,
-  y = pop_less_than_10ug_perL,
-  color = quarter
+```{r 2.1response}
+ggplot(ces_sub, aes(
+  x = Traffic,
+  y = DieselPM,
+  color = CaliforniaCounty
 )) +
   geom_line() +
   geom_point()
 ```
 
-### 2.3
+### 2.2
 
-Redo the above plot by adding a faceting  (`+ facet_wrap( ~ quarter, ncol = 2)`) to have data for quarter in a separate plot panel.
+Redo the above plot by adding a faceting  (`+ facet_wrap( ~ CaliforniaCounty, ncol = 3)`) to have data for quarter in a separate plot panel. 
+
 
 Assign the new plot as an object called `facet_plot`.
 
-```{r 2.3response}
+```{r 2.2response}
 
-facet_plot <- ggplot(nitrate_agg_2, aes(
-  x = year,
-  y = pop_less_than_10ug_perL,
-  color = quarter
+facet_plot <- ggplot(ces_sub, aes(
+  x = Traffic,
+  y = DieselPM,
+  color = CaliforniaCounty
 )) +
   geom_line() +
   geom_point() +
-  facet_wrap(~quarter, ncol = 2)
+  facet_wrap(~CaliforniaCounty, ncol = 3)
 
 facet_plot
 ```
 
-### 2.4
+### 2.3
 
 Observe what happens when you remove either `geom_line()` OR `geom_point()` from one of your plots above.
 
-```{r 2.4response}
+```{r 2.3response}
 # These elements are removed from the plot, like layers
 ```
 
@@ -196,14 +186,15 @@ Observe what happens when you remove either `geom_line()` OR `geom_point()` from
 
 ### P.2
 
-Modify `facet_plot` to remove the legend (hint use `theme()` and the `legend.position` argument) and change the names of the axis titles to be "Population exposed to less than 10 ug/L of nitrate in water" for the y axis and "Year" for the x axis.
+Modify `facet_plot` to remove the legend (hint use `theme()` and the `legend.position` argument) and change the names of the axis titles to be "Diesel particulate matter" for the y axis and "Traffic density" for the x axis. 
+
 
 ```{r P.2response}
 facet_plot <- facet_plot +
   theme(legend.position = "none") +
   labs(
-    y = "Population exposed to less than 10 ug/L of nitrate in water",
-    x = "Year"
+    y = "Diesel particulate matter",
+    x = "Traffic density"
   )
 
 facet_plot
