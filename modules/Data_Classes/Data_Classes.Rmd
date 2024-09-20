@@ -202,7 +202,7 @@ ymd("2021-06-15")
 
 ## Class conversion in with a dataset
 
-Here's a dataset on the covid viral load measured in wastewater between 2022 and 2024, collected by the collected by the National Wastewater Surveillance System.
+Here's a dataset on the SARS-CoV-2 viral load measured in wastewater between 2022 and 2024, collected by the collected by the National Wastewater Surveillance System.
 
 Let's look at the *first_sample_date* variable
 * records the first time samples were collected at a site
