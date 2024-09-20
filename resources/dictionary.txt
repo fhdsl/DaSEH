@@ -4,6 +4,7 @@ al
 AlexsLemonade
 Alightings
 Altmann
+Amador
 anewma
 annualDosage
 anonymize
@@ -167,6 +168,7 @@ mtcars
 na
 naniar
 nd
+Napa
 Nissans
 NISSANs
 nizovatina
@@ -176,6 +178,7 @@ NWSS
 obert
 ocs
 OCSdata
+oldname
 olumn
 Ombudsperson
 onth
@@ -293,3 +296,5 @@ XLSX
 youtube
 yts
 YTS
+zipcode
+Zipcode

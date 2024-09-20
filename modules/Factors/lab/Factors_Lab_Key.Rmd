@@ -124,7 +124,7 @@ ces_Ventura_plot <- ces_Ventura %>%
 
 ggsave(
   filename = "ces_Ventura.png", # will save in working directory
-  plot = yts_fct_plot,
+  plot = ces_Ventura_plot,
   width = 10, height = 3
 )
 ```
