@@ -173,11 +173,11 @@ pre code {
 <h3>1.1</h3>
 <p>Create a function that takes one argument, a vector, and returns the sum of the vector and then squares the result. Call it “sum_squared”. Test your function on the vector <code>c(2,7,21,30,90)</code> - you should get the answer 22500.</p>
 <pre><code># General format
-NEW_FUNCTION &lt;- function(x, y) x + y </code></pre>
+NEW_FUNCTION &lt;- function(x, y) x + y</code></pre>
 <p>or</p>
 <pre><code># General format
 NEW_FUNCTION &lt;- function(x, y){
-result &lt;- x + y 
+result &lt;- x + y
 return(result)
 }</code></pre>
 </div>
@@ -225,14 +225,19 @@ data %&gt;%
 <h1>Practice on Your Own!</h1>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
-<p>Use <code>across</code> and <code>mutate</code> to convert all columns starting with the string “PM” into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. <strong>Hint</strong>: use <code>starts_with()</code> to select the columns that start with “PM”. Use an anonymous function (“function on the fly”) to do a logical test if the value is greater than 10.</p>
+<p>Use <code>across</code> and <code>mutate</code> to convert all columns starting with the string “PM” into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10.</p>
+<ul>
+<li><strong>Hint</strong>: use <code>starts_with()</code> to select the columns that start with “PM”.</li>
+<li>Use an anonymous function (“function on the fly”) to do a logical test if the value is greater than 10.</li>
+<li>A logical test with <code>mutate</code> will automatically fill a column with TRUE/FALSE.</li>
+</ul>
 </div>
 <div id="p.3" class="section level3">
 <h3>P.3</h3>
-<p>Take your code from question 2.4 and assign it to the variable <code>ces_dat</code>.</p>
+<p>Take your code from previous question and assign it to the variable <code>ces_dat</code>.</p>
 <ul>
-<li>use <code>filter()</code> to drop any rows where “Oakland” appears in <code>ApproxLocation</code>. Make sure to reassign this to <code>ces_dat</code>.</li>
-<li>Create a ggplot boxplot (<code>geom_boxplot()</code>) where (1) the x-axis is <code>PM2.5</code> and (2) the y-axis is <code>Asthma</code>.</li>
+<li>Use <code>filter()</code> to drop any rows where “Oakland” appears in <code>ApproxLocation</code>. Make sure to reassign this to <code>ces_dat</code>.</li>
+<li>Create a ggplot boxplot (<code>geom_boxplot()</code>) where (1) the x-axis is <code>Asthma</code> and (2) the y-axis is <code>PM2.5</code>.</li>
 <li>You change the <code>labs()</code> layer so that the x-axis is “ER Visits for Asthma: PM2.5 greater than 10”</li>
 </ul>
 </div>
