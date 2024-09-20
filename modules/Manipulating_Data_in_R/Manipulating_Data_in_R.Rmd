@@ -35,7 +35,7 @@ library(tidyverse)
 
 📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-5.pdf)
 
-## Manipulating Data 
+## Manipulating Data
 
 In this module, we will show you how to:
 
@@ -89,7 +89,7 @@ ex_wide <- tibble(State = c("Alabama", "Alaska"),
 ex_long <- pivot_longer(ex_wide, cols = !State)
 ```
 
-Wide: multiple columns per individual, values spread across multiple columns 
+Wide: multiple columns per individual, values spread across multiple columns
 
 ```{r, echo = FALSE}
 ex_wide
@@ -136,7 +136,7 @@ You might see old functions `gather` and `spread` when googling. These are older
 
 # `pivot_longer`...
 
-## Reshaping data from **wide to long** {.codesmall} 
+## Reshaping data from **wide to long** {.codesmall}
 
 `pivot_longer()` - puts column data into rows (`tidyr` package)
 
@@ -161,7 +161,7 @@ long_vacc <- wide_vacc %>% pivot_longer(cols = everything())
 long_vacc
 ```
 
-## Reshaping wide to long: Better column names {.codesmall} 
+## Reshaping wide to long: Better column names {.codesmall}
 
 `pivot_longer()` - puts column data into rows (`tidyr` package)
 
@@ -189,7 +189,7 @@ long_vacc
 
 Newly created column names are enclosed in quotation marks.
 
-## Data used: Nitrate exposure 
+## Data used: Nitrate exposure
 
 Nitrate exposure by quarter for populations on public water systems in the state of Washington for 1999-2020.
 
@@ -239,7 +239,7 @@ Un-pivoted columns (`year`, `quarter`, `pop_on_sampled_PWS`) are still columns.
 long
 ```
 
-## Cleaning up long data{.codesmall} 
+## Cleaning up long data{.codesmall}
 
 Let's make the `conc_count` into a proportion.
 
@@ -254,8 +254,8 @@ long
 Now our data is more tidy, and we can take the averages easily!
 
 ```{r}
-long %>% 
-  group_by(conc_cat) %>% 
+long %>%
+  group_by(conc_cat) %>%
   summarize("avg_prop" = mean(conc_prop))
 ```
 
@@ -275,7 +275,7 @@ There are many ways to **select** the columns we want. Check out https://dplyr.t
 
 <div class = "codeexample">
 ```{r, eval=FALSE}
-{wide_data} <- {long_data} %>% 
+{wide_data} <- {long_data} %>%
   pivot_wider(names_from = {Old column name: contains new column names},
               values_from = {Old column name: contains new cell values})
 ```
@@ -285,12 +285,12 @@ There are many ways to **select** the columns we want. Check out https://dplyr.t
 
 ```{r}
 long_vacc
-wide_vacc <- long_vacc %>% pivot_wider(names_from = "Month", 
-                                       values_from = "Rate") 
+wide_vacc <- long_vacc %>% pivot_wider(names_from = "Month",
+                                       values_from = "Rate")
 wide_vacc
 ```
 
-## Reshaping nitrate exposure data{.codesmall} 
+## Reshaping nitrate exposure data{.codesmall}
 
 What if we wanted different columns for each quarter?
 
@@ -335,7 +335,7 @@ knitr::include_graphics("images/joins.png")
 * Merging/joining data sets together - usually on key variables, usually "id"
 * `?join` - see different types of joining for `dplyr`
 * `inner_join(x, y)` - only rows that match for `x` and `y` are kept
-* `full_join(x, y)` - all rows of `x` and `y` are kept 
+* `full_join(x, y)` - all rows of `x` and `y` are kept
 * `left_join(x, y)` - all rows of `x` are kept even if not merged with `y`
 * `right_join(x, y)` - all rows of `y` are kept even if not merged with `x`
 * `anti_join(x, y)` - all rows from `x` not in `y` keeping just columns from `x`.
@@ -545,11 +545,11 @@ anti_join(data_cold, data_As, by = "State") # order switched
 * Merging/joining data sets together - assumes all column names that overlap
      - use the `by = c("a" = "b")` if they differ
 * `inner_join(x, y)` - only rows that match for `x` and `y` are kept
-* `full_join(x, y)` - all rows of `x` and `y` are kept 
+* `full_join(x, y)` - all rows of `x` and `y` are kept
 * `left_join(x, y)` - all rows of `x` are kept even if not merged with `y`
 * `right_join(x, y)` - all rows of `y` are kept even if not merged with `x`
 * Use the `tidylog` package for a detailed summary
-* `antijoin(x, y)` shows what is only in `x` (missing from `y`)
+* `anti_join(x, y)` shows what is only in `x` (missing from `y`)
 
 ## Lab Part 2
 
@@ -596,7 +596,7 @@ dplyr::setdiff(cold_states, A_states)
 
 ## Getting the set difference with `setdiff`
 
-Why did we use `dplyr::setdiff`? 
+Why did we use `dplyr::setdiff`?
 
 There is a base R function, also called `setdiff` that requires vectors.
 
