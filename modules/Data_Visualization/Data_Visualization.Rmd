@@ -930,7 +930,7 @@ rp_fac_plot
 ## plotly
 
 ```{r}
-#install.packages(plotly)
+#install.packages("plotly")
 library("plotly") # creates interactive plots!
 ggplotly(lots_of_lines)
 ```
