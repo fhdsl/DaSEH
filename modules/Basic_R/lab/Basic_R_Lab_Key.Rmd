@@ -9,24 +9,21 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-In this lab you can use the interactive console to explore or **Knit** the document. 
-Remember anything you type here can be "sent" to the console with Cmd-Enter (OS-X) or Ctrl-Enter (Windows/Linux) in an R code chunk.
-
+Instructions: Paste your code from the console in the grey boxes below.
 
 # Part 1
 
 ### 1.1 
 
-Create a new object called `my.num` that contains 6 numbers.
+Create a new object called `my.num` that contains any number.
 
 ```
 # General format
-my.num <- c(number1, number2, ...)
+my.num <- ?
 ```
 
 ```{r 1.1response}
-my.num <- c(5, 4, 7, 8, 12, 14) # These can be any real numbers
+my.num <- 2
 ```
 
 ### 1.2
