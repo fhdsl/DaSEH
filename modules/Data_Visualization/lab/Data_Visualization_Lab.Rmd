@@ -19,15 +19,8 @@ library(ggplot2)
 library(dplyr)
 ```
 
-<<<<<<< Updated upstream
-Open the Nitrate exposure via WA public waterways data from the `dasehr` package.
-
-(You can also access it at the link www.daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv)
-
-Then, use the provided code to compute a data frame `nitrate` with aggregate summary of exposure level: average exposed population  (`pop_exposed_to_exceedances`) for each year (`year`).
-=======
 Load the CalEnviroScreen data from  the link www.daseh.org/data/CalEnviroScreen_data.csv) and subset it so that you only have data from Fresno, Merced, Placer, Sonoma, and Yolo counties.
->>>>>>> Stashed changes
+
 
 ```{r}
 ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
@@ -64,11 +57,8 @@ ggplot(???, aes(x = ???, y = ???)) +
 
 ### 1.3
 
-<<<<<<< Updated upstream
-Use the `scale_x_continuous()` function to plot the x axis with the following breaks `c(1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017, 2019)`.
-=======
 Use the `scale_x_continuous()` function to plot the x axis with the following breaks `c(250, 750, 1250, 1750, 2250)`. 
->>>>>>> Stashed changes
+
 
 ```
 # General format
@@ -98,13 +88,10 @@ my_plot + theme_bw()
 
 ### P.1
 
-<<<<<<< Updated upstream
-Create a boxplot (with the `geom_boxplot()` function) using the `nitrate` data, where `quarter` is plotted on the x axis and `pop_on_sampled_PWS` is plotted on the y axis.
-=======
 Create a boxplot (with the `geom_boxplot()` function) using the `ces_sub` data, where `CaliforniaCounty` is plotted on the x axis and `DrinkingWater` is plotted on the y axis. 
 
 `DrinkingWater`: Drinking water contaminant index for selected contaminants. A higher value means drinking water contains a greater volume of contaminants.
->>>>>>> Stashed changes
+
 
 ```{r P1response}
 
@@ -116,24 +103,8 @@ Create a boxplot (with the `geom_boxplot()` function) using the `ces_sub` data, 
 ### 2.1
 Let's look at the plot of traffic density and diesel particulate matter again,
 
-<<<<<<< Updated upstream
-Use the provided code to compute a data frame `nitrate_agg_2` with aggregate summary of WA Nitrate data: population exposed to less than 10 ug/L of nitrate in the water (sum of `pop_0-3ug/L`, `pop_>3-5ug/L`, and `pop_>5-10ug/L`) -- separately for each year (`year`) and for each quarter (`quarter`.
-
-```{r}
-
-nitrate_agg_2 <- nitrate %>%
-  group_by(year, quarter) %>%
-  summarise(pop_less_than_10ug_perL = sum(`pop_0-3ug/L`, `pop_>3-5ug/L`, `pop_>5-10ug/L`))
-
-nitrate_agg_2
-```
-
-### 2.2
-
-Use `ggplot2` package to make a plot showing trajectories of total population exposed to less than 10 ug/L of nitrate (`pop_less_than_10ug_perL`; y-axis) over year (`year`; x-axis), where each quarter type has a different color (hint: use `color = type` in mapping).
-=======
 Use `ggplot2` package make plot of how diesel particulate concentration (`DieselPM`; y-axis) is associated with traffic density values (`Traffic`; x-axis), where each county (`CaliforniaCounty`) has a different color (hint: use `color = type` in mapping).
->>>>>>> Stashed changes
+
 
 ```
 # General format
@@ -154,6 +125,7 @@ ggplot(???, aes(
 
 Redo the above plot by adding a faceting  (`+ facet_wrap( ~ CaliforniaCounty, ncol = 3)`) to have data for quarter in a separate plot panel. 
 
+
 Assign the new plot as an object called `facet_plot`.
 
 ```{r 2.2response}
@@ -162,19 +134,6 @@ Assign the new plot as an object called `facet_plot`.
 
 ### 2.3
 
-<<<<<<< Updated upstream
-Redo the above plot by adding a faceting  (`+ facet_wrap( ~ quarter, ncol = 2)`) to have data for quarter in a separate plot panel.
-
-Assign the new plot as an object called `facet_plot`.
-
-```{r 2.3response}
-
-```
-
-### 2.4
-
-=======
->>>>>>> Stashed changes
 Observe what happens when you remove either `geom_line()` OR `geom_point()` from one of your plots above.
 
 ```{r 2.3response}
@@ -186,11 +145,8 @@ Observe what happens when you remove either `geom_line()` OR `geom_point()` from
 
 ### P.2
 
-<<<<<<< Updated upstream
-Modify `facet_plot` to remove the legend (hint use `theme()` and the `legend.position` argument) and change the names of the axis titles to be "Population exposed to less than 10 ug/L of nitrate in water" for the y axis and "Year" for the x axis.
-=======
 Modify `facet_plot` to remove the legend (hint use `theme()` and the `legend.position` argument) and change the names of the axis titles to be "Diesel particulate matter" for the y axis and "Traffic density" for the x axis. 
->>>>>>> Stashed changes
+
 
 ```{r P.2response}
 

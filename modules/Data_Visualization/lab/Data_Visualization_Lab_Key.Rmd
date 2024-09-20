@@ -19,9 +19,7 @@ library(ggplot2)
 library(dplyr)
 ```
 
-
 Load the CalEnviroScreen data from  the link www.daseh.org/data/CalEnviroScreen_data.csv) and subset it so that you only have data from Fresno, Merced, Placer, Sonoma, and Yolo counties.
->>>>>>> Stashed changes
 
 ```{r}
 ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
