@@ -39,9 +39,7 @@ This dataset is one we'll be working with quite a lot in the lectures. It contai
 
 ```{r setup, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(readr)
-library(ggplot2)
-library(dplyr)
+library(tidyverse)
 
 er <- read_csv(file = "https://daseh.org/data/CO_ER_heat_visits.csv")
 # keep non-missing data
