@@ -13,28 +13,28 @@ opts_chunk$set(comment = "")
 
 ## Working in R
 
-For now, we will be working in the **Console** (Pane 1
-)
+For now, we will be working in the **Console** (Pane 1 )
+
 ```{r, fig.align='center', out.width="70%", echo = FALSE, fig.alt= "When RStudio is first opened you will see 3 panes"}
 knitr::include_graphics("../RStudio/images/three_panes.png")
 ```
 
 ## R as a calculator
 
-- The R console is a full calculator
-- Try to play around with it:
-    - +, -, /, * are add, subtract, divide and multiply
-    - ^ or ** is power
-    - parentheses -- ( and ) -- work with order of operations
-    - %% finds the remainder
+-   The R console is a full calculator
+-   Try to play around with it:
+    -   +, -, /, \* are add, subtract, divide and multiply
+    -   \^ or \*\* is power
+    -   parentheses -- ( and ) -- work with order of operations
+    -   %% finds the remainder
 
 ## R as a calculator
 
-Try evaluating the following. Type these in the Console and press _return_ to evaluate:
+Try evaluating the following. Type these in the Console and press *return* to evaluate:
 
-- `2 + 2`
-- `2 * 3 / 4`
-- `2^4 - 1`
+-   `2 + 2`
+-   `2 * 3 / 4`
+-   `2^4 - 1`
 
 ```{r, fig.alt="Problem gives answer of 1 or 9 depending on calculator.", out.width = "30%", echo = FALSE, out.extra='style="float:left"'}
 knitr::include_graphics("images/Basic_R_calculator.jpg")
@@ -42,7 +42,9 @@ knitr::include_graphics("images/Basic_R_calculator.jpg")
 
 ## Basic terms: "object"
 
-**Object** - an object is something that can be worked with or on in R - can be lots of different things! You can think of objects as **nouns** in R.
+**Object** - an object is something that can be worked with or on in R - can be lots of different things! 
+
+You can think of objects as **nouns** in R.
 
 -   a variable
 -   a dataset
@@ -52,8 +54,8 @@ knitr::include_graphics("images/Basic_R_calculator.jpg")
 
 ## Assigning values to objects
 
-- You can create \textcolor{blue}{objects} within the R environment and from files on your computer
-- R uses `<-` to create objects (you might also see `=` used, but this is not best practice)
+-   You can create \textcolor{blue}{objects} within the R environment and from files on your computer
+-   R uses `<-` to create objects (you might also see `=` used, but this is not best practice)
 
 ```{r}
 x <- 2
@@ -64,9 +66,7 @@ x + 2
 
 ## GUT CHECK: What is an "object"?
 
-A. Something I can touch
-B. Something that can be worked with in R
-C. A software version
+A. Something I can touch B. Something that can be worked with in R C. A software version
 
 ## Objects with text
 
@@ -83,8 +83,8 @@ We will talk in-depth about classes. For now:
 
 **numeric**
 
--  Numbers
--  No quotation marks
+-   Numbers
+-   No quotation marks
 
 ```{r eval = FALSE}
 2
@@ -92,8 +92,8 @@ We will talk in-depth about classes. For now:
 
 **character**
 
--  Text with quotation marks
--  Green lettering (default)
+-   Text with quotation marks
+-   Green lettering (default)
 
 ```{r eval = FALSE}
 "hello!"
@@ -182,8 +182,8 @@ A function might help you add numbers together, create a plot, or organize your 
 
 ## Using functions on our vector
 
-- `class()` tells us what kind of values the object contains (numeric, character, etc)
-- `length()` tells us how many elements.
+-   `class()` tells us what kind of values the object contains (numeric, character, etc)
+-   `length()` tells us how many elements.
 
 ```{r}
 name
@@ -191,6 +191,10 @@ class(name)
 x
 length(x)
 ```
+
+## GUT CHECK: What is a "function"?
+
+A. a number or text B. a button inside RStudio C. code that does something
 
 ## Combining vectors
 
@@ -219,41 +223,31 @@ length(name2)
 class(name2)
 ```
 
+## Commenting in code
+
+`#` creates a comment in R code
+
+```{r}
+# 1 + 2 <- this does not get run
+
+1 + 2 # <- this does
+```
+
 ## Lab Part 1
 
-- Assign values to objects with `<-` (new name on left side)
-- Use the `c()` function to combine text/numbers/etc. into a vector
-- `class()` tells you the class (kind) of object
-- Use the `length()` function to determine number of elements
+-   Assign values to objects with `<-` (new name on left side)
+-   Use the `c()` function to combine text/numbers/etc. into a vector
+-   `class()` tells you the class (kind) of object
+-   Use the `length()` function to determine number of elements
+-   `#` for comments or to deactivate a line of code
+
+\textcolor{red}{Just open up the file to see the questions for lab. More about the file type soon!}
 
 💻 [Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
 
-
-# Pause for Day 1
-
-## Recap So Far
-
-RStudio
-
--  The Editor is for static code like scripts or R Markdown documents  
--  Send code to the Console to run it  
--  The Console can be used for quickly testing code on the fly  
--  R code goes within what is called a chunk (the gray box with a green play button)  
-
-📃[RStudio Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
-
-## Recap So Far
-
-Basic R
-
-- Use `c()` to **combine** vectors  
-- Use `<-` to save (assign) values to objects  
-- if you don't use `<-` to reassign objects that you want to modify, they will stay the same  
-- `length()` and `class()` tell you information about an object  
-
 ## Math + vector objects
 
-You can perform functions to entire vectors of numbers very easily.
+You can perform math with vectors.
 
 ```{r}
 x + 2
@@ -263,7 +257,7 @@ x + c(1, 2, 3, 4)
 
 ## Math + vector objects
 
-But things like algebra can only be performed on numbers.
+But math can only be performed on numbers.
 
 ```{r, error=TRUE}
 name2 + 4
@@ -278,7 +272,7 @@ y <- x + c(1, 2, 3, 4)
 y
 ```
 
-Note that the R object `y` is no longer "hello  world!" - It has been overwritten by assigning new data to the same name.
+Note that the R object `y` is no longer "hello world!" - It has been overwritten by assigning new data to the same name.
 
 ## Reassigning to a new object
 
@@ -306,20 +300,24 @@ str(y)
 
 This tells you that `x` is a numeric vector and tells you the length.
 
-## Lab Part 2
+## Basic terms: "argument"
 
-- Reassigning allows you to make changes "in place"
-- `str()` tells you a lot of information about an object in your environment
+**Argument** - what you pass to a function
 
-💻 [Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
+-   can be data like the number 1 or 20234
+-   can be options about how you want the function to work
+-   separated by commas
 
-## Useful functions to create vectors `seq()`
+Like an **adverb**.
 
-For numeric: `seq()` can be very useful- both integer and double.   
-The `from` argument says what number to start on.    
-The `to` argument says what number to not go above.   
-The `by` argument says how much to increment by.    
-The `length.out` argument says how long the vector should be overall.
+## Create vectors with `seq()`
+
+For numeric: `seq()`
+
+-   The `from` \textcolor{blue}{argument} says what number to start on.\
+-   The `to` \textcolor{blue}{argument} says what number to not go above.\
+-   The `by` \textcolor{blue}{argument} says how much to increment by.\
+-   The `length.out` \textcolor{blue}{argument} says how long the vector should be overall.
 
 ```{r}
 seq(from = 0, to = 1, by = 0.2)
@@ -329,11 +327,9 @@ seq(from = -5, to = 5, length.out = 10)
 
 ## Useful functions to create vectors `rep()`
 
-For character: `rep()` can create very long vectors.
-Works for creating character and numeric vectors.
+For character: `rep()` can create very long vectors. Works for creating character and numeric vectors.
 
-The `each` argument specifies how many of each item you want repeated.
-The `times` argument specifies how many times you want the vector repeated.
+The `each` argument specifies how many of each item you want repeated. The `times` argument specifies how many times you want the vector repeated.
 
 `rep(WHAT_TO_REPEAT, arguments)`
 
@@ -345,10 +341,7 @@ rep(c("black", "white"), each = 2, times = 2)
 
 ## Creating numeric vectors `sample()`
 
- You can use the `sample()` function to make a random sequence.
- The `x` argument specifies what you are sampling from.
- The `size` argument specifies how many values there should be.
- The `replace` argument specifies if values should be replaced or not.
+You can use the `sample()` function to make a random sequence. The `x` argument specifies what you are sampling from. The `size` argument specifies how many values there should be. The `replace` argument specifies if values should be replaced or not.
 
 ```{r}
 seq_hun <- seq(from = 0, to = 100, by = 1)
@@ -359,13 +352,14 @@ y
 
 ## Summary
 
-- R functions as a calculator
-- Use `<-` to save (assign) values to objects
-- Use `c()` to **combine** vectors
-- `length()`, `class()`, and `str()` tell you information about an object
-- The sequence `seq()` function helps you create numeric vectors (`from`,`to`, `by`, and `length.out` arguments)
-- The repeat `rep()` function helps you create vectors with the `each` and `times` arguments
-- `sample()` makes random vectors
+-   R functions as a calculator
+-   Use `<-` to save (assign) values to objects
+-   Reassigning allows you to make changes "in place"
+-   Use `c()` to **combine** vectors
+-   `length()`, `class()`, and `str()` tell you information about an object
+-   The sequence `seq()` function helps you create numeric vectors (`from`,`to`, `by`, and `length.out` arguments)
+-   The repeat `rep()` function helps you create vectors with the `each` and `times` arguments
+-   `sample()` makes random vectors
 
 ## Summary
 
