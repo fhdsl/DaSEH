@@ -262,6 +262,18 @@ Error messages can be scary!
 knitr::include_graphics("images/forrest-gump-running.gif")
 ```
 
+## Installing R
+
+-   Install the [latest R version](http://cran.r-project.org/) `r config::get("r_version")`
+
+-   [Install RStudio](https://www.rstudio.com/products/rstudio/download/)
+
+More detailed instructions [on the website](https://daseh.org/docs/module_details/day0.html).
+
+RStudio is an **integrated development environment** (IDE) that makes it easier to work with R.
+
+More on that soon!
+
 ## Summary
 
 🏠 [Class Website - https://daseh.org/](https://daseh.org/) - Logistics, resources, and help!

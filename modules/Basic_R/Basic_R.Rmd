@@ -350,6 +350,36 @@ y <- sample(x = seq_hun, size = 5, replace = TRUE)
 y
 ```
 
+## Installing packages to do more!
+
+Some functions and data come with R right out of the box ("base R"). We will add more functionality with \textcolor{blue}{packages}. Think of these like "expansion packs" for R.
+
+Must be done **once** for each installation of R (e.g., version 4.2 \>\> 4.3).
+
+An important package we will use is `tidyverse`. It is a mega-package great for data import, wrangling, and visualization.
+
+```{r eval = FALSE}
+install.packages("tidyverse")
+```
+
+## Loading packages
+
+After installing packages, you will need to "load" them into memory so that you can use them.
+
+This must be done **every time** you start R.
+
+We use a function called `library` to load packages.
+
+```{r, eval = FALSE}
+library(tidyverse)
+```
+
+## Installing + Loading packages
+
+```{r, fig.alt="Installing must be done once via 'install.packages() while loading must be done every R session via 'library()'.", out.width = "80%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("../../images/lol/install_packages.jpg")
+```
+
 ## Summary
 
 -   R functions as a calculator
