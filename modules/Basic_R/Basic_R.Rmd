@@ -54,7 +54,7 @@ You can think of objects as **nouns** in R.
 
 ## Assigning values to objects
 
--   You can create \textcolor{blue}{objects} within the R environment and from files on your computer
+-   You can create <span style="color:blue">objects</span> within the R environment and from files on your computer
 -   R uses `<-` to create objects (you might also see `=` used, but this is not best practice)
 
 ```{r}
@@ -66,7 +66,11 @@ x + 2
 
 ## GUT CHECK: What is an "object"?
 
-A. Something I can touch B. Something that can be worked with in R C. A software version
+A. Something I can touch 
+
+B. Something that can be worked with in R 
+
+C. A software version
 
 ## Objects with text
 
@@ -152,7 +156,7 @@ name
 
 ## Combining objects with `c()`
 
-Use `c()` to collect/combine single R objects into a \textcolor{blue}{vector} of R objects. It is mostly used for creating vectors of numbers and character strings.
+Use `c()` to collect/combine single R objects into a <span style="color:blue">vector</span> of R objects. It is mostly used for creating vectors of numbers and character strings.
 
 ```{r}
 x <- c(1, 4, 6, 8)
@@ -194,7 +198,11 @@ length(x)
 
 ## GUT CHECK: What is a "function"?
 
-A. a number or text B. a button inside RStudio C. code that does something
+A. a number or text 
+
+B. a button inside RStudio 
+
+C. code that does something
 
 ## Combining vectors
 
@@ -241,7 +249,7 @@ class(name2)
 -   Use the `length()` function to determine number of elements
 -   `#` for comments or to deactivate a line of code
 
-\textcolor{red}{Just open up the file to see the questions for lab. More about the file type soon!}
+<span style="color:red">Just open up the file to see the questions for lab. More about the file type soon!</span>
 
 💻 [Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
 
@@ -314,10 +322,10 @@ Like an **adverb**.
 
 For numeric: `seq()`
 
--   The `from` \textcolor{blue}{argument} says what number to start on.\
--   The `to` \textcolor{blue}{argument} says what number to not go above.\
--   The `by` \textcolor{blue}{argument} says how much to increment by.\
--   The `length.out` \textcolor{blue}{argument} says how long the vector should be overall.
+-   The `from` <span style="color:blue">argument</span> says what number to start on.\
+-   The `to` <span style="color:blue">argument</span> says what number to not go above.\
+-   The `by` <span style="color:blue">argument</span> says how much to increment by.\
+-   The `length.out` <span style="color:blue">argument</span> says how long the vector should be overall.
 
 ```{r}
 seq(from = 0, to = 1, by = 0.2)
@@ -352,7 +360,7 @@ y
 
 ## Installing packages to do more!
 
-Some functions and data come with R right out of the box ("base R"). We will add more functionality with \textcolor{blue}{packages}. Think of these like "expansion packs" for R.
+Some functions and data come with R right out of the box ("base R"). We will add more functionality with <span style="color:blue">packages</span>. Think of these like "expansion packs" for R.
 
 Must be done **once** for each installation of R (e.g., version 4.2 \>\> 4.3).
 
@@ -383,13 +391,13 @@ knitr::include_graphics("../../images/lol/install_packages.jpg")
 ## Summary
 
 -   R functions as a calculator
--   Use `<-` to save (assign) values to objects
--   Reassigning allows you to make changes "in place"
--   Use `c()` to **combine** vectors
+-   Use `<-` to save (assign) values to objects. Reassigning allows you to make changes "in place".
+-   Use `c()` to **combine** into vectors
 -   `length()`, `class()`, and `str()` tell you information about an object
 -   The sequence `seq()` function helps you create numeric vectors (`from`,`to`, `by`, and `length.out` arguments)
 -   The repeat `rep()` function helps you create vectors with the `each` and `times` arguments
 -   `sample()` makes random vectors
+-   `install.packages()` and `library()` install and load packages, respectively.
 
 ## Summary
 
