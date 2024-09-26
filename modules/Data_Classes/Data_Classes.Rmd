@@ -202,9 +202,17 @@ ymd("2021-06-15")
 
 ## Class conversion in with a dataset
 
+Here's a dataset on the SARS-CoV-2 viral load measured in wastewater between 2022 and 2024, collected by the collected by the National Wastewater Surveillance System.
+
+Let's look at the *first_sample_date* variable
+* records the first time samples were collected at a site
+
 ```{r, results='hide'}
 library(dasehr)
-covidww <- covid_wastewater %>% select(contains("date"))
+covidww <- covid_wastewater %>%
+  select(contains("first_sample_date")) %>%
+  sample_n(10)
+  
 ```
 
 ```{r}
@@ -217,7 +225,7 @@ We would need to use mutate to help us modify that column.
 
 ```{r}
 covidww %>% 
-  mutate(date_start = mdy(date_start))
+  mutate(sampling_start = mdy(first_sample_date))
 ```
 
 # Other two-dimensional data classes
@@ -279,8 +287,10 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
 
 `as.matrix()` creates a matrix from a data frame or tibble (where all values are the same class).
 
+*NOTE:* in the covid_wastewater dataset, "date_start" is always 15 days before "date_end"
+
 ```{r,}
-covidww_mat <- select(covidww, contains("Missouri")) %>%
+covidww_mat <- select(covid_wastewater, contains("date")) %>%
   head(n = 3)
 covidww_mat
 as.matrix(covidww_mat)

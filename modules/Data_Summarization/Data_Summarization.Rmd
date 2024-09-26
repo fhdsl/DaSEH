@@ -97,11 +97,17 @@ knitr::include_graphics("images/Manip_cheatsheet.png")
 
 ## Some examples
 
-We can use the `CO_heat_ER` object from the `dasehr` package to explore different ways of summarizing data. (This dataset contains information about the number and rate of visits for heat-related illness to ERs in Colorado from 2011-2022, adjusted for age.)  The `head` command displays the first rows of an object:
+We can use the CO heat-related ER visits dataset to explore different ways of summarizing data. 
+
+(*Reminder* This dataset contains information about the number and rate of visits for heat-related illness to ERs in Colorado from 2011-2022, adjusted for age.)  
+
+The `head` command displays the first rows of an object:
 
 ```{r}
-library(dasehr)
-head(CO_heat_ER)
+er <- 
+  read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
+
+head(er)
 ```
 
 
@@ -132,7 +138,7 @@ head(CO_heat_ER)
 `pull()` converts a single data column into a vector. This allows you to run summary functions.
 
 ```{r, eval=FALSE}
-CO_heat_ER %>% pull(visits)
+er %>% pull(visits)
 ```
 
 
@@ -141,8 +147,8 @@ CO_heat_ER %>% pull(visits)
 **Add the ** `na.rm =` **argument for missing data**
 
 ```{r}
-CO_heat_ER %>% pull(visits) %>% mean()
-CO_heat_ER %>% pull(visits) %>% mean(na.rm=T)
+er %>% pull(visits) %>% mean()
+er %>% pull(visits) %>% mean(na.rm=T)
 ```
 
 
@@ -223,9 +229,9 @@ Multiple summary statistics can be calculated at once (unlike `pull()` which can
 ## Summarize the data: `dplyr` `summarize()` function
 
 ```{r}
-CO_heat_ER %>% 
+er %>% 
   summarize(mean_visits = mean(visits))
-CO_heat_ER %>% 
+er %>% 
   summarize(mean_visits = mean(visits, na.rm = TRUE))
 ```
 
@@ -235,7 +241,7 @@ CO_heat_ER %>%
 `summarize()` can do multiple operations at once. Just separate by a comma.
 
 ```{r}
-CO_heat_ER %>% 
+er %>% 
   summarize(mean_visits = mean(visits, na.rm = TRUE),
             median_visits = median(visits, na.rm = TRUE),
             mean_rate = mean(rate, na.rm = TRUE))
@@ -254,7 +260,7 @@ If you want to save a summary statistic in the original data, use `mutate()` ins
 Using `summary()` can give you rough snapshots of each numeric column (character columns are skipped):
 
 ```{r}
-summary(CO_heat_ER)
+summary(er)
 ```
 
 
@@ -275,8 +281,8 @@ summary(CO_heat_ER)
 `distinct(x)` will return the unique elements of column `x`.
 
 ```{r, message = FALSE}
-CO_heat_ER %>%
-  distinct(gender)
+er %>%
+  distinct(county)
 ```
 
 
@@ -285,8 +291,8 @@ CO_heat_ER %>%
 `n_distinct()` tells you the number of unique elements. _Must pull the column first!_
 
 ```{r}
-CO_heat_ER %>%
-  pull(gender) %>% 
+er %>%
+  pull(county) %>% 
   n_distinct()
 ```
 
@@ -301,7 +307,7 @@ options(max.print = 1000)
 Use `count` to return row count by category.
 
 ```{r, message = FALSE}
-CO_heat_ER %>% count(gender)
+er %>% count(county)
 ```
 
 
@@ -310,7 +316,7 @@ CO_heat_ER %>% count(gender)
 Multiple columns listed further subdivides the count.
 
 ```{r, message = FALSE}
-CO_heat_ER %>% count(county, gender)
+er %>% count(county, year)
 ```
 
 
@@ -322,8 +328,8 @@ CO_heat_ER %>% count(county, gender)
 `group_by` allows you group the data set by variables/columns you specify:
 
 ```{r}
-CO_heat_ER_grouped <- CO_heat_ER %>% group_by(gender)
-CO_heat_ER_grouped
+er_grouped <- er %>% group_by(year)
+er_grouped
 ```
 
 
@@ -332,7 +338,7 @@ CO_heat_ER_grouped
 It's grouped! Grouping doesn't change the data in any way, but how **functions operate on it**. Now we can summarize `visits` by group:
 
 ```{r}
-CO_heat_ER_grouped %>% 
+er_grouped %>% 
   summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
 
@@ -342,18 +348,18 @@ CO_heat_ER_grouped %>%
 Pipe `CO_heat_ER` into `group_by`, then pipe that into `summarize`:
 
 ```{r}
-CO_heat_ER %>%
-  group_by(gender) %>%
+er %>%
+  group_by(year) %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
 
 ## Group by as many variables as you want
 
-`group_by` gender and year:
+`group_by` county and year:
 
 ```{r, warnings = F}
-CO_heat_ER %>%
-  group_by(year, gender) %>%
+er %>%
+  group_by(year, county) %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
 
@@ -362,8 +368,8 @@ CO_heat_ER %>%
 There are other functions, such as `n()` count the number of observations (NAs included).
 
 ```{r}
-CO_heat_ER %>%
-  group_by(gender) %>%
+er %>%
+  group_by(year) %>%
   summarize(n = n(),
             mean = mean(visits, na.rm = TRUE))
 ```
@@ -374,8 +380,8 @@ CO_heat_ER %>%
 `count()` and `n()` can give very similar information.
 
 ```{r}
-CO_heat_ER %>% count(gender)
-CO_heat_ER %>% group_by(gender) %>% summarize(n()) # n() typically used with summarize
+er %>% count(year)
+er %>% group_by(year) %>% summarize(n()) # n() typically used with summarize
 ```
 
 
@@ -387,8 +393,8 @@ CO_heat_ER %>% group_by(gender) %>% summarize(n()) # n() typically used with sum
 These functions require a column as a vector using `pull()`.
 
 ```{r, message = FALSE}
-CO_heat_ER_gen <- CO_heat_ER %>% pull(gender) # pull() to make a vector
-CO_heat_ER_gen %>% unique() # similar to distinct()
+er_year <- er %>% pull(year) # pull() to make a vector
+er_year %>% unique() # similar to distinct()
 ```
 
 ## Base R functions you might see: `length` and `unique`
@@ -396,16 +402,16 @@ CO_heat_ER_gen %>% unique() # similar to distinct()
 These functions require a column as a vector using `pull()`.
 
 ```{r, message = FALSE}
-CO_heat_ER_gen %>% unique() %>% length() # similar to n_distinct()
+er_year %>% unique() %>% length() # similar to n_distinct()
 ```
 
 ## * New! * Many dplyr functions now have a `.by=` argument
 
-Pipe `CO_heat_ER` into `group_by`, then pipe that into `summarize`:
+Pipe `er` into `group_by`, then pipe that into `summarize`:
 
 ```{r eval = FALSE}
-CO_heat_ER %>%
-  group_by(gender) %>%
+er %>%
+  group_by(year) %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE),
             max_visits = max(visits, na.rm = TRUE))
 ```
@@ -413,10 +419,10 @@ CO_heat_ER %>%
 is the same as..
 
 ```{r eval = FALSE}
-CO_heat_ER %>%
+er %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE),
             max_visits = max(visits, na.rm = TRUE),
-            .by = county)
+            .by = year)
 ```
 
 
@@ -457,7 +463,7 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
     * `colSums(x)`: takes the sum of each column of x
 
 ```{r}
-yearly_co2 <- yearly_co2_emissions
+yearly_co2 <- read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
 ```
 
 
@@ -465,7 +471,7 @@ yearly_co2 <- yearly_co2_emissions
 
 Get means for each row.
 
-Let's see what the mean CO2 emissions is across years for each row (country):
+Let's see what the mean CO2 emissions is across the years 2010-2014 for each row (country):
 
 ```{r}
 yearly_co2 %>%
