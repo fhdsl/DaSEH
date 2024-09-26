@@ -8,7 +8,6 @@ output:
 
 ```{r, echo = FALSE, message = FALSE}
 library(dplyr)
-library(dasehr)
 library(knitr)
 library(stringr)
 library(tidyr)
@@ -207,8 +206,11 @@ get_summary <- function(dataset, col_name) {
 Examples:
 
 ```{r}
-get_summary(calenviroscreen, CES4.0Score)
-get_summary(haa5, perc_pop_exposed_to_exceedances)
+er <- read_csv(file = "https://daseh.org/data/CO_ER_heat_visits.csv")
+get_summary(er, visits)
+
+yearly_co2 <- read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+get_summary(yearly_co2, `2014`)
 ```
 
 ## Summary
@@ -239,23 +241,17 @@ These functions take the form:
 sapply(<a vector, list, data frame>, some_function)
 ```
 
-## CalEnviroScreen
-
-This dataset was gathered by the California Office of Environmental Health Hazard Assessment. CalEnviroScreen ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. Read more at https://calenviroscreen-oehha.hub.arcgis.com/.
-
-```{r}
-head(calenviroscreen)
-```
-
-
 ## Using your custom functions: `sapply()`
+
+Let's apply a function to look at the CO heat-related ER visits dataset.
 
 `r emo::ji("rotating_light")` There are no parentheses on the functions! `r emo::ji("rotating_light")`
 
 You can also pipe into your function.
 
 ```{r comment=""}
-sapply(calenviroscreen, class) # also: calenviroscreen %>% sapply(class)
+sapply(er, class) 
+# also: er %>% sapply(class)
 ```
 
 
@@ -264,8 +260,8 @@ sapply(calenviroscreen, class) # also: calenviroscreen %>% sapply(class)
 Use the `div_100` function we created earlier to convert 0-100 percentiles to proportions.
 
 ```{r}
-calenviroscreen %>%
-  select(ends_with("Pctl")) %>%
+er %>%
+  select(ends_with("cl")) %>%
   sapply(div_100) %>%
   head()
 ```
@@ -276,8 +272,8 @@ calenviroscreen %>%
 Also called "anonymous function".
 
 ```{r comment=""}
-calenviroscreen %>%
-  select(ends_with("Pctl")) %>%
+er %>%
+  select(ends_with("cl")) %>%
   sapply(function(x) x / 100) %>%
   head()
 ```
@@ -286,8 +282,8 @@ calenviroscreen %>%
 ## Anonymous functions: alternative syntax
 
 ```{r comment=""}
-calenviroscreen %>%
-  select(ends_with("Pctl")) %>%
+er %>%
+  select(ends_with("cl")) %>%
   sapply(\(x) x / 100) %>%
   head()
 ```
@@ -299,15 +295,11 @@ calenviroscreen %>%
 
 Already know how to use functions to modify columns using `mutate()` or calculate summary statistics using `summarize()`.
 
-- Pesticides - pounds of selected active pesticide / square mile  
-- Poverty - percent of population living below two times the federal poverty level  
-- LowBirthWeight - Percent low birth weight
 
 ```{r}
-calenviroscreen %>%
-  summarize(max_pest = max(Pesticides, na.rm = T),
-            max_pov = max(Poverty, na.rm = T),
-            low_bw = max(LowBirthWeight, na.rm = T))
+er %>%
+  summarize(max_visits = max(visits, na.rm = T),
+            max_rate = max(rate, na.rm = T))
 ```
 
 
@@ -333,9 +325,9 @@ mutate(across(<columns>,function))
 Combining with `summarize()`
 
 ```{r warning=FALSE}
-calenviroscreen %>%
+er %>%
   summarize(across(
-    c(Pesticides, Poverty, LowBirthWeight),
+    c(visits, rate),
     mean # no parentheses
   ))
 ```
@@ -345,9 +337,9 @@ calenviroscreen %>%
 Add anonymous function to include additional arguments (e.g., `na.rm = T`).
 
 ```{r warning=FALSE}
-calenviroscreen %>%
+er %>%
   summarize(across(
-    c(Pesticides, Poverty, LowBirthWeight),
+    c(visits, rate),
     function(x) mean(x, na.rm = T)
   ))
 ```
@@ -357,10 +349,10 @@ calenviroscreen %>%
 Can use with other tidyverse functions like `group_by`!
 
 ```{r}
-calenviroscreen %>%
-  group_by(CaliforniaCounty) %>% 
+er %>%
+  group_by(year) %>% 
   summarize(across(
-    c(Pesticides, Poverty, LowBirthWeight),
+    c(visits, rate),
     function(x) mean(x, na.rm = T)
   ))
 ```
@@ -371,9 +363,9 @@ calenviroscreen %>%
 Using different `tidyselect()` options (e.g., `starts_with()`, `ends_with()`, `contains()`)
 
 ```{r warning=FALSE}
-calenviroscreen %>% 
-  group_by(CaliforniaCounty) %>%
-  summarize(across(contains("PM"), mean))
+er %>% 
+  group_by(year) %>%
+  summarize(across(contains("cl"), mean, na.rm=T))
 ```
 
 
@@ -394,14 +386,14 @@ calenviroscreen %>%
 
 Combining with `mutate()` - the `replace_na` function
 
-Here we will use the `yearly_co2_emissions` data from `dasehr`
+Let's look at the yearly CO2 emissions dataset we loaded earlier.
 
 ```replace_na({data frame}, {list of values})```
 or
 ```replace_na({vector}, {single value})```
 
 ```{r warning=FALSE, message=FALSE}
-yearly_co2_emissions %>%
+yearly_co2 %>%
   select(country, starts_with("194")) %>%
   mutate(across(
     c(`1943`, `1944`, `1945`),

@@ -1,33 +1,30 @@
 ---
-classoption:
-- landscape
+classoption: landscape
+output: pdf_document
 ---
 
 # Day 2 Cheatsheet
 
-## Basic R
+## Reproducibility
 
 ### Major concepts
 
-- **Package** - a package in R is a bundle or “package” of code (and or possibly data)
-that can be loaded together for easy repeated use or for sharing with others.
-- The R console is a full calculator:
-  - `+`, `-`, `/`, `*` are add, subtract, divide and multiply
-  - `^` or `**` is power
-  - parentheses – ( and ) – work with order of operations
-  - %% finds the remainder
-- `#` is the comment symbol; nothing to its right is evaluated.
-
+- **Reproducibility** - A different analyst re-performs the analysis with the same code and the same data and obtains the same
+result.
+- **Repeatable** - keeping everything the same but repeating the analysis - do we get the same results
+- **Reproducible** - using the same data and analysis but in the hands of another researcher - do we get the same results?
+- **Replicable** - with new data do we obtain the same inferences?
 
 ### Functions
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
-| Base `R`| [`<-`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/assignOps.html)| `x <- 1`| Assigns a name to something in the R environment.|
-| Base `R`| [`c()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/c)| `x <- c(1, 3)`| Combines values into a vector or list. |
-| Base `R`| [`str(x)`](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/str)|`str(x)`| Gets a summary of the object `x` structure.|
-| Base `R`| [`class(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/class)|`class(x)`| Returns the type of the values in object `x`.|
-| Base `R`| [`print(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/print)|`print(x)`| Prints out contents of `x`.|
-| Base `R`| [`length(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/length)|`length(x)`| Returns how long the object `x` is. |
+| Base `R`| [`sessionInfo()`](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/sessionInfo) |`sessionInfo()`| Returns the R version information, the OS, and the attached packages in the current R session.|
+
+### More resources
+- [The RMarkdown book](https://bookdown.org/yihui/rmarkdown/)
+- [Jenny Bryan's organizational strategies](https://www.stat.ubc.ca/~jenny/STAT545A/block19_codeFormattingOrganization.html).
+- [Write efficient R code for science](https://www.earthdatascience.org/courses/earth-analytics/automate-science-workflows/write-efficient-code-for-science-r/).
+- [Reproducibility in Cancer Informatics course](https://jhudatascience.org/Reproducibility_in_Cancer_Informatics/introduction.html)
 
 <div style="page-break-after: always;"></div>
 
