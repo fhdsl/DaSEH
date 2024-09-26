@@ -44,7 +44,7 @@ Look at the column names using `colnames` - do you notice any patterns?
 Let's rename the columns "co2" from this type of format: "2011" to this: "CO2_2011" using `rename`.
 Be sure to do this for all years 2012, 2013, and 2014. Make sure that you end up with the renamed columns in a data frame named `co2` here and in subsequent steps.
 
-Hint: If you run code to rename the columns and store back into a data frame of the same name like `co2` you will not be able to re-run the renaming code without error (the columns are already renamed so it won't be able to find the oldname of the column anymore)
+Hint: If you run code to rename the columns and store back into a data frame of the same name like `co2` you will not be able to re-run the renaming code without error (the columns are already renamed so it won't be able to find the old name of the column anymore)
 
 ```
 # General format
