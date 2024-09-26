@@ -268,6 +268,8 @@ knitr::include_graphics("images/forrest-gump-running.gif")
 
 -   [Install RStudio](https://www.rstudio.com/products/rstudio/download/)
 
+-   [R Tools Issue](https://daseh.org/help.html#im-getting-an-error-related-to-something-called-rtools)
+
 More detailed instructions [on the website](https://daseh.org/docs/module_details/day0.html).
 
 RStudio is an **integrated development environment** (IDE) that makes it easier to work with R.
