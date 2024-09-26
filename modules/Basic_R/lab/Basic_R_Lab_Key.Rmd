@@ -9,7 +9,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Instructions: Paste your code from the console in the grey boxes below.
+Instructions: Paste your code from the console in the gray boxes below.
 
 # Part 1
 
