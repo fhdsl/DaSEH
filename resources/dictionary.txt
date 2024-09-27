@@ -21,6 +21,7 @@ birthweight
 boardings
 Boardings
 Bonferroni
+bou
 bp
 BSPH
 bw
@@ -64,6 +65,7 @@ DaSEH's
 Dataquest
 Dayananda
 de
+DenverSummerHeat
 DESeq
 df
 Diedrich
@@ -211,6 +213,7 @@ recoding
 Recoding
 REDCap
 reddit
+relevel
 Replicability
 Replicable
 reportee

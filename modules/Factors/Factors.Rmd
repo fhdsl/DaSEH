@@ -76,22 +76,13 @@ x_fact
 
 ## A Factor Example{.smaller}
 
-We will use data on heat-related visits to the ER from the State of Colorado, separated by age category, for 2011-2022. More on this data can be found here: https://coepht.colorado.gov/heat-related-illness
+We will use a slightly different version of the data on heat-related visits to the ER from the State of Colorado.
 
-You can download the data from the DaSEH website here: https://daseh.org/data/CO_ER_heat_visits_by_age_data.csv
-
-This dataset is also available in the `dasehr` package.
-
-We will limit the data to only one of the `gender` categories - we will choose "Both genders" because of data missingness.
+For today, we are looking at data that reports ER visits by age category.
 
 ```{r}
-library(dasehr)
-er_visits_age <- CO_heat_ER_byage
+er_visits_age <- read_csv("https://daseh.org/data/CO_ER_heat_visits_by_age.csv")
 
-#er_visits_age <- read_csv("https://daseh.org/data/CO_ER_heat_visits_by_age_data.csv")
-
-er_visits_age <- er_visits_age %>% 
-  filter(str_detect(GENDER, "Both genders")) 
 ```
 
 
@@ -101,11 +92,11 @@ er_visits_age <- er_visits_age %>%
 head(er_visits_age)
 ```
 
-Notice that `AGE` is a `chr` variable. This indicates that the values are **character** strings.
+Notice that `age` is a `chr` variable. This indicates that the values are **character** strings.
 
 R does not realize that there is any order related to the `AGE` values. It will assume that it is **alphabetical** (for numbers, this means ascending order).
 
-However, we know that the order is: **0-4 years old**, **5-14 years old**, **15-34 years old**, **35-64 years old**, **65+ years old**, and **All ages**.
+However, we know that the order is: **0-4 years old**, **5-14 years old**, **15-34 years old**, **35-64 years old**, and **65+ years old**.
 
 ## For the next steps, let's take a subset of data.
 
@@ -122,7 +113,7 @@ Let's make a plot first.
 
 ```{r, fig.height= 3, warning = F}
 er_visits_age_subset %>%
-  ggplot(mapping = aes(x = AGE, y = RATE)) +
+  ggplot(mapping = aes(x = age, y = rate)) +
   geom_boxplot() +
   theme_bw(base_size = 12) # make all labels size 12
 ```
@@ -131,17 +122,17 @@ OK this is very useful, but it is a bit difficult to read. We expect the values 
 
 ## Change to factor
 
-Currently `AGE` is class `character` but let's change that to class `factor` which allows us to specify the levels or order of the values.
+Currently `age` is class `character` but let's change that to class `factor` which allows us to specify the levels or order of the values.
 
 ```{r}
 er_visits_age_fct <-
   er_visits_age_subset %>%
-  mutate(AGE = factor(AGE,
-    levels = c("0-4 years old", "5-14 years old", "15-34 years old", "35-64 years old", "65+ years old", "All ages")
+  mutate(age = factor(age,
+    levels = c("0-4 years old", "5-14 years old", "15-34 years old", "35-64 years old", "65+ years old")
   ))
 
 er_visits_age_fct %>%
-  pull(AGE) %>%
+  pull(age) %>%
   levels()
 ```
 
@@ -157,7 +148,7 @@ Now let's make our plot again:
 
 ```{r, fig.height= 3, warning = FALSE}
 er_visits_age_fct %>%
-  ggplot(mapping = aes(x = AGE, y = RATE)) +
+  ggplot(mapping = aes(x = age, y = rate)) +
   geom_boxplot() +
   theme_bw(base_size = 12)
 ```
@@ -170,7 +161,7 @@ Character data is arranged alphabetically (if letters) or by ascending first num
 
 ```{r}
 er_visits_age_subset %>%
-  arrange(AGE)
+  arrange(age)
 ```
 
 Notice that the order is not what we would hope for!
@@ -181,7 +172,7 @@ Factor data is arranged by level.
 
 ```{r}
 er_visits_age_fct %>%
-  arrange(AGE)
+  arrange(age)
 ```
 
 Nice! Now this is what we would want!
@@ -192,8 +183,8 @@ Tables grouped by a character are arranged alphabetically (if letters) or by asc
 
 ```{r}
 er_visits_age_subset %>%
-  group_by(AGE) %>%
-  summarize(total_visits = sum(VISITS, na.rm = T))
+  group_by(age) %>%
+  summarize(total_visits = sum(visits, na.rm = T))
 ```
 
 ## Making tables with factors
@@ -202,19 +193,19 @@ Tables grouped by a factor are arranged by level.
 
 ```{r}
 er_visits_age_fct %>%
-  group_by(AGE) %>%
-  summarize(total_visits = sum(VISITS, na.rm = T))
+  group_by(age) %>%
+  summarize(total_visits = sum(visits, na.rm = T))
 ```
 
 ## `forcats` for ordering{.smaller}
 
-What if we wanted to order `AGE` by increasing `RATE``?
+What if we wanted to order `age` by increasing `rate`?
 
 ```{r, fig.height= 3, warning=FALSE}
 library(forcats)
 
 er_visits_age_fct %>%
-  ggplot(mapping = aes(x = AGE, y = RATE)) +
+  ggplot(mapping = aes(x = age, y = rate)) +
   geom_boxplot() +
   theme_bw(base_size = 12)
 ```
@@ -239,7 +230,7 @@ We can order a factor by another variable by using the `fct_reorder()` function 
 library(forcats)
 
 er_visits_age_fct %>%
-  ggplot(mapping = aes(x = fct_reorder(AGE, RATE, mean), y = RATE)) +
+  ggplot(mapping = aes(x = fct_reorder(age, rate, mean), y = rate)) +
   geom_boxplot() +
   labs(x = "Age Category") +
   theme_bw(base_size = 12)
@@ -251,7 +242,7 @@ er_visits_age_fct %>%
 library(forcats)
 
 er_visits_age_fct %>%
-  ggplot(mapping = aes(x = fct_reorder(AGE, RATE, mean, .desc = TRUE), y = RATE)) +
+  ggplot(mapping = aes(x = fct_reorder(age, rate, mean, .desc = TRUE), y = rate)) +
   geom_boxplot() +
   labs(x = "Age Category") +
   theme_bw(base_size = 12)
@@ -260,13 +251,13 @@ er_visits_age_fct %>%
 ## forcats for ordering.. can be used to sort datasets
 
 ```{r, fig.height= 3, warning=FALSE}
-er_visits_age_fct %>% pull(AGE) %>% levels() # By year order
+er_visits_age_fct %>% pull(age) %>% levels() # By year order
 er_visits_age_fct <- er_visits_age_fct %>%
   mutate(
-    AGE = fct_reorder(AGE, RATE, mean)
+    age = fct_reorder(age, rate, mean)
   )
 
-er_visits_age_fct %>% pull(AGE) %>% levels() # by increasing mean dropouts
+er_visits_age_fct %>% pull(age) %>% levels() # by increasing mean visits
 ```
 
 ## Checking Proportions with `fct_count()`
@@ -275,7 +266,7 @@ The `fct_count()` function of the `forcats` package is helpful for checking that
 
 ```{r}
 er_visits_age_fct %>%
-  pull(AGE) %>%
+  pull(age) %>%
   fct_count(prop = TRUE)
 ```
 

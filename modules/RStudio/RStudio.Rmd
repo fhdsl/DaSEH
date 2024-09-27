@@ -123,7 +123,7 @@ Super useful "cheat sheet": [LINK](https://raw.githubusercontent.com/rstudio/che
 knitr::include_graphics("images/rstudio_sheet.png")
 ```
 
-## R Markdown files look different form scripts
+## R Markdown files look different from scripts
 
 It will look like this with text in it, unlike a script.
 
