@@ -320,13 +320,13 @@ Other file types
 
 Don't forget to use `<-` to assign your data to an object!
 
+[Posit's Data Import Cheatsheet](https://rstudio.github.io/cheatsheets/data-import.pdf)
 
 ## Lab
 
 🏠 [Class Website](https://daseh.org/)
 
 💻 [Data Input Lab](https://daseh.org/modules/Data_Input/lab/Data_Input_Lab.Rmd)
-
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
