@@ -11,13 +11,13 @@ It's helpful to [install software](modules/Setup/Setup.html) before you start Da
 
 ## Online Overview
 
-| Time (ET)         | Content   |
-|-------------------|-----------|
-| 1:30pm - 2:30pm   | Session 1 |
-| 2:30pm - 2:40pm   | Break     |
-| 2:40pm - 3:40pm   | Session 2 |
-| 3:40pm - 3:50pm   | Break     |
-| 3:50pm - 5:00pm   | Session 3 |
+| Time (PT)           | Content   |
+|---------------------|-----------|
+| 10:30am - 11:30am   | Session 1 |
+| 11:30am - 11:40am   | Break     |
+| 11:40am - 12:40pm   | Session 2 |
+| 12:40pm - 12:50pm   | Break     |
+| 12:50pm - 2:00pm    | Session 3 |
 
 *Note: Timing is approximate*
 
