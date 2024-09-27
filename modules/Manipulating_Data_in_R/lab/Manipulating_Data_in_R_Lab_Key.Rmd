@@ -1,7 +1,7 @@
 ---
 title: "Manipulating Data in R Lab - Key"
 output: html_document
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -44,7 +44,10 @@ colnames(co2)
 
 ### 1.3
 
-Let's rename the column "2011" in "co2" to "CO2_2011" using `rename`. Repeat this for the years 2012, 2013, and 2014. Make sure to reassign to `co2` here and in subsequent steps.
+Let's rename the columns "co2" from this type of format: "2011" to this: "CO2_2011" using `rename`.
+Be sure to do this for all years 2012, 2013, and 2014. Make sure that you end up with the renamed columns in a data frame named `co2` here and in subsequent steps.
+
+Hint: If you run code to rename the columns and store back into a data frame of the same name like `co2` you will not be able to re-run the renaming code without error (the columns are already renamed so it won't be able to find the old name of the column anymore)
 
 ```
 # General format
@@ -146,7 +149,7 @@ co2_compare
 
 Modify the code from Question P.1:
 
--  Choose 4 different years to examine 
+-  Choose 4 different years to examine
 -  Select different countries to compare
 -  Call your data `co2_compare2`
 
@@ -177,7 +180,7 @@ Open the `Yearly_CC_Disasters` dataset using the url below. Save the dataset as 
 
 
 ```{r 2.1response}
-cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv") %>% 
+cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv") %>%
   rename(country = Country)
 ```
 
@@ -218,7 +221,7 @@ What countries are present in "co2" that are not present in "cc"? Use `anti_join
 
 ```
 # General format
-anti_join(data1, data2, by = "") %>% select(index)
+anti_join(data1, data2, by = "") %>% select(columnname)
 ```
 
 ```{r 2.4response}
@@ -234,7 +237,7 @@ anti_join(cc, co2, by = "country") %>% select(country) %>% distinct()
 Take the code from 2.2 and save the output as an object "co2_cc". Filter the dataset. Filter so that you only keep Indonesia and Canada.
 
 ```{r P.3response}
-co2_cc <- full_join(co2, cc, by = "country") %>% 
+co2_cc <- full_join(co2, cc, by = "country") %>%
   filter(country %in% c("Indonesia", "Canada"))
 ```
 
@@ -279,7 +282,7 @@ Pivot the dataset so that there are columns for country, emissions, and a column
 
 ```{r P.6response}
 co2_cc %>% pivot_wider(
-  names_from = Indicator, 
+  names_from = Indicator,
   values_from = disasters
 )
 ```

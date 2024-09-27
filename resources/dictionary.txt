@@ -21,12 +21,14 @@ birthweight
 boardings
 Boardings
 Bonferroni
+bou
 bp
 BSPH
 bw
 byquarter
 calenviroscreen
 CalEnviroScreen
+calenviroscreen
 CDS
 CES
 ces
@@ -63,6 +65,7 @@ DaSEH's
 Dataquest
 Dayananda
 de
+DenverSummerHeat
 DESeq
 df
 Diedrich
@@ -208,6 +211,7 @@ recoding
 Recoding
 REDCap
 reddit
+relevel
 Replicability
 Replicable
 reportee
@@ -233,6 +237,7 @@ SARS
 Savonen
 sessionInfo
 setosa
+sessionInfo
 ShareAlike
 skimr
 SRC
