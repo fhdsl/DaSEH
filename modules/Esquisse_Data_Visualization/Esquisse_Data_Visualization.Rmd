@@ -143,39 +143,38 @@ knitr::include_graphics("images/stop.png")
 
 ## Wide & Long Data Example
 
-Let's examine a subset of the dataset for heat-related ER visits in Colorado, showing only data for Boulder and Denver counties.
+Let's look at the CO heat-related ER visits dataset again. This time we want to look at only Boulder and Denver counties, and only the visit and year data.
 
 ```{r message=FALSE}
-library(dasehr)
 library(dplyr)
-
-wide_heat <- CO_heat_ER_wide
-glimpse(wide_heat)
+er <- read_csv(file =
+    "https://daseh.org/data/CO_ER_heat_visits.csv")
+long_er <- er %>% filter(county == c("Denver", "Boulder")) %>% select(c("county", "year", "visits"))
+glimpse(long_er)
 ```
 
-## Long Data
+## Wide Data
+
+As a comparison, let's also load a wide version of this dataset.
 
 ```{r}
-library(tidyr)
-long_heat <- wide_heat %>%
-  pivot_longer(
-    cols = starts_with("20"),
-    names_to = "year",
-    values_to = "visit_rate"
-  )
+
+wide_er <- read_csv(file =
+    "https://daseh.org/data/CO_heat_er_visits_DenverBoulder_wide.csv")
 ```
 
-## Long Data
+## Wide vs Long Data
 
 ```{r}
-glimpse(long_heat)
+head(long_er)
+head(wide_er)
 ```
 
 ## Make a plot of visit rates by year for different counties
 
 ```{r, eval = FALSE}
-esquisser(wide_heat) # county as x...? Tricky!
-esquisser(long_heat) #county as x, visit rate as y, year as fill
+esquisser(wide_er) # county as x...? Tricky!
+esquisser(long_er) #county as x, visit rate as y, year as fill
 ```
 
 ## Some Alternatives to `esquisse`
