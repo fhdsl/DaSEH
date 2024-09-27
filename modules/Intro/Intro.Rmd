@@ -278,11 +278,11 @@ More on that soon!
 
 ## Summary
 
-🏠 [Class Website - https://daseh.org/](https://daseh.org/) - Logistics, resources, and help!
+🏠 [Class Website - `https://daseh.org/`](https://daseh.org/) - Logistics, resources, and help!
 
-📝 [Research Survey](https://forms.gle/vxp8vxdN2Ck2j7uY6)
+📝 [Research Survey - `https://forms.gle/vxp8vxdN2Ck2j7uY6`](https://forms.gle/vxp8vxdN2Ck2j7uY6)
 
-🩺 [Pulse Check](%60r%20config::get(%22google_survey%22)%60)
+🩺 [Pulse Check - `r config::get("google_survey")`](`r config::get("google_survey")`)
 
 ## Summary
 
