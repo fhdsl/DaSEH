@@ -192,26 +192,22 @@ knitr::include_graphics("images/session_info.png")
 ```
 
 
-## Gut Check
+## GUT CHECK: Why is reproducibility so important?
 
-Why is reproducibility so important?
+A. It helps to ensure that your code is working consistently and it helps others understand what you did 
 
-a) It helps to ensure that your code is working consistently and it helps others understand what you did
-b) It ensures that your code is correct
+B. It ensures that your code is correct 
 
-## Gut Check
+## GUT CHECK: What is NOT a practice to improve the reproducibility of our work?
 
-What is NOT a practice to improve the reproducibility of our work?
+A. Using R Markdown files to describe what your code is doing 
 
-a) using R Markdown files to describe what your code is doing
-b) Using scripts instead of R Markdown files
-c) testing your code with R Markdown files or the run previous button
-d) regularly cleaning the environment
+B. Using scripts instead of R Markdown files   
 
-## Lab 1
+C. Testing your code with R Markdown files or the run previous button
 
-🏠 [Class Website](https://daseh.org/)    
-💻 [Lab](https://daseh.org/modules/Reproducibility/lab/Reproducibility_Lab.Rmd)
+D. Regularly cleaning the environment 
+
 
 ## More resources
 
@@ -233,7 +229,9 @@ To help make your work more reproducible:
 - Tell your future self and others what you did!
 - Print session info!
 
-🏠 [Class Website](https://daseh.org/)
+🏠 [Class Website](https://daseh.org/)    
+💻 [Lab](https://daseh.org/modules/Reproducibility/lab/Reproducibility_Lab.Rmd)
+
 
 ```{r, fig.alt="The End", out.width = "25%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
