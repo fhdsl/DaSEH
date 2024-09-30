@@ -347,19 +347,29 @@ library(janitor)
 
 ## janitor `clean_names`
 
-The `clean_names` function can intuit what fixes you might need. Here it make sure year names aren't just a number, so that the colnames don't need ticks or quotes to be used.
+The `clean_names` function can intuit what fixes you might need. 
 
 The yearly_co2_emissions dataset contains estimated CO2 emissions for 265 countries between the years 1751 and 2014.
 
 ```{r}
 #library(dasehr)
-yearly_co2 <- dasehr::yearly_co2_emissions
+#yearly_co2 <- dasehr::yearly_co2_emissions
 # or this:
 yearly_co2 <- 
   read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
-head(yearly_co2, n = 2)
-clean_names(yearly_co2)
+```
 
+## yearly_co2 column names
+
+```{r}
+head(yearly_co2, n = 2)
+```
+
+## janitor `clean_names` can intuit fixes
+The `clean_names` function can intuit what fixes you might need. Here it make sure year names aren't just a number, so that the colnames don't need ticks or quotes to be used.
+
+```{r}
+clean_names(yearly_co2)
 ```
 
 ## more of clean_names
