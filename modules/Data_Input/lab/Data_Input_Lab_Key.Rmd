@@ -58,7 +58,7 @@ What is the dataset object called? You can find this information in the Console 
 Preview the data by examining the Environment. How many observations and variables are there? Enter your answer as a comment using `#`.
 
 ```{r 1.5response}
-# 33 obs of 11 variables
+# 22 obs of 11 variables
 ```
 
 # Practice on Your Own!
