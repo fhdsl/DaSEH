@@ -206,7 +206,7 @@ Re-order the rows of `ces_Alameda` by `Traffic` value in increasing order. Use `
 
 ```
 
-### 1.4
+### 3.4
 
 Create a new variable in `ces_Alameda` called `Asthma100`, which  is equal to `Asthma` divided by 100, using `mutate()`(don't forget to reassign `ces_Alameda`). Use pipes `%>%`.
 
