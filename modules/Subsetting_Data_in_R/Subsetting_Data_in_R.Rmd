@@ -695,7 +695,7 @@ head(er_30_Den)
 
 ## Using the `pipe` (comes with `dplyr`):
 
-The pipe `%>%` makes this much more readable.  It reads left side "pipes" into right side.  RStudio `CMD/Ctrl + Shift + M` shortcut. Pipe `tb` into `filter`, then pipe that into `select`:
+The pipe `%>%` makes this much more readable.  It reads left side "pipes" into right side.  RStudio `CMD/Ctrl + Shift + M` shortcut. Pipe `er_30` into `filter`, then pipe that into `select`:
 
 
 ```{r}
@@ -839,9 +839,9 @@ For example, let say we just wanted `year` to be before `rate``.
 
 head(er_30, 1)
 
-tb_carb <- relocate(er_30, year, .before = rate)
+er_year_fix <- relocate(er_30, year, .before = rate)
 
-head(tb_carb, 1)
+head(er_year_fix, 1)
 ```
 
 
