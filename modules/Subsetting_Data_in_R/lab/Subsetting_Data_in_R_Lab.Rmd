@@ -13,7 +13,7 @@ In this lab you can use the interactive console to explore but please record you
 
 # Part 1
 
-First let's get load our packages.
+First let's load our packages.
 
 
 ```{r, message = FALSE}
@@ -27,7 +27,6 @@ We'll again work with the CalEnviroScreen dataset, which contains information ab
 First, load the data from the website, either manually or by using the Data Import menu (find it by clicking on File).
 
 ```{r}
-library(dasehr)
 ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
 ```
 
@@ -40,7 +39,7 @@ Check that it worked by seeing if you have the `ces` data.
 
 ### 1.1
 
-What class is `ER`?
+What class is `ces`?
 
 ```{r 1.1response}
 
@@ -91,7 +90,7 @@ Create a subset of the `ces` that only contains the columns: `CensusTract`, `Tra
 
 `CensusTract`: this is a small, relatively permanent area within a county used to present data from the census and other statistical programs
 
-`Traffic`: Traffic density in vehicle-kilometers per hour per road length, within 150 meters of the census tract boundary
+`Traffic`: A measure of traffic density in vehicle-kilometers per hour per road length, within 150 meters of the census tract boundary. A higher `Traffic` value indicates the presence of more traffic
 
 `Asthma`: Age-adjusted rate of emergency department visits for asthma
 
@@ -103,7 +102,7 @@ Create a subset of the `ces` that only contains the columns: `CensusTract`, `Tra
 
 Start with `ces` again instead of the dataset you just made. Subset the data to only include the `CensusTract` column and the columns that end with "Pctl". Hint: use  `select()` and `ends_with()`. Assign this subset of the data to be `ces2`. Again take a look at the data and check the dimensions.
 
-"Pctl" stands for "percentile".
+"Pctl" stands for "percentile". 
 
 ```{r 2.2response}
 
@@ -111,7 +110,7 @@ Start with `ces` again instead of the dataset you just made. Subset the data to 
 
 ### 2.3
 
-Pull the variable `Asthma` from `ces_sub`. How does this differ form selecting it? Use head() to take a look at both options.
+Pull the variable `Asthma` from `ces_sub`. How does this differ from selecting it? Use head() to take a look at both options.
 
 ```{r 2.3response}
 
@@ -119,7 +118,7 @@ Pull the variable `Asthma` from `ces_sub`. How does this differ form selecting i
 
 ### 2.4
 
-Subset the rows of `ces2` that have **more** than 100 for `Asthma` - how many rows are there? Use `filter()`.
+Subset the rows of `ces_sub` that have **more** than 100 for `Asthma` - how many rows are there? Use `filter()`.
 
 ```{r 2.4response}
 
@@ -127,7 +126,7 @@ Subset the rows of `ces2` that have **more** than 100 for `Asthma` - how many ro
 
 ### 2.5
 
-Subset the rows of `ces` that have an `Traffic` value **less** than 500 and an `Asthma` value **more** than 100  - how many are there?
+Subset the rows of `ces_sub` that have a `Traffic` value **less** than 500 and an `Asthma` value **more** than 100  - how many are there?
 
 
 ```{r 2.5response}
@@ -136,7 +135,7 @@ Subset the rows of `ces` that have an `Traffic` value **less** than 500 and an `
 
 ### 2.6
 
-Subset the rows of `ces` that have an `Traffic` value **less than or equal to**  500 and an `Asthma` value **more** than 100  - how many are there?
+Subset the rows of `ces_sub` that have a `Traffic` value **less than or equal to**  500 and an `Asthma` value **more** than 100  - how many are there?
 
 ```{r 2.6response}
 
@@ -144,7 +143,7 @@ Subset the rows of `ces` that have an `Traffic` value **less than or equal to** 
 
 ### 2.7
 
-Why don't the answers for 2.5 and 2.6 differ?
+We used two different criteria for subsetting in 2.5 and 2.6. Why are the number of rows the same for 2.5 and 2.6?
 
 ```{r 2.7response}
 
@@ -165,7 +164,7 @@ How many rows have both?
 
 ### P.3
 
-Select the variables that contain the letter "a" from `ces`.
+Select the variables that contain the letter "a" from `ces`. Remember, the variables are the column names.
 
 ```{r P.3response}
 
@@ -208,7 +207,7 @@ Re-order the rows of `ces_Alameda` by `Traffic` value in increasing order. Use `
 
 ### 3.4
 
-Create a new variable in `ces_Alameda` called `Asthma100`, which  is equal to `Asthma` divided by 100, using `mutate()`(don't forget to reassign `ces_Alameda`). Use pipes `%>%`.
+Create a new variable in `ces_Alameda` called `Asthma100`, which  is equal to `Asthma` divided by 100, using `mutate()`(don't forget to reassign `ces_Alameda`). Use pipes `%>%`. Take a look at the data now!
 
 ```
 # General format
@@ -232,9 +231,9 @@ Move the `Asthma100` column to be before `Traffic` in the `ces_Alameda` dataset.
 
 ### P.5
 
-How can you find the values of `Traffic` for areas within zip code 90745 (in Los Angeles county) that also have a CES4.0 score in the second highest percentile range (90-95%) - using the initial ces data -  without just looking at the data manually and instead use functions we learned today?
+Using the original `ces` data, how can you find the values of `ApproxLocation` for areas within zip code 90745 (in Los Angeles county) that also have a CES4.0 score in the range 90-95% - without just looking at the data manually and instead use functions we learned today? (Hint: It can be helpful to look at your data first)
 
-`CES4.0PercRange`: Percentile of the CalEnviroScreen score, grouped by 5% increments. The CalEnviroScreen score is a measure of the negative environmental effects seen in a given region.
+`CES4.0PercRange`: Percentile of the CalEnviroScreen score, grouped by 5% increments. The CalEnviroScreen score is a measure of the negative environmental effects seen in a given region. Those zip codes that have a percentile range of 90-95% are those regions that experience the highest effects of pollution in California.
 
 ```{r P.5response}
 
