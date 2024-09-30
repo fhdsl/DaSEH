@@ -341,6 +341,9 @@ D) All of the above
 
 💻 [Lab](https://daseh.org/modules/RStudio/lab/RStudio_Lab.Rmd)
 
+🗒 [Rstudio Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
+🗒 [Class Cheatsheet](https://daseh.org/modules/cheatsheets/Day-1.pdf)
+
 ```{r, fig.alt="The End", out.width = "25%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
