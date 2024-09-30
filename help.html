@@ -268,6 +268,9 @@ $(document).ready(function () {
   <a href="materials_schedule.html">Materials + Schedule</a>
 </li>
 <li>
+  <a href="data.html">Data</a>
+</li>
+<li>
   <a href="resources.html">Resources</a>
 </li>
 <li>
@@ -350,14 +353,14 @@ code{
 <p>Here we are creating a new object from an existing one:</p>
 <pre class="r"><code>new_rivers &lt;- sample(rivers, 5)
 new_rivers</code></pre>
-<pre><code>## [1]  430  981  280  352 3710</code></pre>
+<pre><code>## [1]  320  720  525  250 1270</code></pre>
 <p>Using just this will only print the result and not actually change <code>new_rivers</code>:</p>
 <pre class="r"><code>new_rivers + 1</code></pre>
-<pre><code>## [1]  431  982  281  353 3711</code></pre>
+<pre><code>## [1]  321  721  526  251 1271</code></pre>
 <p>If we want to modify <code>new_rivers</code> and save that modified version, then we need to reassign <code>new_rivers</code> like so:</p>
 <pre class="r"><code>new_rivers &lt;- new_rivers + 1
 new_rivers</code></pre>
-<pre><code>## [1]  431  982  281  353 3711</code></pre>
+<pre><code>## [1]  321  721  526  251 1271</code></pre>
 <p>If we forget to reassign this can cause subsequent steps to not work as expected because we will not be working with the data that has been modified.</p>
 <hr />
 </div>
@@ -406,7 +409,7 @@ iris %&gt;% pull(Species) %&gt;% str_detec(&quot;setosa&quot;)</code></pre>
 <p>Make sure you run something like this, with the <code>&lt;-</code> operator:</p>
 <pre class="r"><code>rivers2 &lt;- new_rivers + 1
 rivers2</code></pre>
-<pre><code>## [1]  432  983  282  354 3712</code></pre>
+<pre><code>## [1]  322  722  527  252 1272</code></pre>
 <hr />
 </div>
 <div id="error-unexpected-in-error-unexpected-in-error-unexpected-x-in" class="section level2">
