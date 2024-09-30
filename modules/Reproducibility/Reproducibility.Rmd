@@ -230,7 +230,8 @@ To help make your work more reproducible:
 - Print session info!
 
 🏠 [Class Website](https://daseh.org/)    
-💻 [Lab](https://daseh.org/modules/Reproducibility/lab/Reproducibility_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Reproducibility/lab/Reproducibility_Lab.Rmd)  
+🗒 [Class Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)
 
 
 ```{r, fig.alt="The End", out.width = "25%", echo = FALSE, fig.align='center'}
