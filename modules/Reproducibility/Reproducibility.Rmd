@@ -223,9 +223,9 @@ These are just some quick tips, for more information:
 
 To help make your work more reproducible:
 
-- Use RMarkdown
+- Use R Markdown
 - Clean your environment regularly
-- Check the knit of your RMarkdown regularly
+- Check the knit of your R Markdown regularly
 - Tell your future self and others what you did!
 - Print session info!
 
