@@ -208,19 +208,19 @@ pre code {
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
-<p>Use the manual import method (File &gt; Import Dataset &gt; From Text (<code>readr</code>)) to read in Haloacetic Acids (HAA5) Exposure for WA Populations on Public Water Systems data from this URL:</p>
-<p><a href="https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv" class="uri">https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv</a>.</p>
-<p>These data were collected by the Washington Tracking Network. You can learn more about the data here: <a href="https://fortress.wa.gov/doh/wtn/WTNPortal/#!q0=674" class="uri">https://fortress.wa.gov/doh/wtn/WTNPortal/#!q0=674</a></p>
+<p>Use the manual import method (File &gt; Import Dataset &gt; From Text (<code>readr</code>)) to read in the CalEnviroScreen data from this URL:</p>
+<p><a href="https://daseh.org/data/CalEnviroScreen_data.csv" class="uri">https://daseh.org/data/CalEnviroScreen_data.csv</a></p>
+<p>These data were collected by California Office of Health Hazard Assessment to track environmental measures (like pollution, water contamination, etc.) that can impact human health. You can read more about the project <a href="https://calenviroscreen-oehha.hub.arcgis.com/">here</a></p>
 </div>
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
 <p>What is the dataset object called? You can find this information in the Console or the Environment. Enter your answer as a comment using <code>#</code>.</p>
-<pre class="r"><code># HAA5_Exposure_for_WA_Public_Water_Systems_data</code></pre>
+<pre class="r"><code># CalEnviroScreen_data</code></pre>
 </div>
 <div id="section-4" class="section level3">
 <h3>1.5</h3>
 <p>Preview the data by examining the Environment. How many observations and variables are there? Enter your answer as a comment using <code>#</code>.</p>
-<pre class="r"><code># 22 obs of 11 variables</code></pre>
+<pre class="r"><code># 8035  obs. of 68 variables</code></pre>
 </div>
 </div>
 </div>
@@ -238,23 +238,23 @@ pre code {
 <h1>Part 2</h1>
 <div id="section-5" class="section level3">
 <h3>2.1</h3>
-<p>Read Haloacetic Acids (HAA5) Exposure for WA Populations on Public Water Systems data from <a href="https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv" class="uri">https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv</a>. and assign it to an object named <code>exposure</code>. Use the code structure below.</p>
+<p>Read in the CalEnviroScreen data from this URL using <code>read_csv</code> and this URL: <a href="https://daseh.org/data/CalEnviroScreen_data.csv" class="uri">https://daseh.org/data/CalEnviroScreen_data.csv</a>. Assign it to an object named <code>ces</code>. Use the code structure below.</p>
 <pre><code># General format
 OBJECT &lt;- read_csv(FILE)</code></pre>
-<pre class="r"><code>exposure &lt;- read_csv(file = &quot;https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv&quot;)</code></pre>
-<pre><code>## Rows: 22 Columns: 11
+<pre class="r"><code>ces &lt;- read_csv(file = &quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;)</code></pre>
+<pre><code>## Rows: 8035 Columns: 67
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## dbl (11): year, pop_on_sampled_PWS, pop_0-15µg/L, pop_&gt;15-30µg/L, pop_&gt;30-45...
+## chr  (3): CaliforniaCounty, ApproxLocation, CES4.0PercRange
+## dbl (64): CensusTract, ZIP, Longitude, Latitude, CES4.0Score, CES4.0Percenti...
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div id="section-6" class="section level3">
 <h3>2.2</h3>
-<p>Take a look at the data. Do these data objects (<code>HAA5_Exposure_for_WA_Public_Water_Systems_data</code> and <code>exposure</code>) appear to be the same? Why or why not?</p>
-<pre class="r"><code># Yes, when we look in the RStudio environment, the two objects have the same dimensions. If we use the View() or str() functions, we can also see in more detail that the data is the same. 
-# If we wanted to get really in the weeds, we could do a logical test like all.equal(HAA5_Exposure_for_WA_Public_Water_Systems_data, exposure)</code></pre>
+<p>Take a look at the data. Do these data objects (<code>CalEnviroScreen_data</code> and <code>ces</code>) appear to be the same? Why or why not?</p>
+<pre class="r"><code># Yes, when we look in the RStudio environment, the two objects have the same dimensions. If we use the View() or str() functions, we can also see in more detail that the data is the same.</code></pre>
 </div>
 <div id="section-7" class="section level3">
 <h3>2.3</h3>
@@ -268,32 +268,32 @@ OBJECT &lt;- read_csv(FILE)</code></pre>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
 <p>Run the following code - is there a problem? How do you know?</p>
-<pre class="r"><code>exposure &lt;- read_delim(&quot;https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv&quot;, delim = &quot;\t&quot;)</code></pre>
-<pre><code>## Rows: 22 Columns: 1
+<pre class="r"><code>ces2 &lt;- read_delim(&quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;, delim = &quot;\t&quot;)</code></pre>
+<pre><code>## Rows: 8035 Columns: 1
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;\t&quot;
-## num (1): year,pop_on_sampled_PWS,pop_0-15µg/L,pop_&gt;15-30µg/L,pop_&gt;30-45µg/L,...
+## chr (1): CensusTract,CaliforniaCounty,ZIP,Longitude,Latitude,ApproxLocation,...
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>exposure</code></pre>
-<pre><code>## # A tibble: 22 × 1
-##    year,pop_on_sampled_PWS,pop_0-15µg/L,pop_&gt;15-30µg/L,pop_&gt;30-45µg/L,pop_&gt;45-…¹
-##                                                                            &lt;dbl&gt;
-##  1                                                                       2.00e40
-##  2                                                                       2.00e43
-##  3                                                                       2.00e42
-##  4                                                                       2.00e43
-##  5                                                                       2.00e39
-##  6                                                                       2.00e54
-##  7                                                                       2.01e53
-##  8                                                                       2.01e54
-##  9                                                                       2.01e52
-## 10                                                                       2.01e54
-## # ℹ 12 more rows
+<pre class="r"><code>ces2</code></pre>
+<pre><code>## # A tibble: 8,035 × 1
+##    CensusTract,CaliforniaCounty,ZIP,Longitude,Latitude,ApproxLocation,CES4.0Sc…¹
+##    &lt;chr&gt;                                                                        
+##  1 &quot;6001400100,\&quot;Alameda \&quot;,94704,-122.2319033,37.8675947,\&quot;Oakland\&quot;,4.85,2.8,…
+##  2 &quot;6001400200,\&quot;Alameda \&quot;,94618,-122.2495763,37.848171,\&quot;Oakland\&quot;,4.88,2.87,…
+##  3 &quot;6001400300,\&quot;Alameda \&quot;,94618,-122.2544365,37.8405983,\&quot;Oakland\&quot;,11.2,15.9…
+##  4 &quot;6001400400,\&quot;Alameda \&quot;,94609,-122.2574628,37.8482107,\&quot;Oakland\&quot;,12.39,18.…
+##  5 &quot;6001400500,\&quot;Alameda \&quot;,94609,-122.2647445,37.8485167,\&quot;Oakland\&quot;,16.73,29.…
+##  6 &quot;6001400600,\&quot;Alameda \&quot;,94609,-122.2648882,37.8419909,\&quot;Oakland\&quot;,20.02,37.…
+##  7 &quot;6001400700,\&quot;Alameda \&quot;,94608,-122.2723135,37.8417578,\&quot;Oakland\&quot;,36.71,70.…
+##  8 &quot;6001400800,\&quot;Alameda \&quot;,94608,-122.2833803,37.8454493,\&quot;Oakland\&quot;,37.1,70.7…
+##  9 &quot;6001400900,\&quot;Alameda \&quot;,94608,-122.2802437,37.8394669,\&quot;Oakland\&quot;,40.71,76.…
+## 10 &quot;6001401000,\&quot;Alameda \&quot;,94608,-122.2719625,37.831217,\&quot;Oakland\&quot;,43.74,80.4…
+## # ℹ 8,025 more rows
 ## # ℹ abbreviated name:
-## #   ¹​`year,pop_on_sampled_PWS,pop_0-15µg/L,pop_&gt;15-30µg/L,pop_&gt;30-45µg/L,pop_&gt;45-60µg/L,pop_&gt;60-75µg/L,pop_&gt;75µg/L,pop_on_PWS_with_non-detects,pop_exposed_to_exceedances,perc_pop_exposed_to_exceedances`</code></pre>
-<pre class="r"><code># It should be a red flag to see that there is only one column that looks like: `year,pop_on_sampled_PWS,pop_0-15µg/L,pop_&gt;15-30µg/L,pop_&gt;30-45µg/L,pop
+## #   ¹​`CensusTract,CaliforniaCounty,ZIP,Longitude,Latitude,ApproxLocation,CES4.0Score,CES4.0Percentile,CES4.0PercRange,Ozone,OzonePctl,PM2.5,PM2.5.Pctl,DieselPM,DieselPMPctl,DrinkingWater,DrinkingWaterPctl,Lead,LeadPctl,Pesticides,PesticidesPctl,ToxRelease,ToxReleasePctl,Traffic,TrafficPctl,CleanupSites,CleanupSitesPctl,GroundwaterThreats,GroundwaterThreatsPctl,HazWaste,HazWastePctl,ImpWaterBodies,ImpWaterBodiesPctl,SolidWaste,SolidWastePctl,PollutionBurden,PollutionBurdenScore,PollutionBurdenPctl,Asthma,AsthmaPctl,LowBirthWeight,LowBirthWeightPctl,CardiovascularDisease,CardiovascularDiseasePctl,TotalPop,ChildrenPercLess10,PopPerc10to64,ElderlyMore64,HispanicPerc,WhitePerc,AfAmericanPerc,NativeAmericanPerc,AsianAmericanPerc,OtherMultiplePerc,PopChar,PopCharScore,PopCharPctl,Education,EducationPctl,LinguisticIsol,LinguisticIsolPctl,Poverty,PovertyPctl,Unemployment,UnemploymentPctl,HousingBurden,HousingBurdenPctl`</code></pre>
+<pre class="r"><code># It should be a red flag to see that there is only one column that looks like: ,CensusTract,CaliforniaCounty,ZIP,Longitude,Latitude,ApproxLocation,CES4.0Score,CES4.0Percentile,CES4.0PercRange,Ozone,O
 # This file is comma delimited, not tab delimited!</code></pre>
 </div>
 <div id="p.3" class="section level3">
