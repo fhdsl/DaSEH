@@ -33,12 +33,13 @@ Here are additional resources to help you on your R journey - either before, dur
 - [Day 3 - Data Subsetting  Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
 - [Day 4 - Data Summarization & Data Classes Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
 - [Day 5 - Data Cleaning Cheatsheet](https://daseh.org/modules/cheatsheets/Day-5.pdf)
+- [Really great string Cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf)
 - [Day 6 - Data Manipulation & Data Visualization `esquisse` Cheatsheet](https://daseh.org/modules/cheatsheets/Day-6.pdf)
 - [Day 7 - Data Visualization `ggplot2` & Factors Cheatsheet](https://daseh.org/modules/cheatsheets/Day-7.pdf)
 - [Day 8 - Statistics Cheatsheet](https://daseh.org/modules/cheatsheets/Day-8.pdf)
 - [Day 9 - Functions Cheatsheet](https://daseh.org/modules/cheatsheets/Day-9.pdf)
 - [Additional RStudio "Cheatsheets"](https://www.rstudio.com/resources/cheatsheets/)
-- [Really great string Cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf)
+
 </details>
 
 <br>
