@@ -263,7 +263,7 @@ ces_Alameda
 
 ### P.5
 
-Using the original `ces` data, how can you find the values of `ApproxLocation` for areas within zip code 90745 (in Los Angeles county) that also have a CES4.0 score in the range 90-95% - without just looking at the data manually and instead use functions we learned today?
+Using the original `ces` data, how can you find the values of `ApproxLocation` for areas within zip code 90745 (in Los Angeles county) that also have a CES4.0 score in the range 90-95% - without just looking at the data manually and instead use functions we learned today? (Hint: It can be helpful to look at your data first)
 
 `CES4.0PercRange`: Percentile of the CalEnviroScreen score, grouped by 5% increments. The CalEnviroScreen score is a measure of the negative environmental effects seen in a given region. Those zip codes that have a percentile range of 90-95% are those regions that experience the highest effects of pollution in California.
 
