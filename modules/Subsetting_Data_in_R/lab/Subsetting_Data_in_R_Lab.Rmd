@@ -198,7 +198,7 @@ What happens if you do the steps in a different order? Why does this not work?
 
 ```
 
-### 1.3
+### 3.3
 
 Re-order the rows of `ces_Alameda` by `Traffic` value in increasing order. Use `arrange()`. What's the smallest value?
 
