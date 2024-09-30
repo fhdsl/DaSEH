@@ -26,11 +26,11 @@ er_2 <- er %>%
   filter(!is.na(rate))
 ```
 
-When you click the **Knit** button (at the top of RStudio), a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Next we will show you some code - no worries about understanding it yet, we just want to get you familiar with where code goes. When code is in an RMarkdown file chunk, it is saved to a file. When it is in the console, it is not saved. The console is useful for installing packages like we just did, this is because we only need to do it once, so we don't usually need to save the code.
+When you click the **Knit** button (at the top of RStudio), a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Note that when it does this it starts from scratch - it can't use any objects you created outside of the Rmd file. 
 
 ### Plotting some data
 
-Here is code that will make a plot of some data.You can embed an R code chunk like this: Try pressing the green play button to see what happens. Make sure you have run the previous code chunk first by pressing the green play button in that chunk.
+Here is code that will make a plot of some data.
 
 3. Try the "run all chunks above" button that is to the left of the play button on the following chunk. What happens?
 
