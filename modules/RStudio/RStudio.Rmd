@@ -257,8 +257,28 @@ R studio can help you find issues in your code.
 Note that sometimes the error occurs earlier than RStudio thinks.
 
 ```{r echo=FALSE, fig.align='center', out.width="80%"}
-knitr::include_graphics("images/errors.png")
+knitr::include_graphics("../../images/error.png")
 ```
+
+
+
+
+```{r}
+class(er))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Recap of where code goes
