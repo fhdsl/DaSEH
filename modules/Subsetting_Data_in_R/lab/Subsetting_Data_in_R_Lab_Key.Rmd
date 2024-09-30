@@ -217,8 +217,9 @@ dim(ces_Alameda)
 What happens if you do the steps in a different order? Why does this not work?
 
 ```{r, error = TRUE, label = '3.2aresponse'}
-#ces_Alameda <- ces %>%
-#  select(CA_county == "Alameda")
+ces_Alameda <- ces %>%
+                 select(Traffic, Asthma) %>%
+                 filter(CA_county == "Alameda")
 # you get an error because there is no CA_county variable to filter from
 ```
 
@@ -236,7 +237,7 @@ arrange(ces_Alameda, Traffic) %>%
 
 ### 1.4
 
-Create a new variable in `ces_Alameda` called `Asthma100`, which  is equal to `Asthma` divided by 100, using `mutate()`(don't forget to reassign `ces_Alameda`). Use pipes `%>%`.
+Create a new variable in `ces_Alameda` called `Asthma100`, which  is equal to `Asthma` divided by 100, using `mutate()`(don't forget to reassign `ces_Alameda`). Use pipes `%>%`. Take a look at the data now!
 
 ```
 # General format
@@ -245,6 +246,7 @@ NEWDATA <- OLD_DATA %>% mutate(NEW_COLUMN = OLD_COLUMN)
 
 ```{r 3.4response}
 ces_Alameda <- ces_Alameda %>% mutate(Asthma100 = Asthma/100)
+ces_Alameda
 ```
 
 
@@ -261,12 +263,12 @@ ces_Alameda
 
 ### P.5
 
-How can you find the values of `Traffic` for areas within zip code 90745 (in Los Angeles county) that also have a CES4.0 score in the second highest percentile range (90-95%) - using the initial ces data -  without just looking at the data manually and instead use functions we learned today?
+Using the original `ces` data, how can you find the values of `ApproxLocation` for areas within zip code 90745 (in Los Angeles county) that also have a CES4.0 score in the range 90-95% - without just looking at the data manually and instead use functions we learned today?
 
 `CES4.0PercRange`: Percentile of the CalEnviroScreen score, grouped by 5% increments. The CalEnviroScreen score is a measure of the negative environmental effects seen in a given region. Those zip codes that have a percentile range of 90-95% are those regions that experience the highest effects of pollution in California.
 
 ```{r P.5response}
 ces %>%
   filter(ZIP == 90745 & CES4.0PercRange == "90-95%") %>%
-  select(Traffic)
+  select(ApproxLocation)
 ```
