@@ -26,7 +26,7 @@ er_2 <- er %>%
   filter(!is.na(rate))
 ```
 
-When you click the **Knit** button (at the top of RStudio), a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Note that when it does this it starts from scratch - it can't use any objects you created outside of the Rmd file. 
+When you click the **Knit** button (at the top of RStudio), a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Note that when it does this it starts from scratch - it can't use any objects you created outside of the Rmd file. Therefore it essentially has its own environment that is different from the one that you see when working interactively in RStudio.
 
 ### Plotting some data
 
