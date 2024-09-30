@@ -262,25 +262,6 @@ knitr::include_graphics("../../images/error.png")
 
 
 
-
-```{r}
-class(er))
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Recap of where code goes
 
 - you can test code in the console
