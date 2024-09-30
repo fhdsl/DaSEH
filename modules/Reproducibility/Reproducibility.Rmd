@@ -136,12 +136,18 @@ Provide sufficient detail so that you can understand what you did.
 
 ## Need random numbers to stay consistent?
 
-Use `set.seed()` : sets the starting state for the random number generator (RNG) in R.
+Use `set.seed()` : sets the starting state for the [random number generator (RNG)](https://en.wikipedia.org/wiki/Random_number_generation) in R.
 
-```{r}
-set.seed(100)
+```{r, echo = TRUE}
+set.seed(123)
+sample(10)
+set.seed(123)
+sample(10)
+set.seed(456)
 sample(10)
 ```
+
+Note that these are only psuedo random and the values are created doing calculations based on the given seed. Thus the same "random" values will be reproduced by everyone using the same seed with `set.seed`.
 
 ## R Markdown syntax
 
@@ -176,7 +182,7 @@ ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5
 
 ## Session info can help
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo = TRUE}
 sessionInfo()
 ```
 
