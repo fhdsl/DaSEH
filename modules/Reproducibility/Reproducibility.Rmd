@@ -191,6 +191,23 @@ sessionInfo()
 knitr::include_graphics("images/session_info.png")
 ```
 
+
+## Gut Check
+
+Why is reproducibility so important?
+
+a) It helps to ensure that your code is working consistently and it helps others understand what you did
+b) It ensures that your code is correct
+
+## Gut Check
+
+What is NOT a practice to improve the reproducibility of our work?
+
+a) using R Markdown files to describe what your code is doing
+b) Using scripts instead of R Markdown files
+c) testing your code with R Markdown files or the run previous button
+d) regularly cleaning the environment
+
 ## Lab 1
 
 🏠 [Class Website](https://daseh.org/)    
