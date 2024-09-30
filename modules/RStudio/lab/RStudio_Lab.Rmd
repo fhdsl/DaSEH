@@ -45,9 +45,7 @@ ggplot(aes(x = year, y = rate, colour = county, group = county), data = er_3) +
   scale_colour_manual(values = palette)
 ```
 
-```{r out.width = "100%", label = '0response'}
 
-```
 
 
 # Exercise 
@@ -70,10 +68,7 @@ x <- c(1, 2, 3)
 
 # Practice on Your Own!
 
+
 ### P.1
-
-Update the options of the R chunk you just made (with the lowercase x in it) so that the output option is `show output only`. How does the chunk look now?
-
-### P.2
 
 Create another R Markdown Document from RStudio dropdowns: File → New File → R Markdown.
