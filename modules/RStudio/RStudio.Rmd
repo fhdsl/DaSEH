@@ -318,7 +318,14 @@ Typing in `??package_name` can show you packages that you haven't loaded yet.
 knitr::include_graphics("images/double_question.png")
 ```
 
+## Gut Check
 
+Why are R Markdown files so useful?
+
+A) They let you test your code
+B) They let you view the output of your code
+C) They let you genearate cool reports 
+D) All of the above
 
 ## Summary
 
