@@ -118,7 +118,7 @@ We will be working with a dataset from the "Kaggle" website, which hosts competi
 ```
 
 
-13\. How many data points are from days where the maximum ground temperature got above 0 degrees Celsius? What percent/proportion do these represent? Use:
+13\. How many data points are from days where the maximum ground temperature got above or equal to 0 degrees Celsius? What percent/proportion do these represent? Use:
 
 - `filter()` and `nrow()`
 - `group_by()` and `summarize()` or
