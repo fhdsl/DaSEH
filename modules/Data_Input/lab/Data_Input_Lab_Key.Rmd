@@ -5,6 +5,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+# Part 1
+
 ## Helpful tips before we start
 
 ### TROUBLESHOOTING: Common new user mistakes we have seen
@@ -15,127 +17,113 @@ editor_options:
 - Deleting part of the code chunk  
 - For any function, you can write `?FUNCTION_NAME`, or `help("FUNCTION_NAME")` to look at the help file
 
-### R Projects
-
-R Projects can help you keep files organized and avoid issues with working directories. Check out our resource here: https://daseh.org/resources/R_Projects.html
-
-
-## Lab
-
-In this lab you can use the interactive console to explore or **Knit** the document. 
-Remember anything you type here can be "sent" to the console with Cmd-Enter (OS-X) or Ctrl-Enter (Windows/Linux) in an R code chunk.
-
-```{r}
-# Load the necessary package
-library(readr)
-```
-
 ### 1.1
 
-Use the manual import method (File > Import Dataset > From Text (`readr`)) to read in the CalEnviroScreen data from this URL:
+Set up your R Project.
 
-https://daseh.org/data/CalEnviroScreen_data.csv
+> File, New Project or click the new project button
+> New Directory
+> New Project
+> Type a name and choose a location
+> Check that the folder is there!
 
-These data were collected by California Office of Health Hazard Assessment to track environmental measures (like pollution, water contamination, etc.) that can impact human health. You can read more about the project [here](https://calenviroscreen-oehha.hub.arcgis.com/)
+Check out our resource here: https://daseh.org/resources/R_Projects.html
 
-### 1.2
+### 1.2 
 
-What is the dataset object called? You can find this information in the Console or the Environment. Enter your answer as a comment using `#`.
+Load the package by adding "library(tidyverse)" below and running the code.
 
 ```{r 1.2response}
-# CalEnviroScreen_data
+library(tidyverse)
 ```
 
 ### 1.3
 
-Preview the data by clicking the table button in the Environment. How many observations and variables are there? Enter your answer as a comment using `#`.
+Use the manual import method (File > Import Dataset > From Text (`readr`)) to read in Haloacetic Acids (HAA5) Exposure for WA Populations on Public Water Systems data from this URL:
 
-```{r 1.3response}
-# 8035 obs of 67 variables
-```
+https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv.
+
+These data were collected by the Washington Tracking Network. You can learn more about the data here: https://fortress.wa.gov/doh/wtn/WTNPortal/#!q0=674
 
 ### 1.4
 
-Read in the CalEnviroScreen data from https://daseh.org/data/CalEnviroScreen_data.csv
-and assign it to an object named `ces`. Use the code structure below.
-
-```
-# General format
-library(readr)
-# OBJECT <- read_csv(FILE)
-```
+What is the dataset object called? You can find this information in the Console or the Environment. Enter your answer as a comment using `#`.
 
 ```{r 1.4response}
-library(readr)
-ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
+# HAA5_Exposure_for_WA_Public_Water_Systems_data
 ```
 
 ### 1.5
 
-Take a look at the data. Do these data objects (`CalEnviroScreen_data` and `ces`) appear to be the same? Why or why not?
+Preview the data by examining the Environment. How many observations and variables are there? Enter your answer as a comment using `#`.
 
 ```{r 1.5response}
-# Yes, when we look in the RStudio environment, the two objects have the same dimensions. If we use the View() or str() functions, we can also see in more detail that the data is the same. 
-# If we wanted to get really in the weeds, we could do a logical test like all.equal(CalEnviroScreen, ces)
+# 22 obs of 11 variables
 ```
 
-### 1.6
+# Practice on Your Own!
+
+### P.1
+
+Download the data and move the file to your project folder. Import the data by browsing for the file on your computer.
+
+> *Download the data*
+> *Put data in the project folder*
+> File, Import Dataset, From Text (`readr`)
+> browse for the file
+> click "Update" and "Import"
+
+
+# Part 2
+
+### 2.1
+
+Read Haloacetic Acids (HAA5) Exposure for WA Populations on Public Water Systems data from https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv.
+and assign it to an object named `exposure`. Use the code structure below.
+
+```
+# General format
+OBJECT <- read_csv(FILE)
+```
+
+```{r 2.1response}
+exposure <- read_csv(file = "https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv")
+```
+
+### 2.2
+
+Take a look at the data. Do these data objects (`HAA5_Exposure_for_WA_Public_Water_Systems_data` and `exposure`) appear to be the same? Why or why not?
+
+```{r 2.2response}
+# Yes, when we look in the RStudio environment, the two objects have the same dimensions. If we use the View() or str() functions, we can also see in more detail that the data is the same. 
+# If we wanted to get really in the weeds, we could do a logical test like all.equal(HAA5_Exposure_for_WA_Public_Water_Systems_data, exposure)
+```
+
+### 2.3
 
 Learn your working directory by running `getwd()`. This is where R will look for files unless you tell it otherwise.
 
-```{r 1.6response}
+```{r 2.3response}
 getwd()
 ```
 
 
 # Practice on Your Own!
 
-### P.1
-
-Load the `readxl` package with the `library()` command. 
-
-If it is not installed, install it via: `RStudio --> Tools --> Install Packages`. You can also try `install.packages("readxl")`.
-
-```{r P.1response}
-library(readxl)
-```
-
 ### P.2
-Let's try loading an Excel file of CalEnviroScreen measures for just Alameda County, CA.
-
-Download this dataset using the url https://daseh.org/data/CalEnviroScreen_data_AlamedaCounty.xlsx
-
-Assign it to the object name `ces_alameda.xlsx` by running the following code chunk. This only downloads the file, it does NOT bring the file into R.
-
-```{r}
-download.file(
-  url = "https://daseh.org/data/CalEnviroScreen_data_AlamedaCounty.xlsx",
-  destfile = "ces_Alameda.xlsx",
-  overwrite = TRUE,
-  mode = "wb"
-)
-```
-
-Note: the "wb" option makes sure the file can be read correctly on Windows and Apple machines.
-
-### P.3
-
-Use the `read_excel()` function in the `readxl` package to read the `nitrate.xlsx` file and call the output `nitrate`. 
-
-```{r P.3response}
-ces_Alameda <- read_excel(path = "ces_Alameda.xlsx")
-```
-
-### P.4
 
 Run the following code - is there a problem? How do you know?
 
 ```{r}
-test <- read_delim("https://daseh.org/data/CalEnviroScreen_data.csv", delim = "\t")
-test
+exposure <- read_delim("https://daseh.org/data/HAA5_Exposure_for_WA_Public_Water_Systems_data.csv", delim = "\t")
+exposure
 ```
 
-```{r P.4response}
-# It should be a red flag to see that there is only one column 
+```{r P.2response}
+# It should be a red flag to see that there is only one column that looks like: `year,pop_on_sampled_PWS,pop_0-15µg/L,pop_>15-30µg/L,pop_>30-45µg/L,pop
 # This file is comma delimited, not tab delimited!
 ```
+
+### P.3
+
+Try reading in some data on your computer using any method we discussed!

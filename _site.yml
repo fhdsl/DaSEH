@@ -9,6 +9,8 @@ navbar:
     href: logistics.html
   - text: Materials + Schedule
     href: materials_schedule.html
+  - text: Data
+    href: data.html
   - text: Resources
     href: resources.html
   - text: FAQ / Help
