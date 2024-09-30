@@ -39,7 +39,7 @@ ces
 
 ### 1.1
 
-What class is `ER`?
+What class is `ces`?
 
 ```{r 1.1response}
 class(ces)
