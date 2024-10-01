@@ -33,9 +33,11 @@ ces %>% count()
 
 ### 1.2
 
-The `TotalPop` column includes information about the population for each census tract as of the 2010 census. (Remember, a census tract a small, relatively permanent area within a county used to present data from the census. Each row in the `ces` dataset corresponds to a single census tract.)
+The `TotalPop` column includes information about the population for each census tract as of the 2010 census.
 
-What was the population of California based on the 2010 census? (use `sum()` and the `TotalPop` column)
+NOTE: A census tract a small, relatively permanent area within a county used to present data from the census. Each row in the `ces` dataset corresponds to a single census tract. See https://www2.census.gov/geo/pdfs/education/CensusTracts.pdf
+
+What was the total population in the dataset based on the 2010 census? (use `sum()` and the `TotalPop` column)
 
 ```{r 1.2response}
 ces %>% pull(TotalPop) %>% sum()
@@ -138,7 +140,7 @@ ces_pest %>% count()
 
 ### 2.1
 
-How many census tracts are there in California county?? Use `count()` on the column named `CaliforniaCounty`. Use `ces` as your input data.
+How many census tracts are present in each California county? Use `count()` on the column named `CaliforniaCounty`. Use `ces` as your input data.
 
 ```{r 2.1response}
 ces %>% count(CaliforniaCounty)
@@ -146,7 +148,7 @@ ces %>% count(CaliforniaCounty)
 
 ### 2.2
 
-Modify your code from question 2.1 to break down each county by ZIP code. Use `count()` on the columns named `CaliforniaCounty` and `ZIP`.
+Let's break down the count further. Modify your code from question 2.1 to count census tracts by County AND ZIP code. Use `count()` on the columns named `CaliforniaCounty` and `ZIP`.
 
 ```{r 2.2response}
 ces %>% count(CaliforniaCounty, ZIP)
