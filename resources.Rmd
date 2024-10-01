@@ -28,8 +28,8 @@ Here are additional resources to help you on your R journey - either before, dur
 
 <details><summary> <span style = "color: #5383bb;"> **Class Cheatsheets**</span></summary><br>
 
-- [Day 1 - RStudio & Reproducibility Cheatsheet](https://daseh.org/modules/cheatsheets/Day-1.pdf)
-- [Day 2 - Basic R & Data Input/Output Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)
+- [Day 1 - Basic R & RStudio Cheatsheet](https://daseh.org/modules/cheatsheets/Day-1.pdf)
+- [Day 2 - Reproducibility & Data Input/Output Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)
 - [Day 3 - Data Subsetting  Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
 - [Day 4 - Data Summarization & Data Classes Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
 - [Day 5 - Data Cleaning Cheatsheet](https://daseh.org/modules/cheatsheets/Day-5.pdf)
