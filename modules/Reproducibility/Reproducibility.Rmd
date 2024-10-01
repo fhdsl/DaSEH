@@ -198,10 +198,23 @@ sessionInfo()
 knitr::include_graphics("images/session_info.png")
 ```
 
-## Lab 1
 
-🏠 [Class Website](https://daseh.org/)    
-💻 [Lab](https://daseh.org/modules/Reproducibility/lab/Reproducibility_Lab.Rmd)
+## GUT CHECK: Why is reproducibility so important?
+
+A. It helps to ensure that your code is working consistently and it helps others understand what you did 
+
+B. It ensures that your code is correct 
+
+## GUT CHECK: What is NOT a practice to improve the reproducibility of our work?
+
+A. Using R Markdown files to describe what your code is doing 
+
+B. Using scripts instead of R Markdown files   
+
+C. Testing your code with R Markdown files or the run previous button
+
+D. Regularly cleaning the environment 
+
 
 ## More resources
 
@@ -217,13 +230,16 @@ These are just some quick tips, for more information:
 
 To help make your work more reproducible:
 
-- Use RMarkdown
+- Use R Markdown
 - Clean your environment regularly
-- Check the knit of your RMarkdown regularly
+- Check the knit of your R Markdown regularly
 - Tell your future self and others what you did!
 - Print session info!
 
-🏠 [Class Website](https://daseh.org/)
+🏠 [Class Website](https://daseh.org/)    
+💻 [Lab](https://daseh.org/modules/Reproducibility/lab/Reproducibility_Lab.Rmd)  
+🗒 [Day 2 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)  
+🗒 [RStudio Cheatsheet](https://d33wubrfki0l68.cloudfront.net/374f4c769f97c4ded7300d521eb59b24168a7261/c72ad/lesson-images/cheatsheets-1-cheatsheet.png)
 
 ```{r, fig.alt="The End", out.width = "25%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
