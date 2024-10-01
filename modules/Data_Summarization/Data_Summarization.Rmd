@@ -82,13 +82,23 @@ er %>% pull(visits) %>% mean()
 er %>% pull(visits) %>% mean(na.rm=T)
 ```
 
+## GUT CHECK!
+
+What kind of object do we need to run summary operators like `mean()` ?
+
+A. A vector of numbers
+
+B. A vector of characters
+
+C. A dataset
+
 # Summarization on tibbles (data frames)
 
 ## Summarize the data: `dplyr` `summarize()` function
 
-`summarize` creates a summary table. 
+`summarize` works on datasets without `pull()`.
 
-Multiple summary statistics can be calculated at once (unlike `pull()` which can only do a single calculation on one column).
+Multiple summary statistics can be calculated at once. `pull()` can only do one column.
 
 <div class = "codeexample">
 ```{r, eval = FALSE}
