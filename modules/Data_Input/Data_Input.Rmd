@@ -162,6 +162,17 @@ knitr::include_graphics("images/Data_Input_import_dataset.gif")
 -  `>` browse for the file
 -  `>` click "Update" and "Import"
 
+## GUT CHECK!
+
+How can we get data into R?
+
+A. From a URL
+
+B. From a file we downloaded
+
+C. Both of these!
+
+
 ## Lab - Part 1
 
 🏠 [Class Website](https://daseh.org/)
