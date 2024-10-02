@@ -173,62 +173,38 @@ dmy("15-June-2021")
 ymd("2021-06-15")
 ```
 
-<!-- Note for  function `mdy`: **m**onth **d**ay  **y**ear -->
-
-<!-- ## They right lubridate function needs to be used -->
-
-<!-- Must match the data format! -->
-
-<!-- ```{r} -->
-<!-- ymd("06/15/2021") # This doesn't work - gives NA -->
-<!-- mdy("06/15/2021") # This works -->
-<!-- ``` -->
-
-
-<!-- ## Creating `POSIXct` class object   -->
-
-<!-- ```{r} -->
-<!-- class("2013-01-24 19:39:07") -->
-<!-- ymd_hms("2013-01-24 19:39:07") # lubridate package -->
-<!-- class(ymd_hms("2013-01-24 19:39:07")) # lubridate package -->
-<!-- ``` -->
-
-<!-- UTC represents time zone, by default: Coordinated Universal Time -->
-
-<!-- Note for  function `ymd_hms`: year month day hour minute second.  -->
-
-<!-- There are functions in case your data have only date, hour and minute (`ymd_hm()`) or only date and hour (`ymd_h()`).  -->
-
-
-## Class conversion in with a dataset
+## Class conversion in a dataset
 
 Here's a dataset on the SARS-CoV-2 viral load measured in wastewater between 2022 and 2024, collected by the collected by the National Wastewater Surveillance System.
 
-Let's look at the *first_sample_date* variable
-* records the first time samples were collected at a site
+Let's look at the *date_start* variable, the first date of the sampling window.
 
-```{r, results='hide'}
-library(dasehr)
-covidww <- covid_wastewater %>%
-  select(contains("first_sample_date")) %>%
-  sample_n(10)
-  
+```{r message = FALSE}
+sars_ww <- 
+  read_csv("../../data/SARS-CoV-2_Wastewater_Data.csv") 
+ 
+# Selecting a few columns for easy viewing
+sars_ww <- sars_ww %>% select(town_name, date_start)
 ```
 
+## Class conversion in a dataset
+
+Notice that `date_start` is `chr` class, not `date`.
+
 ```{r}
-head(covidww)
+sars_ww
 ```
 
 ## Class conversion in with a dataset
 
-We would need to use mutate to help us modify that column.
+We would need to use `mutate()` to help us modify that column.
 
 ```{r}
-covidww %>% 
-  mutate(sampling_start = mdy(first_sample_date))
+sars_ww %>% 
+  mutate(date_start_fixed = mdy(date_start))
 ```
 
-# Other two-dimensional data classes
+# Other data classes
 
 ## Two-dimensional data classes
 
@@ -261,21 +237,24 @@ class(mylist)
 
 ## Summary
 
- - two dimensional object classes include: data frames, tibbles, matrices, and lists
- - matrix has columns and rows but  is all one data class
- - lists can contain multiples of any other class of data including lists!
- - calendar dates can be represented with the `Date` class using `ymd()`, `mdy()` functions from `lubridate` package
-  - Make sure you choose the right function for the way the date is formatted!
-- `POSIXct` class representing a calendar date with hours, minutes, seconds. Can use `ymd_hms()` or `ymd_hm()` or `ymd_h()`functions from the [`lubridate` package](https://lubridate.tidyverse.org/)
+- coerce between classes using `as.numeric()` or `as.character()`
+- data frames, tibbles, matrices, and lists are all classes of objects
+- lists can contain multiples of any other class of data including lists!
+- calendar dates can be represented with the `Date` class using `ymd()`, `mdy()` functions from [`lubridate` package](https://lubridate.tidyverse.org/)
 - can then easily subtract `Date` or `POSIXct` class variables or pull out aspects like year
 
-## Lab Part 1
+## Lab
 
 🏠 [Class Website](https://daseh.org/) 
 
 💻 [Lab](https://daseh.org/modules//Data_Classes/lab/Data_Classes_Lab.Rmd)
 
-```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
+📃[Day 4 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
+
+<br>
+**For more advanced learning:** see the extra slides in this file!
+<br><br>
+```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
 
@@ -287,23 +266,11 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
 
 `as.matrix()` creates a matrix from a data frame or tibble (where all values are the same class).
 
-*NOTE:* in the covid_wastewater dataset, "date_start" is always 15 days before "date_end"
-
-```{r,}
-covidww_mat <- select(covid_wastewater, contains("date")) %>%
-  head(n = 3)
-covidww_mat
-as.matrix(covidww_mat)
-```
-
-## Matrices
-
 `matrix()` creates a matrix from scratch.
 
 ```{r}
 matrix(1:6, ncol = 2)
 ```
-
 
 ## More about Lists
 
@@ -317,7 +284,6 @@ mylist_named <- list(
 )
 mylist_named
 ```
-
 
 ## Some useful functions from `lubridate` to manipulate `Date` objects
 
@@ -377,8 +343,6 @@ x[2]
 x[c(1, 2, 100)]
 ```
 
-
-
 ## Matrices: data selection
 
 Note you cannot use `dplyr` functions (like `select`) on matrices. To subset matrix rows and/or columns, use `matrix[row_index, column_index]`.
@@ -393,7 +357,6 @@ mat[, 1] # first column
 mat[c(1, 2), c(2, 3)] # subset of original matrix: two rows and two columns
 ```
 
-
 ## Lists: data selection
 
 You can reference data from list using `$` (if elements are named) or using `[[ ]]`
@@ -403,4 +366,3 @@ mylist_named[[1]]
 mylist_named[["letters"]] # works only for a list with elements' names
 mylist_named$letters # works only for a list with elements' names
 ```
-
