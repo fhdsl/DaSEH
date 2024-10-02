@@ -277,7 +277,7 @@ Let's say we think that all 0 values should be `NA`.
 Maybe we think the person who entered the CO heat-related ER visits data made a mistake in how they coded missing data.
 
 ```{r}
-er %>% count(is.na(visits))
+er %>% count(visits)
 ```
 
 ## Change a value to be `NA`{.codesmall}
@@ -288,7 +288,7 @@ The `na_if()` function of `dplyr` can be helpful for changing all 0 values to `N
 er_nozero <- er %>% 
   mutate(visits = na_if(visits, 0))
 
-er_nozero %>% count(is.na(visits))
+er_nozero %>% count(visits)
 ```
 
 
@@ -299,7 +299,7 @@ The `replace_na()` function (part of the `tidyr` package), can do the opposite o
 ```{r}
 er %>% 
   mutate(visits = replace_na(visits, 0)) %>% 
-  count(is.na(visits))
+  count(visits)
 ```
 
 
@@ -401,7 +401,12 @@ https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5708064/
 ```{r}
 plastics <- read_csv(file =
     "https://daseh.org/data/microplastics_in_blood.csv")
+```
 
+
+## microplastics data
+
+```{r}
 plastics
 ```
 
