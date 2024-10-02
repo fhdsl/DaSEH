@@ -13,12 +13,11 @@ In this lab you can use the interactive console to explore but please record you
 
 # Part 1
 
-First let's load our packages.
+First let's load our packages. We're going to be using the `dplyr` package, which you can load as part of the `tidyverse` package.
 
 
 ```{r, message = FALSE}
 # don't forget to load the packages that you will need!
-library(dplyr)
 library(tidyverse)
 ```
 
