@@ -30,7 +30,7 @@ We are constantly making improvements.
 -  Reproducible science makes everyone's life easier!  
 - `readr`has helpful functions like `read_csv()` that can help you import data into R  
 
-📃[Day 2 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)
+📃 [Day 2 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)
 
 
 ## Overview
@@ -409,9 +409,9 @@ C. Keeping it as is and use quotes around the column name when you use it.
 
 💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd) 
 
-🗒 [Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
+📃 [Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
 
-🗒 [RStudio `dplyr` Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
+📃 [Posit's `dplyr` Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
 
 
 # Subsetting Columns
@@ -682,9 +682,9 @@ D. `select()` with `&`
 
 🏠 [Class Website](https://daseh.org)    
 💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
-🗒 [Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
+📃 [Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
 
-🗒 [RStudio `dplyr` Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
+📃 [Posit's `dplyr` Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
 
 ## Get the data
 
@@ -977,9 +977,9 @@ Even though `$` is easier for creating new columns, `mutate` is really powerful,
 
 💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
 
-🗒 [Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
+📃 [Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
 
-🗒 [RStudio `dplyr` Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
+📃 [Posit's `dplyr` Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
 
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
