@@ -67,24 +67,26 @@ rand_char_vect # Numbers now have quotation marks
 
 Read in the National Wastewater Surveillance System (NWSS) SARS-CoV-2 Wastewater data using the url link and the code provided. 
 
-The NWSS uses water from different sewage treatment plants to test for covid, as a way to estimate how many covid infections a community is experiencing.
+The NWSS uses water from different sewage treatment plants to test for the SARS-CoV-2 virus, as a way to estimate how many COVID infections a community is experiencing.
 
 ```{r}
-covidww <- read_csv(file = "https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv")
+sars_ww <- 
+  read_csv(file = "https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv")
 ```
 
 ### 1.7
 
-Use the `mutate()` function to create a new column named `date_formatted`, based on the `date_end` column. Hint: use `mdy()` function. Reassign to `covidww`.
+Use the `mutate()` function to create a new column named `date_formatted`, based on the `date_end` column. Hint: use `mdy()` function. Reassign to `sars_ww`.
 
-`date_end`: This is confusingly named, but this variable actually tracks the date a given sample was taken. It is called `date_end` because the NWSS is reporting how much the amount of covid in the sample taken on that day has changed compared to what it was 15 days prior. The `date_end` means "the date that ends the 15 day comparison period".
+`date_end`: This is the last date of the sampling window.
+
 ```
 # General format
 NEWDATA <- OLD_DATA %>% mutate(NEW_COLUMN = OLD_COLUMN)
 ```
 
 ```{r 1.7response}
-covidww <- covidww %>% mutate(date_formatted = mdy(date_end))
+sars_ww <- sars_ww %>% mutate(date_formatted = mdy(date_end))
 ```
 
 
@@ -100,12 +102,12 @@ NEWDATA <- OLD_DATA %>% relocate(COLUMN1, .before = COLUMN2)
 ```
 
 ```{r P.1response}
-covidww <- covidww %>% relocate(date_formatted, .before = date_end)
+sars_ww <- sars_ww %>% relocate(date_formatted, .before = date_end)
 
 # alternative
-# covidww <- covidww %>% select(date_end, date_formatted, everything()) %>% head() 
+# sars_ww <- sars_ww %>% select(date_end, date_formatted, everything()) %>% head() 
 
-glimpse(covidww)
+glimpse(sars_ww)
 
 ```
 
@@ -114,8 +116,8 @@ glimpse(covidww)
 Use `range()` function on `date_formatted` variable to display the range of dates in the data set. How does this compare to that of `date_end`? Why? (Hint: use the pull function first to pull the values.)
 
 ```{r P.2response}
-pull(covidww, date_formatted) %>% range()
-pull(covidww, date_end) %>% range()
+pull(sars_ww, date_formatted) %>% range()
+pull(sars_ww, date_end) %>% range()
 
-# The max of `pull(covidww, first_sample_date) %>% range()` is numerical not based on date.
+# The max of `pull(sars_ww, date_end) %>% range()` is numerical not based on date.
 ```
