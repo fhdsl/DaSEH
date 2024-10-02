@@ -926,6 +926,9 @@ Even though `$` is easier for creating new columns, `mutate` is really powerful,
 
 💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
 
+🗒 [Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
+
+🗒 [RStudio `dplyr` Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
 
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
