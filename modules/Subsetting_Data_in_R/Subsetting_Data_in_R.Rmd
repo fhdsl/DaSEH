@@ -472,6 +472,7 @@ knitr::include_graphics("images/tidyselect.png")
 head(er_30, 2)
 select(er_30, ends_with("cl"), year)
 ```
+
 ## Multiple tidyselect functions
 
 Follows OR logic.
@@ -481,14 +482,7 @@ select(er_30, ends_with("cl"), starts_with("r"))
 
 ```
 
-## Multiple patterns with tidyselect
 
-Need to combine the patterns with the `c()` function.
-
-```{r}
-select(er_30, starts_with(c("r", "l")))
-
-```
 
 
 ## The `where()` function can help select columns of a specific class{.codesmall}
@@ -816,32 +810,23 @@ select(er_30, newcol, everything())
 head(select(er_30, newcol, everything()), 3)
 ```
 
-## Ordering the columns of a data frame: dplyr {.codesmall}
+<!-- ## Ordering the columns of a data frame: dplyr {.codesmall} -->
 
-Put `year` at the end ("remove, everything, then add back in"):
+<!-- Put `year` at the end ("remove, everything, then add back in"): -->
 
-```{r, eval = FALSE}
-select(er_30, !year, everything(), year)
-```
+<!-- ```{r, eval = FALSE} -->
+<!-- select(er_30, !year, everything(), year) -->
+<!-- ``` -->
 
-```{r, echo = FALSE}
-head(select(er_30, !year, everything(), year), 3)
-```
+<!-- ```{r, echo = FALSE} -->
+<!-- head(select(er_30, !year, everything(), year), 3) -->
+<!-- ``` -->
 
-
-## Ordering the column names of a data frame: alphabetically {.codesmall}
-
-Using the base R `order()` function.
-
-```{r}
-order(colnames(er_30))
-er_30 %>% select(order(colnames(er_30)))
-```
 
 
 ## Ordering the columns of a data frame: dplyr {.codesmall}
 
-In addition to `select` we can also use the `relocate()` function of dplyr to rearrange the columns for more complicated moves.
+In addition to `select` we can also use the `relocate()` function of dplyr to rearrange the columns for more complicated moves with the `.before` and `.after` arguments.
 
 For example, let say we just wanted `year` to be before `rate``.
 
@@ -950,6 +935,25 @@ knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
 
 # Extra Slides
+
+## Multiple patterns with tidyselect
+
+Need to combine the patterns with the `c()` function.
+
+```{r}
+select(er_30, ends_with("cl"), starts_with("r"))
+select(er_30, starts_with(c("r", "l"))) # here we combine two patterns
+
+```
+
+## Ordering the column names of a data frame: alphabetically {.codesmall}
+
+Using the base R `order()` function.
+
+```{r}
+order(colnames(er_30))
+er_30 %>% select(order(colnames(er_30)))
+```
 
 ## `which()` function
 
