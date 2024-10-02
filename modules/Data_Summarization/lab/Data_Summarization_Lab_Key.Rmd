@@ -22,7 +22,7 @@ ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
 
 ### 1.1 
 
-How observations/rows are in the `ces` data set? You can use `dim()` or `nrow()` or examine the Environment.
+How many observations/rows are in the `ces` data set? You can use `dim()` or `nrow()` or examine the Environment.
 
 ```{r 1.1response}
 nrow(ces)

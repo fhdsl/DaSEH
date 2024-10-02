@@ -34,34 +34,44 @@ pre { /* Code block - slightly smaller in this lecture */
 📃[Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
 
 
-## Summarization with Data
+## The Data
 
 We can use the CO heat-related ER visits dataset to explore different ways of summarizing data. 
 
-(*Reminder* This dataset contains information about the number and rate of visits for heat-related illness to ERs in Colorado from 2011-2022, adjusted for age.)  
+*Reminder*: This dataset contains information about the number and rate of visits for heat-related illness to ERs in Colorado from 2011-2022, adjusted for age.
 
-The `head` command displays the first rows of an object:
+
+## The Data
+
+We can use the CO heat-related ER visits dataset to explore different ways of summarizing data. 
+
+The `head` function displays the first rows of an object:
+
+<!-- ```{r} -->
+<!-- er <-  -->
+<!--   read_csv("https://daseh.org/data/CO_ER_heat_visits.csv") -->
+
+<!-- head(er) -->
+<!-- ``` -->
 
 ```{r}
 er <- 
-  read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
+  read_csv("../../data/CO_ER_heat_visits.csv")
 
 head(er)
 ```
 
-
 ## Behavior of `pull()` function
 
-`pull()` converts a single data column into a vector. This allows you to run summary functions.
+`pull()` converts a single data column into a <span style="color:blue">vector</span>.
 
 ```{r, eval=FALSE}
 er %>% pull(visits)
 ```
 
-
 ## Data Summarization
 
-Now that we have a vector of numbers.. what can we do with it?
+Now that we have a <span style="color:blue">vector of numbers</span>.. what can we do with it?
 
 * Basic statistical summarization
     * `mean(x)`: takes the mean of x
@@ -73,12 +83,19 @@ Now that we have a vector of numbers.. what can we do with it?
     * `max(x)`: maximum value in x
     * `min(x)`: minimum value in x
 
-## Statistical summarization the "tidy" way
+## Pipe (`%>%`) vectors into summarizing functions
 
-**Add the ** `na.rm =` **argument for missing data**
+A vector can be summarized:
 
 ```{r}
 er %>% pull(visits) %>% mean()
+```
+
+<br> 
+
+Add the `na.rm =` argument for missing data
+
+```{r}
 er %>% pull(visits) %>% mean(na.rm=T)
 ```
 
@@ -98,7 +115,7 @@ C. A dataset
 
 `summarize` works on datasets without `pull()`.
 
-Multiple summary statistics can be calculated at once. `pull()` can only do one column.
+Multiple summary statistics can be calculated at once!
 
 <div class = "codeexample">
 ```{r, eval = FALSE}
@@ -150,10 +167,11 @@ summary(er)
 
 ## Summary & Lab Part 1
 
-- summary stats (`mean()`) work with `pull()`
+- `pull()` creates a *vector*
 - don't forget the `na.rm = TRUE` argument!
 - `summary(x)`: quantile information
 - `summarize`: creates a summary table of columns of interest
+- summary stats (`mean()`) work with vectors or with `summarize()`
 
 🏠 [Class Website](https://daseh.org/)
 
@@ -172,7 +190,9 @@ er %>%
 
 ## How many `distinct()` values?
 
-`n_distinct()` tells you the number of unique elements. _Must pull the column first!_
+`n_distinct()` tells you the number of unique elements. 
+
+It needs a vector so you _must pull the column first!_
 
 ```{r}
 er %>%
@@ -186,28 +206,44 @@ options(max.print = 1000)
 ```
 
 
-## `dplyr`: `count` 
-
-Use `count` to return row count by category.
+## Use `count()` to return row count per category.
 
 ```{r, message = FALSE}
 er %>% count(county)
 ```
 
+_Looks like 12 rows/observations per county!_
 
-## `dplyr`: `count` 
-
-Multiple columns listed further subdivides the count.
+## Multiple columns listed further subdivides the `count()`
 
 ```{r, message = FALSE}
 er %>% count(county, year)
 ```
 
+_Looks like 1 row/observation per county and year!_
 
+## GUT CHECK!
+
+The `count()` function can help us tally:
+
+A. Sample size
+
+B. Rows per each category
+
+C. How many categories
 
 # Grouping
 
+## Goal
+
+We want to find the mean number of ER visits per year in the dataset.
+
+_How do we do this?_
+
+
 ## Perform Operations By Groups: dplyr
+
+First, let's group the data.
 
 `group_by` allows you group the data set by variables/columns you specify:
 
@@ -227,7 +263,7 @@ er_grouped %>%
 ```
 
 
-## Use the `pipe` to string these together!
+## Do it in one step: use `%>%` to string these together!
 
 Pipe `CO_heat_ER` into `group_by`, then pipe that into `summarize`:
 
@@ -247,9 +283,9 @@ er %>%
   summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
 
-## Counting
+## Counting rows/observations
 
-There are other functions, such as `n()` count the number of observations (NAs included).
+There are other summarizing functions, such as `n()` count the number of rows/observations (NAs included).
 
 ```{r}
 er %>%
@@ -259,15 +295,23 @@ er %>%
 ```
 
 
-## Counting{.codesmall}
+## Counting: `count()` and `n()`
 
 `count()` and `n()` can give very similar information.
 
 ```{r}
+# Here we use count()
 er %>% count(year)
-er %>% group_by(year) %>% summarize(n()) # n() typically used with summarize
 ```
 
+## Counting: `count()` and `n()`
+
+`count()` and `n()` can give very similar information.
+
+```{r}
+# n() with summarize
+er %>% group_by(year) %>% summarize(n()) 
+```
 
 # A few miscellaneous topics .. 
 
@@ -278,6 +322,7 @@ These functions require a column as a vector using `pull()`.
 
 ```{r, message = FALSE}
 er_year <- er %>% pull(year) # pull() to make a vector
+
 er_year %>% unique() # similar to distinct()
 ```
 
@@ -301,7 +346,6 @@ er_year %>% unique() %>% length() # similar to n_distinct()
   - `n_distinct()` with `pull()`: how many distinct values?
 - `group_by()`: changes all subsequent functions
   - combine with `summarize()` to get statistics per group
-  - combine with `mutate()` to add column
 - `summarize()` with `n()` gives the count (NAs included) 
 
 ## Lab Part 2
@@ -314,9 +358,12 @@ er_year %>% unique() %>% length() # similar to n_distinct()
 
 📃[Posit's data transformation Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
 
-For more advanced learning, check out https://www.danieldsjoberg.com/gtsummary/ for tables of summary statistics and the extra slides in this file.
+**For more advanced learning:**
 
-```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
+- https://www.danieldsjoberg.com/gtsummary/ for tables
+- extra slides in this file.
+
+```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
 
@@ -333,8 +380,13 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
     * `rowSums(x)`: takes the sum of each row of x
     * `colSums(x)`: takes the sum of each column of x
 
+<!-- ```{r} -->
+<!-- yearly_co2 <- read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv") -->
+<!-- ``` -->
+
+
 ```{r}
-yearly_co2 <- read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+yearly_co2 <- read_csv("../../data/Yearly_CO2_Emissions_1000_tonnes.csv")
 ```
 
 
