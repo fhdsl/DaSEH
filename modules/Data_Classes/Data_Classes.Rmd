@@ -56,6 +56,12 @@ class(x)
 
 `logical` elements are NOT in quotes. 
 
+## Why is Class important?
+
+The class of the data tells R how to process the data.
+
+For example, it determines whether you can make summary statistics (numbers) or if you can sort alphabetically (characters).
+
 ## General Class Information
 
 There is one useful functions associated with practically all R classes: 
@@ -87,6 +93,16 @@ When interpretation is ambiguous, R will return `NA` (an R constant representing
 as.numeric(c("1", "4", "7a"))
 as.logical(c("TRUE", "FALSE", "UNKNOWN"))
 ```
+
+## GUT CHECK!
+
+What is one reason we might want to convert data to numeric?
+
+A. So we can take the mean
+
+B. So the data looks better
+
+C. So our data is correct
 
 ## Number Subclasses
 
