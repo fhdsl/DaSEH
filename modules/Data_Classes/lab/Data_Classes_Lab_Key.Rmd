@@ -78,7 +78,7 @@ sars_ww <-
 
 Use the `mutate()` function to create a new column named `date_formatted`, based on the `date_end` column. Hint: use `mdy()` function. Reassign to `sars_ww`.
 
-`date_end`: This is the last date of the sampling window.
+`date_end`: This is the last date of the sampling window. A sampling window is used to measure change in viral concentration.
 
 ```
 # General format
