@@ -384,7 +384,8 @@ knitr::include_graphics("images/debug.png")
 ## Lab Part 1
 
 🏠 [Class Website](https://daseh.org/)    
-💻[Lab](https://daseh.org/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd). 
+📃 [Day 5 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-5.pdf)
 
 
 
@@ -772,7 +773,9 @@ knitr::include_graphics("images/case_when.png")
 ## Lab Part 2
 
 🏠 [Class Website](https://daseh.org/)    
-💻[Lab](https://daseh.org/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd). 
+📃 [Day 5 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-5.pdf)
+📃 [Posit's `stringr` Cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
