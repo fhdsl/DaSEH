@@ -28,7 +28,7 @@ library(emoji)
   - combine with `mutate()` to add column
 - `summarize()` with `n()` gives the count (NAs included) 
 
-📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
+📃[Day 4 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
 
 ## Recap on data classes
 
@@ -42,7 +42,7 @@ library(emoji)
 - Dates can be handled with the `lubridate` package
 - Make sure you choose the right function for the way the date is formatted!
 
-    📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
+📃[ Day 4 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
 
 ## Data Cleaning {.emphasized}
 
