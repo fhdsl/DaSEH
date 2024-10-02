@@ -11,29 +11,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Part 1
 
-Data used
-
-CalEnviroScreen Dataset: CalEnviroScreen is a project that ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. Data used in the CalEnviroScreen model come from national and state sources.
-
-The data is from https://calenviroscreen-oehha.hub.arcgis.com/#Data
-
-You can Download as a CSV in your current working directory.  Note its also available at: 	https://daseh.org/data/CalEnviroScreen_data.csv 
+We'll again use the CalEnviroScreen dataset for the lab. Load the `tidyverse` package and the dataset, which can be found at 	https://daseh.org/data/CalEnviroScreen_data.csv. Name the dataset `ces`.
 
 
 ```{r, echo = TRUE, message=FALSE, error = FALSE}
 library(tidyverse)
-library(dasehr)
-```
 
-```{r}
-ces <- calenviroscreen
-# Or use
-# ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
+ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
 ```
 
 ### 1.1 
 
-How observations/rows are in the `ces` data set? You can use `dim()` or `nrow()` or examine the Environment.
+How many observations/rows are in the `ces` data set? You can use `dim()` or `nrow()` or examine the Environment.
 
 ```{r 1.1response}
 nrow(ces)
@@ -44,7 +33,11 @@ ces %>% count()
 
 ### 1.2
 
-What was the population of California in the 2010 census, based on the `TotalPop` column? (use `sum()`)
+The `TotalPop` column includes information about the population for each census tract as of the 2010 census.
+
+NOTE: A census tract a small, relatively permanent area within a county used to present data from the census. Each row in the `ces` dataset corresponds to a single census tract. See https://www2.census.gov/geo/pdfs/education/CensusTracts.pdf
+
+What was the total population in the dataset based on the 2010 census? (use `sum()` and the `TotalPop` column)
 
 ```{r 1.2response}
 ces %>% pull(TotalPop) %>% sum()
@@ -52,7 +45,7 @@ ces %>% pull(TotalPop) %>% sum()
 
 ### 1.3
 
-What is the largest (`max`) total population (`TotalPop`) among all census tracts (rows)? Use `summarize`.
+What was the largest population, according to the 2010 census, for a single census tract (row)? Use `summarize` and `max`.
 
 ```
 # General format 
@@ -67,7 +60,7 @@ ces %>%
 
 ### 1.4
 
-Modify your code from 1.3 to add the `min` of `TotalPop` using the `summarize` function.
+Modify your code from 1.3 to add the smallest population among census tracts. Use `min` in your `summarize` function.
 
 ```
 # General format 
@@ -88,7 +81,9 @@ ces %>%
 
 ### P.1
 
-Summarize the `ces` data to get the mean of `TotalPop` and `Pesticides`. Make sure to remove `NA`s.
+Summarize the `ces` data to get the mean of both the `TotalPop` and `Pesticides` columns. Make sure to remove `NA`s.
+
+`Pesticides`: Total pounds of selected active pesticide ingredients  used in production-agriculture per square mile. The higher the number, the greater the amount of pesticides have been used on agricultural sites
 
 ```
 # General format 
@@ -115,14 +110,12 @@ ces %>%
 Given that parts of California are heavily agricultural, and the max value for the `Pesticides` variable is 80811, why might the average value be so low??
 
 ```{r P.2response}
-# There are probably some zeros or other incorrect low values in the data from the census tracts that are in urban areas.
+# There are probably some zeros or other incorrect low values in the data from the census tracts that are in urban areas, or areas with limited agriculture.
 ```
 
 ### P.3
 
-Filter any zeros out of `ces` `Pesticides`. Use `filter()`. Assign this "cleaned" dataset object the name `exurban_ces``.
-
-(We are making the admittedly shaky assumption that places with no reported pesticide use are within cities.)
+Filter any zeros from the `Pesticides` column out of `ces`. Use `filter()`. Assign this "cleaned" dataset object the name `ces_pest`.
 
 ```
 # General format 
@@ -130,16 +123,16 @@ DATA_TIBBLE %>% filter(LOGICAL_COMPARISON)
 ```
 
 ```{r P.3aresponse}
-exurban_ces <- ces %>% filter(Pesticides != 0)
+ces_pest <- ces %>% filter(Pesticides != 0)
 ```
 
 How many census tracts have pesticide values greater than 0?
 
 ```{r P.3bresponse}
-nrow(exurban_ces)
-dim(exurban_ces)
-exurban_ces %>% nrow()
-exurban_ces %>% count()
+nrow(ces_pest)
+dim(ces_pest)
+ces_pest %>% nrow()
+ces_pest %>% count()
 ```
 
 
@@ -147,23 +140,21 @@ exurban_ces %>% count()
 
 ### 2.1
 
-The variable `CES4.0PercRange` categorizes the calculated CES4.0 value (a measure of the pollution burden in a particular region) into percentile ranges, grouped by 5% increments.
-
-How many census tracts are there in each percentile range? Use `count()` on the column named `CES4.0PercRange`. Use `ces` as your input data.
+How many census tracts are present in each California county? Use `count()` on the column named `CaliforniaCounty`. Use `ces` as your input data.
 
 ```{r 2.1response}
-ces %>% count(CES4.0PercRange)
+ces %>% count(CaliforniaCounty)
 ```
 
 ### 2.2
 
-Modify your code from question 2.1 to break down each percentile range by California county. Use `count()` on the columns named `CES4.0PercRange` and `CaliforniaCounty`.
+Let's break down the count further. Modify your code from question 2.1 to count census tracts by County AND ZIP code. Use `count()` on the columns named `CaliforniaCounty` and `ZIP`.
 
 ```{r 2.2response}
-ces %>% count(CES4.0PercRange, CaliforniaCounty)
+ces %>% count(CaliforniaCounty, ZIP)
 ```
 
-Hmm. This isn't the easiest table to read. Let's try a different approach.
+This isn't the only way we can create this table in R. Let's look at another way to build it.
 
 ### 2.3
 
@@ -184,11 +175,11 @@ ces %>%
 
 ### 2.4
 
-Modify your code from 2.3 to also group by `CES4.0PercRange`.
+Modify your code from 2.3 to also group by `ZIP`.
 
 ```{r 2.4response}
 ces %>%
-  group_by(CaliforniaCounty, CES4.0PercRange) %>%
+  group_by(CaliforniaCounty, ZIP) %>%
   summarize(count = n())
 ```
 
@@ -197,7 +188,7 @@ ces %>%
 
 ### P.4
 
-Modify code from 2.3 to also summarize by total population per group. In your summarized output, make sure you call the new summarized average total population variable (column name) "mean". In other words, the head of your output should look like:
+Modify code from 2.3 (the code that only groups by county) to also summarize by total population (`TotalPop`) per group. In your summarized output, make sure you call the new summarized average total population variable (column name) "mean". In other words, the head of your output should look like:
 
 ```
 # A tibble: 58 × 3
@@ -206,6 +197,7 @@ Modify code from 2.3 to also summarize by total population per group. In your su
  1 "Alameda "         360 4602.
 ...
 ```
+(In the above table, remember that the "count" column is counting the number of census tracts.)
 
 ```{r P.4response}
 ces %>%
