@@ -30,7 +30,7 @@ We are constantly making improvements.
 -  Reproducible science makes everyone's life easier!  
 - `readr`has helpful functions like `read_csv()` that can help you import data into R  
 
-📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)
+📃[Day 2 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)
 
 
 ## Overview
@@ -382,6 +382,15 @@ test
 clean_names(test)
 ```
 
+## GUT CHECK: Which of the following would NOT always work with a column called `counties_of_seattle_with_population_over_10,000`?
+
+A. Renaming it using `rename` function to something simpler like `seattle_counties_over_10thous`.
+
+B. Keeping it as is and use backticks around the column name when you use it.
+
+C. Keeping it as is and use quotes around the column name when you use it.
+
+
 ## Summary
 
 - data frames are simpler version of a data table
@@ -396,8 +405,14 @@ clean_names(test)
 
 ## Lab Part 1
 
-🏠 [Class Website](https://daseh.org/)    
-💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
+🏠 [Class Website](https://daseh.org/) 
+
+💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd) 
+
+🗒 [Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
+
+🗒 [RStudio `dplyr` Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
+
 
 # Subsetting Columns
 
@@ -495,6 +510,11 @@ select(er_30, where(is.numeric))
 
 ```
 
+## GUT CHECK: What function would be useful for getting a vector version of a column?
+
+A. `pull()`
+
+B. `select()`
 
 
 
@@ -630,6 +650,17 @@ knitr::include_graphics("https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.
 ```
 https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 
+
+## GUT CHECK: If we want to keep just rows that meet either or two conditions, what code should we use?
+
+A. `filter()` with `|`
+
+B. `select()` with `|`
+
+C. `filter()` with `&`
+
+D. `select()` with `&`
+
 ## Summary
 
 - `pull()` to get values out of a data frame/tibble
@@ -651,6 +682,9 @@ https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 
 🏠 [Class Website](https://daseh.org)    
 💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
+🗒 [Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
+
+🗒 [RStudio `dplyr` Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
 
 ## Get the data
 
@@ -865,6 +899,23 @@ arrange(er_30, rate, desc(year)) %>% head(n = 2)
 
 arrange(er_30, desc(year), rate) %>% head(n = 2)
 ```
+
+## GUT CHECK: What function would be useful for changing a column to be a percentage instead of a ratio?
+
+A. `filter()`
+
+B. `select()`
+
+C. `mutate()`
+
+
+## GUT CHECK: How would we interpret `er_30 %>% filter(year > 2020) %>% select(year, rate)`?
+
+A. Get the `er_30` data, then filter it for rows with `year` values over 2020, then select only the `year` and `rate` columns.
+
+B. Get the `er_30` data, then filter it rows with `year` values over 2020, then select for rows that have values for `year` and `rate`.
+
+
 
 
 ## Summary
