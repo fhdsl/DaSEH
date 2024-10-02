@@ -67,6 +67,12 @@ knitr::include_graphics("images/reproducibility.png")
 ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf1accd298e_0_673")
 ```
 
+## We can't get to replicability without reproducibility
+
+```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.g3070a1ee60e_0_0")
+```
+
 ## It's worth the wait
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
@@ -79,6 +85,7 @@ ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxp
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
 ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf1cd772e00_0_330")
 ```
+
 
 ## The process
 
