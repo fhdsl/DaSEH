@@ -47,19 +47,13 @@ We can use the CO heat-related ER visits dataset to explore different ways of su
 
 The `head` function displays the first rows of an object:
 
-<!-- ```{r} -->
-<!-- er <-  -->
-<!--   read_csv("https://daseh.org/data/CO_ER_heat_visits.csv") -->
-
-<!-- head(er) -->
-<!-- ``` -->
-
 ```{r}
-er <- 
-  read_csv("../../data/CO_ER_heat_visits.csv")
+er <-
+  read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
 
 head(er)
 ```
+
 
 ## Behavior of `pull()` function
 
@@ -380,13 +374,9 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
     * `rowSums(x)`: takes the sum of each row of x
     * `colSums(x)`: takes the sum of each column of x
 
-<!-- ```{r} -->
-<!-- yearly_co2 <- read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv") -->
-<!-- ``` -->
-
-
 ```{r}
-yearly_co2 <- read_csv("../../data/Yearly_CO2_Emissions_1000_tonnes.csv")
+yearly_co2 <- 
+  read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
 ```
 
 
