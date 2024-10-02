@@ -54,10 +54,8 @@ output: pdf_document
 ### Functions
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
-| Base `R`| [`factor(x)` or `as.factor(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/factor)| Factor| Coerces object x into a factor (which is used to represent categorical data). This function can be used to coerce object `x` into other data types, i.e., `as.character`, `as.numeric`, `as.data.frame`, `as.matrix`, `as.Date` etc. |
-| Base `R`| [`levels(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/levels)| `levels(factor_obj)`| Returns or sets the value of the levels in an object `x`.|
-| Base `R`| [`rep()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/rep)|`rep(1:3)`| Replicates the values in x to make a vector.|
-| Base `R`| [`seq()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/seq)|`seq(from = 0, to = 1, by = 0.2)`| Creates a vector of a sequence of numbers based on the specified arguments. |
+| Base `R`| [`as.numeric(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/numeric)| `as.numeric(x)` | Coerces object x into numeric class. This type of function can be used to coerce object `x` into other data types, i.e., `as.character`, `as.numeric`, `as.data.frame`, `as.matrix`, `as.Date` etc. |
+| `lubridate`| [`ymd(x)`](https://www.rdocumentation.org/packages/lubridate/versions/1.9.2/topics/ymd)| `ymd("2024-01-31")` | Coerces character object x into date class. The format of the character object determines the function to use. Other examples include `mdy()`, `dmy()`, etc. |
 
 
 - [`lubridate`](https://lubridate.tidyverse.org/) is a powerful, widely used R package from “tidyverse” family to work
