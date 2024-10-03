@@ -163,7 +163,7 @@ The `gg_miss_var()` function creates a nice plot about the number of
 missing values for each variable, (need a data frame).
 
 ```{r, fig.height=4, warning=FALSE, fig.align='center'}
-gg_miss_var(er)
+gg_miss_var(er, show_pct = TRUE)
 ```
 
 
