@@ -7,11 +7,15 @@ editor_options:
 
 # R Markdown
 
-Please read through everything and then try the exercises. This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. The way you can create a file like this in RStudio is: File → New File → R Markdown and then using the default or using a template.
+The file you are reading is called an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>. The way you can create a file like this in RStudio is: File → New File → R Markdown and then using the default or using a template.
+
+1. Try compiling this document using the “Knit” button. What files are produced?
 
 ### The Code
 
 The gray area below is a code chunk that will set up our packages and data. You can also run the code within the editor area by pressing the green play button. Don't worry right now about what the code is doing, we will cover this later. We just want you to get used to RStudio and RMarkdowns. This dataset is one we'll be working with quite a lot in the lectures. It contains county-level data about ER visits for heat-related illnesses in Colorado for the years 2011-2022. 
+
+2. Press the green play button. What happens (check the environment too!)?
 
 ```{r setup, message=FALSE}
 library(tidyverse)
@@ -22,13 +26,17 @@ er_2 <- er %>%
   filter(!is.na(rate))
 ```
 
-When you click the **Knit** button (at the top of RStudio), a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Next we will show you some code - no worries about understanding it yet, we just want to get you familiar with where code goes. When code is in an RMarkdown file chunk, it is saved to a file. When it is in the console, it is not saved. The console is useful for installing packages like we just did, this is because we only need to do it once, so we don't usually need to save the code.
+When you click the **Knit** button (at the top of RStudio), a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Note that when it does this it starts from scratch - it can't use any objects you created outside of the Rmd file. Therefore it essentially has its own environment that is different from the one that you see when working interactively in RStudio.
 
 ### Plotting some data
 
-Here is code that will make a plot of some data.You can embed an R code chunk like this: Try pressing the green play button to see what happens. Make sure you have run the previous code chunk first by pressing the green play button in that chunk.
+Here is code that will make a plot of some data.
 
-```{r plot, out.width = "100%"}
+3. Try the "run all chunks above" button that is to the left of the play button on the following chunk. What happens?
+
+4. Then press the play button on this same chunk. What happens?
+
+```{r out.width = "100%"}
 # keep only some counties
 er_3 <- er_2 %>%
   filter(county %in% c("Arapahoe", "Denver", "Jefferson", "Larimer"))
@@ -37,7 +45,7 @@ palette <- c(
   Arapahoe = "blue",
   Denver = "darkgreen",
   Jefferson = "orange",
-  Larimer = "purple"
+  Larimer = "salmon"
 )
 
 ggplot(aes(x = year, y = rate, colour = county, group = county), data = er_3) +
@@ -45,22 +53,9 @@ ggplot(aes(x = year, y = rate, colour = county, group = county), data = er_3) +
   scale_colour_manual(values = palette)
 ```
 
-```{r out.width = "100%", label = '0response'}
+### Adding new chunks
 
-```
-
-
-# Exercise 
-
-Here are a few changes that will show you how to change small things in `R` code and the output it makes.  After each change, hit the **Knit** button again.
-
-### 1.1
-
-Go through the code for the plot above and change the colors in `palette` to something other than what they originally were. See http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf for a large list of colors. For example, you could replace blue with red.
-
-### 1.2
-
-Add a new R chunk after `<!-- Your code chunk goes here -->`. You can use the insert chunk button or copy paste an existing code chunk. Include a lowercase x inside the chunk as the code. Make sure you press the knit button after this to see what the new chunk looks like.
+5. Add a new R chunk after `<!-- Your code chunk goes here -->`. You can use the insert chunk button or copy paste an existing code chunk. Include a lowercase x inside the chunk as the code. Make sure you press the knit button after this to see what the new chunk looks like. 
 
 ```{r}
 x <- c(1, 2, 3)
@@ -68,12 +63,20 @@ x <- c(1, 2, 3)
 
 <!-- Your code chunk goes here -->
 
+
+
 # Practice on Your Own!
+
+Here are a few changes that will show you how to change small things in `R` code and the output it makes.  After each change, hit the **Knit** button again.
 
 ### P.1
 
-Update the options of the R chunk you just made (with the lowercase x in it) so that the output option is `show output only`. How does the chunk look now?
+Go through the code for the plot above and change the colors in `palette` to something other than what they originally were. See http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf for a large list of colors. For example, you could replace blue with red.
 
 ### P.2
 
 Create another R Markdown Document from RStudio dropdowns: File → New File → R Markdown.
+
+### P.3 
+
+Add a new header with two hash symbols `##` at the start of a line with some text. Knit the report to see how it looks.
