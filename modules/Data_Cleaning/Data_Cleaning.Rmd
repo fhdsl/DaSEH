@@ -368,6 +368,21 @@ Pay attention to your data and your `NA` values!
 knitr::include_graphics("images/debug.png")
 ```
 
+## GUT CHECK: What function can be used to remove NA values from a full dataframe or for an indvidual column?
+
+A. `drop_nulls()`
+
+B. `drop_na()`
+
+C. `rem_na()`
+
+## GUT CHECK: How can you keep NA values when using `filter`?
+
+A. include `| is.na()` 
+
+B. include `& is.na()`
+ 
+
 ## Summary
 
 -   `is.na()`,`any(is.na())`, `all(is.na())`,`count()`, and functions from `naniar` like `gg_miss_var()` and `miss_var_summary` can help determine if we have `NA` values
@@ -518,20 +533,21 @@ plastics %>%
 ```
 
 
-## But maybe we want NA?
+<!-- ## But maybe we want NA? -->
 
-Perhaps we want values that are O or Other to actually be NA, then `case_when` can be helpful for this. We simply specify everything else.
+<!-- Perhaps we want values that are O or Other to actually be NA, then `case_when` can be helpful for this. We simply specify everything else. -->
 
-```{r}
-plastics %>% 
-  mutate(microplastic_recoded = case_when(
-                               microplastic == "Bisphenol A" ~ "BPA",
-                               microplastic == "bpa" ~ "BPA",
-                               microplastic == "BPA" ~ "BPA",
-                               microplastic =="dioxin" ~"Dioxin",
-                               microplastic =="Dioxin" ~"Dioxin")) %>%
-  count(microplastic, microplastic_recoded)
-```
+<!-- ```{r} -->
+<!-- plastics %>%  -->
+<!--   mutate(microplastic_recoded = case_when( -->
+<!--                                microplastic == "Bisphenol A" ~ "BPA", -->
+<!--                                microplastic == "bpa" ~ "BPA", -->
+<!--                                microplastic == "BPA" ~ "BPA", -->
+<!--                                microplastic =="dioxin" ~"Dioxin", -->
+<!--                                microplastic =="Dioxin" ~"Dioxin")) %>% -->
+<!--   count(microplastic, microplastic_recoded) -->
+<!-- ``` -->
+
 ## case_when() can also overwrite/update a variable
 
 You need to specify what we want in the first part of `mutate`.
@@ -539,11 +555,11 @@ You need to specify what we want in the first part of `mutate`.
 ```{r}
 plastics %>% 
   mutate(microplastic = case_when(
-                               microplastic == "Bisphenol A" ~ "BPA",
-                               microplastic == "bpa" ~ "BPA",
-                               microplastic == "BPA" ~ "BPA",
-                               microplastic =="dioxin" ~"Dioxin",
-                               microplastic =="Dioxin" ~"Dioxin")) %>%
+                              microplastic == "Bisphenol A" ~ "BPA",
+                              microplastic == "bpa" ~ "BPA",
+                              microplastic == "dioxin" ~"Dioxin",
+                              microplastic == "O" ~ "Other",
+                               TRUE ~ microplastic)) %>%
   count(microplastic)
 
 ```
@@ -555,10 +571,10 @@ plastics %>%
 ```{r}
 plastics %>% 
   mutate(microplastic_recoded = case_when(
-    microplastic == "Dioxin" ~ "Dioxin", # keep it the same!
-    microplastic == "dioxin" ~ "Dioxin", 
+    microplastic %in% c("dioxin", "Dioxin") ~ "dioxin", 
     microplastic %in% c("BPA", "bpa", "Bisphenol A") ~ "BPA",
-    microplastic %in% c("O", "Other") ~ "Other")) %>%
+    microplastic %in% c("O", "Other") ~ "Other",
+                      TRUE ~ microplastic)) %>%
 
   count(microplastic, microplastic_recoded)
 
@@ -575,9 +591,10 @@ Here we create a new variable called `Effect`.
 ```{r}
 
 plastics <- plastics %>% 
-      mutate(Effect = case_when(blood_level_change_nM > 0 ~ "Increase",
-                                blood_level_change_nM == 0 ~ "Same",
-                                blood_level_change_nM < 0 ~ "Decrease"))
+      mutate(Effect = case_when(
+                    blood_level_change_nM > 0 ~ "Increase",
+                    blood_level_change_nM == 0 ~ "Same",
+                    blood_level_change_nM < 0 ~ "Decrease"))
 
 head(plastics)
 
@@ -589,6 +606,20 @@ head(plastics)
 plastics %>% 
   count(Foods, Effect)
 ```
+
+## GUT CHECK: we need to use what function with `case_when()` to modify or create a new variable?
+
+A. `modify()`
+B. `select()`
+C. `mutate()`
+
+
+## GUT CHECK: If we want all unspecified values to remain the same with `case_when()`, how should we complete the `TRUE ~` statement?
+
+A. With the name of the variable we are modifying or using as source
+
+B. With `TRUE ~ same`
+
 
 # Working with strings
 
@@ -706,13 +737,22 @@ plastics %>%
   count(microplastic, microplastic_recoded)
 ```
 
-This is a more robust solution! It will catch typos as long as first letter is correct.
+This is a more robust solution! It will catch typos as long as the first letter is correct.
 
 ## That's better!
 
 ```{r, echo = FALSE, fig.align='center', out.width= "30%"}
 knitr::include_graphics("https://media1.giphy.com/media/S9ZK4mmi3u3jdc5dek/200w.webp?cid=ecf05e47h7myga959jwvek6s9x1tkog135g7pxu8vvjz2yqb&rid=200w.webp&ct=g")
 ```
+
+
+## GUT CHECK: What `stringr` function helps us find a string pattern?
+
+A. `str_replace()`
+
+B. `str_find()`
+
+C. `str_detect()`
 
 # Separating and uniting data
 
