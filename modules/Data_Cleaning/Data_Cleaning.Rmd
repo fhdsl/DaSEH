@@ -368,7 +368,7 @@ Pay attention to your data and your `NA` values!
 knitr::include_graphics("images/debug.png")
 ```
 
-## GUT CHECK: What function can be used to remove NA values from a full dataframe or for an indvidual column?
+## GUT CHECK: What function can be used to remove NA values from a full dataframe or for an individual column?
 
 A. `drop_nulls()`
 
