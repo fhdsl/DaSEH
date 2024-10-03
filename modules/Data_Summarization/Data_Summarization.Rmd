@@ -259,7 +259,7 @@ er_grouped %>%
 
 ## Do it in one step: use `%>%` to string these together!
 
-Pipe `CO_heat_ER` into `group_by`, then pipe that into `summarize`:
+Pipe `er` into `group_by`, then pipe that into `summarize`:
 
 ```{r}
 er %>%
