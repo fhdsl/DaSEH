@@ -1,0 +1,21 @@
+
+<div class="leaf"></div> 
+# Data
+***
+
+<br>
+
+| Repository/Database | Details |
+|---------------------|---------|
+| [Census Data](https://data.census.gov/) | Learn about America's People, Places, and Economy. There is also a package called [tidycensus](https://walker-data.com/tidycensus/) for working with census data easily in R. |
+| [Centers for Disease Control and Prevention (CDC) Data](https://data.cdc.gov/) | Lists many data sources! Health statistics, injuries, vaccination, disability & health, chronic disease rates, and many more! |
+| [Climate and Health Outcomes Research Data Systems (CHORDS)](https://chordshealth.org/discovery) | Place based environmental exposures on health outcomes |
+| [Climate-related Disasters](https://climatedata.imf.org/datasets/b13b69ee0dde43a99c811f592af4e821/explore) | Trend in these climate-related disasters over time. Check out more of the IMF's data [here](https://climatedata.imf.org/) |
+| [CO2 Emissions Data](https://cfpub.epa.gov/ghgdata/inventoryexplorer/) | U.S. Greenhouse Gas Emissions and Sinks and the Inventory of U.S. Greenhouse Gas Emissions and Sinks by State |
+| [data.gov](https://data.gov/) | Thousands of data sources! |
+| [Environmental Protection Agency (EPA) Data](https://www.epa.gov/data) | Lists many data sources! Data related to air quality, superfund sites, chemicals, water, and more. |
+| [Healthdata.gov](https://healthdata.gov/) | Lots of data related to COVID-19, hospitals, etc. |
+| [National Institute of Environmental Health Sciences (NIEHS) Databases](https://www.niehs.nih.gov/research/resources/databases) | Lists many data sources! Includes Chemical Effects in Biological Systems (CEBS), Comparative Toxicogenomics Database, NIEHS-Funded Epidemiology Resources Faceted Search Tool, many more! |
+| [National Institute of Environmental Health Sciences (NIEHS) Domain Specific Data Repositories](https://public.tableau.com/app/profile/ntp.visuals/viz/ODSDomainSpecificDataRepositories/NewDashboardLandingPage) | Lists many data sources! Includes [HydroShare](https://www.hydroshare.org/), [National Centers for Environmental Information (NCEI)](https://www.ncei.noaa.gov/), [Gene Expression Omnibus](https://www.ncbi.nlm.nih.gov/geo/), many more! |
+| [NOAA National Climatic Data Center (NCDC)](https://www.ncdc.noaa.gov/cdo-web/search) | NOAA's National Climatic Data Center (NCDC) maintains the world's largest climate data archive and provides climatological services and data to every sector of the United States economy and to users worldwide. |
+| [World Health Organization (WHO) Data](https://data.who.int/) | Data on health and health-related indicators |

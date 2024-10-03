@@ -28,7 +28,7 @@ library(emoji)
   - combine with `mutate()` to add column
 - `summarize()` with `n()` gives the count (NAs included) 
 
-📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
+📃[Day 4 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
 
 ## Recap on data classes
 
@@ -42,7 +42,7 @@ library(emoji)
 - Dates can be handled with the `lubridate` package
 - Make sure you choose the right function for the way the date is formatted!
 
-    📃[Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
+📃[ Day 4 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
 
 ## Data Cleaning {.emphasized}
 
@@ -163,7 +163,7 @@ The `gg_miss_var()` function creates a nice plot about the number of
 missing values for each variable, (need a data frame).
 
 ```{r, fig.height=4, warning=FALSE, fig.align='center'}
-gg_miss_var(er)
+gg_miss_var(er, show_pct = TRUE)
 ```
 
 
@@ -277,7 +277,7 @@ Let's say we think that all 0 values should be `NA`.
 Maybe we think the person who entered the CO heat-related ER visits data made a mistake in how they coded missing data.
 
 ```{r}
-er %>% count(is.na(visits))
+er %>% count(visits)
 ```
 
 ## Change a value to be `NA`{.codesmall}
@@ -288,7 +288,7 @@ The `na_if()` function of `dplyr` can be helpful for changing all 0 values to `N
 er_nozero <- er %>% 
   mutate(visits = na_if(visits, 0))
 
-er_nozero %>% count(is.na(visits))
+er_nozero %>% count(visits)
 ```
 
 
@@ -299,7 +299,7 @@ The `replace_na()` function (part of the `tidyr` package), can do the opposite o
 ```{r}
 er %>% 
   mutate(visits = replace_na(visits, 0)) %>% 
-  count(is.na(visits))
+  count(visits)
 ```
 
 
@@ -368,6 +368,21 @@ Pay attention to your data and your `NA` values!
 knitr::include_graphics("images/debug.png")
 ```
 
+## GUT CHECK: What function can be used to remove NA values from a full dataframe or for an individual column?
+
+A. `drop_nulls()`
+
+B. `drop_na()`
+
+C. `rem_na()`
+
+## GUT CHECK: How can you keep NA values when using `filter`?
+
+A. include `| is.na()` 
+
+B. include `& is.na()`
+ 
+
 ## Summary
 
 -   `is.na()`,`any(is.na())`, `all(is.na())`,`count()`, and functions from `naniar` like `gg_miss_var()` and `miss_var_summary` can help determine if we have `NA` values
@@ -384,7 +399,8 @@ knitr::include_graphics("images/debug.png")
 ## Lab Part 1
 
 🏠 [Class Website](https://daseh.org/)    
-💻[Lab](https://daseh.org/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd). 
+📃 [Day 5 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-5.pdf)
 
 
 
@@ -392,17 +408,22 @@ knitr::include_graphics("images/debug.png")
 
 ## Example of Recoding
 
-Let's upload some practice data about microplastics. Maybe we measured the level of microplastics in someone who eats a fish-based diet versus someone who eats a vegetarian diet. 
+Let's upload some practice data about microplastics. Maybe we measured the level of microplastics in someone who eats a fish versus someone who is a vegetarian. 
 
 https://www.medicalnewstoday.com/articles/what-do-we-know-about-microplastics-in-food#Common-microplastics-in-food
 https://www.sciencedirect.com/science/article/pii/S0045653523028072
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5708064/
 
 ```{r}
-diet_data <- read_csv(file =
+plastics <- read_csv(file =
     "https://daseh.org/data/microplastics_in_blood.csv")
+```
 
-diet_data
+
+## microplastics data
+
+```{r}
+plastics
 ```
 
 ## Oh dear...
@@ -410,7 +431,7 @@ diet_data
 This needs lots of recoding.
 
 ```{r}
-diet_data %>%
+plastics %>%
   count(microplastic)
 ```
 
@@ -437,7 +458,7 @@ Need quotes for conditions and new values!
 :::
 
 ```{r}
-diet_data %>% 
+plastics %>% 
   mutate(microplastic_recoded = case_when(
                                microplastic == "O" ~ "Other",
                                microplastic == "Bisphenol A" ~ "BPA",
@@ -454,7 +475,7 @@ We seem to have `NA` values!
 We didn't specify what happens to values that were already `Other` or `Dioxin` or `BPA`.
 
 ```{r, eval = FALSE}
-diet_data %>% 
+plastics %>% 
   mutate(microplastic_recoded = case_when(
                                microplastic == "O" ~ "Other",
                                microplastic == "Bisphenol A" ~ "BPA",
@@ -486,7 +507,7 @@ or it can be the original values of the column
 ## case_when with TRUE ~ original variable name
 
 ```{r}
-diet_data %>% 
+plastics %>% 
   mutate(microplastic_recoded = case_when(
                                microplastic == "O" ~ "Other",
                                microplastic == "Bisphenol A" ~ "BPA",
@@ -501,7 +522,7 @@ diet_data %>%
 You never know if you might be missing something - and if a value already was an NA it will stay that way. 
 
 ```{r, eval = FALSE}
-diet_data %>% 
+plastics %>% 
   mutate(microplastic_recoded = case_when(
                                microplastic == "O" ~ "Other",
                                microplastic == "Bisphenol A" ~ "BPA",
@@ -512,32 +533,33 @@ diet_data %>%
 ```
 
 
-## But maybe we want NA?
+<!-- ## But maybe we want NA? -->
 
-Perhaps we want values that are O or Other to actually be NA, then `case_when` can be helpful for this. We simply specify everything else.
+<!-- Perhaps we want values that are O or Other to actually be NA, then `case_when` can be helpful for this. We simply specify everything else. -->
 
-```{r}
-diet_data %>% 
-  mutate(microplastic_recoded = case_when(
-                               microplastic == "Bisphenol A" ~ "BPA",
-                               microplastic == "bpa" ~ "BPA",
-                               microplastic == "BPA" ~ "BPA",
-                               microplastic =="dioxin" ~"Dioxin",
-                               microplastic =="Dioxin" ~"Dioxin")) %>%
-  count(microplastic, microplastic_recoded)
-```
+<!-- ```{r} -->
+<!-- plastics %>%  -->
+<!--   mutate(microplastic_recoded = case_when( -->
+<!--                                microplastic == "Bisphenol A" ~ "BPA", -->
+<!--                                microplastic == "bpa" ~ "BPA", -->
+<!--                                microplastic == "BPA" ~ "BPA", -->
+<!--                                microplastic =="dioxin" ~"Dioxin", -->
+<!--                                microplastic =="Dioxin" ~"Dioxin")) %>% -->
+<!--   count(microplastic, microplastic_recoded) -->
+<!-- ``` -->
+
 ## case_when() can also overwrite/update a variable
 
 You need to specify what we want in the first part of `mutate`.
 
 ```{r}
-diet_data %>% 
+plastics %>% 
   mutate(microplastic = case_when(
-                               microplastic == "Bisphenol A" ~ "BPA",
-                               microplastic == "bpa" ~ "BPA",
-                               microplastic == "BPA" ~ "BPA",
-                               microplastic =="dioxin" ~"Dioxin",
-                               microplastic =="Dioxin" ~"Dioxin")) %>%
+                              microplastic == "Bisphenol A" ~ "BPA",
+                              microplastic == "bpa" ~ "BPA",
+                              microplastic == "dioxin" ~"Dioxin",
+                              microplastic == "O" ~ "Other",
+                               TRUE ~ microplastic)) %>%
   count(microplastic)
 
 ```
@@ -547,12 +569,12 @@ diet_data %>%
 `case_when` can do complicated statements and can match many patterns at a time.
 
 ```{r}
-diet_data %>% 
+plastics %>% 
   mutate(microplastic_recoded = case_when(
-    microplastic == "Dioxin" ~ "Dioxin", # keep it the same!
-    microplastic == "dioxin" ~ "Dioxin", 
+    microplastic %in% c("dioxin", "Dioxin") ~ "dioxin", 
     microplastic %in% c("BPA", "bpa", "Bisphenol A") ~ "BPA",
-    microplastic %in% c("O", "Other") ~ "Other")) %>%
+    microplastic %in% c("O", "Other") ~ "Other",
+                      TRUE ~ microplastic)) %>%
 
   count(microplastic, microplastic_recoded)
 
@@ -568,21 +590,38 @@ Here we create a new variable called `Effect`.
 
 ```{r}
 
-diet_data <- diet_data %>% 
-      mutate(Effect = case_when(blood_level_change_nM > 0 ~ "Increase",
-                                blood_level_change_nM == 0 ~ "Same",
-                                blood_level_change_nM < 0 ~ "Decrease"))
+plastics <- plastics %>% 
+      mutate(Effect = case_when(
+                    blood_level_change_nM > 0 ~ "Increase",
+                    blood_level_change_nM == 0 ~ "Same",
+                    blood_level_change_nM < 0 ~ "Decrease"))
 
-head(diet_data)
+head(plastics)
 
 ```
 
 ## Now it is easier to see what is happening
 
 ```{r}
-diet_data %>% 
-  count(Diet, Effect)
+plastics %>% 
+  count(Foods, Effect)
 ```
+
+## GUT CHECK: we need to use what function with `case_when()` to modify or create a new variable?
+
+A. `modify()`
+
+B. `select()`
+
+C. `mutate()`
+
+
+## GUT CHECK: If we want all unspecified values to remain the same with `case_when()`, how should we complete the `TRUE ~` statement?
+
+A. With the name of the variable we are modifying or using as source
+
+B. With the word "same"
+
 
 # Working with strings
 
@@ -619,7 +658,7 @@ The `pattern` argument specifies what to check for (case sensitive)
 
 ```{r}
 
-Effect <- pull(diet_data) %>% head(n = 6)
+Effect <- pull(plastics) %>% head(n = 6)
 Effect
 str_detect(string = Effect, pattern = "d")
 str_detect(string = Effect, pattern = "D")
@@ -662,15 +701,15 @@ str_sub(string = Effect, start = 1, end = 3)
 ## `filter` and `stringr` functions
 
 ```{r}
-head(diet_data, n = 4)
-diet_data %>% 
+head(plastics, n = 4)
+plastics %>% 
   filter(str_detect(string = microplastic,
                     pattern = "B"))
 ```
 
 ## OK back to our original problem
 ```{r}
-count(diet_data, microplastic)
+count(plastics, microplastic)
 ```
 
 ## `case_when()` made an improvement
@@ -678,7 +717,7 @@ count(diet_data, microplastic)
 But we still might miss a strange value - like a misspelling
 
 ```{r, eval = FALSE}
-diet_data %>% 
+plastics %>% 
   mutate(microplastic_recoded = case_when(
     microplastic %in% c("Dioxin", "dioxin") ~ "Dioxin",
     microplastic %in% c("BPA", "bpa", "Bisphenol A") ~ "BPA",
@@ -691,7 +730,7 @@ diet_data %>%
 `$` indicates the end
 
 ```{r}
-diet_data %>% 
+plastics %>% 
   mutate(microplastic_recoded = case_when(
     str_detect(string = microplastic, pattern = "^b|B") ~ "BPA",
     str_detect(string = microplastic, pattern = "^o|^O") ~ "Other",
@@ -700,13 +739,22 @@ diet_data %>%
   count(microplastic, microplastic_recoded)
 ```
 
-This is a more robust solution! It will catch typos as long as first letter is correct.
+This is a more robust solution! It will catch typos as long as the first letter is correct.
 
 ## That's better!
 
 ```{r, echo = FALSE, fig.align='center', out.width= "30%"}
 knitr::include_graphics("https://media1.giphy.com/media/S9ZK4mmi3u3jdc5dek/200w.webp?cid=ecf05e47h7myga959jwvek6s9x1tkog135g7pxu8vvjz2yqb&rid=200w.webp&ct=g")
 ```
+
+
+## GUT CHECK: What `stringr` function helps us find a string pattern?
+
+A. `str_replace()`
+
+B. `str_find()`
+
+C. `str_detect()`
 
 # Separating and uniting data
 
@@ -718,12 +766,12 @@ The `sep` argument specifies what separator to use when combining -default is "_
 The `remove` argument specifies if you want to drop the old columns
 
 ```{r}
-diet_comb <- diet_data %>% 
-  unite(Diet, Effect, col = "change", remove = TRUE)
+plastics_comb <- plastics %>% 
+  unite(Foods, Effect, col = "change", remove = TRUE)
 ```
 
 ```{r}
-diet_comb
+plastics_comb
 ```
 
 ## Separating columns based on a separator
@@ -734,9 +782,9 @@ The `into` argument specifies names of new columns
 The `sep` argument specifies what to separate by
 
 ```{r}
-diet_comb <- diet_comb %>% 
-  separate(col = change, into = c("Diet", "Change"), sep = "_" )
-diet_comb
+plastics_comb <- plastics_comb %>% 
+  separate(col = change, into = c("Foods", "Change"), sep = "_" )
+plastics_comb
 ```
 
 
@@ -767,7 +815,9 @@ knitr::include_graphics("images/case_when.png")
 ## Lab Part 2
 
 🏠 [Class Website](https://daseh.org/)    
-💻[Lab](https://daseh.org/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Data_Cleaning/lab/Data_Cleaning_Lab.Rmd). 
+📃 [Day 5 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-5.pdf)
+📃 [Posit's `stringr` Cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
@@ -802,7 +852,7 @@ Need quotes for new values! Tolerates quotes for old values.
 
 ```{r, eval = FALSE}
 
-diet_data %>% 
+plastics %>% 
   mutate(microplastic_recoded = recode(microplastic,  
                         "Bisphenol A" =  "BPA",
                                 "bpa" = "BPA",
@@ -815,7 +865,7 @@ diet_data %>%
 
 ```{r, eval = TRUE}
 
-diet_data %>% 
+plastics %>% 
   mutate(microplastic_recoded = recode(microplastic,  
                         "Bisphenol A" =  "BPA",
                                 "bpa" = "BPA",
@@ -830,7 +880,7 @@ Just use the same variable name to change the variable within mutate.
 
 ```{r, eval = TRUE}
 
-diet_data %>% 
+plastics %>% 
   mutate(microplastic = recode(microplastic,  
                         "Bisphenol A" =  "BPA",
                                 "bpa" = "BPA",

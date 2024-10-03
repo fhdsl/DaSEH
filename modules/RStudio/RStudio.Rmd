@@ -316,19 +316,6 @@ You can run all chunks above a specific chunk using this button:
 knitr::include_graphics("images/previous_chunks.png")
 ```
 
-## Chunk settings
-
-```{r echo=FALSE, fig.align='center', out.width="80%"}
-knitr::include_graphics("images/chunk_settings.png")
-```
-
-## Chunk settings
-
-You can specify if a chunk will be seen in the report or not.
-
-```{r echo=FALSE, fig.align='center', out.width="80%"}
-knitr::include_graphics("images/chunk_settings2.png")
-```
 
 ## Errors
 
@@ -337,19 +324,6 @@ Note that sometimes the error occurs earlier than RStudio thinks.
 
 ```{r echo=FALSE, fig.align='center', out.width="80%"}
 knitr::include_graphics("images/errors.png")
-```
-
-## Rainbow Parentheses
-
-Tools --> Global Options --> Code --> Display --> Use rainbow parentheses
-
-Press enter to save this setting and get out of this menu.
-
-<br>
-<br>
-
-```{r echo=FALSE, fig.align='center', out.width="80%"}
-knitr::include_graphics("https://posit.co/wp-content/themes/Posit/public/markdown-blogs/rstudio-1-4-preview-rainbow-parentheses/colorfulCode.png")
 ```
 
 
@@ -442,7 +416,37 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
 
 # Extra Slides
 
+## Chunk settings
+
+```{r echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("images/chunk_settings.png")
+```
+
+## Chunk settings
+
+You can specify if a chunk will be seen in the report or not.
+
+```{r echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("images/chunk_settings2.png")
+```
+
 ## Sometimes you want to hide your code
 
 If you want to keep your code so people can see it if they want to there is a nice option called code folding - check it out here: https://stackoverflow.com/questions/69326576/show-output-but-hide-code-when-sending-rmd-to-other-people
+
+## Rainbow Parentheses
+
+Tools --> Global Options --> Code --> Display --> Use rainbow parentheses
+
+This can help you see your code more easily.
+
+Press enter to save this setting and get out of this menu.
+
+<br>
+<br>
+
+```{r echo=FALSE, fig.align='center', out.width="80%"}
+knitr::include_graphics("https://posit.co/wp-content/themes/Posit/public/markdown-blogs/rstudio-1-4-preview-rainbow-parentheses/colorfulCode.png")
+```
+
 

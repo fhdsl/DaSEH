@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>data.knit</title>
+
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link rel="shortcut icon" href="images/favicon.ico" />
+ <!--- go to https://favicon.io/favicon-converter/ to upload an image to make a new favicon.io. You will need to replace the current favicon.io image with the one in the downloaded directory from the website. The current image is in the resources/images/ directory --->
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0ZLV1P4LTT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0ZLV1P4LTT');
+</script>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="docs/web_styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DaSEH</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="https://forms.gle/pfX4zCPFjTinKttaA">Apply</a>
+</li>
+<li>
+  <a href="logistics.html">Logistics</a>
+</li>
+<li>
+  <a href="materials_schedule.html">Materials + Schedule</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li>
+  <a href="help.html">FAQ / Help</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div class="leaf">
+
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<hr />
+<p><br></p>
+<table>
+<colgroup>
+<col width="70%" />
+<col width="30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Repository/Database</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://data.census.gov/">Census Data</a></td>
+<td>Learn about America’s People, Places, and Economy. There is also a package called <a href="https://walker-data.com/tidycensus/">tidycensus</a> for working with census data easily in R.</td>
+</tr>
+<tr class="even">
+<td><a href="https://data.cdc.gov/">Centers for Disease Control and Prevention (CDC) Data</a></td>
+<td>Lists many data sources! Health statistics, injuries, vaccination, disability &amp; health, chronic disease rates, and many more!</td>
+</tr>
+<tr class="odd">
+<td><a href="https://chordshealth.org/discovery">Climate and Health Outcomes Research Data Systems (CHORDS)</a></td>
+<td>Place based environmental exposures on health outcomes</td>
+</tr>
+<tr class="even">
+<td><a href="https://climatedata.imf.org/datasets/b13b69ee0dde43a99c811f592af4e821/explore">Climate-related Disasters</a></td>
+<td>Trend in these climate-related disasters over time. Check out more of the IMF’s data <a href="https://climatedata.imf.org/">here</a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://cfpub.epa.gov/ghgdata/inventoryexplorer/">CO2 Emissions Data</a></td>
+<td>U.S. Greenhouse Gas Emissions and Sinks and the Inventory of U.S. Greenhouse Gas Emissions and Sinks by State</td>
+</tr>
+<tr class="even">
+<td><a href="https://data.gov/">data.gov</a></td>
+<td>Thousands of data sources!</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.epa.gov/data">Environmental Protection Agency (EPA) Data</a></td>
+<td>Lists many data sources! Data related to air quality, superfund sites, chemicals, water, and more.</td>
+</tr>
+<tr class="even">
+<td><a href="https://healthdata.gov/">Healthdata.gov</a></td>
+<td>Lots of data related to COVID-19, hospitals, etc.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.niehs.nih.gov/research/resources/databases">National Institute of Environmental Health Sciences (NIEHS) Databases</a></td>
+<td>Lists many data sources! Includes Chemical Effects in Biological Systems (CEBS), Comparative Toxicogenomics Database, NIEHS-Funded Epidemiology Resources Faceted Search Tool, many more!</td>
+</tr>
+<tr class="even">
+<td><a href="https://public.tableau.com/app/profile/ntp.visuals/viz/ODSDomainSpecificDataRepositories/NewDashboardLandingPage">National Institute of Environmental Health Sciences (NIEHS) Domain Specific Data Repositories</a></td>
+<td>Lists many data sources! Includes <a href="https://www.hydroshare.org/">HydroShare</a>, <a href="https://www.ncei.noaa.gov/">National Centers for Environmental Information (NCEI)</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/">Gene Expression Omnibus</a>, many more!</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.ncdc.noaa.gov/cdo-web/search">NOAA National Climatic Data Center (NCDC)</a></td>
+<td>NOAA’s National Climatic Data Center (NCDC) maintains the world’s largest climate data archive and provides climatological services and data to every sector of the United States economy and to users worldwide.</td>
+</tr>
+<tr class="even">
+<td><a href="https://data.who.int/">World Health Organization (WHO) Data</a></td>
+<td>Data on health and health-related indicators</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<p style="text-align:center;"> <small> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. </small></p>
+
+<p style="text-align:center;"><img src="images/logo_icon_highres.png" height="20"/><small>DaSEH is funded by the National Institute of Environmental Health Sciences <a href="https://reporter.nih.gov/search/cMEAgQFeo025gUX1DDzH9g/project-details/10746327">1R25ES035590-01.</a> </p></small>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
