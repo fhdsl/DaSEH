@@ -10,10 +10,7 @@ editor_options:
 
 
 ```{r}
-library(readr)
 library(tidyverse)
-library(lubridate)
-library(broom)
 # install.packages("naniar")
 library(naniar)
 ```
