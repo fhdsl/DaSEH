@@ -405,6 +405,8 @@ knitr::include_graphics("../../images/lol/install_packages.jpg")
 
 💻 [Basic R Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
 
+📃 [Day 1 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-1.pdf)
+
 ```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```

@@ -203,18 +203,8 @@ pre { /* Code block - slightly smaller in this lecture */
 
 <p>The <code>head</code> function displays the first rows of an object:</p>
 
-<!-- ```{r} -->
-
-<!-- er <-  -->
-
-<!--   read_csv("https://daseh.org/data/CO_ER_heat_visits.csv") -->
-
-<!-- head(er) -->
-
-<!-- ``` -->
-
-<pre class = 'prettyprint lang-r'>er &lt;- 
-  read_csv(&quot;../../data/CO_ER_heat_visits.csv&quot;)
+<pre class = 'prettyprint lang-r'>er &lt;-
+  read_csv(&quot;https://daseh.org/data/CO_ER_heat_visits.csv&quot;)
 
 head(er)</pre>
 
@@ -711,13 +701,8 @@ er_year %&gt;% unique() # similar to distinct()</pre>
 </ul></li>
 </ul>
 
-<!-- ```{r} -->
-
-<!-- yearly_co2 <- read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv") -->
-
-<!-- ``` -->
-
-<pre class = 'prettyprint lang-r'>yearly_co2 &lt;- read_csv(&quot;../../data/Yearly_CO2_Emissions_1000_tonnes.csv&quot;)</pre>
+<pre class = 'prettyprint lang-r'>yearly_co2 &lt;- 
+  read_csv(&quot;https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv&quot;)</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>rowMeans()</code> example</h2></hgroup><article  id="rowmeans-example">
 
