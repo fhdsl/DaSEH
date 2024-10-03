@@ -610,7 +610,9 @@ plastics %>%
 ## GUT CHECK: we need to use what function with `case_when()` to modify or create a new variable?
 
 A. `modify()`
+
 B. `select()`
+
 C. `mutate()`
 
 
@@ -618,7 +620,7 @@ C. `mutate()`
 
 A. With the name of the variable we are modifying or using as source
 
-B. With `TRUE ~ same`
+B. With the word "same"
 
 
 # Working with strings
