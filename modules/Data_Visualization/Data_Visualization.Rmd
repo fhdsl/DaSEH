@@ -16,6 +16,7 @@ opts_chunk$set(echo = TRUE,
                comment = "")
 library(tidyverse)
 library(tidyr)
+install.packages('emoji', repos='http://cran.us.r-project.org', dependencies=TRUE)
 library(emoji)
 ```
 
