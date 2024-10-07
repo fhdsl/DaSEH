@@ -147,7 +147,6 @@ Open the `Yearly_CC_Disasters` dataset using the url below. Save the dataset as 
 
 "https://daseh.org/data/Yearly_CC_Disasters.csv"
 
-
 ```{r 2.1response}
 cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv") %>%
   rename(country = Country)
@@ -201,42 +200,44 @@ anti_join(cc, co2, by = "country") %>% select(country) %>% distinct()
 
 # Practice on Your Own!
 
-### P.3
+### P.4
 
 Take the code from 2.2 and save the output as an object "co2_cc". Filter the dataset. Filter so that you only keep Indonesia and Canada.
 
-```{r P.3response}
+```{r P.4response}
 co2_cc <- full_join(co2, cc, by = "country") %>%
   filter(country %in% c("Indonesia", "Canada"))
 ```
 
 
-### P.4
+### P.5
 
 Select:
 
 * the "country" column
-* data from the years 2014 originally in BOTH DATASETS (columns "CO2_2014" and `2014`)
+* data from the years 2014 in BOTH DATASETS (columns "2014.x" and `2014.y`)
 * the "Indicator" column
 
 Rename:
 
-* emissions = CO2_2014
-* disasters = `2014`
+* emissions = `2014.x`
+* disasters = `2014.y`
 
 Reassign to "co2_cc".
 
-```{r P.4response}
-co2_cc <- co2_cc %>% select(country, CO2_2014, Indicator, `2014`) %>%
-  rename(emissions = CO2_2014, disasters = `2014`)
+```{r P.5response}
+co2_cc <- co2_cc %>% select(country, `2014.x`, Indicator, `2014.y`) %>%
+  rename(emissions = `2014.x`, disasters = `2014.y`)
 ```
 
 
-### P.5
+### P.6
 
 Use `stringr` to trim the piece of text, "Climate related disasters frequency, Number of Disasters: ", from the "Indicator" column. You will use the function `str_remove()` to do this. It works similarly to other `stringr` functions. Try to intuit how it works by using the documentation page (`?str_remove`).
 
-```{r P.5response}
+Reassign to "co2_cc".
+
+```{r P.6response}
 library(stringr)
 co2_cc <- co2_cc %>% mutate(Indicator = str_remove(
   Indicator,
@@ -245,11 +246,11 @@ co2_cc <- co2_cc %>% mutate(Indicator = str_remove(
 ```
 
 
-### P.6
+### P.7
 
 Pivot the dataset so that there are columns for country, emissions, and a column for each "Indicator".
 
-```{r P.6response}
+```{r P.7response}
 co2_cc %>% pivot_wider(
   names_from = Indicator,
   values_from = disasters

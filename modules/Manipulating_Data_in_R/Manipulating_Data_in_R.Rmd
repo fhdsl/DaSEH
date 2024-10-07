@@ -362,7 +362,6 @@ knitr::include_graphics("images/joins.png")
 * `anti_join(x, y)` - all rows from `x` not in `y` keeping just columns from `x`.
 
 ## Merging: Simple Data
-Let's load in some datasets about vaccination rates by state. These data are saved in two different files.
 
 ```{r message=FALSE}
 data_As <- read_csv(
@@ -472,7 +471,7 @@ fj
 
 <IMG style="position:absolute;bottom:10.5%;left:85%;width:120px;"SRC="images/full.png">
 
-## Watch out for "`includes duplicates`"
+## "`includes duplicates`"
 
 
 ```{r message=FALSE}
@@ -487,7 +486,7 @@ data_As
 data_cold
 ```
 
-## Watch out for "`includes duplicates`"
+## "`includes duplicates`"
 
 ```{r}
 lj <- left_join(data_As, data_cold)
@@ -495,7 +494,7 @@ lj <- left_join(data_As, data_cold)
 
 <IMG style="position:absolute;bottom:10.5%;left:85%;width:120px;"SRC="images/left.png">
 
-## Watch out for "`includes duplicates`"
+## "`includes duplicates`"
 
 Data including the joining column ("State") has been duplicated.
 
@@ -509,7 +508,7 @@ Note that "Alaska willow ptarmigan" appears twice.
 
 <IMG style="position:absolute;bottom:10.5%;left:85%;width:120px;"SRC="images/left.png">
 
-## Watch out for "`includes duplicates`"
+## "`includes duplicates`"
 
 https://github.com/gadenbuie/tidyexplain/blob/main/images/left-join-extra.gif
 
@@ -562,6 +561,16 @@ anti_join(data_cold, data_As, by = "State") # order switched
 ```
 
 <IMG style="position:absolute;bottom:10.5%;left:85%;width:120px;"SRC="images/anti.png">
+
+## GUT CHECK!
+
+Why use `join` functions?
+
+A. Combine different data sources
+
+B. Connect Rmd to other files
+
+C. Using one data source is too easy and we want our analysis ~ fancy ~
 
 ## Summary
 
