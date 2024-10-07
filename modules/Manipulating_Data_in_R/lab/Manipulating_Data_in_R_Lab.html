@@ -165,92 +165,82 @@ pre code {
 </div>
 
 
-<p>Some data in this lab comes from the OCS “Exploring CO2 emissions across time” activity (<a href="https://www.opencasestudies.org/ocs-bp-co2-emissions/" class="uri">https://www.opencasestudies.org/ocs-bp-co2-emissions/</a>. This dataset is available in the <code>dasehr</code> package.</p>
+<p>Some data in this lab comes from the OCS “Exploring CO2 emissions across time” activity (<a href="https://www.opencasestudies.org/ocs-bp-co2-emissions/" class="uri">https://www.opencasestudies.org/ocs-bp-co2-emissions/</a>.</p>
 <p>Additional data about climate change disasters can be found at “<a href="https://daseh.org/data/Yearly_CC_Disasters.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters.csv</a>”.</p>
-<pre class="r"><code>library(tidyverse)
-library(dasehr)</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
 <div id="section" class="section level3">
 <h3>1.1</h3>
-<p>Open the <code>yearly_co2_emissions</code> dataset from the <code>dasehr</code> package and assign it to an object called <code>co2</code>. (You can also use <code>read_csv()</code> from the <code>readr</code> package and download the dataset directly from the daseh.org website: “<a href="https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv" class="uri">https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv</a>”)</p>
-<ul>
-<li>Remember to use <code>read_csv()</code> from the <code>readr</code> package.</li>
-<li>Do NOT use <code>read.csv()</code>.</li>
-</ul>
+<p>Open the <code>yearly_co2_emissions</code> dataset. Use <code>read_csv()</code> from the <code>tidyverse</code> / <code>readr</code> package. You can download the data or use this URL directly: <a href="https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv" class="uri">https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv</a></p>
+<p>Check out the data to understand the format.</p>
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
-<p>Look at the column names using <code>colnames</code> - do you notice any patterns?</p>
-</div>
-<div id="section-2" class="section level3">
-<h3>1.3</h3>
-<p>Let’s rename the columns “co2” from this type of format: “2011” to this: “CO2_2011” using <code>rename</code>. Be sure to do this for all years 2012, 2013, and 2014. Make sure that you end up with the renamed columns in a data frame named <code>co2</code> here and in subsequent steps.</p>
-<p>Hint: If you run code to rename the columns and store back into a data frame of the same name like <code>co2</code> you will not be able to re-run the renaming code without error (the columns are already renamed so it won’t be able to find the old name of the column anymore)</p>
-<pre><code># General format
-new_data &lt;- old_data %&gt;% rename(newname = oldname)</code></pre>
-</div>
-<div id="section-3" class="section level3">
-<h3>1.4</h3>
-<p>Select only the columns “country”, and those that start with “CO2_”. Use <code>select</code> and <code>starts_with(&quot;CO2_&quot;)</code>.</p>
-<pre><code># General format
-new_data &lt;- old_data %&gt;% select(colname1, colname2, ...)</code></pre>
-</div>
-<div id="section-4" class="section level3">
-<h3>1.5</h3>
 <p>Create a new dataset “co2_long” that does <code>pivot_longer()</code> on all columns except “country”. Remember that <code>!country</code> means all columns except “country”.</p>
+<p>Reassign to co2_long.</p>
 <pre><code># General format
 new_data &lt;- old_data %&gt;% pivot_longer(cols = colname(s))</code></pre>
 </div>
-<div id="section-5" class="section level3">
-<h3>1.6</h3>
+<div id="section-2" class="section level3">
+<h3>1.3</h3>
 <p>Using <code>co2_long</code>, filter the “country” column so it only includes values from Indonesia and Canada. <strong>Hint</strong>: use <code>filter</code> and <code>%in%</code>.</p>
+<p>Reassign to co2_long.</p>
 <pre><code># General format
 new_data &lt;- old_data %&gt;% filter(colname %in% c(...))</code></pre>
 </div>
-<div id="section-6" class="section level3">
-<h3>1.7</h3>
-<p>Use <code>pivot_wider</code> to reshape “co2_long”. Use “county” for the <code>names_from</code> argument. Use “value” for the <code>values_from</code> argument. Call this new data <code>co2_wide</code>. Look at the data. How do these years compare to one another?</p>
+<div id="section-3" class="section level3">
+<h3>1.4</h3>
+<p>Use <code>pivot_wider</code> to reshape “co2_long”. Use “county” for the <code>names_from</code> argument. Use “value” for the <code>values_from</code> argument. Call this new data <code>co2_wide</code>.</p>
 <pre><code># General format
 new_data &lt;- old_data %&gt;% pivot_wider(names_from = column1, values_from = column2)</code></pre>
+</div>
+<div id="section-4" class="section level3">
+<h3>1.5</h3>
+<p>Using <code>co2_wide</code>, drop all NA values using <code>drop_na()</code>.</p>
+<p>Reassign to co2_wide. Compare the years - what conclusions can you draw?</p>
+<p>Tip: you can adjust scientific notation with <code>options(scipen=&lt;n&gt;)</code></p>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
 <h1>Practice on Your Own!</h1>
 <div id="p.1" class="section level3">
 <h3>P.1</h3>
-<p>Take the code from Questions 1.1 and 1.3-1.7. Chain all of this code together using the pipe <code>%&gt;%</code>. Call your data <code>co2_compare</code>.</p>
+<p>Take the code from Questions 1.1 - 1.5. Chain all of this code together using the pipe <code>%&gt;%</code>. Call your data <code>co2_compare</code>.</p>
 </div>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
 <p>Modify the code from Question P.1:</p>
 <ul>
-<li>Choose 4 different years to examine</li>
 <li>Select different countries to compare</li>
 <li>Call your data <code>co2_compare2</code></li>
 </ul>
 </div>
+<div id="p.3" class="section level3">
+<h3>P.3</h3>
+<p>Add on to Question P.1 to add a column. The column values for each line should be “TRUE” if Canada has greater emissions than Indonesia for that year.</p>
+</div>
 </div>
 <div id="part-2" class="section level1">
 <h1>Part 2</h1>
-<div id="section-7" class="section level3">
+<div id="section-5" class="section level3">
 <h3>2.1</h3>
 <p>Open the <code>Yearly_CC_Disasters</code> dataset using the url below. Save the dataset as an object called “cc”. rename the column “Country” to “country”.</p>
 <p>“<a href="https://daseh.org/data/Yearly_CC_Disasters.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters.csv</a>”</p>
 </div>
-<div id="section-8" class="section level3">
+<div id="section-6" class="section level3">
 <h3>2.2</h3>
 <p>Join the datasets “co2” and “cc” by “country”. Keep all rows, even if there is no match. How many rows are there?</p>
 <pre><code># General format
 full_join(data1, data2, by = &quot;&quot;)</code></pre>
 </div>
-<div id="section-9" class="section level3">
+<div id="section-7" class="section level3">
 <h3>2.3</h3>
 <p>Join the datasets “co2” and “cc” by “country”. Keep only rows that match both datasets. How many rows are there?</p>
 <pre><code># General format
 inner_join(data1, data2, by = &quot;&quot;)</code></pre>
 </div>
-<div id="section-10" class="section level3">
+<div id="section-8" class="section level3">
 <h3>2.4</h3>
 <p>What countries are present in “co2” that are not present in “cc”? Use <code>anti_join</code>. What countries are present in “cc” that are not present in “co2”?</p>
 <pre><code># General format
@@ -259,31 +249,32 @@ anti_join(data1, data2, by = &quot;&quot;) %&gt;% select(columnname)</code></pre
 </div>
 <div id="practice-on-your-own-1" class="section level1">
 <h1>Practice on Your Own!</h1>
-<div id="p.3" class="section level3">
-<h3>P.3</h3>
-<p>Take the code from 2.2 and save the output as an object “co2_cc”. Filter the dataset. Filter so that you only keep Indonesia and Canada.</p>
-</div>
 <div id="p.4" class="section level3">
 <h3>P.4</h3>
+<p>Take the code from 2.2 and save the output as an object “co2_cc”. Filter the dataset. Filter so that you only keep Indonesia and Canada.</p>
+</div>
+<div id="p.5" class="section level3">
+<h3>P.5</h3>
 <p>Select:</p>
 <ul>
 <li>the “country” column</li>
-<li>data from the years 2014 originally in BOTH DATASETS (columns “CO2_2014” and <code>2014</code>)</li>
+<li>data from the years 2014 in BOTH DATASETS (columns “2014.x” and <code>2014.y</code>)</li>
 <li>the “Indicator” column</li>
 </ul>
 <p>Rename:</p>
 <ul>
-<li>emissions = CO2_2014</li>
-<li>disasters = <code>2014</code></li>
+<li>emissions = <code>2014.x</code></li>
+<li>disasters = <code>2014.y</code></li>
 </ul>
 <p>Reassign to “co2_cc”.</p>
 </div>
-<div id="p.5" class="section level3">
-<h3>P.5</h3>
-<p>Use <code>stringr</code> to trim the piece of text, “Climate related disasters frequency, Number of Disasters:”, from the “Indicator” column. You will use the function <code>str_remove()</code> to do this. It works similarly to other <code>stringr</code> functions. Try to intuit how it works by using the documentation page (<code>?str_remove</code>).</p>
-</div>
 <div id="p.6" class="section level3">
 <h3>P.6</h3>
+<p>Use <code>stringr</code> to trim the piece of text, “Climate related disasters frequency, Number of Disasters:”, from the “Indicator” column. You will use the function <code>str_remove()</code> to do this. It works similarly to other <code>stringr</code> functions. Try to intuit how it works by using the documentation page (<code>?str_remove</code>).</p>
+<p>Reassign to “co2_cc”.</p>
+</div>
+<div id="p.7" class="section level3">
+<h3>P.7</h3>
 <p>Pivot the dataset so that there are columns for country, emissions, and a column for each “Indicator”.</p>
 </div>
 </div>
