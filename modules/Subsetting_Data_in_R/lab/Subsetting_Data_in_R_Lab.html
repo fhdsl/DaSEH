@@ -168,22 +168,20 @@ pre code {
 <p>In this lab you can use the interactive console to explore but please record your commands here. Remember anything you type here can be “sent” to the console with Cmd-Enter (OS-X) or Ctrl-Enter (Windows/Linux) (But only inside the code chunks designated with the <code>{r}</code> areas).</p>
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
-<p>First let’s load our packages.</p>
+<p>First let’s load our packages. We’re going to be using the <code>dplyr</code> package, which you can load as part of the <code>tidyverse</code> package.</p>
 <pre class="r"><code># don&#39;t forget to load the packages that you will need!
-library(dplyr)
 library(tidyverse)</code></pre>
 <p>We’ll again work with the CalEnviroScreen dataset, which contains information about environmental factors associated with human health in California.</p>
 <p>First, load the data from the website, either manually or by using the Data Import menu (find it by clicking on File).</p>
 <pre class="r"><code>ces &lt;- read_csv(file = &quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;)</code></pre>
-<pre><code>## New names:
-## Rows: 8035 Columns: 68
-## ── Column specification
-## ──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
-## (3): CaliforniaCounty, ApproxLocation, CES4.0PercRange dbl (65): ...1,
-## CensusTract, ZIP, Longitude, Latitude, CES4.0Score, CES4.0Pe...
-## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
-## Specify the column types or set `show_col_types = FALSE` to quiet this message.
-## • `` -&gt; `...1`</code></pre>
+<pre><code>## Rows: 8035 Columns: 67
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (3): CaliforniaCounty, ApproxLocation, CES4.0PercRange
+## dbl (64): CensusTract, ZIP, Longitude, Latitude, CES4.0Score, CES4.0Percenti...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>Check that it worked by seeing if you have the <code>ces</code> data.</p>
 <div id="section" class="section level3">
 <h3>1.1</h3>
