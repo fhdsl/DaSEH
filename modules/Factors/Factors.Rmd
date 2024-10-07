@@ -270,6 +270,18 @@ er_visits_age_fct %>%
   fct_count(prop = TRUE)
 ```
 
+## GUT CHECK: Why is it useful to have the factor class as an option?
+
+A. It helps us check the factual accuracy of our datasets. 
+
+B. It helps us change the order of variables in case the order has meaning.
+
+## GUT CHECK: What does the `fct_reorder()` function do?
+
+A. It helps us reorder a factor based on the values of another variable.
+
+B. It helps us reorder a factor based on a random change in the order.
+
 ## Summary
 - the factor class allows us to have a different order from alphanumeric for categorical data
 - we can change data to be a factor variable using `mutate` and a factor creating function like `factor()` or `as_factor`
@@ -279,10 +291,13 @@ er_visits_age_fct %>%
 - the `fct_reorder({variable_to_reorder}, {variable_to_order_by}, {summary function})` helps us reorder a variable by the values of another variable
 - arranging, tabulating, and plotting the data will reflect the new order
 
+
 ## Lab
 
 🏠 [Class Website](https://daseh.org/)    
-💻 [Lab](https://daseh.org/modules//Factors/lab/Factors_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules//Factors/lab/Factors_Lab.Rmd). 
+📃[Day 6 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-6.pdf) 
+📃[Posit's forcats cheatsheet](https://rstudio.github.io/cheatsheets/factors.pdf)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
