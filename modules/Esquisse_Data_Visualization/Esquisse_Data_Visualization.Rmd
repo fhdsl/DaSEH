@@ -196,6 +196,8 @@ esquisser(long_er) #county as x, visit rate as y, year as fill
 
 💻 [Lab](https://daseh.org/modules/Esquisse_Data_Visualization/lab/Esquisse_Data_Visualization_Lab.Rmd)
 
+📃 [Day 6 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-6.pdf)
+
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
