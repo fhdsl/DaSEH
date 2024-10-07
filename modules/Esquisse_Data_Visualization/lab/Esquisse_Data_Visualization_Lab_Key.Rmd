@@ -72,13 +72,12 @@ ggplot(ces_sub) +
 Launch Esquisse on any selection of the following datasets we have worked with before and explore!
 
 ```{r}
-covid_wastewater
-CO_heat_ER
-CO_heat_ER_byage
-CO_heat_ER_bygender
-yearly_co2_emissions
-nitrate
-haa5
+co2 <- read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+
+cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv")
+
+nitrate <- read_csv(file = "https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv")
+
 ```
 
 ```{r P.1response}
