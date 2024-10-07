@@ -9,27 +9,21 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Some data in this lab comes from the OCS "Exploring CO2 emissions across time" activity (https://www.opencasestudies.org/ocs-bp-co2-emissions/. This dataset is available in the `dasehr` package.
+Some data in this lab comes from the OCS "Exploring CO2 emissions across time" activity (https://www.opencasestudies.org/ocs-bp-co2-emissions/.
 
 Additional data about climate change disasters can be found at "https://daseh.org/data/Yearly_CC_Disasters.csv".
 
 ```{r message=FALSE}
 library(tidyverse)
-library(dasehr)
 ```
 
 # Part 1
 
 ### 1.1
 
-Open the `yearly_co2_emissions` dataset from the `dasehr` package and assign it to an object called `co2`. (You can also use `read_csv()` from the `readr` package and download the dataset directly from the daseh.org website: "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
-
--  Remember to use `read_csv()` from the `readr` package.
--  Do NOT use `read.csv()`.
+Open the `yearly_co2_emissions` dataset. Use `read_csv()` from the `tidyverse` / `readr` package. You can download the data or use this URL directly: https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv
 
 ```{r 1.1response}
-co2 <- yearly_co2_emissions
-
 co2 <- read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
 ```
 
