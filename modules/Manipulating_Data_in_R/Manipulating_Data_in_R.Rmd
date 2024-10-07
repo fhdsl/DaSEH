@@ -125,9 +125,9 @@ Long: **Easier for R to make plots & do analysis**
 ex_long
 ```
 
-## Pivoting using `tidyr` package
+## Pivoting using the `tidyr` package (part of `tidyverse`)
 
-`tidyr` allows you to "tidy" your data.  We will be talking about:
+We will be talking about:
 
 - `pivot_longer` - make multiple columns into variables, (wide to long)
 - `pivot_wider` - make a variable into multiple columns, (long to wide)
@@ -154,7 +154,7 @@ You might see old functions `gather` and `spread` when googling. These are older
 
 ```{r}
 ex_wide
-ex_long <- ex_wide %>% pivot_longer(cols = !ends_with("State"))
+ex_long <- ex_wide %>% pivot_longer(cols = ends_with("rate"))
 ex_long
 ```
 
@@ -169,29 +169,29 @@ ex_long
 <div class = "codeexample">
 ```{r, eval=FALSE}
 {long_data} <- {wide_data} %>% pivot_longer(cols = {columns to pivot},
-                                        names_to = {name for old columns},
-                                        values_to = {name for cell values})
+                                            names_to = {name for old columns},
+                                            values_to = {name for cell values})
 ```
 </div>
 
-## Reshaping data from **wide to long**
+## Reshaping wide to long: Better column names {.codesmall}
+
+Newly created column names ("Month" and "Rate") are enclosed in quotation marks. It helps us be more specific than "name" and "value".
 
 ```{r}
-ex_wide
-ex_long <- ex_wide %>% pivot_longer(cols = !ends_with("State"),
-                                        names_to = "Month",
-                                        values_to = "Rate")
+ex_long <- ex_wide %>% pivot_longer(cols = ends_with("rate"),
+                                    names_to = "Month",
+                                    values_to = "Rate")
 ex_long
 ```
 
-Newly created column names are enclosed in quotation marks.
-
-## Data used: Nitrate exposure
+## Data used: Nitrate exposure{.codesmall}
 
 Let's look at some data on levels of nitrate in water from Washington. This dataset reports the amount of people in Washington exposed to excess levels of nitrate in their water between 1999 and 2020.
 
 ```{r, message = FALSE}
-wide_nitrate <- read_csv(file = "https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv")
+wide_nitrate <- 
+  read_csv(file = "https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv")
 head(wide_nitrate)
 ```
 
@@ -219,9 +219,7 @@ wide_nitrate
 
 ```{r}
 long_nitrate <- wide_nitrate %>%
-  pivot_longer(!c(year, quarter, pop_on_sampled_PWS),
-               names_to = "conc_cat",
-               values_to = "conc_count")
+  pivot_longer(!c(year, quarter, pop_on_sampled_PWS))
 long_nitrate
 ```
 
@@ -239,7 +237,7 @@ Let's make the `conc_count` into a proportion.
 
 ```{r}
 long_nitrate <- long_nitrate %>%
-  mutate(conc_prop = conc_count / pop_on_sampled_PWS)
+  mutate(conc_prop = value / pop_on_sampled_PWS)
 long_nitrate
 ```
 
@@ -249,7 +247,7 @@ Now our data is more tidy, and we can take the averages easily!
 
 ```{r}
 long_nitrate %>% 
-  group_by(conc_cat) %>% 
+  group_by(name) %>% 
   summarize("avg_prop_exposedpop" = mean(conc_prop))
 ```
 
@@ -281,6 +279,13 @@ We can use `pivot_wider` to convert long data to wide format. Let's try it with 
 
 ```{r}
 ex_long
+```
+
+## Reshaping data from **long to wide**
+
+We can use `pivot_wider` to convert long data to wide format. Let's try it with the vaccine data from earlier.
+
+```{r}
 ex_wide2 <- ex_long %>% pivot_wider(names_from = "Month", 
                                        values_from = "Rate") 
 ex_wide2
@@ -288,7 +293,7 @@ ex_wide2
 
 ## Reshaping nitrate exposure data{.codesmall}
 
-Let's go back to the nitrate exposure dataset. What if we wanted to make a wide version of the data that displayed the number of people at each level of nitrate exposure for each quarter?
+Let's go back to the nitrate exposure dataset. What if we wanted to make a wide version of the data that displayed the proportion of people at each level of nitrate exposure, with each quarter as a column?
 
 ```{r}
 long_nitrate
@@ -296,9 +301,20 @@ long_nitrate
 
 ## Reshaping nitrate exposure data
 
+Drop some columns we don't need.
+
+```{r}
+long_nitrate <- long_nitrate %>%
+  select(!c(pop_on_sampled_PWS, value))
+long_nitrate
+```
+
+## Reshaping nitrate exposure data
+
+Pivot the data!
+
 ```{r}
 wide_nitrate <- long_nitrate %>%
-  select(!c(pop_on_sampled_PWS, conc_count)) %>%
   pivot_wider(names_from = "quarter", values_from = "conc_prop")
 wide_nitrate
 ```
