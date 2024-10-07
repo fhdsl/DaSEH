@@ -158,6 +158,16 @@ ex_long <- ex_wide %>% pivot_longer(cols = ends_with("rate"))
 ex_long
 ```
 
+## GUT CHECK!
+
+What does `pivot_longer()` do?
+
+A. Summarize data
+
+B. Import data
+
+C. Reshape data
+
 ## Reshaping wide to long: Better column names {.codesmall}
 
 `pivot_longer()` - puts column data into rows (`tidyr` package)
@@ -254,7 +264,6 @@ long_nitrate %>%
 ## Reshaping data from **wide to long**
 
 There are many ways to **select** the columns we want. Check out https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html to look at more column selection options.
-
 
 # `pivot_wider`...
 
