@@ -19,9 +19,17 @@ library(dasehr)
 
 ### 1.1
 
-Try creating a plot in `esquisse` using the `calenviroscreen` data from the `dasehr` packaged. This dataset has a lot of variables, so first run the below code to subset it so that you're only working with these variables: `CES4.0Percentile`,  `Asthma`, and `ChildrenPercLess10`. We will also categorize `CES4.0Percentile` into three categories (high, middle, and low) to make visualization a little easier!
+Try creating a plot in `esquisse` using the `calenviroscreen` data. This dataset has a lot of variables, so first run the below code to subset it so that you're only working with these variables: `CES4.0Percentile`,  `Asthma`, and `ChildrenPercLess10`. We will also categorize `CES4.0Percentile` into three categories (high, middle, and low) to make visualization a little easier!
+
+`CES4.0Percentile`: a measure of how much pollution people in a census tract experience, relative to the other census tracts in California
+
+`Asthma`: Age-adjusted rate of emergency department visits for asthma
+
+`ChildrenPercLess10`: estimates of the percent per census tract of children under 10 years old
 
 ```{r}
+ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
+
 ces_sub <- select(calenviroscreen, c("CES4.0Percentile", "Asthma", "ChildrenPercLess10"))
 
 ces_sub <- ces_sub %>% 
