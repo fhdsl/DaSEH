@@ -953,6 +953,19 @@ ggplotly(lots_of_lines)
 
 Also check out the [`ggiraph` package](https://www.rdocumentation.org/packages/ggiraph/versions/0.6.1)
 
+## `patchwork` package
+
+Great for combining plots together
+
+Also check out the [`patchwork` package](https://patchwork.data-imaginist.com/)
+
+```{r, out.width= "80%", fig.align='center'}
+#install.packages("patchwork")
+library(patchwork)
+lots_of_lines + rp_fac_plot
+
+```
+
 # Saving plots
 
 ## Saving a ggplot to file
@@ -1182,15 +1195,4 @@ library(directlabels)
 direct.label(lots_of_lines, method = list("angled.boxes"))
 ```
 
-## `patchwork` package
 
-Great for combining plots together
-
-Also check out the [`patchwork` package](https://patchwork.data-imaginist.com/)
-
-```{r, out.width= "50%", fig.align='center'}
-#install.packages("patchwork")
-library(patchwork)
-(plt1 + plt2)/plt2
-
-```
