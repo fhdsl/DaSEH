@@ -155,7 +155,7 @@ er_visits_age_fct %>%
 
 Now that's more like it! Notice how the data is automatically plotted in the order we would like.
 
-## What about if we `arrange()` the data by grade ?{.smaller}
+## What about if we `arrange()` the data by age?{.smaller}
 
 Character data is arranged alphabetically (if letters) or by ascending first number (if numbers).
 
