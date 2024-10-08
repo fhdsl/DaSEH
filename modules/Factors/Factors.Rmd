@@ -128,7 +128,7 @@ Currently `age` is class `character` but let's change that to class `factor` whi
 er_visits_age_fct <-
   er_visits_age_subset %>%
   mutate(age = factor(age,
-    levels = c("0-4 years old", "5-14 years old", "15-34 years old", "35-64 years old", "65+ years old")
+    levels = c("0-4 years", "5-14 years", "15-34 years", "35-64 years", "65+ years")
   ))
 
 er_visits_age_fct %>%
