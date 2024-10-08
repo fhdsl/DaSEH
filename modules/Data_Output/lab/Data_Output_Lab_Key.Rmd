@@ -14,12 +14,12 @@ Remember anything you type here can be "sent" to the console with Cmd-Enter (OS-
 ### 1.1
 Load the tidyverse package. Then read in the CalEnviroScreen dataset from 
 https://daseh.org/data/CalEnviroScreen_data.csv
-and assign it to an object named `ces. 
+and assign it to an object named `ces`. 
 
 ```
 # General format
 library(readr)
-# OBJECT <- read_csv(FILE)
+OBJECT <- read_csv(FILE)
 ```
 
 ```{r 1.1response}
@@ -56,9 +56,8 @@ write_csv(ces_Yuba, file = "ces_Yuba.csv")
 Copy your code from problem 1.3 and modify it to write to the data directory inside your R Project. *Note: you may need to make a new folder named "data" if it doesn't already exist.*
 
 ```{r eval = FALSE, label = 'P.1response'}
-getwd()
-dir.create("data")
-write_csv(ces_Yuba, file = "ces_Yuba.csv")
+getwd() # Check -- are you in the project directory?
+write_csv(ces_Yuba, file = "data/ces_Yuba.csv")
 ```
 
 ### P.2
@@ -72,7 +71,7 @@ write_rds(y, file = "my_variable.rds")
 
 ### P.3
 
-Read the RDS file from your working directory back into your Environment. Call the file `z`.
+Read the RDS file you just created from your working directory back into your Environment. Call the file `z`.
 
 ```{r P.3response}
 z <- read_rds(file = "my_variable.rds")
