@@ -159,6 +159,7 @@ lubridate
 macosx
 McKenna
 mclaire
+Merced
 MHS
 microplastics
 misspecification
@@ -215,6 +216,7 @@ Recoding
 REDCap
 reddit
 relevel
+replicability
 Replicability
 Replicable
 reportee
@@ -243,6 +245,7 @@ setosa
 sessionInfo
 ShareAlike
 skimr
+Sonoma
 SRC
 StackOverflow
 Stata
@@ -297,6 +300,7 @@ www
 xls
 xlsx
 XLSX
+Yolo
 youtube
 yts
 YTS
