@@ -63,6 +63,17 @@ write_delim(dat, file = "CO_ER_heat_newNames.csv", delim = ",")
 ```
 
 
+## GUT CHECK!
+
+What does `write_csv()` do? Saves data to..
+
+A. R's memory
+
+B. A file on your hard drive
+
+C. A ggplot
+
+
 ## R binary file
 
 `.rds` is an extension for R native file format.
