@@ -29,7 +29,7 @@ ces_sub <- ces %>% filter(CaliforniaCounty == c("Fresno", "Merced", "Placer", "S
 
 ### 1.1
 
-Use `ggplot2` package make plot of how diesel particulate concentration (`DieselPM`; y-axis) is associated with traffic density values (`Traffic`; x-axis). You can use lines layer (`+ geom_line()`) or points layer (`+ geom_point()`), or both!
+Use the `ggplot2` package to make a plot of how diesel particulate concentration (`DieselPM`; y-axis) is associated with traffic density values (`Traffic`; x-axis). You can use lines layer (`+ geom_line()`) or points layer (`+ geom_point()`), or both!
 
 Assign the plot to variable `my_plot`. Type `my_plot` in the console to have it displayed.
 
