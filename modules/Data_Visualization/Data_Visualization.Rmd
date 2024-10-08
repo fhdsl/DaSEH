@@ -14,10 +14,10 @@ opts_chunk$set(echo = TRUE,
                fig.height = 4,
                fig.width = 7,
                comment = "")
-library(dasehr)
 library(tidyverse)
 library(tidyr)
-library(emo)
+install.packages('emoji', repos='http://cran.us.r-project.org', dependencies=TRUE)
+library(emoji)
 ```
 
 ## Recap
@@ -470,10 +470,26 @@ er_visits_4 %>% ggplot(aes(x = year,
 -   `scale_x_continuous()` and `scale_y_continuous()` can modify the scale of the axes
 -   by default, `ggplot()` removes points with missing values from plots.
 
+## GUT CHECK: If we get an empty plot what might we need to do?
+
+A. Add a `plot_` layer like `plot_point()`
+
+B. Add a `geom_` layer like `geom_point()`
+
+
+## GUT CHECK: How do we add more layers in ggplot2 plots?
+
+A. `%>%`
+
+B. `&`
+
+C. `+`
+
 ## Lab 1
 
-🏠 [Class Website](https://daseh.org/)\
-💻 [Lab](https://daseh.org/modules//Data_Visualization/lab/Data_Visualization_Lab.Rmd)
+🏠 [Class Website](https://daseh.org/)
+💻 [Lab](https://daseh.org/modules//Data_Visualization/lab/Data_Visualization_Lab.Rmd) 
+📃[Day 6 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-6.pdf)
 
 ## theme() function:
 
@@ -729,7 +745,7 @@ er_bar +
 
 ## Tip - Check what you plot {.codesmall}
 
-`r emo::ji("warning")` May not be plotting what you think you are! `r emo::ji("warning")`
+`r emoji("warning")` May not be plotting what you think you are! `r emoji("warning")`
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
 ggplot(er_visits_4, aes(x = county,
@@ -937,6 +953,19 @@ ggplotly(lots_of_lines)
 
 Also check out the [`ggiraph` package](https://www.rdocumentation.org/packages/ggiraph/versions/0.6.1)
 
+## `patchwork` package
+
+Great for combining plots together
+
+Also check out the [`patchwork` package](https://patchwork.data-imaginist.com/)
+
+```{r, out.width= "80%", fig.align='center'}
+#install.packages("patchwork")
+library(patchwork)
+lots_of_lines + rp_fac_plot
+
+```
+
 # Saving plots
 
 ## Saving a ggplot to file
@@ -952,6 +981,20 @@ ggsave(filename = "saved_plot.png",  # will save in working directory
        plot = rp_fac_plot,
        width = 6, height = 3.5)               # by default in inches
 ```
+
+## GUT CHECK: How to we make sure that the boxplots are filled with color instead of just the outside boarder?
+
+A. Use the `fill` argument in the `aes` specification 
+
+B. Use `color` argument in `geom_boxplot()`
+
+## GUT CHECK: If our plot is too complicated to read, what might be a good option to fix this?
+
+A. add more `theme()` layers
+
+B. Use `facet_grid()` to split the plot up
+
+
 
 ## Summary
 
@@ -973,6 +1016,8 @@ Check out this [guide](https://jhudatascience.org/tidyversecourse/dataviz.html#m
 
 🏠 [Class Website](https://daseh.org/)\
 💻 [Lab](https://daseh.org/modules//Data_Visualization/lab/Data_Visualization_Lab.Rmd)
+📃[Day 6 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-6.pdf) 
+📃[Posit's theme cheatsheet](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf) 
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
@@ -1150,15 +1195,4 @@ library(directlabels)
 direct.label(lots_of_lines, method = list("angled.boxes"))
 ```
 
-## `patchwork` package
 
-Great for combining plots together
-
-Also check out the [`patchwork` package](https://patchwork.data-imaginist.com/)
-
-```{r, out.width= "50%", fig.align='center'}
-#install.packages("patchwork")
-library(patchwork)
-(plt1 + plt2)/plt2
-
-```
