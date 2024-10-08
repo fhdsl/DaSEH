@@ -13,7 +13,7 @@ library(tidyverse)
 
 ### 1.0
 
-Load the CalEnviroScreen dataset and use `select` to choose the `CaliforniaCounty`, `ImpWaterBodies`, and `ZIP` variables. Then subset this data using `filter` to include only the California counties Napa and San Francisco. Name this data "ces". 
+Load the CalEnviroScreen dataset and assign it to an object called `ces`. Use `select` to choose the `CaliforniaCounty`, `ImpWaterBodies`, and `ZIP` variables. Then subset this data using `filter` to include only the California counties Napa and San Francisco.
 
 `ImpWaterBodies`: measure of the number of pollutants across all impaired water bodies within a given distance of populated areas.
 
