@@ -110,6 +110,21 @@ knitr::include_graphics(here::here("images/subset_objects_in_environment.png"))
 knitr::include_graphics(here::here("images/save_environment.png"))
 ```
 
+
+## REMINDER: Saving a ggplot to file
+
+A few options:
+
+-   RStudio \> Plots \> Export \> Save as image / Save as PDF
+-   RStudio \> Plots \> Zoom \> [right mouse click on the plot] \> Save image as
+-   In the code
+
+```{r, eval = FALSE}
+ggsave(filename = "saved_plot.png",  # will save in working directory
+       plot = rp_fac_plot,
+       width = 6, height = 3.5)               # by default in inches
+```
+
 ## Summary {.small}
 
 - Use `write_csv()` and `write_delim()` from the `readr` package to write your (modified) data
