@@ -9,139 +9,102 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Some data in this lab comes from the OCS "Exploring CO2 emissions across time" activity (https://www.opencasestudies.org/ocs-bp-co2-emissions/. This dataset is available in the `dasehr` package.
+Some data in this lab comes from the OCS "Exploring CO2 emissions across time" activity (https://www.opencasestudies.org/ocs-bp-co2-emissions/.
 
 Additional data about climate change disasters can be found at "https://daseh.org/data/Yearly_CC_Disasters.csv".
 
 ```{r message=FALSE}
 library(tidyverse)
-library(dasehr)
 ```
 
 # Part 1
 
 ### 1.1
 
-Open the `yearly_co2_emissions` dataset from the `dasehr` package and assign it to an object called `co2`. (You can also use `read_csv()` from the `readr` package and download the dataset directly from the daseh.org website: "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+Open the `yearly_co2_emissions` dataset. Use `read_csv()` from the `tidyverse` / `readr` package. You can download the data or use this URL directly: https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv
 
--  Remember to use `read_csv()` from the `readr` package.
--  Do NOT use `read.csv()`.
+Check out the data to understand the format.
 
 ```{r 1.1response}
-co2 <- yearly_co2_emissions
-
 co2 <- read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+head(co2)
 ```
 
 ### 1.2
 
-Look at the column names using `colnames` - do you notice any patterns?
+Create a new dataset "co2_long" that does `pivot_longer()` on all columns except "country". Remember that `!country` means all columns except "country". 
 
-```{r 1.2response}
-colnames(co2)
-# Most column names are years
-```
-
-### 1.3
-
-Let's rename the columns "co2" from this type of format: "2011" to this: "CO2_2011" using `rename`.
-Be sure to do this for all years 2012, 2013, and 2014. Make sure that you end up with the renamed columns in a data frame named `co2` here and in subsequent steps.
-
-Hint: If you run code to rename the columns and store back into a data frame of the same name like `co2` you will not be able to re-run the renaming code without error (the columns are already renamed so it won't be able to find the old name of the column anymore)
-
-```
-# General format
-new_data <- old_data %>% rename(newname = oldname)
-```
-
-```{r 1.3response}
-co2 <- co2 %>% rename(
-  CO2_2011 = `2011`,
-  CO2_2012 = `2012`,
-  CO2_2013 = `2013`,
-  CO2_2014 = `2014`
-)
-```
-
-### 1.4
-
-Select only the columns "country", and those that start with "CO2_". Use `select` and `starts_with("CO2_")`.
-
-```
-# General format
-new_data <- old_data %>% select(colname1, colname2, ...)
-```
-
-```{r 1.4response}
-co2 <- co2 %>% select(country, starts_with("CO2_"))
-
-```
-
-### 1.5
-
-Create a new dataset "co2_long" that does `pivot_longer()` on all columns except "country". Remember that `!country` means all columns except "country".
+Reassign to co2_long.
 
 ```
 # General format
 new_data <- old_data %>% pivot_longer(cols = colname(s))
 ```
 
-```{r 1.5response}
+```{r 1.2response}
 co2_long <- co2 %>% pivot_longer(cols = !country)
 ```
 
-### 1.6
+### 1.3
 
-Using `co2_long`, filter the "country" column so it only includes values from Indonesia and Canada. **Hint**: use `filter` and `%in%`.
+Using `co2_long`, filter the "country" column so it only includes values from Indonesia and Canada. **Hint**: use `filter` and `%in%`. 
+
+Reassign to co2_long.
 
 ```
 # General format
 new_data <- old_data %>% filter(colname %in% c(...))
 ```
 
-```{r 1.6response}
+```{r 1.3response}
 co2_long <- co2_long %>%
   filter(country %in% c("Indonesia", "Canada"))
 ```
 
-### 1.7
+### 1.4
 
-Use `pivot_wider` to reshape "co2_long". Use "county" for the `names_from` argument. Use "value" for the `values_from` argument. Call this new data `co2_wide`. Look at the data. How do these years compare to one another?
+Use `pivot_wider` to reshape "co2_long". Use "county" for the `names_from` argument. Use "value" for the `values_from` argument. Call this new data `co2_wide`. 
 
 ```
 # General format
 new_data <- old_data %>% pivot_wider(names_from = column1, values_from = column2)
 ```
 
-```{r 1.7response}
+```{r 1.4response}
 co2_wide <- co2_long %>%
   pivot_wider(
     names_from = country,
     values_from = value
   )
-co2_wide
 ```
+
+### 1.5
+
+Using `co2_wide`, drop all NA values using `drop_na()`.
+
+Reassign to co2_wide. Compare the years - what conclusions can you draw?
+
+```{r 1.5response}
+co2_wide <- co2_wide %>% drop_na()
+```
+
+Tip: you can adjust scientific notation with `options(scipen=<n>)` 
 
 
 # Practice on Your Own!
 
 ### P.1
 
-Take the code from Questions 1.1 and 1.3-1.7. Chain all of this code together using the pipe ` %>% `. Call your data `co2_compare`.
+Take the code from Questions 1.1 - 1.5. Chain all of this code together using the pipe ` %>% `. Call your data `co2_compare`.
 
 ```{r P.1response}
 co2_compare <-
-  yearly_co2_emissions %>%
-  rename(
-    CO2_2011 = `2011`,
-    CO2_2012 = `2012`,
-    CO2_2013 = `2013`,
-    CO2_2014 = `2014`
-  ) %>% select(country, starts_with("CO2_")) %>%
+  read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv") %>%
   pivot_longer(cols = !country) %>%
   filter(country %in% c("Indonesia", "Canada")) %>%
-  pivot_wider(names_from = country, values_from = value)
-
+  pivot_wider(names_from = country, values_from = value) %>% 
+  drop_na()
+  
 co2_compare
 ```
 
@@ -149,24 +112,30 @@ co2_compare
 
 Modify the code from Question P.1:
 
--  Choose 4 different years to examine
 -  Select different countries to compare
 -  Call your data `co2_compare2`
 
 ```{r P.2response}
 co2_compare2 <-
-  yearly_co2_emissions %>%
-  rename(
-    CO2_1950 = `1950`,
-    CO2_1960 = `1960`,
-    CO2_1970 = `1970`,
-    CO2_1980 = `1980`
-  ) %>% select(country, starts_with("CO2_")) %>%
+  read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv") %>%
   pivot_longer(cols = !country) %>%
   filter(country %in% c("Brazil", "Mexico")) %>%
-  pivot_wider(names_from = country, values_from = value)
+  pivot_wider(names_from = country, values_from = value) %>% 
+  drop_na()
 
 co2_compare2
+```
+
+### P.3
+
+Add on to Question P.1 to add a column. The column values for each line should be "TRUE" if Canada has greater emissions than Indonesia for that year.
+
+```{r P.3response}
+co2_compare <-
+  co2_compare %>% 
+  mutate(Canada_greater = Canada > Indonesia)
+
+co2_compare
 ```
 
 
@@ -177,7 +146,6 @@ co2_compare2
 Open the `Yearly_CC_Disasters` dataset using the url below. Save the dataset as an object called "cc". rename the column "Country" to "country".
 
 "https://daseh.org/data/Yearly_CC_Disasters.csv"
-
 
 ```{r 2.1response}
 cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv") %>%
@@ -232,42 +200,44 @@ anti_join(cc, co2, by = "country") %>% select(country) %>% distinct()
 
 # Practice on Your Own!
 
-### P.3
+### P.4
 
 Take the code from 2.2 and save the output as an object "co2_cc". Filter the dataset. Filter so that you only keep Indonesia and Canada.
 
-```{r P.3response}
+```{r P.4response}
 co2_cc <- full_join(co2, cc, by = "country") %>%
   filter(country %in% c("Indonesia", "Canada"))
 ```
 
 
-### P.4
+### P.5
 
 Select:
 
 * the "country" column
-* data from the years 2014 originally in BOTH DATASETS (columns "CO2_2014" and `2014`)
+* data from the years 2014 in BOTH DATASETS (columns "2014.x" and `2014.y`)
 * the "Indicator" column
 
 Rename:
 
-* emissions = CO2_2014
-* disasters = `2014`
+* emissions = `2014.x`
+* disasters = `2014.y`
 
 Reassign to "co2_cc".
 
-```{r P.4response}
-co2_cc <- co2_cc %>% select(country, CO2_2014, Indicator, `2014`) %>%
-  rename(emissions = CO2_2014, disasters = `2014`)
+```{r P.5response}
+co2_cc <- co2_cc %>% select(country, `2014.x`, Indicator, `2014.y`) %>%
+  rename(emissions = `2014.x`, disasters = `2014.y`)
 ```
 
 
-### P.5
+### P.6
 
 Use `stringr` to trim the piece of text, "Climate related disasters frequency, Number of Disasters: ", from the "Indicator" column. You will use the function `str_remove()` to do this. It works similarly to other `stringr` functions. Try to intuit how it works by using the documentation page (`?str_remove`).
 
-```{r P.5response}
+Reassign to "co2_cc".
+
+```{r P.6response}
 library(stringr)
 co2_cc <- co2_cc %>% mutate(Indicator = str_remove(
   Indicator,
@@ -276,11 +246,11 @@ co2_cc <- co2_cc %>% mutate(Indicator = str_remove(
 ```
 
 
-### P.6
+### P.7
 
 Pivot the dataset so that there are columns for country, emissions, and a column for each "Indicator".
 
-```{r P.6response}
+```{r P.7response}
 co2_cc %>% pivot_wider(
   names_from = Indicator,
   values_from = disasters
