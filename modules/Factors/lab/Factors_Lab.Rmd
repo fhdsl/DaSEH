@@ -13,17 +13,20 @@ library(tidyverse)
 
 ### 1.0
 
-Load the Youth Tobacco Survey data and `select` "Sample_Size",  "Education", and "LocationAbbr". Name this data "yts". 
+Load the CalEnviroScreen dataset and use `select` to choose the `CaliforniaCounty`, `ImpWaterBodies`, and `ZIP` variables. Then subset this data using `filter` to include only the California counties Napa and San Francisco. Name this data "ces". 
+
+`ImpWaterBodies`: measure of the number of pollutants across all impaired water bodies within a given distance of populated areas.
 
 ```{r}
-yts <- 
-  read_csv("https://daseh.org/data/Youth_Tobacco_Survey_YTS_Data.csv") %>% 
-  select(Sample_Size, Education, LocationAbbr)
+ces <- 
+  read_csv("https://daseh.org/data/CalEnviroScreen_data.csv") %>% 
+  select(CaliforniaCounty, ImpWaterBodies, ZIP) %>%
+  filter(CaliforniaCounty == c("Amador", "Napa", "Ventura", "San Francisco"))
 ```
 
 ### 1.1
 
-Create a boxplot showing the difference in "Sample_Size" between Middle School and High School "Education". **Hint**: Use `aes(x = Education, y = Sample_Size)` and `geom_boxplot()`.
+Create a boxplot showing the difference in groundwater contamination threats (`ImpWaterBodies`) among Amador, Napa, San Francisco, and Ventura counties (`CaliforniaCounty`). **Hint**: Use `aes(x = CaliforniaCounty, y = ImpWaterBodies)` and `geom_boxplot()`.
 
 ```{r 1.1response}
 
@@ -31,7 +34,7 @@ Create a boxplot showing the difference in "Sample_Size" between Middle School a
 
 ### 1.2
 
-Use `count` to count up the number of observations of data for each "Education" group.
+Use `count` to count up the number of observations of data for each `CaliforniaCounty` group.
 
 ```{r 1.2response}
 
@@ -39,7 +42,7 @@ Use `count` to count up the number of observations of data for each "Education" 
 
 ### 1.3
 
-Make "Education" a factor using the `mutate` and `factor` functions. Use the `levels` argument inside `factor` to reorder "Education". Reorder this variable so that "Middle School" comes before "High School". Assign the output the name "yts_fct".
+Make `CaliforniaCounty` a factor using the `mutate` and `factor` functions. Use the `levels` argument inside `factor` to reorder `CaliforniaCounty`. Reorder this variable so the order is now San Francisco, Ventura, Napa, and Amador. Assign the output the name "ces_fct".
 
 ```{r 1.3response}
 
@@ -47,7 +50,7 @@ Make "Education" a factor using the `mutate` and `factor` functions. Use the `le
 
 ### 1.4
 
-Repeat question 1.1 and 1.2 using the "yts_fct" data. You should see different ordering in the plot and `count` table.
+Repeat question 1.1 and 1.2 using the "ces_fct" data. You should see different ordering in the plot and `count` table.
 
 ```{r 1.4response}
 
@@ -57,8 +60,7 @@ Repeat question 1.1 and 1.2 using the "yts_fct" data. You should see different o
 # Practice on Your Own!
 
 ### P.1
-
-Convert "LocationAbbr" (state) in "yts_fct" into a factor using the `mutate` and `factor` functions. Do not add a `levels =` argument.
+Subset `ces_fct` so that it only includes data from Ventura county. Then convert `ZIP` (zip code) into a factor using the `mutate` and `factor` functions. Do not add a `levels =` argument.
 
 ```{r P.1response}
 
@@ -66,11 +68,11 @@ Convert "LocationAbbr" (state) in "yts_fct" into a factor using the `mutate` and
 
 ### P.2
 
-We want to create a new column that contains the group-level median sample size. 
+We want to create a new column that contains the group-level median values for `ImpWaterBodies`. 
 
-- Using the "yts_fct" data, `group_by` "LocationAbbr". 
-- Then, use `mutate` to create a new column "med_sample_size" that is the median "Sample_Size". 
-- **Hint**: Since you have already done `group_by`, a median "Sample_Size" will automatically be created for each unique level in "LocationAbbr". Use the `median` function with `na.rm = TRUE`.
+- Using the "ces_Ventura" data, group the data by `ZIP` using `group_by`
+- Then, use `mutate` to create a new column `med_ImpWaterBodies` that is the median of `ImpWaterBodies`. 
+- **Hint**: Since you have already done `group_by`, a median `ImpWaterBodies` will automatically be created for each unique level in `ZIP`. Use the `median` function with `na.rm = TRUE`.
 
 ```{r P.2response}
 
@@ -78,18 +80,18 @@ We want to create a new column that contains the group-level median sample size.
 
 ### P.3
 
-We want to plot the "LocationAbbr" (state) by the "med_sample_size" column we created above. Using the `forcats` package, create a plot that:
+We want to make a plot of the `med_ImpWaterBodies`  column we created above in the `ces_Ventura`, separated by `ZIP`. Using the `forcats` package, create a plot that:
 
-- Has "LocationAbbr" on the x-axis
-- Uses the `mapping` argument and the `fct_reorder` function to order the x-axis by "med_sample_size"
-- Has "Sample_Size" on the y-axis
+- Has `ZIP` on the x-axis
+- Uses the `mapping` argument and the `fct_reorder` function to order the x-axis by `med_ImpWaterBodies`
+- Has `med_ImpWaterBodies` on the y-axis
 - Is a boxplot (`geom_boxplot`)
-- Has the x axis label of `State`
+- Has the x axis label of "Zipcode"
 (Don't worry if you get a warning about not being able to plot `NA` values.)
 
 Save your plot using `ggsave()` with a width of 10 and height of 3.
 
-Which state has the largest median sample size?
+Which zipcode has the largest median measure of water pollution?
 
 ```{r P.3response}
 
