@@ -65,8 +65,8 @@ cor(ces_sub, use = "complete.obs")
 
 Perform a t-test to determine if there is evidence of a difference between low birth weight percentage (`LowBirthWeight`) in Los Angeles census tracts compared to San Diego:
 
-* Create a subset of the data for CaliforniaCounty == "Los Angeles"
-* Create a subset of the data for CaliforniaCounty == "San Diego"
+* Create a subset of the data for `CaliforniaCounty == "Los Angeles"`
+* Create a subset of the data for `CaliforniaCounty == "San Diego"`
 * `pull` the `LowBirthWeight` column for both subsets
 * Use `t.test` to compare the two pulled vectors
 * Print the results using the `tidy` function from the `broom` package
