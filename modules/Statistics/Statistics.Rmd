@@ -112,6 +112,15 @@ cor.test(x, y = NULL, alternative(c("two.sided", "less", "greater")),
    - greater means true correlation coefficient is > 0 (positive relationship)
    - less means true correlation coefficient is < 0 (negative relationship)
 
+## GUT CHECK!
+
+What class of data do you need to calculate a correlation?
+
+A. Character data
+
+B. Factor data
+
+C. Numeric data
 
 ## Correlation {.codesmall}
 
@@ -139,7 +148,6 @@ Like other functions, if there are `NA`s, you get `NA` as the result.  But if yo
 ```{r}
 cor(y1980, y1985, use = "complete.obs")
 ```
-
 
 ## Correlation coefficient calculation and test
 
@@ -440,13 +448,17 @@ For example, if we want to fit a regression model where outcome is `income` and 
 `income ~ years_of_education + age + location`
 </p>
 
-## Linear regression
+## Linear regression example
 
 Let's look variables that might be able to predict the number of heat-related ER visits in Colorado.
 
 We'll use the dataset that has ER visits separated out by age category.
 
-We'll combine this with a new dataset that has some weather information about summer temperatures in Denver, downloaded from [https://www.weather.gov/bou/DenverSummerHeat](https://www.weather.gov/bou/DenverSummerHeat). We will use this as a proxy for temperatures for the state of CO as a whole for this example.
+We'll combine this with a new dataset that has some weather information about summer temperatures in Denver, downloaded from [https://www.weather.gov/bou/DenverSummerHeat](https://www.weather.gov/bou/DenverSummerHeat). 
+
+We will use this as a proxy for temperatures for the state of CO as a whole for this example.
+
+## Linear regression example{.codesmall}
 
 ```{r}
 er <- read_csv(file = "https://daseh.org/data/CO_ER_heat_visits_by_age.csv")
@@ -519,7 +531,6 @@ er_temps <- er_temps %>% mutate(age = factor(age))
 ```
 
 
-
 ## Linear regression: factors {.smaller}
 
 The comparison group that is not listed is treated as intercept. All other estimates are relative to the intercept. 
@@ -534,7 +545,7 @@ summary(fit3)
 
 Maybe we want to use the age group "65+ years" as our reference. We can relevel the factor.
 
-Relative to the level is not listed.
+The ages are relative to the level that is not listed.
 
 ```{r}
 er_temps <- 
@@ -553,12 +564,20 @@ You can view estimates for the comparison group by removing the intercept in the
 
 `y ~ x - 1`
 
-*Caveat* is that the p-values change.
+*Caveat* is that the p-values change, and interpretation is often confusing.
 
 ```{r regress9, comment="", fig.height=4, fig.width=8}
 fit5 <- glm(visits ~ highest_temp + year + age - 1, data = er_temps)
 summary(fit5)
 ```
+
+## Linear regression: interactions
+
+```{r, fig.alt="Statistical interaction showing the relationship between cookie yield, temperature, and cooking duration.", out.width = "70%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/interaction.png")
+```
+
+[source](https://en.wikipedia.org/wiki/Interaction_(statistics)#/media/File:Interaction_plot_cookie_baking.svg)
 
 ## Linear regression: interactions {.smaller}
 
@@ -605,19 +624,15 @@ We will create a new binary variable `high_rate`. We will say a visit rate of mo
 
 ```{r}
 er_temps <-
-  er_temps %>%
-    mutate(
-      high_rate = case_when(
-      rate > 8 ~ 1,
-      TRUE ~ 0))
+  er_temps %>% mutate(high_rate = rate > 8)
+
+glimpse(er_temps)
 ```
 
 
 ## Logistic regression {.smaller}
 
-Now that we've created the `high_rate` variable (where a 1 indicates that there was a visit rate greater than 8), we can run a logistic regression.
-
-Let's explore how `highest_temp`, `year`, and `age` might predict `high rate`.
+Let's explore how `highest_temp`, `year`, and `age` might predict `high_rate`.
 
 ```
 # General format
@@ -640,39 +655,40 @@ See this [case study](https://www.opencasestudies.org/ocs-bp-vaping-case-study/#
 
 Check out [this paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2938757/).
 
+Use `oddsratio(x, y)` from the `epitools()` package to calculate odds ratios.
 
 ## Odds ratios {.smaller}
 
-Use `oddsratio(x, y)` from the `epitools()` package to calculate odds ratios.
-
 During the years 2012, 2018, 2021, and 2022, there were multiple consecutive days with temperatures above 100 degrees. We will code this as `heatwave`.
-
-In this case, we're calculating the odds ratio for whether a heatwave is associated with having a visit rate greater than 8.
 
 ```{r}
 library(epitools)
 
 er_temps <-
   er_temps %>%
-    mutate(
-      heatwave = case_when(
-      year == 2012 ~ 1,
-      year == 2018 ~ 1,
-      year == 2021 ~ 1,
-      year == 2022 ~ 1,
-      TRUE ~ 0))
+  mutate(heatwave = year %in% c(2012, 2018, 2021, 2022))
 
-response <- er_temps %>% pull(high_rate)
-predictor <- er_temps %>% pull(heatwave)
+glimpse(er_temps)
 ```
 
 ## Odds ratios {.smaller}
 
-Use `oddsratio(x, y)` from the `epitools()` package to calculate odds ratios.
-
 In this case, we're calculating the odds ratio for whether a heatwave is associated with having a visit rate greater than 8. 
 
 ```{r}
+response <- er_temps %>% pull(high_rate)
+predictor <- er_temps %>% pull(heatwave)
+
+oddsratio(predictor, response)
+```
+
+## Odds ratios {.smaller}
+
+The Odds Ratio is 3.86.
+
+When the predictor is TRUE (aka it was a heatwave year), the odds of the response (high hospital visitation) are 3.86 times greater than when it is FALSE (not a heatwave year).
+
+```{r echo = FALSE}
 oddsratio(predictor, response)
 ```
 
