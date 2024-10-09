@@ -49,11 +49,9 @@ cor(ces_sub, use = "complete.obs")
 
 Change your code from 1.2 to add a few more variables: 
 
-`DieselPM`: Diesel PM emissions from on-road and non-road sources
-
-`Traffic`: Measure of traffic density within 150 meters of the census tract boundary
-
-`Asthma`: Age-adjusted rate of emergency department visits for asthma
+* `DieselPM`: Diesel PM emissions from on-road and non-road sources. 
+* `Traffic`: Measure of traffic density within 150 meters of the census tract boundary. 
+* `Asthma`: Age-adjusted rate of emergency department visits for asthma. 
 
 ```{r 1.3response}
 ces_sub <-
