@@ -13,53 +13,79 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### 1.1
 
-Load the libraries needed in this lab. Then, read in the CalEnviroScreen data from `dasehr` package. Assign it to the "ces" variable. You can also find the data at https://daseh.org/data/CalEnviroScreen_data.csv
+Load the packages needed in this lab. Then, read in the CalEnviroScreen data and assign it to the "ces" variable. You can find the data at https://daseh.org/data/CalEnviroScreen_data.csv
 
 
 ```{r message = FALSE}
-library(dplyr)
-library(dasehr)
+library(tidyverse)
 library(broom)
 ```
 
 ```{r 1.1response}
-ces <- calenviroscreen
+ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
 ```
 
 ### 1.2
 
-Compute the correlation (with `cor`) between the `PM2.5` and `Ozone` variables. (No need to save this in an object. Just display the result to the screen.) Use the `pull()` function to first extract these columns. To use a column name in `pull()` that starts with a number, surround it with backticks. Then, use the `cor` function.
+Compute the correlation (with `cor`) between the `HousingBurden` and `LowBirthWeight` variables. 
+
+* Use `select()` to choose these columns and save as an object. 
+* Use the `cor` function on this object.
+* Add the use = "complete.obs" argument.
+
+`HousingBurden`: Percentage of housing-burdened low-income households. Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs
+
+`LowBirthWeight`: Percentage of births that are low birth weight.
 
 ```{r 1.2response}
-x <- pull(ces, PM2.5)
-y <- pull(ces, Ozone)
+ces_sub <-
+  ces %>%
+  select(HousingBurden, LowBirthWeight)
 
-cor(x, y)
+cor(ces_sub, use = "complete.obs")
 ```
 
 ### 1.3
 
-Compute the correlation (with `cor`) between the `DieselPM`, `Lead`, `Traffic`, and `Asthma` variables. (No need to save this in an object. Just display the result to the screen.) Use `select()` function to first subset the data frame to keep the four columns only. To use a column name in `select()` that starts with a number, surround it with backticks. Does this change when we use the `use = "complete.obs"` argument? 
+Change your code from 1.2 to add a few more variables: 
+
+* `DieselPM`: Diesel PM emissions from on-road and non-road sources. 
+* `Traffic`: Measure of traffic density within 150 meters of the census tract boundary. 
+* `Asthma`: Age-adjusted rate of emergency department visits for asthma. 
 
 ```{r 1.3response}
 ces_sub <-
   ces %>%
-  select(DieselPM, Lead, Traffic, Asthma)
+  select(HousingBurden, LowBirthWeight, DieselPM, Traffic, Asthma)
 
-cor(ces_sub)
 cor(ces_sub, use = "complete.obs")
 ```
 
 ### 1.4
 
-Perform a t-test to determine if there is evidence of a difference between lead exposure burden (`Lead`) and poverty burden (`Poverty`). Use the `pull()` function to extract these columns. Print the results using the `tidy` function from the `broom` package. 
+Perform a t-test to determine if there is evidence of a difference between low birth weight percentage (`LowBirthWeight`) in Los Angeles census tracts compared to San Diego:
+
+* Create a subset of the data for CaliforniaCounty == "Los Angeles"
+* Create a subset of the data for CaliforniaCounty == "San Diego"
+* `pull` the `LowBirthWeight` column for both subsets
+* Use `t.test` to compare the two pulled vectors
+* Print the results using the `tidy` function from the `broom` package
 
 ```{r 1.4response}
-x <- pull(ces, Lead)
-y <- pull(ces, Poverty)
+losangeles <- ces %>% filter(CaliforniaCounty == "Los Angeles")
+sandiego <- ces %>% filter(CaliforniaCounty == "San Diego")
+
+x <- pull(losangeles, LowBirthWeight)
+y <- pull(sandiego, LowBirthWeight)
 
 t.test(x, y)
 tidy(t.test(x, y))
+
+# Another way to look at it..
+ces %>% 
+  group_by(CaliforniaCounty) %>% 
+  summarize(mean = mean(LowBirthWeight, na.rm = TRUE)) %>% 
+  filter(CaliforniaCounty %in% c("Los Angeles", "San Diego"))
 ```
 
 
@@ -67,14 +93,31 @@ tidy(t.test(x, y))
 
 ### P.1
 
-Perform a t-test to determine if there is evidence of a difference between lead exposure burden (`Lead`) and housing insecurity (`HousingBurden`). Use the `pull()` function to extract these columns. Print the results using the `tidy` function. How do these results compare to those in question 1.4?
+Perform a t-test similar to 1.4, but this time examine differences in `HousingBurden`. 
 
 ```{r P.1response}
-x <- pull(ces, Lead)
-y <- pull(ces, HousingBurden)
+x <- pull(losangeles, HousingBurden)
+y <- pull(sandiego, HousingBurden)
 
 t.test(x, y)
 tidy(t.test(x, y))
+```
+
+### P.2 
+
+Filter `ces` so it only contains Los Angeles and San Diego. Launch Esquisse or create a ggplot which plots:
+
+* `Lead` exposure on the x axis
+* `HousingBurden` on the y axis
+* Colors points (`geom_point()`) by `CaliforniaCounty`
+
+```{r P.2response}
+ces_sub <- 
+  ces %>% 
+  filter(CaliforniaCounty %in% c("Los Angeles", "San Diego"))
+
+ggplot(ces_sub, aes(x = Lead, y = HousingBurden, color = CaliforniaCounty)) +
+  geom_point()
 ```
 
 
@@ -82,7 +125,11 @@ tidy(t.test(x, y))
 
 ### 2.1
 
-Fit a linear regression model with low birthweight percentile ("LowBirthWeightPctl") as the outcome and CES4.0 score ("CES4.0Score") as the predictor. Save the model fit in an object called "lmfit_bw" and display the summary table with `summary()`.
+Fit a linear regression model with `LowBirthWeight` as the outcome and `HousingBurden` as the predictor. Save the model fit in an object called "lmfit_bw" and display the summary table with `summary()`.
+
+`HousingBurden`: Percentage of housing-burdened low-income households. Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs
+
+`LowBirthWeight`: Percentage of births that are low birth weight.
 
 ```
 # General format
@@ -90,51 +137,65 @@ glm(y ~ x, data = DATASET_NAME)
 ```
 
 ```{r 2.1response}
-lmfit_bw <- glm(LowBirthWeightPctl ~ CES4.0Score, data = ces)
+lmfit_bw <- glm(LowBirthWeight ~ HousingBurden, data = ces)
 summary(lmfit_bw)
 ```
 
 ### 2.2
 
-Fit a linear regression model with low birthweight percentile ("LowBirthWeightPctl") as the outcome and CES4.0 score ("CES4.0Score") and poverty score ("Poverty") as the predictors. Save the model fit in an object called "lmfit_bw2" and display the summary table.
+Take your code from 2.1 and add `Traffic` as another predictor. Save the model fit in an object called "lmfit_bw2" and display the summary table.
+
+`Traffic`: Measure of traffic density within 150 meters of the census tract boundary
 
 ```{r 2.2response}
-lmfit_bw2 <- glm(LowBirthWeightPctl ~ CES4.0Score + Poverty, data = ces)
+lmfit_bw2 <- glm(LowBirthWeight ~ HousingBurden + Traffic, data = ces)
 summary(lmfit_bw2)
 ```
 
 
 # Practice on Your Own!
 
-### P.2
+### P.3
 
-Fit a linear regression model with low birthweight percentile ("LowBirthWeightPctl") as the outcome, CES4.0 score ("CES4.0Score") and poverty score ("Poverty") as the predictors, and interaction between "CES4.0Score" and "Poverty".
+Take your code from 2.2 and add an interaction term. Save the model fit in an object called "lmfit_bw3" and display the summary table.
 
-- To include the interaction, use `CES4.0Score * Poverty` in the formula. 
+- To include the interaction, use `HousingBurden * Traffic` in the formula. 
 - Save the model fit in an object called "lmfit_bw3" and display the summary table with `summary()`.
 
-```{r P.2response}
-lmfit_bw3 <- glm(LowBirthWeightPctl ~ CES4.0Score + Poverty + CES4.0Score * Poverty, data = ces)
+```{r P.3response}
+lmfit_bw3 <- glm(LowBirthWeight ~ HousingBurden * Traffic, data = ces)
 summary(lmfit_bw3)
 ```
 
-### P.3
+### P.4   
 
-Fit a logistic regression model where the outcome is whether the CES percentile is above the 50th percentile and predictors are the poverty measure ("Poverty") and percentage of white residents ("WhitePerc"), as well as the interaction between "Poverty" and "WhitePerc". Information about the CES4.0 percentile rank is stored in the "CES4.0Percentile" variable. You will need to first create a variable "CESPctlMoreThan50" using the `mutate` and `case_when` commands.
+Let's make `LowBirthWeight` into a binary variable, where over 5% low birth weight is "TRUE".
 
-- Save the model fit in an object called "logfit_ces" and display the summary table with `summary()`.
+The following code creates a column `weight_cat` with TRUE/FALSE values.
 
+```{r}
+ces_bw <- 
+  ces %>% 
+  mutate(weight_cat = LowBirthWeight > 5)
 ```
-# General format
-df <- df %>% mutate(binary_y = case_when(y > 50  ~ 1, y < 50 ~ 0)) 
-glm(y ~ x, data = DATASET_NAME, family = binomial(link = "logit"))
-```
 
-```{r P.3response}
-ces <- ces %>% 
-  mutate(CESPctlMoreThan50 = 
-           case_when(CES4.0Percentile > 50  ~ 1, CES4.0Percentile < 50 ~ 0))
+Fit a logistic regression model where:
 
-logfit_ces <- glm(CESPctlMoreThan50 ~ Poverty + WhitePerc + Poverty * WhitePerc, data = ces, family = binomial(link = "logit"))
-summary(logfit_ces)
+* The outcome is `weight_cat`.
+* `HousingBurden`, `Poverty`, and `Education` are predictors.
+* Use `glm` and family = binomial(link = "logit").
+* Save the model fit in an object called "logfit_bw" and display the summary table with `summary()`.
+
+`Poverty`: Percent of population living below two times the federal poverty level
+
+`Education`: Percent of population over 25 with less than a high school education
+
+```{r P.4response}
+logfit_bw <-
+  glm(
+    weight_cat ~ HousingBurden + Poverty + Education,
+    data = ces_bw,
+    family = binomial(link = "logit")
+  )
+summary(logfit_bw)
 ```
