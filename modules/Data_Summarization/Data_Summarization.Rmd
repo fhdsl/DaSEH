@@ -348,9 +348,9 @@ er_year %>% unique() %>% length() # similar to n_distinct()
 
 💻 [Lab](https://daseh.org/modules/Data_Summarization/lab/Data_Summarization_Lab.Rmd)
 
-📃[Day 4 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
+📃 [Day 4 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-4.pdf)
 
-📃[Posit's data transformation Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
+📃 [Posit's data transformation Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
 
 **For more advanced learning:**
 
