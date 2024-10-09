@@ -113,7 +113,7 @@ cor.test(x, y = NULL, alternative(c("two.sided", "less", "greater")),
 
 ## Correlation {.small}
 
-Let's look at the dataset of yearly CO2 emissions by country.
+Let's look at the dataset of yearly CO2 emissions by country again.
 
 ```{r cor1, comment="", message = FALSE}
 yearly_co2 <- read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
