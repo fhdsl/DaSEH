@@ -90,9 +90,11 @@ Function `cor()` computes correlation in R.
 cor(x, y = NULL, use = c("everything", "complete.obs"),
     method = c("pearson", "kendall", "spearman"))
 ```
-- provide two numeric vectors of the same length (arguments `x`, `y`), or
-- provide a data.frame / tibble with numeric columns only
-- by default, Pearson correlation coefficient is computed
+<br>
+
+- provide two numeric vectors of the same length (arguments `x`, `y`), or  
+- provide a data.frame / tibble with numeric columns only  
+- by default, Pearson correlation coefficient is computed  
 
 ## Correlation test
 
@@ -111,27 +113,28 @@ cor.test(x, y = NULL, alternative(c("two.sided", "less", "greater")),
    - less means true correlation coefficient is < 0 (negative relationship)
 
 
-## Correlation {.small}
+## Correlation {.codesmall}
 
 Let's look at the dataset of yearly CO2 emissions by country.
 
 ```{r cor1, comment="", message = FALSE}
-yearly_co2 <- read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+yearly_co2 <- 
+  read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
 ```
 
 ## Correlation for two vectors
 
-First, we compute correlation by providing two vectors.
+First, we create two vectors.
 
 ```{r}
 # x and y must be numeric vectors
-y1980 <- yearly_co2_emissions %>% pull(`1980`)
-y1985 <- yearly_co2_emissions %>% pull(`1985`)
+y1980 <- yearly_co2 %>% pull(`1980`)
+y1985 <- yearly_co2 %>% pull(`1985`)
 ```
 
 <br>
 
-Like other functions, if there are `NA`s, you get `NA` as the result.  But if you specify use only the complete observations, then it will give you correlation using the non-missing data.
+Like other functions, if there are `NA`s, you get `NA` as the result.  But if you specify `use = "complete.obs"`, then it will give you correlation using the non-missing data.
 
 ```{r}
 cor(y1980, y1985, use = "complete.obs")
@@ -156,31 +159,15 @@ glimpse(cor_result)
 
 ## Correlation for two vectors with plot{.codesmall}
 
-In plot form... `geom_smooth()` and `annotate()` can help.
+In plot form... `geom_smooth()` and `annotate()` can look very nice!
 
 ```{r, warning = F}
 corr_value <- pull(cor_result, estimate) %>% round(digits = 4)
 cor_label <- paste0("R = ", corr_value)
-yearly_co2_emissions %>%
+yearly_co2 %>%
   ggplot(aes(x = `1980`, y = `1985`)) + geom_point(size = 1) + geom_smooth() +
   annotate("text", x = 2000000, y = 4000000, label = cor_label)
 ```
-
-<!-- ## Plotting with `ggpubr` -->
-
-<!-- In plot form... `geom_smooth()` of `ggplot2` can help, as can `stat_cor()` of `ggpubr`. -->
-<!-- ```{r, fig.width=3, fig.height=3} -->
-<!-- install.packages("ggpubr") -->
-
-<!-- library(ggpubr) -->
-<!-- yearly_co2_emissions %>% -->
-<!--   ggplot(aes(x = `1989`, y = `2014`)) + -->
-<!--   geom_point(size = 0.3) + -->
-<!--   geom_smooth() + -->
-<!--   stat_cor(p.accuracy = 0.001) -->
-<!-- ``` -->
-
-
 
 ## Correlation for data frame columns
 
@@ -189,13 +176,14 @@ We can compute correlation for all pairs of columns of a data frame / matrix. Th
 Columns must be all numeric!
 
 ```{r}
-co2_subset <- yearly_co2_emissions %>%
+co2_subset <- yearly_co2 %>%
   select(c(`1950`, `1980`, `1985`, `2010`))
 
 head(co2_subset)
 ```
 
 ## Correlation for data frame columns
+
 We can compute correlation for all pairs of columns of a data frame / matrix. This is often called, *"computing a correlation matrix"*.
 
 ```{r}
@@ -226,12 +214,13 @@ knitr::include_graphics(here::here("images/lyme_and_fried_chicken.png"))
 
 ## T-test
 
-The commonly used are:
+The commonly used t-tests are:
 
-- **one-sample t-test** -- used to test mean of a variable in one group
-- **two-sample t-test** -- used to test difference in means of a variable between two groups (if the "two groups" are data of the *same* individuals collected at 2 time points, we say it is two-sample paired t-test)
+- **one-sample t-test** -- used to test mean of a variable in one group 
+- **two-sample t-test** -- used to test difference in means of a variable between two groups
+    - if the "two groups" are data of the *same* individuals collected at 2 time points, we say it is two-sample paired t-test)
 
-The `t.test()` function in R is one to address the above.
+The `t.test()` function does both.
 
 ```
 t.test(x, y = NULL,
@@ -302,7 +291,7 @@ See [here](https://www.nature.com/articles/nbt1209-1135) for more about multiple
 ## Some other statistical tests
 
 - `wilcox.test()` -- Wilcoxon signed rank test, Wilcoxon rank sum test
-- `shapiro.test()` -- Shapiro test
+- `shapiro.test()` -- Test normality assumptions 
 - `ks.test()` -- Kolmogorov-Smirnov test
 - `var.test()`-- Fisher’s F-Test
 - `chisq.test()` -- Chi-squared test
@@ -548,8 +537,10 @@ Maybe we want to use the age group "65+ years" as our reference. We can relevel 
 Relative to the level is not listed.
 
 ```{r}
-er_temps <- er_temps %>% mutate(age = factor(age,
-    levels = c("65+ years old", "35-64 years old", "15-34 years old", "5-14 years old", "0-4 years old")
+er_temps <- 
+  er_temps %>% 
+  mutate(age = factor(age,
+    levels = c("65+ years", "35-64 years", "15-34 years", "5-14 years", "0-4 years")
   ))
   
 fit4 <- glm(visits ~ highest_temp + year + age, data = er_temps)
