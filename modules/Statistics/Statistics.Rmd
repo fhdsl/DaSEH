@@ -125,8 +125,8 @@ First, we compute correlation by providing two vectors.
 
 ```{r}
 # x and y must be numeric vectors
-y1980 <- yearly_co2_emissions %>% pull(`1980`)
-y1985 <- yearly_co2_emissions %>% pull(`1985`)
+y1980 <- yearly_co2 %>% pull(`1980`)
+y1985 <- yearly_co2 %>% pull(`1985`)
 ```
 
 <br>
@@ -161,7 +161,7 @@ In plot form... `geom_smooth()` and `annotate()` can help.
 ```{r, warning = F}
 corr_value <- pull(cor_result, estimate) %>% round(digits = 4)
 cor_label <- paste0("R = ", corr_value)
-yearly_co2_emissions %>%
+yearly_co2 %>%
   ggplot(aes(x = `1980`, y = `1985`)) + geom_point(size = 1) + geom_smooth() +
   annotate("text", x = 2000000, y = 4000000, label = cor_label)
 ```
@@ -189,7 +189,7 @@ We can compute correlation for all pairs of columns of a data frame / matrix. Th
 Columns must be all numeric!
 
 ```{r}
-co2_subset <- yearly_co2_emissions %>%
+co2_subset <- yearly_co2 %>%
   select(c(`1950`, `1980`, `1985`, `2010`))
 
 head(co2_subset)
