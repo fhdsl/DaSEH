@@ -225,8 +225,8 @@ cor(ces_sub, use = &quot;complete.obs&quot;)</code></pre>
 <h3>1.4</h3>
 <p>Perform a t-test to determine if there is evidence of a difference between low birth weight percentage (<code>LowBirthWeight</code>) in Los Angeles census tracts compared to San Diego:</p>
 <ul>
-<li>Create a subset of the data for CaliforniaCounty == “Los Angeles”</li>
-<li>Create a subset of the data for CaliforniaCounty == “San Diego”</li>
+<li>Create a subset of the data for <code>CaliforniaCounty == &quot;Los Angeles&quot;</code></li>
+<li>Create a subset of the data for <code>CaliforniaCounty == &quot;San Diego&quot;</code></li>
 <li><code>pull</code> the <code>LowBirthWeight</code> column for both subsets</li>
 <li>Use <code>t.test</code> to compare the two pulled vectors</li>
 <li>Print the results using the <code>tidy</code> function from the <code>broom</code> package</li>
@@ -409,6 +409,15 @@ summary(lmfit_bw3)</code></pre>
 <h3>P.4</h3>
 <p>Let’s make <code>LowBirthWeight</code> into a binary variable, where over 5% low birth weight is “TRUE”.</p>
 <p>The following code creates a column <code>weight_cat</code> with TRUE/FALSE values.</p>
+<pre class="r"><code>ces &lt;- read_csv(&quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;)</code></pre>
+<pre><code>## Rows: 8035 Columns: 67
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (3): CaliforniaCounty, ApproxLocation, CES4.0PercRange
+## dbl (64): CensusTract, ZIP, Longitude, Latitude, CES4.0Score, CES4.0Percenti...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>ces_bw &lt;- 
   ces %&gt;% 
   mutate(weight_cat = LowBirthWeight &gt; 5)</code></pre>

@@ -57,8 +57,8 @@ Change your code from 1.2 to add a few more variables:
 
 Perform a t-test to determine if there is evidence of a difference between low birth weight percentage (`LowBirthWeight`) in Los Angeles census tracts compared to San Diego:
 
-* Create a subset of the data for CaliforniaCounty == "Los Angeles"
-* Create a subset of the data for CaliforniaCounty == "San Diego"
+* Create a subset of the data for `CaliforniaCounty == "Los Angeles"`
+* Create a subset of the data for `CaliforniaCounty == "San Diego"`
 * `pull` the `LowBirthWeight` column for both subsets
 * Use `t.test` to compare the two pulled vectors
 * Print the results using the `tidy` function from the `broom` package
@@ -141,6 +141,8 @@ Let's make `LowBirthWeight` into a binary variable, where over 5% low birth weig
 The following code creates a column `weight_cat` with TRUE/FALSE values.
 
 ```{r}
+ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
+
 ces_bw <- 
   ces %>% 
   mutate(weight_cat = LowBirthWeight > 5)
