@@ -549,7 +549,7 @@ Relative to the level is not listed.
 
 ```{r}
 er_temps <- er_temps %>% mutate(age = factor(age,
-    levels = c("65+ years old", "35-64 years old", "15-34 years old", "5-14 years old", "0-4 years old")
+    levels = c("65+ years", "35-64 years", "15-34 years", "5-14 years", "0-4 years")
   ))
   
 fit4 <- glm(visits ~ highest_temp + year + age, data = er_temps)
