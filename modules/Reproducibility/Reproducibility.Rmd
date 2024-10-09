@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, comment=FALSE, warning=FALS
 ```
 
 ```{r}
-# from these slides: https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit?usp=sharing
+# from these slides: https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit?usp=sharing
 library(knitr)
 opts_chunk$set(comment = "")
 library(readr)
@@ -23,10 +23,10 @@ install.packages("ottrpal", repos = "https://cloud.r-project.org", quiet = TRUE)
 library(ottrpal)
 ```
 
-## What's Reproducibility
+## What is  Reproducibility
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf1accd298e_0_146")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf1accd298e_0_146")
 ```
 
 Content adapted from [Candace Savonen](https://www.cansavvy.com/).
@@ -34,25 +34,25 @@ Content adapted from [Candace Savonen](https://www.cansavvy.com/).
 ##
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf1accd298e_0_0")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf1accd298e_0_0")
 ```
 
 ##
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf1accd298e_0_413")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf1accd298e_0_413")
 ```
 
 ## 
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf1accd298e_0_368")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf1accd298e_0_368")
 ```
 
 ## 
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf1accd298e_0_464")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf1accd298e_0_464")
 ```
 
 ## Reproducibility vs Repeatability vs Replicability
@@ -64,50 +64,57 @@ knitr::include_graphics("images/reproducibility.png")
 ## Why Reproducibility is important...
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf1accd298e_0_673")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf1accd298e_0_673")
+```
+
+## We can't get to replicability without reproducibility
+
+```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.g3070a1ee60e_0_0")
 ```
 
 ## It's worth the wait
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf7bed24491_1_38")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf7bed24491_1_38")
 ```
 
 
 ## Reproducibility can also be for your future self!
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf1cd772e00_0_330")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf1cd772e00_0_330")
 ```
+
 
 ## The process
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.g10ab57f2c44_0_221")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.g10ab57f2c44_0_221")
 ```
 
 ## R Markdown
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.g10ab57f2c44_0_0")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.g10ab57f2c44_0_0")
 ```
 
 ## R Markdown lets you test your work
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf8f405fdab_0_186")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf8f405fdab_0_186")
 ```
 
 ## R Markdown allows you to more clearly show what you did
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf8f405fdab_0_102")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf8f405fdab_0_102")
 ```
 
 ## R Markdown makes it easier to update code and see results
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf9440130d0_0_0")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf9440130d0_0_0")
 ```
 
 
@@ -136,12 +143,18 @@ Provide sufficient detail so that you can understand what you did.
 
 ## Need random numbers to stay consistent?
 
-Use `set.seed()` : sets the starting state for the random number generator (RNG) in R.
+Use `set.seed()` : sets the starting state for the [random number generator (RNG)](https://en.wikipedia.org/wiki/Random_number_generation) in R.
 
-```{r}
-set.seed(100)
+```{r, echo = TRUE}
+set.seed(123)
+sample(10)
+set.seed(123)
+sample(10)
+set.seed(456)
 sample(10)
 ```
+
+Note that these are only psuedo random and the values are created doing calculations based on the given seed. Thus the same "random" values will be reproduced by everyone using the same seed with `set.seed`.
 
 ## R Markdown syntax
 
@@ -171,12 +184,12 @@ knitr::include_graphics("images/markdown_cheatsheet.png")
 ## Versions matter
 
 ```{r, fig.alt="session info", out.width = "80%", echo = FALSE, fig.align='center'}
-ottrpal::include_slide("https://docs.google.com/presentation/d/1-cauITbscmnDEDt5IqrZOLlCjyhzEOZY5fqwVY7l8tQ/edit#slide=id.gf62875ddf7_0_404")
+ottrpal::include_slide("https://docs.google.com/presentation/d/1nV7x0mIIE4oWVKxpv4qJNvO17y51MajsERGtzR2qClk/edit#slide=id.gf62875ddf7_0_404")
 ```
 
 ## Session info can help
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo = TRUE}
 sessionInfo()
 ```
 
@@ -185,10 +198,23 @@ sessionInfo()
 knitr::include_graphics("images/session_info.png")
 ```
 
-## Lab 1
 
-🏠 [Class Website](https://daseh.org/)    
-💻 [Lab](https://daseh.org/modules/Reproducibility/lab/Reproducibility_Lab.Rmd)
+## GUT CHECK: Why is reproducibility so important?
+
+A. It helps to ensure that your code is working consistently and it helps others understand what you did 
+
+B. It ensures that your code is correct 
+
+## GUT CHECK: What is NOT a practice to improve the reproducibility of our work?
+
+A. Using R Markdown files to describe what your code is doing 
+
+B. Using scripts instead of R Markdown files   
+
+C. Testing your code with R Markdown files or the run previous button
+
+D. Regularly cleaning the environment 
+
 
 ## More resources
 
@@ -204,13 +230,16 @@ These are just some quick tips, for more information:
 
 To help make your work more reproducible:
 
-- Use RMarkdown
+- Use R Markdown
 - Clean your environment regularly
-- Check the knit of your RMarkdown regularly
+- Check the knit of your R Markdown regularly
 - Tell your future self and others what you did!
 - Print session info!
 
-🏠 [Class Website](https://daseh.org/)
+🏠 [Class Website](https://daseh.org/)    
+💻 [Lab](https://daseh.org/modules/Reproducibility/lab/Reproducibility_Lab.Rmd)  
+🗒 [Day 2 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)  
+🗒 [RStudio Cheatsheet](https://d33wubrfki0l68.cloudfront.net/374f4c769f97c4ded7300d521eb59b24168a7261/c72ad/lesson-images/cheatsheets-1-cheatsheet.png)
 
 ```{r, fig.alt="The End", out.width = "25%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

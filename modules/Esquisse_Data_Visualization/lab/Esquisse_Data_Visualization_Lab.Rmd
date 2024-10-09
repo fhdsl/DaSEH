@@ -13,16 +13,25 @@ install.packages("ggplot2")
 ```{r, comment = FALSE}
 library(esquisse)
 library(ggplot2)
-library(dplyr)
-library(dasehr)
+library(tidyverse)
 ```
 
 ### 1.1
 
-Try creating a plot in `esquisse` using the `calenviroscreen` data from the `dasehr` packaged. This dataset has a lot of variables, so first run the below code to subset it so that you're only working with these variables: `CES4.0Percentile`,  `Asthma`, and `ChildrenPercLess10`. We will also categorize `CES4.0Percentile` into three categories (high, middle, and low) to make visualization a little easier!
+Let's look at the relationship between exposure to pollution and visits to the ER for asthma issues.
+
+Try creating a plot in `esquisse` using the `calenviroscreen` data. This dataset has a lot of variables, so first run the below code to subset it so that you're only working with these variables: `CES4.0Percentile`,  `Asthma`, and `ChildrenPercLess10`. We will also categorize `CES4.0Percentile` into three categories (high, middle, and low) to make visualization a little easier!
+
+`CES4.0Percentile`: a measure of how much pollution people in a census tract experience, relative to the other census tracts in California
+
+`Asthma`: Age-adjusted rate of emergency department visits for asthma
+
+`ChildrenPercLess10`: estimates of the percent per census tract of children under 10 years old
 
 ```{r}
-ces_sub <- select(calenviroscreen, c("CES4.0Percentile", "Asthma", "ChildrenPercLess10"))
+ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
+
+ces_sub <- select(ces, c("CES4.0Percentile", "Asthma", "ChildrenPercLess10"))
 
 ces_sub <- ces_sub %>% 
             mutate(CES4.0Perc_cat = 
@@ -57,13 +66,12 @@ Click where it says "point" (may say "auto" depending on how you did the last qu
 Launch Esquisse on any selection of the following datasets we have worked with before and explore!
 
 ```{r}
-covid_wastewater
-CO_heat_ER
-CO_heat_ER_byage
-CO_heat_ER_bygender
-yearly_co2_emissions
-nitrate
-haa5
+co2 <- read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+
+cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv")
+
+nitrate <- read_csv(file = "https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv")
+
 ```
 
 ```{r P.1response}
