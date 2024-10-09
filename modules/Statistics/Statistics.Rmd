@@ -719,7 +719,9 @@ Content for similar topics as this course can also be found on Leanpub.
 
 💻 [Lab](https://daseh.org/modules/Statistics/lab/Statistics_Lab.Rmd)
 
-```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
+📃 [Day 8 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-8.pdf)
+
+```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
 
