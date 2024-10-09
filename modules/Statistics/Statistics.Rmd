@@ -396,6 +396,8 @@ We typically provide two arguments:
 - `formula` -- model formula written using names of columns in our data
 - `data` -- our data frame
 
+<!-- Note that regression coefficients are unstandardized, meaning they are in the original units of the variables, while standardized coefficients are unitless and based on standard deviations. -->
+
 ## Linear regression fit in R: model formula
 
 Model formula
