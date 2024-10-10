@@ -365,7 +365,6 @@ er %>%
   ))
 ```
 
-
 ## Applying functions with `across` from `dplyr`
 
 Using different `tidyselect()` options (e.g., `starts_with()`, `ends_with()`, `contains()`)
@@ -375,20 +374,6 @@ er %>%
   group_by(year) %>%
   summarize(across(contains("cl"), mean, na.rm=T))
 ```
-
-
-<!-- ## Applying functions with `across` from `dplyr`{.codesmall} -->
-
-<!-- `mutate()` across to round across many columns at once! -->
-
-<!-- ```{r} -->
-<!-- calenviroscreen %>% -->
-<!--   mutate(across( -->
-<!--     where(is.numeric),  -->
-<!--     function(x) round(x, digits = 0) -->
-<!--   )) %>% select(7:13) -->
-<!-- ``` -->
-
 
 ## Applying functions with `across` from `dplyr` {.smaller}
 
@@ -409,29 +394,15 @@ yearly_co2 %>%
   ))
 ```
 
+## GUT CHECK! 
 
-<!-- ## Use custom functions within `mutate` and `across` -->
+Why use `across()`?
 
-<!-- If your function needs to span more than one line, better to define it first before using inside `mutate()` and `across()`. -->
+A. Efficiency - faster and less repetitive
 
-<!-- ```{r} -->
-<!-- times1000 <- function(x) x * 1000 -->
+B. Calculate the cross product
 
-<!-- airquality %>% -->
-<!--   mutate(across( -->
-<!--     everything(), -->
-<!--     .fns  = times1000 -->
-<!--   )) %>% -->
-<!--   head(n = 2) -->
-
-<!-- airquality %>% -->
-<!--   mutate(across( -->
-<!--     everything(), -->
-<!--     .fns  = function(x) x * 1000 -->
-<!--   )) %>% -->
-<!--   head(n = 2) -->
-<!-- ``` -->
-
+C. Connect across datasets
 
 ## `purrr` package
 
