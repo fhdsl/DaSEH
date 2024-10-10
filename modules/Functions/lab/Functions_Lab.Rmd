@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Part 1
 
-Load all the libraries we will use in this lab.
+Load the `tidyverse` package.
 
 ```{r message=FALSE}
 library(tidyverse)
@@ -19,21 +19,13 @@ library(tidyverse)
 
 ### 1.1
 
-Create a function that takes one argument, a vector, and returns the sum of the vector and then squares the result. Call it "sum_squared". Test your function on the vector `c(2,7,21,30,90)` - you should get the answer 22500.
+Create a function that: 
 
-```
-# General format
-NEW_FUNCTION <- function(x, y) x + y
-```
-or
-
-```
-# General format
-NEW_FUNCTION <- function(x, y){
-result <- x + y
-return(result)
-}
-```
+* Takes one argument, a vector.
+* Returns the sum of the vector and then squares the result. 
+* Call it "sum_squared". 
+* Test your function on the vector `c(2,7,21,30,90)` - you should get the answer 22500.
+* Format is `NEW_FUNCTION <- function(x, y) x + y`
 
 ```{r 1.1response}
 
@@ -41,7 +33,12 @@ return(result)
 
 ### 1.2
 
-Create a function that takes two arguments, (1) a vector and (2) a numeric value. This function tests whether the number (2) is contained within the vector (1). **Hint**: use `%in%`. Call it `has_n`. Test your function on the vector `c(2,7,21,30,90)` and number `21` - you should get the answer TRUE.
+Create a function that:
+
+* takes two arguments, (1) a vector and (2) a numeric value. 
+* This function tests whether the number (2) is contained within the vector (1). **Hint**: use `%in%`. 
+* Call it `has_n`. 
+* Test your function on the vector `c(2,7,21,30,90)` and number `21` - you should get the answer TRUE.
 
 ```{r 1.2response}
 
@@ -57,7 +54,13 @@ Amend the function `has_n` from question 1.2 so that it takes a default value of
 
 ### P.1
 
-Create a new number `b_num` that is not contained with `nums`. Use your updated `has_n` function with the default value and add `b_num` as the `n` argument when calling the function. What is the outcome?
+Create a function for the CalEnviroScreen Data. 
+
+* Read in (https://daseh.org/data/CalEnviroScreen_data.csv)
+* The function takes an argument for a column name. (use `{{col_name}}`)
+* The function creates a ggplot with `{{col_name}}` on the x-axis and `Poverty` on the y-axis.
+* Use `geom_point()`
+* Test the function using the `Lead` column and `HousingBurden` columns, or other columns of your choice.
 
 ```{r P.1response}
 
@@ -76,7 +79,12 @@ Read in the CalEnviroScreen from https://daseh.org/data/CalEnviroScreen_data.csv
 
 ### 2.2
 
-We want to get some summary statistics on water contamination. Use `across` inside `summarize` to get the sum total variable containing the string "water" AND ending with "Pctl". **Hint**: use `contains()` AND `ends_with()` to select the right columns inside `across`. Remember that `NA` values can influence calculations.
+We want to get some summary statistics on water contamination. 
+
+* Use `across` inside `summarize`.
+* Choose columns about "water". **Hint**: use `contains("water")` inside `across`. 
+* Use `mean` as the function inside of `across`.
+* Remember that `NA` values can influence calculations.
 
 ```
 # General format
@@ -93,7 +101,12 @@ data %>%
 
 ### 2.3
 
-Use `across` and `mutate` to convert all columns containing the word "water" into proportions (i.e., divide that value by 100). **Hint**: use `contains()` to select the right columns within `across()`. Use an anonymous function ("function on the fly") to divide by 100 (`function(x) x / 100`). It will also be easier to check your work if you `select()` columns that match "Pctl".
+Convert all columns that are percentiles into proportions.
+
+* Use `across` and `mutate`
+* Choose columns that contain "Pctl" in the name. **Hint**: use `contains("Pctl")` inside `across`.
+* Use an anonymous function ("function on the fly") to divide by 100 (`function(x) x / 100`). 
+* Check your work - It will also be easier if you `select(contains("Pctl"))`.
 
 ```
 # General format
@@ -115,9 +128,9 @@ data %>%
 
 Use `across` and `mutate` to convert all columns starting with the string "PM" into a binary variable: TRUE if the value is greater than 10 and FALSE if less than or equal to 10. 
 
-- **Hint**: use `starts_with()` to select the columns that start with "PM". 
-- Use an anonymous function ("function on the fly") to do a logical test if the value is greater than 10.
-- A logical test with `mutate` will automatically fill a column with TRUE/FALSE.
+* **Hint**: use `starts_with()` to select the columns that start with "PM". 
+* Use an anonymous function ("function on the fly") to do a logical test if the value is greater than 10.
+* A logical test with `mutate` (x > 10) will automatically fill a column with TRUE/FALSE.
 
 ```{r P.2response}
 
@@ -127,9 +140,9 @@ Use `across` and `mutate` to convert all columns starting with the string "PM" i
 
 Take your code from previous question and assign it to the variable `ces_dat`.
 
-- Use `filter()` to drop any rows where "Oakland" appears in `ApproxLocation`. Make sure to reassign this to `ces_dat`.
-- Create a ggplot boxplot (`geom_boxplot()`) where (1) the x-axis is `Asthma`  and (2) the y-axis is `PM2.5`.
-- You change the `labs()` layer so that the x-axis is "ER Visits for Asthma: PM2.5 greater than 10"
+- Create a ggplot where the x-axis is `Asthma` and the y-axis is `PM2.5`.
+- Add a boxplot (`geom_boxplot()`)
+- Change the `labs()` layer so that the x-axis is "ER Visits for Asthma: PM2.5 greater than 10"
 
 ```{r P.3response}
 
