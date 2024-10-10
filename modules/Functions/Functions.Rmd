@@ -11,7 +11,6 @@ library(dplyr)
 library(knitr)
 library(stringr)
 library(tidyr)
-library(emo)
 library(readr)
 opts_chunk$set(comment = "")
 ```
@@ -192,7 +191,7 @@ loud(word = "hooray!")
 <!-- ``` -->
 
 
-## Functions for tibbles - curly braces{.codesmall}
+## Functions for tibbles - curly braces
 
 ```{r}
 # get means and missing for a specific column
@@ -203,13 +202,22 @@ get_summary <- function(dataset, col_name) {
 }
 ```
 
-Examples:
+## Functions for tibbles - example{.codesmall}
+
+```{r message = FALSE}
+er <- read_csv(file = "https://daseh.org/data/CO_ER_heat_visits.csv")
+```
 
 ```{r}
-er <- read_csv(file = "https://daseh.org/data/CO_ER_heat_visits.csv")
 get_summary(er, visits)
+```
 
-yearly_co2 <- read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+```{r message = FALSE}
+yearly_co2 <- 
+  read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+```
+
+```{r}
 get_summary(yearly_co2, `2014`)
 ```
 
@@ -217,9 +225,9 @@ get_summary(yearly_co2, `2014`)
 
 - Simple functions take the form:
   - `NEW_FUNCTION <- function(x, y){x + y}`
-  - Can specify defaults like `function(x = 1, y = 2){x + y}`
-  -`return` will provide a value as output
-  - `print` will simply print the value on the screen but not save it
+  - Can specify defaults like `function(x = 1, y = 2){x + y}`  
+  - `return` will provide a value as output
+- Specify a column (from a tibble) inside a function using `{{double curly braces}}`
 
 
 ## Lab Part 1
@@ -245,7 +253,7 @@ sapply(<a vector, list, data frame>, some_function)
 
 Let's apply a function to look at the CO heat-related ER visits dataset.
 
-`r emo::ji("rotating_light")` There are no parentheses on the functions! `r emo::ji("rotating_light")`
+🚨There are no parentheses on the functions!🚨
 
 You can also pipe into your function.
 
@@ -357,7 +365,6 @@ er %>%
   ))
 ```
 
-
 ## Applying functions with `across` from `dplyr`
 
 Using different `tidyselect()` options (e.g., `starts_with()`, `ends_with()`, `contains()`)
@@ -367,20 +374,6 @@ er %>%
   group_by(year) %>%
   summarize(across(contains("cl"), mean, na.rm=T))
 ```
-
-
-<!-- ## Applying functions with `across` from `dplyr`{.codesmall} -->
-
-<!-- `mutate()` across to round across many columns at once! -->
-
-<!-- ```{r} -->
-<!-- calenviroscreen %>% -->
-<!--   mutate(across( -->
-<!--     where(is.numeric),  -->
-<!--     function(x) round(x, digits = 0) -->
-<!--   )) %>% select(7:13) -->
-<!-- ``` -->
-
 
 ## Applying functions with `across` from `dplyr` {.smaller}
 
@@ -401,29 +394,15 @@ yearly_co2 %>%
   ))
 ```
 
+## GUT CHECK! 
 
-<!-- ## Use custom functions within `mutate` and `across` -->
+Why use `across()`?
 
-<!-- If your function needs to span more than one line, better to define it first before using inside `mutate()` and `across()`. -->
+A. Efficiency - faster and less repetitive
 
-<!-- ```{r} -->
-<!-- times1000 <- function(x) x * 1000 -->
+B. Calculate the cross product
 
-<!-- airquality %>% -->
-<!--   mutate(across( -->
-<!--     everything(), -->
-<!--     .fns  = times1000 -->
-<!--   )) %>% -->
-<!--   head(n = 2) -->
-
-<!-- airquality %>% -->
-<!--   mutate(across( -->
-<!--     everything(), -->
-<!--     .fns  = function(x) x * 1000 -->
-<!--   )) %>% -->
-<!--   head(n = 2) -->
-<!-- ``` -->
-
+C. Connect across datasets
 
 ## `purrr` package
 
@@ -433,22 +412,29 @@ While we won't get into `purrr` too much in this class, its a handy package for 
 
 # Multiple Data Frames
 
-## Multiple data frames {.smaller}
+## Multiple data frames
 
-Lists help us work with multiple data frames
+Lists help us work with multiple tibbles / data frames
 
 ```{r}
-AQ_list <- list(AQ1 = airquality, AQ2 = airquality, AQ3 = airquality)
-str(AQ_list)
+df_list <- list(AQ = airquality, er = er, yearly_co2 = yearly_co2)
 ```
 
+<br>
 
-## Multiple data frames: `sapply`
+`select()` from each tibble the numeric columns:
 
 ```{r}
-AQ_list %>% sapply(class)
-AQ_list %>% sapply(nrow)
-AQ_list %>% sapply(colMeans, na.rm = TRUE)
+df_list <- 
+  df_list %>% 
+  sapply(function(x) select(x, where(is.numeric)))
+```
+
+## Multiple data frames: `sapply` {.smaller}
+
+```{r}
+df_list %>% sapply(nrow)
+df_list %>% sapply(colMeans, na.rm = TRUE)
 ```
 
 
@@ -457,7 +443,7 @@ AQ_list %>% sapply(colMeans, na.rm = TRUE)
 - Apply your functions with `sapply(<a vector or list>, some_function)`
 - Use `across()` to apply functions across multiple columns of data 
 - Need to use `across` within `summarize()` or `mutate()`
-- Can use `sapply` or `purrr` to work with multiple data frames within lists simultaneously
+- Can use `sapply` (or `purrr` package) to work with multiple data frames within lists simultaneously
 
 
 ## Lab Part 2
@@ -466,7 +452,20 @@ AQ_list %>% sapply(colMeans, na.rm = TRUE)
 
 💻 [Lab](https://daseh.org/modules/Functions/lab/Functions_Lab.Rmd)
 
-```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
+📃 [Day 9 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-9.pdf)
+
+📃 [Posit's purrr Cheatsheet](https://rstudio.github.io/cheatsheets/purrr.pdf)
+
+## Research Survey
+
+<br>
+
+https://forms.gle/jVue79CjgoMmbVbg9
+
+<br>
+<br>
+
+```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
 
