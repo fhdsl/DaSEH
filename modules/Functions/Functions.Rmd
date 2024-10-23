@@ -454,7 +454,7 @@ df_list %>% sapply(colMeans, na.rm = TRUE)
 
 📃 [Day 9 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-9.pdf)
 
-📃 [Posit's purrr Cheatsheet](https://rstudio.github.io/cheatsheets/purrr.pdf)
+📃 [Posit's `purrr` Cheatsheet](https://rstudio.github.io/cheatsheets/purrr.pdf)
 
 ## Research Survey
 

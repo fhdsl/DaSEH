@@ -1,6 +1,8 @@
 ---
 title: "Mapping"
+fontsize: 8pt
 output:
+  beamer_presentation: default
   ioslides_presentation:
     css: ../docs/styles.css
     widescreen: true
@@ -29,12 +31,12 @@ head(map_data("county"))
 
 ## Data formats - boundary data
 
-- **long**: Longitude (x-coordinate)
-- **lat**: Latitude (y-coordinate)
-- **group**: Identifies unique polygons (each county may have multiple polygons if it contains islands or complex borders).
-- **order**: Sequence in which points should be connected to form the boundary (polygons).
-- **region**: State name (e.g., "alabama").
-- **subregion**: County name within the state (e.g., "autauga").
+- **`long`**: Longitude (x-coordinate)
+- **`lat`**: Latitude (y-coordinate)
+- **`group`**: Identifies unique polygons (each county may have multiple polygons if it contains islands or complex borders).
+- **`order`**: Sequence in which points should be connected to form the boundary (polygons).
+- **`region`**: State name (e.g., "alabama").
+- **`subregion`**: County name within the state (e.g., "autauga").
 
 ## Data formats - sf data {.codesmall}
 
@@ -49,7 +51,7 @@ This data is "Simple Feature" (sf) data used for spatial analysis.
 
 These objects store geometric shapes (like points, lines, or polygons) along with associated attributes (metadata).
 
-the `geom` column is a MULTIPOLYGON — a geometry type representing complex shapes, which may consist of multiple polygons (e.g., islands or non-contiguous regions).
+the `geom` column is a `MULTIPOLYGON` — a geometry type representing complex shapes, which may consist of multiple polygons (e.g., islands or non-contiguous regions).
 
 ## `ggplot` has spatial functions{.codesmall}
 
@@ -199,7 +201,7 @@ ggplot(data = wa_income, aes(fill = estimate)) +
 
 3. Clean Data to make life easier
 
-    - Use functions like tolower() and str_remove() to standardize text (e.g., removing "County").
+    - Use functions like `tolower()` and `str_remove()` to standardize text (e.g., removing "County").
     - Group and summarize data when plotting aggregates, like population by county.
 
 ## More resources
