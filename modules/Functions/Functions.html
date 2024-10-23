@@ -373,7 +373,7 @@ get_summary &lt;- function(dataset, col_name) {
               na_count = sum(is.na({{col_name}})))
 }</pre>
 
-</article></slide><slide class=""><hgroup><h2>Functions for tibbles - example</h2></hgroup><article  class="codesmall" id="functions-for-tibbles---example">
+</article></slide><slide class=""><hgroup><h2>Functions for tibbles - example</h2></hgroup><article  id="functions-for-tibbles---example" class="codesmall">
 
 <pre class = 'prettyprint lang-r'>er &lt;- read_csv(file = &quot;https://daseh.org/data/CO_ER_heat_visits.csv&quot;)</pre>
 
@@ -599,7 +599,7 @@ get_summary &lt;- function(dataset, col_name) {
 11  2021     1.30       2.92
 12  2022     1.93       4.71</pre>
 
-</article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  class="smaller" id="applying-functions-with-across-from-dplyr-5">
+</article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-5" class="smaller">
 
 <p>Combining with <code>mutate()</code> - the <code>replace_na</code> function</p>
 
@@ -662,7 +662,7 @@ get_summary &lt;- function(dataset, col_name) {
   df_list %&gt;% 
   sapply(function(x) select(x, where(is.numeric)))</pre>
 
-</article></slide><slide class=""><hgroup><h2>Multiple data frames: <code>sapply</code></h2></hgroup><article  class="smaller" id="multiple-data-frames-sapply">
+</article></slide><slide class=""><hgroup><h2>Multiple data frames: <code>sapply</code></h2></hgroup><article  id="multiple-data-frames-sapply" class="smaller">
 
 <pre class = 'prettyprint lang-r'>df_list %&gt;% sapply(nrow)</pre>
 
@@ -774,7 +774,7 @@ $yearly_co2
 
 <p>📃 <a href='https://daseh.org/modules/cheatsheets/Day-9.pdf' title=''>Day 9 Cheatsheet</a></p>
 
-<p>📃 <a href='https://rstudio.github.io/cheatsheets/purrr.pdf' title=''>Posit’s purrr Cheatsheet</a></p>
+<p>📃 <a href='https://rstudio.github.io/cheatsheets/purrr.pdf' title=''>Posit’s <code>purrr</code> Cheatsheet</a></p>
 
 </article></slide><slide class=""><hgroup><h2>Research Survey</h2></hgroup><article  id="research-survey">
 
