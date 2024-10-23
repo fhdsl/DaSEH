@@ -1,0 +1,213 @@
+---
+title: "Mapping"
+output:
+  ioslides_presentation:
+    css: ../../docs/styles.css
+    widescreen: yes
+---
+
+```{r, echo = FALSE}
+library(knitr)
+opts_chunk$set(comment = "")
+
+install.packages(c("maps", "usmap", "tidycensus"))
+```
+
+## Making maps in R
+
+Maps can be tricky in R! There are many packages to choose from.
+
+- `usmap` is compatible with ggplot
+- `maps` is "Base R"
+- Some require API keys (e.g., `ggmap`, `tidycensus`)
+- Some are interactive (e.g., `leaflet`)
+
+## Data formats - boundary data
+
+```{r message=FALSE}
+library(tidyverse)
+head(map_data("county"))
+```
+
+## Data formats - boundary data
+
+- **long**: Longitude (x-coordinate)
+- **lat**: Latitude (y-coordinate)
+- **group**: Identifies unique polygons (each county may have multiple polygons if it contains islands or complex borders).
+- **order**: Sequence in which points should be connected to form the boundary (polygons).
+- **region**: State name (e.g., "alabama").
+- **subregion**: County name within the state (e.g., "autauga").
+
+## Data formats - sf data {.codesmall}
+
+```{r message=FALSE}
+library(usmapdata)
+head(us_map("county"))
+```
+
+## Data formats - sf data {.codesmall}
+
+This data is "Simple Feature" (sf) data used for spatial analysis. 
+
+These objects store geometric shapes (like points, lines, or polygons) along with associated attributes (metadata).
+
+the `geom` column is a MULTIPOLYGON — a geometry type representing complex shapes, which may consist of multiple polygons (e.g., islands or non-contiguous regions).
+
+## `ggplot` has spatial functions{.codesmall}
+
+`geom_polygon()` works with boundary data
+
+```{r message=FALSE}
+library(tidyverse) # `map_data()` from ggplot2
+library(maps) # `us.cities` data
+
+wa_county <- map_data("county") %>% filter(region == "washington")
+wa_cities <- us.cities %>% filter(country.etc == "WA")
+
+plot_1 <- 
+  ggplot() + 
+  geom_polygon(data = wa_county, aes(x = long, y = lat, group = group), color = "black", fill = NA) +
+  geom_point(data = wa_cities, aes(x = long, y = lat)) +
+  labs(title = "Washington State Cities", x = "longitude", y = "latitude") +
+  coord_fixed(1.3)
+```
+
+## `ggplot` has spatial functions{.codesmall}
+
+```{r echo=FALSE, message=FALSE}
+plot_1
+```
+
+## `maps` package is more similar to Base R
+
+```{r eval=FALSE}
+library(maps) # `map` and `map.cities` functions and `us.cities` data
+
+map('county', region = 'washington', col = "#5E610B")
+map.cities(us.cities, country="WA", col = "#642EFE", cex = 2)
+title(main = "Washington State Cities")
+```
+
+## `maps` package is more similar to Base R
+
+```{r echo=FALSE, message=FALSE}
+library(maps) # `map` and `map.cities` functions and `us.cities` data
+
+map('county', region = 'washington', col = "#5E610B")
+map.cities(us.cities, country="WA", col = "#642EFE", cex = 2)
+title(main = "Washington State Cities")
+```
+
+## `usmap` is compatible with ggplot
+
+```{r message=FALSE}
+library(tidyverse)
+library(usmap) # `countypop` data and the `plot_usmap()` function
+
+wa_dat <- countypop %>% filter(abbr == "WA")
+
+plot_3 <-
+  plot_usmap(data = wa_dat, values = "pop_2022", include = c("WA")) +
+  scale_fill_continuous() +
+  theme(legend.position = "right")
+```
+
+## `usmap` is compatible with ggplot
+
+```{r echo=FALSE, message=FALSE}
+plot_3
+```
+
+## It can get complicated! `ggplot` fill by county {.codesmall}
+
+Sometimes a lot of cleanup is needed to join boundary data with attributes of interest!
+
+```{r message=FALSE}
+library(tidyverse)
+library(usmap) # `countypop` data
+library(maps) # `us.cities` data
+
+# Get county boundaries
+wa_county <- map_data("county") %>% filter(region == "washington")
+
+# Get county-level ("subregion") population
+wa_dat <- countypop %>% filter(abbr == "WA") %>%
+  mutate(subregion = tolower(str_remove(county, " County"))) %>%
+  group_by(subregion) %>% summarize(pop_2022 = sum(pop_2022))
+
+# Combine the data
+wa_complete <- wa_county %>% inner_join(wa_dat)
+
+# Get WA cities and their coordinates
+wa_cities <- us.cities %>% filter(country.etc == "WA")
+```
+
+## It can get complicated! `ggplot` fill by county {.codesmall}
+
+Sometimes a lot of cleanup is needed to join boundary data with attributes of interest!
+
+```{r message=FALSE}
+# Step 2: create the plot
+plot_4 <-
+  ggplot() + 
+  geom_polygon(data = wa_complete, aes(x = long, y = lat, group = group, fill = pop_2022)) +
+  geom_point(data = wa_cities, aes(x = long, y = lat), color = "red") +
+  labs(title = "Washington State Population and Cities, 2022", x = "longitude", y = "latitude") +
+  coord_fixed(1.3)
+```
+
+## It can get complicated! `ggplot` fill by county {.codesmall}
+
+```{r echo=FALSE, message=FALSE}
+plot_4
+```
+
+## `tidycensus` is helpful for tract level {.codesmall}
+
+Use `geom_sf()` function with SF data.
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse) # `geom_sf()` from ggplot2
+library(tidycensus) # `get_acs()` function for American Community Survey data
+
+wa_income <- get_acs(
+  geography = "tract", 
+  variables = "B19013_001", # Income key 
+  state = "WA", 
+  year = 2022,
+  geometry = TRUE
+)
+```
+
+## `tidycensus` is helpful for tract level {.codesmall}
+
+```{r message=FALSE}
+ggplot(data = wa_income, aes(fill = estimate)) + 
+  geom_sf()
+```
+
+## Tips for Mapping in R
+
+1. Know the functions: make sure your data going into plotting functions is similar to 
+
+2. Data Structure: Ensure column names match between datasets for join() operations
+
+    - e.g., `subregion` needs to align in both `wa_county` and `wa_dat` to make `wa_complete`.
+    - Make sure all datasets (like counties and cities) use the same geographic system, such as longitude-latitude pairs.
+
+3. Clean Data to make life easier
+
+    - Use functions like tolower() and str_remove() to standardize text (e.g., removing "County").
+    - Group and summarize data when plotting aggregates, like population by county.
+
+## More resources
+
+https://rfortherestofus.com/2024/06/us-maps
+
+https://ggplot2-book.org/maps
+
+https://walker-data.com/tidycensus/articles/spatial-data.html
+
+https://walker-data.com/census-r/mapping-census-data-with-r.html
+
+https://jtr13.github.io/cc19/different-ways-of-plotting-u-s-map-in-r.html
