@@ -9,8 +9,6 @@ output:
 ```{r, echo = FALSE}
 library(knitr)
 opts_chunk$set(comment = "")
-
-install.packages(c("maps", "sf", "tigris", "units", "usmapdata", "usmap", "tidycensus"), repos = "https://cloud.r-project.org", dependencies = "Depends")
 ```
 
 ## Making maps in R
