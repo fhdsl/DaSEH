@@ -10,7 +10,7 @@ output:
 library(knitr)
 opts_chunk$set(comment = "")
 
-install.packages(c("maps", "usmap", "tidycensus"), repos = "https://cloud.r-project.org")
+install.packages(c("maps", "usmap", "usmapdata", "tidycensus"), repos = "https://cloud.r-project.org")
 ```
 
 ## Making maps in R
