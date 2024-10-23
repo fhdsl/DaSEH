@@ -22,6 +22,30 @@ Maps can be tricky in R! There are many packages to choose from.
 - Some require API keys (e.g., `ggmap`, `tidycensus`)
 - Some are interactive (e.g., `leaflet`)
 
+## What does a map in R look like?
+
+```{r message=FALSE, warning=FALSE, echo=FALSE}
+library(tidyverse) # `geom_sf()` from ggplot2
+library(tidycensus) # `get_acs()` function for American Community Survey data
+
+wa_income <- get_acs(
+  geography = "tract", 
+  variables = "B19013_001", # Income key 
+  state = "WA", 
+  year = 2022,
+  geometry = TRUE
+)
+
+ggplot(data = wa_income, aes(fill = estimate)) + 
+  geom_sf() +
+  labs(title = "Median Household Income by Census Tract",
+       x = "Longitude",
+       y = "Latitude") +
+  theme_classic() +
+  scale_fill_viridis_c() +
+  theme(legend.title = element_blank())
+```
+
 ## Data formats - boundary data
 
 ```{r message=FALSE}
@@ -53,9 +77,13 @@ These objects store geometric shapes (like points, lines, or polygons) along wit
 
 the `geom` column is a `MULTIPOLYGON` — a geometry type representing complex shapes, which may consist of multiple polygons (e.g., islands or non-contiguous regions).
 
+Federal Information Processing System (FIPS) Codes for States and Counties are numbers which uniquely identify geographic areas. See [this codebook](https://transition.fcc.gov/oet/info/maps/census/fips/fips.txt).
+
 ## `ggplot` has spatial functions{.codesmall}
 
 `geom_polygon()` works with boundary data
+
+Let's plot county outlines and major cities.
 
 ```{r message=FALSE}
 library(tidyverse) # `map_data()` from ggplot2
@@ -100,6 +128,8 @@ title(main = "Washington State Cities")
 ```
 
 ## `usmap` is compatible with ggplot
+
+Let's fill each county based on its population.
 
 ```{r message=FALSE}
 library(tidyverse)
@@ -170,13 +200,15 @@ plot_4
 
 Use `geom_sf()` function with SF data.
 
+Let's fill each census tract by median household income.
+
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse) # `geom_sf()` from ggplot2
 library(tidycensus) # `get_acs()` function for American Community Survey data
 
 wa_income <- get_acs(
   geography = "tract", 
-  variables = "B19013_001", # Income key 
+  variables = "B19013_001", # Median income code
   state = "WA", 
   year = 2022,
   geometry = TRUE
