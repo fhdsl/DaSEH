@@ -331,7 +331,7 @@ D) All of the above
 
 ## Gut Check 
 
-Where does code go typcially in an Rmd file?
+Where does code go typically in an Rmd file?
 
 ```{r, fig.alt="help_pane", out.width = "90%", echo = FALSE, fig.align='center'}
 knitr::include_graphics("images/where_code_gut_check.png")
