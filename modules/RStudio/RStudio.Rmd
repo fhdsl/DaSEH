@@ -328,6 +328,15 @@ B) They let you view the output of your code
 C) They let you genearate cool reports 
 D) All of the above
 
+## Gut Check
+
+Which button do you click to run the code in a current chunk?
+
+```{r, fig.alt="help_pane", out.width = "90%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/chunk_gut_check.png")
+```
+
+
 ## Summary
 
 -  RStudio makes working in R easier
