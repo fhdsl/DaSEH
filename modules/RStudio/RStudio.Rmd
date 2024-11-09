@@ -326,7 +326,7 @@ Why are R Markdown files so useful?
 
 A) They let you test your code
 B) They let you view the output of your code
-C) They let you genearate cool reports 
+C) They let you generate cool reports 
 D) All of the above
 
 ## Gut Check 
