@@ -82,6 +82,6 @@ Create another R Markdown Document from RStudio dropdowns: File → New File →
 
 ### P.3 
 
-Add a new header with two hash symbols `##` at the start of a line with some text. Knit the report to see how it looks.
+Add a new header with two hash symbols `##` at the start of a line with some text. Knit the report to see how it looks. 
 
 ## New Header
