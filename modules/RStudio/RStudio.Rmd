@@ -30,6 +30,7 @@ knitr::include_graphics("https://d33wubrfki0l68.cloudfront.net/62bcc8535a0607709
 
 <sub>[[source](https://www.rstudio.com/)]</sub>
 
+RStudio used to be the name of a company that is now called [Posit](https://posit.co/).
 
 
 ## RStudio
@@ -81,7 +82,7 @@ knitr::include_graphics("images/new_pane.png")
 
 ## RStudio
 
-Super useful "cheat sheet": [LINK](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
+Super useful "cheatsheet": [LINK](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
 
 ```{r, fig.alt="RStudio", out.width = "65%", echo = FALSE, fig.align='center'}
 knitr::include_graphics("images/rstudio_sheet.png")
@@ -348,8 +349,8 @@ knitr::include_graphics("images/chunk_gut_check.png")
 
 🏠 [Class Website](https://daseh.org/). 
 💻 [Lab](https://daseh.org/modules/RStudio/lab/RStudio_Lab.Rmd). 
-🗒 [Rstudio Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf). 
-🗒 [Day 1 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-1.pdf). 
+📃 [Posit Cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf). 
+📃 [Day 1 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-1.pdf). 
 
 ```{r, fig.alt="The End", out.width = "25%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
