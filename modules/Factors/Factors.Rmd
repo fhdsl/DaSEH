@@ -58,7 +58,7 @@ knitr::include_graphics("https://github.com/tidyverse/forcats/raw/main/man/figur
 
 Both can change a variable to be of class factor.
 
-- `factor()` will order **alphabetically** unless told otherwise.
+- `factor()` will order **alphanumerically** unless told otherwise.
 - `as_factor()` will  order by **first appearance** unless told otherwise.
 
 If you are assigning your levels manually either function is fine!
@@ -94,7 +94,7 @@ head(er_visits_age)
 
 Notice that `age` is a `chr` variable. This indicates that the values are **character** strings.
 
-R does not realize that there is any order related to the `AGE` values. It will assume that it is **alphabetical** (for numbers, this means ascending order).
+R does not realize that there is any order related to the `AGE` values. It will assume that it is **alphanumeric** (for numbers, this means ascending order).
 
 However, we know that the order is: **0-4 years old**, **5-14 years old**, **15-34 years old**, **35-64 years old**, and **65+ years old**.
 
@@ -128,7 +128,7 @@ Currently `age` is class `character` but let's change that to class `factor` whi
 er_visits_age_fct <-
   er_visits_age_subset %>%
   mutate(age = factor(age,
-    levels = c("0-4 years old", "5-14 years old", "15-34 years old", "35-64 years old", "65+ years old")
+    levels = c("0-4 years", "5-14 years", "15-34 years", "35-64 years", "65+ years")
   ))
 
 er_visits_age_fct %>%
@@ -155,7 +155,7 @@ er_visits_age_fct %>%
 
 Now that's more like it! Notice how the data is automatically plotted in the order we would like.
 
-## What about if we `arrange()` the data by grade ?{.smaller}
+## What about if we `arrange()` the data by age?{.smaller}
 
 Character data is arranged alphabetically (if letters) or by ascending first number (if numbers).
 
@@ -248,7 +248,7 @@ er_visits_age_fct %>%
   theme_bw(base_size = 12)
 ```
 
-## forcats for ordering.. can be used to sort datasets
+## forcats for ordering... can be used to sort datasets
 
 ```{r, fig.height= 3, warning=FALSE}
 er_visits_age_fct %>% pull(age) %>% levels() # By year order
@@ -270,19 +270,34 @@ er_visits_age_fct %>%
   fct_count(prop = TRUE)
 ```
 
+## GUT CHECK: Why is it useful to have the factor class as an option?
+
+A. It helps us check the factual accuracy of our datasets. 
+
+B. It helps us change the order of variables in case the order has meaning.
+
+## GUT CHECK: What does the `fct_reorder()` function do?
+
+A. It helps us reorder a factor based on the values of another variable.
+
+B. It helps us reorder a factor based on a random change in the order.
+
 ## Summary
 - the factor class allows us to have a different order from alphanumeric for categorical data
 - we can change data to be a factor variable using `mutate` and a factor creating function like `factor()` or `as_factor`
 - the `as_factor()` is from the  `forcats` package (first appearance order by default)
-- the `factor()` base R function (alphabetical order by default)
+- the `factor()` base R function (alphanumeric order by default)
 - with `factor()` we can specify the levels with the `levels` argument if we want a specific order
 - the `fct_reorder({variable_to_reorder}, {variable_to_order_by}, {summary function})` helps us reorder a variable by the values of another variable
 - arranging, tabulating, and plotting the data will reflect the new order
 
+
 ## Lab
 
 🏠 [Class Website](https://daseh.org/)    
-💻 [Lab](https://daseh.org/modules//Factors/lab/Factors_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules//Factors/lab/Factors_Lab.Rmd). 
+📃[Day 6 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-6.pdf) 
+📃[Posit's forcats cheatsheet](https://rstudio.github.io/cheatsheets/factors.pdf)
 
 ```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))

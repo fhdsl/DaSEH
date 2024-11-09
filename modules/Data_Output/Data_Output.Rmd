@@ -63,6 +63,17 @@ write_delim(dat, file = "CO_ER_heat_newNames.csv", delim = ",")
 ```
 
 
+## GUT CHECK!
+
+What does `write_csv()` do? Saves data to..
+
+A. R's memory
+
+B. A file on your hard drive
+
+C. A ggplot
+
+
 ## R binary file
 
 `.rds` is an extension for R native file format.
@@ -110,6 +121,21 @@ knitr::include_graphics(here::here("images/subset_objects_in_environment.png"))
 knitr::include_graphics(here::here("images/save_environment.png"))
 ```
 
+
+## REMINDER: Saving a ggplot to file
+
+A few options:
+
+-   RStudio \> Plots \> Export \> Save as image / Save as PDF
+-   RStudio \> Plots \> Zoom \> [right mouse click on the plot] \> Save image as
+-   In the code
+
+```{r, eval = FALSE}
+ggsave(filename = "saved_plot.png",  # will save in working directory
+       plot = rp_fac_plot,
+       width = 6, height = 3.5)               # by default in inches
+```
+
 ## Summary {.small}
 
 - Use `write_csv()` and `write_delim()` from the `readr` package to write your (modified) data
@@ -120,7 +146,11 @@ knitr::include_graphics(here::here("images/save_environment.png"))
 
 💻 [Data Output Lab](https://daseh.org/modules/Data_Output/lab/Data_Output_Lab.Rmd)
 
-```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
+📃 [Posit's Data Import Cheatsheet](https://rstudio.github.io/cheatsheets/data-import.pdf)
+
+📃 [Day 8 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)
+
+```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
 

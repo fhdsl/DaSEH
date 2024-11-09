@@ -168,37 +168,35 @@ pre code {
 <p>In this lab you can use the interactive console to explore but please record your commands here. Remember anything you type here can be “sent” to the console with Cmd-Enter (OS-X) or Ctrl-Enter (Windows/Linux) (But only inside the code chunks designated with the <code>{r}</code> areas).</p>
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
-<p>First let’s load our packages.</p>
+<p>First let’s load our packages. We’re going to be using the <code>dplyr</code> package, which you can load as part of the <code>tidyverse</code> package.</p>
 <pre class="r"><code># don&#39;t forget to load the packages that you will need!
-library(dplyr)
 library(tidyverse)</code></pre>
 <p>We’ll again work with the CalEnviroScreen dataset, which contains information about environmental factors associated with human health in California.</p>
 <p>First, load the data from the website, either manually or by using the Data Import menu (find it by clicking on File).</p>
 <pre class="r"><code>ces &lt;- read_csv(file = &quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;)</code></pre>
-<pre><code>## New names:
-## Rows: 8035 Columns: 68
-## ── Column specification
-## ──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
-## (3): CaliforniaCounty, ApproxLocation, CES4.0PercRange dbl (65): ...1,
-## CensusTract, ZIP, Longitude, Latitude, CES4.0Score, CES4.0Pe...
-## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
-## Specify the column types or set `show_col_types = FALSE` to quiet this message.
-## • `` -&gt; `...1`</code></pre>
+<pre><code>## Rows: 8035 Columns: 67
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (3): CaliforniaCounty, ApproxLocation, CES4.0PercRange
+## dbl (64): CensusTract, ZIP, Longitude, Latitude, CES4.0Score, CES4.0Percenti...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>Check that it worked by seeing if you have the <code>ces</code> data.</p>
 <pre class="r"><code>ces</code></pre>
-<pre><code>## # A tibble: 8,035 × 68
-##     ...1 CensusTract CaliforniaCounty   ZIP Longitude Latitude ApproxLocation
-##    &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
-##  1     1  6001400100 Alameda          94704     -122.     37.9 Oakland       
-##  2     2  6001400200 Alameda          94618     -122.     37.8 Oakland       
-##  3     3  6001400300 Alameda          94618     -122.     37.8 Oakland       
-##  4     4  6001400400 Alameda          94609     -122.     37.8 Oakland       
-##  5     5  6001400500 Alameda          94609     -122.     37.8 Oakland       
-##  6     6  6001400600 Alameda          94609     -122.     37.8 Oakland       
-##  7     7  6001400700 Alameda          94608     -122.     37.8 Oakland       
-##  8     8  6001400800 Alameda          94608     -122.     37.8 Oakland       
-##  9     9  6001400900 Alameda          94608     -122.     37.8 Oakland       
-## 10    10  6001401000 Alameda          94608     -122.     37.8 Oakland       
+<pre><code>## # A tibble: 8,035 × 67
+##    CensusTract CaliforniaCounty   ZIP Longitude Latitude ApproxLocation
+##          &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
+##  1  6001400100 Alameda          94704     -122.     37.9 Oakland       
+##  2  6001400200 Alameda          94618     -122.     37.8 Oakland       
+##  3  6001400300 Alameda          94618     -122.     37.8 Oakland       
+##  4  6001400400 Alameda          94609     -122.     37.8 Oakland       
+##  5  6001400500 Alameda          94609     -122.     37.8 Oakland       
+##  6  6001400600 Alameda          94609     -122.     37.8 Oakland       
+##  7  6001400700 Alameda          94608     -122.     37.8 Oakland       
+##  8  6001400800 Alameda          94608     -122.     37.8 Oakland       
+##  9  6001400900 Alameda          94608     -122.     37.8 Oakland       
+## 10  6001401000 Alameda          94608     -122.     37.8 Oakland       
 ## # ℹ 8,025 more rows
 ## # ℹ 61 more variables: CES4.0Score &lt;dbl&gt;, CES4.0Percentile &lt;dbl&gt;,
 ## #   CES4.0PercRange &lt;chr&gt;, Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;,
@@ -216,29 +214,29 @@ library(tidyverse)</code></pre>
 <h3>1.2</h3>
 <p>How many observations (rows) and variables (columns) are in the dataset - try the <code>dim()</code> function?</p>
 <pre class="r"><code>dim(ces)</code></pre>
-<pre><code>## [1] 8035   68</code></pre>
+<pre><code>## [1] 8035   67</code></pre>
 <pre class="r"><code>nrow(ces)</code></pre>
 <pre><code>## [1] 8035</code></pre>
 <pre class="r"><code>ncol(ces)</code></pre>
-<pre><code>## [1] 68</code></pre>
+<pre><code>## [1] 67</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
 <p>Next, rename the column <code>CaliforniaCounty</code> to <code>CA_county</code> (hint - use <code>rename()</code> and watch out for the order of the new and old names!).</p>
 <pre class="r"><code>ces&lt;- rename(ces, CA_county = CaliforniaCounty)
 head(ces)</code></pre>
-<pre><code>## # A tibble: 6 × 68
-##    ...1 CensusTract CA_county   ZIP Longitude Latitude ApproxLocation
-##   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
-## 1     1  6001400100 Alameda   94704     -122.     37.9 Oakland       
-## 2     2  6001400200 Alameda   94618     -122.     37.8 Oakland       
-## 3     3  6001400300 Alameda   94618     -122.     37.8 Oakland       
-## 4     4  6001400400 Alameda   94609     -122.     37.8 Oakland       
-## 5     5  6001400500 Alameda   94609     -122.     37.8 Oakland       
-## 6     6  6001400600 Alameda   94609     -122.     37.8 Oakland       
-## # ℹ 61 more variables: CES4.0Score &lt;dbl&gt;, CES4.0Percentile &lt;dbl&gt;,
-## #   CES4.0PercRange &lt;chr&gt;, Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;,
-## #   PM2.5.Pctl &lt;dbl&gt;, DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
+<pre><code>## # A tibble: 6 × 67
+##   CensusTract CA_county   ZIP Longitude Latitude ApproxLocation CES4.0Score
+##         &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+## 1  6001400100 Alameda   94704     -122.     37.9 Oakland               4.85
+## 2  6001400200 Alameda   94618     -122.     37.8 Oakland               4.88
+## 3  6001400300 Alameda   94618     -122.     37.8 Oakland              11.2 
+## 4  6001400400 Alameda   94609     -122.     37.8 Oakland              12.4 
+## 5  6001400500 Alameda   94609     -122.     37.8 Oakland              16.7 
+## 6  6001400600 Alameda   94609     -122.     37.8 Oakland              20.0 
+## # ℹ 60 more variables: CES4.0Percentile &lt;dbl&gt;, CES4.0PercRange &lt;chr&gt;,
+## #   Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;, PM2.5.Pctl &lt;dbl&gt;,
+## #   DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
 ## #   DrinkingWaterPctl &lt;dbl&gt;, Lead &lt;dbl&gt;, LeadPctl &lt;dbl&gt;, Pesticides &lt;dbl&gt;,
 ## #   PesticidesPctl &lt;dbl&gt;, ToxRelease &lt;dbl&gt;, ToxReleasePctl &lt;dbl&gt;,
 ## #   Traffic &lt;dbl&gt;, TrafficPctl &lt;dbl&gt;, CleanupSites &lt;dbl&gt;,
@@ -249,24 +247,24 @@ head(ces)</code></pre>
 <p>Convert the column names of <code>ces</code> to be all upper case. Use <code>rename_with()</code>, and the <code>toupper</code> command. Save this as a new dataset called <code>ces_upper</code>.</p>
 <pre class="r"><code>ces_upper &lt;- rename_with(ces, toupper)
 head(ces_upper)</code></pre>
-<pre><code>## # A tibble: 6 × 68
-##    ...1 CENSUSTRACT CA_COUNTY   ZIP LONGITUDE LATITUDE APPROXLOCATION
-##   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
-## 1     1  6001400100 Alameda   94704     -122.     37.9 Oakland       
-## 2     2  6001400200 Alameda   94618     -122.     37.8 Oakland       
-## 3     3  6001400300 Alameda   94618     -122.     37.8 Oakland       
-## 4     4  6001400400 Alameda   94609     -122.     37.8 Oakland       
-## 5     5  6001400500 Alameda   94609     -122.     37.8 Oakland       
-## 6     6  6001400600 Alameda   94609     -122.     37.8 Oakland       
-## # ℹ 61 more variables: CES4.0SCORE &lt;dbl&gt;, CES4.0PERCENTILE &lt;dbl&gt;,
-## #   CES4.0PERCRANGE &lt;chr&gt;, OZONE &lt;dbl&gt;, OZONEPCTL &lt;dbl&gt;, PM2.5 &lt;dbl&gt;,
-## #   PM2.5.PCTL &lt;dbl&gt;, DIESELPM &lt;dbl&gt;, DIESELPMPCTL &lt;dbl&gt;, DRINKINGWATER &lt;dbl&gt;,
+<pre><code>## # A tibble: 6 × 67
+##   CENSUSTRACT CA_COUNTY   ZIP LONGITUDE LATITUDE APPROXLOCATION CES4.0SCORE
+##         &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+## 1  6001400100 Alameda   94704     -122.     37.9 Oakland               4.85
+## 2  6001400200 Alameda   94618     -122.     37.8 Oakland               4.88
+## 3  6001400300 Alameda   94618     -122.     37.8 Oakland              11.2 
+## 4  6001400400 Alameda   94609     -122.     37.8 Oakland              12.4 
+## 5  6001400500 Alameda   94609     -122.     37.8 Oakland              16.7 
+## 6  6001400600 Alameda   94609     -122.     37.8 Oakland              20.0 
+## # ℹ 60 more variables: CES4.0PERCENTILE &lt;dbl&gt;, CES4.0PERCRANGE &lt;chr&gt;,
+## #   OZONE &lt;dbl&gt;, OZONEPCTL &lt;dbl&gt;, PM2.5 &lt;dbl&gt;, PM2.5.PCTL &lt;dbl&gt;,
+## #   DIESELPM &lt;dbl&gt;, DIESELPMPCTL &lt;dbl&gt;, DRINKINGWATER &lt;dbl&gt;,
 ## #   DRINKINGWATERPCTL &lt;dbl&gt;, LEAD &lt;dbl&gt;, LEADPCTL &lt;dbl&gt;, PESTICIDES &lt;dbl&gt;,
 ## #   PESTICIDESPCTL &lt;dbl&gt;, TOXRELEASE &lt;dbl&gt;, TOXRELEASEPCTL &lt;dbl&gt;,
 ## #   TRAFFIC &lt;dbl&gt;, TRAFFICPCTL &lt;dbl&gt;, CLEANUPSITES &lt;dbl&gt;,
 ## #   CLEANUPSITESPCTL &lt;dbl&gt;, GROUNDWATERTHREATS &lt;dbl&gt;, …</code></pre>
 <pre class="r"><code>dim(ces_upper)</code></pre>
-<pre><code>## [1] 8035   68</code></pre>
+<pre><code>## [1] 8035   67</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
@@ -275,29 +273,29 @@ head(ces_upper)</code></pre>
 <h3>P.1</h3>
 <p>How can you print the first 3 rows and the last 3 rows of <code>ces</code> (in two lines of code)?</p>
 <pre class="r"><code>head(ces, 3)</code></pre>
-<pre><code>## # A tibble: 3 × 68
-##    ...1 CensusTract CA_county   ZIP Longitude Latitude ApproxLocation
-##   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
-## 1     1  6001400100 Alameda   94704     -122.     37.9 Oakland       
-## 2     2  6001400200 Alameda   94618     -122.     37.8 Oakland       
-## 3     3  6001400300 Alameda   94618     -122.     37.8 Oakland       
-## # ℹ 61 more variables: CES4.0Score &lt;dbl&gt;, CES4.0Percentile &lt;dbl&gt;,
-## #   CES4.0PercRange &lt;chr&gt;, Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;,
-## #   PM2.5.Pctl &lt;dbl&gt;, DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
+<pre><code>## # A tibble: 3 × 67
+##   CensusTract CA_county   ZIP Longitude Latitude ApproxLocation CES4.0Score
+##         &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+## 1  6001400100 Alameda   94704     -122.     37.9 Oakland               4.85
+## 2  6001400200 Alameda   94618     -122.     37.8 Oakland               4.88
+## 3  6001400300 Alameda   94618     -122.     37.8 Oakland              11.2 
+## # ℹ 60 more variables: CES4.0Percentile &lt;dbl&gt;, CES4.0PercRange &lt;chr&gt;,
+## #   Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;, PM2.5.Pctl &lt;dbl&gt;,
+## #   DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
 ## #   DrinkingWaterPctl &lt;dbl&gt;, Lead &lt;dbl&gt;, LeadPctl &lt;dbl&gt;, Pesticides &lt;dbl&gt;,
 ## #   PesticidesPctl &lt;dbl&gt;, ToxRelease &lt;dbl&gt;, ToxReleasePctl &lt;dbl&gt;,
 ## #   Traffic &lt;dbl&gt;, TrafficPctl &lt;dbl&gt;, CleanupSites &lt;dbl&gt;,
 ## #   CleanupSitesPctl &lt;dbl&gt;, GroundwaterThreats &lt;dbl&gt;, …</code></pre>
 <pre class="r"><code>tail(ces, 3)</code></pre>
-<pre><code>## # A tibble: 3 × 68
-##    ...1 CensusTract CA_county   ZIP Longitude Latitude ApproxLocation           
-##   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                    
-## 1  8033  6115040902 Yuba      95901     -121.     39.1 Unincorporated Yuba Coun…
-## 2  8034  6115041000 Yuba      95901     -121.     39.3 Unincorporated Yuba Coun…
-## 3  8035  6115041100 Yuba      95925     -121.     39.5 Unincorporated Yuba Coun…
-## # ℹ 61 more variables: CES4.0Score &lt;dbl&gt;, CES4.0Percentile &lt;dbl&gt;,
-## #   CES4.0PercRange &lt;chr&gt;, Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;,
-## #   PM2.5.Pctl &lt;dbl&gt;, DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
+<pre><code>## # A tibble: 3 × 67
+##   CensusTract CA_county   ZIP Longitude Latitude ApproxLocation      CES4.0Score
+##         &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;
+## 1  6115040902 Yuba      95901     -121.     39.1 Unincorporated Yub…        18.7
+## 2  6115041000 Yuba      95901     -121.     39.3 Unincorporated Yub…        22.0
+## 3  6115041100 Yuba      95925     -121.     39.5 Unincorporated Yub…        11.7
+## # ℹ 60 more variables: CES4.0Percentile &lt;dbl&gt;, CES4.0PercRange &lt;chr&gt;,
+## #   Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;, PM2.5.Pctl &lt;dbl&gt;,
+## #   DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
 ## #   DrinkingWaterPctl &lt;dbl&gt;, Lead &lt;dbl&gt;, LeadPctl &lt;dbl&gt;, Pesticides &lt;dbl&gt;,
 ## #   PesticidesPctl &lt;dbl&gt;, ToxRelease &lt;dbl&gt;, ToxReleasePctl &lt;dbl&gt;,
 ## #   Traffic &lt;dbl&gt;, TrafficPctl &lt;dbl&gt;, CleanupSites &lt;dbl&gt;,
@@ -427,23 +425,23 @@ nrow(ces_sub)</code></pre>
 <p>Subset the rows of <code>ces</code> for rows that have <code>CA_county</code> of “Los Angeles”, <strong>or</strong> a <code>Traffic</code> value <strong>less</strong> than 300.</p>
 <p>How many rows have both?</p>
 <pre class="r"><code>filter(ces, CA_county == &quot;Los Angeles&quot; | Traffic &lt; 300)</code></pre>
-<pre><code>## # A tibble: 2,943 × 68
-##     ...1 CensusTract CA_county   ZIP Longitude Latitude ApproxLocation
-##    &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;         
-##  1    18  6001401800 Alameda   94607     -122.     37.8 Oakland       
-##  2    20  6001402400 Alameda   94607     -122.     37.8 Oakland       
-##  3    47  6001404800 Alameda   94602     -122.     37.8 Oakland       
-##  4    56  6001405500 Alameda   94606     -122.     37.8 Oakland       
-##  5    59  6001405800 Alameda   94606     -122.     37.8 Oakland       
-##  6    82  6001407700 Alameda   94619     -122.     37.8 Oakland       
-##  7   101  6001409600 Alameda   94621     -122.     37.8 Oakland       
-##  8   102  6001409700 Alameda   94605     -122.     37.8 Oakland       
-##  9   111  6001420100 Alameda   94706     -122.     37.9 Albany        
-## 10   117  6001421100 Alameda   94708     -122.     37.9 Berkeley      
+<pre><code>## # A tibble: 2,943 × 67
+##    CensusTract CA_county   ZIP Longitude Latitude ApproxLocation CES4.0Score
+##          &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+##  1  6001401800 Alameda   94607     -122.     37.8 Oakland              45.1 
+##  2  6001402400 Alameda   94607     -122.     37.8 Oakland              37.3 
+##  3  6001404800 Alameda   94602     -122.     37.8 Oakland              14.3 
+##  4  6001405500 Alameda   94606     -122.     37.8 Oakland              28.4 
+##  5  6001405800 Alameda   94606     -122.     37.8 Oakland              28.8 
+##  6  6001407700 Alameda   94619     -122.     37.8 Oakland              15.7 
+##  7  6001409600 Alameda   94621     -122.     37.8 Oakland              32.3 
+##  8  6001409700 Alameda   94605     -122.     37.8 Oakland              21.8 
+##  9  6001420100 Alameda   94706     -122.     37.9 Albany                6.52
+## 10  6001421100 Alameda   94708     -122.     37.9 Berkeley              3.28
 ## # ℹ 2,933 more rows
-## # ℹ 61 more variables: CES4.0Score &lt;dbl&gt;, CES4.0Percentile &lt;dbl&gt;,
-## #   CES4.0PercRange &lt;chr&gt;, Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;,
-## #   PM2.5.Pctl &lt;dbl&gt;, DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
+## # ℹ 60 more variables: CES4.0Percentile &lt;dbl&gt;, CES4.0PercRange &lt;chr&gt;,
+## #   Ozone &lt;dbl&gt;, OzonePctl &lt;dbl&gt;, PM2.5 &lt;dbl&gt;, PM2.5.Pctl &lt;dbl&gt;,
+## #   DieselPM &lt;dbl&gt;, DieselPMPctl &lt;dbl&gt;, DrinkingWater &lt;dbl&gt;,
 ## #   DrinkingWaterPctl &lt;dbl&gt;, Lead &lt;dbl&gt;, LeadPctl &lt;dbl&gt;, Pesticides &lt;dbl&gt;,
 ## #   PesticidesPctl &lt;dbl&gt;, ToxRelease &lt;dbl&gt;, ToxReleasePctl &lt;dbl&gt;,
 ## #   Traffic &lt;dbl&gt;, TrafficPctl &lt;dbl&gt;, CleanupSites &lt;dbl&gt;, …</code></pre>

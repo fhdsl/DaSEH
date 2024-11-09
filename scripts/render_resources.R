@@ -51,6 +51,7 @@ if (length(res_files_md) != 0) {
 
 # Excluding the parent file, "resources.Rmd"
 res_files_Rmd <- res_files_Rmd[res_files_Rmd != "resources.Rmd"]
+res_files_Rmd <- res_files_Rmd[res_files_Rmd != "resources/Mapping.Rmd"] # Exclude for now
 
 # Check if any .Rmd files at all
 if (length(res_files_Rmd) != 0)
