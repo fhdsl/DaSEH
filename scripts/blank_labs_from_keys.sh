@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-find modules/ -type f -name "*_Key.Rmd" -print0 | while IFS= read -r -d '' file; do    # Remove Rmarkdown chunk content
-    # !! Note that the chunks must be named, with the name ending with "response" 
+find modules/ -type f ! -name "*RStudio*" -name "*_Key.Rmd" -print0 | while IFS= read -r -d '' file; do    # !! Note that the chunks must be named, with the name ending with "response" 
     # to be cleared. This prevents unwanted erasure of library loading and knitr
     # options. EG, a chunk set to be cleared would look like:
     #```{r 1.1response}

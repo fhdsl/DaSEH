@@ -63,10 +63,6 @@ x <- c(1, 2, 3)
 
 <!-- Your code chunk goes here -->
 
-```{r}
-x 
-```
-
 
 # Practice on Your Own!
 
@@ -84,4 +80,3 @@ Create another R Markdown Document from RStudio dropdowns: File → New File →
 
 Add a new header with two hash symbols `##` at the start of a line with some text. Knit the report to see how it looks. 
 
-## New Header
