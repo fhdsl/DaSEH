@@ -290,7 +290,6 @@ Let's map ER visit rates for four CO counties on the same plot
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
 
-set.seed(123)
 er_visits_4 <- er %>% 
   filter(county %in% c("Denver", "Weld", "Pueblo", "Jackson"))
 
@@ -456,20 +455,6 @@ er_visits_4 %>% ggplot(aes(x = year,
 ```
 
 
-
-## Summary
-
--   `ggplot()` specifies what data use and what variables will be mapped to where
--   inside `ggplot()`, `aes(x = , y = , color =)` specify what variables correspond to what aspects of the plot in general
--   layers of plots can be combined using the `+` at the **end** of lines
--   special [`theme_*()` functions](https://ggplot2.tidyverse.org/reference/ggtheme.html) can change the overall look
--   individual layers can be customized using arguments like: `size`, `color` `alpha` (more transparent is closer to 0), and `linetype`
--   labels can be added with the `labs()` function and `x`, `y`, `title` arguments
-<!-- -   the `\n` can be used for line breaks -->
-<!-- -   `xlim()` and `ylim()` can limit or expand the plot area -->
--   `scale_x_continuous()` and `scale_y_continuous()` can modify the scale of the axes
--   by default, `ggplot()` removes points with missing values from plots.
-
 ## GUT CHECK: If we get an empty plot what might we need to do?
 
 A. Add a `plot_` layer like `plot_point()`
@@ -485,10 +470,26 @@ B. `&`
 
 C. `+`
 
+## Summary
+
+-   `ggplot()` specifies what data use and what variables will be mapped to where
+-   inside `ggplot()`, `aes(x = , y = , color =)` specify what variables correspond to what aspects of the plot in general
+-   layers of plots can be combined using the `+` at the **end** of lines
+-   special [`theme_*()` functions](https://ggplot2.tidyverse.org/reference/ggtheme.html) can change the overall look
+-   individual layers can be customized using arguments like: `size`, `color` `alpha` (more transparent is closer to 0), and `linetype`
+-   labels can be added with the `labs()` function and `x`, `y`, `title` arguments
+<!-- -   the `\n` can be used for line breaks -->
+<!-- -   `xlim()` and `ylim()` can limit or expand the plot area -->
+-   `scale_x_continuous()` and `scale_y_continuous()` can modify the scale of the axes
+-   by default, `ggplot()` removes points with missing values from plots.
+
+
 ## Lab 1
 
-🏠 [Class Website](https://daseh.org/)
+🏠 [Class Website](https://daseh.org/) 
+
 💻 [Lab](https://daseh.org/modules//Data_Visualization/lab/Data_Visualization_Lab.Rmd) 
+
 📃[Day 6 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-6.pdf)
 
 ## theme() function:
@@ -959,10 +960,10 @@ Great for combining plots together
 
 Also check out the [`patchwork` package](https://patchwork.data-imaginist.com/)
 
-```{r, out.width= "80%", fig.align='center'}
+```{r, out.width= "55%", fig.align='center'}
 #install.packages("patchwork")
 library(patchwork)
-lots_of_lines + rp_fac_plot
+lots_of_lines + er_bar
 
 ```
 
@@ -1014,12 +1015,15 @@ Check out this [guide](https://jhudatascience.org/tidyversecourse/dataviz.html#m
 
 ## Lab 2
 
-🏠 [Class Website](https://daseh.org/)\
+🏠 [Class Website](https://daseh.org/) 
+
 💻 [Lab](https://daseh.org/modules//Data_Visualization/lab/Data_Visualization_Lab.Rmd)
+
 📃[Day 6 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-6.pdf) 
+
 📃[Posit's theme cheatsheet](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf) 
 
-```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
+```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
 
