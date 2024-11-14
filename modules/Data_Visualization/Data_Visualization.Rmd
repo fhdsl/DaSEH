@@ -290,7 +290,6 @@ Let's map ER visit rates for four CO counties on the same plot
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
 
-set.seed(123)
 er_visits_4 <- er %>% 
   filter(county %in% c("Denver", "Weld", "Pueblo", "Jackson"))
 
