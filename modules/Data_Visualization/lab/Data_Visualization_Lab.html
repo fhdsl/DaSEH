@@ -167,10 +167,8 @@ pre code {
 
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
-<p>Load the libraries</p>
-<pre class="r"><code>library(readr)
-library(ggplot2)
-library(dplyr)</code></pre>
+<p>Load the packages.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
 <p>Load the CalEnviroScreen data from the link www.daseh.org/data/CalEnviroScreen_data.csv) and subset it so that you only have data from Fresno, Merced, Placer, Sonoma, and Yolo counties.</p>
 <pre class="r"><code>ces &lt;- read_csv(&quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;)</code></pre>
 <pre><code>## Rows: 8035 Columns: 67
@@ -181,7 +179,7 @@ library(dplyr)</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>ces_sub &lt;- ces %&gt;% filter(CaliforniaCounty == c(&quot;Fresno&quot;, &quot;Merced&quot;, &quot;Placer&quot;, &quot;Sonoma&quot;, &quot;Yolo&quot;))</code></pre>
+<pre class="r"><code>ces_sub &lt;- ces %&gt;% filter(CaliforniaCounty %in% c(&quot;Fresno&quot;, &quot;Merced&quot;, &quot;Placer&quot;, &quot;Sonoma&quot;, &quot;Yolo&quot;))</code></pre>
 <div id="section" class="section level3">
 <h3>1.1</h3>
 <p>Use the <code>ggplot2</code> package to make a plot of how diesel particulate concentration (<code>DieselPM</code>; y-axis) is associated with traffic density values (<code>Traffic</code>; x-axis). You can use lines layer (<code>+ geom_line()</code>) or points layer (<code>+ geom_point()</code>), or both!</p>
@@ -194,7 +192,7 @@ ggplot(???, aes(x = ???, y = ???)) +
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
-<p>“Update” your plot by adding a title and changing the x and y axis titles.</p>
+<p>“Update” your plot by adding a title and changing the x and y axis titles. (Hint: use the <code>labs</code> function.)</p>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
@@ -223,7 +221,7 @@ my_plot + theme_bw()</code></pre>
 <div id="section-4" class="section level3">
 <h3>2.1</h3>
 <p>Let’s look at the plot of traffic density and diesel particulate matter again,</p>
-<p>Use <code>ggplot2</code> package make plot of how diesel particulate concentration (<code>DieselPM</code>; y-axis) is associated with traffic density values (<code>Traffic</code>; x-axis), where each county (<code>CaliforniaCounty</code>) has a different color (hint: use <code>color = type</code> in mapping).</p>
+<p>Use <code>ggplot2</code> package make plot of how diesel particulate concentration (<code>DieselPM</code>; y-axis) is associated with traffic density values (<code>Traffic</code>; x-axis), where each county (<code>CaliforniaCounty</code>) has a different color (hint: use <code>color = CaliforniaCounty</code> in mapping).</p>
 <pre><code># General format
 ggplot(???, aes(
   x = ???,
@@ -235,8 +233,9 @@ ggplot(???, aes(
 </div>
 <div id="section-5" class="section level3">
 <h3>2.2</h3>
-<p>Redo the above plot by adding a faceting (<code>+ facet_wrap( ~ CaliforniaCounty, ncol = 3)</code>) to have data for quarter in a separate plot panel.</p>
+<p>Redo the above plot by adding a faceting (<code>+ facet_wrap( ~ CaliforniaCounty, nrow = 3)</code>) to have data for quarter in a separate plot panel.</p>
 <p>Assign the new plot as an object called <code>facet_plot</code>.</p>
+<p>Try adjusting the number of rows in the <code>facet_wrap</code> to see how this changes the plot.</p>
 </div>
 <div id="section-6" class="section level3">
 <h3>2.3</h3>
