@@ -52,7 +52,7 @@ my_plot
 
 ### 1.2
 
-"Update" your plot by adding a title and changing the x and y axis titles.
+"Update" your plot by adding a title and changing the x and y axis titles. (Hint: use the `labs` function.)
 
 ```{r 1.2response}
 my_plot <- my_plot +
