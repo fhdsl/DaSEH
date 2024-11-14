@@ -486,8 +486,10 @@ C. `+`
 
 ## Lab 1
 
-🏠 [Class Website](https://daseh.org/)
+🏠 [Class Website](https://daseh.org/) 
+
 💻 [Lab](https://daseh.org/modules//Data_Visualization/lab/Data_Visualization_Lab.Rmd) 
+
 📃[Day 6 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-6.pdf)
 
 ## theme() function:
@@ -958,10 +960,10 @@ Great for combining plots together
 
 Also check out the [`patchwork` package](https://patchwork.data-imaginist.com/)
 
-```{r, out.width= "80%", fig.align='center'}
+```{r, out.width= "55%", fig.align='center'}
 #install.packages("patchwork")
 library(patchwork)
-lots_of_lines + rp_fac_plot
+lots_of_lines + er_bar
 
 ```
 
@@ -1013,12 +1015,15 @@ Check out this [guide](https://jhudatascience.org/tidyversecourse/dataviz.html#m
 
 ## Lab 2
 
-🏠 [Class Website](https://daseh.org/)\
+🏠 [Class Website](https://daseh.org/) 
+
 💻 [Lab](https://daseh.org/modules//Data_Visualization/lab/Data_Visualization_Lab.Rmd)
+
 📃[Day 6 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-6.pdf) 
+
 📃[Posit's theme cheatsheet](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf) 
 
-```{r, fig.alt="The End", out.width = "50%", echo = FALSE, fig.align='center'}
+```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
 
