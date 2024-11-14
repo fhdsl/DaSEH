@@ -21,7 +21,7 @@ Load the CalEnviroScreen data from  the link www.daseh.org/data/CalEnviroScreen_
 
 ```{r}
 ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
-ces_sub <- ces %>% filter(CaliforniaCounty == c("Fresno", "Merced", "Placer", "Sonoma", "Yolo"))
+ces_sub <- ces %>% filter(CaliforniaCounty %in% c("Fresno", "Merced", "Placer", "Sonoma", "Yolo"))
 ```
 
 ### 1.1
@@ -124,7 +124,7 @@ ces_sub %>%
 ### 2.1
 Let's look at the plot of traffic density and diesel particulate matter again,
 
-Use `ggplot2` package make plot of how diesel particulate concentration (`DieselPM`; y-axis) is associated with traffic density values (`Traffic`; x-axis), where each county (`CaliforniaCounty`) has a different color (hint: use `color = type` in mapping).
+Use `ggplot2` package make plot of how diesel particulate concentration (`DieselPM`; y-axis) is associated with traffic density values (`Traffic`; x-axis), where each county (`CaliforniaCounty`) has a different color (hint: use `color = CaliforniaCounty` in mapping).
 
 
 ```
@@ -150,10 +150,11 @@ ggplot(ces_sub, aes(
 
 ### 2.2
 
-Redo the above plot by adding a faceting  (`+ facet_wrap( ~ CaliforniaCounty, ncol = 3)`) to have data for quarter in a separate plot panel. 
-
+Redo the above plot by adding a faceting  (`+ facet_wrap( ~ CaliforniaCounty, nrow = 3)`) to have data for quarter in a separate plot panel. 
 
 Assign the new plot as an object called `facet_plot`.
+
+Try adjusting the number of rows in the `facet_wrap` to see how this changes the plot.
 
 ```{r 2.2response}
 
@@ -164,7 +165,7 @@ facet_plot <- ggplot(ces_sub, aes(
 )) +
   geom_line() +
   geom_point() +
-  facet_wrap(~CaliforniaCounty, ncol = 3)
+  facet_wrap(~CaliforniaCounty, nrow = 3)
 
 facet_plot
 ```
