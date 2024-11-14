@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Part 1
 
-Load the libraries
+Load the packages.
 
 ```{r, message=FALSE}
 library(tidyverse)
