@@ -11,19 +11,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Part 1
 
-Load the libraries
+Load the packages.
 
 ```{r, message=FALSE}
-library(readr)
-library(ggplot2)
-library(dplyr)
+library(tidyverse)
 ```
 
 Load the CalEnviroScreen data from  the link www.daseh.org/data/CalEnviroScreen_data.csv) and subset it so that you only have data from Fresno, Merced, Placer, Sonoma, and Yolo counties.
 
 ```{r}
 ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
-ces_sub <- ces %>% filter(CaliforniaCounty == c("Fresno", "Merced", "Placer", "Sonoma", "Yolo"))
+ces_sub <- ces %>% filter(CaliforniaCounty %in% c("Fresno", "Merced", "Placer", "Sonoma", "Yolo"))
 ```
 
 ### 1.1
@@ -48,7 +46,7 @@ ggplot(???, aes(x = ???, y = ???)) +
 
 ### 1.2
 
-"Update" your plot by adding a title and changing the x and y axis titles.
+"Update" your plot by adding a title and changing the x and y axis titles. (Hint: use the `labs` function.)
 
 ```{r 1.2response}
 
@@ -102,7 +100,7 @@ Create a boxplot (with the `geom_boxplot()` function) using the `ces_sub` data, 
 ### 2.1
 Let's look at the plot of traffic density and diesel particulate matter again,
 
-Use `ggplot2` package make plot of how diesel particulate concentration (`DieselPM`; y-axis) is associated with traffic density values (`Traffic`; x-axis), where each county (`CaliforniaCounty`) has a different color (hint: use `color = type` in mapping).
+Use `ggplot2` package make plot of how diesel particulate concentration (`DieselPM`; y-axis) is associated with traffic density values (`Traffic`; x-axis), where each county (`CaliforniaCounty`) has a different color (hint: use `color = CaliforniaCounty` in mapping).
 
 
 ```
@@ -122,10 +120,11 @@ ggplot(???, aes(
 
 ### 2.2
 
-Redo the above plot by adding a faceting  (`+ facet_wrap( ~ CaliforniaCounty, ncol = 3)`) to have data for quarter in a separate plot panel. 
-
+Redo the above plot by adding a faceting  (`+ facet_wrap( ~ CaliforniaCounty, nrow = 3)`) to have data for quarter in a separate plot panel. 
 
 Assign the new plot as an object called `facet_plot`.
+
+Try adjusting the number of rows in the `facet_wrap` to see how this changes the plot.
 
 ```{r 2.2response}
 
