@@ -455,20 +455,6 @@ er_visits_4 %>% ggplot(aes(x = year,
 ```
 
 
-
-## Summary
-
--   `ggplot()` specifies what data use and what variables will be mapped to where
--   inside `ggplot()`, `aes(x = , y = , color =)` specify what variables correspond to what aspects of the plot in general
--   layers of plots can be combined using the `+` at the **end** of lines
--   special [`theme_*()` functions](https://ggplot2.tidyverse.org/reference/ggtheme.html) can change the overall look
--   individual layers can be customized using arguments like: `size`, `color` `alpha` (more transparent is closer to 0), and `linetype`
--   labels can be added with the `labs()` function and `x`, `y`, `title` arguments
-<!-- -   the `\n` can be used for line breaks -->
-<!-- -   `xlim()` and `ylim()` can limit or expand the plot area -->
--   `scale_x_continuous()` and `scale_y_continuous()` can modify the scale of the axes
--   by default, `ggplot()` removes points with missing values from plots.
-
 ## GUT CHECK: If we get an empty plot what might we need to do?
 
 A. Add a `plot_` layer like `plot_point()`
@@ -483,6 +469,20 @@ A. `%>%`
 B. `&`
 
 C. `+`
+
+## Summary
+
+-   `ggplot()` specifies what data use and what variables will be mapped to where
+-   inside `ggplot()`, `aes(x = , y = , color =)` specify what variables correspond to what aspects of the plot in general
+-   layers of plots can be combined using the `+` at the **end** of lines
+-   special [`theme_*()` functions](https://ggplot2.tidyverse.org/reference/ggtheme.html) can change the overall look
+-   individual layers can be customized using arguments like: `size`, `color` `alpha` (more transparent is closer to 0), and `linetype`
+-   labels can be added with the `labs()` function and `x`, `y`, `title` arguments
+<!-- -   the `\n` can be used for line breaks -->
+<!-- -   `xlim()` and `ylim()` can limit or expand the plot area -->
+-   `scale_x_continuous()` and `scale_y_continuous()` can modify the scale of the axes
+-   by default, `ggplot()` removes points with missing values from plots.
+
 
 ## Lab 1
 
