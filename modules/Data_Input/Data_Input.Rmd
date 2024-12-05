@@ -22,13 +22,7 @@ pre { /* Code block - slightly smaller in this lecture */
 
 This course will involve moving files around on your computer and downloading files.
 
-If you are new to this - check out these videos.
-
-If you have a PC: https://youtu.be/we6vwB7DsNU
-
-If you have a Mac: https://www.youtube.com/watch?v=Ao9e0cDzMrE
-
-You can find these on the resource page of the website.
+If you are new to this - check out the videos on the resource page of the website.
 
 # R Projects
 
