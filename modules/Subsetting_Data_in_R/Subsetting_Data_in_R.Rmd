@@ -441,6 +441,12 @@ The `select` command from `dplyr` allows you to subset (still a `tibble`!)
 select(er_30, year)
 ```
 
+## GUT CHECK: What function would be useful for getting a vector version of a column?
+
+A. `pull()`
+
+B. `select()`
+
 ## Select multiple columns
 
 We can use `select` to select for multiple columns.
@@ -505,11 +511,6 @@ select(er_30, where(is.numeric))
 
 ```
 
-## GUT CHECK: What function would be useful for getting a vector version of a column?
-
-A. `pull()`
-
-B. `select()`
 
 
 
