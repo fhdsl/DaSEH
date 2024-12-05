@@ -685,7 +685,7 @@ B. `filter()` with `&`
 
 ```{r}
 
-#er <- read_csv("https://daseh.org/data/Colorado_ER_heat_visits.csv")
+#er <- read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
 set.seed(1234)
 er_30 <-slice_sample(er, n = 30)
 ```
