@@ -42,7 +42,7 @@ What was the total population in the dataset based on the 2010 census? (use `sum
 
 ### 1.3
 
-What was the largest population, according to the 2010 census, for a single census tract (row)? Use `summarize` and `max`.
+What was the largest population, according to the 2010 census? Use `summarize` and `max`.
 
 ```
 # General format 
@@ -56,7 +56,7 @@ DATA_TIBBLE %>%
 
 ### 1.4
 
-Modify your code from 1.3 to add the smallest population among census tracts. Use `min` in your `summarize` function.
+Modify your code from 1.3 to add the smallest population among census tracts. Use `min` in your `summarize` function. *HINT:* Make sure you make your `SUMMARY_COLUMN_NAME` different for the max and the min summaries! What do you think would happen if you tried to make `SUMMARY_COLUMN_NAME` the same name for both statistics?
 
 ```
 # General format 
