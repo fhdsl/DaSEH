@@ -345,6 +345,25 @@ Which button do you click to run the code in a current chunk?
 knitr::include_graphics("images/chunk_gut_check.png")
 ```
 
+## Lab: Getting started
+
+To do this lab we need to:
+
+- Download the file at the link above by clicking on it or go to the website schedule page
+
+- Find the downloaded file on your computer
+
+- Open the file in RStudio (double clicking the file name typically works, otherwise right click)
+
+- Might need to restart RStudio
+
+These videos can help if you aren't sure where your downloads are:
+
+If you have a PC: https://youtu.be/we6vwB7DsNU
+
+If you have a Mac: https://www.youtube.com/watch?v=Ao9e0cDzMrE
+
+You can find these on the resource page of the class website.
 
 ## Summary
 
