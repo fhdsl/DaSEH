@@ -65,7 +65,7 @@ Preview the data by examining the Environment. How many observations and variabl
 
 ### P.1
 
-Download the data and move the file to your project folder. Import the data by browsing for the file on your computer.
+Download the data from https://daseh.org/data/CalEnviroScreen_data.csv and move the file to your project folder. Import the data by browsing for the file on your computer.
 
 > *Download the data*
 > *Put data in the project folder*
