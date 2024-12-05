@@ -428,7 +428,8 @@ er_30 <-slice_sample(er, n = 30)
 
 ## Subset columns of a data frame - `tidyverse` way: 
 
-To grab (or "pull" out) the `year` column the `tidyverse` way we can use the `pull` function:
+To grab a vector version (or "pull" out) the `year` column the `tidyverse` way we can use the `pull` function:
+
 ```{r}
 pull(er_30, year)
 ```
@@ -437,6 +438,7 @@ pull(er_30, year)
 ## Subset columns of a data frame: dplyr
 
 The `select` command from `dplyr` allows you to subset (still a `tibble`!)
+
 ```{r}
 select(er_30, year)
 ```
@@ -651,11 +653,8 @@ https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 
 A. `filter()` with `|`
 
-B. `select()` with `|`
+B. `filter()` with `&`
 
-C. `filter()` with `&`
-
-D. `select()` with `&`
 
 ## Summary
 
