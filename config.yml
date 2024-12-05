@@ -1,19 +1,17 @@
 default:
-  course_dates: >
-      * **Summer Session ** : July 8-18 (online/virtual course) + July 29-31 (in person in Seattle)
-
-      * **Fall Session ** : September 30 - October 10 (online/virtual course) + October 23-25 (in person in Seattle)
-  course_time: "1:30 p.m. - 4:50 p.m. ET"
-  register_link: "https://forms.gle/BNrdKJJ8PHpQtKMS8"
+  online_dates: "June 2026"
+  online_times: "10:30am - 2pm Pacific Time"
+  codeathon_dates: "June 2026"
+  codeathon_times: "9:30am - 4pm Pacific Time"
+  register_link: "https://forms.gle/pfX4zCPFjTinKttaA"
   codeathon_schedule: "https://docs.google.com/document/d/1ZD-w0vc3Vtv1vf95h6323zaaxORg9vC7Hp4I_IUeW0I/edit?usp=sharing"
   instructor_slides: "https://drive.google.com/drive/folders/18LZlTF-iGwM6kZvFGeoFq1wFmIvOyCYQ?usp=sharing"
-  lightning_talk_folder: "https://drive.google.com/drive/folders/1YyWArRRKWJ8it6fx9emgqT6S_WsVJLJM?usp=sharing"
-  #final_due_date: "January 24th at 11:59pm ET"
-  #grades_due: "January 26"
-  holiday: "In recognition of [Martin Luther King Jr. Day](https://en.wikipedia.org/wiki/Martin_Luther_King_Jr._Day), there will be **no class on Monday January 15th, 2024**."
-  google_survey: "https://forms.gle/JAsLbyRDtCtxwgFG9"
+  lightning_talk_folder: ""
+
+  pulsecheck_survey: ""
+  research_survey: ""
+  
   slack_workspace: "https://daseh.slack.com/"
-  # ta: "Padmashri Saravanan (psarava1 at jhu.edu), Alex Newman (anewma28 at jhu.edu)"
   ds: "Candace Savonen (csavonen at fredhutch.org)"
   instructors: "[Carrie Wright](https://carriewright11.github.io/) (cwright2 @ fredhutch.org), [Ava Hoffman](https://www.avahoffman.com/) (ahoffma2 at fredhutch.org), [Elizabeth Humphries]() (ehumphri at fredhutch.org)"
   r_version: "(4.4.1 (called 'Race for your Life') as of June 14, 2024)"
@@ -22,4 +20,3 @@ default:
   r_dl_windows: "https://cran.r-project.org/bin/windows/base/R-4.4.1-win.exe"
   rstudio_dl_mac: "https://download1.rstudio.org/electron/macos/RStudio-2024.04.2-764.dmg"
   rstudio_dl_windows: "https://download1.rstudio.org/electron/windows/RStudio-2024.04.2-764.exe"
-

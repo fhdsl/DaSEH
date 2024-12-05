@@ -278,10 +278,10 @@ More on that soon!
 
 ## Summary
 
-🏠 [Class Website - `https://daseh.org/`](https://daseh.org/) - Logistics, resources, and help!
+🏠 [Class Website - https://daseh.org/](https://daseh.org/) - Logistics, resources, and help!
 
-📝 [Research Survey - `https://forms.gle/vxp8vxdN2Ck2j7uY6`](https://forms.gle/vxp8vxdN2Ck2j7uY6)
+📝 [Research Survey - `r config::get("research_survey")`](`r config::get("research_survey")`)
 
-🩺 [Pulse Check - `r config::get("google_survey")`](`r config::get("google_survey")`)
+🩺 [Pulse Check - `r config::get("pulsecheck_survey")`](`r config::get("pulsecheck_survey")`)
 
 Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
