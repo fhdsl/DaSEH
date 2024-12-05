@@ -379,7 +379,7 @@ test
 clean_names(test)
 ```
 
-## GUT CHECK: Which of the following would NOT always work with a column called `counties_of_seattle_with_population_over_10,000`?
+## GUT CHECK: Which of the following would work well with a column called `counties_of_seattle_with_population_over_10,000`?
 
 A. Renaming it using `rename` function to something simpler like `seattle_counties_over_10thous`.
 
