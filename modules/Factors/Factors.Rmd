@@ -113,7 +113,7 @@ Let's make a plot first.
 
 ```{r, fig.height= 3, warning = F}
 er_visits_age_subset %>%
-  ggplot(mapping = aes(x = age, y = rate)) +
+  ggplot(aes(x = age, y = rate)) +
   geom_boxplot() +
   theme_bw(base_size = 12) # make all labels size 12
 ```
@@ -148,7 +148,7 @@ Now let's make our plot again:
 
 ```{r, fig.height= 3, warning = FALSE}
 er_visits_age_fct %>%
-  ggplot(mapping = aes(x = age, y = rate)) +
+  ggplot(aes(x = age, y = rate)) +
   geom_boxplot() +
   theme_bw(base_size = 12)
 ```
@@ -205,7 +205,7 @@ What if we wanted to order `age` by increasing `rate`?
 library(forcats)
 
 er_visits_age_fct %>%
-  ggplot(mapping = aes(x = age, y = rate)) +
+  ggplot(aes(x = age, y = rate)) +
   geom_boxplot() +
   theme_bw(base_size = 12)
 ```
@@ -230,7 +230,7 @@ We can order a factor by another variable by using the `fct_reorder()` function 
 library(forcats)
 
 er_visits_age_fct %>%
-  ggplot(mapping = aes(x = fct_reorder(age, rate, mean), y = rate)) +
+  ggplot(aes(x = fct_reorder(age, rate, mean), y = rate)) +
   geom_boxplot() +
   labs(x = "Age Category") +
   theme_bw(base_size = 12)
@@ -242,7 +242,7 @@ er_visits_age_fct %>%
 library(forcats)
 
 er_visits_age_fct %>%
-  ggplot(mapping = aes(x = fct_reorder(age, rate, mean, .desc = TRUE), y = rate)) +
+  ggplot(aes(x = fct_reorder(age, rate, mean, .desc = TRUE), y = rate)) +
   geom_boxplot() +
   labs(x = "Age Category") +
   theme_bw(base_size = 12)
