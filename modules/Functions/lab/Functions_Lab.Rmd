@@ -138,11 +138,13 @@ Use `across` and `mutate` to convert all columns starting with the string "PM" i
 
 ### P.3
 
-Take your code from previous question and assign it to the variable `ces_dat`.
+Take your code from previous question and assign it to the object `ces_dat`.
 
 - Create a ggplot where the x-axis is `Asthma` and the y-axis is `PM2.5`.
 - Add a boxplot (`geom_boxplot()`)
 - Change the `labs()` layer so that the x-axis is "ER Visits for Asthma: PM2.5 greater than 10"
+
+**NOTE:** You can make this code into a function! To do so, you create a function that doesn't have any inputs. Instead, just hard-code the column names into the ggplot `aes` line. The function will create this exact plot every time it is called.
 
 ```{r P.3response}
 
