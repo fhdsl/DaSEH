@@ -37,7 +37,7 @@ knitr::include_graphics("images/class.jpg")
 
 #### Online course
 
-_`r config::get("online_dates")`_
+_`r config::get("online_dates")`_  
 _`r config::get("online_times")`_
 
 Two-week online course in R programming foundations.
@@ -46,7 +46,7 @@ Two-week online course in R programming foundations.
 
 #### Code-a-thon
 
-_`r config::get("codeathon_dates")`_
+_`r config::get("codeathon_dates")`_  
 _`r config::get("codeathon_times")`_
 
 Three-day in-person intensive “Code-a-thon”. Here, we'll work on authentic environmental health projects. We'll also practice data ethics skills in peer code review, reproducibility, and transparency in a supportive environment. 
