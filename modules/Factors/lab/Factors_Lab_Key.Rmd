@@ -13,7 +13,7 @@ library(tidyverse)
 
 ### 1.0
 
-Load the CalEnviroScreen dataset and use `select` to choose the `CaliforniaCounty`, `ImpWaterBodies`, and `ZIP` variables. Then subset this data using `filter` to include only the California counties Napa and San Francisco. Name this data "ces". 
+Load the CalEnviroScreen dataset and use `select` to choose the `CaliforniaCounty`, `ImpWaterBodies`, and `ZIP` variables. Then subset this data using `filter` to include only the California counties Amador, Napa, Ventura, and San Francisco. Name this data "ces". 
 
 `ImpWaterBodies`: measure of the number of pollutants across all impaired water bodies within a given distance of populated areas.
 
@@ -21,7 +21,7 @@ Load the CalEnviroScreen dataset and use `select` to choose the `CaliforniaCount
 ces <- 
   read_csv("https://daseh.org/data/CalEnviroScreen_data.csv") %>% 
   select(CaliforniaCounty, ImpWaterBodies, ZIP) %>%
-  filter(CaliforniaCounty == c("Amador", "Napa", "Ventura", "San Francisco"))
+  filter(CaliforniaCounty %in% c("Amador", "Napa", "Ventura", "San Francisco"))
 ```
 
 ### 1.1
@@ -30,7 +30,7 @@ Create a boxplot showing the difference in groundwater contamination threats (`I
 
 ```{r 1.1response}
 ces %>%
-  ggplot(mapping = aes(x = CaliforniaCounty, y = ImpWaterBodies)) +
+  ggplot(aes(x = CaliforniaCounty, y = ImpWaterBodies)) +
   geom_boxplot()
 ```
 
@@ -60,7 +60,7 @@ Repeat question 1.1 and 1.2 using the "ces_fct" data. You should see different o
 
 ```{r 1.4response}
 ces_fct %>%
-  ggplot(mapping = aes(x = CaliforniaCounty, y = ImpWaterBodies)) +
+  ggplot(aes(x = CaliforniaCounty, y = ImpWaterBodies)) +
   geom_boxplot()
 
 ces_fct %>%
@@ -113,7 +113,7 @@ library(forcats)
 
 ces_Ventura_plot <- ces_Ventura %>%
   drop_na() %>%
-  ggplot(mapping = aes(
+  ggplot(aes(
     x = fct_reorder(
       ZIP, med_ImpWaterBodies
     ),
