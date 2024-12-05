@@ -38,7 +38,7 @@ R Projects are a super helpful feature of RStudio. They help you:
 
 ## Why projects?
 
-"The chance of the setwd() command having the desired effect – making the file paths work – for anyone besides its author is 0%. It’s also unlikely to work for the author one or two years or computers from now. The project is not self-contained and portable."
+"The chance of the `setwd()` command having the desired effect – making the file paths work – for anyone besides its author is 0%. It’s also unlikely to work for the author one or two years or computers from now. The project is not self-contained and portable."
 
 - [Jenny Bryan](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
 
