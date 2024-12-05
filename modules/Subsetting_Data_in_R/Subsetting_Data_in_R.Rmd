@@ -735,6 +735,13 @@ The pipe `%>%` makes this much more readable.  It reads left side "pipes" into r
 er_30 %>% filter(year > 2000 & county == "Denver") %>% select(year, rate)
 ```
 
+## Alternative Pipes
+
+There are multiple ways to write a pipe and you might see these (they work the same!):
+
+         |>
+
+         %>%
 
 # Adding/Removing Columns
 
