@@ -212,7 +212,8 @@ knitr::include_graphics("images/rename.png")
 "Artwork by @allison_horst". https://allisonhorst.com/
 
 
-## checking names of columns, we can use the `colnames()` function (or `names()`)
+## checking names of columns, we can use the `colnames()` function
+
 ```{r}
 colnames(er)
 ```
