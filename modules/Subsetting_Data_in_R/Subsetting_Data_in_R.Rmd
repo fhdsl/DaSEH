@@ -663,7 +663,7 @@ B. `filter()` with `&`
 -  you can `select()` based on patterns in the column names
 -  you can also `select()` based on column class with the `where()` function
 -  you can combine multiple tidyselect functions together like `select(starts_with("C"), ends_with("state"))`
--  you can combine multiple patterns with the `c()` function like `select(starts_with(c("A", "C")))`
+-  you can combine multiple patterns with the `c()` function like `select(starts_with(c("A", "C")))` (see extra slides at the end for more info!)
 - `filter()` can be used to filter out rows based on logical conditions
 -  avoid using quotes when referring to column names with `filter()`
 
