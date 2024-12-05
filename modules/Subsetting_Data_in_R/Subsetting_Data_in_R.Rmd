@@ -421,8 +421,7 @@ We'll work with the CO heat-related ER visits dataset again.
 This time lets also make it a smaller subset so it is easier for us to see the full dataset as we work through examples. 
 
 ```{r}
-
-#read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
+# er<-read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
 set.seed(1234)
 er_30 <-slice_sample(er, n = 30)
 ```
