@@ -1002,6 +1002,30 @@ select(er_30, starts_with(c("r", "l"))) # here we combine two patterns
 
 ```
 
+## Nuances about `filter()`
+
+```{r}
+test <- tibble(A = c(1,2,3,4), B = c(1,2,3,4))
+test
+
+# These are technically the same but >= is easier to read
+# Separating can cause issues
+filter(test,  B > 2 | B==2)
+filter(test, B >= 2)
+```
+
+## Order of operations for `filter()`
+
+Order can matter. Think of individual statements separately first.
+```{r}
+
+filter(test,  A>3 | B==2 & B>2) # A is greater than 3 or B is equal to 2 AND (think but also) B must be greater than 2 , thus 2 is dropped.
+filter(test,  A>3 & B>2 | B==2) # A is greater than 3 AND B is greater than 2 leaving only 4s OR B is equal to 2, (since this comes later, 2 is preserved)
+```
+
+
+
+
 ## Ordering the column names of a data frame: alphabetically {.codesmall}
 
 Using the base R `order()` function.
