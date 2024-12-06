@@ -152,7 +152,7 @@ Modify `facet_plot` to remove the legend (hint use `theme()` and the `legend.pos
 
 ### P.3
 
-Modify `facet_plot` one more time with a fun theme! Look into the [ThemePark package](https://github.com/MatthewBJane/ThemePark) It has lots of fun themes! Try one out! Remember you will need to install it using `remotes::install_github("MatthewBJane/ThemePark")`and load in the library.
+Modify `facet_plot` one more time with a fun theme! Look into the [ThemePark package](https://github.com/MatthewBJane/ThemePark). It has lots of fun themes! Try one out! Remember you will need to install it using `remotes::install_github("MatthewBJane/ThemePark")`and load in the library.
 
 ```{r P.3response}
 
