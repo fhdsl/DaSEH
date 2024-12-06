@@ -130,29 +130,29 @@ head(select(ces_sub, Asthma))
 Subset the rows of `ces_sub` that have **more** than 100 for `Asthma` - how many rows are there? Use `filter()`.
 
 ```{r 2.4response}
-ces_sub <- filter(ces_sub, Asthma > 100)
-nrow(ces_sub)
+nrow(filter(ces_sub, Asthma > 100))
+
 ```
 
 ### 2.5
 
-Subset the rows of `ces_sub` that have a `Traffic` value **less** than 500 and an `Asthma` value **more** than 100  - how many are there?
+Subset the rows of `ces_sub` that have an `Asthma` value **more** than 100 and a `Traffic` value **less** than 500 and — how many are there?
 
 
 ```{r 2.5response}
-filter(ces_sub, Traffic < 500 & Asthma > 100) # all of these options work
-nrow(filter(ces_sub, Traffic < 500 & Asthma > 100))
-nrow(filter(ces_sub, Traffic < 500, Asthma > 100))
+filter(ces_sub, Asthma > 100 & Traffic < 500) # all of these options work
+nrow(filter(ces_sub, Asthma > 100 & Traffic < 500))
+nrow(filter(ces_sub, Asthma > 100, Traffic < 500))
 ```
 
 ### 2.6
 
-Subset the rows of `ces_sub` that have a `Traffic` value **less than or equal to**  500 and an `Asthma` value **more** than 100  - how many are there?
+Subset the rows of `ces_sub` that have an `Asthma` value **more** than 100 and a `Traffic` value **less than or equal to (`<=`)**  500 — how many are there?
 
 ```{r 2.6response}
 filter(ces_sub, Traffic <= 500 & Asthma > 100) # all of these options work
-nrow(filter(ces_sub, Traffic <= 500 & Asthma > 100))
-nrow(filter(ces_sub, Traffic <= 500, Asthma > 100))
+nrow(filter(ces_sub, Asthma > 100 & Traffic <= 500))
+nrow(filter(ces_sub, Asthma > 100, Traffic <= 500))
 ```
 
 ### 2.7

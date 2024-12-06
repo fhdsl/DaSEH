@@ -212,7 +212,8 @@ knitr::include_graphics("images/rename.png")
 "Artwork by @allison_horst". https://allisonhorst.com/
 
 
-## checking names of columns, we can use the `colnames()` function (or `names()`)
+## checking names of columns, we can use the `colnames()` function
+
 ```{r}
 colnames(er)
 ```
@@ -379,7 +380,7 @@ test
 clean_names(test)
 ```
 
-## GUT CHECK: Which of the following would NOT always work with a column called `counties_of_seattle_with_population_over_10,000`?
+## GUT CHECK: Which of the following would work well with a column called `counties_of_seattle_with_population_over_10,000`?
 
 A. Renaming it using `rename` function to something simpler like `seattle_counties_over_10thous`.
 
@@ -420,15 +421,15 @@ We'll work with the CO heat-related ER visits dataset again.
 This time lets also make it a smaller subset so it is easier for us to see the full dataset as we work through examples. 
 
 ```{r}
-
-#read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
+# er<-read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
 set.seed(1234)
 er_30 <-slice_sample(er, n = 30)
 ```
 
 ## Subset columns of a data frame - `tidyverse` way: 
 
-To grab (or "pull" out) the `year` column the `tidyverse` way we can use the `pull` function:
+To grab a vector version (or "pull" out) the `year` column the `tidyverse` way we can use the `pull` function:
+
 ```{r}
 pull(er_30, year)
 ```
@@ -437,9 +438,16 @@ pull(er_30, year)
 ## Subset columns of a data frame: dplyr
 
 The `select` command from `dplyr` allows you to subset (still a `tibble`!)
+
 ```{r}
 select(er_30, year)
 ```
+
+## GUT CHECK: What function would be useful for getting a vector version of a column?
+
+A. `pull()`
+
+B. `select()`
 
 ## Select multiple columns
 
@@ -505,11 +513,6 @@ select(er_30, where(is.numeric))
 
 ```
 
-## GUT CHECK: What function would be useful for getting a vector version of a column?
-
-A. `pull()`
-
-B. `select()`
 
 
 
@@ -650,11 +653,8 @@ https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 
 A. `filter()` with `|`
 
-B. `select()` with `|`
+B. `filter()` with `&`
 
-C. `filter()` with `&`
-
-D. `select()` with `&`
 
 ## Summary
 
@@ -663,7 +663,7 @@ D. `select()` with `&`
 -  you can `select()` based on patterns in the column names
 -  you can also `select()` based on column class with the `where()` function
 -  you can combine multiple tidyselect functions together like `select(starts_with("C"), ends_with("state"))`
--  you can combine multiple patterns with the `c()` function like `select(starts_with(c("A", "C")))`
+-  you can combine multiple patterns with the `c()` function like `select(starts_with(c("A", "C")))` (see extra slides at the end for more info!)
 - `filter()` can be used to filter out rows based on logical conditions
 -  avoid using quotes when referring to column names with `filter()`
 
@@ -675,8 +675,10 @@ D. `select()` with `&`
 
 ## Lab Part 2
 
-🏠 [Class Website](https://daseh.org)    
+🏠 [Class Website](https://daseh.org)   
+
 💻 [Lab](https://daseh.org/modules/Subsetting_Data_in_R/lab/Subsetting_Data_in_R_Lab.Rmd)
+
 📃 [Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
 
 📃 [Posit's `dplyr` Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
@@ -685,7 +687,7 @@ D. `select()` with `&`
 
 ```{r}
 
-#er <- read_csv("https://daseh.org/data/Colorado_ER_heat_visits.csv")
+#er <- read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
 set.seed(1234)
 er_30 <-slice_sample(er, n = 30)
 ```
@@ -733,6 +735,13 @@ The pipe `%>%` makes this much more readable.  It reads left side "pipes" into r
 er_30 %>% filter(year > 2000 & county == "Denver") %>% select(year, rate)
 ```
 
+## Alternative Pipes
+
+There are multiple ways to write a pipe and you might see these (they work the same!):
+
+         |>
+
+         %>%
 
 # Adding/Removing Columns
 
@@ -992,6 +1001,30 @@ select(er_30, ends_with("cl"), starts_with("r"))
 select(er_30, starts_with(c("r", "l"))) # here we combine two patterns
 
 ```
+
+## Nuances about `filter()`
+
+```{r}
+test <- tibble(A = c(1,2,3,4), B = c(1,2,3,4))
+test
+
+# These are technically the same but >= is easier to read
+# Separating can cause issues
+filter(test,  B > 2 | B==2)
+filter(test, B >= 2)
+```
+
+## Order of operations for `filter()`
+
+Order can matter. Think of individual statements separately first.
+```{r}
+
+filter(test,  A>3 | B==2 & B>2) # A is greater than 3 or B is equal to 2 AND (think but also) B must be greater than 2 , thus 2 is dropped.
+filter(test,  A>3 & B>2 | B==2) # A is greater than 3 AND B is greater than 2 leaving only 4s OR B is equal to 2, (since this comes later, 2 is preserved)
+```
+
+
+
 
 ## Ordering the column names of a data frame: alphabetically {.codesmall}
 
