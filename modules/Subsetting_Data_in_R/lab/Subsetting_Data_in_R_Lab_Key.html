@@ -362,14 +362,13 @@ ces2</code></pre>
 <div id="section-7" class="section level3">
 <h3>2.4</h3>
 <p>Subset the rows of <code>ces_sub</code> that have <strong>more</strong> than 100 for <code>Asthma</code> - how many rows are there? Use <code>filter()</code>.</p>
-<pre class="r"><code>ces_sub &lt;- filter(ces_sub, Asthma &gt; 100)
-nrow(ces_sub)</code></pre>
+<pre class="r"><code>nrow(filter(ces_sub, Asthma &gt; 100))</code></pre>
 <pre><code>## [1] 592</code></pre>
 </div>
 <div id="section-8" class="section level3">
 <h3>2.5</h3>
-<p>Subset the rows of <code>ces_sub</code> that have a <code>Traffic</code> value <strong>less</strong> than 500 and an <code>Asthma</code> value <strong>more</strong> than 100 - how many are there?</p>
-<pre class="r"><code>filter(ces_sub, Traffic &lt; 500 &amp; Asthma &gt; 100) # all of these options work</code></pre>
+<p>Subset the rows of <code>ces_sub</code> that have an <code>Asthma</code> value <strong>more</strong> than 100 and a <code>Traffic</code> value <strong>less</strong> than 500 and — how many are there?</p>
+<pre class="r"><code>filter(ces_sub, Asthma &gt; 100 &amp; Traffic &lt; 500) # all of these options work</code></pre>
 <pre><code>## # A tibble: 130 × 3
 ##    CensusTract Traffic Asthma
 ##          &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
@@ -384,14 +383,14 @@ nrow(ces_sub)</code></pre>
 ##  9  6001407600   311.    115.
 ## 10  6001408200   437.    187.
 ## # ℹ 120 more rows</code></pre>
-<pre class="r"><code>nrow(filter(ces_sub, Traffic &lt; 500 &amp; Asthma &gt; 100))</code></pre>
+<pre class="r"><code>nrow(filter(ces_sub, Asthma &gt; 100 &amp; Traffic &lt; 500))</code></pre>
 <pre><code>## [1] 130</code></pre>
-<pre class="r"><code>nrow(filter(ces_sub, Traffic &lt; 500, Asthma &gt; 100))</code></pre>
+<pre class="r"><code>nrow(filter(ces_sub, Asthma &gt; 100, Traffic &lt; 500))</code></pre>
 <pre><code>## [1] 130</code></pre>
 </div>
 <div id="section-9" class="section level3">
 <h3>2.6</h3>
-<p>Subset the rows of <code>ces_sub</code> that have a <code>Traffic</code> value <strong>less than or equal to</strong> 500 and an <code>Asthma</code> value <strong>more</strong> than 100 - how many are there?</p>
+<p>Subset the rows of <code>ces_sub</code> that have an <code>Asthma</code> value <strong>more</strong> than 100 and a <code>Traffic</code> value <strong>less than or equal to (<code>&lt;=</code>)</strong> 500 — how many are there?</p>
 <pre class="r"><code>filter(ces_sub, Traffic &lt;= 500 &amp; Asthma &gt; 100) # all of these options work</code></pre>
 <pre><code>## # A tibble: 130 × 3
 ##    CensusTract Traffic Asthma
@@ -407,9 +406,9 @@ nrow(ces_sub)</code></pre>
 ##  9  6001407600   311.    115.
 ## 10  6001408200   437.    187.
 ## # ℹ 120 more rows</code></pre>
-<pre class="r"><code>nrow(filter(ces_sub, Traffic &lt;= 500 &amp; Asthma &gt; 100))</code></pre>
+<pre class="r"><code>nrow(filter(ces_sub, Asthma &gt; 100 &amp; Traffic &lt;= 500))</code></pre>
 <pre><code>## [1] 130</code></pre>
-<pre class="r"><code>nrow(filter(ces_sub, Traffic &lt;= 500, Asthma &gt; 100))</code></pre>
+<pre class="r"><code>nrow(filter(ces_sub, Asthma &gt; 100, Traffic &lt;= 500))</code></pre>
 <pre><code>## [1] 130</code></pre>
 </div>
 <div id="section-10" class="section level3">

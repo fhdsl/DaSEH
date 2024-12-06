@@ -125,7 +125,7 @@ Subset the rows of `ces_sub` that have **more** than 100 for `Asthma` - how many
 
 ### 2.5
 
-Subset the rows of `ces_sub` that have a `Traffic` value **less** than 500 and an `Asthma` value **more** than 100  - how many are there?
+Subset the rows of `ces_sub` that have an `Asthma` value **more** than 100 and a `Traffic` value **less** than 500 and — how many are there?
 
 
 ```{r 2.5response}
@@ -134,7 +134,7 @@ Subset the rows of `ces_sub` that have a `Traffic` value **less** than 500 and a
 
 ### 2.6
 
-Subset the rows of `ces_sub` that have a `Traffic` value **less than or equal to**  500 and an `Asthma` value **more** than 100  - how many are there?
+Subset the rows of `ces_sub` that have an `Asthma` value **more** than 100 and a `Traffic` value **less than or equal to (`<=`)**  500 — how many are there?
 
 ```{r 2.6response}
 
