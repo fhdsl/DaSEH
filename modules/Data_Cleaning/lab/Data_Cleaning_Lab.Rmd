@@ -17,6 +17,8 @@ library(naniar)
 
 Read in the CalEnviroScreen data using `read_csv` and the URL 	https://daseh.org/data/CalEnviroScreen_data.csv
 
+Assign this dataset to an object called "ces"
+
 ```{r 1.0response}
 
 ```
