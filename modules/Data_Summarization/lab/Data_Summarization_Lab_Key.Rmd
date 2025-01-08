@@ -165,7 +165,7 @@ This isn't the only way we can create this table in R. Let's look at another way
 
 ### 2.3
 
-How many census tracts are there in each county? Use `group_by()`, `summarize()`, and `n()` on the column named `county`.
+How many census tracts are there in each county? Use `group_by()`, `summarize()`, and `n()` on the column named `CaliforniaCounty`.
 
 ```
 # General format 
