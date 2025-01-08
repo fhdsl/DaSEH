@@ -732,7 +732,7 @@ plastics %>%
 ```{r}
 plastics %>% 
   mutate(microplastic_recoded = case_when(
-    str_detect(string = microplastic, pattern = "^b|B") ~ "BPA",
+    str_detect(string = microplastic, pattern = "^b|^B") ~ "BPA",
     str_detect(string = microplastic, pattern = "^o|^O") ~ "Other",
     str_detect(string = microplastic, pattern = "^d|^D") ~ "Dioxin",
     TRUE ~ microplastic)) %>%
