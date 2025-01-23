@@ -186,11 +186,13 @@ ces %>%
 
 ### P.3
 
-Take your code from previous question and assign it to the variable `ces_dat`.
+Take your code from previous question and assign it to the object `ces_dat`.
 
 - Create a ggplot where the x-axis is `Asthma` and the y-axis is `PM2.5`.
 - Add a boxplot (`geom_boxplot()`)
 - Change the `labs()` layer so that the x-axis is "ER Visits for Asthma: PM2.5 greater than 10"
+
+**NOTE:** You can make this code into a function! To do so, you create a function that doesn't have any inputs. Instead, just hard-code the column names into the ggplot `aes` line. The function will create this exact plot every time it is called.
 
 ```{r P.3response}
 ces_dat <-
@@ -200,7 +202,7 @@ ces_dat <-
     function(x) x > 10
   ))
 
-ggplot(data = ces_dat, aes(x = `Asthma`, y = `PM2.5`)) +
+ggplot(data = ces_dat, aes(x = Asthma, y = PM2.5)) +
   geom_boxplot() +
   labs(x = "ER Visits for Asthma: PM2.5 greater than 10")
 
@@ -211,7 +213,7 @@ ces_boxplot <- function() {
       starts_with("PM"), 
       function(x) x > 10
     )) %>% 
-    ggplot(aes(x = `Asthma`, y = `PM2.5`)) +
+    ggplot(aes(x = Asthma, y = PM2.5)) +
     geom_boxplot() +
     labs(x = "ER Visits for Asthma: PM2.5 greater than 10")
 }
