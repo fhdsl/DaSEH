@@ -1102,7 +1102,7 @@ Effect</pre>
 
 <pre class = 'prettyprint lang-r'>plastics %&gt;% 
   mutate(microplastic_recoded = case_when(
-    str_detect(string = microplastic, pattern = &quot;^b|B&quot;) ~ &quot;BPA&quot;,
+    str_detect(string = microplastic, pattern = &quot;^b|^B&quot;) ~ &quot;BPA&quot;,
     str_detect(string = microplastic, pattern = &quot;^o|^O&quot;) ~ &quot;Other&quot;,
     str_detect(string = microplastic, pattern = &quot;^d|^D&quot;) ~ &quot;Dioxin&quot;,
     TRUE ~ microplastic)) %&gt;%
