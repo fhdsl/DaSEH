@@ -197,7 +197,7 @@ Let's look at the *date_start* variable, the first date of the sampling window.
 
 ```{r message = FALSE}
 sars_ww <- 
-  read_csv("../../data/SARS-CoV-2_Wastewater_Data.csv") 
+  read_csv("https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv") 
  
 # Selecting a few columns for easy viewing
 sars_ww <- sars_ww %>% select(town_name, date_start)
