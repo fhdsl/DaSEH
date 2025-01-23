@@ -183,7 +183,7 @@ ces &lt;- read_csv(file = &quot;https://daseh.org/data/CalEnviroScreen_data.csv&
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
-<p>What was the largest population, according to the 2010 census, for a single census tract (row)? Use <code>summarize</code> and <code>max</code>.</p>
+<p>What was the largest population, according to the 2010 census? Use <code>summarize</code> and <code>max</code>.</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% 
     summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN))</code></pre>
@@ -191,6 +191,7 @@ DATA_TIBBLE %&gt;%
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
 <p>Modify your code from 1.3 to add the smallest population among census tracts. Use <code>min</code> in your <code>summarize</code> function.</p>
+<p><em>HINT:</em> Make sure you make your <code>SUMMARY_COLUMN_NAME</code> different for the max and the min summaries! What do you think would happen if you tried to make <code>SUMMARY_COLUMN_NAME</code> the same name for both statistics?</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% 
     summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN),
@@ -235,7 +236,7 @@ DATA_TIBBLE %&gt;% filter(LOGICAL_COMPARISON)</code></pre>
 </div>
 <div id="section-6" class="section level3">
 <h3>2.3</h3>
-<p>How many census tracts are there in each county? Use <code>group_by()</code>, <code>summarize()</code>, and <code>n()</code> on the column named <code>county</code>.</p>
+<p>How many census tracts are there in each county? Use <code>group_by()</code>, <code>summarize()</code>, and <code>n()</code> on the column named <code>CaliforniaCounty</code>.</p>
 <pre><code># General format 
 DATA_TIBBLE %&gt;% 
     group_by(GROUPING_COLUMN_NAME) %&gt;% 
