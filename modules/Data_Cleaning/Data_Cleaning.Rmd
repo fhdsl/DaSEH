@@ -460,10 +460,9 @@ Need quotes for conditions and new values!
 ```{r}
 plastics %>% 
   mutate(microplastic_recoded = case_when(
-                               microplastic == "O" ~ "Other",
                                microplastic == "Bisphenol A" ~ "BPA",
                                microplastic == "bpa" ~ "BPA",
-                               microplastic =="dioxin" ~"Dioxin"))  %>% 
+                               microplastic == "dioxin" ~"Dioxin"))  %>% 
   count(microplastic, microplastic_recoded)
 
 ```
@@ -477,10 +476,9 @@ We didn't specify what happens to values that were already `Other` or `Dioxin` o
 ```{r, eval = FALSE}
 plastics %>% 
   mutate(microplastic_recoded = case_when(
-                               microplastic == "O" ~ "Other",
                                microplastic == "Bisphenol A" ~ "BPA",
                                microplastic == "bpa" ~ "BPA",
-                               microplastic =="dioxin" ~"Dioxin"))  %>% 
+                               microplastic == "dioxin" ~"Dioxin"))  %>% 
   count(microplastic, microplastic_recoded)
 ```
 
@@ -496,7 +494,7 @@ Note that automatically values not reassigned explicitly by
 {data_input} %>%
   mutate({variable_to_fix} = case_when({Variable_fixing}   
              /some condition/ ~ {value_for_con},
-                     .default = {value_for_not_meeting_condition})
+                     .default = {value_for_not_meeting_condition}) # need this to avoid NAs
 
 ```
 :::
@@ -509,7 +507,6 @@ or it can be the original values of the column
 ```{r}
 plastics %>% 
   mutate(microplastic_recoded = case_when(
-                               microplastic == "O" ~ "Other",
                                microplastic == "Bisphenol A" ~ "BPA",
                                microplastic == "bpa" ~ "BPA",
                                microplastic =="dioxin" ~"Dioxin",
@@ -524,10 +521,9 @@ You never know if you might be missing something - and if a value already was an
 ```{r, eval = FALSE}
 plastics %>% 
   mutate(microplastic_recoded = case_when(
-                               microplastic == "O" ~ "Other",
                                microplastic == "Bisphenol A" ~ "BPA",
                                microplastic == "bpa" ~ "BPA",
-                               microplastic =="dioxin" ~"Dioxin",
+                               microplastic == "dioxin" ~"Dioxin",
                                .default = microplastic)) %>%
   count(microplastic, microplastic_recoded)
 ```
@@ -558,7 +554,6 @@ plastics %>%
                               microplastic == "Bisphenol A" ~ "BPA",
                               microplastic == "bpa" ~ "BPA",
                               microplastic == "dioxin" ~"Dioxin",
-                              microplastic == "O" ~ "Other",
                               .default = microplastic)) %>%
   count(microplastic)
 
@@ -573,7 +568,6 @@ plastics %>%
   mutate(microplastic_recoded = case_when(
     microplastic %in% c("dioxin", "Dioxin") ~ "Dioxin", 
     microplastic %in% c("BPA", "bpa", "Bisphenol A") ~ "BPA",
-    microplastic %in% c("O", "Other") ~ "Other",
                      .default = microplastic)) %>%
 
   count(microplastic, microplastic_recoded)
@@ -606,6 +600,27 @@ head(plastics)
 plastics %>% 
   count(Foods, Effect)
 ```
+## Note that if you change data classes this might impact .default
+
+```{r}
+plastics <- plastics %>% 
+      mutate(Effect = case_when(
+                    blood_level_change_nM > 0 ~ "Increase",
+                    blood_level_change_nM == 0 ~ "Same",
+                    blood_level_change_nM < 0 ~ "Decrease",
+                    .default = blood_level_change_nM)) # this will give an error!
+
+plastics <- plastics %>% 
+      mutate(Effect = case_when(
+                    blood_level_change_nM > 0 ~ "Increase",
+                    blood_level_change_nM == 0 ~ "Same",
+                    blood_level_change_nM < 0 ~ "Decrease",
+                    .default = as.character(blood_level_change_nM))) # this works!
+
+
+```
+
+
 
 ## GUT CHECK: we need to use what function with `case_when()` to modify or create a new variable?
 
@@ -721,7 +736,6 @@ plastics %>%
   mutate(microplastic_recoded = case_when(
     microplastic %in% c("Dioxin", "dioxin") ~ "Dioxin",
     microplastic %in% c("BPA", "bpa", "Bisphenol A") ~ "BPA",
-    microplastic %in% c("O", "Other") ~ "Other",
     .default = microplastic))
 ```
 
@@ -733,7 +747,6 @@ plastics %>%
 plastics %>% 
   mutate(microplastic_recoded = case_when(
     str_detect(string = microplastic, pattern = "^b|^B") ~ "BPA",
-    str_detect(string = microplastic, pattern = "^o|^O") ~ "Other",
     str_detect(string = microplastic, pattern = "^d|^D") ~ "Dioxin",
     .default =  microplastic)) %>%
   count(microplastic, microplastic_recoded)
@@ -827,6 +840,12 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
 
 # Extra Slides
 
+## `n_complete_row()` evaluating how many columns are complete for each row
+
+```{r}
+head(plastics_comb)
+head(plastics_comb) %>% n_complete_row()
+```
 
 ## `recode()` function
 
@@ -857,8 +876,7 @@ plastics %>%
   mutate(microplastic_recoded = recode(microplastic,  
                         "Bisphenol A" =  "BPA",
                                 "bpa" = "BPA",
-                             "dioxin" = "Dioxin",
-                                  "O" = "Other")) %>%
+                             "dioxin" = "Dioxin") %>%
   count(microplastic, microplastic_recoded)
 ```
 
@@ -870,8 +888,7 @@ plastics %>%
   mutate(microplastic_recoded = recode(microplastic,  
                         "Bisphenol A" =  "BPA",
                                 "bpa" = "BPA",
-                             "dioxin" = "Dioxin",
-                                  "O" = "Other")) %>%
+                             "dioxin" = "Dioxin")) %>%
   count(microplastic, microplastic_recoded)
 ```
 
@@ -885,8 +902,7 @@ plastics %>%
   mutate(microplastic = recode(microplastic,  
                         "Bisphenol A" =  "BPA",
                                 "bpa" = "BPA",
-                             "dioxin" = "Dioxin",
-                                  "O" = "Other")) %>%
+                             "dioxin" = "Dioxin")) %>%
   count(microplastic)
 ```
 
@@ -902,6 +918,24 @@ ces %>% mutate(new_col_case_when =
                  select(Longitude, Latitude, new_col_case_when) %>%
                  slice_sample(n = 6)
 ```
+
+## Don't need `case_when()` if just calculating new variables
+
+```{r}
+ces %>% mutate(num_col_mutate = Longitude * Latitude) %>% pull(num_col_mutate) 
+
+```
+
+## `case_when()` if you want NA values
+
+```{r}
+ces %>% mutate(num_new =  case_when(
+  Longitude < -121 & Latitude > 37.8 ~  Longitude * Latitude),
+  .defualt = NA) %>% 
+  pull(num_new)
+```
+
+
 
 ## String Splitting
 
