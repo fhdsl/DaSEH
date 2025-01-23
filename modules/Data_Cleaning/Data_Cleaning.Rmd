@@ -622,7 +622,18 @@ plastics <- plastics %>%
 
 ```
 
+## multiple conditions with `case_when` recoding
 
+```{r}
+plastics %>% 
+      mutate(Amt_change = case_when(
+                    blood_level_change_nM > 0 & blood_level_change_nM < 2 ~ "Small",
+                    blood_level_change_nM >= 2 ~ "Large",
+                    blood_level_change_nM < 0 & blood_level_change_nM > -2 ~ "Small",
+                    blood_level_change_nM <= -2 ~ "Large",
+                    blood_level_change_nM == 0 ~ "none")) %>%
+  head()
+```
 
 ## GUT CHECK: we need to use what function with `case_when()` to modify or create a new variable?
 
