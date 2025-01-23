@@ -602,20 +602,22 @@ plastics %>%
 ```
 ## Note that if you change data classes this might impact .default
 
-```{r}
+```{r, eval = FALSE}
 plastics <- plastics %>% 
       mutate(Effect = case_when(
                     blood_level_change_nM > 0 ~ "Increase",
                     blood_level_change_nM == 0 ~ "Same",
                     blood_level_change_nM < 0 ~ "Decrease",
-                    .default = blood_level_change_nM)) # this will give an error!
+                    .default = blood_level_change_nM)) 
+# this will give an error!
 
 plastics <- plastics %>% 
       mutate(Effect = case_when(
                     blood_level_change_nM > 0 ~ "Increase",
                     blood_level_change_nM == 0 ~ "Same",
                     blood_level_change_nM < 0 ~ "Decrease",
-                    .default = as.character(blood_level_change_nM))) # this works!
+                    .default = as.character(blood_level_change_nM))) 
+# this works!
 
 
 ```
