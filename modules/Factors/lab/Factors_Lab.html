@@ -169,12 +169,12 @@ pre code {
 <pre class="r"><code>library(tidyverse)</code></pre>
 <div id="section" class="section level3">
 <h3>1.0</h3>
-<p>Load the CalEnviroScreen dataset and use <code>select</code> to choose the <code>CaliforniaCounty</code>, <code>ImpWaterBodies</code>, and <code>ZIP</code> variables. Then subset this data using <code>filter</code> to include only the California counties Napa and San Francisco. Name this data “ces”.</p>
+<p>Load the CalEnviroScreen dataset and use <code>select</code> to choose the <code>CaliforniaCounty</code>, <code>ImpWaterBodies</code>, and <code>ZIP</code> variables. Then subset this data using <code>filter</code> to include only the California counties Amador, Napa, Ventura, and San Francisco. Name this data “ces”.</p>
 <p><code>ImpWaterBodies</code>: measure of the number of pollutants across all impaired water bodies within a given distance of populated areas.</p>
 <pre class="r"><code>ces &lt;- 
   read_csv(&quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;) %&gt;% 
   select(CaliforniaCounty, ImpWaterBodies, ZIP) %&gt;%
-  filter(CaliforniaCounty == c(&quot;Amador&quot;, &quot;Napa&quot;, &quot;Ventura&quot;, &quot;San Francisco&quot;))</code></pre>
+  filter(CaliforniaCounty %in% c(&quot;Amador&quot;, &quot;Napa&quot;, &quot;Ventura&quot;, &quot;San Francisco&quot;))</code></pre>
 <pre><code>## Rows: 8035 Columns: 67
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -183,11 +183,6 @@ pre code {
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre><code>## Warning: There was 1 warning in `filter()`.
-## ℹ In argument: `CaliforniaCounty == c(&quot;Amador&quot;, &quot;Napa&quot;, &quot;Ventura&quot;, &quot;San
-##   Francisco&quot;)`.
-## Caused by warning in `CaliforniaCounty == c(&quot;Amador&quot;, &quot;Napa&quot;, &quot;Ventura&quot;, &quot;San Francisco&quot;)`:
-## ! longer object length is not a multiple of shorter object length</code></pre>
 </div>
 <div id="section-1" class="section level3">
 <h3>1.1</h3>
