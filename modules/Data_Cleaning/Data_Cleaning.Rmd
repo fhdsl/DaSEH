@@ -496,7 +496,7 @@ Note that automatically values not reassigned explicitly by
 {data_input} %>%
   mutate({variable_to_fix} = case_when({Variable_fixing}   
              /some condition/ ~ {value_for_con},
-                         TRUE ~ {value_for_not_meeting_condition})
+                     .default = {value_for_not_meeting_condition})
 
 ```
 :::
@@ -504,7 +504,7 @@ Note that automatically values not reassigned explicitly by
 {value_for_not_meeting_condition} could be something new 
 or it can be the original values of the column
 
-## case_when with TRUE ~ original variable name
+## case_when with .default = original variable name
 
 ```{r}
 plastics %>% 
@@ -513,11 +513,11 @@ plastics %>%
                                microplastic == "Bisphenol A" ~ "BPA",
                                microplastic == "bpa" ~ "BPA",
                                microplastic =="dioxin" ~"Dioxin",
-                                TRUE ~ microplastic)) %>%
+                               .default = microplastic)) %>%
   count(microplastic_recoded)
 ```
 
-## Typically it is good practice to include the TRUE statement
+## Typically it is good practice to include the .default statement
 
 You never know if you might be missing something - and if a value already was an NA it will stay that way. 
 
@@ -528,7 +528,7 @@ plastics %>%
                                microplastic == "Bisphenol A" ~ "BPA",
                                microplastic == "bpa" ~ "BPA",
                                microplastic =="dioxin" ~"Dioxin",
-                               TRUE ~ microplastic)) %>%
+                               .default = microplastic)) %>%
   count(microplastic, microplastic_recoded)
 ```
 
@@ -559,7 +559,7 @@ plastics %>%
                               microplastic == "bpa" ~ "BPA",
                               microplastic == "dioxin" ~"Dioxin",
                               microplastic == "O" ~ "Other",
-                               TRUE ~ microplastic)) %>%
+                              .default = microplastic)) %>%
   count(microplastic)
 
 ```
@@ -571,10 +571,10 @@ plastics %>%
 ```{r}
 plastics %>% 
   mutate(microplastic_recoded = case_when(
-    microplastic %in% c("dioxin", "Dioxin") ~ "dioxin", 
+    microplastic %in% c("dioxin", "Dioxin") ~ "Dioxin", 
     microplastic %in% c("BPA", "bpa", "Bisphenol A") ~ "BPA",
     microplastic %in% c("O", "Other") ~ "Other",
-                      TRUE ~ microplastic)) %>%
+                     .default = microplastic)) %>%
 
   count(microplastic, microplastic_recoded)
 
@@ -616,11 +616,11 @@ B. `select()`
 C. `mutate()`
 
 
-## GUT CHECK: If we want all unspecified values to remain the same with `case_when()`, how should we complete the `TRUE ~` statement?
+## GUT CHECK: If we want all unspecified values to remain the same with `case_when()`, how should we complete the `.default` statement?
 
-A. With the name of the variable we are modifying or using as source
+A. = the name of the variable we are modifying or using as source
 
-B. With the word "same"
+B. = "same"
 
 
 # Working with strings
@@ -722,7 +722,7 @@ plastics %>%
     microplastic %in% c("Dioxin", "dioxin") ~ "Dioxin",
     microplastic %in% c("BPA", "bpa", "Bisphenol A") ~ "BPA",
     microplastic %in% c("O", "Other") ~ "Other",
-    TRUE ~ microplastic))
+    .default = microplastic))
 ```
 
 ## `case_when()` improved with `stringr`
@@ -735,7 +735,7 @@ plastics %>%
     str_detect(string = microplastic, pattern = "^b|^B") ~ "BPA",
     str_detect(string = microplastic, pattern = "^o|^O") ~ "Other",
     str_detect(string = microplastic, pattern = "^d|^D") ~ "Dioxin",
-    TRUE ~ microplastic)) %>%
+    .default =  microplastic)) %>%
   count(microplastic, microplastic_recoded)
 ```
 
@@ -791,7 +791,7 @@ plastics_comb
 ## Summary
  -  `case_when()` requires `mutate()` when working with dataframes/tibbles
 -   `case_when()` can recode **entire values** based on **conditions** (need quotes for conditions and new values)
-    -   remember `case_when()` needs `TRUE ~ varaible` to keep values that aren't specified by conditions, otherwise will be `NA`
+    -   remember `case_when()` needs `.default = varaible` to keep values that aren't specified by conditions, otherwise will be `NA`
     
 **Note:** you might see the `recode()` function, it only does some of what `case_when()` can do, so we skipped it, but it is in the extra slides at the end.
 
@@ -826,6 +826,7 @@ knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
 
 # Extra Slides
+
 
 ## `recode()` function
 
@@ -890,6 +891,17 @@ plastics %>%
 ```
 
 
+## More complicated case_when
+
+```{r}
+ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
+set.seed(123)
+ces %>% mutate(new_col_case_when = 
+                 case_when(Longitude < -121 & Latitude > 37.8 ~ "Distract A",  
+                           .default = "District B")) %>% 
+                 select(Longitude, Latitude, new_col_case_when) %>%
+                 slice_sample(n = 6)
+```
 
 ## String Splitting
 
