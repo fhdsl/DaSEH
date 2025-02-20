@@ -40,7 +40,7 @@ knitr::include_graphics("images/class.jpg")
 _`r config::get("online_dates")`_  
 _`r config::get("online_times")`_
 
-Two-week online course in R programming foundations.
+Two-week online course in R programming foundations. It is extremely helpful to have Slack and Zoom available on the same computer that you intend to practice in R on RStudio during the course. This allows you to easily share your code with the instructors and others.
 
 <br>
 
