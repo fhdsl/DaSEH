@@ -24,6 +24,7 @@ classoption:
 | `dplyr`| [`filter()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/filter)|`filter(df, mpg > 20)`| Returns a subset of rows matching the conditions of the specified logical argument|
 | Base `R`| [`==, <=, >=, !=`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html)|`filter(df, mpg > 20)`| These are binary operators which allow for the comparison of values in an object. They are handy for use with `filter()`|
 | Base `R`| [`%in%`](http://www.datasciencemadesimple.com/in-operator-in-r/)|`filter(df, mpg %in% c(20,21,22))`| Checks if the given value(s) on the left side of the operator are in the vector or other R object defined on the right side of the operator. It returns a logical `TRUE` or `FALSE` statement.|
+| Base `R`| [`|>`](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/)|`df <- df |> select('new_variable_name')`| Funnels a data.frame through additional operations |
 | `dplyr`| [`%>%`](https://www.rdocumentation.org/packages/magrittr/versions/1.5/topics/%25%26gt%3B%25)|`df <- df %>% select('new_variable_name')`| Funnels a data.frame through tidyverse operations |
 | `dplyr`| [`mutate()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/mutate)| `df <- mutate(df, newcol = wt/2.2)`| Adds a new column that is a function of existing columns|
 | `dplyr`| [`relocate()`](https://dplyr.tidyverse.org/reference/relocate.html)| `df_carb <- relocate(.data = df, wt, .before = mpg)`| Reorder columns in a data frame or tibble|
