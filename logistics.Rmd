@@ -67,6 +67,7 @@ By the end of the course, learners should be comfortable:
 - Class sessions will be recorded and later posted.
 - If you have a question not covered during class, please post it on Slack. This allows everyone to see it. If another student does not answer your question (which we encourage!), we will try to answer it within 24 hours. If you feel uncomfortable posting a question publicly, let a TA or instructor know your question and we will post it for you anonymously.
 - To get the most out of this class, if possible, we suggest working virtually with a **large monitor or two screens**. This setup allows you to follow along on Zoom while also doing the hands-on coding.  
+- If possible, we also **highly suggest** working in RStudio on the **same computer** as the one you connect with Zoom and or Slack, so that you can copy paste your code if needed or share your code form your screen.
 - <details><summary> <span style = "color: #5383bb;"> **Please click here for details about using Zoom.**</span></summary>
 
   Zoom + Working Virtually
