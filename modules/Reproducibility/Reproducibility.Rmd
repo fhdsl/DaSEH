@@ -238,8 +238,8 @@ To help make your work more reproducible:
 
 🏠 [Class Website](https://daseh.org/)    
 💻 [Lab](https://daseh.org/modules/Reproducibility/lab/Reproducibility_Lab.Rmd)  
-🗒 [Day 2 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)  
-🗒 [RStudio Cheatsheet](https://d33wubrfki0l68.cloudfront.net/374f4c769f97c4ded7300d521eb59b24168a7261/c72ad/lesson-images/cheatsheets-1-cheatsheet.png)
+📃 [Day 2 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-2.pdf)  
+📃 [Posit's R Markdown Cheatsheet](https://rstudio.github.io/cheatsheets/rmarkdown.pdf)
 
 ```{r, fig.alt="The End", out.width = "25%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
