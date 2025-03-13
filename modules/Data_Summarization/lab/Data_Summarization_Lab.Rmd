@@ -46,7 +46,7 @@ What was the largest population, according to the 2010 census? Use `summarize` a
 
 ```
 # General format 
-DATA_TIBBLE %>% 
+DATA_TIBBLE |> 
     summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN))
 ```
 
@@ -62,7 +62,7 @@ Modify your code from 1.3 to add the smallest population among census tracts. Us
 
 ```
 # General format 
-DATA_TIBBLE %>% 
+DATA_TIBBLE |> 
     summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN),
               SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN)
     )
@@ -83,7 +83,7 @@ Summarize the `ces` data to get the mean of both the `TotalPop` and `Pesticides`
 
 ```
 # General format 
-DATA_TIBBLE %>% 
+DATA_TIBBLE |> 
     summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE),
               SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE)
     )
@@ -107,7 +107,7 @@ Filter any zeros from the `Pesticides` column out of `ces`. Use `filter()`. Assi
 
 ```
 # General format 
-DATA_TIBBLE %>% filter(LOGICAL_COMPARISON)
+DATA_TIBBLE |> filter(LOGICAL_COMPARISON)
 ```
 
 ```{r P.3aresponse}
@@ -147,8 +147,8 @@ How many census tracts are there in each county? Use `group_by()`, `summarize()`
 
 ```
 # General format 
-DATA_TIBBLE %>% 
-    group_by(GROUPING_COLUMN_NAME) %>% 
+DATA_TIBBLE |> 
+    group_by(GROUPING_COLUMN_NAME) |> 
     summarize(SUMMARY_COLUMN_NAME = n())
 ```
 
@@ -188,7 +188,7 @@ Modify code from 2.3 (the code that only groups by county) to also summarize by 
 
 Take your code from the above question P.4 and do the following:
 
-- Add another pipe (`%>%`)
+- Add another pipe (`|>`)
 - Add the `arrange()` to sort the output by the summarized column "mean".
 
 ```{r P.5response}

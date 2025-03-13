@@ -200,7 +200,7 @@ sars_ww <-
   read_csv("https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv") 
  
 # Selecting a few columns for easy viewing
-sars_ww <- sars_ww %>% select(town_name, date_start)
+sars_ww <- sars_ww |> select(town_name, date_start)
 ```
 
 ## Class conversion in a dataset
@@ -216,7 +216,7 @@ sars_ww
 We would need to use `mutate()` to help us modify that column.
 
 ```{r}
-sars_ww %>% 
+sars_ww |> 
   mutate(date_start_fixed = mdy(date_start))
 ```
 

@@ -37,7 +37,7 @@ Reassign to co2_long.
 
 ```
 # General format
-new_data <- old_data %>% pivot_longer(cols = colname(s))
+new_data <- old_data |> pivot_longer(cols = colname(s))
 ```
 
 ```{r 1.2response}
@@ -52,7 +52,7 @@ Reassign to co2_long.
 
 ```
 # General format
-new_data <- old_data %>% filter(colname %in% c(...))
+new_data <- old_data |> filter(colname %in% c(...))
 ```
 
 ```{r 1.3response}
@@ -65,7 +65,7 @@ Use `pivot_wider` to reshape "co2_long". Use "county" for the `names_from` argum
 
 ```
 # General format
-new_data <- old_data %>% pivot_wider(names_from = column1, values_from = column2)
+new_data <- old_data |> pivot_wider(names_from = column1, values_from = column2)
 ```
 
 ```{r 1.4response}
@@ -89,7 +89,7 @@ Tip: you can adjust scientific notation with `options(scipen=<n>)`
 
 ### P.1
 
-Take the code from Questions 1.1 - 1.5. Chain all of this code together using the pipe ` %>% `. Call your data `co2_compare`.
+Take the code from Questions 1.1 - 1.5. Chain all of this code together using the pipe ` |> `. Call your data `co2_compare`.
 
 ```{r P.1response}
 
@@ -162,7 +162,7 @@ What countries are present in "co2" that are not present in "cc"? Use `anti_join
 
 ```
 # General format
-anti_join(data1, data2, by = "") %>% select(columnname)
+anti_join(data1, data2, by = "") |> select(columnname)
 ```
 
 ```{r 2.4response}

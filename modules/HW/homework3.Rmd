@@ -127,7 +127,7 @@ library(tidyr)
 ```
 
 
-14\. Using "country_ordered" and "mort_sub", `right_join()` the two datasets by "country". Use the pipe `%>%` to join this dataset to "pop", keeping only the data on the lefthand side of the join. Call this "joined".
+14\. Using "country_ordered" and "mort_sub", `right_join()` the two datasets by "country". Use the pipe `|>` to join this dataset to "pop", keeping only the data on the lefthand side of the join. Call this "joined".
 
 ```{r 14response}
 

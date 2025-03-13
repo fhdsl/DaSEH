@@ -33,11 +33,11 @@ Filter the dataset so that the `CaliforniaCounty` column is equal to "Yuba". Sto
 
 ```
 # General format
-NEW_OBJECT <- OBJECT %>% filter(COLUMNNAME == CRITERIA)
+NEW_OBJECT <- OBJECT |> filter(COLUMNNAME == CRITERIA)
 ```
 
 ```{r 1.2response}
-ces_Yuba <- ces %>% filter(CaliforniaCounty == "Yuba")
+ces_Yuba <- ces |> filter(CaliforniaCounty == "Yuba")
 ```
 
 ### 1.3

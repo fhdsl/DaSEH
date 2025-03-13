@@ -42,7 +42,7 @@ Here we use the `~` and the `.` to indicate that we are using `str_remove` and a
 
 
 ```{r}
-data_to_clean %>% rename_with(~str_remove(., '_percent'))
+data_to_clean |> rename_with(~str_remove(., '_percent'))
 
 ```
 
@@ -77,7 +77,7 @@ Now we can remove the numbers and punctuation in a similar way as we did before 
 Here we go:
 
 ```{r}
-d %>% 
+d |> 
   rename_with(~str_remove(., "[:digit:]+\\. "))
 
 ```

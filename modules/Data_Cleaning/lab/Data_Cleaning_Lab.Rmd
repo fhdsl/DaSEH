@@ -33,9 +33,9 @@ Hint: You first need to `pull` out the vector version of this variable to use th
 
 ```
 # General format
-TIBBLE %>%
-  pull(COLUMN) %>%
-  is.na() %>%
+TIBBLE |>
+  pull(COLUMN) |>
+  is.na() |>
   any()
 ```
 
@@ -124,7 +124,7 @@ Recode the `exposure` variable of the `BloodType` data so that it is consistent.
 
 ```
 # General format
-NEW_TIBBLE <- OLD_TIBBLE %>%
+NEW_TIBBLE <- OLD_TIBBLE |>
   mutate(NEW_COLUMN = case_when(
     OLD_COLUMN %in% c( ... ) ~ ... ,
     OLD_COLUMN %in% c( ... ) ~ ... ,
@@ -167,7 +167,7 @@ Make a new tibble of `BloodType` called `Bloodtype_split` that splits the `type`
 
 ```
 # General format
-NEW_TIBBLE <- OLD_TIBBLE %>%
+NEW_TIBBLE <- OLD_TIBBLE |>
   separate(OLD_COLUMN,
            into = c("NEW_COLUMN1", "NEW_COLUMN2"),
            sep = "SEPARATING_CHARACTER")

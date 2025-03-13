@@ -115,7 +115,7 @@ We want to get some summary statistics on water contamination.
 
 ```
 # General format
-data %>%
+data |>
   summarize(across(
     {vector or tidyselect},
     {some function}
@@ -123,14 +123,14 @@ data %>%
 ```
 
 ```{r 2.2response}
-ces %>%
+ces |>
   summarize(across(
     contains("water"),
     mean
   ))
 
 # Accounting for NA
-ces %>%
+ces |>
   summarize(across(
     contains("water"),
     function(x) mean(x, na.rm = T)
@@ -148,7 +148,7 @@ Convert all columns that are percentiles into proportions.
 
 ```
 # General format
-data %>%
+data |>
   mutate(across(
     {vector or tidyselect},
     {some function}
@@ -156,11 +156,11 @@ data %>%
 ```
 
 ```{r 2.3response}
-ces %>%
+ces |>
   mutate(across(
     contains("Pctl"),
     function(x) x / 100
-  )) %>%
+  )) |>
   select(contains("Pctl"))
 ```
 
@@ -176,11 +176,11 @@ Use `across` and `mutate` to convert all columns starting with the string "PM" i
 * A logical test with `mutate` (x > 10) will automatically fill a column with TRUE/FALSE.
 
 ```{r P.2response}
-ces %>%
+ces |>
   mutate(across(
     starts_with("PM"),
     function(x) x > 10
-  )) %>% 
+  )) |> 
   glimpse() # add glimpse to view the changes
 ```
 
@@ -196,7 +196,7 @@ Take your code from previous question and assign it to the object `ces_dat`.
 
 ```{r P.3response}
 ces_dat <-
-  ces %>%
+  ces |>
   mutate(across(
     starts_with("PM"),
     function(x) x > 10
@@ -208,11 +208,11 @@ ggplot(data = ces_dat, aes(x = Asthma, y = PM2.5)) +
 
 # Make everything a function if you like!
 ces_boxplot <- function() {
-  ces %>%
+  ces |>
     mutate(across(
       starts_with("PM"), 
       function(x) x > 10
-    )) %>% 
+    )) |> 
     ggplot(aes(x = Asthma, y = PM2.5)) +
     geom_boxplot() +
     labs(x = "ER Visits for Asthma: PM2.5 greater than 10")

@@ -88,7 +88,7 @@ We want to get some summary statistics on water contamination.
 
 ```
 # General format
-data %>%
+data |>
   summarize(across(
     {vector or tidyselect},
     {some function}
@@ -110,7 +110,7 @@ Convert all columns that are percentiles into proportions.
 
 ```
 # General format
-data %>%
+data |>
   mutate(across(
     {vector or tidyselect},
     {some function}

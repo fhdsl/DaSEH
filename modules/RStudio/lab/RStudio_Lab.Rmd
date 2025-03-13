@@ -22,7 +22,7 @@ library(tidyverse)
 
 er <- read_csv(file = "https://daseh.org/data/CO_ER_heat_visits.csv")
 # keep non-missing data
-er_2 <- er %>%
+er_2 <- er |>
   filter(!is.na(rate))
 ```
 
@@ -38,7 +38,7 @@ Here is code that will make a plot of some data.
 
 ```{r out.width = "100%"}
 # keep only some counties
-er_3 <- er_2 %>%
+er_3 <- er_2 |>
   filter(county %in% c("Arapahoe", "Denver", "Jefferson", "Larimer"))
 
 palette <- c(

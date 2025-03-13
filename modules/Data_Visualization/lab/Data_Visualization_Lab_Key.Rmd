@@ -21,7 +21,7 @@ Load the CalEnviroScreen data from  the link www.daseh.org/data/CalEnviroScreen_
 
 ```{r}
 ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
-ces_sub <- ces %>% filter(CaliforniaCounty %in% c("Fresno", "Merced", "Placer", "Sonoma", "Yolo"))
+ces_sub <- ces |> filter(CaliforniaCounty %in% c("Fresno", "Merced", "Placer", "Sonoma", "Yolo"))
 ```
 
 ### 1.1
@@ -113,7 +113,7 @@ Create a boxplot (with the `geom_boxplot()` function) using the `ces_sub` data, 
 
 
 ```{r P1response}
-ces_sub %>%
+ces_sub |>
   ggplot(aes(x = CaliforniaCounty, y = DrinkingWater)) +
   geom_boxplot()
 ```

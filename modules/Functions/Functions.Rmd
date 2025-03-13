@@ -179,10 +179,10 @@ loud(word = "hooray!")
 <!-- We can use `filter(row_number() == n)` to extract a row of a tibble: -->
 
 <!-- ```{r message=FALSE} -->
-<!-- get_row <- function(dat, row) dat %>% filter(row_number() == row) -->
+<!-- get_row <- function(dat, row) dat |> filter(row_number() == row) -->
 
 <!-- ces <- calenviroscreen -->
-<!-- ces_1_8 <- ces %>% select(1:8) -->
+<!-- ces_1_8 <- ces |> select(1:8) -->
 <!-- ``` -->
 
 <!-- ```{r} -->
@@ -196,7 +196,7 @@ loud(word = "hooray!")
 ```{r}
 # get means and missing for a specific column
 get_summary <- function(dataset, col_name) {
-    dataset %>%  
+    dataset |>  
     summarise(mean = mean({{col_name}}, na.rm = TRUE),
               na_count = sum(is.na({{col_name}})))
 }
@@ -259,7 +259,7 @@ You can also pipe into your function.
 
 ```{r comment=""}
 sapply(er, class) 
-# also: er %>% sapply(class)
+# also: er |> sapply(class)
 ```
 
 
@@ -268,9 +268,9 @@ sapply(er, class)
 Use the `div_100` function we created earlier to convert 0-100 percentiles to proportions.
 
 ```{r}
-er %>%
-  select(ends_with("cl")) %>%
-  sapply(div_100) %>%
+er |>
+  select(ends_with("cl")) |>
+  sapply(div_100) |>
   head()
 ```
 
@@ -280,9 +280,9 @@ er %>%
 Also called "anonymous function".
 
 ```{r comment=""}
-er %>%
-  select(ends_with("cl")) %>%
-  sapply(function(x) x / 100) %>%
+er |>
+  select(ends_with("cl")) |>
+  sapply(function(x) x / 100) |>
   head()
 ```
 
@@ -290,9 +290,9 @@ er %>%
 ## Anonymous functions: alternative syntax
 
 ```{r comment=""}
-er %>%
-  select(ends_with("cl")) %>%
-  sapply(\(x) x / 100) %>%
+er |>
+  select(ends_with("cl")) |>
+  sapply(\(x) x / 100) |>
   head()
 ```
 
@@ -305,7 +305,7 @@ Already know how to use functions to modify columns using `mutate()` or calculat
 
 
 ```{r}
-er %>%
+er |>
   summarize(max_visits = max(visits, na.rm = T),
             max_rate = max(rate, na.rm = T))
 ```
@@ -333,7 +333,7 @@ mutate(across(<columns>,function))
 Combining with `summarize()`
 
 ```{r warning=FALSE}
-er %>%
+er |>
   summarize(across(
     c(visits, rate),
     mean # no parentheses
@@ -345,7 +345,7 @@ er %>%
 Add anonymous function to include additional arguments (e.g., `na.rm = T`).
 
 ```{r warning=FALSE}
-er %>%
+er |>
   summarize(across(
     c(visits, rate),
     function(x) mean(x, na.rm = T)
@@ -357,8 +357,8 @@ er %>%
 Can use with other tidyverse functions like `group_by`!
 
 ```{r}
-er %>%
-  group_by(year) %>% 
+er |>
+  group_by(year) |> 
   summarize(across(
     c(visits, rate),
     function(x) mean(x, na.rm = T)
@@ -370,8 +370,8 @@ er %>%
 Using different `tidyselect()` options (e.g., `starts_with()`, `ends_with()`, `contains()`)
 
 ```{r warning=FALSE}
-er %>% 
-  group_by(year) %>%
+er |> 
+  group_by(year) |>
   summarize(across(contains("cl"), mean, na.rm=T))
 ```
 
@@ -386,8 +386,8 @@ or
 ```replace_na({vector}, {single value})```
 
 ```{r warning=FALSE, message=FALSE}
-yearly_co2 %>%
-  select(country, starts_with("194")) %>%
+yearly_co2 |>
+  select(country, starts_with("194")) |>
   mutate(across(
     c(`1943`, `1944`, `1945`),
     function(x) replace_na(x, replace = 0)
@@ -426,15 +426,15 @@ df_list <- list(AQ = airquality, er = er, yearly_co2 = yearly_co2)
 
 ```{r}
 df_list <- 
-  df_list %>% 
+  df_list |> 
   sapply(function(x) select(x, where(is.numeric)))
 ```
 
 ## Multiple data frames: `sapply` {.smaller}
 
 ```{r}
-df_list %>% sapply(nrow)
-df_list %>% sapply(colMeans, na.rm = TRUE)
+df_list |> sapply(nrow)
+df_list |> sapply(colMeans, na.rm = TRUE)
 ```
 
 
