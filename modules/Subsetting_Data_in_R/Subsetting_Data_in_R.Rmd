@@ -728,7 +728,7 @@ head(er_30_Den)
 
 ## Using the `pipe` (comes with `dplyr`):
 
-The pipe `|>` makes this much more readable.  It reads left side "pipes" into right side.  RStudio `CMD/Ctrl + Shift + M` shortcut. Pipe `er_30` into `filter`, then pipe that into `select`:
+The pipe `|>` makes this much more readable.  It reads left side "pipes" into right side.  Pipe `er_30` into `filter`, then pipe that into `select`:
 
 
 ```{r}
@@ -737,11 +737,16 @@ er_30 |> filter(year > 2000 & county == "Denver") |> select(year, rate)
 
 ## Alternative Pipes
 
-There are multiple ways to write a pipe and you might see these (they work the same!):
+There are multiple ways to write a pipe and you might also see this (they work the same!):
 
-         |>
-
-         |>
+        %>%  - called the tydiverse pipe
+        
+  RStudio `CMD/Ctrl + Shift + M` shortcut.  
+  We find that people often mix up `%>%` and `%in%`.
+  
+        |> - called the base pipe
+  
+  Follow this [link to add a shortcut](https://stackoverflow.com/questions/68667933/how-to-fast-insert-new-pipe-operator-in-rstudio)
 
 # Adding/Removing Columns
 
