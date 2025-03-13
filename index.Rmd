@@ -40,7 +40,9 @@ knitr::include_graphics("images/class.jpg")
 _`r config::get("online_dates")`_  
 _`r config::get("online_times")`_
 
-Two-week online course in R programming foundations.
+Two-week online course in R programming foundations. 
+
+To get the most out of this part of the program, if possible, we suggest working virtually with a **large monitor or two screens**. This setup allows you to follow along on Zoom while also doing the hands-on coding. 
 
 <br>
 
