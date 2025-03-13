@@ -38,11 +38,11 @@ Reassign to co2_long.
 
 ```
 # General format
-new_data <- old_data %>% pivot_longer(cols = colname(s))
+new_data <- old_data |> pivot_longer(cols = colname(s))
 ```
 
 ```{r 1.2response}
-co2_long <- co2 %>% pivot_longer(cols = !country)
+co2_long <- co2 |> pivot_longer(cols = !country)
 ```
 
 ### 1.3
@@ -53,11 +53,11 @@ Reassign to co2_long.
 
 ```
 # General format
-new_data <- old_data %>% filter(colname %in% c(...))
+new_data <- old_data |> filter(colname %in% c(...))
 ```
 
 ```{r 1.3response}
-co2_long <- co2_long %>%
+co2_long <- co2_long |>
   filter(country %in% c("Indonesia", "Canada"))
 ```
 
@@ -67,11 +67,11 @@ Use `pivot_wider` to reshape "co2_long". Use "county" for the `names_from` argum
 
 ```
 # General format
-new_data <- old_data %>% pivot_wider(names_from = column1, values_from = column2)
+new_data <- old_data |> pivot_wider(names_from = column1, values_from = column2)
 ```
 
 ```{r 1.4response}
-co2_wide <- co2_long %>%
+co2_wide <- co2_long |>
   pivot_wider(
     names_from = country,
     values_from = value
@@ -85,7 +85,7 @@ Using `co2_wide`, drop all NA values using `drop_na()`.
 Reassign to co2_wide. Compare the years - what conclusions can you draw?
 
 ```{r 1.5response}
-co2_wide <- co2_wide %>% drop_na()
+co2_wide <- co2_wide |> drop_na()
 ```
 
 Tip: you can adjust scientific notation with `options(scipen=<n>)` 
@@ -95,14 +95,14 @@ Tip: you can adjust scientific notation with `options(scipen=<n>)`
 
 ### P.1
 
-Take the code from Questions 1.1 - 1.5. Chain all of this code together using the pipe ` %>% `. Call your data `co2_compare`.
+Take the code from Questions 1.1 - 1.5. Chain all of this code together using the pipe ` |> `. Call your data `co2_compare`.
 
 ```{r P.1response}
 co2_compare <-
-  read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv") %>%
-  pivot_longer(cols = !country) %>%
-  filter(country %in% c("Indonesia", "Canada")) %>%
-  pivot_wider(names_from = country, values_from = value) %>% 
+  read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv") |>
+  pivot_longer(cols = !country) |>
+  filter(country %in% c("Indonesia", "Canada")) |>
+  pivot_wider(names_from = country, values_from = value) |> 
   drop_na()
   
 co2_compare
@@ -117,10 +117,10 @@ Modify the code from Question P.1:
 
 ```{r P.2response}
 co2_compare2 <-
-  read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv") %>%
-  pivot_longer(cols = !country) %>%
-  filter(country %in% c("Brazil", "Mexico")) %>%
-  pivot_wider(names_from = country, values_from = value) %>% 
+  read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv") |>
+  pivot_longer(cols = !country) |>
+  filter(country %in% c("Brazil", "Mexico")) |>
+  pivot_wider(names_from = country, values_from = value) |> 
   drop_na()
 
 co2_compare2
@@ -132,7 +132,7 @@ Add on to Question P.1 to add a column. The column values for each line should b
 
 ```{r P.3response}
 co2_compare <-
-  co2_compare %>% 
+  co2_compare |> 
   mutate(Canada_greater = Canada > Indonesia)
 
 co2_compare
@@ -148,7 +148,7 @@ Open the `Yearly_CC_Disasters` dataset using the url below. Save the dataset as 
 "https://daseh.org/data/Yearly_CC_Disasters.csv"
 
 ```{r 2.1response}
-cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv") %>%
+cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv") |>
   rename(country = Country)
 ```
 
@@ -189,12 +189,12 @@ What countries are present in "co2" that are not present in "cc"? Use `anti_join
 
 ```
 # General format
-anti_join(data1, data2, by = "") %>% select(columnname)
+anti_join(data1, data2, by = "") |> select(columnname)
 ```
 
 ```{r 2.4response}
-anti_join(co2, cc, by = "country") %>% select(country)
-anti_join(cc, co2, by = "country") %>% select(country) %>% distinct()
+anti_join(co2, cc, by = "country") |> select(country)
+anti_join(cc, co2, by = "country") |> select(country) |> distinct()
 ```
 
 
@@ -205,7 +205,7 @@ anti_join(cc, co2, by = "country") %>% select(country) %>% distinct()
 Take the code from 2.2 and save the output as an object "co2_cc". Filter the dataset. Filter so that you only keep Indonesia and Canada.
 
 ```{r P.4response}
-co2_cc <- full_join(co2, cc, by = "country") %>%
+co2_cc <- full_join(co2, cc, by = "country") |>
   filter(country %in% c("Indonesia", "Canada"))
 ```
 
@@ -226,7 +226,7 @@ Rename:
 Reassign to "co2_cc".
 
 ```{r P.5response}
-co2_cc <- co2_cc %>% select(country, `2014.x`, Indicator, `2014.y`) %>%
+co2_cc <- co2_cc |> select(country, `2014.x`, Indicator, `2014.y`) |>
   rename(emissions = `2014.x`, disasters = `2014.y`)
 ```
 
@@ -239,7 +239,7 @@ Reassign to "co2_cc".
 
 ```{r P.6response}
 library(stringr)
-co2_cc <- co2_cc %>% mutate(Indicator = str_remove(
+co2_cc <- co2_cc |> mutate(Indicator = str_remove(
   Indicator,
   "Climate related disasters frequency, Number of Disasters: "
 ))
@@ -251,7 +251,7 @@ co2_cc <- co2_cc %>% mutate(Indicator = str_remove(
 Pivot the dataset so that there are columns for country, emissions, and a column for each "Indicator".
 
 ```{r P.7response}
-co2_cc %>% pivot_wider(
+co2_cc |> pivot_wider(
   names_from = Indicator,
   values_from = disasters
 )

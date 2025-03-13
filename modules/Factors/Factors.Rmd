@@ -112,7 +112,7 @@ er_visits_age_subset <- slice_sample(er_visits_age, n = 32)
 Let's make a plot first.
 
 ```{r, fig.height= 3, warning = F}
-er_visits_age_subset %>%
+er_visits_age_subset |>
   ggplot(aes(x = age, y = rate)) +
   geom_boxplot() +
   theme_bw(base_size = 12) # make all labels size 12
@@ -126,13 +126,13 @@ Currently `age` is class `character` but let's change that to class `factor` whi
 
 ```{r}
 er_visits_age_fct <-
-  er_visits_age_subset %>%
+  er_visits_age_subset |>
   mutate(age = factor(age,
     levels = c("0-4 years", "5-14 years", "15-34 years", "35-64 years", "65+ years")
   ))
 
-er_visits_age_fct %>%
-  pull(age) %>%
+er_visits_age_fct |>
+  pull(age) |>
   levels()
 ```
 
@@ -147,7 +147,7 @@ head(er_visits_age_fct)
 Now let's make our plot again:
 
 ```{r, fig.height= 3, warning = FALSE}
-er_visits_age_fct %>%
+er_visits_age_fct |>
   ggplot(aes(x = age, y = rate)) +
   geom_boxplot() +
   theme_bw(base_size = 12)
@@ -160,7 +160,7 @@ Now that's more like it! Notice how the data is automatically plotted in the ord
 Character data is arranged alphabetically (if letters) or by ascending first number (if numbers).
 
 ```{r}
-er_visits_age_subset %>%
+er_visits_age_subset |>
   arrange(age)
 ```
 
@@ -171,7 +171,7 @@ Notice that the order is not what we would hope for!
 Factor data is arranged by level.
 
 ```{r}
-er_visits_age_fct %>%
+er_visits_age_fct |>
   arrange(age)
 ```
 
@@ -182,8 +182,8 @@ Nice! Now this is what we would want!
 Tables grouped by a character are arranged alphabetically (if letters) or by ascending first number (if numbers).
 
 ```{r}
-er_visits_age_subset %>%
-  group_by(age) %>%
+er_visits_age_subset |>
+  group_by(age) |>
   summarize(total_visits = sum(visits, na.rm = T))
 ```
 
@@ -192,8 +192,8 @@ er_visits_age_subset %>%
 Tables grouped by a factor are arranged by level.
 
 ```{r}
-er_visits_age_fct %>%
-  group_by(age) %>%
+er_visits_age_fct |>
+  group_by(age) |>
   summarize(total_visits = sum(visits, na.rm = T))
 ```
 
@@ -204,7 +204,7 @@ What if we wanted to order `age` by increasing `rate`?
 ```{r, fig.height= 3, warning=FALSE}
 library(forcats)
 
-er_visits_age_fct %>%
+er_visits_age_fct |>
   ggplot(aes(x = age, y = rate)) +
   geom_boxplot() +
   theme_bw(base_size = 12)
@@ -229,7 +229,7 @@ We can order a factor by another variable by using the `fct_reorder()` function 
 ```{r, fig.height= 3, warning = F}
 library(forcats)
 
-er_visits_age_fct %>%
+er_visits_age_fct |>
   ggplot(aes(x = fct_reorder(age, rate, mean), y = rate)) +
   geom_boxplot() +
   labs(x = "Age Category") +
@@ -241,7 +241,7 @@ er_visits_age_fct %>%
 ```{r, fig.height= 3, warning = F}
 library(forcats)
 
-er_visits_age_fct %>%
+er_visits_age_fct |>
   ggplot(aes(x = fct_reorder(age, rate, mean, .desc = TRUE), y = rate)) +
   geom_boxplot() +
   labs(x = "Age Category") +
@@ -251,13 +251,13 @@ er_visits_age_fct %>%
 ## forcats for ordering... can be used to sort datasets
 
 ```{r, fig.height= 3, warning=FALSE}
-er_visits_age_fct %>% pull(age) %>% levels() # By year order
-er_visits_age_fct <- er_visits_age_fct %>%
+er_visits_age_fct |> pull(age) |> levels() # By year order
+er_visits_age_fct <- er_visits_age_fct |>
   mutate(
     age = fct_reorder(age, rate, mean)
   )
 
-er_visits_age_fct %>% pull(age) %>% levels() # by increasing mean visits
+er_visits_age_fct |> pull(age) |> levels() # by increasing mean visits
 ```
 
 ## Checking Proportions with `fct_count()`
@@ -265,8 +265,8 @@ er_visits_age_fct %>% pull(age) %>% levels() # by increasing mean visits
 The `fct_count()` function of the `forcats` package is helpful for checking that the proportions of each level for a factor are similar. Need the `prop = TRUE` argument otherwise just counts are reported.
 
 ```{r}
-er_visits_age_fct %>%
-  pull(age) %>%
+er_visits_age_fct |>
+  pull(age) |>
   fct_count(prop = TRUE)
 ```
 

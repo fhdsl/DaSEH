@@ -728,11 +728,11 @@ head(er_30_Den)
 
 ## Using the `pipe` (comes with `dplyr`):
 
-The pipe `%>%` makes this much more readable.  It reads left side "pipes" into right side.  RStudio `CMD/Ctrl + Shift + M` shortcut. Pipe `er_30` into `filter`, then pipe that into `select`:
+The pipe `|>` makes this much more readable.  It reads left side "pipes" into right side.  RStudio `CMD/Ctrl + Shift + M` shortcut. Pipe `er_30` into `filter`, then pipe that into `select`:
 
 
 ```{r}
-er_30 %>% filter(year > 2000 & county == "Denver") %>% select(year, rate)
+er_30 |> filter(year > 2000 & county == "Denver") |> select(year, rate)
 ```
 
 ## Alternative Pipes
@@ -741,7 +741,7 @@ There are multiple ways to write a pipe and you might see these (they work the s
 
          |>
 
-         %>%
+         |>
 
 # Adding/Removing Columns
 
@@ -786,7 +786,7 @@ head(er_30, 4)
 
 
 ```{r}
-er_30 <- er_30 %>% mutate(newcol = newcol / 2)
+er_30 <- er_30 |> mutate(newcol = newcol / 2)
 head(er_30,4)
 ```
 
@@ -831,7 +831,7 @@ select(er_30, !c(newcol, year))
 The `select` function can reorder columns.
 ```{r}
 head(er_30, 2)
-er_30 %>% select(year, rate, county) %>%
+er_30 |> select(year, rate, county) |>
 head(2)
 ```
 
@@ -897,9 +897,9 @@ arrange(er_30, desc(year))
 
 You can combine increasing and decreasing orderings:
 ```{r}
-arrange(er_30, rate, desc(year)) %>% head(n = 2)
+arrange(er_30, rate, desc(year)) |> head(n = 2)
 
-arrange(er_30, desc(year), rate) %>% head(n = 2)
+arrange(er_30, desc(year), rate) |> head(n = 2)
 ```
 
 ## GUT CHECK: What function would be useful for changing a column to be a percentage instead of a ratio?
@@ -911,7 +911,7 @@ B. `select()`
 C. `mutate()`
 
 
-## GUT CHECK: How would we interpret `er_30 %>% filter(year > 2020) %>% select(year, rate)`?
+## GUT CHECK: How would we interpret `er_30 |> filter(year > 2020) |> select(year, rate)`?
 
 A. Get the `er_30` data, then filter it for rows with `year` values over 2020, then select only the `year` and `rate` columns.
 
@@ -926,7 +926,7 @@ B. Get the `er_30` data, then filter it rows with `year` values over 2020, then 
 - you can do sequential steps in a few ways:
     1. nesting them inside one another using parentheses `()`
     2. creating intermediate data objects in between
-    3. using pipes `%>%` (like "then" statements)
+    3. using pipes `|>` (like "then" statements)
 - `select()` and `relocate()` can be used to reorder columns
 - `arrange()` can be used to reorder rows
 - can remove rows with `filter()`
@@ -1032,7 +1032,7 @@ Using the base R `order()` function.
 
 ```{r}
 order(colnames(er_30))
-er_30 %>% select(order(colnames(er_30)))
+er_30 |> select(order(colnames(er_30)))
 ```
 
 ## `which()` function
@@ -1041,7 +1041,7 @@ Instead of removing rows like filter, `which()` simply shows where the values oc
 
 ```{r}
 which(select(er_30, year) == 2012)
-select(er_30, year) == 2012 %>% head(10)
+select(er_30, year) == 2012 |> head(10)
 ```
 
 ## Remove a column in base R

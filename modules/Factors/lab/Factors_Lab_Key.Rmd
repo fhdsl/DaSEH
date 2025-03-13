@@ -19,8 +19,8 @@ Load the CalEnviroScreen dataset and use `select` to choose the `CaliforniaCount
 
 ```{r}
 ces <- 
-  read_csv("https://daseh.org/data/CalEnviroScreen_data.csv") %>% 
-  select(CaliforniaCounty, ImpWaterBodies, ZIP) %>%
+  read_csv("https://daseh.org/data/CalEnviroScreen_data.csv") |> 
+  select(CaliforniaCounty, ImpWaterBodies, ZIP) |>
   filter(CaliforniaCounty %in% c("Amador", "Napa", "Ventura", "San Francisco"))
 ```
 
@@ -29,7 +29,7 @@ ces <-
 Create a boxplot showing the difference in groundwater contamination threats (`ImpWaterBodies`) among Amador, Napa, San Francisco, and Ventura counties (`CaliforniaCounty`). **Hint**: Use `aes(x = CaliforniaCounty, y = ImpWaterBodies)` and `geom_boxplot()`.
 
 ```{r 1.1response}
-ces %>%
+ces |>
   ggplot(aes(x = CaliforniaCounty, y = ImpWaterBodies)) +
   geom_boxplot()
 ```
@@ -39,7 +39,7 @@ ces %>%
 Use `count` to count up the number of observations of data for each `CaliforniaCounty` group.
 
 ```{r 1.2response}
-ces %>%
+ces |>
   count(CaliforniaCounty)
 ```
 
@@ -49,7 +49,7 @@ Make `CaliforniaCounty` a factor using the `mutate` and `factor` functions. Use 
 
 ```{r 1.3response}
 ces_fct <-
-  ces %>% mutate(CaliforniaCounty = factor(CaliforniaCounty,
+  ces |> mutate(CaliforniaCounty = factor(CaliforniaCounty,
     levels = c("San Francisco", "Ventura", "Napa", "Amador")
   ))
 ```
@@ -59,11 +59,11 @@ ces_fct <-
 Repeat question 1.1 and 1.2 using the "ces_fct" data. You should see different ordering in the plot and `count` table.
 
 ```{r 1.4response}
-ces_fct %>%
+ces_fct |>
   ggplot(aes(x = CaliforniaCounty, y = ImpWaterBodies)) +
   geom_boxplot()
 
-ces_fct %>%
+ces_fct |>
   count(CaliforniaCounty)
 ```
 
@@ -74,8 +74,8 @@ ces_fct %>%
 Subset `ces_fct` so that it only includes data from Ventura county. Then convert `ZIP` (zip code) into a factor using the `mutate` and `factor` functions. Do not add a `levels =` argument.
 
 ```{r P.1response}
-ces_Ventura <- ces_fct %>% 
-  filter(CaliforniaCounty == "Ventura") %>%
+ces_Ventura <- ces_fct |> 
+  filter(CaliforniaCounty == "Ventura") |>
   mutate(ZIP = factor(ZIP))
 ```
 
@@ -88,8 +88,8 @@ We want to create a new column that contains the group-level median values for `
 - **Hint**: Since you have already done `group_by`, a median `ImpWaterBodies` will automatically be created for each unique level in `ZIP`. Use the `median` function with `na.rm = TRUE`.
 
 ```{r P.2response}
-ces_Ventura <- ces_Ventura %>%
-  group_by(ZIP) %>%
+ces_Ventura <- ces_Ventura |>
+  group_by(ZIP) |>
   mutate(med_ImpWaterBodies = median(ImpWaterBodies, na.rm = TRUE))
 ```
 
@@ -111,8 +111,8 @@ Which zipcode has the largest median measure of water pollution?
 ```{r P.3response}
 library(forcats)
 
-ces_Ventura_plot <- ces_Ventura %>%
-  drop_na() %>%
+ces_Ventura_plot <- ces_Ventura |>
+  drop_na() |>
   ggplot(aes(
     x = fct_reorder(
       ZIP, med_ImpWaterBodies

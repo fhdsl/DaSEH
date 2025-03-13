@@ -144,7 +144,7 @@ The following code creates a column `weight_cat` with TRUE/FALSE values.
 ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
 
 ces_bw <- 
-  ces %>% 
+  ces |> 
   mutate(weight_cat = LowBirthWeight > 5)
 ```
 

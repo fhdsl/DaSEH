@@ -89,8 +89,8 @@ Let's plot county outlines and major cities.
 library(tidyverse) # `map_data()` from ggplot2
 library(maps) # `us.cities` data
 
-wa_county <- map_data("county") %>% filter(region == "washington")
-wa_cities <- us.cities %>% filter(country.etc == "WA")
+wa_county <- map_data("county") |> filter(region == "washington")
+wa_cities <- us.cities |> filter(country.etc == "WA")
 
 plot_1 <- 
   ggplot() + 
@@ -135,7 +135,7 @@ Let's fill each county based on its population.
 library(tidyverse)
 library(usmap) # `countypop` data and the `plot_usmap()` function
 
-wa_dat <- countypop %>% filter(abbr == "WA")
+wa_dat <- countypop |> filter(abbr == "WA")
 
 plot_3 <-
   plot_usmap(data = wa_dat, values = "pop_2022", include = c("WA")) +
@@ -159,18 +159,18 @@ library(usmap) # `countypop` data
 library(maps) # `us.cities` data
 
 # Get county boundaries
-wa_county <- map_data("county") %>% filter(region == "washington")
+wa_county <- map_data("county") |> filter(region == "washington")
 
 # Get county-level ("subregion") population
-wa_dat <- countypop %>% filter(abbr == "WA") %>%
-  mutate(subregion = tolower(str_remove(county, " County"))) %>%
-  group_by(subregion) %>% summarize(pop_2022 = sum(pop_2022))
+wa_dat <- countypop |> filter(abbr == "WA") |>
+  mutate(subregion = tolower(str_remove(county, " County"))) |>
+  group_by(subregion) |> summarize(pop_2022 = sum(pop_2022))
 
 # Combine the data
-wa_complete <- wa_county %>% inner_join(wa_dat)
+wa_complete <- wa_county |> inner_join(wa_dat)
 
 # Get WA cities and their coordinates
-wa_cities <- us.cities %>% filter(country.etc == "WA")
+wa_cities <- us.cities |> filter(country.etc == "WA")
 ```
 
 ## It can get complicated! `ggplot` fill by county {.codesmall}

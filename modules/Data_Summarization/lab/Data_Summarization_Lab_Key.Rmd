@@ -27,8 +27,8 @@ How many observations/rows are in the `ces` data set? You can use `dim()` or `nr
 ```{r 1.1response}
 nrow(ces)
 dim(ces)
-ces %>% nrow()
-ces %>% count()
+ces |> nrow()
+ces |> count()
 ```
 
 ### 1.2
@@ -40,7 +40,7 @@ NOTE: A census tract a small, relatively permanent area within a county used to 
 What was the total population in the dataset based on the 2010 census? (use `sum()` and the `TotalPop` column)
 
 ```{r 1.2response}
-ces %>% pull(TotalPop) %>% sum()
+ces |> pull(TotalPop) |> sum()
 ```
 
 ### 1.3
@@ -49,12 +49,12 @@ What was the largest population, according to the 2010 census? Use `summarize` a
 
 ```
 # General format 
-DATA_TIBBLE %>% 
+DATA_TIBBLE |> 
     summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN))
 ```
 
 ```{r 1.3response}
-ces %>% 
+ces |> 
   summarize(max = max(TotalPop))
 ```
 
@@ -66,19 +66,19 @@ Modify your code from 1.3 to add the smallest population among census tracts. Us
 
 ```
 # General format 
-DATA_TIBBLE %>% 
+DATA_TIBBLE |> 
     summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN),
               SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN)
     )
 ```
 
 ```{r 1.4response}
-ces %>% 
+ces |> 
   summarize(max = max(TotalPop),
             min = min(TotalPop))
 
 #If your code uses the same name for both summary columns, the output only has one column. The min() summary replaces the max() summary
-test <- ces %>% 
+test <- ces |> 
   summarize(summary = max(TotalPop),
             summary = min(TotalPop))
   
@@ -96,20 +96,20 @@ Summarize the `ces` data to get the mean of both the `TotalPop` and `Pesticides`
 
 ```
 # General format 
-DATA_TIBBLE %>% 
+DATA_TIBBLE |> 
     summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE),
               SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE)
     )
 ```
 
 ```{r P.1response}
-ces %>% summarize(
+ces |> summarize(
   mean_pop = mean(TotalPop, na.rm = TRUE),
   mean_pesticide = mean(Pesticides, na.rm = TRUE)
 )
 
-ces %>%
-  select(TotalPop, Pesticides) %>%
+ces |>
+  select(TotalPop, Pesticides) |>
   colMeans()
 
 ```
@@ -128,11 +128,11 @@ Filter any zeros from the `Pesticides` column out of `ces`. Use `filter()`. Assi
 
 ```
 # General format 
-DATA_TIBBLE %>% filter(LOGICAL_COMPARISON)
+DATA_TIBBLE |> filter(LOGICAL_COMPARISON)
 ```
 
 ```{r P.3aresponse}
-ces_pest <- ces %>% filter(Pesticides != 0)
+ces_pest <- ces |> filter(Pesticides != 0)
 ```
 
 How many census tracts have pesticide values greater than 0?
@@ -140,8 +140,8 @@ How many census tracts have pesticide values greater than 0?
 ```{r P.3bresponse}
 nrow(ces_pest)
 dim(ces_pest)
-ces_pest %>% nrow()
-ces_pest %>% count()
+ces_pest |> nrow()
+ces_pest |> count()
 ```
 
 
@@ -152,7 +152,7 @@ ces_pest %>% count()
 How many census tracts are present in each California county? Use `count()` on the column named `CaliforniaCounty`. Use `ces` as your input data.
 
 ```{r 2.1response}
-ces %>% count(CaliforniaCounty)
+ces |> count(CaliforniaCounty)
 ```
 
 ### 2.2
@@ -160,7 +160,7 @@ ces %>% count(CaliforniaCounty)
 Let's break down the count further. Modify your code from question 2.1 to count census tracts by County AND ZIP code. Use `count()` on the columns named `CaliforniaCounty` and `ZIP`.
 
 ```{r 2.2response}
-ces %>% count(CaliforniaCounty, ZIP)
+ces |> count(CaliforniaCounty, ZIP)
 ```
 
 This isn't the only way we can create this table in R. Let's look at another way to build it.
@@ -171,14 +171,14 @@ How many census tracts are there in each county? Use `group_by()`, `summarize()`
 
 ```
 # General format 
-DATA_TIBBLE %>% 
-    group_by(GROUPING_COLUMN_NAME) %>% 
+DATA_TIBBLE |> 
+    group_by(GROUPING_COLUMN_NAME) |> 
     summarize(SUMMARY_COLUMN_NAME = n())
 ```
 
 ```{r 2.3response}
-ces %>%
-  group_by(CaliforniaCounty) %>%
+ces |>
+  group_by(CaliforniaCounty) |>
   summarize(count = n())
 ```
 
@@ -187,8 +187,8 @@ ces %>%
 Modify your code from 2.3 to also group by `ZIP`.
 
 ```{r 2.4response}
-ces %>%
-  group_by(CaliforniaCounty, ZIP) %>%
+ces |>
+  group_by(CaliforniaCounty, ZIP) |>
   summarize(count = n())
 ```
 
@@ -209,8 +209,8 @@ Modify code from 2.3 (the code that only groups by county) to also summarize by 
 (In the above table, remember that the "count" column is counting the number of census tracts.)
 
 ```{r P.4response}
-ces %>%
-  group_by(CaliforniaCounty) %>%
+ces |>
+  group_by(CaliforniaCounty) |>
   summarize(
     count = n(),
     mean = mean(TotalPop)
@@ -221,15 +221,15 @@ ces %>%
 
 Take your code from the above question P.4 and do the following:
 
-- Add another pipe (`%>%`)
+- Add another pipe (`|>`)
 - Add the `arrange()` to sort the output by the summarized column "mean".
 
 ```{r P.5response}
-ces %>%
-  group_by(CaliforniaCounty) %>%
+ces |>
+  group_by(CaliforniaCounty) |>
   summarize(
     count = n(),
     mean = mean(TotalPop)
-  ) %>%
+  ) |>
   arrange(mean)
 ```

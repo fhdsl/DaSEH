@@ -24,8 +24,8 @@ Upon completion of this session, you will be able to do the following:
 # The str_replace_all creates an absolute url to linked documents. Important because there are word and pdf rendered versions of the syllabus.
 # The filter() step removes all dates but this date to make a smaller table.
 pander::pandoc.table(
-  schedule %>%
-    urls_for_module_details() %>%
+  schedule |>
+    urls_for_module_details() |>
     filter(
       row_number() >= which(str_detect(schedule$`**Day**`, "\\[Day 0\\]")) &
         row_number() < which(str_detect(schedule$`**Day**`, "\\[Day 1\\]"))

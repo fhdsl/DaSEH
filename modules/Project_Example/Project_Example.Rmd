@@ -44,8 +44,8 @@ dim(Happiness)
 To determine how many unique countries there are I used the `unqiue()` function and the `length()` function.
 
 ```{r}
-pull(Happiness, "Country name") %>%
-  unique() %>%
+pull(Happiness, "Country name") |>
+  unique() |>
   length()
 ```
 
@@ -58,7 +58,7 @@ I decided to rename the first variable called `Country name` so that it would no
 
 ```{r}
 
-Happiness <- Happiness %>%
+Happiness <- Happiness |>
   rename("Country_name" = "Country name")
 colnames(Happiness)
 ```
@@ -67,7 +67,7 @@ I can see that this column is renamed, but I then realized that many columns hav
 
 
 ```{r}
-Happiness <- Happiness %>%
+Happiness <- Happiness |>
   rename("Happiness_score" = "Ladder score")
 colnames(Happiness)
 ```
@@ -75,7 +75,7 @@ colnames(Happiness)
 I then decided to arrange the data by `Happiness_score` using the `arrange()` function with the largest score shown first, thus I needed to use `desc()`.
 
 ```{r}
-Happiness <- Happiness %>% arrange(desc(Happiness_score))
+Happiness <- Happiness |> arrange(desc(Happiness_score))
 head(Happiness)
 ```
 
@@ -85,7 +85,7 @@ I could see from this that Finland is the top scoring country and that all of th
 I then wanted to know about the US so I filtered for `United States` for the `Country_name`.
 
 ```{R}
-Happiness %>% filter(Country_name == "United States")
+Happiness |> filter(Country_name == "United States")
 ```
 
 Looks like the score was fairly high for the United States - much higher than Dystopia.
@@ -93,7 +93,7 @@ Looks like the score was fairly high for the United States - much higher than Dy
 I wondered how the US ranked, so I decided to make a variable for rank. To do so I used the `seq()` function to create a sequence of numbers from 1 to 149 the number of countries or rows in the data.
 
 ```{r}
-Happiness <- Happiness %>% mutate(rank = seq(1:149))
+Happiness <- Happiness |> mutate(rank = seq(1:149))
 Happiness$rank
 ```
 
@@ -101,8 +101,8 @@ Happiness$rank
 I then looked again at the US using `filter()`. I used the `pull()` function to get the rank for the US.
 
 ```{r}
-Happiness %>%
-  filter(Country_name == "United States") %>%
+Happiness |>
+  filter(Country_name == "United States") |>
   pull(rank)
 ```
 
@@ -114,7 +114,7 @@ I decided to make a plot of the top 5 countries using `geom_point()` and `ggplot
 First I created a new dataset of just the top 5 ranking countries using the `filter()` function to filter for countries with a `rank` of less than 5.
 
 ```{r}
-top5 <- Happiness %>% filter(rank < 5)
+top5 <- Happiness |> filter(rank < 5)
 
 ggplot(
   data = top5,
@@ -128,7 +128,7 @@ ggplot(
 I felt that this plot could be improved. So first I used I made `Country_name` a factor and then reordered it by the `Happiness_score` variable. 
 
 ```{r}
-top5 <- top5 %>%
+top5 <- top5 |>
   mutate(
     Country_name = as_factor(Country_name),
     Country_name = fct_reorder(Country_name, Happiness_score)
@@ -152,7 +152,7 @@ I then decided to make a plot of a few countries of interest. Since I again want
 ```{r}
 
 
-Happiness <- Happiness %>%
+Happiness <- Happiness |>
   mutate(
     Country_name = as_factor(Country_name),
     Country_name = fct_reorder(Country_name, Happiness_score)
@@ -162,7 +162,7 @@ Happiness <- Happiness %>%
 Now I check out these other countries that I was interested in by filtering for them from the  `Happiness` data set and creating another plot.
 
 ```{r}
-int_Country <- Happiness %>% filter(Country_name %in% c("China", "United States", "India", "Mexico"))
+int_Country <- Happiness |> filter(Country_name %in% c("China", "United States", "India", "Mexico"))
 
 ggplot(
   data = int_Country,
@@ -182,7 +182,7 @@ I then decided to compare different regions. Using `count()` and `tally()` I det
 
 ```{r}
 count(Happiness, `Regional indicator`)
-count(Happiness, `Regional indicator`) %>% tally()
+count(Happiness, `Regional indicator`) |> tally()
 ```
 
 
@@ -212,9 +212,9 @@ I then decided to perform a simple analysis to compare countries in different re
 I first filtered the data to create two new data sets for these regions only and then performed a t test without assuming equal variance between the scores for the countries for each region.
 
 ```{r}
-West_Eur <- Happiness %>%
+West_Eur <- Happiness |>
   filter(`Regional indicator` == "Western Europe")
-NAmer <- Happiness %>%
+NAmer <- Happiness |>
   filter(`Regional indicator` == "North America and ANZ")
 
 t.test(
