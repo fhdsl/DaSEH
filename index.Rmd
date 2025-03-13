@@ -42,7 +42,6 @@ _`r config::get("online_times")`_
 
 Two-week online course in R programming foundations. 
 
-To get the most out of this part of the program, if possible, we suggest downloading Zoom and RStudio on the same computer, so that you can copy paste your code if needed or share your code form your screen. 
 
 <br>
 
