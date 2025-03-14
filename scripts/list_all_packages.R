@@ -54,7 +54,7 @@ file.rename(from = df$source, to = file.path(df$destination)) # move files
 new_r_files = new_r_files[ !grepl("Basic_R.R", new_r_files)] # remove one problematic file - with errors on purpose
 all_func = sapply(new_r_files, list.functions.in.file) 
 
-write_rds(all_func, file = "resources/raw_all_func_forcheatsheets.rds")
+write_rds(all_func, file = "resources/raw_all_func_forpuzzles.rds")
 #### if copying files
 #file.copy(all_rmd, to = "modules/R_files") # copy to new R_files dir
 #new_r_files <-gsub(pattern = "./", replacement = "./modules/R_files/", all_r_files)
