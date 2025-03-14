@@ -6,12 +6,12 @@ ss = function(x,pattern,slot=1,...) {
 }
 
 ## find RMDs
-files <- dir(pattern = '[.]R', recursive = TRUE)
-files = files[ !grepl("scratch", files)]
-files = files[ !grepl("all_packages", files)]
+files <- dir(pattern = '[.]Rmd', recursive = TRUE)
+
+files = files[ grepl("modules", files)]
 # files = files[ files != "index.Rmd" ]
 # files = files[ !grepl("HW", files)]
-files = files[ basename(files) != "illusion.Rmd" ]
+#files = files[ basename(files) != "illusion.Rmd" ]
 
 ## read in code
 fileList = lapply(files, scan, what = "character()", sep="\n")
@@ -19,12 +19,13 @@ allFiles = unlist(fileList)
 allFiles = trimws(allFiles)
 libCalls = allFiles[grep("^(library|require)", allFiles)]
 theLibs = ss(ss(libCalls, "(", 2, fixed = TRUE), ")", fixed=TRUE)
-theLibs = ss(theLibs, ",", 1, fixed = TRUE)
-theLibs = ss(theLibs, '"', 1, fixed = TRUE)
-theLibs = ss(theLibs, " ", 1, fixed = TRUE)
+#theLibs = ss(theLibs, ",", 1, fixed = TRUE)
+#theLibs = ss(theLibs, '"', 1, fixed = TRUE)
+#theLibs = ss(theLibs, " ", 1, fixed = TRUE)
 theLibs = unique(theLibs)
 theLibs = sort(theLibs)
-
+theLibs = theLibs[ !grepl("replace_with_package_name", theLibs)]
+theLibs = theLibs[ !grepl("ThemePark|ottrpal", theLibs)]
 writeLines(theLibs, con = "./resources/all_the_packages.txt")
 
 sapply(theLibs, library, character.only = TRUE)
@@ -33,12 +34,37 @@ sapply(theLibs, library, character.only = TRUE)
 # Getting functions for cheatsheet
 ####################################
 library(NCmisc)
-all_r = list.files(pattern = "[.]R$", recursive = TRUE, full.names = TRUE)
-all_r = all_r[ !grepl("scratch", all_r)]
-all_r = all_r[ !grepl("all_packages", all_r)]
-xall_func = all_func = sapply(all_r, list.functions.in.file)
+library(filestrings)
+all_rmd = list.files(pattern = "[.]Rmd", recursive = TRUE, full.names = TRUE)
+#all_r = all_r[ !grepl("scratch", all_r)]
+#all_r = all_r[ !grepl("all_packages", all_r)]
+all_rmd = all_rmd[ grepl("modules", all_rmd)] # get just just module files
+dir.create("modules/R_files")
 
-all_func = xall_func
+#####If not copying files
+sapply(all_rmd, knitr::purl) # create R file from Rmd files
+all_r_files = list.files(pattern = "[.]R", recursive = FALSE, full.names = TRUE) #get new R file names
+new_r_files <-gsub(pattern = "./", replacement = "./modules/R_files/", all_r_files) #change path name
+# make df for file destination
+df = data.frame(
+  source = all_r_files,
+  destination = (new_r_files))
+file.rename(from = df$source, to = file.path(df$destination)) # move files
+
+new_r_files = new_r_files[ !grepl("Basic_R.R", new_r_files)] # remove one problematic file - with errors on purpose
+all_func = sapply(new_r_files, list.functions.in.file) 
+
+
+#### if copying files
+#file.copy(all_rmd, to = "modules/R_files") # copy to new R_files dir
+#new_r_files <-gsub(pattern = "./", replacement = "./modules/R_files/", all_r_files)
+#all_rmd = list.files(path = "modules/R_files", full.names = TRUE) # new file names with paths
+#sapply(all_rmd, knitr::purl) # create R file from Rmd files
+#all_r_files = list.files(pattern = "[.]R", recursive = FALSE, full.names = TRUE)
+
+
+
+
 quick = function(r) {
   res = mapply(function(x, y) { 
     x[ !grepl(":", x)] = ""
