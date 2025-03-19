@@ -49,7 +49,7 @@ By the end of the course, learners should be comfortable:
 ## Know Before the Class
 
 - To get the most out of this class, if possible, we suggest working virtually with a **large monitor or two screens**. This setup allows you to follow along on Zoom while also doing the hands-on coding.  
-- If possible, we also **highly suggest** working in RStudio on the **same computer** as the one you connect with Zoom and Slack, so that you can copy and paste your code if needed or share your code form your screen.
+- If possible, we also **highly suggest** working in RStudio on the **same computer** as the one you connect with Zoom and Slack, so that you can copy and paste your code if needed or share your code from your screen.
 
 ## Online Portion
 
