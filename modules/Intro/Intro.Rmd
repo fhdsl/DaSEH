@@ -261,6 +261,18 @@ Error messages can be scary!
 knitr::include_graphics("images/forrest-gump-running.gif")
 ```
 
+## Using AI
+
+Large Language Models (ChatGPT, Claude, etc.) can be useful for programming. Specifically, it can help with:
+
+* Writing or re-writing (refactoring) your code
+* Annotation (code "notes")
+* Understanding unfamiliar code
+
+We will talk more about AI + programming during the code-a-thon.
+
+For best practices, we encourage you to check out our [AI for Efficient Programming Course](https://hutchdatascience.org/AI_for_Efficient_Programming).
+
 ## Installing R
 
 -   Install the [latest R version](http://cran.r-project.org/) `r config::get("r_version")`
