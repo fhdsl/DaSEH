@@ -97,14 +97,14 @@ unloadNamespace("tidyverse")
 ```
 
 ```{r, error = TRUE, class.error="bg-error"}
-iris %>% pull(Species) 
+iris |> pull(Species) 
 ```
 
 Below will not work because `str_detect` is missing a `t` at the end:
 
 ```{r, error = TRUE, message = FALSE, class.error="bg-error"}
 library(tidyverse) # need this! This can be at the top of your file
-iris %>% pull(Species) %>% str_detec("setosa")
+iris |> pull(Species) |> str_detec("setosa")
 ```
 
 This will not work because `library()` is misspelled:
@@ -181,19 +181,19 @@ df_quotes
 If we want to specifically pull out the column with the variable named `The Values` we need to use quotes or back ticks.
 
 ```{r}
-df_quotes %>% pull(names) # this works fine! no spaces in `names`
+df_quotes |> pull(names) # this works fine! no spaces in `names`
 ```
 
 ```{r}
-df_quotes %>% pull("The Values") # this works
+df_quotes |> pull("The Values") # this works
 ```
 
 ```{r}
-df_quotes %>% pull(`The Values`) # this works
+df_quotes |> pull(`The Values`) # this works
 ```
 
 ```{r, error = TRUE, class.error="bg-error"}
-df_quotes %>% pull(The Values) # this does not work!
+df_quotes |> pull(The Values) # this does not work!
 ```
 
 ***
@@ -204,22 +204,22 @@ df_quotes %>% pull(The Values) # this does not work!
 If you copy paste code form somewhere with curly quotation marks, it will not work.
 
 ```{r}
-df_quotes %>% pull("The Values") # this works
+df_quotes |> pull("The Values") # this works
 ```
 
 ```{r, error = TRUE, class.error="bg-error"}
-df_quotes %>% pull(“The Values”) # this doesn't work
+df_quotes |> pull(“The Values”) # this doesn't work
 ```
 
 ***
-## **Error: `mapping` must be created by `aes()` / `ℹ` Did you use '%>%' or '|>' instead of '+'?**
+## **Error: `mapping` must be created by `aes()` / `ℹ` Did you use '|>' or '|>' instead of '+'?**
 
 **Forgetting to use `+` to add `ggplot2` layers**
 
 This will not work:
 
 ```{r, error = TRUE, class.error="bg-error"}
-ggplot(data = iris, aes(x = Species, y = Petal.Length)) %>%
+ggplot(data = iris, aes(x = Species, y = Petal.Length)) |>
   geom_boxplot()
 ```
 

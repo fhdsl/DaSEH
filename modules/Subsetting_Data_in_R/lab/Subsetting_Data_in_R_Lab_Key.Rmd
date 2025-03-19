@@ -192,7 +192,7 @@ select(ces, contains("a"))
 
 Create a subset called `ces_Alameda` from `ces` that only contains the rows for Alameda and only the columns: `Traffic` and	`Asthma`. `CA_county` should not be included in `ces_Alameda`.
 
-What are the dimensions of this dataset? Don't use pipes (`%>%`) and instead do this in two steps creating the `ces_Alameda` object with `filter` and updating it with `select`.
+What are the dimensions of this dataset? Don't use pipes (`|>`) and instead do this in two steps creating the `ces_Alameda` object with `filter` and updating it with `select`.
 
 ```{r 3.1response}
 ces_Alameda <- filter(ces, CA_county == "Alameda")
@@ -203,11 +203,11 @@ dim(ces_Alameda) # alternatively can use dim() function
 
 ### 3.2
 
-Try the same thing again with pipes `%>%`.
+Try the same thing again with pipes `|>`.
 
 ```{r 3.2response}
-ces_Alameda <- ces %>%
-  filter(CA_county == "Alameda") %>%
+ces_Alameda <- ces |>
+  filter(CA_county == "Alameda") |>
   select(Traffic, Asthma)
 ces_Alameda
 dim(ces_Alameda)
@@ -216,8 +216,8 @@ dim(ces_Alameda)
 What happens if you do the steps in a different order? Why does this not work?
 
 ```{r, error = TRUE, label = '3.2aresponse'}
-ces_Alameda <- ces %>%
-                 select(Traffic, Asthma) %>%
+ces_Alameda <- ces |>
+                 select(Traffic, Asthma) |>
                  filter(CA_county == "Alameda")
 # you get an error because there is no CA_county variable to filter from
 ```
@@ -229,22 +229,22 @@ Re-order the rows of `ces_Alameda` by `Traffic` value in increasing order. Use `
 ```{r 3.3response}
 ces_Alameda <- arrange(ces_Alameda, Traffic)
 ces_Alameda
-arrange(ces_Alameda, Traffic) %>%
-  head(n = 1) %>%
+arrange(ces_Alameda, Traffic) |>
+  head(n = 1) |>
   pull(Traffic)
 ```
 
 ### 3.4
 
-Create a new variable in `ces_Alameda` called `Asthma100`, which  is equal to `Asthma` divided by 100, using `mutate()`(don't forget to reassign `ces_Alameda`). Use pipes `%>%`. Take a look at the data now!
+Create a new variable in `ces_Alameda` called `Asthma100`, which  is equal to `Asthma` divided by 100, using `mutate()`(don't forget to reassign `ces_Alameda`). Use pipes `|>`. Take a look at the data now!
 
 ```
 # General format
-NEWDATA <- OLD_DATA %>% mutate(NEW_COLUMN = OLD_COLUMN)
+NEWDATA <- OLD_DATA |> mutate(NEW_COLUMN = OLD_COLUMN)
 ```
 
 ```{r 3.4response}
-ces_Alameda <- ces_Alameda %>% mutate(Asthma100 = Asthma/100)
+ces_Alameda <- ces_Alameda |> mutate(Asthma100 = Asthma/100)
 ces_Alameda
 ```
 
@@ -256,7 +256,7 @@ ces_Alameda
 Move the `Asthma100` column to be before `Traffic` in the `ces_Alameda` dataset. Use `relocate()`.
 
 ```{r P.4response}
-ces_Alameda <- ces_Alameda %>% relocate(Asthma100, .before = Traffic)
+ces_Alameda <- ces_Alameda |> relocate(Asthma100, .before = Traffic)
 ces_Alameda
 ```
 
@@ -267,7 +267,7 @@ Using the original `ces` data, how can you find the values of `ApproxLocation` f
 `CES4.0PercRange`: Percentile of the CalEnviroScreen score, grouped by 5% increments. The CalEnviroScreen score is a measure of the negative environmental effects seen in a given region. Those zip codes that have a percentile range of 90-95% are those regions that experience the highest effects of pollution in California.
 
 ```{r P.5response}
-ces %>%
-  filter(ZIP == 90745 & CES4.0PercRange == "90-95%") %>%
+ces |>
+  filter(ZIP == 90745 & CES4.0PercRange == "90-95%") |>
   select(ApproxLocation)
 ```

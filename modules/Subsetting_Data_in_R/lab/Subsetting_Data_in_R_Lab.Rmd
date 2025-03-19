@@ -176,7 +176,7 @@ Select the variables that contain the letter "a" from `ces`. Remember, the varia
 
 Create a subset called `ces_Alameda` from `ces` that only contains the rows for Alameda and only the columns: `Traffic` and	`Asthma`. `CA_county` should not be included in `ces_Alameda`.
 
-What are the dimensions of this dataset? Don't use pipes (`%>%`) and instead do this in two steps creating the `ces_Alameda` object with `filter` and updating it with `select`.
+What are the dimensions of this dataset? Don't use pipes (`|>`) and instead do this in two steps creating the `ces_Alameda` object with `filter` and updating it with `select`.
 
 ```{r 3.1response}
 
@@ -184,7 +184,7 @@ What are the dimensions of this dataset? Don't use pipes (`%>%`) and instead do 
 
 ### 3.2
 
-Try the same thing again with pipes `%>%`.
+Try the same thing again with pipes `|>`.
 
 ```{r 3.2response}
 
@@ -206,11 +206,11 @@ Re-order the rows of `ces_Alameda` by `Traffic` value in increasing order. Use `
 
 ### 3.4
 
-Create a new variable in `ces_Alameda` called `Asthma100`, which  is equal to `Asthma` divided by 100, using `mutate()`(don't forget to reassign `ces_Alameda`). Use pipes `%>%`. Take a look at the data now!
+Create a new variable in `ces_Alameda` called `Asthma100`, which  is equal to `Asthma` divided by 100, using `mutate()`(don't forget to reassign `ces_Alameda`). Use pipes `|>`. Take a look at the data now!
 
 ```
 # General format
-NEWDATA <- OLD_DATA %>% mutate(NEW_COLUMN = OLD_COLUMN)
+NEWDATA <- OLD_DATA |> mutate(NEW_COLUMN = OLD_COLUMN)
 ```
 
 ```{r 3.4response}

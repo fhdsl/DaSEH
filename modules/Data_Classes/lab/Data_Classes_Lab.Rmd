@@ -77,7 +77,7 @@ Use the `mutate()` function to create a new column named `date_formatted`, based
 
 ```
 # General format
-NEWDATA <- OLD_DATA %>% mutate(NEW_COLUMN = OLD_COLUMN)
+NEWDATA <- OLD_DATA |> mutate(NEW_COLUMN = OLD_COLUMN)
 ```
 
 ```{r 1.7response}
@@ -93,7 +93,7 @@ Move the `date_formatted` variable to be before `date_end` using the `relocate` 
 
 ```
 # General format
-NEWDATA <- OLD_DATA %>% relocate(COLUMN1, .before = COLUMN2)
+NEWDATA <- OLD_DATA |> relocate(COLUMN1, .before = COLUMN2)
 ```
 
 ```{r P.1response}

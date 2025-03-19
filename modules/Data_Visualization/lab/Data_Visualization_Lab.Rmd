@@ -21,7 +21,7 @@ Load the CalEnviroScreen data from  the link www.daseh.org/data/CalEnviroScreen_
 
 ```{r}
 ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
-ces_sub <- ces %>% filter(CaliforniaCounty %in% c("Fresno", "Merced", "Placer", "Sonoma", "Yolo"))
+ces_sub <- ces |> filter(CaliforniaCounty %in% c("Fresno", "Merced", "Placer", "Sonoma", "Yolo"))
 ```
 
 ### 1.1

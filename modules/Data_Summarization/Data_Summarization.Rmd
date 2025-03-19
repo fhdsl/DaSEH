@@ -29,7 +29,7 @@ pre { /* Code block - slightly smaller in this lecture */
 - `mutate()`: create new columns or modify them
 - `select()` and `filter()` can be combined together
 - remove a column: `select()` with `!` mark (`!col_name`)
-- you can do sequential steps: especially using pipes `%>%`
+- you can do sequential steps: especially using pipes `|>`
 
 📃[Day 3 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-3.pdf)
 
@@ -60,7 +60,7 @@ head(er)
 `pull()` converts a single data column into a <span style="color:blue">vector</span>.
 
 ```{r, eval=FALSE}
-er %>% pull(visits)
+er |> pull(visits)
 ```
 
 ## Data Summarization
@@ -77,12 +77,12 @@ Now that we have a <span style="color:blue">vector of numbers</span>.. what can 
     * `max(x)`: maximum value in x
     * `min(x)`: minimum value in x
 
-## Pipe (`%>%`) vectors into summarizing functions
+## Pipe (`|>`) vectors into summarizing functions
 
 A vector can be summarized:
 
 ```{r}
-er %>% pull(visits) %>% mean()
+er |> pull(visits) |> mean()
 ```
 
 <br> 
@@ -90,7 +90,7 @@ er %>% pull(visits) %>% mean()
 Add the `na.rm =` argument for missing data
 
 ```{r}
-er %>% pull(visits) %>% mean(na.rm=T)
+er |> pull(visits) |> mean(na.rm=T)
 ```
 
 ## GUT CHECK!
@@ -114,7 +114,7 @@ Multiple summary statistics can be calculated at once!
 <div class = "codeexample">
 ```{r, eval = FALSE}
 # General format - Not the code!
-{data to use} %>% 
+{data to use} |> 
    summarize({summary column name} = {function(source column)},
              {summary column name} = {function(source column)}) 
 ```
@@ -124,9 +124,9 @@ Multiple summary statistics can be calculated at once!
 ## Summarize the data: `dplyr` `summarize()` function
 
 ```{r}
-er %>% 
+er |> 
   summarize(mean_visits = mean(visits))
-er %>% 
+er |> 
   summarize(mean_visits = mean(visits, na.rm = TRUE))
 ```
 
@@ -136,7 +136,7 @@ er %>%
 `summarize()` can do multiple operations at once. Just separate by a comma.
 
 ```{r}
-er %>% 
+er |> 
   summarize(mean_visits = mean(visits, na.rm = TRUE),
             median_visits = median(visits, na.rm = TRUE),
             mean_rate = mean(rate, na.rm = TRUE))
@@ -177,7 +177,7 @@ summary(er)
 `distinct(x)` will return the unique elements of column `x`.
 
 ```{r, message = FALSE}
-er %>%
+er |>
   distinct(county)
 ```
 
@@ -189,8 +189,8 @@ er %>%
 It needs a vector so you _must pull the column first!_
 
 ```{r}
-er %>%
-  pull(county) %>% 
+er |>
+  pull(county) |> 
   n_distinct()
 ```
 
@@ -203,7 +203,7 @@ options(max.print = 1000)
 ## Use `count()` to return row count per category.
 
 ```{r, message = FALSE}
-er %>% count(county)
+er |> count(county)
 ```
 
 _Looks like 12 rows/observations per county!_
@@ -211,7 +211,7 @@ _Looks like 12 rows/observations per county!_
 ## Multiple columns listed further subdivides the `count()`
 
 ```{r, message = FALSE}
-er %>% count(county, year)
+er |> count(county, year)
 ```
 
 _Looks like 1 row/observation per county and year!_
@@ -242,7 +242,7 @@ First, let's group the data.
 `group_by` allows you group the data set by variables/columns you specify:
 
 ```{r}
-er_grouped <- er %>% group_by(year)
+er_grouped <- er |> group_by(year)
 er_grouped
 ```
 
@@ -252,18 +252,18 @@ er_grouped
 It's grouped! Grouping doesn't change the data in any way, but how **functions operate on it**. Now we can summarize `visits` by group:
 
 ```{r}
-er_grouped %>% 
+er_grouped |> 
   summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
 
 
-## Do it in one step: use `%>%` to string these together!
+## Do it in one step: use `|>` to string these together!
 
 Pipe `er` into `group_by`, then pipe that into `summarize`:
 
 ```{r}
-er %>%
-  group_by(year) %>%
+er |>
+  group_by(year) |>
   summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
 
@@ -272,8 +272,8 @@ er %>%
 `group_by` county and year:
 
 ```{r, warnings = F}
-er %>%
-  group_by(year, county) %>%
+er |>
+  group_by(year, county) |>
   summarize(avg_visits = mean(visits, na.rm = TRUE))
 ```
 
@@ -282,8 +282,8 @@ er %>%
 There are other summarizing functions, such as `n()` count the number of rows/observations (NAs included).
 
 ```{r}
-er %>%
-  group_by(year) %>%
+er |>
+  group_by(year) |>
   summarize(n = n(),
             mean = mean(visits, na.rm = TRUE))
 ```
@@ -295,7 +295,7 @@ er %>%
 
 ```{r}
 # Here we use count()
-er %>% count(year)
+er |> count(year)
 ```
 
 ## Counting: `count()` and `n()`
@@ -304,7 +304,7 @@ er %>% count(year)
 
 ```{r}
 # n() with summarize
-er %>% group_by(year) %>% summarize(n()) 
+er |> group_by(year) |> summarize(n()) 
 ```
 
 # A few miscellaneous topics .. 
@@ -315,9 +315,9 @@ er %>% group_by(year) %>% summarize(n())
 These functions require a column as a vector using `pull()`.
 
 ```{r, message = FALSE}
-er_year <- er %>% pull(year) # pull() to make a vector
+er_year <- er |> pull(year) # pull() to make a vector
 
-er_year %>% unique() # similar to distinct()
+er_year |> unique() # similar to distinct()
 ```
 
 ## Base R functions you might see: `length` and `unique`
@@ -325,7 +325,7 @@ er_year %>% unique() # similar to distinct()
 These functions require a column as a vector using `pull()`.
 
 ```{r, message = FALSE}
-er_year %>% unique() %>% length() # similar to n_distinct()
+er_year |> unique() |> length() # similar to n_distinct()
 ```
 
 ## `summary()` vs. `summarize()`
@@ -387,14 +387,14 @@ Get means for each row.
 Let's see what the mean CO2 emissions is across the years 2010-2014 for each row (country):
 
 ```{r}
-yearly_co2 %>%
-  select(starts_with("201")) %>%
-  rowMeans(na.rm = TRUE) %>%
+yearly_co2 |>
+  select(starts_with("201")) |>
+  rowMeans(na.rm = TRUE) |>
   head(n = 5)
 
-yearly_co2 %>%
-  group_by(country) %>%
-  summarize(mean = rowMeans(across(starts_with("201")), na.rm = TRUE)) %>%
+yearly_co2 |>
+  group_by(country) |>
+  summarize(mean = rowMeans(across(starts_with("201")), na.rm = TRUE)) |>
   head(n = 5)
 ```
 
@@ -406,12 +406,12 @@ Get means for each column.
 Let's see what the mean is across each column (year):
 
 ```{r}
-yearly_co2 %>%
-  select(starts_with("201")) %>%
-  colMeans(na.rm = TRUE) %>%
+yearly_co2 |>
+  select(starts_with("201")) |>
+  colMeans(na.rm = TRUE) |>
   head(n = 5)
 
-yearly_co2 %>%
+yearly_co2 |>
   summarize(across(starts_with("201"), ~mean(.x, na.rm = TRUE)))
 ```
 
@@ -420,8 +420,8 @@ yearly_co2 %>%
 Pipe `er` into `group_by`, then pipe that into `summarize`:
 
 ```{r eval = FALSE}
-er %>%
-  group_by(year) %>%
+er |>
+  group_by(year) |>
   summarize(avg_visits = mean(visits, na.rm = TRUE),
             max_visits = max(visits, na.rm = TRUE))
 ```
@@ -429,7 +429,7 @@ er %>%
 is the same as..
 
 ```{r eval = FALSE}
-er %>%
+er |>
   summarize(avg_visits = mean(visits, na.rm = TRUE),
             max_visits = max(visits, na.rm = TRUE),
             .by = year)

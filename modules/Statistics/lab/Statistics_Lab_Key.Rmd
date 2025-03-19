@@ -39,7 +39,7 @@ Compute the correlation (with `cor`) between the `HousingBurden` and `LowBirthWe
 
 ```{r 1.2response}
 ces_sub <-
-  ces %>%
+  ces |>
   select(HousingBurden, LowBirthWeight)
 
 cor(ces_sub, use = "complete.obs")
@@ -55,7 +55,7 @@ Change your code from 1.2 to add a few more variables:
 
 ```{r 1.3response}
 ces_sub <-
-  ces %>%
+  ces |>
   select(HousingBurden, LowBirthWeight, DieselPM, Traffic, Asthma)
 
 cor(ces_sub, use = "complete.obs")
@@ -72,8 +72,8 @@ Perform a t-test to determine if there is evidence of a difference between low b
 * Print the results using the `tidy` function from the `broom` package
 
 ```{r 1.4response}
-losangeles <- ces %>% filter(CaliforniaCounty == "Los Angeles")
-sandiego <- ces %>% filter(CaliforniaCounty == "San Diego")
+losangeles <- ces |> filter(CaliforniaCounty == "Los Angeles")
+sandiego <- ces |> filter(CaliforniaCounty == "San Diego")
 
 x <- pull(losangeles, LowBirthWeight)
 y <- pull(sandiego, LowBirthWeight)
@@ -82,9 +82,9 @@ t.test(x, y)
 tidy(t.test(x, y))
 
 # Another way to look at it..
-ces %>% 
-  group_by(CaliforniaCounty) %>% 
-  summarize(mean = mean(LowBirthWeight, na.rm = TRUE)) %>% 
+ces |> 
+  group_by(CaliforniaCounty) |> 
+  summarize(mean = mean(LowBirthWeight, na.rm = TRUE)) |> 
   filter(CaliforniaCounty %in% c("Los Angeles", "San Diego"))
 ```
 
@@ -113,7 +113,7 @@ Filter `ces` so it only contains Los Angeles and San Diego. Launch Esquisse or c
 
 ```{r P.2response}
 ces_sub <- 
-  ces %>% 
+  ces |> 
   filter(CaliforniaCounty %in% c("Los Angeles", "San Diego"))
 
 ggplot(ces_sub, aes(x = Lead, y = HousingBurden, color = CaliforniaCounty)) +
@@ -177,7 +177,7 @@ The following code creates a column `weight_cat` with TRUE/FALSE values.
 ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
 
 ces_bw <- 
-  ces %>% 
+  ces |> 
   mutate(weight_cat = LowBirthWeight > 5)
 ```
 

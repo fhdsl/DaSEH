@@ -137,8 +137,8 @@ First, we create two vectors.
 
 ```{r}
 # x and y must be numeric vectors
-y1980 <- yearly_co2 %>% pull(`1980`)
-y1985 <- yearly_co2 %>% pull(`1985`)
+y1980 <- yearly_co2 |> pull(`1980`)
+y1985 <- yearly_co2 |> pull(`1985`)
 ```
 
 <br>
@@ -170,9 +170,9 @@ glimpse(cor_result)
 In plot form... `geom_smooth()` and `annotate()` can look very nice!
 
 ```{r, warning = F}
-corr_value <- pull(cor_result, estimate) %>% round(digits = 4)
+corr_value <- pull(cor_result, estimate) |> round(digits = 4)
 cor_label <- paste0("R = ", corr_value)
-yearly_co2 %>%
+yearly_co2 |>
   ggplot(aes(x = `1980`, y = `1985`)) + geom_point(size = 1) + geom_smooth() +
   annotate("text", x = 2000000, y = 4000000, label = cor_label)
 ```
@@ -184,7 +184,7 @@ We can compute correlation for all pairs of columns of a data frame / matrix. Th
 Columns must be all numeric!
 
 ```{r}
-co2_subset <- yearly_co2 %>%
+co2_subset <- yearly_co2 |>
   select(c(`1950`, `1980`, `1985`, `2010`))
 
 head(co2_subset)
@@ -346,7 +346,7 @@ where:
 ## Linear regression
 
 ```{r,echo=FALSE}
-coefs <- lm(data = iris, Petal.Width ~ Petal.Length) %>% coef()
+coefs <- lm(data = iris, Petal.Width ~ Petal.Length) |> coef()
 
 line_df <- data.frame(x = c(0, 7), y = c(coefs[1], (coefs[2] * 7 + coefs[1])))
 riserun_df <- data.frame(x = c(2.1, 2.9, 2.9), y = c((coefs[1] + coefs[2] * 2.1), (coefs[1] + coefs[2] * 2.1), (coefs[1] + coefs[2] * 2.9)))
@@ -500,7 +500,7 @@ The estimate is the coefficient or slope.
 for every 1 degree increase in the highest temperature, we see 1.134 more heat-related ER visits. The error for this estimate is pretty big at 3.328. This relationship appears to be insignificant with a p value = 0.735.
 
 ```{r}
-tidy(fit) %>% glimpse()
+tidy(fit) |> glimpse()
 ```
 
 ## Linear regression: multiple predictors {.smaller}
@@ -517,8 +517,8 @@ summary(fit2)
 Can also use `tidy` and `glimpse` to see the output nicely.
 
 ```{r}
-fit2 %>%
-  tidy() %>%
+fit2 |>
+  tidy() |>
   glimpse()
 ```
 
@@ -529,7 +529,7 @@ Factors get special treatment in regression models - lowest level of the factor 
 Let's add age category (`age`) as a factor into our model. We'll need to convert it to a factor first.
 
 ```{r}
-er_temps <- er_temps %>% mutate(age = factor(age))
+er_temps <- er_temps |> mutate(age = factor(age))
 ```
 
 
@@ -551,7 +551,7 @@ The ages are relative to the level that is not listed.
 
 ```{r}
 er_temps <- 
-  er_temps %>% 
+  er_temps |> 
   mutate(age = factor(age,
     levels = c("65+ years", "35-64 years", "15-34 years", "5-14 years", "0-4 years")
   ))
@@ -626,7 +626,7 @@ We will create a new binary variable `high_rate`. We will say a visit rate of mo
 
 ```{r}
 er_temps <-
-  er_temps %>% mutate(high_rate = rate > 8)
+  er_temps |> mutate(high_rate = rate > 8)
 
 glimpse(er_temps)
 ```
@@ -667,7 +667,7 @@ During the years 2012, 2018, 2021, and 2022, there were multiple consecutive day
 library(epitools)
 
 er_temps <-
-  er_temps %>%
+  er_temps |>
   mutate(heatwave = year %in% c(2012, 2018, 2021, 2022))
 
 glimpse(er_temps)
@@ -678,8 +678,8 @@ glimpse(er_temps)
 In this case, we're calculating the odds ratio for whether a heatwave is associated with having a visit rate greater than 8. 
 
 ```{r}
-response <- er_temps %>% pull(high_rate)
-predictor <- er_temps %>% pull(heatwave)
+response <- er_temps |> pull(high_rate)
+predictor <- er_temps |> pull(heatwave)
 
 oddsratio(predictor, response)
 ```
