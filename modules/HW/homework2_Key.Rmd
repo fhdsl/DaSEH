@@ -153,7 +153,7 @@ mars <- drop_na(mars)
 mars <- filter(mars, earth_year > 2014)
 nrow(mars)
 # OR
-mars <- mars %>% drop_na() %>% filter(earth_year > 2014)
+mars <- mars |> drop_na() |> filter(earth_year > 2014)
 nrow(mars)
 
 # There are 2393 measurements left after filtering by year.
@@ -165,7 +165,7 @@ nrow(mars)
 **Hint:** use the `mutate()` function.
 
 ```{r 10response}
-mars <- mars %>% mutate(years_since_landing = solar_day / 668.6)
+mars <- mars |> mutate(years_since_landing = solar_day / 668.6)
 # OR
 mars <- mutate(mars, years_since_landing = solar_day / 668.6)
 colnames(mars)
@@ -175,7 +175,7 @@ colnames(mars)
 11\. What is the range of the maximum ground temperature ("max_ground_temp") of the dataset?
 
 ```{r 11response}
-range(mars %>% pull(max_ground_temp))
+range(mars |> pull(max_ground_temp))
 # OR
 gtemp_max_range <- pull(mars, max_ground_temp)
 range(gtemp_max_range)
@@ -202,17 +202,17 @@ sample(pull(mars, mean_pressure), size = 20)
 
 ```{r 13response}
 # How many data points are from days where the maximum ground temperature got above or equal to 0 degrees Celsius?
-nrow(mars %>% filter(max_ground_temp >= 0))
+nrow(mars |> filter(max_ground_temp >= 0))
 # OR
-mars %>%
-  group_by(max_ground_temp >= 0) %>%
+mars |>
+  group_by(max_ground_temp >= 0) |>
   summarize(total = n())
 # OR
 sum(mars$max_ground_temp >= 0)
 # OR
 table(mars$max_ground_temp >= 0)
 # what percent/proportion do these represent?
-nrow(mars %>% filter(max_ground_temp >= 0)) / nrow(mars)
+nrow(mars |> filter(max_ground_temp >= 0)) / nrow(mars)
 # OR
 mean(mars$max_ground_temp >= 0, na.rm=T)
 
@@ -225,12 +225,12 @@ mean(mars$max_ground_temp >= 0, na.rm=T)
 **Hint:** use `length()` with `unique()` or `table()`. Remember to `pull()` the right column.
 
 ```{r 14response}
-mars %>%
-  pull(UV_Radiation) %>%
-  unique() %>%
+mars |>
+  pull(UV_Radiation) |>
+  unique() |>
   length()
 # OR
-length(unique(mars %>% pull(UV_Radiation)))
+length(unique(mars |> pull(UV_Radiation)))
 # OR
 length(unique(mars$UV_Radiation))
 # OR
@@ -244,9 +244,9 @@ table(unique(mars$UV_Radiation))
 15\. How many different weather conditions ("weather") are reported?
 
 ```{r 15response}
-mars %>%
-  pull(weather) %>%
-  unique() %>%
+mars |>
+  pull(weather) |>
+  unique() |>
   length()
 
 # 1 weather condition.
@@ -258,8 +258,8 @@ mars %>%
 **Hint:** Use  `group_by()` with `summarize()`.
 
 ```{r 16response}
-mars %>%
-  group_by(UV_Radiation) %>%
+mars |>
+  group_by(UV_Radiation) |>
   summarize(mean = mean(max_air_temp))
 ```
 
@@ -267,9 +267,9 @@ mars %>%
 17\. Extend on the code you wrote for question 16. Use the `arrange()` function to sort the output by maximum air temperature.
 
 ```{r 17response}
-mars %>%
-  group_by(UV_Radiation) %>%
-  summarize(mean = mean(max_air_temp)) %>%
+mars |>
+  group_by(UV_Radiation) |>
+  summarize(mean = mean(max_air_temp)) |>
   arrange(desc(mean))
 ```
 
@@ -281,12 +281,12 @@ mars %>%
 - `sum()`
 
 ```{r 18response}
-mars %>%
-  filter(UV_Radiation == "low" & max_air_temp > 0) %>%
+mars |>
+  filter(UV_Radiation == "low" & max_air_temp > 0) |>
   tally()
 # OR
-mars %>%
-  filter(UV_Radiation == "low" & max_air_temp > 0) %>%
+mars |>
+  filter(UV_Radiation == "low" & max_air_temp > 0) |>
   count()
 # OR
 sum(mars$UV_Radiation == "low" & mars$max_air_temp > 0)
@@ -302,12 +302,12 @@ sum(mars$UV_Radiation == "low" & mars$max_air_temp > 0)
 - `sum()`
 
 ```{r 19response}
-mars %>%
-  filter(UV_Radiation == "high" | UV_Radiation == "very_high") %>%
+mars |>
+  filter(UV_Radiation == "high" | UV_Radiation == "very_high") |>
   count()
 # OR
-mars %>%
-  filter(UV_Radiation %in% c("high", "very_high")) %>%
+mars |>
+  filter(UV_Radiation %in% c("high", "very_high")) |>
   count()
 # OR
 sum(mars$UV_Radiation == "high" | mars$UV_Radiation == "very_high")
@@ -321,8 +321,8 @@ sum(mars$UV_Radiation %in% c("high", "very_high"))
 20\. Select all columns in "mars" where the column names starts with "min" (using `select()` and `starts_with()`. Then, use `colMeans()` to summarize across these columns.
 
 ```{r 20response}
-mars %>%
-  select(starts_with("min")) %>%
+mars |>
+  select(starts_with("min")) |>
   colMeans()
 ```
 
@@ -330,21 +330,21 @@ mars %>%
 21\. Using "mars", create a new binary (TRUEs and FALSEs) column to indicate if the day's maximum air temperature was above freezing. Call the new column "above_freezing".
 
 ```{r 21response}
-mars <- mars %>% mutate(above_freezing = (max_air_temp > 0))
+mars <- mars |> mutate(above_freezing = (max_air_temp > 0))
 ```
 
 
 22\. What is the average atmospheric pressure for days that have an air temperature above freezing and UV radiation level of "moderate"? How does this compare with days that do NOT fit these criteria?
 
 ```{r 22response}
-mean_mod_warm <- mars %>%
-  filter(above_freezing == TRUE & UV_Radiation == "moderate") %>%
-  summarize(mean = mean(mean_pressure)) %>%
+mean_mod_warm <- mars |>
+  filter(above_freezing == TRUE & UV_Radiation == "moderate") |>
+  summarize(mean = mean(mean_pressure)) |>
   pull()
 
-mean_not_mod_warm <- mars %>%
-  filter(above_freezing != TRUE | UV_Radiation != "moderate") %>%
-  summarize(mean = mean(mean_pressure)) %>%
+mean_not_mod_warm <- mars |>
+  filter(above_freezing != TRUE | UV_Radiation != "moderate") |>
+  summarize(mean = mean(mean_pressure)) |>
   pull()
 
 # Days that are above freezing with UV level of "moderate" have an average atmospheric pressure of 820.7 Pa while days not fitting this criteria have an average atmospheric pressure of 826.6 Pa.
@@ -354,20 +354,20 @@ mean_not_mod_warm <- mars %>%
 23\. Among days with a "moderate" UV level that are above freezing, what is the distribution of the earth year in which these days occurred?
 
 ```{r 23response}
-mod_warm <- mars %>% filter(UV_Radiation == "moderate" & above_freezing == TRUE)
-mod_warm %>%
-  group_by(earth_year) %>%
-  select(earth_year) %>%
+mod_warm <- mars |> filter(UV_Radiation == "moderate" & above_freezing == TRUE)
+mod_warm |>
+  group_by(earth_year) |>
+  select(earth_year) |>
   table()
 # OR
-mod_warm <- mars %>% filter(UV_Radiation == "moderate" & above_freezing == TRUE)
-mod_warm %>%
-  group_by(earth_year) %>%
+mod_warm <- mars |> filter(UV_Radiation == "moderate" & above_freezing == TRUE)
+mod_warm |>
+  group_by(earth_year) |>
   count()
 # OR
-mod_warm <- mars %>% filter(UV_Radiation == "moderate" & above_freezing == TRUE)
-mod_warm %>%
-  group_by(earth_year) %>%
+mod_warm <- mars |> filter(UV_Radiation == "moderate" & above_freezing == TRUE)
+mod_warm |>
+  group_by(earth_year) |>
   tally()
 ```
 
@@ -379,8 +379,8 @@ sum((mars$max_ground_temp > 0| mars$max_air_temp > 0) & (mars$UV_Radiation == "h
 # OR
 sum((mars$max_ground_temp > 0| mars$max_air_temp > 0) & mars$UV_Radiation %in% c("high", "very_high"))
 # OR
-mars %>%
-  filter((mars$max_ground_temp > 0| mars$max_air_temp > 0) & mars$UV_Radiation %in% c("high", "very_high")) %>%
+mars |>
+  filter((mars$max_ground_temp > 0| mars$max_air_temp > 0) & mars$UV_Radiation %in% c("high", "very_high")) |>
   count()
 
 # A total of 886 days. 
@@ -390,7 +390,7 @@ mars %>%
 25\. Make a boxplot (`boxplot()`) that looks at earth year ("earth_year") on the x-axis and minimum air temperature ("min_air_temp") on the y-axis.
 
 ```{r 25response}
-boxplot(mars %>% pull(min_air_temp) ~ mars %>% pull(earth_year))
+boxplot(mars |> pull(min_air_temp) ~ mars |> pull(earth_year))
 ```
 
 

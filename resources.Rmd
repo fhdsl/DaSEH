@@ -184,7 +184,7 @@ Here are additional resources to help you on your R journey - either before, dur
   ), ncol = 2, byrow = TRUE)
   mat <- data.frame(mat, stringsAsFactors = FALSE)
   colnames(mat) <- c("Day", "Link to Video")
-  knitr::kable(mat, format = "html") %>%
+  knitr::kable(mat, format = "html") |>
     kable_styling()
   ```
 
@@ -208,7 +208,7 @@ Here are additional resources to help you on your R journey - either before, dur
   ), ncol = 2, byrow = TRUE)
   mat <- data.frame(mat, stringsAsFactors = FALSE)
   colnames(mat) <- c("Day", "Link to Video")
-  knitr::kable(mat, format = "html") %>%
+  knitr::kable(mat, format = "html") |>
     kable_styling()
   ```
 
@@ -233,7 +233,7 @@ Here are additional resources to help you on your R journey - either before, dur
   ), ncol = 2, byrow = TRUE)
   mat <- data.frame(mat, stringsAsFactors = FALSE)
   colnames(mat) <- c("Day", "Link to Video")
-  knitr::kable(mat, format = "html") %>%
+  knitr::kable(mat, format = "html") |>
     kable_styling()
   ```
 
@@ -256,7 +256,7 @@ Here are additional resources to help you on your R journey - either before, dur
   ), ncol = 2, byrow = TRUE)
   mat <- data.frame(mat, stringsAsFactors = FALSE)
   colnames(mat) <- c("Day", "Link to Video")
-  knitr::kable(mat, format = "html") %>%
+  knitr::kable(mat, format = "html") |>
     kable_styling()
   ```
 
@@ -275,7 +275,7 @@ Here are additional resources to help you on your R journey - either before, dur
   ), ncol = 2, byrow = TRUE)
   mat <- data.frame(mat, stringsAsFactors = FALSE)
   colnames(mat) <- c("Day", "Link to Video")
-  knitr::kable(mat, format = "html") %>%
+  knitr::kable(mat, format = "html") |>
     kable_styling()
   ```
 
@@ -291,7 +291,7 @@ Here are additional resources to help you on your R journey - either before, dur
   ), ncol = 2, byrow = TRUE)
   mat <- data.frame(mat, stringsAsFactors = FALSE)
   colnames(mat) <- c("Day", "Link to Video")
-  knitr::kable(mat, format = "html") %>%
+  knitr::kable(mat, format = "html") |>
     kable_styling()
   ```
 

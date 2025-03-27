@@ -33,7 +33,7 @@ ces <- read_csv(file = "https://daseh.org/data/CalEnviroScreen_data.csv")
 
 ces_sub <- select(ces, c("CES4.0Percentile", "Asthma", "ChildrenPercLess10"))
 
-ces_sub <- ces_sub %>% 
+ces_sub <- ces_sub |> 
             mutate(CES4.0Perc_cat = 
               case_when(CES4.0Percentile > 75  ~ "High", 
                         CES4.0Percentile <= 75 & CES4.0Percentile >25 ~ "Middle",

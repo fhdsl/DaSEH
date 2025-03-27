@@ -156,7 +156,7 @@ Is the data in tidy? Is it in long format?
 
 er <- 
   read_csv("https://daseh.org/data/CO_ER_heat_visits.csv")
-er_Boulder <- er %>% filter(county == "Boulder")
+er_Boulder <- er |> filter(county == "Boulder")
 
 head(er_Boulder)
 ```
@@ -249,7 +249,7 @@ Pipes will also not work in place of `+`!
 ```{r,eval = FALSE}
 ggplot(er_Boulder, aes(x = year,
                            y = rate,
-                           fill = item_categ))  %>%
+                           fill = item_categ))  |>
 geom_boxplot()
 ```
 
@@ -290,7 +290,7 @@ Let's map ER visit rates for four CO counties on the same plot
 
 ```{r, fig.width=4, fig.height=3, fig.align='center'}
 
-er_visits_4 <- er %>% 
+er_visits_4 <- er |> 
   filter(county %in% c("Denver", "Weld", "Pueblo", "Jackson"))
 
 ggplot(er_visits_4, aes(x = year, y = rate, color = county)) +
@@ -422,7 +422,7 @@ You can use `theme(legend.position = "none")` to remove the legend.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
 
-er_visits_4 %>% ggplot(aes(x = year,
+er_visits_4 |> ggplot(aes(x = year,
                       y = rate,
                       color = county)) +
   geom_line(size = 0.8) +
@@ -436,7 +436,7 @@ er_visits_4 %>% ggplot(aes(x = year,
 It's possible to go in and change specifications with newer layers. Here is our original plot.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-er_visits_4 %>% ggplot(aes(x = year,
+er_visits_4 |> ggplot(aes(x = year,
                       y = rate,
                       color = county)) +
   geom_line(size = 0.8)
@@ -448,7 +448,7 @@ er_visits_4 %>% ggplot(aes(x = year,
 It's possible to go in and change specifications with newer layers.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-er_visits_4 %>% ggplot(aes(x = year,
+er_visits_4 |> ggplot(aes(x = year,
                       y = rate,
                       color = county)) +
   geom_line(size = 0.8, color = "black")
@@ -464,7 +464,7 @@ B. Add a `geom_` layer like `geom_point()`
 
 ## GUT CHECK: How do we add more layers in ggplot2 plots?
 
-A. `%>%`
+A. `|>`
 
 B. `&`
 
@@ -579,7 +579,7 @@ knitr::include_graphics("img/theme_sheet.png")
 <!-- -   these include values that are strings like "blank", "solid", "dashed", "dotdash", "longdash", and "twodash" -->
 
 <!-- ```{r, fig.width=5, fig.height=3, fig.align='center'} -->
-<!-- er_state %>% ggplot(aes(x = year, -->
+<!-- er_state |> ggplot(aes(x = year, -->
 <!--                       y = rate)) + -->
 <!--   geom_line(size = 0.8, linetype = "twodash") -->
 <!-- ``` -->
@@ -602,7 +602,7 @@ knitr::include_graphics("img/theme_sheet.png")
 
 
 <!-- ```{r, fig.width=5, fig.height=3, fig.align='center'} -->
-<!-- er_state %>% ggplot(aes(x = year, -->
+<!-- er_state |> ggplot(aes(x = year, -->
 <!--                       y = rate)) + -->
 <!--   geom_point(size = 2, shape = 12) -->
 <!-- ``` -->
@@ -717,9 +717,9 @@ ggplot(er_visits_4, aes(x = county,
 
 ```{r, fig.width=5 , fig.height=2.5, fig.align='center'}
 
-er_bar <- er_visits_4 %>%
-  group_by(county) %>%
-  summarize("max_rate" = max(rate, na.rm=T)) %>%
+er_bar <- er_visits_4 |>
+  group_by(county) |>
+  summarize("max_rate" = max(rate, na.rm=T)) |>
 
 ggplot(aes(x = county,
            y = max_rate,
@@ -760,22 +760,22 @@ ggplot(er_visits_4, aes(x = county,
 ```{r}
 head(er_visits_4, n = 3)
 
-er_visits_4 %>% group_by(county) %>%
+er_visits_4 |> group_by(county) |>
   summarize(sum = sum(visits, na.rm=T))
 ```
 
 ## Try that again {.codesmall}
 
 ```{r, fig.width=5 , fig.height=3, fig.align='center'}
-er_visits_4 %>% group_by(county) %>%
+er_visits_4 |> group_by(county) |>
   summarize(mean_visits = mean(visits, na.rm=T))
 ```
 
 ## Try that again {.codesmall}
 
 ```{r}
-er_visits_4 %>% group_by(county) %>%
-  summarize(mean_visits = mean(visits, na.rm=T)) %>%
+er_visits_4 |> group_by(county) |>
+  summarize(mean_visits = mean(visits, na.rm=T)) |>
 
 ggplot(aes(x = county,
            y = mean_visits,
@@ -823,7 +823,7 @@ er_bar +
 <!-- icecream1 <- ggplot(icecream, aes(x = flavor)) + geom_bar() + -->
 <!--               theme(text=element_text(size=24)) -->
 
-<!-- icecream2 <- icecream %>% drop_na(flavor)  %>% -->
+<!-- icecream2 <- icecream |> drop_na(flavor)  |> -->
 <!--                 ggplot( aes(x = flavor)) + geom_bar() + -->
 <!--                   theme(text=element_text(size=24)) -->
 <!-- ``` -->
@@ -838,7 +838,7 @@ er_bar +
 Let's look at visit rates for 9 CO counties.
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-er_visits_9 <- er %>% 
+er_visits_9 <- er |> 
   filter(county %in% c("Denver", "Weld", "Pueblo", "Jackson", 
                        "San Juan", "Mesa", "Jefferson", "Larimer", "Boulder"))
 
@@ -1113,7 +1113,7 @@ knitr::include_graphics("img/line_types.png")
 -   these include values that are strings like "blank", "solid", "dashed", "dotdash", "longdash", and "twodash"
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-er_Boulder %>% ggplot(aes(x = year,
+er_Boulder |> ggplot(aes(x = year,
                       y = rate)) +
   geom_line(size = 0.8, linetype = "twodash")
 ```
@@ -1136,7 +1136,7 @@ knitr::include_graphics("img/shape.png")
 
 
 ```{r, fig.width=5, fig.height=3, fig.align='center'}
-er_Boulder %>% ggplot(aes(x = year,
+er_Boulder |> ggplot(aes(x = year,
                       y = rate)) +
   geom_point(size = 2, shape = 12)
 ```
@@ -1177,7 +1177,7 @@ icecream <-tibble(flavor =
 icecream1 <- ggplot(icecream, aes(x = flavor)) + geom_bar() +
               theme(text=element_text(size=24))
 
-icecream2 <- icecream %>% drop_na(flavor)  %>%
+icecream2 <- icecream |> drop_na(flavor)  |>
                 ggplot( aes(x = flavor)) + geom_bar() +
                   theme(text=element_text(size=24))
 ```
