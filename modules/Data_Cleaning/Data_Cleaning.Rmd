@@ -1156,12 +1156,9 @@ We can do the same thing (with 2 piping operations!) in dplyr
 
 ```{r}
 dplyr_sal <- Sal
-dplyr_sal <- dplyr_sal |> mutate(
-  AnnualSalary = AnnualSalary |>
-    str_replace(
-      fixed("$"),
-      "") |>
-    as.numeric) |>
+dplyr_sal <- dplyr_sal |>
+  mutate(AnnualSalary = str_replace(AnnualSalary, fixed("$"), "")) |>
+  mutate(AnnualSalary = as.numeric(AnnualSalary)) |>
   arrange(desc(AnnualSalary))
 check_Sal <- Sal
 rownames(check_Sal) <- NULL
