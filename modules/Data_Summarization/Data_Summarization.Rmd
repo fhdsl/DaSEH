@@ -184,7 +184,7 @@ er %>%
 
 ## How many `distinct()` values?
 
-`n_distinct()` tells you the number of unique elements. 
+`n_distinct()` tells you the number of unique elements (including `NA`). 
 
 It needs a vector so you _must pull the column first!_
 
