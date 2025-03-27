@@ -129,7 +129,7 @@ Here are additional resources to help you on your R journey - either before, dur
 
 Resource for specific public health cases - **a great next step** for learning! https://www.opencasestudies.org
 
-- Link to case studies for extra practice:https://daseh.org/resources/ocs_practice.html
+- Link to case studies for extra practice: https://daseh.org/resources/ocs_practice.html
 
 - Link to search table: https://www.opencasestudies.org/OCS_search/ 
 
