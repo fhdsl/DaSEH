@@ -153,8 +153,8 @@ Let's look at why we might want long data using Esquisse.
 library(tidyverse)
 er <- read_csv(file =
     "https://daseh.org/data/CO_ER_heat_visits.csv")
-long_er <- er %>% 
-  filter(county == c("Denver", "Boulder")) %>% 
+long_er <- er |> 
+  filter(county == c("Denver", "Boulder")) |> 
   select(c("county", "year", "visits"))
 glimpse(long_er)
 ```

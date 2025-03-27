@@ -33,16 +33,16 @@ Hint: You first need to `pull` out the vector version of this variable to use th
 
 ```
 # General format
-TIBBLE %>%
-  pull(COLUMN) %>%
-  is.na() %>%
+TIBBLE |>
+  pull(COLUMN) |>
+  is.na() |>
   any()
 ```
 
 ```{r 1.1response}
-ces %>%
-  pull(Lead) %>%
-  is.na() %>%
+ces |>
+  pull(Lead) |>
+  is.na() |>
   any()
 ```
 
@@ -53,7 +53,7 @@ Clean rows of ces, so that only rows remain that do NOT have missing values for 
 `Education`: the percentage of the population over 25 with less than a high school education.
 
 ```{r 1.2response}
-have_ed_data <- ces %>% drop_na(Education)
+have_ed_data <- ces |> drop_na(Education)
 ```
 
 ### 1.3
@@ -76,7 +76,7 @@ What percentage of the `LinguisticIsol` variable is complete in `ces` ? Hint: us
 
  
 ```{r P.1response}
-pull(ces, LinguisticIsol) %>% pct_complete() # this
+pull(ces, LinguisticIsol) |> pct_complete() # this
 miss_var_summary(ces) # or this
 ```
 
@@ -121,9 +121,9 @@ Determine how many `NA` values there are for `exposure` (assume you know that`N`
 ```{r 2.1response}
 count(BloodType, exposure) # the simple way
 sum(is.na(pull(BloodType, exposure))) # another way
-BloodType %>% # another way
-  pull(exposure) %>%
-  is.na() %>%
+BloodType |> # another way
+  pull(exposure) |>
+  is.na() |>
   sum()
 ```
 
@@ -133,7 +133,7 @@ Recode the `exposure` variable of the `BloodType` data so that it is consistent.
 
 ```
 # General format
-NEW_TIBBLE <- OLD_TIBBLE %>%
+NEW_TIBBLE <- OLD_TIBBLE |>
   mutate(NEW_COLUMN = case_when(
     OLD_COLUMN %in% c( ... ) ~ ... ,
     OLD_COLUMN %in% c( ... ) ~ ... ,
@@ -143,7 +143,7 @@ NEW_TIBBLE <- OLD_TIBBLE %>%
 
 ```{r 2.2response}
 
-BloodType <- BloodType %>%
+BloodType <- BloodType |>
   mutate(exposure = case_when(
     exposure %in% c("N", "n", "No", "no") ~ "No",
     exposure %in% c("Y", "y", "Yes", "yes") ~ "Yes",
@@ -158,7 +158,7 @@ count(BloodType, exposure)
 Check to see how many values `exposure` has for each category (hint: use `count`). It's good practice to regularly check your data throughout the data wrangling process.
 
 ```{r 2.3response}
-BloodType %>% count(exposure)
+BloodType |> count(exposure)
 ```
 
 ### 2.4
@@ -166,7 +166,7 @@ BloodType %>% count(exposure)
 Recode the `type` variable of the `BloodType` data to be consistent. Use `case_when()`. Hint: the inconsistency has to do with lower case `o` and capital `O`. Don't forget to use quotes! **Remember that important extra step that we often do for `case_when()`. Sometimes it matters and sometimes it doesn't.** Why is that?
 
 ```{r 2.4response}
-BloodType <- BloodType %>%
+BloodType <- BloodType |>
   mutate(type = case_when(
     type == "o.-" ~ "O.-",
     type == "o.+" ~ "O.+",
@@ -180,7 +180,7 @@ Check to see that `type` only has these possible values:
  "A.-","A.+", "AB.-", "AB.+", "B-","B+", "O.-", "O.+"
 
 ```{r 2.5response}
-BloodType %>% count(type)
+BloodType |> count(type)
 ```
 
 ### 2.6
@@ -189,14 +189,14 @@ Make a new tibble of `BloodType` called `Bloodtype_split` that splits the `type`
 
 ```
 # General format
-NEW_TIBBLE <- OLD_TIBBLE %>%
+NEW_TIBBLE <- OLD_TIBBLE |>
   separate(OLD_COLUMN,
            into = c("NEW_COLUMN1", "NEW_COLUMN2"),
            sep = "SEPARATING_CHARACTER")
 ```
 
 ```{r 2.6response}
-BloodType_split <- BloodType %>%
+BloodType_split <- BloodType |>
   separate(type, into = c("blood_type", "Rhfactor"), sep = "\\.")
 ```
 
@@ -216,7 +216,7 @@ count(BloodType_split, Rhfactor)
 Filtering for patients with type O, how many had the infection?
 
 ```{r P.3response}
-BloodType_split %>%
-  filter(blood_type == "O") %>%
+BloodType_split |>
+  filter(blood_type == "O") |>
   count(infection)
 ```

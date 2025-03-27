@@ -319,12 +319,12 @@ df2 <- select(df2, cyl, hp)
 
 ## Using the `pipe` (comes with `dplyr`):
 
-Recently, the pipe `%>%` makes things such as this much more readable.  It reads left side "pipes" into right side.  RStudio `CMD/Ctrl + Shift + M` shortcut. Pipe `df` into `filter`, then pipe that into `select`:
+Recently, the pipe `|>` makes things such as this much more readable.  It reads left side "pipes" into right side.  RStudio `CMD/Ctrl + Shift + M` shortcut. Pipe `df` into `filter`, then pipe that into `select`:
 
 
 ```{r}
-df %>%
-  filter(mpg > 20 & cyl == 4) %>%
+df |>
+  filter(mpg > 20 & cyl == 4) |>
   select(cyl, hp)
 ```
 

@@ -19,8 +19,8 @@ Load the CalEnviroScreen dataset and use `select` to choose the `CaliforniaCount
 
 ```{r}
 ces <- 
-  read_csv("https://daseh.org/data/CalEnviroScreen_data.csv") %>% 
-  select(CaliforniaCounty, ImpWaterBodies, ZIP) %>%
+  read_csv("https://daseh.org/data/CalEnviroScreen_data.csv") |> 
+  select(CaliforniaCounty, ImpWaterBodies, ZIP) |>
   filter(CaliforniaCounty %in% c("Amador", "Napa", "Ventura", "San Francisco"))
 ```
 
