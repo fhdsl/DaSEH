@@ -32,7 +32,7 @@ This is a list of case studies recommended to specifically help you with your ne
 #### Joining Data Practice
 
   - [Merging 2 datasets - Diet Case Study](https://www.opencasestudies.org/ocs-bp-diet) ([Specific Section](https://www.opencasestudies.org/ocs-bp-diet/#Joining_data))
-  - [Merging a few datsets - CO2 Case Study](https://www.opencasestudies.org/ocs-bp-co2-emissions/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-co2-emissions/#Joining_data))
+  - [Merging a few datasets - CO2 Case Study](https://www.opencasestudies.org/ocs-bp-co2-emissions/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-co2-emissions/#Joining_data))
   - [Left join - Opioid Case Study](https://www.opencasestudies.org/ocs-bp-opioid-rural-urban) ([Specific Section](https://www.opencasestudies.org/ocs-bp-opioid-rural-urban/#Rural_and_Urban_Counties))
   - [Joining multiple files - Opioid Case Study](https://www.opencasestudies.org/ocs-bp-opioid-rural-urban) ([Specific Section](https://www.opencasestudies.org/ocs-bp-opioid-rural-urban/#Rural_and_Urban_Counties))
 
