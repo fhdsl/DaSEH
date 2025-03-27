@@ -11,11 +11,16 @@ This is a list of case studies recommended to specifically help you with your ne
 
 - [Filtering Data - Rural and Urban Obesity](https://www.opencasestudies.org/ocs-bp-rural-and-urban-obesity/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-rural-and-urban-obesity/#Data_Exploration))
 
+#### Summarization Practice
+
+[Grouping and Summarizing Data - CO2 Case Study](https://www.opencasestudies.org/ocs-bp-co2-emissions/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-co2-emissions/#Data_Visualization))
+
 ##### Cleaning Practice
 
 - [Using strings - Diet Case Study](https://www.opencasestudies.org/ocs-bp-diet/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-diet/#Data_Wrangling))
 - [Missing Data - Opioid Case Study](https://www.opencasestudies.org/ocs-bp-opioid-rural-urban) ([Specific Section](https://www.opencasestudies.org/ocs-bp-opioid-rural-urban/#Data_Exploration))
   
+
 ##### Manipulating Data Practice
 
 - [Pivoting Data - Disparities in Youth Disconnection Case Study](https://www.opencasestudies.org/ocs-bp-youth-disconnection/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-youth-disconnection/#Major_Racial_and_Ethnic_Groups))
