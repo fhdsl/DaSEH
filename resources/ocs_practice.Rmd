@@ -44,4 +44,4 @@ This is a list of case studies recommended to specifically help you with your ne
   
 #### Functions Practice
 
-- [Vaping Case Study](https://www.opencasestudies.org/ocs-bp-vaping-case-study/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-vaping-case-study/#Updating_Values))
+- [Writing Functions - Vaping Case Study](https://www.opencasestudies.org/ocs-bp-vaping-case-study/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-vaping-case-study/#Updating_Values))
