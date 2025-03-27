@@ -180,20 +180,20 @@ pre code {
 <p>Create a new dataset “co2_long” that does <code>pivot_longer()</code> on all columns except “country”. Remember that <code>!country</code> means all columns except “country”.</p>
 <p>Reassign to co2_long.</p>
 <pre><code># General format
-new_data &lt;- old_data %&gt;% pivot_longer(cols = colname(s))</code></pre>
+new_data &lt;- old_data |&gt; pivot_longer(cols = colname(s))</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
 <p>Using <code>co2_long</code>, filter the “country” column so it only includes values from Indonesia and Canada. <strong>Hint</strong>: use <code>filter</code> and <code>%in%</code>.</p>
 <p>Reassign to co2_long.</p>
 <pre><code># General format
-new_data &lt;- old_data %&gt;% filter(colname %in% c(...))</code></pre>
+new_data &lt;- old_data |&gt; filter(colname %in% c(...))</code></pre>
 </div>
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
 <p>Use <code>pivot_wider</code> to reshape “co2_long”. Use “county” for the <code>names_from</code> argument. Use “value” for the <code>values_from</code> argument. Call this new data <code>co2_wide</code>.</p>
 <pre><code># General format
-new_data &lt;- old_data %&gt;% pivot_wider(names_from = column1, values_from = column2)</code></pre>
+new_data &lt;- old_data |&gt; pivot_wider(names_from = column1, values_from = column2)</code></pre>
 </div>
 <div id="section-4" class="section level3">
 <h3>1.5</h3>
@@ -206,7 +206,7 @@ new_data &lt;- old_data %&gt;% pivot_wider(names_from = column1, values_from = c
 <h1>Practice on Your Own!</h1>
 <div id="p.1" class="section level3">
 <h3>P.1</h3>
-<p>Take the code from Questions 1.1 - 1.5. Chain all of this code together using the pipe <code>%&gt;%</code>. Call your data <code>co2_compare</code>.</p>
+<p>Take the code from Questions 1.1 - 1.5. Chain all of this code together using the pipe <code>|&gt;</code>. Call your data <code>co2_compare</code>.</p>
 </div>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
@@ -244,7 +244,7 @@ inner_join(data1, data2, by = &quot;&quot;)</code></pre>
 <h3>2.4</h3>
 <p>What countries are present in “co2” that are not present in “cc”? Use <code>anti_join</code>. What countries are present in “cc” that are not present in “co2”?</p>
 <pre><code># General format
-anti_join(data1, data2, by = &quot;&quot;) %&gt;% select(columnname)</code></pre>
+anti_join(data1, data2, by = &quot;&quot;) |&gt; select(columnname) |&gt; distinct()</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own-1" class="section level1">
