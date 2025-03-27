@@ -117,8 +117,6 @@ Here are additional resources to help you on your R journey - either before, dur
 
 - [Tidyverse Skills for Data Science Book](https://jhudatascience.org/tidyversecourse/)  (**a great next step** to learn more about the tidyverse, some modeling, and machine learning)
 - [Tidyverse Skills for Data Science Course](https://www.coursera.org/specializations/tidyverse-data-science-r)  (same content with quizzes, can get certificate with $)
-- [Open Case Studies](https://www.opencasestudies.org/)  
-(resource for specific public health cases with statistical implementation and interpretation - **a great next step** for learning more about stats and wrangling!)
 - [R for Data Science](http://r4ds.had.co.nz/)  (great general information)
 - [R for Applied Epidemiology](https://epirhandbook.com/en/)  (Similar general introductory course)  
 - [R basics chapter of Introduction to Data Science by Rafael A. Irizarry](https://rafalab.github.io/dsbook/r-basics.html)(great general information)
@@ -126,6 +124,17 @@ Here are additional resources to help you on your R journey - either before, dur
 - [Quick R Guide]( http://statmethods.net/)  (nice free general resource)
 - [Introduction to Reproducibility](https://jhudatascience.org/Reproducibility_in_Cancer_Informatics/)
 - [Advanced Reproducibility](https://jhudatascience.org/Adv_Reproducibility_in_Cancer_Informatics/)
+
+#### **Open Case Studies**
+
+Resource for specific public health cases - **a great next step** for learning! https://www.opencasestudies.org
+
+- Link to case studies for extra practice: https://daseh.org/resources/ocs_practice.html
+
+- Link to search table: https://www.opencasestudies.org/OCS_search/ 
+
+- Link to flip book search: https://americanhealth.jhu.edu/open-case-studies 
+
 
 #### **R Conferences**
 
