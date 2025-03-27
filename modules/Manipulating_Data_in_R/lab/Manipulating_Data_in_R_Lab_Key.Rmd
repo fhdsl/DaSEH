@@ -88,8 +88,6 @@ Reassign to co2_wide. Compare the years - what conclusions can you draw?
 co2_wide <- co2_wide |> drop_na()
 ```
 
-Tip: you can adjust scientific notation with `options(scipen=<n>)` 
-
 
 # Practice on Your Own!
 
