@@ -63,7 +63,7 @@ co2_long <- co2_long |>
 
 ### 1.4
 
-Use `pivot_wider` to reshape "co2_long". Use "county" for the `names_from` argument. Use "value" for the `values_from` argument. Call this new data `co2_wide`. 
+Use `pivot_wider` to reshape "co2_long". Use "country" for the `names_from` argument. Use "value" for the `values_from` argument. Call this new data `co2_wide`. 
 
 ```
 # General format
