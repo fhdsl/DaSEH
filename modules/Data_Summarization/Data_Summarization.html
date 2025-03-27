@@ -186,7 +186,7 @@ pre { /* Code block - slightly smaller in this lecture */
 <li><code>mutate()</code>: create new columns or modify them</li>
 <li><code>select()</code> and <code>filter()</code> can be combined together</li>
 <li>remove a column: <code>select()</code> with <code>!</code> mark (<code>!col_name</code>)</li>
-<li>you can do sequential steps: especially using pipes <code>%&gt;%</code></li>
+<li>you can do sequential steps: especially using pipes <code>|&gt;</code></li>
 </ul>
 
 <p>📃<a href='https://daseh.org/modules/cheatsheets/Day-3.pdf' title=''>Day 3 Cheatsheet</a></p>
@@ -223,7 +223,7 @@ head(er)</pre>
 <p><code>pull()</code> converts a single data column into a <span style="color:blue">
 vector</span>.</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;% pull(visits)</pre>
+<pre class = 'prettyprint lang-r'>er |&gt; pull(visits)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Data Summarization</h2></hgroup><article  id="data-summarization">
 
@@ -245,11 +245,11 @@ vector of numbers</span>.. what can we do with it?</p>
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Pipe (<code>%&gt;%</code>) vectors into summarizing functions</h2></hgroup><article  id="pipe-vectors-into-summarizing-functions">
+</article></slide><slide class=""><hgroup><h2>Pipe (<code></h2><h3>&gt;</code>) vectors into summarizing functions</h3></hgroup><article  id="pipe-vectors-into-summarizing-functions">
 
 <p>A vector can be summarized:</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;% pull(visits) %&gt;% mean()</pre>
+<pre class = 'prettyprint lang-r'>er |&gt; pull(visits) |&gt; mean()</pre>
 
 <pre >[1] NA</pre>
 
@@ -257,7 +257,7 @@ vector of numbers</span>.. what can we do with it?</p>
 
 <p>Add the <code>na.rm =</code> argument for missing data</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;% pull(visits) %&gt;% mean(na.rm=T)</pre>
+<pre class = 'prettyprint lang-r'>er |&gt; pull(visits) |&gt; mean(na.rm=T)</pre>
 
 <pre >[1] 7.189247</pre>
 
@@ -281,13 +281,13 @@ vector of numbers</span>.. what can we do with it?</p>
 
 <div class="codeexample">
 <pre class = 'prettyprint lang-r'># General format - Not the code!
-{data to use} %&gt;% 
+{data to use} |&gt; 
    summarize({summary column name} = {function(source column)},
              {summary column name} = {function(source column)}) </pre></div>
 
 </article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function-1">
 
-<pre class = 'prettyprint lang-r'>er %&gt;% 
+<pre class = 'prettyprint lang-r'>er |&gt; 
   summarize(mean_visits = mean(visits))</pre>
 
 <pre ># A tibble: 1 × 1
@@ -295,7 +295,7 @@ vector of numbers</span>.. what can we do with it?</p>
         &lt;dbl&gt;
 1          NA</pre>
 
-<pre class = 'prettyprint lang-r'>er %&gt;% 
+<pre class = 'prettyprint lang-r'>er |&gt; 
   summarize(mean_visits = mean(visits, na.rm = TRUE))</pre>
 
 <pre ># A tibble: 1 × 1
@@ -307,7 +307,7 @@ vector of numbers</span>.. what can we do with it?</p>
 
 <p><code>summarize()</code> can do multiple operations at once. Just separate by a comma.</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;% 
+<pre class = 'prettyprint lang-r'>er |&gt; 
   summarize(mean_visits = mean(visits, na.rm = TRUE),
             median_visits = median(visits, na.rm = TRUE),
             mean_rate = mean(rate, na.rm = TRUE))</pre>
@@ -364,7 +364,7 @@ vector of numbers</span>.. what can we do with it?</p>
 
 <p><code>distinct(x)</code> will return the unique elements of column <code>x</code>.</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
   distinct(county)</pre>
 
 <pre ># A tibble: 64 × 1
@@ -384,19 +384,19 @@ vector of numbers</span>.. what can we do with it?</p>
 
 </article></slide><slide class=""><hgroup><h2>How many <code>distinct()</code> values?</h2></hgroup><article  id="how-many-distinct-values">
 
-<p><code>n_distinct()</code> tells you the number of unique elements.</p>
+<p><code>n_distinct()</code> tells you the number of unique elements (including <code>NA</code>).</p>
 
 <p>It needs a vector so you <em>must pull the column first!</em></p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
-  pull(county) %&gt;% 
+<pre class = 'prettyprint lang-r'>er |&gt;
+  pull(county) |&gt; 
   n_distinct()</pre>
 
 <pre >[1] 64</pre>
 
 </article></slide><slide class=""><hgroup><h2>Use <code>count()</code> to return row count per category.</h2></hgroup><article  id="use-count-to-return-row-count-per-category.">
 
-<pre class = 'prettyprint lang-r'>er %&gt;% count(county)</pre>
+<pre class = 'prettyprint lang-r'>er |&gt; count(county)</pre>
 
 <pre ># A tibble: 64 × 2
    county         n
@@ -417,7 +417,7 @@ vector of numbers</span>.. what can we do with it?</p>
 
 </article></slide><slide class=""><hgroup><h2>Multiple columns listed further subdivides the <code>count()</code></h2></hgroup><article  id="multiple-columns-listed-further-subdivides-the-count">
 
-<pre class = 'prettyprint lang-r'>er %&gt;% count(county, year)</pre>
+<pre class = 'prettyprint lang-r'>er |&gt; count(county, year)</pre>
 
 <pre ># A tibble: 768 × 3
    county  year     n
@@ -460,7 +460,7 @@ vector of numbers</span>.. what can we do with it?</p>
 
 <p><code>group_by</code> allows you group the data set by variables/columns you specify:</p>
 
-<pre class = 'prettyprint lang-r'>er_grouped &lt;- er %&gt;% group_by(year)
+<pre class = 'prettyprint lang-r'>er_grouped &lt;- er |&gt; group_by(year)
 er_grouped</pre>
 
 <pre ># A tibble: 768 × 6
@@ -483,7 +483,7 @@ er_grouped</pre>
 
 <p>It’s grouped! Grouping doesn’t change the data in any way, but how <strong>functions operate on it</strong>. Now we can summarize <code>visits</code> by group:</p>
 
-<pre class = 'prettyprint lang-r'>er_grouped %&gt;% 
+<pre class = 'prettyprint lang-r'>er_grouped |&gt; 
   summarize(avg_visits = mean(visits, na.rm = TRUE))</pre>
 
 <pre ># A tibble: 12 × 2
@@ -502,12 +502,12 @@ er_grouped</pre>
 11  2021       8.06
 12  2022       9.29</pre>
 
-</article></slide><slide class=""><hgroup><h2>Do it in one step: use <code>%&gt;%</code> to string these together!</h2></hgroup><article  id="do-it-in-one-step-use-to-string-these-together">
+</article></slide><slide class=""><hgroup><h2>Do it in one step: use <code></h2><h3>&gt;</code> to string these together!</h3></hgroup><article  id="do-it-in-one-step-use-to-string-these-together">
 
 <p>Pipe <code>er</code> into <code>group_by</code>, then pipe that into <code>summarize</code>:</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
-  group_by(year) %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
+  group_by(year) |&gt;
   summarize(avg_visits = mean(visits, na.rm = TRUE))</pre>
 
 <pre ># A tibble: 12 × 2
@@ -530,8 +530,8 @@ er_grouped</pre>
 
 <p><code>group_by</code> county and year:</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
-  group_by(year, county) %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
+  group_by(year, county) |&gt;
   summarize(avg_visits = mean(visits, na.rm = TRUE))</pre>
 
 <pre ># A tibble: 768 × 3
@@ -554,8 +554,8 @@ er_grouped</pre>
 
 <p>There are other summarizing functions, such as <code>n()</code> count the number of rows/observations (NAs included).</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
-  group_by(year) %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
+  group_by(year) |&gt;
   summarize(n = n(),
             mean = mean(visits, na.rm = TRUE))</pre>
 
@@ -580,7 +580,7 @@ er_grouped</pre>
 <p><code>count()</code> and <code>n()</code> can give very similar information.</p>
 
 <pre class = 'prettyprint lang-r'># Here we use count()
-er %&gt;% count(year)</pre>
+er |&gt; count(year)</pre>
 
 <pre ># A tibble: 12 × 2
     year     n
@@ -603,7 +603,7 @@ er %&gt;% count(year)</pre>
 <p><code>count()</code> and <code>n()</code> can give very similar information.</p>
 
 <pre class = 'prettyprint lang-r'># n() with summarize
-er %&gt;% group_by(year) %&gt;% summarize(n()) </pre>
+er |&gt; group_by(year) |&gt; summarize(n()) </pre>
 
 <pre ># A tibble: 12 × 2
     year `n()`
@@ -627,9 +627,9 @@ er %&gt;% group_by(year) %&gt;% summarize(n()) </pre>
 
 <p>These functions require a column as a vector using <code>pull()</code>.</p>
 
-<pre class = 'prettyprint lang-r'>er_year &lt;- er %&gt;% pull(year) # pull() to make a vector
+<pre class = 'prettyprint lang-r'>er_year &lt;- er |&gt; pull(year) # pull() to make a vector
 
-er_year %&gt;% unique() # similar to distinct()</pre>
+er_year |&gt; unique() # similar to distinct()</pre>
 
 <pre > [1] 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022</pre>
 
@@ -637,7 +637,7 @@ er_year %&gt;% unique() # similar to distinct()</pre>
 
 <p>These functions require a column as a vector using <code>pull()</code>.</p>
 
-<pre class = 'prettyprint lang-r'>er_year %&gt;% unique() %&gt;% length() # similar to n_distinct()</pre>
+<pre class = 'prettyprint lang-r'>er_year |&gt; unique() |&gt; length() # similar to n_distinct()</pre>
 
 <pre >[1] 12</pre>
 
@@ -710,16 +710,16 @@ er_year %&gt;% unique() # similar to distinct()</pre>
 
 <p>Let’s see what the mean CO2 emissions is across the years 2010-2014 for each row (country):</p>
 
-<pre class = 'prettyprint lang-r'>yearly_co2 %&gt;%
-  select(starts_with(&quot;201&quot;)) %&gt;%
-  rowMeans(na.rm = TRUE) %&gt;%
+<pre class = 'prettyprint lang-r'>yearly_co2 |&gt;
+  select(starts_with(&quot;201&quot;)) |&gt;
+  rowMeans(na.rm = TRUE) |&gt;
   head(n = 5)</pre>
 
 <pre >[1]  10254   5106 129800    487  32040</pre>
 
-<pre class = 'prettyprint lang-r'>yearly_co2 %&gt;%
-  group_by(country) %&gt;%
-  summarize(mean = rowMeans(across(starts_with(&quot;201&quot;)), na.rm = TRUE)) %&gt;%
+<pre class = 'prettyprint lang-r'>yearly_co2 |&gt;
+  group_by(country) |&gt;
+  summarize(mean = rowMeans(across(starts_with(&quot;201&quot;)), na.rm = TRUE)) |&gt;
   head(n = 5)</pre>
 
 <pre ># A tibble: 5 × 2
@@ -737,15 +737,15 @@ er_year %&gt;% unique() # similar to distinct()</pre>
 
 <p>Let’s see what the mean is across each column (year):</p>
 
-<pre class = 'prettyprint lang-r'>yearly_co2 %&gt;%
-  select(starts_with(&quot;201&quot;)) %&gt;%
-  colMeans(na.rm = TRUE) %&gt;%
+<pre class = 'prettyprint lang-r'>yearly_co2 |&gt;
+  select(starts_with(&quot;201&quot;)) |&gt;
+  colMeans(na.rm = TRUE) |&gt;
   head(n = 5)</pre>
 
 <pre >    2010     2011     2012     2013     2014 
 165334.1 171764.9 174033.4 174856.2 175992.5 </pre>
 
-<pre class = 'prettyprint lang-r'>yearly_co2 %&gt;%
+<pre class = 'prettyprint lang-r'>yearly_co2 |&gt;
   summarize(across(starts_with(&quot;201&quot;), ~mean(.x, na.rm = TRUE)))</pre>
 
 <pre ># A tibble: 1 × 5
@@ -757,14 +757,14 @@ er_year %&gt;% unique() # similar to distinct()</pre>
 
 <p>Pipe <code>er</code> into <code>group_by</code>, then pipe that into <code>summarize</code>:</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
-  group_by(year) %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
+  group_by(year) |&gt;
   summarize(avg_visits = mean(visits, na.rm = TRUE),
             max_visits = max(visits, na.rm = TRUE))</pre>
 
 <p>is the same as..</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
   summarize(avg_visits = mean(visits, na.rm = TRUE),
             max_visits = max(visits, na.rm = TRUE),
             .by = year)</pre></article></slide>

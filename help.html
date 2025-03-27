@@ -310,7 +310,7 @@ $(document).ready(function () {
 <li><a href="#error-unexpected-in-error-unexpected-in-error-unexpected-x-in"><strong>Error: unexpected ‘,’ in … / Error: unexpected ‘)’ in … / Error: unexpected ‘X’ in …</strong></a></li>
 <li><a href="#error-unexpected-symbol-in-x"><strong>Error: unexpected symbol in “x”</strong></a></li>
 <li><a href="#error-unexpected-input-in-x"><strong>Error: unexpected input in “x”</strong></a></li>
-<li><a href="#error-mapping-must-be-created-by-aes-ℹ-did-you-use-or-instead-of"><strong>Error: <code>mapping</code> must be created by <code>aes()</code> / <code>ℹ</code> Did you use ‘%&gt;%’ or ‘|&gt;’ instead of ‘+’?</strong></a></li>
+<li><a href="#error-mapping-must-be-created-by-aes-ℹ-did-you-use-or-instead-of"><strong>Error: <code>mapping</code> must be created by <code>aes()</code> / <code>ℹ</code> Did you use ‘|&gt;’ or ‘|&gt;’ instead of ‘+’?</strong></a></li>
 <li><a href="#error-in-.gg-ℹ-did-you-accidentally-put-on-a-new-line"><strong>Error in +.gg: <code>ℹ</code> Did you accidentally put ‘+’ on a new line?</strong></a></li>
 </ul></li>
 <li><a href="#preference-changes"><strong>Preference Changes</strong></a>
@@ -353,14 +353,14 @@ code{
 <p>Here we are creating a new object from an existing one:</p>
 <pre class="r"><code>new_rivers &lt;- sample(rivers, 5)
 new_rivers</code></pre>
-<pre><code>## [1]  280  250  250 1459  360</code></pre>
+<pre><code>## [1]  420  210  360 1038  696</code></pre>
 <p>Using just this will only print the result and not actually change <code>new_rivers</code>:</p>
 <pre class="r"><code>new_rivers + 1</code></pre>
-<pre><code>## [1]  281  251  251 1460  361</code></pre>
+<pre><code>## [1]  421  211  361 1039  697</code></pre>
 <p>If we want to modify <code>new_rivers</code> and save that modified version, then we need to reassign <code>new_rivers</code> like so:</p>
 <pre class="r"><code>new_rivers &lt;- new_rivers + 1
 new_rivers</code></pre>
-<pre><code>## [1]  281  251  251 1460  361</code></pre>
+<pre><code>## [1]  421  211  361 1039  697</code></pre>
 <p>If we forget to reassign this can cause subsequent steps to not work as expected because we will not be working with the data that has been modified.</p>
 <hr />
 </div>
@@ -389,12 +389,12 @@ new_rivers</code></pre>
 <h2><strong>Error in x : could not find function “y”</strong></h2>
 <p><strong>Forgetting to load a library or misspelling a function or package</strong></p>
 <p>For example, we forgot <code>library(tidyverse)</code> below:</p>
-<pre class="r"><code>iris %&gt;% pull(Species) </code></pre>
-<pre class="bg-error"><code>## Error in iris %&gt;% pull(Species): could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="r"><code>iris |&gt; pull(Species) </code></pre>
+<pre class="bg-error"><code>## Error in pull(iris, Species): could not find function &quot;pull&quot;</code></pre>
 <p>Below will not work because <code>str_detect</code> is missing a <code>t</code> at the end:</p>
 <pre class="r"><code>library(tidyverse) # need this! This can be at the top of your file
-iris %&gt;% pull(Species) %&gt;% str_detec(&quot;setosa&quot;)</code></pre>
-<pre class="bg-error"><code>## Error in str_detec(., &quot;setosa&quot;): could not find function &quot;str_detec&quot;</code></pre>
+iris |&gt; pull(Species) |&gt; str_detec(&quot;setosa&quot;)</code></pre>
+<pre class="bg-error"><code>## Error in str_detec(pull(iris, Species), &quot;setosa&quot;): could not find function &quot;str_detec&quot;</code></pre>
 <p>This will not work because <code>library()</code> is misspelled:</p>
 <pre class="r"><code>libary(tidyverse)</code></pre>
 <pre class="bg-error"><code>## Error in libary(tidyverse): could not find function &quot;libary&quot;</code></pre>
@@ -409,7 +409,7 @@ iris %&gt;% pull(Species) %&gt;% str_detec(&quot;setosa&quot;)</code></pre>
 <p>Make sure you run something like this, with the <code>&lt;-</code> operator:</p>
 <pre class="r"><code>rivers2 &lt;- new_rivers + 1
 rivers2</code></pre>
-<pre><code>## [1]  282  252  252 1461  362</code></pre>
+<pre><code>## [1]  422  212  362 1040  698</code></pre>
 <hr />
 </div>
 <div id="error-unexpected-in-error-unexpected-in-error-unexpected-x-in" class="section level2">
@@ -449,35 +449,35 @@ all.equal((rivers+1, rivers)</code></pre>
 ## 2            2 B    
 ## 3            3 C</code></pre>
 <p>If we want to specifically pull out the column with the variable named <code>The Values</code> we need to use quotes or back ticks.</p>
-<pre class="r"><code>df_quotes %&gt;% pull(names) # this works fine! no spaces in `names`</code></pre>
+<pre class="r"><code>df_quotes |&gt; pull(names) # this works fine! no spaces in `names`</code></pre>
 <pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot;</code></pre>
-<pre class="r"><code>df_quotes %&gt;% pull(&quot;The Values&quot;) # this works</code></pre>
+<pre class="r"><code>df_quotes |&gt; pull(&quot;The Values&quot;) # this works</code></pre>
 <pre><code>## [1] 1 2 3</code></pre>
-<pre class="r"><code>df_quotes %&gt;% pull(`The Values`) # this works</code></pre>
+<pre class="r"><code>df_quotes |&gt; pull(`The Values`) # this works</code></pre>
 <pre><code>## [1] 1 2 3</code></pre>
-<pre class="r"><code>df_quotes %&gt;% pull(The Values) # this does not work!</code></pre>
-<pre class="bg-error"><code>## Error: &lt;text&gt;:1:24: unexpected symbol
-## 1: df_quotes %&gt;% pull(The Values
-##                            ^</code></pre>
+<pre class="r"><code>df_quotes |&gt; pull(The Values) # this does not work!</code></pre>
+<pre class="bg-error"><code>## Error: &lt;text&gt;:1:23: unexpected symbol
+## 1: df_quotes |&gt; pull(The Values
+##                           ^</code></pre>
 <hr />
 </div>
 <div id="error-unexpected-input-in-x" class="section level2">
 <h2><strong>Error: unexpected input in “x”</strong></h2>
 <p><strong>Copy+pasting quotation marks</strong></p>
 <p>If you copy paste code form somewhere with curly quotation marks, it will not work.</p>
-<pre class="r"><code>df_quotes %&gt;% pull(&quot;The Values&quot;) # this works</code></pre>
+<pre class="r"><code>df_quotes |&gt; pull(&quot;The Values&quot;) # this works</code></pre>
 <pre><code>## [1] 1 2 3</code></pre>
-<pre class="r"><code>df_quotes %&gt;% pull(“The Values”) # this doesn&#39;t work</code></pre>
-<pre class="bg-error"><code>## Error: &lt;text&gt;:1:20: unexpected invalid token
-## 1: df_quotes %&gt;% pull(“
-##                        ^</code></pre>
+<pre class="r"><code>df_quotes |&gt; pull(“The Values”) # this doesn&#39;t work</code></pre>
+<pre class="bg-error"><code>## Error: &lt;text&gt;:1:19: unexpected invalid token
+## 1: df_quotes |&gt; pull(“
+##                       ^</code></pre>
 <hr />
 </div>
 <div id="error-mapping-must-be-created-by-aes-ℹ-did-you-use-or-instead-of" class="section level2">
-<h2><strong>Error: <code>mapping</code> must be created by <code>aes()</code> / <code>ℹ</code> Did you use ‘%&gt;%’ or ‘|&gt;’ instead of ‘+’?</strong></h2>
+<h2><strong>Error: <code>mapping</code> must be created by <code>aes()</code> / <code>ℹ</code> Did you use ‘|&gt;’ or ‘|&gt;’ instead of ‘+’?</strong></h2>
 <p><strong>Forgetting to use <code>+</code> to add <code>ggplot2</code> layers</strong></p>
 <p>This will not work:</p>
-<pre class="r"><code>ggplot(data = iris, aes(x = Species, y = Petal.Length)) %&gt;%
+<pre class="r"><code>ggplot(data = iris, aes(x = Species, y = Petal.Length)) |&gt;
   geom_boxplot()</code></pre>
 <pre class="bg-error"><code>## Error in `geom_boxplot()`:
 ## ! `mapping` must be created by `aes()`.
