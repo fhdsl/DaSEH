@@ -189,11 +189,11 @@ What countries are present in "co2" that are not present in "cc"? Use `anti_join
 
 ```
 # General format
-anti_join(data1, data2, by = "") |> select(columnname)
+anti_join(data1, data2, by = "") |> select(columnname) |> distinct()
 ```
 
 ```{r 2.4response}
-anti_join(co2, cc, by = "country") |> select(country)
+anti_join(co2, cc, by = "country") |> select(country) |> distinct()
 anti_join(cc, co2, by = "country") |> select(country) |> distinct()
 ```
 
