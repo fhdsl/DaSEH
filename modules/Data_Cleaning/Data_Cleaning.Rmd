@@ -1156,15 +1156,15 @@ We can do the same thing (with 2 piping operations!) in dplyr
 
 ```{r}
 dplyr_sal <- Sal
-dplyr_sal <- dplyr_sal |> mutate( 
+dplyr_sal <- dplyr_sal |> mutate(
   AnnualSalary = AnnualSalary |>
     str_replace(
-      fixed("$"), 
+      fixed("$"),
       "") |>
     as.numeric) |>
   arrange(desc(AnnualSalary))
-check_Sal = Sal
-rownames(check_Sal) = NULL
+check_Sal <- Sal
+rownames(check_Sal) <- NULL
 all.equal(check_Sal, dplyr_sal)
 ```
 
