@@ -3,7 +3,7 @@
 
 This is a list of case studies recommended to specifically help you with your next steps with the content we learned in DaSEH. See more of the [case studies](https://www.opencasestudies.org/) for additional learning!
 
-#### Data Import Practice
+#### Data Input Practice
 
 - [Importing Excel Files - Vaping Case Study](https://www.opencasestudies.org/ocs-bp-vaping-case-study/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-vaping-case-study/#Data_Import))
 
