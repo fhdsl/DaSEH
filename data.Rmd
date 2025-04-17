@@ -4,100 +4,21 @@
 ***
 
 ## Datasets Used in Course
+| Dataset | Details | Modules | Original Source |
+|:-------|:---------|:-----|:---------|
+| [CalEnviroScreen](https://daseh.org/data/CalEnviroScreen_data.csv) | CalEnviroScreen4.0 data. This dataset was gathered by the California Office of Environmental Health Hazard Assessment. CalEnviroScreen ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. | Data Input, Subsetting Data in R, Data Summarization, Data Cleaning, Intro to Data Visualization, Data Visualization, Factors, Statistics, Data Output, Functions | https://calenviroscreen-oehha.hub.arcgis.com/ |
+| [Climate change disasters](https://daseh.org/data/Yearly_CC_Disasters.csv) | | Manipulating Data in R | original source unclear |
+| [CO heat-related ER visits](https://daseh.org/data/CO_ER_heat_visits.csv) | Age-adjusted visit rates and total number of visits for all genders by Colorado county for 2011-2023, collected by the Colorado Environmental Public Health Tracking program | Data Input, Subsetting Data in R, Data Summarization, Data Cleaning, Intro to Data Visualization, Data Visualization, Factors, Statistics, Data Output, Functions | https://coepht.colorado.gov/heat-related-illness |
+| [Country population](https://daseh.org/data/country_pop.txt) | | Homework 3 | original source unclear |
+| [CoVID wastewater surveillance]( URL: https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv) | SARS-CoV-2 viral load measured in wastewater between 2022 and 2024, collected by the collected by the National Wastewater Surveillance System | Data Classes | https://data.cdc.gov/Public-Health-Surveillance/NWSS-Public-SARS-CoV-2-Wastewater-Metric-Data/2ew6-ywp6/about_data |
+| [Mortality](https://daseh.org/data/mortality.csv) |  | Original source unclear. Possibly https://www.gapminder.org/data/documentation/gd005/ |
+| mtcars | Classic dataset in R. The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973--74 models) | Data Subsetting | https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars |
+| [Nitrate exposure](https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv) | The amount of people in Washington exposed to excess levels of nitrate in their water between 1999 and 2020 by quarter, collected by the Washington Tracking Network | Manipulating Data in R | https://doh.wa.gov/data-and-statistical-reports/washington-tracking-network-wtn/drinking-water |
+| [Weather on Mars](https://daseh.org/data/kaggleMars_Dataset.csv) | Information about temperature measures from the Rover Environmental Monitoring Station (REMS) on Mars, collected by Spain and Finland | Homework 2 | https://www.kaggle.com/datasets/deepcontractor/mars-rover-environmental-monitoring-station/data |
+| [Yearly CO2 emissions](https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv) | Estimated CO2 emissions in tonnes or metric tons (equivalent to approximately 2,204.6 pounds) per person by country for 265 countries between the years 1751 and 2014. | Data Subsetting, Manipulating Data in R, Functions | https://www.opencasestudies.org/ocs-bp-co2-emissions; originally from https://www.gapminder.org/data/ and https://cdiac.ess-dive.lbl.gov/ |
 
-The following datasets are used in this course.
 
-### CalEnviroScreen
 
-CalEnviroScreen4.0 data. This dataset was gathered by the California Office of Environmental Health Hazard Assessment. CalEnviroScreen ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions.
-
-* Source: https://calenviroscreen-oehha.hub.arcgis.com/
-* URL: https://daseh.org/data/CalEnviroScreen_data.csv
-* Modules: Data Input, Subsetting Data in R, Data Summarization, Data Cleaning, Intro to Data Visualization, Data Visualization, Factors, Statistics, Data Output, Functions
-
-<br>
-
-### Climate change disasters
-
-* Source: Original source unclear.
-* URL: https://daseh.org/data/Yearly_CC_Disasters.csv
-* Modules: Manipulating Data in R
-
-<br> 
-
-### CO heat-related ER visits
-
-Age-adjusted visit rates and total number of visits for all genders by Colorado county for 2011-2023, collected by the Colorado Environmental Public Health Tracking program.
-
-* Source: https://coepht.colorado.gov/heat-related-illness
-* URL: https://daseh.org/data/CO_ER_heat_visits.csv
-* Modules: Data Input, Subsetting Data in R, Data Summarization, Data Cleaning, Intro to Data Visualization, Data Visualization, Factors, Statistics, Data Output, Functions
-
-<br>
-
-### Country population
-
-* Source: Original source unclear.
-* URL: https://daseh.org/data/country_pop.txt
-* Modules: Homework 3
-
-<br>
-
-### CoVID wastewater surveillance
-
-SARS-CoV-2 viral load measured in wastewater between 2022 and 2024, collected by the collected by the National Wastewater Surveillance System.
-
-* Source:  https://data.cdc.gov/Public-Health-Surveillance/NWSS-Public-SARS-CoV-2-Wastewater-Metric-Data/2ew6-ywp6/about_data
-* URL: https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv
-* Modules: Data Classes
-
-<br>
-
-### Mortality
-
-* Source: Original source unclear. Possibly https://www.gapminder.org/data/documentation/gd005/
-* URL: https://daseh.org/data/mortality.csv
-* Modules: Homework 3
-
-<br>
-
-### mtcars
-
-Classic dataset in R. The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973--74 models)
-
-* Source: https://www.rdocumentation.org/packages/datasets/versions/3.6.2/topics/mtcars
-* URL: none
-* Modules: Data Subsetting
-
-<br>
-
-### Nitrate exposure
-
-The amount of people in Washington exposed to excess levels of nitrate in their water between 1999 and 2020 by quarter, collected by the Washington Tracking Network.
-
-* Source:  https://doh.wa.gov/data-and-statistical-reports/washington-tracking-network-wtn/drinking-water
-* URL: https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv
-* Modules: Manipulating Data in R
-
-<br>
-
-### Weather on Mars
-
-Information about temperature measures from the Rover Environmental Monitoring Station (REMS) on Mars. These data are collected by Spain and Finland.
-
-* Source: https://www.kaggle.com/datasets/deepcontractor/mars-rover-environmental-monitoring-station/data
-* URL: https://daseh.org/data/kaggleMars_Dataset.csv
-* Modules: Homework 2
-
-<br>
-
-### Yearly CO2 emissions
-
-Estimated CO2 emissions in tonnes or metric tons (equivalent to approximately 2,204.6 pounds) per person by country for 265 countries between the years 1751 and 2014.
-
-* Source: https://www.opencasestudies.org/ocs-bp-co2-emissions; originally from https://www.gapminder.org/data/ and https://cdiac.ess-dive.lbl.gov/
-* URL: https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv
-* Modules: Data Subsetting, Manipulating Data in R, Functions
 
 <br>
 
