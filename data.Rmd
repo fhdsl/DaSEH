@@ -1,6 +1,6 @@
 
 <div class="leaf"></div> 
-# Data
+# Data {.tabset .tabset-fade}
 ***
 
 ## Datasets Used in Course
@@ -10,7 +10,7 @@
 | Dataset | Details| Modules | Original Source |
 |---|--------------------------|--------------------|---|
 | [CalEnviroScreen](https://daseh.org/data/CalEnviroScreen_data.csv) | CalEnviroScreen4.0 data. This dataset was gathered by the California Office of Environmental Health Hazard Assessment. CalEnviroScreen ranks census tracts in California based on potential exposures to pollutants, adverse environmental conditions, socioeconomic factors and the prevalence of certain health conditions. | • Data Input <br> • Subsetting Data in R <br> • Data Summarization <br> • Data Cleaning <br> • Intro to Data Visualization <br> • Data Visualization <br> • Factors <br> •  Statistics <br> • Data Output <br> • Functions | https://calenviroscreen-oehha.hub.arcgis.com/ |
-| [Climate change disasters](https://daseh.org/data/Yearly_CC_Disasters.csv) | Data from 202 from the National Ocenaic and Atmosphere Administaration (NOAA) about droughts, floods, freezes, severe storms, tropical cyclones, wildfires, and winter storms in the United States| Manipulating Data in R | https://www.opencasestudies.org/ocs-bp-co2-emissions/ and https://www.ncei.noaa.gov/access/billions/time-series |
+| [Climate change disasters](https://daseh.org/data/Yearly_CC_Disasters.csv) | NA| Manipulating Data in R | NA |
 | [CO heat-related ER visits](https://daseh.org/data/CO_ER_heat_visits.csv) | Age-adjusted visit rates and total number of visits for all genders by Colorado county for 2011-2023, collected by the Colorado Environmental Public Health Tracking program | • Data Input <br> • Subsetting Data in R <br> •  Data Summarization <br> •  Data Cleaning <br> • Intro to Data Visualization <br> • Data Visualization <br> • Factors <br> •  Statistics <br> •  Data Output <br> • Functions | https://coepht.colorado.gov/heat-related-illness |
 | [Country population](https://daseh.org/data/country_pop.txt) | NA | • Homework 3 | original source unclear |
 | [CoVID wastewater surveillance](https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv) | SARS-CoV-2 viral load measured in wastewater between 2022 and 2024, collected by the collected by the National Wastewater Surveillance System |• Data Classes | https://data.cdc.gov/Public-Health-Surveillance/NWSS-Public-SARS-CoV-2-Wastewater-Metric-Data/2ew6-ywp6/about_data |
