@@ -49,7 +49,7 @@ co2_long <- co2 |> pivot_longer(cols = !country)
 
 Using `co2_long`, filter the "country" column so it only includes values from Indonesia and Canada. **Hint**: use `filter` and `%in%`. 
 
-Reassign to co2_long.
+Name the new object co2_long_sub.
 
 ```
 # General format
@@ -57,13 +57,13 @@ new_data <- old_data |> filter(colname %in% c(...))
 ```
 
 ```{r 1.3response}
-co2_long <- co2_long |>
+co2_long_sub <- co2_long |>
   filter(country %in% c("Indonesia", "Canada"))
 ```
 
 ### 1.4
 
-Use `pivot_wider` to reshape "co2_long". Use "country" for the `names_from` argument. Use "value" for the `values_from` argument. Call this new data `co2_wide`. 
+Use `pivot_wider` to reshape "co2_long_sub". Use "country" for the `names_from` argument. Use "value" for the `values_from` argument. Call this new data `co2_wide`. 
 
 ```
 # General format
@@ -71,7 +71,7 @@ new_data <- old_data |> pivot_wider(names_from = column1, values_from = column2)
 ```
 
 ```{r 1.4response}
-co2_wide <- co2_long |>
+co2_wide <- co2_long_sub |>
   pivot_wider(
     names_from = country,
     values_from = value
@@ -82,10 +82,11 @@ co2_wide <- co2_long |>
 
 Using `co2_wide`, drop all NA values using `drop_na()`.
 
-Reassign to co2_wide. Compare the years - what conclusions can you draw?
+Reassign to co2_wide. Compare the years - what conclusions can you draw, comparing the two countries?
 
 ```{r 1.5response}
 co2_wide <- co2_wide |> drop_na()
+co2_wide
 ```
 
 
@@ -139,60 +140,63 @@ co2_compare
 
 # Part 2
 
-### 2.1
+### 2.1 
 
-Open the `Yearly_CC_Disasters` dataset using the url below. Save the dataset as an object called "cc". rename the column "Country" to "country".
+Using the `co2_long` object, rename the columns using `rename()`:
 
-"https://daseh.org/data/Yearly_CC_Disasters.csv"
+- change `name` to `year` 
+- change `value` to `emissions`
+
+Reassign to `co2_long`.
 
 ```{r 2.1response}
-cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv") |>
-  rename(country = Country)
+co2_long <- co2_long |> rename(year = name, emissions = value)
 ```
 
+### 2.2 
 
-### 2.2
+Read in the climate change disasters dataset from the URL below. Save the dataset as an object called `cc`.
 
-Join the datasets "co2" and "cc" by "country". Keep all rows, even if there is no match. How many rows are there?
+"https://daseh.org/data/Yearly_CC_Disasters_total_affected.csv"
+
+This dataset shows the total number of people affected by climate disasters by country and year.
+
+```{r 2.2response}
+cc <- read_csv("https://daseh.org/data/Yearly_CC_disasters_total_affected.csv")
+```
+
+### 2.3
+
+Join the datasets "co2_long" and "cc" by "year" and "country". Keep all rows, even if there is no match. How many rows are there?
+
+Call the dataset "fj".
 
 ```
 # General format
 full_join(data1, data2, by = "")
 ```
 
-```{r 2.2response}
-full_join(co2, cc, by = "country")
-# 1,032 rows
+```{r 2.3response}
+fj <- full_join(co2_long, cc, by = c("year", "country"))
+nrow(fj)
+# 55,823 rows
 ```
 
+### 2.4
 
-### 2.3
+Join the datasets "co2_long" and "cc" by "year" and "country". Keep only rows in both datasets. How many rows are there?
 
-Join the datasets "co2" and "cc" by "country". Keep only rows that match both datasets. How many rows are there?
+Call the dataset "ij".
 
 ```
 # General format
 inner_join(data1, data2, by = "")
 ```
 
-```{r 2.3response}
-inner_join(co2, cc, by = "country")
-# 628 rows
-```
-
-
-### 2.4
-
-What countries are present in "co2" that are not present in "cc"? Use `anti_join`. What countries are present in "cc" that are not present in "co2"?
-
-```
-# General format
-anti_join(data1, data2, by = "") |> select(columnname) |> distinct()
-```
-
 ```{r 2.4response}
-anti_join(co2, cc, by = "country") |> select(country) |> distinct()
-anti_join(cc, co2, by = "country") |> select(country) |> distinct()
+ij <- inner_join(co2_long, cc, by = c("year", "country"))
+nrow(ij)
+# 4,585 rows
 ```
 
 
@@ -200,57 +204,14 @@ anti_join(cc, co2, by = "country") |> select(country) |> distinct()
 
 ### P.4
 
-Take the code from 2.2 and save the output as an object "co2_cc". Filter the dataset. Filter so that you only keep Indonesia and Canada.
+Inspect "fj" and "ij". Why is there such a big difference between the row counts?
 
 ```{r P.4response}
-co2_cc <- full_join(co2, cc, by = "country") |>
-  filter(country %in% c("Indonesia", "Canada"))
-```
+# There are many more years in the "co2_long" dataset than are present in the "cc" dataset. Could check out range to do this:
+co2_long |> pull(year) |> range()
+cc |> pull(year) |> range()
 
-
-### P.5
-
-Select:
-
-* the "country" column
-* data from the years 2014 in BOTH DATASETS (columns "2014.x" and `2014.y`)
-* the "Indicator" column
-
-Rename:
-
-* emissions = `2014.x`
-* disasters = `2014.y`
-
-Reassign to "co2_cc".
-
-```{r P.5response}
-co2_cc <- co2_cc |> select(country, `2014.x`, Indicator, `2014.y`) |>
-  rename(emissions = `2014.x`, disasters = `2014.y`)
-```
-
-
-### P.6
-
-Use `stringr` to trim the piece of text, "Climate related disasters frequency, Number of Disasters: ", from the "Indicator" column. You will use the function `str_remove()` to do this. It works similarly to other `stringr` functions. Try to intuit how it works by using the documentation page (`?str_remove`).
-
-Reassign to "co2_cc".
-
-```{r P.6response}
-library(stringr)
-co2_cc <- co2_cc |> mutate(Indicator = str_remove(
-  Indicator,
-  "Climate related disasters frequency, Number of Disasters: "
-))
-```
-
-
-### P.7
-
-Pivot the dataset so that there are columns for country, emissions, and a column for each "Indicator".
-
-```{r P.7response}
-co2_cc |> pivot_wider(
-  names_from = Indicator,
-  values_from = disasters
-)
+# Additionally, there are several indexes that don't match for country
+# e.g., "Afghanistan" does not match with "Afghanistan, Islamic Rep. of"
+# Perhaps the dataset could be cleaned up to account for these!
 ```
