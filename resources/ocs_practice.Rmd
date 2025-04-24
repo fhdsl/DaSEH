@@ -1,0 +1,46 @@
+
+## Case Studies to help you practice!
+
+This is a list of case studies recommended to specifically help you with your next steps with the content we learned in DaSEH. See more of the [case studies](https://www.opencasestudies.org/) for additional learning!
+
+#### Data Input Practice
+
+- [Importing Excel Files - Vaping Case Study](https://www.opencasestudies.org/ocs-bp-vaping-case-study/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-vaping-case-study/#Data_Import))
+
+#### Subsetting Data Practice
+
+- [Filtering Data - Rural and Urban Obesity](https://www.opencasestudies.org/ocs-bp-rural-and-urban-obesity/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-rural-and-urban-obesity/#Data_Exploration))
+
+#### Summarization Practice
+
+[Grouping and Summarizing Data - CO2 Case Study](https://www.opencasestudies.org/ocs-bp-co2-emissions/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-co2-emissions/#Data_Visualization))
+
+##### Cleaning Practice
+
+- [Using strings - Diet Case Study](https://www.opencasestudies.org/ocs-bp-diet/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-diet/#Data_Wrangling))
+- [Missing Data - Opioid Case Study](https://www.opencasestudies.org/ocs-bp-opioid-rural-urban) ([Specific Section](https://www.opencasestudies.org/ocs-bp-opioid-rural-urban/#Data_Exploration))
+  
+
+##### Manipulating Data Practice
+
+- [Pivoting Data - Disparities in Youth Disconnection Case Study](https://www.opencasestudies.org/ocs-bp-youth-disconnection/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-youth-disconnection/#Major_Racial_and_Ethnic_Groups))
+  - [Joining 2 datasets - Diet Case Study](https://www.opencasestudies.org/ocs-bp-diet) ([Specific Section](https://www.opencasestudies.org/ocs-bp-diet/#Joining_data))
+  - [Joining a few datasets - CO2 Case Study](https://www.opencasestudies.org/ocs-bp-co2-emissions/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-co2-emissions/#Joining_data))
+  - [Left join - Opioid Case Study](https://www.opencasestudies.org/ocs-bp-opioid-rural-urban) ([Specific Section](https://www.opencasestudies.org/ocs-bp-opioid-rural-urban/#Rural_and_Urban_Counties))
+
+#### Data Visualization Practice
+
+  - [Labeling Lines - CO2 Case Study](https://www.opencasestudies.org/ocs-bp-co2-emissions/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-co2-emissions/#Joining_data))
+  - [Combining plots - Youth Disconnection Case Study](https://www.opencasestudies.org/ocs-bp-youth-disconnection) ([Specific Section](https://www.opencasestudies.org/ocs-bp-youth-disconnection/#Summary_Plot) 
+  - [Plot labels -  Rural and Urban Obesity](https://www.opencasestudies.org/ocs-bp-rural-and-urban-obesity) ([Specific Section](https://www.opencasestudies.org/ocs-bp-rural-and-urban-obesity/#Data_Visualization))
+  
+  
+#### Statistics Practice
+
+- [Correlation - CO2 Case Study](https://www.opencasestudies.org/ocs-bp-co2-emissions/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-co2-emissions/#Joining_data))
+- [Regressions - Diet Case Study](https://www.opencasestudies.org/ocs-bp-diet/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-diet/#Data_Wrangling))]
+- [Logistic Regression - Vaping Case Study](https://www.opencasestudies.org/ocs-bp-vaping-case-study/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-vaping-case-study/#Data_Analysis))
+  
+#### Functions Practice
+
+- [Writing Functions - Vaping Case Study](https://www.opencasestudies.org/ocs-bp-vaping-case-study/) ([Specific Section](https://www.opencasestudies.org/ocs-bp-vaping-case-study/#Updating_Values))
