@@ -9,9 +9,9 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Some data in this lab comes from the OCS "Exploring CO2 emissions across time" activity (https://www.opencasestudies.org/ocs-bp-co2-emissions/.
+Some data in this lab comes from the OCS "Exploring CO2 emissions across time" activity (https://www.opencasestudies.org/ocs-bp-co2-emissions/).
 
-Additional data about climate change disasters can be found at "https://daseh.org/data/Yearly_CC_Disasters.csv".
+Additional data about climate change disasters can be found at "https://daseh.org/data/Yearly_CC_Disasters_total_affected.csv". This dataset shows the total number of people affected by climate disasters by country and year.
 
 ```{r message=FALSE}
 library(tidyverse)
@@ -32,9 +32,9 @@ head(co2)
 
 ### 1.2
 
-Create a new dataset "co2_long" that does `pivot_longer()` on all columns except "country". Remember that `!country` means all columns except "country". 
+Create a new dataset `co2_long` that does `pivot_longer()` on all columns except "country". Remember that `!country` means all columns except "country". 
 
-Reassign to co2_long.
+Reassign to `co2_long`.
 
 ```
 # General format
@@ -47,9 +47,9 @@ co2_long <- co2 |> pivot_longer(cols = !country)
 
 ### 1.3
 
-Using `co2_long`, filter the "country" column so it only includes values from Indonesia and Canada. **Hint**: use `filter` and `%in%`. 
+Using `co2_long`, filter the "country" column so it only includes values from Indonesia and Canada. **Hint**: use `filter()` and `%in%`. 
 
-Name the new object co2_long_sub.
+Name the new object `co2_long_sub`.
 
 ```
 # General format
@@ -63,7 +63,9 @@ co2_long_sub <- co2_long |>
 
 ### 1.4
 
-Use `pivot_wider` to reshape "co2_long_sub". Use "country" for the `names_from` argument. Use "value" for the `values_from` argument. Call this new data `co2_wide`. 
+Use `pivot_wider()` to reshape `co2_long_sub`. Use "country" for the `names_from` argument. Use "value" for the `values_from` argument. 
+
+Call this new data `co2_wide`. 
 
 ```
 # General format
@@ -82,11 +84,12 @@ co2_wide <- co2_long_sub |>
 
 Using `co2_wide`, drop all NA values using `drop_na()`.
 
-Reassign to co2_wide. Compare the years - what conclusions can you draw, comparing the two countries?
+Reassign to `co2_wide`. Compare the years - what conclusions can you draw, comparing the two countries?
 
 ```{r 1.5response}
 co2_wide <- co2_wide |> drop_na()
-co2_wide
+tail(co2_wide)
+# Indonesia emissions are lower to start, but become closer in value to Canada over time. However, Indonesia has many more people!
 ```
 
 
@@ -127,7 +130,7 @@ co2_compare2
 
 ### P.3
 
-Add on to Question P.1 to add a column. The column values for each line should be "TRUE" if Canada has greater emissions than Indonesia for that year.
+Add on to Question P.1 to add a new column. The new column values for each line should be "TRUE" if Canada has greater emissions than Indonesia for that year.
 
 ```{r P.3response}
 co2_compare <-
@@ -149,6 +152,11 @@ Using the `co2_long` object, rename the columns using `rename()`:
 
 Reassign to `co2_long`.
 
+```
+# General format
+new_data <- old_data |> rename(newcol1 = oldcol1, newcol2 = oldcol2)
+```
+
 ```{r 2.1response}
 co2_long <- co2_long |> rename(year = name, emissions = value)
 ```
@@ -167,33 +175,43 @@ cc <- read_csv("https://daseh.org/data/Yearly_CC_disasters_total_affected.csv")
 
 ### 2.3
 
-Join the datasets "co2_long" and "cc" by "year" and "country". Keep all rows, even if there is no match. How many rows are there?
+For the `co2_long` dataset, use `mutate()` to make the "year" column numeric.
 
-Call the dataset "fj".
+Reassign to `co2_long`.
+
+```{r 2.3response}
+co2_long <- co2_long |> mutate(year = as.numeric(year))
+```
+
+### 2.4
+
+Join the datasets `co2_long` and `cc` by "year" and "country". Keep all rows, even if there is no match. How many rows are there?
+
+Call the dataset `fj`.
 
 ```
 # General format
 full_join(data1, data2, by = "")
 ```
 
-```{r 2.3response}
+```{r 2.4response}
 fj <- full_join(co2_long, cc, by = c("year", "country"))
 nrow(fj)
 # 55,823 rows
 ```
 
-### 2.4
+### 2.5
 
-Join the datasets "co2_long" and "cc" by "year" and "country". Keep only rows in both datasets. How many rows are there?
+Join the datasets `co2_long` and `cc` by "year" and "country". Keep only rows in both datasets. How many rows are there?
 
-Call the dataset "ij".
+Call the dataset `ij`.
 
 ```
 # General format
 inner_join(data1, data2, by = "")
 ```
 
-```{r 2.4response}
+```{r 2.5response}
 ij <- inner_join(co2_long, cc, by = c("year", "country"))
 nrow(ij)
 # 4,585 rows
@@ -215,3 +233,12 @@ cc |> pull(year) |> range()
 # e.g., "Afghanistan" does not match with "Afghanistan, Islamic Rep. of"
 # Perhaps the dataset could be cleaned up to account for these!
 ```
+
+### P.5
+
+What happens if you leave out step 2.3? Try running all chunks, but place a `#` on line 183. 
+
+```{r P.5response}
+# the year column in co2_long is a character type if we don't take the step in 2.3. This prevents joining as the columns joined must be the same class.
+```
+
