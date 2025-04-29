@@ -165,8 +165,8 @@ pre code {
 </div>
 
 
-<p>Some data in this lab comes from the OCS “Exploring CO2 emissions across time” activity (<a href="https://www.opencasestudies.org/ocs-bp-co2-emissions/" class="uri">https://www.opencasestudies.org/ocs-bp-co2-emissions/</a>.</p>
-<p>Additional data about climate change disasters can be found at “<a href="https://daseh.org/data/Yearly_CC_Disasters.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters.csv</a>”.</p>
+<p>Some data in this lab comes from the OCS “Exploring CO2 emissions across time” activity (<a href="https://www.opencasestudies.org/ocs-bp-co2-emissions/" class="uri">https://www.opencasestudies.org/ocs-bp-co2-emissions/</a>).</p>
+<p>Additional data about climate change disasters can be found at “<a href="https://daseh.org/data/Yearly_CC_Disasters_total_affected.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters_total_affected.csv</a>”. This dataset shows the total number of people affected by climate disasters by country and year.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
@@ -203,27 +203,28 @@ pre code {
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
-<p>Create a new dataset “co2_long” that does <code>pivot_longer()</code> on all columns except “country”. Remember that <code>!country</code> means all columns except “country”.</p>
-<p>Reassign to co2_long.</p>
+<p>Create a new dataset <code>co2_long</code> that does <code>pivot_longer()</code> on all columns except “country”. Remember that <code>!country</code> means all columns except “country”.</p>
+<p>Reassign to <code>co2_long</code>.</p>
 <pre><code># General format
 new_data &lt;- old_data |&gt; pivot_longer(cols = colname(s))</code></pre>
 <pre class="r"><code>co2_long &lt;- co2 |&gt; pivot_longer(cols = !country)</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
-<p>Using <code>co2_long</code>, filter the “country” column so it only includes values from Indonesia and Canada. <strong>Hint</strong>: use <code>filter</code> and <code>%in%</code>.</p>
-<p>Reassign to co2_long.</p>
+<p>Using <code>co2_long</code>, filter the “country” column so it only includes values from Indonesia and Canada. <strong>Hint</strong>: use <code>filter()</code> and <code>%in%</code>.</p>
+<p>Name the new object <code>co2_long_sub</code>.</p>
 <pre><code># General format
 new_data &lt;- old_data |&gt; filter(colname %in% c(...))</code></pre>
-<pre class="r"><code>co2_long &lt;- co2_long |&gt;
+<pre class="r"><code>co2_long_sub &lt;- co2_long |&gt;
   filter(country %in% c(&quot;Indonesia&quot;, &quot;Canada&quot;))</code></pre>
 </div>
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
-<p>Use <code>pivot_wider</code> to reshape “co2_long”. Use “county” for the <code>names_from</code> argument. Use “value” for the <code>values_from</code> argument. Call this new data <code>co2_wide</code>.</p>
+<p>Use <code>pivot_wider()</code> to reshape <code>co2_long_sub</code>. Use “country” for the <code>names_from</code> argument. Use “value” for the <code>values_from</code> argument.</p>
+<p>Call this new data <code>co2_wide</code>.</p>
 <pre><code># General format
 new_data &lt;- old_data |&gt; pivot_wider(names_from = column1, values_from = column2)</code></pre>
-<pre class="r"><code>co2_wide &lt;- co2_long |&gt;
+<pre class="r"><code>co2_wide &lt;- co2_long_sub |&gt;
   pivot_wider(
     names_from = country,
     values_from = value
@@ -232,9 +233,19 @@ new_data &lt;- old_data |&gt; pivot_wider(names_from = column1, values_from = co
 <div id="section-4" class="section level3">
 <h3>1.5</h3>
 <p>Using <code>co2_wide</code>, drop all NA values using <code>drop_na()</code>.</p>
-<p>Reassign to co2_wide. Compare the years - what conclusions can you draw?</p>
-<pre class="r"><code>co2_wide &lt;- co2_wide |&gt; drop_na()</code></pre>
-<p>Tip: you can adjust scientific notation with <code>options(scipen=&lt;n&gt;)</code></p>
+<p>Reassign to <code>co2_wide</code>. Compare the years - what conclusions can you draw, comparing the two countries?</p>
+<pre class="r"><code>co2_wide &lt;- co2_wide |&gt; drop_na()
+tail(co2_wide)</code></pre>
+<pre><code>## # A tibble: 6 × 3
+##   name  Canada Indonesia
+##   &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+## 1 2009  537000    446000
+## 2 2010  535000    429000
+## 3 2011  537000    604000
+## 4 2012  517000    637000
+## 5 2013  517000    490000
+## 6 2014  537000    464000</code></pre>
+<pre class="r"><code># Indonesia emissions are lower to start, but become closer in value to Canada over time. However, Indonesia has many more people!</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
@@ -311,7 +322,7 @@ new_data &lt;- old_data |&gt; pivot_wider(names_from = column1, values_from = co
 </div>
 <div id="p.3" class="section level3">
 <h3>P.3</h3>
-<p>Add on to Question P.1 to add a column. The column values for each line should be “TRUE” if Canada has greater emissions than Indonesia for that year.</p>
+<p>Add on to Question P.1 to add a new column. The new column values for each line should be “TRUE” if Canada has greater emissions than Indonesia for that year.</p>
 <pre class="r"><code>co2_compare &lt;-
   co2_compare |&gt; 
   mutate(Canada_greater = Canada &gt; Indonesia)
@@ -337,160 +348,78 @@ co2_compare</code></pre>
 <h1>Part 2</h1>
 <div id="section-5" class="section level3">
 <h3>2.1</h3>
-<p>Open the <code>Yearly_CC_Disasters</code> dataset using the url below. Save the dataset as an object called “cc”. rename the column “Country” to “country”.</p>
-<p>“<a href="https://daseh.org/data/Yearly_CC_Disasters.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters.csv</a>”</p>
-<pre class="r"><code>cc &lt;- read_csv(&quot;https://daseh.org/data/Yearly_CC_Disasters.csv&quot;) |&gt;
-  rename(country = Country)</code></pre>
-<pre><code>## Rows: 970 Columns: 53
+<p>Using the <code>co2_long</code> object, rename the columns using <code>rename()</code>:</p>
+<ul>
+<li>change <code>name</code> to <code>year</code></li>
+<li>change <code>value</code> to <code>emissions</code></li>
+</ul>
+<p>Reassign to <code>co2_long</code>.</p>
+<pre><code># General format
+new_data &lt;- old_data |&gt; rename(newcol1 = oldcol1, newcol2 = oldcol2)</code></pre>
+<pre class="r"><code>co2_long &lt;- co2_long |&gt; rename(year = name, emissions = value)</code></pre>
+</div>
+<div id="section-6" class="section level3">
+<h3>2.2</h3>
+<p>Read in the climate change disasters dataset from the URL below. Save the dataset as an object called <code>cc</code>.</p>
+<p>“<a href="https://daseh.org/data/Yearly_CC_Disasters_total_affected.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters_total_affected.csv</a>”</p>
+<p>This dataset shows the total number of people affected by climate disasters by country and year.</p>
+<pre class="r"><code>cc &lt;- read_csv(&quot;https://daseh.org/data/Yearly_CC_disasters_total_affected.csv&quot;)</code></pre>
+<pre><code>## Rows: 9720 Columns: 3
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr  (9): Country, ISO2, ISO3, Indicator, Unit, Source, CTS Code, CTS Name, ...
-## dbl (44): ObjectId, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 19...
+## chr (1): country
+## dbl (2): year, total_affected
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div id="section-6" class="section level3">
-<h3>2.2</h3>
-<p>Join the datasets “co2” and “cc” by “country”. Keep all rows, even if there is no match. How many rows are there?</p>
-<pre><code># General format
-full_join(data1, data2, by = &quot;&quot;)</code></pre>
-<pre class="r"><code>full_join(co2, cc, by = &quot;country&quot;)</code></pre>
-<pre><code>## # A tibble: 1,032 × 317
-##    country `1751` `1752` `1753` `1754` `1755` `1756` `1757` `1758` `1759` `1760`
-##    &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 Afghan…     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  2 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  3 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  4 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  5 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  6 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  7 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  8 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  9 Algeria     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-## 10 Algeria     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-## # ℹ 1,022 more rows
-## # ℹ 306 more variables: `1761` &lt;dbl&gt;, `1762` &lt;dbl&gt;, `1763` &lt;dbl&gt;, `1764` &lt;dbl&gt;,
-## #   `1765` &lt;dbl&gt;, `1766` &lt;dbl&gt;, `1767` &lt;dbl&gt;, `1768` &lt;dbl&gt;, `1769` &lt;dbl&gt;,
-## #   `1770` &lt;dbl&gt;, `1771` &lt;dbl&gt;, `1772` &lt;dbl&gt;, `1773` &lt;dbl&gt;, `1774` &lt;dbl&gt;,
-## #   `1775` &lt;dbl&gt;, `1776` &lt;dbl&gt;, `1777` &lt;dbl&gt;, `1778` &lt;dbl&gt;, `1779` &lt;dbl&gt;,
-## #   `1780` &lt;dbl&gt;, `1781` &lt;dbl&gt;, `1782` &lt;dbl&gt;, `1783` &lt;dbl&gt;, `1784` &lt;dbl&gt;,
-## #   `1785` &lt;dbl&gt;, `1786` &lt;dbl&gt;, `1787` &lt;dbl&gt;, `1788` &lt;dbl&gt;, `1789` &lt;dbl&gt;, …</code></pre>
-<pre class="r"><code># 1,032 rows</code></pre>
-</div>
 <div id="section-7" class="section level3">
 <h3>2.3</h3>
-<p>Join the datasets “co2” and “cc” by “country”. Keep only rows that match both datasets. How many rows are there?</p>
-<pre><code># General format
-inner_join(data1, data2, by = &quot;&quot;)</code></pre>
-<pre class="r"><code>inner_join(co2, cc, by = &quot;country&quot;)</code></pre>
-<pre><code>## # A tibble: 628 × 317
-##    country `1751` `1752` `1753` `1754` `1755` `1756` `1757` `1758` `1759` `1760`
-##    &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  2 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  3 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  4 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  5 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  6 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  7 Albania     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  8 Algeria     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-##  9 Algeria     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-## 10 Algeria     NA     NA     NA     NA     NA     NA     NA     NA     NA     NA
-## # ℹ 618 more rows
-## # ℹ 306 more variables: `1761` &lt;dbl&gt;, `1762` &lt;dbl&gt;, `1763` &lt;dbl&gt;, `1764` &lt;dbl&gt;,
-## #   `1765` &lt;dbl&gt;, `1766` &lt;dbl&gt;, `1767` &lt;dbl&gt;, `1768` &lt;dbl&gt;, `1769` &lt;dbl&gt;,
-## #   `1770` &lt;dbl&gt;, `1771` &lt;dbl&gt;, `1772` &lt;dbl&gt;, `1773` &lt;dbl&gt;, `1774` &lt;dbl&gt;,
-## #   `1775` &lt;dbl&gt;, `1776` &lt;dbl&gt;, `1777` &lt;dbl&gt;, `1778` &lt;dbl&gt;, `1779` &lt;dbl&gt;,
-## #   `1780` &lt;dbl&gt;, `1781` &lt;dbl&gt;, `1782` &lt;dbl&gt;, `1783` &lt;dbl&gt;, `1784` &lt;dbl&gt;,
-## #   `1785` &lt;dbl&gt;, `1786` &lt;dbl&gt;, `1787` &lt;dbl&gt;, `1788` &lt;dbl&gt;, `1789` &lt;dbl&gt;, …</code></pre>
-<pre class="r"><code># 628 rows</code></pre>
+<p>For the <code>co2_long</code> dataset, use <code>mutate()</code> to make the “year” column numeric.</p>
+<p>Reassign to <code>co2_long</code>.</p>
+<pre class="r"><code>co2_long &lt;- co2_long |&gt; mutate(year = as.numeric(year))</code></pre>
 </div>
 <div id="section-8" class="section level3">
 <h3>2.4</h3>
-<p>What countries are present in “co2” that are not present in “cc”? Use <code>anti_join</code>. What countries are present in “cc” that are not present in “co2”?</p>
+<p>Join the datasets <code>co2_long</code> and <code>cc</code> by “year” and “country”. Keep all rows, even if there is no match. How many rows are there?</p>
+<p>Call the dataset <code>fj</code>.</p>
 <pre><code># General format
-anti_join(data1, data2, by = &quot;&quot;) |&gt; select(columnname) |&gt; distinct()</code></pre>
-<pre class="r"><code>anti_join(co2, cc, by = &quot;country&quot;) |&gt; select(country) |&gt; distinct()</code></pre>
-<pre><code>## # A tibble: 62 × 1
-##    country                 
-##    &lt;chr&gt;                   
-##  1 Afghanistan             
-##  2 Andorra                 
-##  3 Armenia                 
-##  4 Azerbaijan              
-##  5 Bahamas                 
-##  6 Bahrain                 
-##  7 Belarus                 
-##  8 Brunei                  
-##  9 Cape Verde              
-## 10 Central African Republic
-## # ℹ 52 more rows</code></pre>
-<pre class="r"><code>anti_join(cc, co2, by = &quot;country&quot;) |&gt; select(country) |&gt; distinct()</code></pre>
-<pre><code>## # A tibble: 85 × 1
-##    country                     
-##    &lt;chr&gt;                       
-##  1 Afghanistan, Islamic Rep. of
-##  2 American Samoa              
-##  3 Anguilla                    
-##  4 Armenia, Rep. of            
-##  5 Azerbaijan, Rep. of         
-##  6 Azores Island               
-##  7 Bahamas, The                
-##  8 Belarus, Rep. of            
-##  9 Bermuda                     
-## 10 British Virgin Islands      
-## # ℹ 75 more rows</code></pre>
+full_join(data1, data2, by = &quot;&quot;)</code></pre>
+<pre class="r"><code>fj &lt;- full_join(co2_long, cc, by = c(&quot;year&quot;, &quot;country&quot;))
+nrow(fj)</code></pre>
+<pre><code>## [1] 55823</code></pre>
+<pre class="r"><code># 55,823 rows</code></pre>
+</div>
+<div id="section-9" class="section level3">
+<h3>2.5</h3>
+<p>Join the datasets <code>co2_long</code> and <code>cc</code> by “year” and “country”. Keep only rows in both datasets. How many rows are there?</p>
+<p>Call the dataset <code>ij</code>.</p>
+<pre><code># General format
+inner_join(data1, data2, by = &quot;&quot;)</code></pre>
+<pre class="r"><code>ij &lt;- inner_join(co2_long, cc, by = c(&quot;year&quot;, &quot;country&quot;))
+nrow(ij)</code></pre>
+<pre><code>## [1] 4585</code></pre>
+<pre class="r"><code># 4,585 rows</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own-1" class="section level1">
 <h1>Practice on Your Own!</h1>
 <div id="p.4" class="section level3">
 <h3>P.4</h3>
-<p>Take the code from 2.2 and save the output as an object “co2_cc”. Filter the dataset. Filter so that you only keep Indonesia and Canada.</p>
-<pre class="r"><code>co2_cc &lt;- full_join(co2, cc, by = &quot;country&quot;) |&gt;
-  filter(country %in% c(&quot;Indonesia&quot;, &quot;Canada&quot;))</code></pre>
+<p>Inspect “fj” and “ij”. Why is there such a big difference between the row counts?</p>
+<pre class="r"><code># There are many more years in the &quot;co2_long&quot; dataset than are present in the &quot;cc&quot; dataset. Could check out range to do this:
+co2_long |&gt; pull(year) |&gt; range()</code></pre>
+<pre><code>## [1] 1751 2014</code></pre>
+<pre class="r"><code>cc |&gt; pull(year) |&gt; range()</code></pre>
+<pre><code>## [1] 1980 2024</code></pre>
+<pre class="r"><code># Additionally, there are several indexes that don&#39;t match for country
+# e.g., &quot;Afghanistan&quot; does not match with &quot;Afghanistan, Islamic Rep. of&quot;
+# Perhaps the dataset could be cleaned up to account for these!</code></pre>
 </div>
 <div id="p.5" class="section level3">
 <h3>P.5</h3>
-<p>Select:</p>
-<ul>
-<li>the “country” column</li>
-<li>data from the years 2014 in BOTH DATASETS (columns “2014.x” and <code>2014.y</code>)</li>
-<li>the “Indicator” column</li>
-</ul>
-<p>Rename:</p>
-<ul>
-<li>emissions = <code>2014.x</code></li>
-<li>disasters = <code>2014.y</code></li>
-</ul>
-<p>Reassign to “co2_cc”.</p>
-<pre class="r"><code>co2_cc &lt;- co2_cc |&gt; select(country, `2014.x`, Indicator, `2014.y`) |&gt;
-  rename(emissions = `2014.x`, disasters = `2014.y`)</code></pre>
-</div>
-<div id="p.6" class="section level3">
-<h3>P.6</h3>
-<p>Use <code>stringr</code> to trim the piece of text, “Climate related disasters frequency, Number of Disasters:”, from the “Indicator” column. You will use the function <code>str_remove()</code> to do this. It works similarly to other <code>stringr</code> functions. Try to intuit how it works by using the documentation page (<code>?str_remove</code>).</p>
-<p>Reassign to “co2_cc”.</p>
-<pre class="r"><code>library(stringr)
-co2_cc &lt;- co2_cc |&gt; mutate(Indicator = str_remove(
-  Indicator,
-  &quot;Climate related disasters frequency, Number of Disasters: &quot;
-))</code></pre>
-</div>
-<div id="p.7" class="section level3">
-<h3>P.7</h3>
-<p>Pivot the dataset so that there are columns for country, emissions, and a column for each “Indicator”.</p>
-<pre class="r"><code>co2_cc |&gt; pivot_wider(
-  names_from = Indicator,
-  values_from = disasters
-)</code></pre>
-<pre><code>## # A tibble: 2 × 9
-##   country   emissions Drought `Extreme temperature` Flood Storm TOTAL Wildfire
-##   &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;                 &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
-## 1 Canada       537000      NA                     1     1    NA     2       NA
-## 2 Indonesia    464000      NA                    NA     6    NA     8       NA
-## # ℹ 1 more variable: Landslide &lt;dbl&gt;</code></pre>
+<p>What happens if you leave out step 2.3? Try running all chunks, but place a <code>#</code> on line 183.</p>
+<pre class="r"><code># the year column in co2_long is a character type if we don&#39;t take the step in 2.3. This prevents joining as the columns joined must be the same class.</code></pre>
 </div>
 </div>
 
