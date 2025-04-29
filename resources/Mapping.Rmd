@@ -2,10 +2,10 @@
 title: "Mapping"
 fontsize: 8pt
 output:
-  beamer_presentation: default
   ioslides_presentation:
     css: ../docs/styles.css
     widescreen: true
+  beamer_presentation: default
 ---
 
 ```{r, echo = FALSE}
@@ -21,6 +21,7 @@ Maps can be tricky in R! There are many packages to choose from.
 - `maps` is "Base R"
 - Some require API keys (e.g., `ggmap`, `tidycensus`)
 - Some are interactive (e.g., `leaflet`)
+- Some provide utilities (e.g., `tigris`)
 
 ## What does a map in R look like?
 
@@ -247,3 +248,18 @@ https://walker-data.com/tidycensus/articles/spatial-data.html
 https://walker-data.com/census-r/mapping-census-data-with-r.html
 
 https://jtr13.github.io/cc19/different-ways-of-plotting-u-s-map-in-r.html
+
+## `tigris` has many utility functions
+
+`tigris` gets boundary shapefiles from the US Census Bureau (as sf data).
+
+- `zctas()`: ZIP code tabulation areas
+- `voting_districts()`: voting districts
+- `school_districts()`: school districts
+
+```{r}
+library(tigris)
+zip_wa <- zctas(state = "WA", year = 2010)
+zip_wa
+```
+
