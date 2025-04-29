@@ -2,10 +2,10 @@
 title: "Mapping"
 fontsize: 8pt
 output:
+  beamer_presentation: default
   ioslides_presentation:
     css: ../docs/styles.css
     widescreen: true
-  beamer_presentation: default
 ---
 
 ```{r, echo = FALSE}
@@ -22,6 +22,7 @@ Maps can be tricky in R! There are many packages to choose from.
 - Some require API keys (e.g., `ggmap`, `tidycensus`)
 - Some are interactive (e.g., `leaflet`)
 - Some provide utilities (e.g., `tigris`)
+- Some deal with raster data (e.g., `terra`)
 
 ## What does a map in R look like?
 
@@ -238,6 +239,8 @@ ggplot(data = wa_income, aes(fill = estimate)) +
     - Group and summarize data when plotting aggregates, like population by county.
 
 ## More resources
+
+https://rspatial.org/index.html (whole course using `terra`!)
 
 https://rfortherestofus.com/2024/06/us-maps
 
