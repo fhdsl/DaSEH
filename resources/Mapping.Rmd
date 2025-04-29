@@ -79,7 +79,7 @@ These objects store geometric shapes (like points, lines, or polygons) along wit
 
 the `geom` column is a `MULTIPOLYGON` — a geometry type representing complex shapes, which may consist of multiple polygons (e.g., islands or non-contiguous regions).
 
-Federal Information Processing System (FIPS) Codes for States and Counties are numbers which uniquely identify geographic areas. See [this codebook](https://transition.fcc.gov/oet/info/maps/census/fips/fips.txt).
+Federal Information Processing System (FIPS) Codes for States and Counties are numbers which uniquely identify geographic areas. See [this data key](https://transition.fcc.gov/oet/info/maps/census/fips/fips.txt).
 
 ## `ggplot` has spatial functions{.codesmall}
 

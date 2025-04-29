@@ -222,7 +222,7 @@ nrow(ij)
 
 ### P.4
 
-Inspect "fj" and "ij". Why is there such a big difference between the row counts?
+Inspect `fj` and `ij`. Why is there such a big difference between the row counts?
 
 ```{r P.4response}
 # There are many more years in the "co2_long" dataset than are present in the "cc" dataset. Could check out range to do this:
