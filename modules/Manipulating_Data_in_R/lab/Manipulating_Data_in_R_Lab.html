@@ -165,8 +165,8 @@ pre code {
 </div>
 
 
-<p>Some data in this lab comes from the OCS “Exploring CO2 emissions across time” activity (<a href="https://www.opencasestudies.org/ocs-bp-co2-emissions/" class="uri">https://www.opencasestudies.org/ocs-bp-co2-emissions/</a>.</p>
-<p>Additional data about climate change disasters can be found at “<a href="https://daseh.org/data/Yearly_CC_Disasters.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters.csv</a>”.</p>
+<p>Some data in this lab comes from the OCS “Exploring CO2 emissions across time” activity (<a href="https://www.opencasestudies.org/ocs-bp-co2-emissions/" class="uri">https://www.opencasestudies.org/ocs-bp-co2-emissions/</a>).</p>
+<p>Additional data about climate change disasters can be found at “<a href="https://daseh.org/data/Yearly_CC_Disasters_total_affected.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters_total_affected.csv</a>”. This dataset shows the total number of people affected by climate disasters by country and year.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
@@ -177,29 +177,29 @@ pre code {
 </div>
 <div id="section-1" class="section level3">
 <h3>1.2</h3>
-<p>Create a new dataset “co2_long” that does <code>pivot_longer()</code> on all columns except “country”. Remember that <code>!country</code> means all columns except “country”.</p>
-<p>Reassign to co2_long.</p>
+<p>Create a new dataset <code>co2_long</code> that does <code>pivot_longer()</code> on all columns except “country”. Remember that <code>!country</code> means all columns except “country”.</p>
+<p>Reassign to <code>co2_long</code>.</p>
 <pre><code># General format
 new_data &lt;- old_data |&gt; pivot_longer(cols = colname(s))</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
-<p>Using <code>co2_long</code>, filter the “country” column so it only includes values from Indonesia and Canada. <strong>Hint</strong>: use <code>filter</code> and <code>%in%</code>.</p>
-<p>Reassign to co2_long.</p>
+<p>Using <code>co2_long</code>, filter the “country” column so it only includes values from Indonesia and Canada. <strong>Hint</strong>: use <code>filter()</code> and <code>%in%</code>.</p>
+<p>Name the new object <code>co2_long_sub</code>.</p>
 <pre><code># General format
 new_data &lt;- old_data |&gt; filter(colname %in% c(...))</code></pre>
 </div>
 <div id="section-3" class="section level3">
 <h3>1.4</h3>
-<p>Use <code>pivot_wider</code> to reshape “co2_long”. Use “county” for the <code>names_from</code> argument. Use “value” for the <code>values_from</code> argument. Call this new data <code>co2_wide</code>.</p>
+<p>Use <code>pivot_wider()</code> to reshape <code>co2_long_sub</code>. Use “country” for the <code>names_from</code> argument. Use “value” for the <code>values_from</code> argument.</p>
+<p>Call this new data <code>co2_wide</code>.</p>
 <pre><code># General format
 new_data &lt;- old_data |&gt; pivot_wider(names_from = column1, values_from = column2)</code></pre>
 </div>
 <div id="section-4" class="section level3">
 <h3>1.5</h3>
 <p>Using <code>co2_wide</code>, drop all NA values using <code>drop_na()</code>.</p>
-<p>Reassign to co2_wide. Compare the years - what conclusions can you draw?</p>
-<p>Tip: you can adjust scientific notation with <code>options(scipen=&lt;n&gt;)</code></p>
+<p>Reassign to <code>co2_wide</code>. Compare the years - what conclusions can you draw, comparing the two countries?</p>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
@@ -218,64 +218,57 @@ new_data &lt;- old_data |&gt; pivot_wider(names_from = column1, values_from = co
 </div>
 <div id="p.3" class="section level3">
 <h3>P.3</h3>
-<p>Add on to Question P.1 to add a column. The column values for each line should be “TRUE” if Canada has greater emissions than Indonesia for that year.</p>
+<p>Add on to Question P.1 to add a new column. The new column values for each line should be “TRUE” if Canada has greater emissions than Indonesia for that year.</p>
 </div>
 </div>
 <div id="part-2" class="section level1">
 <h1>Part 2</h1>
 <div id="section-5" class="section level3">
 <h3>2.1</h3>
-<p>Open the <code>Yearly_CC_Disasters</code> dataset using the url below. Save the dataset as an object called “cc”. rename the column “Country” to “country”.</p>
-<p>“<a href="https://daseh.org/data/Yearly_CC_Disasters.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters.csv</a>”</p>
+<p>Using the <code>co2_long</code> object, rename the columns using <code>rename()</code>:</p>
+<ul>
+<li>change <code>name</code> to <code>year</code></li>
+<li>change <code>value</code> to <code>emissions</code></li>
+</ul>
+<p>Reassign to <code>co2_long</code>.</p>
+<pre><code># General format
+new_data &lt;- old_data |&gt; rename(newcol1 = oldcol1, newcol2 = oldcol2)</code></pre>
 </div>
 <div id="section-6" class="section level3">
 <h3>2.2</h3>
-<p>Join the datasets “co2” and “cc” by “country”. Keep all rows, even if there is no match. How many rows are there?</p>
-<pre><code># General format
-full_join(data1, data2, by = &quot;&quot;)</code></pre>
+<p>Read in the climate change disasters dataset from the URL below. Save the dataset as an object called <code>cc</code>.</p>
+<p>“<a href="https://daseh.org/data/Yearly_CC_Disasters_total_affected.csv" class="uri">https://daseh.org/data/Yearly_CC_Disasters_total_affected.csv</a>”</p>
+<p>This dataset shows the total number of people affected by climate disasters by country and year.</p>
 </div>
 <div id="section-7" class="section level3">
 <h3>2.3</h3>
-<p>Join the datasets “co2” and “cc” by “country”. Keep only rows that match both datasets. How many rows are there?</p>
-<pre><code># General format
-inner_join(data1, data2, by = &quot;&quot;)</code></pre>
+<p>For the <code>co2_long</code> dataset, use <code>mutate()</code> to make the “year” column numeric.</p>
+<p>Reassign to <code>co2_long</code>.</p>
 </div>
 <div id="section-8" class="section level3">
 <h3>2.4</h3>
-<p>What countries are present in “co2” that are not present in “cc”? Use <code>anti_join</code>. What countries are present in “cc” that are not present in “co2”?</p>
+<p>Join the datasets <code>co2_long</code> and <code>cc</code> by “year” and “country”. Keep all rows, even if there is no match. How many rows are there?</p>
+<p>Call the dataset <code>fj</code>.</p>
 <pre><code># General format
-anti_join(data1, data2, by = &quot;&quot;) |&gt; select(columnname) |&gt; distinct()</code></pre>
+full_join(data1, data2, by = &quot;&quot;)</code></pre>
+</div>
+<div id="section-9" class="section level3">
+<h3>2.5</h3>
+<p>Join the datasets <code>co2_long</code> and <code>cc</code> by “year” and “country”. Keep only rows in both datasets. How many rows are there?</p>
+<p>Call the dataset <code>ij</code>.</p>
+<pre><code># General format
+inner_join(data1, data2, by = &quot;&quot;)</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own-1" class="section level1">
 <h1>Practice on Your Own!</h1>
 <div id="p.4" class="section level3">
 <h3>P.4</h3>
-<p>Take the code from 2.2 and save the output as an object “co2_cc”. Filter the dataset. Filter so that you only keep Indonesia and Canada.</p>
+<p>Inspect “fj” and “ij”. Why is there such a big difference between the row counts?</p>
 </div>
 <div id="p.5" class="section level3">
 <h3>P.5</h3>
-<p>Select:</p>
-<ul>
-<li>the “country” column</li>
-<li>data from the years 2014 in BOTH DATASETS (columns “2014.x” and <code>2014.y</code>)</li>
-<li>the “Indicator” column</li>
-</ul>
-<p>Rename:</p>
-<ul>
-<li>emissions = <code>2014.x</code></li>
-<li>disasters = <code>2014.y</code></li>
-</ul>
-<p>Reassign to “co2_cc”.</p>
-</div>
-<div id="p.6" class="section level3">
-<h3>P.6</h3>
-<p>Use <code>stringr</code> to trim the piece of text, “Climate related disasters frequency, Number of Disasters:”, from the “Indicator” column. You will use the function <code>str_remove()</code> to do this. It works similarly to other <code>stringr</code> functions. Try to intuit how it works by using the documentation page (<code>?str_remove</code>).</p>
-<p>Reassign to “co2_cc”.</p>
-</div>
-<div id="p.7" class="section level3">
-<h3>P.7</h3>
-<p>Pivot the dataset so that there are columns for country, emissions, and a column for each “Indicator”.</p>
+<p>What happens if you leave out step 2.3? Try running all chunks, but place a <code>#</code> on line 183.</p>
 </div>
 </div>
 
