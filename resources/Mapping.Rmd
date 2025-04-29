@@ -260,9 +260,8 @@ https://jtr13.github.io/cc19/different-ways-of-plotting-u-s-map-in-r.html
 - `voting_districts()`: voting districts
 - `school_districts()`: school districts
 
-```{r}
+```{r eval=FALSE}
 library(tigris)
 zip_wa <- zctas(state = "WA", year = 2010)
-zip_wa
 ```
 
