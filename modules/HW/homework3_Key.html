@@ -358,8 +358,14 @@ display: none;
 <p>Homework is optional, but we recommend it so you can get the most out
 of this course.</p>
 <pre class="r"><code>## you can add more, or change...these are suggestions
-library(tidyverse)
-library(readr)
+library(tidyverse)</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.4.2</code></pre>
+<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.4.2</code></pre>
+<pre><code>## Warning: package &#39;purrr&#39; was built under R version 4.4.2</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.4.2</code></pre>
+<pre><code>## Warning: package &#39;stringr&#39; was built under R version 4.4.2</code></pre>
+<pre><code>## Warning: package &#39;lubridate&#39; was built under R version 4.4.2</code></pre>
+<pre class="r"><code>library(readr)
 library(dplyr)
 library(ggplot2)
 library(tidyr)</code></pre>
@@ -416,20 +422,20 @@ in <code>dplyr</code>.</p>
 ## [231] &quot;1989&quot; &quot;1990&quot; &quot;1991&quot; &quot;1992&quot; &quot;1993&quot; &quot;1994&quot; &quot;1995&quot; &quot;1996&quot; &quot;1997&quot; &quot;1998&quot;
 ## [241] &quot;1999&quot; &quot;2000&quot; &quot;2001&quot; &quot;2002&quot; &quot;2003&quot; &quot;2004&quot; &quot;2005&quot; &quot;2006&quot; &quot;2007&quot; &quot;2008&quot;
 ## [251] &quot;2009&quot; &quot;2010&quot; &quot;2030&quot; &quot;2050&quot; &quot;2099&quot;</code></pre>
-<pre class="r"><code>mort &lt;- mort %&gt;% rename(country = `...1`)</code></pre>
+<pre class="r"><code>mort &lt;- mort |&gt; rename(country = `...1`)</code></pre>
 <p>3. Select only the numeric type columns (<code>select()</code>).
 Then, create the variable “year” from column names by using the
 <code>colnames()</code> function to extract them.</p>
-<pre class="r"><code>year &lt;- mort %&gt;%
-  select(-country) %&gt;%
+<pre class="r"><code>year &lt;- mort |&gt;
+  select(-country) |&gt;
   colnames()
 # OR
-year &lt;- mort %&gt;%
-  select(starts_with(c(&quot;1&quot;, &quot;2&quot;))) %&gt;%
+year &lt;- mort |&gt;
+  select(starts_with(c(&quot;1&quot;, &quot;2&quot;))) |&gt;
   colnames()
 # OR
-year &lt;- mort %&gt;%
-  select(where(is.numeric)) %&gt;%
+year &lt;- mort |&gt;
+  select(where(is.numeric)) |&gt;
   colnames()</code></pre>
 <p>4. What is the <code>typeof()</code> for “year”? If it’s not an
 integer, turn it into integer form with <code>as.integer()</code>.</p>
@@ -501,7 +507,7 @@ for getting the file.</li>
 <p>9. Rename the second column in “pop” to “country” and the column “%
 of world population”, to “percent”. Use the <code>rename()</code>
 function. Don’t forget to reassign the renamed data to “pop”.</p>
-<pre class="r"><code>pop &lt;- pop %&gt;%
+<pre class="r"><code>pop &lt;- pop |&gt;
   rename(
     country = `Country (or dependent territory)`,
     percent = `% of world population`
@@ -511,17 +517,17 @@ using <code>arrange()</code> and <code>desc()</code>. After sorting,
 <code>select()</code> “country” to create an one-column tibble of
 countries ordered by population. Assign this data the name
 “country_ordered”.</p>
-<pre class="r"><code>country_ordered &lt;- pop %&gt;%
-  arrange(desc(Population)) %&gt;%
+<pre class="r"><code>country_ordered &lt;- pop |&gt;
+  arrange(desc(Population)) |&gt;
   select(country)</code></pre>
 <p>11. Subset “long” based on years 2000-2010, including 2000 and 2010
 and call this “long_sub” using <code>&amp;</code> or the
 <code>between()</code> function. Confirm your filtering worked by
 looking at the range of “year”. If you’re getting a strange error, make
 sure you created the “year” column in problem #7.</p>
-<pre class="r"><code>long_sub &lt;- long %&gt;% filter(year &gt;= 2000 &amp; year &lt;= 2010)
-long_sub %&gt;%
-  pull(year) %&gt;%
+<pre class="r"><code>long_sub &lt;- long |&gt; filter(year &gt;= 2000 &amp; year &lt;= 2010)
+long_sub |&gt;
+  pull(year) |&gt;
   range() # confirm it worked</code></pre>
 <pre><code>## [1] &quot;2000&quot; &quot;2010&quot;</code></pre>
 <p>12. Further subset <code>long_sub</code>. You will filter for
@@ -529,20 +535,20 @@ specific countries using <code>filter()</code> and the <code>%in%</code>
 operator. Only include countries in this list:
 <code>c(&quot;Venezuela&quot;, &quot;Bahrain&quot;, &quot;Estonia&quot;, &quot;Iran&quot;, &quot;Thailand&quot;, &quot;Canada&quot;)</code>.
 Make sure to reassign to “long_sub”.</p>
-<pre class="r"><code>long_sub &lt;- long_sub %&gt;%
+<pre class="r"><code>long_sub &lt;- long_sub |&gt;
   filter(country %in% c(&quot;Venezuela&quot;, &quot;Bahrain&quot;, &quot;Estonia&quot;, &quot;Iran&quot;, &quot;Thailand&quot;, &quot;Canada&quot;))</code></pre>
 <p>13. Use <code>pivot_wider()</code> to turn the “year” column of
 “long_sub” into multiple columns, each representing a different year.
 Fill values (<code>values_from=</code>) with “mortality”. Assign this
 pivoted dataset the name “mort_sub”.</p>
-<pre class="r"><code>mort_sub &lt;- long_sub %&gt;%
+<pre class="r"><code>mort_sub &lt;- long_sub |&gt;
   pivot_wider(id_cols = country, names_from = year, values_from = mortality)</code></pre>
 <p>14. Using “country_ordered” and “mort_sub”, <code>right_join()</code>
-the two datasets by “country”. Use the pipe <code>%&gt;%</code> to join
+the two datasets by “country”. Use the pipe <code>|&gt;</code> to join
 this dataset to “pop”, keeping only the data on the lefthand side of the
 join. Call this “joined”.</p>
-<pre class="r"><code>joined &lt;- country_ordered %&gt;%
-  right_join(mort_sub, by = &quot;country&quot;) %&gt;%
+<pre class="r"><code>joined &lt;- country_ordered |&gt;
+  right_join(mort_sub, by = &quot;country&quot;) |&gt;
   left_join(pop, by = &quot;country&quot;)</code></pre>
 <p>15. The values in the table are percentages of the total population
 (not proportion).</p>
@@ -560,8 +566,8 @@ your analysis should depend on your reasoning not how many lines of code
 it takes :)</p>
 </blockquote>
 <pre class="r"><code># Use 2010: There appears to be a downward trend in mortality rates, so using 2010 could be the most accurate for future years.
-joined %&gt;%
-  mutate(mort_count = Population * `2010` / 100) %&gt;%
+joined |&gt;
+  mutate(mort_count = Population * `2010` / 100) |&gt;
   select(country, Population, mort_count)</code></pre>
 <pre><code>## # A tibble: 6 × 3
 ##   country   Population mort_count
@@ -575,10 +581,10 @@ joined %&gt;%
 <pre class="r"><code># OR
 
 # Use an average 2000-2010: Using the average is more robust to fluctuations and uncertainty in the coming years.
-avg_mort &lt;- rowMeans(joined %&gt;% select(starts_with(&quot;2&quot;)))
-joined &lt;- joined %&gt;% mutate(avg_pct_2000 = avg_mort)
-joined %&gt;%
-  mutate(mort_count = Population * avg_pct_2000 / 100) %&gt;%
+avg_mort &lt;- rowMeans(joined |&gt; select(starts_with(&quot;2&quot;)))
+joined &lt;- joined |&gt; mutate(avg_pct_2000 = avg_mort)
+joined |&gt;
+  mutate(mort_count = Population * avg_pct_2000 / 100) |&gt;
   select(country, Population, mort_count)</code></pre>
 <pre><code>## # A tibble: 6 × 3
 ##   country   Population mort_count
@@ -604,11 +610,11 @@ asthma &lt;- read_excel(&quot;asthma.xlsx&quot;, sheet = &quot;Age Group (Years)
 <code>Weighted Number With Current Asthma</code> to “asthma_count” using
 <code>rename()</code>. Replace the original “asthma” object by calling
 the new dataset “asthma”.</p>
-<pre class="r"><code>asthma &lt;- asthma %&gt;% rename(&quot;asthma_count&quot; = `Weighted Number With Current Asthma`)</code></pre>
+<pre class="r"><code>asthma &lt;- asthma |&gt; rename(&quot;asthma_count&quot; = `Weighted Number With Current Asthma`)</code></pre>
 <p>18. Separate <code>Percent (SE)</code> into two separate columns:
 “percent” and “SE” using the <code>separate()</code> function. Replace
 the original “asthma” object by calling the new dataset “asthma”.</p>
-<pre class="r"><code>asthma &lt;- asthma %&gt;% separate(`Percent (SE)`, into = c(&quot;percent&quot;, &quot;SE&quot;), sep = &quot; &quot;)</code></pre>
+<pre class="r"><code>asthma &lt;- asthma |&gt; separate(`Percent (SE)`, into = c(&quot;percent&quot;, &quot;SE&quot;), sep = &quot; &quot;)</code></pre>
 <p>19. Remove the parentheses around the numbers in the new SE column.
 You should use a combination of <code>str_replace()</code>,
 <code>pull()</code> (because stringr package functions work on vectors
@@ -622,8 +628,8 @@ not dataframes!) and <code>mutate()</code>. Replace the original
 <li>The <code>replacement =</code> for both can be empty quotation
 marks: “”</li>
 </ul>
-<pre class="r"><code>asthma &lt;- asthma %&gt;% mutate(SE = str_replace(pull(asthma, SE), pattern = &quot;[(]&quot;, replacement = &quot;&quot;))
-asthma &lt;- asthma %&gt;% mutate(SE = str_replace(pull(asthma, SE), pattern = &quot;[)]&quot;, replacement = &quot;&quot;))</code></pre>
+<pre class="r"><code>asthma &lt;- asthma |&gt; mutate(SE = str_replace(pull(asthma, SE), pattern = &quot;[(]&quot;, replacement = &quot;&quot;))
+asthma &lt;- asthma |&gt; mutate(SE = str_replace(pull(asthma, SE), pattern = &quot;[)]&quot;, replacement = &quot;&quot;))</code></pre>
 <p>20. Determine the class of “percent” and “SE”. Can you take the mean
 values? Why or why not?</p>
 <pre class="r"><code>class(pull(asthma, percent))</code></pre>
@@ -633,14 +639,14 @@ values? Why or why not?</p>
 <pre class="r"><code># No. Both are character type and math cannot be performed on characters.</code></pre>
 <p>21. Use <code>as.numeric()</code> to convert “percent” and “SE” to
 numeric class. Calculate the mean for both.</p>
-<pre class="r"><code>asthma %&gt;%
-  mutate(percent = as.numeric(percent)) %&gt;%
-  pull(percent) %&gt;%
+<pre class="r"><code>asthma |&gt;
+  mutate(percent = as.numeric(percent)) |&gt;
+  pull(percent) |&gt;
   mean()</code></pre>
 <pre><code>## [1] 7.771429</code></pre>
-<pre class="r"><code>asthma %&gt;%
-  mutate(SE = as.numeric(SE)) %&gt;%
-  pull(SE) %&gt;%
+<pre class="r"><code>asthma |&gt;
+  mutate(SE = as.numeric(SE)) |&gt;
+  pull(SE) |&gt;
   mean()</code></pre>
 <pre><code>## [1] 0.655</code></pre>
 </div>
