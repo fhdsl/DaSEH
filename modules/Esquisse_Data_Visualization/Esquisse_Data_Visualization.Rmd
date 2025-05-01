@@ -137,7 +137,8 @@ knitr::include_graphics("images/view_data.png")
 
 You'll need to "interrupt" Esquisse to launch it with a new dataset.
 
-Use the stop button or press ctrl+c to stop the Esquisse app.
+1. Close the tab/window
+2. Use the stop button to stop the Esquisse app
 
 _If you don't see the stop button, you need to resize your window._
 
