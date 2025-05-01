@@ -137,7 +137,8 @@ knitr::include_graphics("images/view_data.png")
 
 You'll need to "interrupt" Esquisse to launch it with a new dataset.
 
-Use the stop button or press ctrl+c to stop the Esquisse app.
+1. Close the tab/window
+2. Use the stop button to stop the Esquisse app
 
 _If you don't see the stop button, you need to resize your window._
 
@@ -151,10 +152,7 @@ Let's look at why we might want long data using Esquisse.
 
 ```{r message=FALSE}
 library(tidyverse)
-er <- read_csv(file =
-    "https://daseh.org/data/CO_ER_heat_visits.csv")
 long_er <- er |> 
-  filter(county == c("Denver", "Boulder")) |> 
   select(c("county", "year", "visits"))
 glimpse(long_er)
 ```
@@ -164,9 +162,9 @@ glimpse(long_er)
 As a comparison, let's also load a wide version of this dataset.
 
 ```{r}
-
-wide_er <- read_csv(file =
-    "https://daseh.org/data/CO_heat_er_visits_DenverBoulder_wide.csv")
+wide_er <- er |> 
+  select(county, visits, year) |>
+  pivot_wider(names_from = county, values_from = visits)
 ```
 
 ## Wide vs Long Data
@@ -176,11 +174,11 @@ head(long_er)
 head(wide_er)
 ```
 
-## Make a plot of visit rates by year for different counties
+## Make a plot of visits by year for different counties
 
 ```{r, eval = FALSE}
-esquisser(wide_er) # county as x...? Tricky!
-esquisser(long_er) #county as x, visit rate as y, year as fill
+esquisser(wide_er) # only one county at a time? Tricky!
+esquisser(long_er) # county as color, visits as y, year as x!
 ```
 
 ## GUT CHECK!
