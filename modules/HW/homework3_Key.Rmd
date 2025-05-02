@@ -24,46 +24,43 @@ library(tidyr)
 
 1\. Bring the following dataset into R. 
 
--  The dataset is located at: https://daseh.org/data/mortality.csv. 
+-  The dataset is located at: https://daseh.org/data/Baltimore_surface_water_quality_data.csv. 
 -  You can use the link, download it, or use whatever method you like for getting the file. 
--  Once you get the file, read the dataset in using `read_csv()` and assign it the name "mort".
+-  Once you get the file, read the dataset in using `read_csv()` and assign it the name "water".
 
 ```{r 1response}
-mort <- read_csv("https://daseh.org/data/mortality.csv")
+water <- read_csv("https://daseh.org/data/Baltimore_surface_water_quality_data.csv")
 ```
 
 
-2\. Run the `colnames()` function to take a look at the dataset column names. You should see that there was originally no name for the first column and that R replaced it with "...1". Rename the first column of "mort" to "country" using the `rename()` function in `dplyr`.  
+2\. Run the `colnames()` function to take a look at the dataset column names. Rename the third column of "water" to "GPS_North" using the `rename()` function in `dplyr`. Then rename the fourth column to "GPS_West".  
 
 ```{r 2response}
-colnames(mort)
-mort <- mort |> rename(country = `...1`)
+colnames(water)
+water <- water |> rename(GPS_North = `GPS Coordinate North`)
+water <- water |> rename(GPS_West = `GPS Coordinate West`)
 ```
 
 
-3\. Select only the numeric type columns (`select()`). Then, create the variable "year" from column names by using the `colnames()` function to extract them. 
+3\. Convert the "datetime" column to POSIXct format using the `mdy_hm()` functions from the `lubridate` package. Then create the variable "year" by extracting the year from the `datetime` column. (HINT: use mutate and `year(datetime_fixed)` to create your new variable.)
+
 
 ```{r 3response}
-year <- mort |>
-  select(-country) |>
-  colnames()
-# OR
-year <- mort |>
-  select(starts_with(c("1", "2"))) |>
-  colnames()
-# OR
-year <- mort |>
-  select(where(is.numeric)) |>
-  colnames()
+#converting the date format to POSIXct
+water <- water |> mutate(datetime_fixed = mdy_hm(datetime))
+
+#creating a new variable
+water <- water |> mutate(year = year(datetime_fixed))
+
 ```
 
 
-4\. What is the `typeof()` for "year"? If it's not an integer, turn it into integer form with `as.integer()`.
+4\. What is the class for "Result"? Why might this column not be formatted a numeric? What can you do to change the format of "Result" to numeric? 
 
 ```{r 4response}
-typeof(year)
-year <- as.integer(year)
-# "year" is of type "character".
+water |> class(Result)
+
+# "Result" is of type "character". For some tests, the result is listed as below the detectible level, using a ">". R can only interpret this symbol as a character. In order to change "Result" to numeric, we need to change the values
 ```
 
 
