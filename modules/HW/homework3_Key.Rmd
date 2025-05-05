@@ -54,30 +54,69 @@ water <- water |> mutate(year = year(datetime_fixed))
 
 ```
 
+18\. Separate `datetime_fixed` into two separate columns: "date" and "time" using the `separate()` function. Replace the original "water" object by calling the new dataset "water".
 
-4\. What is the class for "Result"? Why might this column not be formatted a numeric? What can you do to change the format of "Result" to numeric? 
-
-```{r 4response}
-water |> class(Result)
-
-# "Result" is of type "character". For some tests, the result is listed as below the detectible level, using a ">". R can only interpret this symbol as a character. In order to change "Result" to numeric, we need to change the values
+```{r 18response}
+water <- water |> separate(`datetime_fixed`, into = c("date", "time"), sep = " ")
 ```
 
+4\. What is the class for "Result"? Can you take the mean value? Why or why not? What can you do to change the format of "Result" to numeric? 
 
-5\. Use the `pct_complete()` function in the `naniar` package to determine the percent missing data in "mort". You might need to load and install `naniar`!
+```{r 4response}
+water |> pull(Result) |> class()
+
+# "Result" is of type "character". For some tests, the result is listed as below the detectable level, using a ">". R can only interpret this symbol as a character. In order to change "Result" to numeric, we need to change the values of the results that are below detectable levels. Some options are to change these to 0 or to NA. You can also change them on a case-by-case basis to a number just slightly smaller than the detectable level (for example, if the level is 3 ug, anything below this could be coded as 2.9 ug). Use your best judgment on how to recode these values.
+
+```
+
+19\. Replace the below detectable level values in "Results" with a measure that you choose. You should use a combination of `str_replace`,  `pull()` (because stringr package functions work on vectors not dataframes!) and `mutate()`. Replace the original "water" object by calling the new dataset "water".
+
+-  The `pattern =` to find the starting parenthesis is "^<"
+-  The `replacement =` depends on how you choose to replace the values
+
+```{r 19response}
+#replacing values with NA
+water <- water |> mutate(Result = str_replace(pull(water, Result), pattern = "^<", replacement = NA_character_))
+
+#replacing values with 0
+#water <- water |> mutate(Result = str_replace(pull(water, Result), pattern = "^<", replacement = 0))
+```
+
+21\. Use `as.numeric()` to convert "Result" to numeric class. Then convert "Parameter" to a factor with `as.factor`.
+
+```{r 21response}
+water |>
+  mutate(Result = as.numeric(Result)) 
+water |> 
+  mutate(Parameter = as.factor(Parameter))
+```
+
+xx\. How many different measurements (levels) are stored in the Parameter column?
+
+```{r xxresponse}
+water |> pull(Parameter) |> levels()
+
+#There are 49 different types of measurements in this dataset.
+```
+
+5\. Use the `pct_complete()` function in the `naniar` package to determine the percent missing data in "Results". You might need to load and install `naniar`!
 
 ```{r 5response}
 library(naniar)
-pct_complete(mort)
-# "mort" is 66.95332 percent complete.
+pct_complete(water)
+# "water" is 99.99913 percent complete if you chose to replace results below the detectable limit with 0. The dataset is 99.41319 if you instead chose to replace results below the detectable limit with NA.
 ```
 
-
-6\. Are there any countries that have a complete record in "mort" across all years? Just look at the output here, don't reassign it. **Hint:** look for complete records by dropping all NAs from the dataset using `drop_na()`.
+6\. Are there any parameter levels that have a complete record in "water" across all years? **Hint:** Create a new dataframe using `group_by` and `summarize` to count the number of NAs in "Result" for each level in "Parameter", then filter out rows with more than 0.
 
 ```{r 6response}
-drop_na(mort)
-# Yes - but just two!
+na_counts <- water %>%
+  group_by(Parameter) %>%
+  summarise(na_count = sum(is.na(Result)))
+
+na_counts |> filter(na_count == 0)
+
+#If you replaced the values below detectable levels with NA, there are seven parameter levels (tests) that have no missing data. If you replaced the values below detectable levels with 0, all the parameter levels (tests) have complete data.
 ```
 
 
@@ -191,65 +230,4 @@ joined |>
 ```
 
 
-
-16\. Bring the following dataset into R. 
-
--  The dataset is located at: https://daseh.org/data/asthma.xlsx. 
--  You should download the associated data.
--  Once you get the file, read the dataset in using `read_excel()` from the `readxl` package and assign it the name "asthma".
--  Read in the sheet named "Age Group (Years)".
-
-```{r 16response}
-library(readxl)
-asthma <- read_excel("asthma.xlsx", sheet = "Age Group (Years)")
-```
-
-
-17\. Rename the column `Weighted Number With Current Asthma` to "asthma_count" using `rename()`. Replace the original "asthma" object by calling the new dataset "asthma".
-
-```{r 17response}
-asthma <- asthma |> rename("asthma_count" = `Weighted Number With Current Asthma`)
-```
-
-
-18\. Separate `Percent (SE)` into two separate columns: "percent" and "SE" using the `separate()` function. Replace the original "asthma" object by calling the new dataset "asthma".
-
-```{r 18response}
-asthma <- asthma |> separate(`Percent (SE)`, into = c("percent", "SE"), sep = " ")
-```
-
-
-19\. Remove the parentheses around the numbers in the new SE column. You should use a combination of `str_replace()`,  `pull()` (because stringr package functions work on vectors not dataframes!) and `mutate()`. Replace the original "asthma" object by calling the new dataset "asthma".
-
--  The `pattern =` to find the starting parenthesis is "[(]"
--  The `pattern =` to find for the ending parenthesis is "[)]"
--  The `replacement =` for both can be empty quotation marks: ""
-
-```{r 19response}
-asthma <- asthma |> mutate(SE = str_replace(pull(asthma, SE), pattern = "[(]", replacement = ""))
-asthma <- asthma |> mutate(SE = str_replace(pull(asthma, SE), pattern = "[)]", replacement = ""))
-```
-
-
-20\. Determine the class of "percent" and "SE". Can you take the mean values? Why or why not?
-
-```{r 20response}
-class(pull(asthma, percent))
-class(pull(asthma, SE))
-# No. Both are character type and math cannot be performed on characters.
-```
-
-
-21\. Use `as.numeric()` to convert "percent" and "SE" to numeric class. Calculate the mean for both.
-
-```{r 21response}
-asthma |>
-  mutate(percent = as.numeric(percent)) |>
-  pull(percent) |>
-  mean()
-asthma |>
-  mutate(SE = as.numeric(SE)) |>
-  pull(SE) |>
-  mean()
-```
 
