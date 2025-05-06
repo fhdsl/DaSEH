@@ -119,6 +119,33 @@ na_counts |> filter(na_count == 0)
 #If you replaced the values below detectable levels with NA, there are seven parameter levels (tests) that have no missing data. If you replaced the values below detectable levels with 0, all the parameter levels (tests) have complete data.
 ```
 
+11\. Subset "water"  so that it only contains results for the years 2010 - 2024, using `&` and the filter function. Make sure to include both the years 2010 and 2024. Confirm your filtering worked by looking at the range of "year". Assign this subsetted tibble to "water_subset".
+
+```{r 11response}
+water_subset <- water |> filter(year >= 2010 & year <= 2024)
+water_subset |>
+  pull(year) |>
+  range() # confirm it worked
+```
+
+
+12\. Subset "water_subset"  so that it only contains results from the tests for dissolved oxygen, pH, and water temperature, using %in% and the filter function. Make sure to reassign to "water_subset".
+
+```{r 12response}
+water_subset <- water_subset |>
+  filter(Parameter %in% c("Dissolved Oxygen", "pH", "Water Temperature"))
+```
+
+8\. Bring an additional dataset into R. 
+
+-  The dataset is tab-delimited and located at: https://daseh.org/data/country_pop.txt. 
+-  You can use the link, download it, or use whatever method you like for getting the file. 
+-  Once you get the file, read the dataset in using `read_tsv()` and assign it the name "pop".
+
+```{r 8response}
+pop <- read_tsv("https://daseh.org/data/country_pop.txt")
+```
+
 
 7\. Reshape the "complete" data to long form. 
 
@@ -140,17 +167,6 @@ long <-
 ```
 
 
-8\. Bring an additional dataset into R. 
-
--  The dataset is tab-delimited and located at: https://daseh.org/data/country_pop.txt. 
--  You can use the link, download it, or use whatever method you like for getting the file. 
--  Once you get the file, read the dataset in using `read_tsv()` and assign it the name "pop".
-
-```{r 8response}
-pop <- read_tsv("https://daseh.org/data/country_pop.txt")
-```
-
-
 9\. Rename the second column in "pop" to "country" and the column "% of world population", to "percent". Use the `rename()` function. Don't forget to reassign the renamed data to "pop".
 
 ```{r 9response}
@@ -168,24 +184,6 @@ pop <- pop |>
 country_ordered <- pop |>
   arrange(desc(Population)) |>
   select(country)
-```
-
-
-11\. Subset "long"  based on years 2000-2010, including 2000 and 2010 and call this "long_sub" using `&` or the `between()` function. Confirm your filtering worked by looking at the range of "year". If you're getting a strange error, make sure you created the "year" column in problem #7.
-
-```{r 11response}
-long_sub <- long |> filter(year >= 2000 & year <= 2010)
-long_sub |>
-  pull(year) |>
-  range() # confirm it worked
-```
-
-
-12\. Further subset `long_sub`. You will filter for specific countries using `filter()` and the `%in%` operator. Only include countries in this list: `c("Venezuela", "Bahrain", "Estonia", "Iran", "Thailand", "Canada")`. Make sure to reassign to "long_sub".
-
-```{r 12response}
-long_sub <- long_sub |>
-  filter(country %in% c("Venezuela", "Bahrain", "Estonia", "Iran", "Thailand", "Canada"))
 ```
 
 
