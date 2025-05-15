@@ -171,7 +171,7 @@ water_Ham <- water_subset |> filter(Station == "HAMILTON AVE.")
 
 17\. Right-join "water_Ham" and "rainfall_long" by "Month" and "Year" and assign the joined dataset to the name "water_rain". Did this join attempt work? Why or why not?
 
-```{r 17response}
+```{r 17response, eval=FALSE}
 water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
 
 #This attempted join did not work, because the class of Month is not the same between the two datasets!
@@ -200,7 +200,7 @@ rainfall_long <- rainfall_long |>
 
 19\. NOW try to right-join "water_Ham" and "rainfall_long" by "Month" and "Year" and assign the joined dataset to the name "water_rain". Did this join attempt work?
 
-```{r 19response}
+```{r 19response, eval=FALSE}
 water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
 
 #This attempted join did not work either, because "Year" is a different format between both datasets too!
