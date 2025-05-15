@@ -216,3 +216,20 @@ water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
 ```
 
 
+21\. Plot the relationship between pH and rainfall, colored by Month and faceted by Year. You can use esquisse or ggplot (whichever you prefer).
+
+```{r 21response}
+
+#If using esquisse:
+#library(esquisse)
+#esquisser(water_rain)
+
+#If using ggplot:
+ggplot(water_rain) +
+  aes(x = Precip, y = Result, colour = Month, group = Month) +
+  geom_point() +
+  theme_minimal() +
+  facet_wrap(vars(Year)) +
+  xlim(0, 10)
+
+```
