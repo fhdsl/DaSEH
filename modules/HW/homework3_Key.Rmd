@@ -169,3 +169,50 @@ rainfall_long <- rainfall |> pivot_longer(!Month, names_to = "Year", values_to =
 water_Ham <- water_subset |> filter(Station == "HAMILTON AVE.")
 ```
 
+17\. Right-join "water_Ham" and "rainfall_long" by "Month" and "Year" and assign the joined dataset to the name "water_rain". Did this join attempt work? Why or why not?
+
+```{r 17response}
+water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
+
+#This attempted join did not work, because the class of Month is not the same between the two datasets!
+```
+
+18\. We have formatted "Month" differently in each dataset. In "rainfall_long", "Month" is a character and has a three-letter abbreviation for each month. In "water_Ham", "Month" is designated by a number. Reformat "Month" in "rainfall_long" so that it matches the format in "water_Ham".
+
+```{r 18response}
+rainfall_long <- rainfall_long |> 
+  mutate(Month = case_when(
+    Month == "Jan" ~ 1,
+    Month == "Feb" ~ 2,
+    Month == "Mar" ~ 3,
+    Month == "Apr" ~ 4,
+    Month == "May" ~ 5,
+    Month == "Jun" ~ 6,
+    Month == "Jul" ~ 7,
+    Month == "Aug" ~ 8,
+    Month == "Sep" ~ 9,
+    Month == "Oct" ~ 10,
+    Month == "Nov" ~ 11,
+    Month == "Dec" ~ 12
+    ))
+```
+
+
+19\. NOW try to right-join "water_Ham" and "rainfall_long" by "Month" and "Year" and assign the joined dataset to the name "water_rain". Did this join attempt work?
+
+```{r 19response}
+water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
+
+#This attempted join did not work either, because "Year" is a different format between both datasets too!
+```
+
+20\. Fix the differences between the classes of "Year" and right-join the two datasets to make "water_rain".
+
+```{r 20response}
+rainfall_long <- rainfall_long |> 
+  mutate(Year = as.double(Year))
+
+water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
+```
+
+
