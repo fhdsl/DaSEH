@@ -42,15 +42,16 @@ water <- water |> rename(GPS_West = `GPS Coordinate West`)
 ```
 
 
-3\. Convert the "datetime" column to POSIXct format using the `mdy_hm()` functions from the `lubridate` package. Then create the variable "year" by extracting the year from the `datetime` column. (HINT: use mutate and `year(datetime_fixed)` to create your new variable.)
+3\. Convert the "datetime" column to POSIXct format using the `mdy_hm()` functions from the `lubridate` package. Then create the variables "Month" and "Year" by extracting the month and year from the `datetime` column. (HINT: use mutate and `year(datetime_fixed)` to create your new variables.)
 
 
 ```{r 3response}
 #converting the date format to POSIXct
 water <- water |> mutate(datetime_fixed = mdy_hm(datetime))
 
-#creating a new variable
-water <- water |> mutate(year = year(datetime_fixed))
+#creating new variables
+water <- water |> mutate(Year = year(datetime_fixed))
+water <- water |> mutate(Month = month(datetime_fixed))
 
 ```
 
@@ -104,7 +105,7 @@ water |> pull(Parameter) |> levels()
 ```{r 9response}
 library(naniar)
 pct_complete(water)
-# "water" is 99.99913 percent complete if you chose to replace results below the detectable limit with 0. The dataset is 99.41319 if you instead chose to replace results below the detectable limit with NA.
+# "water" is 99.99913 percent complete if you chose to replace results below the detectable limit with 0. The dataset is 99.47796 if you instead chose to replace results below the detectable limit with NA.
 ```
 
 10\. Are there any parameter levels that have a complete record in "water" across all years? **Hint:** Create a new dataframe using `group_by` and `summarize` to count the number of NAs in "Result" for each level in "Parameter", then filter out rows with more than 0.
@@ -119,12 +120,12 @@ na_counts |> filter(na_count == 0)
 #If you replaced the values below detectable levels with NA, there are seven parameter levels (tests) that have no missing data. If you replaced the values below detectable levels with 0, all the parameter levels (tests) have complete data.
 ```
 
-11\. Subset "water"  so that it only contains results for the years 2010 - 2024, using `&` and the filter function. Make sure to include both the years 2010 and 2024. Confirm your filtering worked by looking at the range of "year". Assign this subsetted tibble to "water_subset".
+11\. Subset "water"  so that it only contains results for the years 2010 - 2024, using `&` and the filter function. Make sure to include both the years 2010 and 2024. Confirm your filtering worked by looking at the range of "Year". Assign this subsetted tibble to "water_subset".
 
 ```{r 11response}
-water_subset <- water |> filter(year >= 2010 & year <= 2024)
+water_subset <- water |> filter(Year >= 2010 & Year <= 2024)
 water_subset |>
-  pull(year) |>
+  pull(Year) |>
   range() # confirm it worked
 ```
 
@@ -149,17 +150,22 @@ This dataset contains measured precipitation by month, as collected near the Ham
 rainfall <- read_csv("https://daseh.org/data/Baltimore_rainfall_HamiltonAve.csv")
 ```
 
-14\. We want only the rainfall measurements for the year 2010 and 2020 from this new dataset. Subset the dataset using the `select()` function so that it only contains these years. Reassign this to `rainfall`. HINT: Make sure you remember to keep the column that contains information about the month!
+14\. We want only the rainfall measurements for the years 2010 - 2024 from this new dataset, as well as the month information. Subset the dataset using the `select()` function. Reassign this to `rainfall`. HINT: Make sure you remember to keep the column that contains information about the month!
 
 ```{r 14response}
-rainfall <- rainfall |> select(c("2010", "2020"))
+rainfall <- rainfall |> select(c("Month", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"))
 ```
 
 
-15\. Reshape `rainfall` into long format using `pivot.longer`. The reshaped dataset should contain three columns: year ("year"), month ("month"), and amount of rainfall ("precip"). Assign the reshaped dataset to `rainfall_long`.
+15\. Reshape `rainfall` into long format using `pivot.longer`. The reshaped dataset should contain three columns: year ("Year"), month ("Month"), and amount of rainfall ("Precip"). ou should pivot all columns except "Month". **Hint:** listing `!COLUMN` or `-COLUMN` means everything except COLUMN. Assign the reshaped dataset to `rainfall_long`.
 
 ```{r 15response}
-
+rainfall_long <- rainfall |> pivot_longer(!Month, names_to = "Year", values_to = "Precip")
 ```
 
-We would like to join the rainfall measurements dataset with the Baltimore surface water quality dataset, but we need to do a bit more wrangling first. Because the rainfall measures were collected near the Hamilton Ave water testing site, let's pull only the Hamilton Ave data from the `water_subset` data.
+16\. We would like to join the rainfall measurements dataset with the Baltimore surface water quality dataset, but we need to do a bit more wrangling first. Because the rainfall measures were collected near the Hamilton Ave water testing site, let's pull only the Hamilton Ave data from the `water_subset` data, using `filter`. Assign this to `water_Ham`.
+
+```{r 16response}
+water_Ham <- water_subset |> filter(Station == "HAMILTON AVE.")
+```
+
