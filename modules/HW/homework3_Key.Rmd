@@ -85,9 +85,9 @@ water <- water |> mutate(Result = str_replace(pull(water, Result), pattern = "^<
 7\. Use `as.numeric()` to convert "Result" to numeric class. Then convert "Parameter" to a factor with `as.factor`.
 
 ```{r 7response}
-water |>
+water <- water |>
   mutate(Result = as.numeric(Result)) 
-water |> 
+water <- water |> 
   mutate(Parameter = as.factor(Parameter))
 ```
 
@@ -135,3 +135,31 @@ water_subset |>
 water_subset <- water_subset |>
   filter(Parameter %in% c("Dissolved Oxygen", "pH", "Water Temperature"))
 ```
+
+
+13\. Load the new dataset "Baltimore_rainfall_HamiltonAve.csv" into R.  
+
+-  The dataset is located at: https://daseh.org/data/Baltimore_rainfall_HamiltonAve.csv. 
+-  You can use the link, download it, or use whatever method you like for getting the file. 
+-  Once you get the file, read the dataset in using `read_csv()` and assign it the name "rainfall".
+
+This dataset contains measured precipitation by month, as collected near the Hamilton Ave testing location in Baltimore.
+
+```{r 13response}
+rainfall <- read_csv("https://daseh.org/data/Baltimore_rainfall_HamiltonAve.csv")
+```
+
+14\. We want only the rainfall measurements for the year 2010 and 2020 from this new dataset. Subset the dataset using the `select()` function so that it only contains these years. Reassign this to `rainfall`. HINT: Make sure you remember to keep the column that contains information about the month!
+
+```{r 14response}
+rainfall <- rainfall |> select(c("2010", "2020"))
+```
+
+
+15\. Reshape `rainfall` into long format using `pivot.longer`. The reshaped dataset should contain three columns: year ("year"), month ("month"), and amount of rainfall ("precip"). Assign the reshaped dataset to `rainfall_long`.
+
+```{r 15response}
+
+```
+
+We would like to join the rainfall measurements dataset with the Baltimore surface water quality dataset, but we need to do a bit more wrangling first. Because the rainfall measures were collected near the Hamilton Ave water testing site, let's pull only the Hamilton Ave data from the `water_subset` data.
