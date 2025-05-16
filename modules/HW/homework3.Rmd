@@ -24,176 +24,151 @@ library(tidyr)
 
 1\. Bring the following dataset into R. 
 
--  The dataset is located at: https://daseh.org/data/mortality.csv. 
+-  The dataset is located at: https://daseh.org/data/Baltimore_surface_water_quality_data.csv. 
 -  You can use the link, download it, or use whatever method you like for getting the file. 
--  Once you get the file, read the dataset in using `read_csv()` and assign it the name "mort".
+-  Once you get the file, read the dataset in using `read_csv()` and assign it the name "water".
 
 ```{r 1response}
 
 ```
 
 
-2\. Run the `colnames()` function to take a look at the dataset column names. You should see that there was originally no name for the first column and that R replaced it with "...1". Rename the first column of "mort" to "country" using the `rename()` function in `dplyr`.  
+2\. Run the `colnames()` function to take a look at the dataset column names. Rename the third column of "water" to "GPS_North" using the `rename()` function in `dplyr`. Then rename the fourth column to "GPS_West".  
 
 ```{r 2response}
 
 ```
 
 
-3\. Select only the numeric type columns (`select()`). Then, create the variable "year" from column names by using the `colnames()` function to extract them. 
+3\. Convert the "datetime" column to POSIXct format using the `mdy_hm()` functions from the `lubridate` package. Then create the variables "Month" and "Year" by extracting the month and year from the `datetime` column. (HINT: use mutate and `year(datetime_fixed)` to create your new variables.)
+
 
 ```{r 3response}
 
 ```
 
-
-4\. What is the `typeof()` for "year"? If it's not an integer, turn it into integer form with `as.integer()`.
+4\. Separate `datetime_fixed` into two separate columns: "date" and "time" using the `separate()` function. Replace the original "water" object by calling the new dataset "water".
 
 ```{r 4response}
 
 ```
 
-
-5\. Use the `pct_complete()` function in the `naniar` package to determine the percent missing data in "mort". You might need to load and install `naniar`!
+5\. What is the class for "Result"? Can you take the mean value? Why or why not? What can you do to change the format of "Result" to numeric? 
 
 ```{r 5response}
 
 ```
 
+6\. Replace the below detectable level values in "Results" with a measure that you choose. You should use a combination of `str_replace`,  `pull()` (because stringr package functions work on vectors not dataframes!) and `mutate()`. Replace the original "water" object by calling the new dataset "water".
 
-6\. Are there any countries that have a complete record in "mort" across all years? Just look at the output here, don't reassign it. **Hint:** look for complete records by dropping all NAs from the dataset using `drop_na()`.
+-  The `pattern =` to find the starting parenthesis is "^<"
+-  The `replacement =` depends on how you choose to replace the values
 
 ```{r 6response}
 
 ```
 
-
-7\. Reshape the "complete" data to long form. 
-
-- There should be a column for country ("country"), a column for year ("year"), and a column for the mortality value ("mortality"). 
-- Use `pivot_longer()`. 
-- You should pivot all columns except "country". 
-- **Hint:** listing `!COLUMN` or `-COLUMN` means everything except COLUMN. 
-- Assign the reshaped data to "long".
+7\. Use `as.numeric()` to convert "Result" to numeric class. Then convert "Parameter" to a factor with `as.factor`.
 
 ```{r 7response}
 
 ```
 
-
-8\. Bring an additional dataset into R. 
-
--  The dataset is tab-delimited and located at: https://daseh.org/data/country_pop.txt. 
--  You can use the link, download it, or use whatever method you like for getting the file. 
--  Once you get the file, read the dataset in using `read_tsv()` and assign it the name "pop".
+8\. How many different measurements (levels) are stored in the Parameter column?
 
 ```{r 8response}
 
 ```
 
-
-9\. Rename the second column in "pop" to "country" and the column "% of world population", to "percent". Use the `rename()` function. Don't forget to reassign the renamed data to "pop".
+9\. Use the `pct_complete()` function in the `naniar` package to determine the percent missing data in "Results". You might need to load and install `naniar`!
 
 ```{r 9response}
 
 ```
 
-
-10\. Sort the data in "pop" by "Population" from largest to smallest using `arrange()` and `desc()`. After sorting, `select()` "country" to create an one-column tibble of countries ordered by population. Assign this data the name "country_ordered".
+10\. Are there any parameter levels that have a complete record in "water" across all years? **Hint:** Create a new dataframe using `group_by` and `summarize` to count the number of NAs in "Result" for each level in "Parameter", then filter out rows with more than 0.
 
 ```{r 10response}
 
 ```
 
-
-11\. Subset "long"  based on years 2000-2010, including 2000 and 2010 and call this "long_sub" using `&` or the `between()` function. Confirm your filtering worked by looking at the range of "year". If you're getting a strange error, make sure you created the "year" column in problem #7.
+11\. Subset "water"  so that it only contains results for the years 2010 - 2024, using `&` and the filter function. Make sure to include both the years 2010 and 2024. Confirm your filtering worked by looking at the range of "Year". Assign this subsetted tibble to "water_subset".
 
 ```{r 11response}
 
 ```
 
 
-12\. Further subset `long_sub`. You will filter for specific countries using `filter()` and the `%in%` operator. Only include countries in this list: `c("Venezuela", "Bahrain", "Estonia", "Iran", "Thailand", "Canada")`. Make sure to reassign to "long_sub".
+12\. Subset "water_subset"  so that it only contains results from the tests for dissolved oxygen, pH, and water temperature, using %in% and the filter function. Make sure to reassign to "water_subset".
 
 ```{r 12response}
 
 ```
 
 
-13\. Use `pivot_wider()` to turn the "year" column of "long_sub" into multiple columns, each representing a different year. Fill values (`values_from=`) with "mortality". Assign this pivoted dataset the name "mort_sub".
+13\. Load the new dataset "Baltimore_rainfall_HamiltonAve.csv" into R.  
+
+-  The dataset is located at: https://daseh.org/data/Baltimore_rainfall_HamiltonAve.csv. 
+-  You can use the link, download it, or use whatever method you like for getting the file. 
+-  Once you get the file, read the dataset in using `read_csv()` and assign it the name "rainfall".
+
+This dataset contains measured precipitation by month, as collected near the Hamilton Ave testing location in Baltimore.
 
 ```{r 13response}
 
 ```
 
-
-14\. Using "country_ordered" and "mort_sub", `right_join()` the two datasets by "country". Use the pipe `|>` to join this dataset to "pop", keeping only the data on the lefthand side of the join. Call this "joined".
+14\. We want only the rainfall measurements for the years 2010 - 2024 from this new dataset, as well as the month information. Subset the dataset using the `select()` function. Reassign this to `rainfall`. HINT: Make sure you remember to keep the column that contains information about the month!
 
 ```{r 14response}
 
 ```
 
 
-15\. The values in the table are percentages of the total population (not proportion). 
-
--  Create a new column called "mort_count" that estimates the total number of child deaths per year based on the total population. You can use (a) any year or (b) an average of all years to make your calculation. Whichever you choose, justify your choice. 
--  Finally, `select()` only "country", "Population", and "mort_count" and view the data.
-
-> Justification is just for fun. The main point is that decisions in your analysis should depend on your reasoning not how many lines of code it takes :)
+15\. Reshape `rainfall` into long format using `pivot.longer`. The reshaped dataset should contain three columns: year ("Year"), month ("Month"), and amount of rainfall ("Precip"). ou should pivot all columns except "Month". **Hint:** listing `!COLUMN` or `-COLUMN` means everything except COLUMN. Assign the reshaped dataset to `rainfall_long`.
 
 ```{r 15response}
 
 ```
 
-
-
-16\. Bring the following dataset into R. 
-
--  The dataset is located at: https://daseh.org/data/asthma.xlsx. 
--  You should download the associated data.
--  Once you get the file, read the dataset in using `read_excel()` from the `readxl` package and assign it the name "asthma".
--  Read in the sheet named "Age Group (Years)".
+16\. We would like to join the rainfall measurements dataset with the Baltimore surface water quality dataset, but we need to do a bit more wrangling first. Because the rainfall measures were collected near the Hamilton Ave water testing site, let's pull only the Hamilton Ave data from the `water_subset` data, using `filter`. Assign this to `water_Ham`.
 
 ```{r 16response}
 
 ```
 
+17\. Right-join "water_Ham" and "rainfall_long" by "Month" and "Year" and assign the joined dataset to the name "water_rain". Did this join attempt work? Why or why not?
 
-17\. Rename the column `Weighted Number With Current Asthma` to "asthma_count" using `rename()`. Replace the original "asthma" object by calling the new dataset "asthma".
+```{r 17response, eval=FALSE}
+water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
 
-```{r 17response}
-
+#This attempted join did not work, because the class of Month is not the same between the two datasets!
 ```
 
-
-18\. Separate `Percent (SE)` into two separate columns: "percent" and "SE" using the `separate()` function. Replace the original "asthma" object by calling the new dataset "asthma".
+18\. We have formatted "Month" differently in each dataset. In "rainfall_long", "Month" is a character and has a three-letter abbreviation for each month. In "water_Ham", "Month" is designated by a number. Reformat "Month" in "rainfall_long" so that it matches the format in "water_Ham".
 
 ```{r 18response}
 
 ```
 
 
-19\. Remove the parentheses around the numbers in the new SE column. You should use a combination of `str_replace()`,  `pull()` (because stringr package functions work on vectors not dataframes!) and `mutate()`. Replace the original "asthma" object by calling the new dataset "asthma".
+19\. NOW try to right-join "water_Ham" and "rainfall_long" by "Month" and "Year" and assign the joined dataset to the name "water_rain". Did this join attempt work?
 
--  The `pattern =` to find the starting parenthesis is "[(]"
--  The `pattern =` to find for the ending parenthesis is "[)]"
--  The `replacement =` for both can be empty quotation marks: ""
+```{r 19response, eval=FALSE}
+water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
 
-```{r 19response}
-
+#This attempted join did not work either, because "Year" is a different format between both datasets too!
 ```
 
-
-20\. Determine the class of "percent" and "SE". Can you take the mean values? Why or why not?
+20\. Fix the differences between the classes of "Year" and right-join the two datasets to make "water_rain".
 
 ```{r 20response}
 
 ```
 
 
-21\. Use `as.numeric()` to convert "percent" and "SE" to numeric class. Calculate the mean for both.
+21\. Plot the relationship between pH and rainfall, colored by Month and faceted by Year. You can use esquisse or ggplot (whichever you prefer).
 
 ```{r 21response}
 
 ```
-
