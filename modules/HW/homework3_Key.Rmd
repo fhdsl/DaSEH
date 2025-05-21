@@ -24,26 +24,39 @@ library(tidyr)
 
 1\. Bring the following dataset into R. 
 
--  The dataset is located at: https://daseh.org/data/Baltimore_surface_water_quality_data.csv. 
--  You can use the link, download it, or use whatever method you like for getting the file. 
--  Once you get the file, read the dataset in using `read_csv()` and assign it the name "water".
+-  The dataset is located at: https://daseh.org/data/Baltimore_surface_water_quality_data.csv.  
+-  You can use the link, download it, or use whatever method you like for getting the file.  
+-  Once you get the file, read the dataset in using `read_csv()` and assign it the name "water". 
 
 ```{r 1response}
 water <- read_csv("https://daseh.org/data/Baltimore_surface_water_quality_data.csv")
 ```
 
 
-2\. Run the `colnames()` function to take a look at the dataset column names. Rename the third column of "water" to "GPS_North" using the `rename()` function in `dplyr`. Then rename the fourth column to "GPS_West".  
+2\. Check out and clean the columns of the `water` object.
+
+- Run the `colnames()` function to take a look at the dataset column names. 
+- Rename the third column of "water" to "GPS_North" using the `rename()` function (tidyverse).  
+- Then rename the fourth column to "GPS_West".   
+- Reassign the changed data to `water`.  
 
 ```{r 2response}
 colnames(water)
 water <- water |> rename(GPS_North = `GPS Coordinate North`)
 water <- water |> rename(GPS_West = `GPS Coordinate West`)
+
+# Alternatives
+# water <- rename(water, GPS_North = "GPS Coordinate North", GPS_West = "GPS Coordinate West")
+# Or pipe
+# water <- water |> rename(GPS_North = "GPS Coordinate North", GPS_West = "GPS Coordinate West")
 ```
 
 
-3\. Convert the "datetime" column to POSIXct format using the `mdy_hm()` functions from the `lubridate` package. Then create the variables "Month" and "Year" by extracting the month and year from the `datetime` column. (HINT: use mutate and `year(datetime_fixed)` to create your new variables.)
+3\. Clean up the "datetime" column.
 
+- Convert the "datetime" column to POSIXct format using the `mdy_hm()` functions from the `lubridate` package. Call the new column "datetime_fixed".  
+- Then create the variables "Month" and "Year" by extracting the month and year from the `datetime` column. (HINT: use mutate and `year(datetime_fixed)` to create your new variables.)
+- Reassign to `water`.
 
 ```{r 3response}
 #converting the date format to POSIXct
@@ -53,37 +66,37 @@ water <- water |> mutate(datetime_fixed = mdy_hm(datetime))
 water <- water |> mutate(Year = year(datetime_fixed))
 water <- water |> mutate(Month = month(datetime_fixed))
 
+# Alternative
+# water <- water |> mutate( datetime_fixed = mdy_hm(datetime), Month = month(datetime_fixed), Year = year(datetime_fixed))
 ```
 
-4\. Separate `datetime_fixed` into two separate columns: "date" and "time" using the `separate()` function. Replace the original "water" object by calling the new dataset "water".
+4\. Separate `datetime_fixed` into two separate columns using the `separate()` function. Use `into = c("date", "time")` and `sep = " "` arguments. Replace the original "water" object by reassigning the new dataset to "water".
 
 ```{r 4response}
 water <- water |> separate(`datetime_fixed`, into = c("date", "time"), sep = " ")
 ```
 
-5\. What is the class for "Result"? Can you take the mean value? Why or why not? What can you do to change the format of "Result" to numeric? 
+5\. What is the class for "Result" column? Use `pull()`. Can you take the mean value? Why or why not?
 
 ```{r 5response}
 water |> pull(Result) |> class()
 
-# "Result" is of type "character". For some tests, the result is listed as below the detectable level, using a ">". R can only interpret this symbol as a character. In order to change "Result" to numeric, we need to change the values of the results that are below detectable levels. Some options are to change these to 0 or to NA. You can also change them on a case-by-case basis to a number just slightly smaller than the detectable level (for example, if the level is 3 ug, anything below this could be coded as 2.9 ug). Use your best judgment on how to recode these values.
-
+# "Result" is of type "character". For some tests, the result is listed as below the detectable level, using a "<". R can only interpret this symbol as a character.
 ```
 
-6\. Replace the below detectable level values in "Results" with a measure that you choose. You should use a combination of `str_replace`,  `pull()` (because stringr package functions work on vectors not dataframes!) and `mutate()`. Replace the original "water" object by calling the new dataset "water".
+6\. Some of the values of the "Result" column contain symbols "<", ">", and/or "=". Replace these:
 
--  The `pattern =` to find the starting parenthesis is "^<"
--  The `replacement =` depends on how you choose to replace the values
+- Using `mutate()` and `str_remove()`.  
+- Repeat 3 times for patterns: `pattern = "<"` , `pattern = ">"`, then `pattern = "="`.  
+- Reassign the object to "water" each time.  
 
 ```{r 6response}
-#replacing values with NA
-water <- water |> mutate(Result = str_replace(pull(water, Result), pattern = "^<", replacement = NA_character_))
-
-#replacing values with 0
-#water <- water |> mutate(Result = str_replace(pull(water, Result), pattern = "^<", replacement = 0))
+water <- water |> mutate(Result = str_remove(Result, pattern = "<"))
+water <- water |> mutate(Result = str_remove(Result, pattern = ">"))
+water <- water |> mutate(Result = str_remove(Result, pattern = "="))
 ```
 
-7\. Use `as.numeric()` to convert "Result" to numeric class. Then convert "Parameter" to a factor with `as.factor`.
+7\. Use `mutate()` and `as.numeric()` to convert the "Result" column to numeric class. Then convert "Parameter" to a factor with `as.factor()`. Reassign to "water" both times.
 
 ```{r 7response}
 water <- water |>
