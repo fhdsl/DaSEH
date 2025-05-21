@@ -22,11 +22,12 @@ library(tidyr)
 
 ### **Problem Set**
 
+
 1\. Bring the following dataset into R. 
 
 -  The dataset is located at: https://daseh.org/data/Baltimore_surface_water_quality_data.csv.  
 -  You can use the link, download it, or use whatever method you like for getting the file.  
--  Once you get the file, read the dataset in using `read_csv()` and assign it the name "water". 
+-  Once you get the file, read the dataset in using `read_csv()` and assign it the name `water`. 
 
 ```{r 1response}
 water <- read_csv("https://daseh.org/data/Baltimore_surface_water_quality_data.csv")
@@ -36,7 +37,7 @@ water <- read_csv("https://daseh.org/data/Baltimore_surface_water_quality_data.c
 2\. Check out and clean the columns of the `water` object.
 
 - Run the `colnames()` function to take a look at the dataset column names. 
-- Rename the third column of "water" to "GPS_North" using the `rename()` function (tidyverse).  
+- Rename the third column of `water` to "GPS_North" using the `rename()` function (tidyverse).  
 - Then rename the fourth column to "GPS_West".   
 - Reassign the changed data to `water`.  
 
@@ -70,11 +71,13 @@ water <- water |> mutate(Month = month(datetime_fixed))
 # water <- water |> mutate( datetime_fixed = mdy_hm(datetime), Month = month(datetime_fixed), Year = year(datetime_fixed))
 ```
 
-4\. Separate `datetime_fixed` into two separate columns using the `separate()` function. Use `into = c("date", "time")` and `sep = " "` arguments. Replace the original "water" object by reassigning the new dataset to "water".
+
+4\. Separate `datetime_fixed` into two separate columns using the `separate()` function. Use `into = c("date", "time")` and `sep = " "` arguments. Replace the original `water` object by reassigning the new dataset to `water`.
 
 ```{r 4response}
 water <- water |> separate(`datetime_fixed`, into = c("date", "time"), sep = " ")
 ```
+
 
 5\. What is the class for "Result" column? Use `pull()`. Can you take the mean value? Why or why not?
 
@@ -84,11 +87,12 @@ water |> pull(Result) |> class()
 # "Result" is of type "character". For some tests, the result is listed as below the detectable level, using a "<". R can only interpret this symbol as a character.
 ```
 
+
 6\. Some of the values of the "Result" column contain symbols "<", ">", and/or "=". Replace these:
 
 - Using `mutate()` and `str_remove()`.  
 - Repeat 3 times for patterns: `pattern = "<"` , `pattern = ">"`, then `pattern = "="`.  
-- Reassign the object to "water" each time.  
+- Reassign the object to `water` each time.  
 
 ```{r 6response}
 water <- water |> mutate(Result = str_remove(Result, pattern = "<"))
@@ -96,7 +100,8 @@ water <- water |> mutate(Result = str_remove(Result, pattern = ">"))
 water <- water |> mutate(Result = str_remove(Result, pattern = "="))
 ```
 
-7\. Use `mutate()` and `as.numeric()` to convert the "Result" column to numeric class. Then convert "Parameter" to a factor with `as.factor()`. Reassign to "water" both times.
+
+7\. Use `mutate()` and `as.numeric()` to convert the "Result" column to numeric class. Then convert "Parameter" to a factor with `as.factor()`. Reassign to `water` both times.
 
 ```{r 7response}
 water <- water |>
@@ -105,7 +110,8 @@ water <- water |>
   mutate(Parameter = as.factor(Parameter))
 ```
 
-8\. How many different measurements (levels) are stored in the Parameter column?
+
+8\. How many different measurements (levels) are stored in the Parameter column? Use `pull()` and `levels()`.
 
 ```{r 8response}
 water |> pull(Parameter) |> levels()
@@ -113,27 +119,32 @@ water |> pull(Parameter) |> levels()
 #There are 49 different types of measurements in this dataset.
 ```
 
+
 9\. Use the `pct_complete()` function in the `naniar` package to determine the percent missing data in "Results". You might need to load and install `naniar`!
 
 ```{r 9response}
 library(naniar)
 pct_complete(water)
-# "water" is 99.99913 percent complete if you chose to replace results below the detectable limit with 0. The dataset is 99.47796 if you instead chose to replace results below the detectable limit with NA.
 ```
 
-10\. Are there any parameter levels that have a complete record in "water" across all years? **Hint:** Create a new dataframe using `group_by` and `summarize` to count the number of NAs in "Result" for each level in "Parameter", then filter out rows with more than 0.
+
+10\. Are there any parameter levels that have an incomplete record in `water` across all years? 
+
+- Create a new dataframe called `na_counts`.
+- Use `group_by()` on "Parameter"
+- Use `summarize()` on Result checking for NA values with `sum(is.na(Result))`.
+- Use `filter()` to keep only rows with > 0 NA values.
 
 ```{r 10response}
-na_counts <- water %>%
-  group_by(Parameter) %>%
-  summarise(na_count = sum(is.na(Result)))
+na_counts <- water |>
+  group_by(Parameter) |>
+  summarize(na_count = sum(is.na(Result)))
 
-na_counts |> filter(na_count == 0)
-
-#If you replaced the values below detectable levels with NA, there are seven parameter levels (tests) that have no missing data. If you replaced the values below detectable levels with 0, all the parameter levels (tests) have complete data.
+na_counts |> filter(na_count > 0)
 ```
 
-11\. Subset "water"  so that it only contains results for the years 2010 - 2024, using `&` and the filter function. Make sure to include both the years 2010 and 2024. Confirm your filtering worked by looking at the range of "Year". Assign this subsetted tibble to "water_subset".
+
+11\. Subset `water` so that it only contains results for the years 2010 - 2024, using `&` and the filter function. Make sure to include both the years 2010 and 2024. Confirm your filtering worked by looking at the range of "Year". Assign this subsetted tibble to `water_subset`.
 
 ```{r 11response}
 water_subset <- water |> filter(Year >= 2010 & Year <= 2024)
@@ -143,7 +154,7 @@ water_subset |>
 ```
 
 
-12\. Subset "water_subset"  so that it only contains results from the tests for dissolved oxygen, pH, and water temperature, using %in% and the filter function. Make sure to reassign to "water_subset".
+12\. Subset `water_subset` so that the "Parameter" column only contains results from the tests for "Dissolved Oxygen", "pH", and "Water Temperature". Use the `%in%` operator and the `filter()` function. Make sure to reassign to `water_subset`.
 
 ```{r 12response}
 water_subset <- water_subset |>
