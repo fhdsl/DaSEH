@@ -166,7 +166,7 @@ water_subset <- water_subset |>
 
 -  The dataset is located at: https://daseh.org/data/Baltimore_rainfall_HamiltonAve.csv. 
 -  You can use the link, download it, or use whatever method you like for getting the file. 
--  Once you get the file, read the dataset in using `read_csv()` and assign it the name "rainfall".
+-  Once you get the file, read the dataset in using `read_csv()` and assign it the name `rainfall`.
 
 This dataset contains measured precipitation by month, as collected near the Hamilton Ave testing location in Baltimore.
 
@@ -174,34 +174,47 @@ This dataset contains measured precipitation by month, as collected near the Ham
 rainfall <- read_csv("https://daseh.org/data/Baltimore_rainfall_HamiltonAve.csv")
 ```
 
-14\. We want only the rainfall measurements for the years 2010 - 2024 from this new dataset, as well as the month information. Subset the dataset using the `select()` function. Reassign this to `rainfall`. HINT: Make sure you remember to keep the column that contains information about the month!
+
+14\. Reshape `rainfall` into long format using `pivot_longer`. The reshaped dataset should contain three columns: year ("Year"), month ("Month"), and amount of rainfall ("Precip").
+
+- Pivot all columns except "Month". **Hint:** listing `!COLUMN` or `-COLUMN` means everything except COLUMN.  
+- Make sure `names_to` is "Year" and `values_to` is "Precip".  
+- Assign the reshaped dataset to `rainfall_long`.  
 
 ```{r 14response}
-rainfall <- rainfall |> select(c("Month", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"))
-```
-
-
-15\. Reshape `rainfall` into long format using `pivot.longer`. The reshaped dataset should contain three columns: year ("Year"), month ("Month"), and amount of rainfall ("Precip"). ou should pivot all columns except "Month". **Hint:** listing `!COLUMN` or `-COLUMN` means everything except COLUMN. Assign the reshaped dataset to `rainfall_long`.
-
-```{r 15response}
 rainfall_long <- rainfall |> pivot_longer(!Month, names_to = "Year", values_to = "Precip")
 ```
 
-16\. We would like to join the rainfall measurements dataset with the Baltimore surface water quality dataset, but we need to do a bit more wrangling first. Because the rainfall measures were collected near the Hamilton Ave water testing site, let's pull only the Hamilton Ave data from the `water_subset` data, using `filter`. Assign this to `water_Ham`.
+
+15\. How many possible "Year" and "Month" combinations are in `rainfall_long`? Use `count()`. How does this compare to `nrow()`? What can you conclude?
+
+```{r 15response}
+rainfall_long |> count(Year, Month)
+nrow(rainfall_long)
+
+# They are the same; the dataset contains one observation per Year and Month combination.
+```
+
+
+16\. We would like to join the rainfall measurements dataset with the Baltimore surface water quality dataset, but we need to do a bit more wrangling first. Because the rainfall measures were collected near the Hamilton Ave water testing site, let's keep only the Hamilton Ave data from the `water_subset` data, using `filter()`. Assign this to `water_Ham`.
+
+- The "Station" column should be "HAMILTON AVE."
 
 ```{r 16response}
 water_Ham <- water_subset |> filter(Station == "HAMILTON AVE.")
 ```
 
-17\. Right-join "water_Ham" and "rainfall_long" by "Month" and "Year" and assign the joined dataset to the name "water_rain". Did this join attempt work? Why or why not?
 
-```{r 17response, eval=FALSE}
+17\. Right-join `water_Ham` and `rainfall_long` by "Month" and "Year" using `right_join`. Assign the joined dataset to the name `water_rain`. Did this join attempt work? Why or why not?
+
+```{r error=T, 17response}
 water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
 
 #This attempted join did not work, because the class of Month is not the same between the two datasets!
 ```
 
-18\. We have formatted "Month" differently in each dataset. In "rainfall_long", "Month" is a character and has a three-letter abbreviation for each month. In "water_Ham", "Month" is designated by a number. Reformat "Month" in "rainfall_long" so that it matches the format in "water_Ham".
+
+18\. Check the class of the "Month" column in each dataset. Reformat "Month" in `rainfall_long` so that it matches the format in `water_Ham`. Use `case_when()` and reassign to `rainfall_long`.
 
 ```{r 18response}
 rainfall_long <- rainfall_long |> 
@@ -222,15 +235,16 @@ rainfall_long <- rainfall_long |>
 ```
 
 
-19\. NOW try to right-join "water_Ham" and "rainfall_long" by "Month" and "Year" and assign the joined dataset to the name "water_rain". Did this join attempt work?
+19\. NOW try to right-join `water_Ham` and `rainfall_long` by "Month" and "Year" and assign the joined dataset to the name `water_rain`. Did this join attempt work?
 
-```{r 19response, eval=FALSE}
+```{r error=T, 19response}
 water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
 
 #This attempted join did not work either, because "Year" is a different format between both datasets too!
 ```
 
-20\. Fix the differences between the classes of "Year" and right-join the two datasets to make "water_rain".
+
+20\. Fix the differences between the classes of "Year" by changing `rainfall_long`. Then right-join the two datasets to make "water_rain".
 
 ```{r 20response}
 rainfall_long <- rainfall_long |> 
@@ -240,20 +254,35 @@ water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
 ```
 
 
-21\. Plot the relationship between pH and rainfall, colored by Month and faceted by Year. You can use esquisse or ggplot (whichever you prefer).
+21\. Subset `water_rain` so that "Parameter" is "pH". Plot points with "Precip" on the x axis, "Result" on the y axis, and "Year" as color. Facet the plot by Month. You can use esquisse or ggplot (whichever you prefer).
 
 ```{r 21response}
+plot_subset <- water_rain |> filter(Parameter == "pH")
 
 #If using esquisse:
 #library(esquisse)
-#esquisser(water_rain)
+#esquisser(plot_subset)
 
 #If using ggplot:
-ggplot(water_rain) +
-  aes(x = Precip, y = Result, colour = Month, group = Month) +
+ggplot(data = plot_subset, aes(x = Precip, y = Result, color = Year)) +
   geom_point() +
-  theme_minimal() +
-  facet_wrap(vars(Year)) +
-  xlim(0, 10)
+  facet_wrap(~Month)
+```
 
+
+22\. Create a new plot changing the measurement units. This time, subset `water_rain` so that "Parameter" is "Water Temperature". Plot points with "Precip" on the x axis, "Result" on the y axis, and "Year" as color. Facet the plot by Month. You can use esquisse or ggplot (whichever you prefer). Do the temperatures follow the expected seasonal climate across months (highs and lows)?
+
+```{r 22response}
+plot_subset <- water_rain |> filter(Parameter == "Water Temperature")
+
+#If using esquisse:
+#library(esquisse)
+#esquisser(plot_subset)
+
+#If using ggplot:
+ggplot(data = plot_subset, aes(x = Precip, y = Result, color = Year)) +
+  geom_point() +
+  facet_wrap(~Month)
+
+# Yes, temperatures are higher in summer and lower in winter months.
 ```
