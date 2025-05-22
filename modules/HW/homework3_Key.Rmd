@@ -56,7 +56,7 @@ water <- water |> rename(GPS_West = `GPS Coordinate West`)
 3\. Clean up the "datetime" column.
 
 - Convert the "datetime" column to POSIXct format using the `mdy_hm()` functions from the `lubridate` package. Call the new column "datetime_fixed".  
-- Then create the variables "Month" and "Year" by extracting the month and year from the `datetime` column. (HINT: use mutate and `year(datetime_fixed)` to create your new variables.)
+- Then create the variables "Month" and "Year" by extracting the month and year from the "datetime" column. (HINT: use `mutate()` and `year(datetime_fixed)` to create your new variables.)
 - Reassign to `water`.
 
 ```{r 3response}
@@ -72,7 +72,7 @@ water <- water |> mutate(Month = month(datetime_fixed))
 ```
 
 
-4\. Separate `datetime_fixed` into two separate columns using the `separate()` function. Use `into = c("date", "time")` and `sep = " "` arguments. Replace the original `water` object by reassigning the new dataset to `water`.
+4\. Separate "datetime_fixed" into two separate columns using the `separate()` function. Use `into = c("date", "time")` and `sep = " "` arguments. Replace the original `water` object by reassigning the new dataset to `water`.
 
 ```{r 4response}
 water <- water |> separate(`datetime_fixed`, into = c("date", "time"), sep = " ")
@@ -98,6 +98,13 @@ water |> pull(Result) |> class()
 water <- water |> mutate(Result = str_remove(Result, pattern = "<"))
 water <- water |> mutate(Result = str_remove(Result, pattern = ">"))
 water <- water |> mutate(Result = str_remove(Result, pattern = "="))
+
+# Alternative syntax
+# water <- water |> mutate(
+#   Result = str_remove(Result, pattern = "<"),
+#   Result = str_remove(Result, pattern = ">"),
+#   Result = str_remove(Result, pattern = "=")
+# )
 ```
 
 
@@ -111,7 +118,7 @@ water <- water |>
 ```
 
 
-8\. How many different measurements (levels) are stored in the Parameter column? Use `pull()` and `levels()`.
+8\. How many different measurements (levels) are stored in the "Parameter" column? Use `pull()` and `levels()`.
 
 ```{r 8response}
 water |> pull(Parameter) |> levels()
@@ -144,7 +151,7 @@ na_counts |> filter(na_count > 0)
 ```
 
 
-11\. Subset `water` so that it only contains results for the years 2010 - 2024, using `&` and the filter function. Make sure to include both the years 2010 and 2024. Confirm your filtering worked by looking at the range of "Year". Assign this subsetted tibble to `water_subset`.
+11\. Subset `water` so that it only contains results for the years 2010 - 2024, using `&` and the `filter()` function. Make sure to include both the years 2010 and 2024. Confirm your filtering worked by looking at the `range()` of "Year". Assign this subsetted tibble to `water_subset`.
 
 ```{r 11response}
 water_subset <- water |> filter(Year >= 2010 & Year <= 2024)
@@ -175,7 +182,7 @@ rainfall <- read_csv("https://daseh.org/data/Baltimore_rainfall_HamiltonAve.csv"
 ```
 
 
-14\. Reshape `rainfall` into long format using `pivot_longer`. The reshaped dataset should contain three columns: year ("Year"), month ("Month"), and amount of rainfall ("Precip").
+14\. Reshape `rainfall` into long format using `pivot_longer()`. The reshaped dataset should contain three columns: year ("Year"), month ("Month"), and amount of rainfall ("Precip").
 
 - Pivot all columns except "Month". **Hint:** listing `!COLUMN` or `-COLUMN` means everything except COLUMN.  
 - Make sure `names_to` is "Year" and `values_to` is "Precip".  
@@ -186,7 +193,7 @@ rainfall_long <- rainfall |> pivot_longer(!Month, names_to = "Year", values_to =
 ```
 
 
-15\. How many possible "Year" and "Month" combinations are in `rainfall_long`? Use `count()`. How does this compare to `nrow()`? What can you conclude?
+15\. How many possible "Year" and "Month" combinations are in `rainfall_long`? Use `count()`. How does this compare to `nrow()`? Can you use this information to determine the number of observations per each Year and Month combination?
 
 ```{r 15response}
 rainfall_long |> count(Year, Month)
@@ -205,7 +212,7 @@ water_Ham <- water_subset |> filter(Station == "HAMILTON AVE.")
 ```
 
 
-17\. Right-join `water_Ham` and `rainfall_long` by "Month" and "Year" using `right_join`. Assign the joined dataset to the name `water_rain`. Did this join attempt work? Why or why not?
+17\. Right-join `water_Ham` and `rainfall_long` by "Month" and "Year" using `right_join()`. Assign the joined dataset to the name `water_rain`. Did this join attempt work? Why or why not?
 
 ```{r error=T, 17response}
 water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
@@ -214,7 +221,7 @@ water_rain <- water_Ham |> right_join(rainfall_long, by = c("Month", "Year"))
 ```
 
 
-18\. Check the class of the "Month" column in each dataset. Reformat "Month" in `rainfall_long` so that it matches the format in `water_Ham`. Use `case_when()` and reassign to `rainfall_long`.
+18\. Check the class of the "Month" column in each dataset. Reformat "Month" in `rainfall_long` so that it matches the format in `water_Ham`. Use `case_when()` and `mutate()`, then reassign to `rainfall_long`.
 
 ```{r 18response}
 rainfall_long <- rainfall_long |> 
@@ -267,6 +274,13 @@ plot_subset <- water_rain |> filter(Parameter == "pH")
 ggplot(data = plot_subset, aes(x = Precip, y = Result, color = Year)) +
   geom_point() +
   facet_wrap(~Month)
+
+# Alternative syntax
+# water_rain |>
+#   filter(Parameter == "pH") |>
+#   ggplot(aes(x = Precip, y = Result, color = Year)) +
+#   geom_point() +
+#   facet_wrap(~ Month)
 ```
 
 
