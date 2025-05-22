@@ -66,6 +66,7 @@ dasehr
 DaSEH
 DaSEH's
 Dataquest
+datetime
 Dayananda
 de
 DenverSummerHeat
@@ -114,6 +115,7 @@ HAA
 Hadley
 Haloacetic
 haloacetic
+HamiltonAve
 healthdata
 hoffman
 Hotline
@@ -203,6 +205,7 @@ plotly
 png
 POSIXct
 pre
+Precip
 programmatically
 psarava
 px

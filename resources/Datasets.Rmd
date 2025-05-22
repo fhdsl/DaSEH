@@ -39,7 +39,7 @@ Age-adjusted visit rates and total number of visits for all genders by Colorado 
 * URL: https://daseh.org/data/country_pop.txt
 * Modules: Homework 3
 
-## CoVID wastewater surveillance
+## COVID wastewater surveillance
 
 SARS-CoV-2 viral load measured in wastewater between 2022 and 2024, collected by the collected by the National Wastewater Surveillance System.
 
