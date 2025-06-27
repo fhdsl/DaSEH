@@ -15,7 +15,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Load the packages needed in this lab. Then, read in the CalEnviroScreen data and assign it to the "ces" variable. You can find the data at https://daseh.org/data/CalEnviroScreen_data.csv
 
-
 ```{r message = FALSE}
 library(tidyverse)
 library(broom)
@@ -29,9 +28,9 @@ ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
 
 Compute the correlation (with `cor`) between the `HousingBurden` and `LowBirthWeight` variables. 
 
-* Use `select()` to choose these columns and save as an object. 
+* Select columns or extract these columns as vectors.
 * Use the `cor` function on this object.
-* Add the use = "complete.obs" argument.
+* Add the `use = "complete.obs"` argument.
 
 `HousingBurden`: Percentage of housing-burdened low-income households. Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs
 
@@ -43,6 +42,12 @@ ces_sub <-
   select(HousingBurden, LowBirthWeight)
 
 cor(ces_sub, use = "complete.obs")
+
+# or
+
+ces_housing <- ces |> pull(HousingBurden)
+ces_bw <- ces |> pull(LowBirthWeight)
+cor(ces_housing, ces_bw, use = "complete.obs")
 ```
 
 ### 1.3
@@ -169,35 +174,40 @@ summary(lmfit_bw3)
 
 ### P.4   
 
-Let's make `LowBirthWeight` into a binary variable, where over 5% low birth weight is "TRUE".
+Let's look at a different dataset. This data comes from a research article looking at how well internet searches predicted influenza infections. See the DaSEH website for a link to the paper.
 
-The following code creates a column `weight_cat` with TRUE/FALSE values.
+`any.flu`: how many internet searches related to flu for a given survey respondent
+
+`parent`: binary variable, is the respondent a parent (1) or not (0)
+
+`household.flu`: binary variable, did someone in the household have a flu infection (1 = yes, 0 = no).
 
 ```{r}
-ces <- read_csv("https://daseh.org/data/CalEnviroScreen_data.csv")
-
-ces_bw <- 
-  ces |> 
-  mutate(weight_cat = LowBirthWeight > 5)
+flu <- read_csv("https://daseh.org/data/Wojcik_2021_flu.csv")
 ```
 
 Fit a logistic regression model where:
 
-* The outcome is `weight_cat`.
-* `HousingBurden`, `Poverty`, and `Education` are predictors.
+* The outcome is `household.flu`.
+* `any.flu` is the predictor.
 * Use `glm` and family = binomial(link = "logit").
-* Save the model fit in an object called "logfit_bw" and display the summary table with `summary()`.
-
-`Poverty`: Percent of population living below two times the federal poverty level
-
-`Education`: Percent of population over 25 with less than a high school education
+* Save the model fit in an object called "logfit_flu" and display the summary table with `summary()`.
+* Try adding `parent` as a predictor. What is the result?
 
 ```{r P.4response}
-logfit_bw <-
+logfit_flu <-
   glm(
-    weight_cat ~ HousingBurden + Poverty + Education,
-    data = ces_bw,
+    household.flu ~ any.flu,
+    data = flu,
     family = binomial(link = "logit")
   )
-summary(logfit_bw)
+summary(logfit_flu)
+
+logfit_flu2 <-
+  glm(
+    household.flu ~ any.flu + parent,
+    data = flu,
+    family = binomial(link = "logit")
+  )
+summary(logfit_flu2)
 ```
