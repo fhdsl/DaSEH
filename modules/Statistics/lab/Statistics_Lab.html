@@ -177,9 +177,9 @@ library(broom)</code></pre>
 <h3>1.2</h3>
 <p>Compute the correlation (with <code>cor</code>) between the <code>HousingBurden</code> and <code>LowBirthWeight</code> variables.</p>
 <ul>
-<li>Use <code>select()</code> to choose these columns and save as an object.</li>
+<li>Select columns or extract these columns as vectors.</li>
 <li>Use the <code>cor</code> function on this object.</li>
-<li>Add the use = “complete.obs” argument.</li>
+<li>Add the <code>use = &quot;complete.obs&quot;</code> argument.</li>
 </ul>
 <p><code>HousingBurden</code>: Percentage of housing-burdened low-income households. Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs</p>
 <p><code>LowBirthWeight</code>: Percentage of births that are low birth weight.</p>
@@ -249,29 +249,26 @@ glm(y ~ x, data = DATASET_NAME)</code></pre>
 </div>
 <div id="p.4" class="section level3">
 <h3>P.4</h3>
-<p>Let’s make <code>LowBirthWeight</code> into a binary variable, where over 5% low birth weight is “TRUE”.</p>
-<p>The following code creates a column <code>weight_cat</code> with TRUE/FALSE values.</p>
-<pre class="r"><code>ces &lt;- read_csv(&quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;)</code></pre>
-<pre><code>## Rows: 8035 Columns: 67
+<p>Let’s look at a different dataset. This data comes from a research article looking at how well internet searches predicted influenza infections. See the DaSEH website for a link to the paper.</p>
+<p><code>any.flu</code>: how many internet searches related to flu for a given survey respondent</p>
+<p><code>parent</code>: binary variable, is the respondent a parent (1) or not (0)</p>
+<p><code>household.flu</code>: binary variable, did someone in the household have a flu infection (1 = yes, 0 = no).</p>
+<pre class="r"><code>flu &lt;- read_csv(&quot;https://daseh.org/data/Wojcik_2021_flu.csv&quot;)</code></pre>
+<pre><code>## Rows: 654 Columns: 3
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr  (3): CaliforniaCounty, ApproxLocation, CES4.0PercRange
-## dbl (64): CensusTract, ZIP, Longitude, Latitude, CES4.0Score, CES4.0Percenti...
+## dbl (3): any.flu, parent, household.flu
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>ces_bw &lt;- 
-  ces %&gt;% 
-  mutate(weight_cat = LowBirthWeight &gt; 5)</code></pre>
 <p>Fit a logistic regression model where:</p>
 <ul>
-<li>The outcome is <code>weight_cat</code>.</li>
-<li><code>HousingBurden</code>, <code>Poverty</code>, and <code>Education</code> are predictors.</li>
+<li>The outcome is <code>household.flu</code>.</li>
+<li><code>any.flu</code> is the predictor.</li>
 <li>Use <code>glm</code> and family = binomial(link = “logit”).</li>
-<li>Save the model fit in an object called “logfit_bw” and display the summary table with <code>summary()</code>.</li>
+<li>Save the model fit in an object called “logfit_flu” and display the summary table with <code>summary()</code>.</li>
+<li>Try adding <code>parent</code> as a predictor. What is the result?</li>
 </ul>
-<p><code>Poverty</code>: Percent of population living below two times the federal poverty level</p>
-<p><code>Education</code>: Percent of population over 25 with less than a high school education</p>
 </div>
 </div>
 
