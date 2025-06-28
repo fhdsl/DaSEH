@@ -756,10 +756,20 @@ Can tell you if a vector is normally distributed.
 
 The smaller the p-value, the more likely the data violates normality assumptions.
 
+## Kolmogorov-Smirnov test
 
-- `ks.test()` -- Kolmogorov-Smirnov test
-- `var.test()`-- Fisher’s F-Test
-- `chisq.test()` -- Chi-squared test
-- `aov()` -- Analysis of Variance (ANOVA)
+`ks.test()`
+
+## Fisher’s F-Test
+
+`var.test()`
+
+## Chi-squared test
+
+`chisq.test()`
+
+## Analysis of Variance (ANOVA)
+
+`aov()`
 
 
