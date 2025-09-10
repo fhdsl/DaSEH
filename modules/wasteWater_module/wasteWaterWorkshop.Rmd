@@ -94,10 +94,10 @@ The national average is lower than the state average because it is the average a
 - We will not be using the columns `Coverage` and `date_updated` so we will remove them from our data frame.
 - We will conduct our analysis using all the results available, so that we will remove the rows with results at 1 year or every 6 months.
 ```{r}
-# dat = dat |> rename(State_Territory_WVAL = `State/Territory_WVAL`,
-#                     State_Territory = `State/Territory`,
-#                     ) |> select(!c(Coverage, date_updated)) |> 
-#              filter(Data_Collec)
+dat = dat |> rename(State_Territory_WVAL = `State/Territory_WVAL`,
+                    State_Territory = `State/Territory`,
+                    ) |> select(!c(Coverage, date_updated)) #|> 
+             #filter(Data_Collec)
 ```
 - We will select three states to look at their wastewater data: Florida, South Carolina, Washington. Can you create a dataset with only those two states?
 
