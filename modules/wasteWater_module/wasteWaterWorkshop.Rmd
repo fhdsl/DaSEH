@@ -96,8 +96,8 @@ The national average is lower than the state average because it is the average a
 ```{r}
 dat = dat |> rename(State_Territory_WVAL = `State/Territory_WVAL`,
                     State_Territory = `State/Territory`,
-                    ) |> select(!c(Coverage, date_updated)) |> 
-             filter(Data_Collec)
+                    ) |> select(!c(Coverage, date_updated)) #|> 
+             #filter(Data_Collec)
 ```
 - We will select three states to look at their wastewater data: Florida, South Carolina, Washington. Can you create a dataset with only those two states?
 
