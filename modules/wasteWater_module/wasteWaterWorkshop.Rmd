@@ -1,0 +1,109 @@
+---
+title: "Wastewater analysis using R"
+output:
+  html_document:
+    df_print: paged
+  ioslides_presentation:
+    css: ../../docs/styles.css
+    widescreen: true
+---
+
+```{r, echo = FALSE, message = FALSE, results='hide'}
+library(knitr)
+opts_chunk$set(comment = "")
+library(readr)
+suppressPackageStartupMessages(library(dplyr))
+library(tidyverse)
+install.packages("emoji", repos='http://cran.us.r-project.org')
+library(emoji)
+```
+
+
+## Introduction
+In this module, we will analyze a wastewater dataset from the CDC and investigate how COVID-19 viral levels change through time. We will learn ways to manipulate dates in R using the library **lubridate** (part of the Tidyverse package). 
+
+
+## Recap: Dates and times in R
+There are two most popular R classes used when working with dates and times: 
+
+- `Date` class representing a calendar date and
+- `POSIXct` class representing a calendar date with hours, minutes, seconds.
+A date-time object in R is a point on the timeline stored as the number of seconds since January 1st, 1970, 00:00 UTC . This date is also called the **Unix epoch** and serves as a reference by computer systems to track and operate with time. 
+###`lubridate` package:
+- The lubridate package allows us to work with dates and times in a simple and efficient way. 
+
+
+- Very flexible for formatting dates: YYYY-MM-DD, DD-MM-YYYY or MM-DD-YY
+- Perform operations with dates:
+```{r}
+a <- ymd("2024-09-20")
+b <- ymd("2025-07-15")
+b - a
+```
+- Split a date in its components: its year, month, day of the month (mday), day of the year (yday), day of the week (wday), hour, minute and seconds
+```{r}
+a <- ymd_hms("2024-09-20 3:59:01")
+year(a) 
+month(a)
+mday(a)
+yday(a)
+wday(a)
+hour(a)
+minute(a)
+second(a)
+```
+- 
+# Download the data
+We will use the data located here:
+https://www.cdc.gov/wcms/vizdata/NCEZID_DIDRI/SC2/nwsssc2stateactivitylevelDL.csv
+You can read about the data and how it was collected here:
+https://www.cdc.gov/nwss/rv/COVID19-statetrend.html
+According to this website, National, regional, and state/territory data represent the median values across all wastewater treatment plants in the respective area.
+
+```{r, echo = FALSE}
+dat = read_csv("https://www.cdc.gov/wcms/vizdata/NCEZID_DIDRI/SC2/nwsssc2stateactivitylevelDL.csv")
+```
+
+# Explore the data set:
+Remember that  the function `head(n)` will print the first n rows of your dataframe, and the function `summary()` will give you 
+snapshots of each numeric column while skipping character columns:
+```{r}
+head(dat)
+summary(dat)
+```
+
+## Use your R knowledge to answer to the following questions:
+- Are all states represented here? (hint: use the function `unique` to see unique elements of each column)
+- What is the maximum wastewater value observed in a single state in this dataset (the wastewater value is given in the column named `State/Territory_WVAL`? Remember to include the parameter na.rm=TRUE to the max function!
+- What is the minimum  wastewater value observed in a single state in this dataset?
+- What is the maximum wastewater value observed at the national level (this is given in the column named `National_WVAL`)?
+- Can you explain why the maximum value observed at the state level is much higher than the one at the national level?
+
+## Answers:
+```{r}
+unique(dat$`State/Territory`)
+dat |> pull(`State/Territory_WVAL`) |> max(na.rm = TRUE)
+dat |> pull(`State/Territory_WVAL`) |> min(na.rm = TRUE)
+dat |> pull(`National_WVAL`) |> max(na.rm = TRUE)
+
+```
+The national average is lower than the state average because it is the average across all states. 
+
+## Clean up the data a little bit:
+- Some column names contain `/` and spaces, which are not standard form. We will change them so it is easier to work with them.To do so, we use the function `rename` (part of dplyr).
+- We will not be using the columns `Coverage` and `date_updated` so we will remove them from our data frame.
+- We will conduct our analysis using all the results available, so that we will remove the rows with results at 1 year or every 6 months.
+```{r}
+dat = dat |> rename(State_Territory_WVAL = `State/Territory_WVAL`,
+                    State_Territory = `State/Territory`,
+                    ) |> select(!c(Coverage, date_updated)) |> 
+             filter(Data_Collec)
+```
+- We will select three states to look at their wastewater data: Florida, South Carolina, Washington. Can you create a dataset with only those two states?
+
+## Answer
+```{r}
+mydat = dat |> filter(State_Territory %in% c('Florida', 'South Carolina', 'Washington'))
+```
+
+
