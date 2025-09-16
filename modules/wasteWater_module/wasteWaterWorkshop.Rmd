@@ -259,6 +259,7 @@ maxRows
 
 ## Number of days between summer peaks
 Now we can compute the number of days between the peak waste water levels for each state during the summer wave:
+
 - Difference between South Carolina and Nebraska
 ```{r}
 maxRows$Week_Ending_Date[1] - maxRows$Week_Ending_Date[2]
