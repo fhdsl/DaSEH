@@ -1,0 +1,40 @@
+---
+title: "wasteWater_lab"
+output: html_document
+date: "2025-09-16"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Wastewater data set.
+We will continue to use the wastewater data set to practice our R skills.
+You can download the data here:
+https://www.cdc.gov/wcms/vizdata/NCEZID_DIDRI/SC2/nwsssc2stateactivitylevelDL.csv
+
+
+
+# Explore the data set:
+Remember that  the function `head(n)` will print the first n rows of your dataframe, and the function `summary()` will give you 
+snapshots of each numeric column while skipping character columns:
+```{r}
+head(dat)
+summary(dat)
+```
+
+## Use your R knowledge to answer to the following questions:
+- Are all states represented here? (hint: use the function `unique` to see unique elements of each column)
+- What is the maximum wastewater value observed in a single state in this dataset (the wastewater value is given in the column named `State/Territory_WVAL`? Remember to include the parameter na.rm=TRUE to the max function!
+- What is the minimum  wastewater value observed in a single state in this dataset?
+- What is the maximum wastewater value observed at the national level (this is given in the column named `National_WVAL`)?
+- Can you explain why the maximum value observed at the state level is much higher than the one at the national level?
+
+## Answers:
+```{r}
+unique(dat$`State/Territory`)
+dat |> pull(`State/Territory_WVAL`) |> max(na.rm = TRUE)
+dat |> pull(`State/Territory_WVAL`) |> min(na.rm = TRUE)
+dat |> pull(`National_WVAL`) |> max(na.rm = TRUE)
+
+```
+The national average is lower than the state average because it is the average across all states. 
