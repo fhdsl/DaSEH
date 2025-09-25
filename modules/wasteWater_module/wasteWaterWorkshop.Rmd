@@ -64,9 +64,9 @@ a <- dmy("20-09-2024")
 - Year, month, day of the month (mday): 
 ```{r}
 a <- ymd_hms("2024-09-20 3:59:01")
-myyear = year(a)
-mymonth = month(a)
-myday = mday(a)
+year(a)
+month(a)
+mday(a)
 ```
 
 ## Extract the components of a date continued:
@@ -84,7 +84,7 @@ a <- ymd("2024-09-20")
 b <- ymd("2025-07-15")
 b - a
 a - ymd("2024-08-20")
-myyear - 1989
+year(a) - 1989
 ```
 ## GUT CHECK:
 What does the package `lubridate` allows us to do?
@@ -109,32 +109,46 @@ We will use the data located here:
 
 <div style="font-size:18pt"> https://www.cdc.gov/wcms/vizdata/NCEZID_DIDRI/SC2/nwsssc2stateactivitylevelDL.csv
 </div>
-
-
 ```{r, message = FALSE}
-dat = read_csv("https://www.cdc.gov/wcms/vizdata/NCEZID_DIDRI/SC2/nwsssc2stateactivitylevelDL.csv")
+dat <- read_csv("https://www.cdc.gov/wcms/vizdata/NCEZID_DIDRI/SC2/nwsssc2stateactivitylevelDL.csv")
 head(dat)
 ```
+
+<!-- ```{r, message = FALSE}
+dat <- read_csv("https://daseh.org/datadata/wastewater_COVID-19_State_and_Territory_Trends.csv")
+head(dat)
+```
+--> 
+
 
 
 ## Mission: Understand the trends of COVID-19 disease through time in different parts of the United States (US).
 Let's imagine we want to understand how SARS-CoV-2 infections (and hence COVID-19 disease) change through time in three different parts of the US: the East coast, the West coast, and the Midwest. We want to obtain plots that should look like this:
-
-
-## Clean up the data a little bit:
-- Some column names contain `/` and spaces, which are not standard form. We will change them so it is easier to work with them.To do so, we use the function `rename` (part of dplyr).
-- We will not be using the columns `Coverage` and `date_updated` so we will remove them from our data frame.
-
-```{r}
-mydat = dat |> rename(State_Territory_WVAL = `State/Territory_WVAL`,
-                    State_Territory = `State/Territory`,
-                    ) |> select(!c(Coverage, date_updated)) 
+```{r, fig.align='center', echo=FALSE}
+temp = dat |> janitor::clean_names() |> filter(state_territory %in% c("California", 
+                                                                     "Colorado", 
+                                                                     "Maine"))
+ggplot(data=temp, aes(x = week_ending_date, y=state_territory_wval, 
+                color=state_territory)) + geom_line(linewidth=0.8) + 
+  theme(text = element_text(size = 18))
 ```
 
-## Clean up the data (continued)
+## Clean up the data a little bit:{.codesmall} 
+- Some column names contain `/` and spaces, which are not standard form. We will change them so it is easier to work with them.To do so, we use the function `clean_names` part of `janitor` package. Look at the column names of the old dataset (called `dat`) and the column names of the new dataset (called `dat1), the new names are all in lower case with underscores between words.
+
+
+```{r}
+dat1 <- dat |> janitor::clean_names() 
+colnames(dat)
+colnames(dat1)
+```
+
+## Clean up the data (continued){.codesmall} 
+- We will not be using the columns `Coverage` and `date_updated` so we will remove them from our data frame.
 - We will conduct our analysis using all the results available, so that we will remove the rows with results at 1 year or every 6 months.
 ```{r}
-mydat2 = mydat |> filter(Data_Collection_Period == "All Results")
+dat2 <- dat1 |> select(!c(coverage, date_updated)) |> filter(data_collection_period == "All Results")
+head(dat2)
 ```
 
 
@@ -142,7 +156,7 @@ mydat2 = mydat |> filter(Data_Collection_Period == "All Results")
 - We will select three states in the US in three different parts (East, Center, West) to look at their wastewater data:  South Carolina, Nebraska, Washington. 
 
 ```{r}
-df <- mydat2 |> filter(State_Territory %in% c('South Carolina', 'Nebraska', 'Washington'))
+df <- dat2 |> filter(state_territory %in% c('South Carolina', 'Nebraska', 'Washington'))
 head(df)
 ```
 
@@ -150,8 +164,8 @@ head(df)
 ## Look at the data!{.codesmall}
 We will plot the data using ggplot:
 ```{r, fig.align='center'}
-ggplot(data=df, aes(x = Week_Ending_Date, y=State_Territory_WVAL, 
-                color=State_Territory)) + geom_line(linewidth=0.8) + 
+ggplot(data=df, aes(x = week_ending_date, y=state_territory_wval, 
+                color=state_territory)) + geom_line(linewidth=0.8) + 
   theme(text = element_text(size = 18))
 
 ```
@@ -160,83 +174,126 @@ ggplot(data=df, aes(x = Week_Ending_Date, y=State_Territory_WVAL,
 ## Split the plots to see the patterns more clearly:{.codesmall}
 
 ```{r, fig.align='center'}
-ggplot(data=df, aes(x = Week_Ending_Date, y=State_Territory_WVAL, color=State_Territory)) + 
-  geom_line(linewidth=0.8) + theme(text = element_text(size = 18)) + facet_grid(State_Territory~.)
+ggplot(data=df, aes(x = week_ending_date, y=state_territory_wval, color=state_territory)) + 
+  geom_line(linewidth=0.8) + theme(text = element_text(size = 18)) + facet_grid(state_territory~.)
 
 ```
 
 
-## What can we say about this data:
+## What can we say about this data?
 - Seasonality pattern for each state.
+
+- Looks like the peaks of the 2023-2024 winter season occurred at slightly different times in each state.
 
 - Most of the big waves happen in winter time, but all three states had a summer outbreak in 2024.
 
-- Looks like the peaks of the 2023-2024 winter season occurred at slightly different times in each state. 
 
 ## Zoom in the data!
 - Now, we want to investigate how big was the summer outbreak in each state in 2024.
 
-- We use lubridate to select only the data from year 2024:
+- We use `lubridate` to select only the data from year 2024:
 
-## Quick quizz
+## Quick quiz
 Do you remember how to extract the year from a date called mydate?
 
-1. year(mydate)
+1. `year(mydate)`
 
-2. extract(year, mydate)
+2. `extract(year, mydate)`
 
-3. mydate.year()
+3. `mydate.year()`
 
 
 ## Extract the data for year 2024:
 
 ```{r}
-df2024 <- df |> filter(year(Week_Ending_Date) == 2024)
+df2024 <- df |> filter(year(week_ending_date) == 2024)
 head(df2024)
 ```
 
 
-## Group the data by state and retrieve the rows with the maximum level in each state:{.codesmall}
+## Obtain the peak viral level in each state.{.codesmall}
+
+First, we need to group the data by state, we use the function`group_by` from `dplyr` to do it:
+
+```{r, eval=FALSE} 
+maxRows <- df2024  |> group_by(state_territory) |> 
+```
+
+then retrieve the rows with the peak level:
+```{r, eval=FALSE} 
+maxRows <- df2024  |> group_by(state_territory) |> ???
+```
+How do we do this?
+
+## Quick quiz
+Do you remember what function to use to obtain the peak level?
+
+1. `max(dat)`
+
+2. `min(dat)`
+
+3. `unique(dat)`
+
+
+## Obtain the peak viral level in each state.{.codesmall}
+
+To do this, we need to group the data by state and retrieve the rows with the maximum level:
 
 ```{r}
-maxRows <- df2024  |> group_by(State_Territory) |> 
-          filter(State_Territory_WVAL == max(State_Territory_WVAL, na.rm=TRUE)) 
+maxRows <- df2024  |> group_by(state_territory) |> 
+          filter(state_territory_wval == max(state_territory_wval, na.rm=TRUE)) 
 maxRows
 ```
 
-## Compute the number of days between the peak wastewater levels for each state during the summer wave:
+
+
+## Extract the peak wastewater levels for each state:{.codesmall}
+We will compute the date of the summer peak in each state:
+```{r}
+Nebraska_peak <- maxRows %>% filter(state_territory=="Nebraska") %>% 
+                             pull(week_ending_date)
+South_Carolina_peak <- maxRows %>% filter(state_territory=="South Carolina") %>% 
+                                   pull(week_ending_date)
+Washington_peak <- maxRows %>% filter(state_territory=="Washington") %>% 
+                               pull(week_ending_date)
+Nebraska_peak
+South_Carolina_peak
+Washington_peak
+```
+
+## Compute the number of days between the peak wastewater levels for each state during the summer wave:{.codesmall}
 
 - Difference between South Carolina and Nebraska
 ```{r}
-maxRows$Week_Ending_Date[1] - maxRows$Week_Ending_Date[2]
+Nebraska_peak - South_Carolina_peak
 ```
 
 - Difference between South Carolina and Washington
 
 ```{r}
-maxRows$Week_Ending_Date[1] - maxRows$Week_Ending_Date[3]
+South_Carolina_peak - Washington_peak
 ```
 
 - Difference between Nebraska and Washington
 ```{r}
-maxRows$Week_Ending_Date[2] - maxRows$Week_Ending_Date[3]
+Nebraska_peak - Washington_peak
 ```
 
 ## Summer wave:
 
 - From this data, we can see that South Carolina and Washington had a summer wave that peaked 21 days apart. 
 
-- However, the maximum for Nebraska corresponds to the winter wave, not to the summer wave.
+- However, the maximum calculated for Nebraska corresponds to the winter wave, not to the summer wave.
 
 ```{r, echo = FALSE, fig.align='center', out.width= "45%"}
 knitr::include_graphics("images/confused_emoji.jpeg")
 ```
 
-## Let's look again at the plot, but this time restricted to the year 2024:
+## Let's look again at the plot, but this time restricted to the year 2024:{.codesmall}
 
 ```{r, fig.align='center'}
-ggplot(data=df2024, aes(x = Week_Ending_Date, y=State_Territory_WVAL, color=State_Territory)) + 
-  geom_line(linewidth=0.8) + theme(text = element_text(size = 18)) + facet_grid(State_Territory~.)
+ggplot(data=df2024, aes(x = week_ending_date, y=state_territory_wval, color=state_territory)) + 
+  geom_line(linewidth=0.8) + theme(text = element_text(size = 18)) + facet_grid(state_territory~.)
 
 ```
 
@@ -247,12 +304,12 @@ How can we obtain the day that the wastewater measurement reached the maximum le
 
 ## Summer wave continued:{.codesmall}
 
-We will further restrict our attention to the summer months and modify the code as follows:
+We will further zoom our attention to the summer months and modify the code to look at the data for the months of June, July and August 2024:
 
 ```{r}
-maxRows <- df2024 |> filter(month(Week_Ending_Date) %in% c(06, 07, 08)) |>
-                      group_by(State_Territory) |>
-                      filter(State_Territory_WVAL == max(State_Territory_WVAL, na.rm=TRUE))
+maxRows <- df2024 |> filter(month(week_ending_date) %in% c(06, 07, 08)) |>
+                      group_by(state_territory) |>
+                      filter(state_territory_wval == max(state_territory_wval, na.rm=TRUE))
                                                           
 maxRows
 ```
@@ -260,20 +317,20 @@ maxRows
 ## Number of days between summer peaks
 Now we can compute the number of days between the peak waste water levels for each state during the summer wave:
 
+```{r}
+Nebraska_peak <- maxRows %>% filter(state_territory=="Nebraska") %>% pull(week_ending_date)
+South_Carolina_peak <- maxRows %>% filter(state_territory=="South Carolina") %>% pull(week_ending_date)
+Washington_peak <- maxRows %>% filter(state_territory=="Washington") %>% pull(week_ending_date)
+```
 - Difference between South Carolina and Nebraska
 ```{r}
-maxRows$Week_Ending_Date[1] - maxRows$Week_Ending_Date[2]
+Nebraska_peak - South_Carolina_peak
 ```
 
 - Difference between South Carolina and Washington
 
 ```{r}
-maxRows$Week_Ending_Date[1] - maxRows$Week_Ending_Date[3]
-```
-
-- Difference between Nebraska and Washington
-```{r}
-maxRows$Week_Ending_Date[2] - maxRows$Week_Ending_Date[3]
+South_Carolina_peak - Washington_peak
 ```
 
 ## Conclusion
