@@ -125,6 +125,7 @@ head(dat)
 ## Mission: Understand the trends of COVID-19 disease through time in different parts of the United States (US).
 Let's imagine we want to understand how SARS-CoV-2 infections (and hence COVID-19 disease) change through time in three different parts of the US: the East coast, the West coast, and the Midwest. We want to obtain plots that should look like this:
 ```{r, fig.align='center', echo=FALSE}
+library(janitor)
 temp = dat |> janitor::clean_names() |> filter(state_territory %in% c("California", 
                                                                      "Colorado", 
                                                                      "Maine"))

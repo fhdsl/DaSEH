@@ -8,7 +8,7 @@ editor_options:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# Part 1
+## Part 1: Explore the data set:
 Start at the beginning: load the packages.
 
 ```{r, message=FALSE}
@@ -22,16 +22,17 @@ We will continue to use the wastewater data set to practice our data science ski
 You can download the data here:
 http://daseh.org/data/wastewater_COVID-19_State_and_Territory_Trends.csv.
 
-<!--```{r, message = FALSE}
-dat <- read_csv("https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv")
-```
---> 
 ```{r, message = FALSE}
+dat <- read_csv("http://daseh.org/data/wastewater_COVID-19_State_and_Territory_Trends.csv")
+```
+
+<!--```{r, message = FALSE}
 dat <- read_csv("https://www.cdc.gov/wcms/vizdata/NCEZID_DIDRI/SC2/nwsssc2stateactivitylevelDL.csv")
 head(dat)
 ```
+--> 
 
-# Explore the data set:
+
 Remember that  the function `head(n)` will print the first n rows of your dataframe, and the function `summary()` will give you 
 snapshots of each numeric column while skipping character columns:
 ```{r}
@@ -40,6 +41,16 @@ summary(dat)
 ```
 
 ### 1.1
+Print the column names of this dataset. Can you notice anything about them?
+
+```{r 1.1response}
+colnames(dat)
+# The names are not in standard form
+```
+
+
+
+### 1.2
 
 Use your R knowledge to answer to the following questions:
 
@@ -49,7 +60,7 @@ Use your R knowledge to answer to the following questions:
 4. What are the maximum wastewater values observed at the national level (this is given in the column named `National_WVAL`) and state level?
 5. Can you explain why the maximum value observed at the state level is much higher than the one at the national level?
 
-```{r 1.1response}
+```{r 1.2response}
 unique(dat$`State/Territory`)
 dat |> pull(`State/Territory_WVAL`) |> mean(na.rm = TRUE)
 dat |> pull(`State/Territory_WVAL`) |> min(na.rm = TRUE)
@@ -59,3 +70,78 @@ dat |> pull(`National_WVAL`) |> max(na.rm = TRUE)
 #The national maximum is lower than the state maximum because it is the average across all states. 
 ```
 
+## Clean the data set:
+
+### 1.3 
+In order to work with a cleaner dataset, do
+* Clean the names of the columns (remember to use the function `clean_names` from the `janitor` package).
+* Remove the columns named `data_collection_period`, `wval_category`, `coverage`, and `date_updated` from the dataframe. 
+
+
+
+```{r 1.3response}
+library(janitor)
+df <- dat |> janitor::clean_names() |> 
+  filter(data_collection_period == "All Results") |>
+  select(!c(data_collection_period, wval_category, coverage, date_updated))
+```
+
+## Part 2. Understanding trends in peak viral load through time.
+### 2.1
+We want to examine the peak viral levels in each year in four different states: Oklahoma, New Jersey, California and Texas. To achieve this:
+* Create a new data set with only these four states.
+* Create a new column in this data set named `Year` with the year of each row.
+* Create a new column in this data set with the maximum viral level in each of these states for each year (hint: you will need to use the command `group_by` and group your maximum viral load by `state_territory` and `Year`).
+
+```{r 2.1response}  
+temp <- df |> filter(state_territory %in% c("California", "New Jersey", "Oklahoma","Texas")) |> mutate(Year = year(week_ending_date))
+peakdf <- temp |> group_by(state_territory, Year) |> 
+  mutate(peak_value = max(state_territory_wval, na.rm=TRUE)) |> ungroup()
+```
+
+### 2.2
+Now, we want to know the date for which each of these maximum viral levels occurred. To do so:
+* Create a new column in your data set that extracts the date when the maximum viral level occurred for each year and each state.
+
+```
+#General idea:
+peakdf <-peakdf |> group_by( ???, ???) |>
+mutate(peak_date = ???[which.max(???)] |> ungroup()
+```
+
+```{r 2.2response}  
+peakdf <-peakdf |> group_by(state_territory, Year) |> 
+  mutate(peak_date = week_ending_date[which.max(state_territory_wval)]) |> ungroup()
+```
+
+## Plot the results:
+### 2.3
+```{r 2.3response}
+ggplot(data=peakdf, aes(x =Year, y=peak_value, color=state_territory)) + 
+  geom_point(size = 3) + geom_line() + facet_grid(~state_territory) +
+  theme(text = element_text(size = 18))
+```
+
+### 2.4
+* What can you say about the peak wastewater viral levels in each state and each year?
+* Can you explain why the peak wastewater viral levels for 2025 are so much lower than previous years?
+* The peak wastewater viral level in Oklahoma in 2022 is much higher than in the other 3 states, can you hypothesize why? 
+How can you prove/disprove your hypothesis?
+
+```{r 2.4response}
+# The peak wastewater viral levels in California, Oklahoma and Texas have the same pattern: highest in 2022, with a smaller peak in 2023, a rebound in 2024 and the lowest in 2025. 
+# In 2022,  New Yersey had the smallest peak, followed by California, Texas and the biggest one is in Oklahoma.
+# In 2023, California had the smallest peak, followed by Texas, New Yersey and Oklahoma.
+# 
+# The peak is much smaller in 2025 because we have not reached the fall/winter season.
+```
+To prove or disprove your hypothesis, you can read more about how wastewater viral levels are determined and collected here:
+https://www.cdc.gov/nwss/rv/COVID19-statetrend.html?stateval=Oklahoma
+
+Oklahoma had a surprisingly big peak wastewater viral level in 2022. This might be because of a variety of reasons including:
+
+ a. Oklahoma has a bigger wastewater plant that serves more individuals resulting in higher viral levels.
+ b. Oklahoma has bigger epidemic waves overall? 
+ c. Oklahoma has more variability/measurement errors?
+ 
+It is unlikely that reason (a) is the culprit, as CDC normalizes the wastewater data. In addition, case data does not suggest that Oklahoma had much bigger epidemics than the other states overall (see for example here: https://www.nytimes.com/interactive/2021/us/covid-cases.html). Looking at the CDC website it looks like Oklahoma has only one site reporting wastewater data vs 78, 22 and 63 sites for California, New Jersey and Texas respectively. While this is expected because these states have bigger populations than Oklahoma. Hence  reason (c) might be  contributing to the peak viral level observed in 2022. 
