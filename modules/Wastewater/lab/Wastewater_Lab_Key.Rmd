@@ -84,6 +84,7 @@ library(janitor)
 df <- dat |> janitor::clean_names() |> 
   filter(data_collection_period == "All Results") |>
   select(!c(data_collection_period, wval_category, coverage, date_updated))
+colnames(df)
 ```
 
 ## Part 2. Understanding trends in peak viral load through time.
