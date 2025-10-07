@@ -76,6 +76,7 @@ dat |> pull(`National_WVAL`) |> max(na.rm = TRUE)
 
 ### 1.3 
 In order to work with a cleaner dataset, do
+
 * Clean the names of the columns (remember to use the function `clean_names` from the `janitor` package).
 * Remove the columns named `data_collection_period`, `wval_category`, `coverage`, and `date_updated` from the dataframe. 
 
@@ -92,6 +93,7 @@ colnames(df)
 ## Part 2. Understanding trends in peak viral load through time.
 ### 2.1
 We want to examine the peak viral levels in each year in four different states: Oklahoma, New Jersey, California and Texas. To achieve this:
+
 * Create a new data set with only these four states.
 * Create a new column in this data set named `Year` with the year of each row.
 * Create a new column in this data set with the maximum viral level in each of these states for each year (hint: you will need to use the command `group_by` and group your maximum viral load by `state_territory` and `Year`).
