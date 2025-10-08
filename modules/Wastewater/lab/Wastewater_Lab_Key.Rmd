@@ -258,8 +258,12 @@ We are going to focus now on comparing different influenza seasons. To do this, 
 
 
 ```{r 3.6response}
+#create a new data frame:
 compare_df <- df %>% group_by(flu_season) %>% summarize("peak_flu" = max(as.numeric(weekly_rate)))
-max_season <- compare_df %>% pull(peak_flu) %>% max(na.rm = TRUE)
-min_season  <- compare_df %>% pull(peak_flu) %>% min(na.rm = TRUE)
-mean_season <- compare_df %>% pull(peak_flu) %>% mean(na.rm = TRUE)
+#Select the seasons with the max and min peak flu
+max_season <- compare_df %>% filter(peak_flu == max(peak_flu, na.rm = TRUE))
+min_season  <- compare_df %>% filter(peak_flu == min(peak_flu, na.rm = TRUE))
+mean_season_value <- compare_df %>% pull(peak_flu) %>% mean(na.rm = TRUE)
+#the minimum peak was in the 21-22 season with a value of 1.2 and the maximum 
+#was in the 24-25 season with a value of 13.7. 
 ```
