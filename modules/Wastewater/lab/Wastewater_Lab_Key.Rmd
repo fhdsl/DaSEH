@@ -316,7 +316,7 @@ p38
 
 * Use a t-test to compare the difference between the 21-22 flu season (the one with the minimum peak hospitalization rate) and the 24-25 flu season (the one with the maximum peak hospitalization rate). Are the hospitalization rates significantly different?
 
-Hint: create twi variables by selecting the `weekly_rate` column from `df15_25` and filtering by the desired flu seasons. 
+Hint: create two new variables called `minSeason` and `maxSeason` by selecting the `weekly_rate` column from `df15_25` and filtering by the desired flu seasons. 
 
 ```{r 3.10response}
 minSeason <-  df15_25 %>% filter(flu_season == "2021-22") %>% pull(weekly_rate)
@@ -329,5 +329,5 @@ mytest
 ## Other resources
 
 This is a simple analysis using a t-test. For more sophisticated analysis, you can take a look at the
-`tseries` package for analysing time series (https://cran.r-project.org/web/packages/tseries/index.html) or the fable` package for forecasting models (https://fable.tidyverts.org/).
+`tseries` package for analyzing time series (https://cran.r-project.org/web/packages/tseries/index.html) or the fable` package for forecasting models (https://fable.tidyverts.org/).
 
