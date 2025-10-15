@@ -151,6 +151,7 @@ It is unlikely that reason (a) is the culprit, as CDC normalizes the wastewater 
 In this section we will dive deeper into using date objects to understand time series.
 For that purpose, we will use influenza hospitalization rates from 2009 to 2025! You can read more about how this data is collected here:
 
+https://www.cdc.gov/fluview/overview/index.html
 
 ### 3.1 Download the data:
 Start by downloading the data
@@ -248,9 +249,9 @@ num_weeks_missing
 
 ## Comparing influenza seasons  
 
-### 3.6
-We are going to focus now on comparing different influenza seasons. To do this, we will compare the overall mean weekly rate of all seasons to the the seasons with the minimum and maximum peak hospitalization weekly rates.
+We are going to focus now on comparing different influenza seasons. To do this, we will compare the overall mean weekly rate of all seasons to the seasons with the minimum and maximum peak hospitalization weekly rates.
 
+### 3.6
 * Write code to create a new data frame called `compare_df` that has two columns, one with the flu season and one with the mean weekly rate for that season.
 
 
@@ -269,8 +270,8 @@ min_season  <- compare_df %>% filter(peak_flu == min(peak_flu, na.rm = TRUE))
 ```
 
 ### 3.7 
-* Add a column `overall_mean_flu_rate` to the `df15_25` data set that computes the mean weekly rate for each date. 
-Hint: you will have to use the command `group_by` and group both by the `num_week` and the `virus_type_category` columns. 
+* Add a column `overall_mean_flu_rate` to the `df15_25` data set that computes the mean weekly rate for each week across seasons for each flu strain. For example, compute the mean weekly rate for week 40 for H1N1 for all seasons between 2015 and 2025.  
+Hint: you will have to use the command `group_by`= and group both by the `num_week` and the `virus_type_category` columns. 
 
 
 ```{r 3.7response}
@@ -280,9 +281,13 @@ df15_25 <- df15_25 %>% group_by(num_week, virus_type_category) %>% mutate("overa
 
 ### 3.8
 
-To understand the data better, we compute the difference between the 21-22 flu season and the overall mean hospitalization rate for each week. We then repeat this for the 24-25 flu season:
+To understand the data better, we compute the difference between the 21-22 flu season (the season with the lowest peak hospitalization rate) and the overall mean hospitalization rate for each week. We then repeat this for the 24-25 flu season (the season with the highest peak hospitalization rate):
 
-* Create a new column in the `df15_25` data frame called `diff_rate` obtained by subtracting the weekly rates  from the `overall_mean_flu_rate`. Remember to group by the `num_week` column as you want to compare each week in the data. Keep only the 21-22 and 24-25 seasons, by  storing the results in new data frames called `diff_min_season` and `diff_max_season` respectively.
+* Create a new column in the `df15_25` data frame called `diff_rate` obtained by subtracting the weekly rates  from the `overall_mean_flu_rate`. 
+
+Remember to group by the `num_week` column as you want to compare each week in the data. 
+
+Keep only the 21-22 and 24-25 seasons, by  storing the results in new data frames called `diff_min_season` and `diff_max_season` respectively.
 
 ```{r 3.8response}
 diff_min_season <- df15_25 %>%  group_by(num_week) %>%
@@ -297,6 +302,7 @@ diff_max_season <- df15_25 %>% group_by(num_week) %>%
 
 ### 3.9 
 We can now visualize the differences by doing a plot with overlaying histograms. 
+
 * Do a plot with overlaying histograms of each of the differences.
 
 ```
