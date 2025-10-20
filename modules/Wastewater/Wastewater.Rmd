@@ -43,24 +43,20 @@ There are two most popular R classes used when working with dates and times:
   - Extract components of dates.
 
 
-## `lubridate` is very flexible for inputting dates in different formats: 
-- `YYYY\-MM\-DD`:
+## `lubridate` first needs to understand the date format:
+
+You tell lubridate how to "read" your character object.
 
 ```{r}
-a <- ymd("2024-09-20")
+# YYYY-M-DD
+a <- ymd("2024-9-20")
+
+# DD/MM/YYYY
+a <- dmy("20/09/2024")
+
+# MM-DD-YY
+a <- mdy("09-20-24")
 ```
-
-- `DD-MM-YYYY`:
-```{r}
-a <- dmy("20-09-2024")
-```
-
-- `MM-DD-YY`:
-```{r}
-a <- dmy("20-09-2024")
-```
-
-
 
 ## Extract the components of a date with   `lubridate`:
 - Year, month, day of the month (`mday`): 
