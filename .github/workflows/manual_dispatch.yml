@@ -24,7 +24,6 @@ jobs:
   build-it:
     name: Docker Build - ${{ inputs.directory }}
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/docker-test.yml
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -32,6 +31,7 @@ jobs:
           fetch-depth: 0
           
       - name: Docker build
+        uses: ottrproject/ottr-docker/.github/workflows/action/
         with:
           directory: ${{ inputs.directory }}
           tag: ${{ inputs.tag }}
