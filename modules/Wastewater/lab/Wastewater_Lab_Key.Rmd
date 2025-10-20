@@ -15,9 +15,6 @@ Start at the beginning: load the packages.
 library(tidyverse)
 library(ggplot2)
 ```
-```{r, echo = FALSE, message=FALSE, comment= FALSE, warning = FALSE, results='hide'}
-install.packages("janitor", repos='http://cran.us.r-project.org')
-```
 
 
 We will continue to use the wastewater data set to practice our data science skills.
