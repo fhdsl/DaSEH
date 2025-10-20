@@ -1,5 +1,5 @@
 ---
-title: "Wastewater_lab_key"
+title: "Wastewater Lab - Key"
 output: html_document
 editor_options:
   chunk_output_type: console
@@ -8,7 +8,9 @@ editor_options:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-## Part 1: Explore the data set:
+
+## Part 1: Explore the Data Set
+
 Start at the beginning: load the packages.
 
 ```{r, message=FALSE}
@@ -16,24 +18,21 @@ library(tidyverse)
 library(ggplot2)
 ```
 
-
-We will continue to use the wastewater data set to practice our data science skills.
-You can download the data here:
-http://daseh.org/data/wastewater_COVID-19_State_and_Territory_Trends.csv.
+We will continue to use the wastewater data set to practice our data science skills. You can download the data here: http://daseh.org/data/wastewater_COVID-19_State_and_Territory_Trends.csv
 
 ```{r, message = FALSE}
 dat <- read_csv("http://daseh.org/data/wastewater_COVID-19_State_and_Territory_Trends.csv")
 ```
 
+Remember that the function `head(n)` will print the first n rows of your dataframe, and the function `summary()` will give you snapshots of each numeric column while skipping character columns:
 
-Remember that  the function `head(n)` will print the first n rows of your dataframe, and the function `summary()` will give you 
-snapshots of each numeric column while skipping character columns:
 ```{r}
 head(dat)
 summary(dat)
 ```
 
 ### 1.1
+
 Print the column names of this dataset. Can you notice anything about them?
 
 ```{r 1.1response}
@@ -41,17 +40,15 @@ colnames(dat)
 # The names are not in standard form.
 ```
 
-
-
 ### 1.2
 
-Use your R knowledge to answer to the following questions:
+Use your R knowledge to answer the following questions:
 
-1. Are all states represented here? (hint: use the function `unique` to see unique elements of each column)
-2. What is the mean wastewater value observed in a single state in this dataset (the wastewater value is given in the column named `State/Territory_WVAL`? Remember to include the parameter `na.rm=TRUE` to the mean function!
-3. What is the minimum  wastewater value observed in a single state in this dataset?
-4. What are the maximum wastewater values observed at the national level (this is given in the column named `National_WVAL`) and state level?
-5. Can you explain why the maximum value observed at the state level is much higher than the one at the national level?
+* Are all states represented here? (hint: use the function `unique` to see unique elements of each column)
+* What is the mean wastewater value observed in a single state in this dataset (the wastewater value is given in the column named `State/Territory_WVAL`)? Remember to include the parameter `na.rm=TRUE` to the mean function!
+* What is the minimum wastewater value observed in a single state in this dataset?
+* What are the maximum wastewater values observed at the national level (this is given in the column named `National_WVAL`) and state level?
+* Can you explain why the maximum value observed at the state level is much higher than the one at the national level?
 
 ```{r 1.2response}
 unique(dat$`State/Territory`)
@@ -60,258 +57,259 @@ dat |> pull(`State/Territory_WVAL`) |> min(na.rm = TRUE)
 dat |> pull(`State/Territory_WVAL`) |> max(na.rm = TRUE)
 dat |> pull(`National_WVAL`) |> max(na.rm = TRUE)
 
-#The national maximum is lower than the state maximum because it is the average across all states. 
+# The national maximum is lower than the state maximum because it is the average across all states. 
 ```
 
-## Clean the data set:
+## Clean the Data Set
 
 ### 1.3 
-In order to work with a cleaner dataset, do
 
-* Clean the names of the columns (remember to use the function `clean_names` from the `janitor` package).
-* Remove the columns named `data_collection_period`, `wval_category`, `coverage`, and `date_updated` from the dataframe. 
+In order to work with a cleaner dataset, do the following:
 
-
+* Clean the names of the columns (remember to use the function `clean_names` from the `janitor` package)
+* Remove the columns named `data_collection_period`, `wval_category`, `coverage`, and `date_updated` from the dataframe
 
 ```{r 1.3response}
 library(janitor)
-df <- dat |> janitor::clean_names() |> 
+df <- dat |> clean_names() |>
   filter(data_collection_period == "All Results") |>
   select(!c(data_collection_period, wval_category, coverage, date_updated))
 colnames(df)
 ```
 
-## Part 2. Understanding trends in peak viral load through time.
-### 2.1
-We want to examine the peak viral levels in each year in four different states: Oklahoma, New Jersey, California and Texas. To achieve this:
+## Part 2: Understanding Trends in Peak Viral Load Through Time
 
-* Create a new data set with only these four states.
-* Create a new column in this data set named `Year` with the year of each row.
-* Create a new column in this data set with the maximum viral level in each of these states for each year (hint: you will need to use the command `group_by` and group your maximum viral load by `state_territory` and `Year`).
+### 2.1
+
+We want to examine the peak viral levels in each year in four different states: Oklahoma, New Jersey, California, and Texas. To achieve this:
+
+* Create a new data set with only these four states
+* Create a new column in this data set named `Year` with the year of each row
+* Create a new column in this data set with the maximum viral level in each of these states for each year (Hint: you will need to use the command `group_by` and group your maximum viral load by `state_territory` and `Year`)
 
 ```{r 2.1response}  
-temp <- df |> filter(state_territory %in% c("California", "New Jersey", "Oklahoma","Texas")) |> mutate(Year = year(week_ending_date))
-peakdf <- temp |> group_by(state_territory, Year) |> 
-  mutate(peak_value = max(state_territory_wval, na.rm=TRUE)) |> ungroup()
+temp <- df |> filter(state_territory %in% c("California", "New Jersey", "Oklahoma", "Texas")) |> mutate(Year = year(week_ending_date))
+peakdf <- temp |> group_by(state_territory, Year) |>
+  mutate(peak_value = max(state_territory_wval, na.rm = TRUE)) |> ungroup()
 ```
 
 ### 2.2
+
 Now, we want to know the date for which each of these maximum viral levels occurred. To do so:
-* Create a new column in your data set that extracts the date when the maximum viral level occurred for each year and each state.
+
+* Create a new column in your data set that extracts the date when the maximum viral level occurred for each year and each state
 
 ```
-#General idea:
-peakdf <-peakdf |> group_by( ???, ???) |>
-mutate(peak_date = ???[which.max(???)] |> ungroup()
+# General idea:
+peakdf <- peakdf |> group_by(???, ???) |>
+  mutate(peak_date = ???[which.max(???)]) |> ungroup()
 ```
 
 ```{r 2.2response}  
-peakdf <-peakdf |> group_by(state_territory, Year) |> 
+peakdf <- peakdf |> group_by(state_territory, Year) |> 
   mutate(peak_date = week_ending_date[which.max(state_territory_wval)]) |> ungroup()
 ```
 
-## Plot the results:
+## Plot the Results
+
 ### 2.3
+
 ```{r 2.3response}
-ggplot(data=peakdf, aes(x =Year, y=peak_value, color=state_territory)) + 
-  geom_point(size = 3) + geom_line() + facet_grid(~state_territory) +
-  theme(text = element_text(size = 18),
-        axis.text.x = element_text(angle = 90))
+ggplot(data = peakdf, aes(x = Year, y = peak_value, color = state_territory)) +
+  geom_point(size = 3) + geom_line() + facet_grid( ~ state_territory) +
+  theme(text = element_text(size = 18), axis.text.x = element_text(angle = 90))
 ```
 
 ### 2.4
+
 * What can you say about the peak wastewater viral levels in each state and each year?
 * Can you explain why the peak wastewater viral levels for 2025 are so much lower than previous years?
-* The peak wastewater viral level in Oklahoma in 2022 is much higher than in the other 3 states, can you hypothesize why? 
-How can you prove/disprove your hypothesis?
+* The peak wastewater viral level in Oklahoma in 2022 is much higher than in the other 3 states. Can you hypothesize why? How can you prove/disprove your hypothesis?
 
 ```{r 2.4response}
-# The peak wastewater viral levels in California, Oklahoma and Texas have the same pattern: highest in 2022, with a smaller peak in 2023, a rebound in 2024 and the lowest in 2025. 
-# In 2022,  New Yersey had the smallest peak, followed by California, Texas and the biggest one is in Oklahoma.
-# In 2023, California had the smallest peak, followed by Texas, New Yersey and Oklahoma.
+# The peak wastewater viral levels in California, Oklahoma, and Texas have the same pattern: highest in 2022, with a smaller peak in 2023, a rebound in 2024, and the lowest in 2025. 
+# In 2022, New Jersey had the smallest peak, followed by California, Texas, and the biggest one is in Oklahoma.
+# In 2023, California had the smallest peak, followed by Texas, New Jersey, and Oklahoma.
 # 
 # The peak is much smaller in 2025 because we have not reached the fall/winter season.
 ```
-To prove or disprove your hypothesis, you can read more about how wastewater viral levels are determined and collected here:
-https://www.cdc.gov/nwss/rv/COVID19-statetrend.html?stateval=Oklahoma
+
+To prove or disprove your hypothesis, you can read more about how wastewater viral levels are determined and collected here: https://www.cdc.gov/nwss/rv/COVID19-statetrend.html?stateval=Oklahoma
 
 Oklahoma had a surprisingly big peak wastewater viral level in 2022. This might be because of a variety of reasons including:
 
- a. Oklahoma has a bigger wastewater plant that serves more individuals resulting in higher viral levels.
- b. Oklahoma has bigger epidemic waves overall? 
- c. Oklahoma has more variability/measurement errors?
- 
-It is unlikely that reason (a) is the culprit, as CDC normalizes the wastewater data. In addition, case data does not suggest that Oklahoma had much bigger epidemics than the other states overall (see for example here: https://www.nytimes.com/interactive/2021/us/covid-cases.html). Looking at the CDC website it looks like Oklahoma has only one site reporting wastewater data vs 78, 22 and 63 sites for California, New Jersey and Texas respectively. While this is expected because these states have bigger populations than Oklahoma. Hence  reason (c) might be  contributing to the peak viral level observed in 2022. 
+a. Oklahoma has a bigger wastewater plant that serves more individuals resulting in higher viral levels
+b. Oklahoma has bigger epidemic waves overall
+c. Oklahoma has more variability/measurement errors
 
-## Part 3: Dive deeper!
+It is unlikely that reason (a) is the culprit, as CDC normalizes the wastewater data. In addition, case data does not suggest that Oklahoma had much bigger epidemics than the other states overall (see for example here: https://www.nytimes.com/interactive/2021/us/covid-cases.html). Looking at the CDC website, it looks like Oklahoma has only one site reporting wastewater data vs 78, 22, and 63 sites for California, New Jersey, and Texas respectively. While this is expected because these states have bigger populations than Oklahoma, reason (c) might be contributing to the peak viral level observed in 2022.
 
-In this section we will dive deeper into using date objects to understand time series.
-For that purpose, we will use influenza hospitalization rates from 2009 to 2025! You can read more about how this data is collected here:
+## Part 3: Dive Deeper
 
-https://www.cdc.gov/fluview/overview/index.html
+In this section we will dive deeper into using date objects to understand time series. For that purpose, we will use influenza hospitalization rates from 2009 to 2025! You can read more about how this data is collected here: https://www.cdc.gov/fluview/overview/index.html
 
-### 3.1 Download the data:
-Start by downloading the data
-The data is located here:
-http://daseh.org/data/FluSurveillance_2009_2025.csv
+### 3.1: Download the Data
 
-Hint: You will need to skip the first two rows of the data, use the argument `skip=` in the 
-`read_csv` function to do this.
+Start by downloading the data. The data is located here: http://daseh.org/data/FluSurveillance_2009_2025.csv
+
+Hint: You will need to skip the first two rows of the data. Use the argument `skip=` in the `read_csv` function to do this.
 
 ```{r, message = FALSE} 
 fludat <- read_csv("http://daseh.org/data/FluSurveillance_2009_2025.csv", skip=2) 
 ``` 
- 
 
+### 3.2: Filter the Columns and Subsets That We Will Use
 
-### 3.2 Filter the columns and subsets that we will use.
-
-1. Use the `clean_names` command from the `janitor` package to clean up the column names.
-2. Use the commands `filter` and `select` to obtain a data set with data for the "overall" value for the  age group, race and sex categories, and keeping only the columns "YEAR...3","YEAR...4", "WEEK", "VIRUS TYPE CATEGORY", "CUMULATIVE RATE" and "WEEKLY RATE".
-3. Rename the columns `year_3` and `year_4` to more meaningful names: `flu_season` and `Year`  respectively. To avoid confusion with the `week` function in `lubridate`, rename the `week` column to `num_week`.
-
-4. Check the types of all columns. Transform the columns that are meant to be numeric to numeric using the function `as.numeric()`.
+* Use the `clean_names` command from the `janitor` package to clean up the column names
+* Use the commands `filter` and `select` to obtain a data set with data for the "overall" value for the age group, race, and sex categories, and keeping only the columns "YEAR...3", "YEAR...4", "WEEK", "VIRUS TYPE CATEGORY", "CUMULATIVE RATE", and "WEEKLY RATE"
+* Rename the columns `year_3` and `year_4` to more meaningful names: `flu_season` and `Year` respectively. To avoid confusion with the `week` function in `lubridate`, rename the `week` column to `num_week`
+* Check the types of all columns. Transform the columns that are meant to be numeric to numeric using the function `as.numeric()`
 
 ```{r 3.2response}
 library(janitor)
-fludat2 <- fludat %>% clean_names() %>% filter(age_category == "Overall",
-                            sex_category== "Overall",
-                            race_category== "Overall") 
-fludat2 <- fludat2 %>% select(year_3,year_4,week, virus_type_category,
-                               cumulative_rate, weekly_rate) %>%
-                        rename("flu_season" = year_3, "Year" = year_4,
-                               "num_week" = week) %>% mutate("weekly_rate" = as.numeric(weekly_rate))
+fludat2 <-
+  fludat |>
+  clean_names() |>
+  filter(age_category == "Overall",
+         sex_category == "Overall",
+         race_category == "Overall")
+
+fludat2 <-
+  fludat2 |>
+  select(year_3,
+         year_4,
+         week,
+         virus_type_category,
+         cumulative_rate,
+         weekly_rate) |>
+  rename("flu_season" = year_3,
+         "Year" = year_4,
+         "num_week" = week) |>
+  mutate(weekly_rate = as.numeric(weekly_rate))
 ```
 
+### 3.3: Create a Column with the Starting Date of Each Week
 
+We are interested in having the actual date for each entry in the `week` column. Use `lubridate`'s arithmetic to do this. Create a new column called `week_date` by adding the beginning of the year given in the column `Year` (January 1st, Year) and the number of weeks given in the column `week`. 
 
-### 3.3 Create a column with the starting date of each week:
-We are interested in having the actual date for each entry in the `week` column.
-Use `lubridate`'s arithmetic to do this. Create a new column called `week_date` by adding the beginning of the year given in the column `Year` (January 1st, Year) and the number of weeks given in the column `week`. 
+Hint: You can do this in several steps:
 
-Hint: You can do this in several steps.
-
-1. Create a string by pasting the year in the column `Year` and the string "-01-01".
-2. Use a function `lubridate` package to transform this string in a date of the form `YYYY-MM-DD`.
-3. Add to this date the number of weeks given in the column `week_date`. You will have to subtract one week because the first week of the year is already week 1.
+* Create a string by pasting the year in the column `Year` and the string "-01-01" using `paste0()`.
+* Use a function from the `lubridate` package to transform this string into a date of the form `YYYY-MM-DD`
+* Add to this date the number of weeks given in the column `week_date`. You will have to subtract one week because the first week of the year is already week 1
 
 ```{r 3.3response}
-temp <- paste0(fludat2 %>% pull(Year),  "-01-01")
+temp <- paste0(fludat2 |> pull(Year), "-01-01")
 temp_date <- ymd(temp)
-fludat2 <- fludat2 %>% mutate("week_date" = temp_date + weeks(num_week) -1 )
+fludat2 <- fludat2 |> mutate(week_date = temp_date + weeks(num_week) - 1)
 ```
 
-### 3.4 Plot a time series of each flu season from 2015 to 2025.
+### 3.4: Plot a Time Series of Each Flu Season from 2015 to 2025
 
 * Create a data frame called `df15_25` of all flu seasons between 2015 and 2025. Hint: make sure that you include *all the points* for the 2015 flu season (some of them might be in 2014!)
-* Use `df15_25` to create a plot of a time series of each flu season from 2015 to 2025, coloring the lines by virus type. 
-
+* Use `df15_25` to create a plot of a time series of each flu season from 2015 to 2025, coloring the lines by virus type
 
 ```{r 3.4response}
-df15_25 <- fludat2 %>% filter(flu_season %in% c("2014-15", "2024-25") | 
-                           between(Year,2015, 2025))
-p <- ggplot(df15_25, aes(x=week_date, y=as.numeric(weekly_rate), color= virus_type_category)) + geom_line()
+df15_25 <- fludat2 |> filter(flu_season %in% c("2014-15", "2024-25") | 
+                           between(Year, 2015, 2025))
+p <- ggplot(df15_25, aes(x=week_date, y=as.numeric(weekly_rate), color=virus_type_category)) + geom_line()
 p
 ```
 
-## Dealing with missing data.
+## Dealing with Missing Data
+
 ### 3.5 
 
-1. What can you say about the 2020-2021 flu season? Do we have data for this season? Why? Is this data missing at random?
-Hint: you can look at the definition of "missing at random" in the *Data Cleaning* module.
-
-2. When did the data collection stopped in 2020? 
-
-3. When did it restart again?
-
-4. How many weeks of data are missing?
+* What can you say about the 2020-2021 flu season? Do we have data for this season? Why? Is this data missing at random? Hint: you can look at the definition of "missing at random" in the *Data Cleaning* module
+* When did the data collection stop in 2020?
+* When did it restart again?
+* How many weeks of data are missing?
 
 ```{r 3.5response}
-#1. There is no data plotted for the 2020-2021 influenza season. This is because of the COVID-19 pandemic. 
+# 1. There is no data plotted for the 2020-2021 influenza season. This is because of the COVID-19 pandemic. 
 
-#2
-covid19_min <- df15_25 %>% filter(flu_season == "2020-21", is.na(weekly_rate)) %>% pull(week_date) %>% min(na.rm = TRUE)
-#Data stopped being collected on 2020-10-06.
+# 2
+covid19_min <- df15_25 |> filter(flu_season == "2020-21", is.na(weekly_rate)) |> pull(week_date) |> min(na.rm = TRUE)
+# Data stopped being collected on 2020-10-06.
 
-#3 
-covid19_max <- df15_25 %>% filter(flu_season == "2020-21", is.na(weekly_rate)) %>% pull(week_date) %>% max(na.rm = TRUE)
-#The last week of data not collected was 2021-04-29.
+# 3 
+covid19_max <- df15_25 |> filter(flu_season == "2020-21", is.na(weekly_rate)) |> pull(week_date) |> max(na.rm = TRUE)
+# The last week of data not collected was 2021-04-29.
 
-#4 
+# 4 
 num_days_missing = covid19_max - covid19_min
 
 num_weeks_missing = as.numeric(floor(num_days_missing/7))
 num_weeks_missing
 ```
 
-## Comparing influenza seasons  
+## Comparing Influenza Seasons  
 
 We are going to focus now on comparing different influenza seasons. To do this, we will compare the overall mean weekly rate of all seasons to the seasons with the minimum and maximum peak hospitalization weekly rates.
 
 ### 3.6
-* Write code to create a new data frame called `compare_df` that has two columns, one with the flu season and one with the mean weekly rate for that season.
 
-
-* Select the flu seasons with the minimum and maximum, call them `min_season` and `max_season` respectively.
-
-
+* Write code to create a new data frame called `compare_df` that has two columns, one with the flu season and one with the mean weekly rate for that season
+* Select the flu seasons with the minimum and maximum, call them `min_season` and `max_season` respectively
 
 ```{r 3.6response}
-#create a new data frame:
-compare_df <- df15_25 %>% group_by(flu_season) %>% summarize("peak_flu" = max(as.numeric(weekly_rate)))
-#Select the seasons with the max and min peak flu
-max_season <- compare_df %>% filter(peak_flu == max(peak_flu, na.rm = TRUE))
-min_season  <- compare_df %>% filter(peak_flu == min(peak_flu, na.rm = TRUE))
-#the minimum peak was in the 21-22 season with a value of 1.2 and the maximum 
-#The maximum peak was in the 24-25 season with a value of 13.7. 
+# Create a new data frame:
+compare_df <- df15_25 |> group_by(flu_season) |> summarize("peak_flu" = max(as.numeric(weekly_rate)))
+
+# Select the seasons with the max and min peak flu
+max_season <- compare_df |> filter(peak_flu == max(peak_flu, na.rm = TRUE))
+min_season <- compare_df |> filter(peak_flu == min(peak_flu, na.rm = TRUE))
+
+# The minimum peak was in the 21-22 season with a value of 1.2 and the maximum 
+# The maximum peak was in the 24-25 season with a value of 13.7. 
 ```
 
 ### 3.7 
-* Add a column `overall_mean_flu_rate` to the `df15_25` data set that computes the mean weekly rate for each week across seasons for each flu strain. For example, compute the mean weekly rate for week 40 for H1N1 for all seasons between 2015 and 2025.  
-Hint: you will have to use the command `group_by`= and group both by the `num_week` and the `virus_type_category` columns. 
 
+* Add a column `overall_mean_flu_rate` to the `df15_25` data set that computes the mean weekly rate for each week across seasons for each flu strain. For example, compute the mean weekly rate for week 40 for H1N1 for all seasons between 2015 and 2025
+
+Hint: you will have to use the command `group_by` and group both by the `num_week` and the `virus_type_category` columns.
 
 ```{r 3.7response}
-df15_25 <- df15_25 %>% group_by(num_week, virus_type_category) %>% mutate("overall_mean_flu_rate" = mean(weekly_rate, na.rm=TRUE))
-
+df15_25 <- df15_25 |> group_by(num_week, virus_type_category) |> mutate("overall_mean_flu_rate" = mean(weekly_rate, na.rm=TRUE))
 ```
 
 ### 3.8
 
 To understand the data better, we compute the difference between the 21-22 flu season (the season with the lowest peak hospitalization rate) and the overall mean hospitalization rate for each week. We then repeat this for the 24-25 flu season (the season with the highest peak hospitalization rate):
 
-* Create a new column in the `df15_25` data frame called `diff_rate` obtained by subtracting the weekly rates  from the `overall_mean_flu_rate`. 
+* Create a new column in the `df15_25` data frame called `diff_rate` obtained by subtracting the weekly rates from the `overall_mean_flu_rate`
 
 Remember to group by the `num_week` column as you want to compare each week in the data. 
 
-Keep only the 21-22 and 24-25 seasons, by  storing the results in new data frames called `diff_min_season` and `diff_max_season` respectively.
+Keep only the 21-22 and 24-25 seasons by storing the results in new data frames called `diff_min_season` and `diff_max_season` respectively.
 
 ```{r 3.8response}
-diff_min_season <- df15_25 %>%  group_by(num_week) %>%
-  mutate("diff_rate" = weekly_rate - overall_mean_flu_rate) %>% 
+diff_min_season <- df15_25 |> group_by(num_week) |>
+  mutate("diff_rate" = weekly_rate - overall_mean_flu_rate) |> 
   filter(flu_season == "2021-22") 
-diff_max_season <- df15_25 %>% group_by(num_week) %>%
-  mutate("diff_rate" = weekly_rate - overall_mean_flu_rate) %>% 
+
+diff_max_season <- df15_25 |> group_by(num_week) |>
+  mutate("diff_rate" = weekly_rate - overall_mean_flu_rate) |> 
   filter(flu_season == "2024-25") 
 ```
 
-
-
 ### 3.9 
+
 We can now visualize the differences by doing a plot with overlaying histograms. 
 
-* Do a plot with overlaying histograms of each of the differences.
+* Do a plot with overlaying histograms of each of the differences
 
 ```
-#General idea:
-diff_min_season %>% select(diff_rate)
-diff_max_season %>% select(diff_rate)
-p <- ggplot(data= XXX, aes(x=diff_rate)) +  geom_histogram(fill = "blue", alpha=0.2) + geom_histogram(data=YYY, fill = "red", alpha=0.2) 
+# General idea:
+diff_min_season |> select(diff_rate)
+diff_max_season |> select(diff_rate)
+p <- ggplot(data=XXX, aes(x=diff_rate)) + geom_histogram(fill = "blue", alpha=0.2) + geom_histogram(data=YYY, fill = "red", alpha=0.2) 
 # with XXX = your first data set and YYY = your second data set.
 ```
 
 ```{r 3.9response}
-p38 <- ggplot(data=diff_max_season%>% select(diff_rate), aes(x=diff_rate)) +  geom_histogram(fill = "blue", alpha=0.2) + geom_histogram(data=diff_min_season%>% select(diff_rate), fill = "red", alpha=0.2) + theme(legend.location = "right")
+p38 <- ggplot(data=diff_max_season |> select(diff_rate), aes(x=diff_rate)) + geom_histogram(fill = "blue", alpha=0.2) + geom_histogram(data=diff_min_season |> select(diff_rate), fill = "red", alpha=0.2) + theme(legend.location = "right")
 p38
 ```
 
@@ -319,18 +317,16 @@ p38
 
 * Use a t-test to compare the difference between the 21-22 flu season (the one with the minimum peak hospitalization rate) and the 24-25 flu season (the one with the maximum peak hospitalization rate). Are the hospitalization rates significantly different?
 
-Hint: create two new variables called `minSeason` and `maxSeason` by selecting the `weekly_rate` column from `df15_25` and filtering by the desired flu seasons. 
+Hint: create two new variables called `minSeason` and `maxSeason` by selecting the `weekly_rate` column from `df15_25` and filtering by the desired flu seasons.
 
 ```{r 3.10response}
-minSeason <-  df15_25 %>% filter(flu_season == "2021-22") %>% pull(weekly_rate)
-maxSeason <-  df15_25 %>% filter(flu_season == "2024-25") %>% pull(weekly_rate)
+minSeason <- df15_25 |> filter(flu_season == "2021-22") |> pull(weekly_rate)
+maxSeason <- df15_25 |> filter(flu_season == "2024-25") |> pull(weekly_rate)
 mytest = t.test(minSeason, maxSeason)
 mytest
-#Yes, they are significantly different.
+# Yes, they are significantly different.
 ```
 
-## Other resources
+## Other Resources
 
-This is a simple analysis using a t-test. For more sophisticated analysis, you can take a look at the
-`tseries` package for analyzing time series (https://cran.r-project.org/web/packages/tseries/index.html) or the fable` package for forecasting models (https://fable.tidyverts.org/).
-
+This is a simple analysis using a t-test. For more sophisticated analysis, you can take a look at the `tseries` package for analyzing time series (https://cran.r-project.org/web/packages/tseries/index.html) or the `fable` package for forecasting models (https://fable.tidyverts.org/).
