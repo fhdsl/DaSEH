@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
           
       - name: Docker build
-        uses: ottrproject/ottr-docker/.github/workflows/
+        uses: ottrproject/ottr-docker/.github/workflows@main
         with:
           directory: ${{ inputs.directory }}
           tag: ${{ inputs.tag }}
