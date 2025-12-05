@@ -5,7 +5,7 @@ navbar:
   left:
   - text: Apply
     href: https://forms.gle/pfX4zCPFjTinKttaA
-  - text: Course
+  - text: Course Content
     icon: fa-book-open
     menu:
       - text: Materials + Schedule
@@ -14,17 +14,19 @@ navbar:
         href: logistics.html
       - text: Data
         href: data.html
+      - text: Error FAQ
+        href: help.html
   - text: Support
     icon: fa-circle-info
     menu:
       - text: Learning Resources
         href: resources.html
-      - text: Error FAQ
-        href: help.html
       - text: Contact Us
         href: contact.html
       - text: Give Feedback
         href: https://forms.gle/pfX4zCPFjTinKttaA
+  - text: Instructors
+    icon: fa-chalkboard-user
       - text: Instructor Guide
         href: https://forms.gle/pfX4zCPFjTinKttaA
 
