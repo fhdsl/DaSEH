@@ -6,7 +6,7 @@ navbar:
   - text: Apply
     href: https://forms.gle/pfX4zCPFjTinKttaA
   - text: Course
-    icon: fa-gear
+    icon: fa-book-open
     menu:
       - text: Materials + Schedule
         href: materials_schedule.html
@@ -15,7 +15,7 @@ navbar:
       - text: Data
         href: data.html
   - text: Support
-    icon: fa-gear
+    icon: fa-circle-info
     menu:
       - text: Learning Resources
         href: resources.html
