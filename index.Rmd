@@ -59,8 +59,6 @@ Three-day in-person intensive “Code-a-thon”. Here, we'll work on authentic e
 
 The lead instructors have earned recognition for excellence in teaching and have trained hundreds of professional learners. We can't wait to have you in class, too!
 
-We're also supported by our data scientist, `r config::get("ds")`.
-
 <br>
 
 <!-- ## Sign Up! -->
@@ -94,8 +92,5 @@ https://github.com/fhdsl/DaSEH
 
 This page was last updated on `r Sys.Date()`.
 
-<p style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://live.staticflickr.com/4557/26350808799_6f9c8bcaa2_b.jpg" height="150"/> </a> </p><br />
-
-
-
+<p style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png" height="150"/> </a> </p><br />
 

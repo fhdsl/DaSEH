@@ -12,8 +12,7 @@ default:
   research_survey: ""
   
   slack_workspace: "https://daseh.slack.com/"
-  ds: "Candace Savonen (csavonen at fredhutch.org)"
-  instructors: "[Carrie Wright](https://carriewright11.github.io/) (cwright2 @ fredhutch.org), [Ava Hoffman](https://www.avahoffman.com/) (ahoffma2 at fredhutch.org), [Elizabeth Humphries]() (ehumphri at fredhutch.org)"
+  instructors: "[Carrie Wright](https://carriewright11.github.io/), [Ava Hoffman](https://www.avahoffman.com/), [Elizabeth Humphries]()"
   r_version: "(4.4.1 (called 'Race for your Life') as of June 14, 2024)"
   r_dl_mac_m1: "https://cran.r-project.org/bin/macosx/big-sur-arm64/base/R-4.4.1-arm64.pkg"
   r_dl_mac_intel: "https://cran.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.4.1-x86_64.pkg"
