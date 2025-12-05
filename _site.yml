@@ -18,7 +18,7 @@ navbar:
         href: help.html
   - text: Support
     icon: fa-circle-info
-    menu:
+    menu: 
       - text: Learning Resources
         href: resources.html
       - text: Contact Us
@@ -27,6 +27,7 @@ navbar:
         href: https://forms.gle/pfX4zCPFjTinKttaA
   - text: Instructors
     icon: fa-chalkboard-user
+    menu:
       - text: Instructor Guide
         href: https://forms.gle/pfX4zCPFjTinKttaA
 
