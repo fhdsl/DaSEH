@@ -34,6 +34,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="shortcut icon" href="images/favicon.ico" />
  <!--- go to https://favicon.io/favicon-converter/ to upload an image to make a new favicon.io. You will need to replace the current favicon.io image with the one in the downloaded directory from the website. The current image is in the resources/images/ directory --->
 
@@ -263,23 +265,62 @@ $(document).ready(function () {
         <li>
   <a href="https://forms.gle/pfX4zCPFjTinKttaA">Apply</a>
 </li>
-<li>
-  <a href="logistics.html">Logistics</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-book-open"></span>
+     
+    Course Content
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="materials_schedule.html">Materials + Schedule</a>
+    </li>
+    <li>
+      <a href="logistics.html">Course Logistics</a>
+    </li>
+    <li>
+      <a href="data.html">Data</a>
+    </li>
+    <li>
+      <a href="help.html">Error FAQ</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="materials_schedule.html">Materials + Schedule</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-circle-info"></span>
+     
+    Support
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="resources.html">Learning Resources</a>
+    </li>
+    <li>
+      <a href="contact.html">Contact Us</a>
+    </li>
+    <li>
+      <a href="https://forms.gle/pfX4zCPFjTinKttaA">Give Feedback</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="data.html">Data</a>
-</li>
-<li>
-  <a href="resources.html">Resources</a>
-</li>
-<li>
-  <a href="help.html">FAQ / Help</a>
-</li>
-<li>
-  <a href="contact.html">Contact Us</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-chalkboard-user"></span>
+     
+    Instructors
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://forms.gle/pfX4zCPFjTinKttaA">Instructor Guide</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
