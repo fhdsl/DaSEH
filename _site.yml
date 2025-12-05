@@ -5,19 +5,31 @@ navbar:
   left:
   - text: Apply
     href: https://forms.gle/pfX4zCPFjTinKttaA
-  - text: Logistics
-    href: logistics.html
-  - text: Materials + Schedule
-    href: materials_schedule.html
-  - text: Data
-    href: data.html
-  - text: Resources
-    href: resources.html
-  - text: FAQ / Help
-    href: help.html
-  - text: Contact Us
-    href: contact.html
-
+  - text: Course Content
+    icon: fa-book-open
+    menu:
+      - text: Materials + Schedule
+        href: materials_schedule.html
+      - text: Course Logistics
+        href: logistics.html
+      - text: Data
+        href: data.html
+      - text: Error FAQ
+        href: help.html
+  - text: Support
+    icon: fa-circle-info
+    menu: 
+      - text: Learning Resources
+        href: resources.html
+      - text: Contact Us
+        href: contact.html
+      - text: Give Feedback
+        href: https://forms.gle/pfX4zCPFjTinKttaA
+  - text: Instructors
+    icon: fa-chalkboard-user
+    menu:
+      - text: Instructor Guide
+        href: https://forms.gle/pfX4zCPFjTinKttaA
 
 output:
   html_document:
