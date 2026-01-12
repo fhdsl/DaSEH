@@ -379,7 +379,7 @@ where:
 
 * $y_i$ is the outcome for person i
 * $\alpha$ is the intercept
-* $\beta_1$, $\beta_2$, $\beta_2$ are the slopes/coefficients for variables $x_{i1}$, $x_{i2}$, $x_{i3}$ - average difference in y for a unit change (or each value) in x while accounting for other variables
+* $\beta_1$, $\beta_2$, $\beta_3$ are the slopes/coefficients for variables $x_{i1}$, $x_{i2}$, $x_{i3}$ - average difference in y for a unit change (or each value) in x while accounting for other variables
 * $x_{i1}$, $x_{i2}$, $x_{i3}$ are the predictors for person i
 * $\varepsilon_i$ is the residual variation for person i
 
