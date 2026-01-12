@@ -186,20 +186,26 @@ library(broom)</code></pre>
 <h3>1.2</h3>
 <p>Compute the correlation (with <code>cor</code>) between the <code>HousingBurden</code> and <code>LowBirthWeight</code> variables.</p>
 <ul>
-<li>Use <code>select()</code> to choose these columns and save as an object.</li>
+<li>Select columns or extract these columns as vectors.</li>
 <li>Use the <code>cor</code> function on this object.</li>
-<li>Add the use = “complete.obs” argument.</li>
+<li>Add the <code>use = &quot;complete.obs&quot;</code> argument.</li>
 </ul>
 <p><code>HousingBurden</code>: Percentage of housing-burdened low-income households. Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs</p>
 <p><code>LowBirthWeight</code>: Percentage of births that are low birth weight.</p>
 <pre class="r"><code>ces_sub &lt;-
-  ces %&gt;%
+  ces |&gt;
   select(HousingBurden, LowBirthWeight)
 
 cor(ces_sub, use = &quot;complete.obs&quot;)</code></pre>
 <pre><code>##                HousingBurden LowBirthWeight
 ## HousingBurden      1.0000000      0.2841148
 ## LowBirthWeight     0.2841148      1.0000000</code></pre>
+<pre class="r"><code># or
+
+ces_housing &lt;- ces |&gt; pull(HousingBurden)
+ces_bw &lt;- ces |&gt; pull(LowBirthWeight)
+cor(ces_housing, ces_bw, use = &quot;complete.obs&quot;)</code></pre>
+<pre><code>## [1] 0.2841148</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
@@ -210,7 +216,7 @@ cor(ces_sub, use = &quot;complete.obs&quot;)</code></pre>
 <li><code>Asthma</code>: Age-adjusted rate of emergency department visits for asthma.</li>
 </ul>
 <pre class="r"><code>ces_sub &lt;-
-  ces %&gt;%
+  ces |&gt;
   select(HousingBurden, LowBirthWeight, DieselPM, Traffic, Asthma)
 
 cor(ces_sub, use = &quot;complete.obs&quot;)</code></pre>
@@ -231,8 +237,8 @@ cor(ces_sub, use = &quot;complete.obs&quot;)</code></pre>
 <li>Use <code>t.test</code> to compare the two pulled vectors</li>
 <li>Print the results using the <code>tidy</code> function from the <code>broom</code> package</li>
 </ul>
-<pre class="r"><code>losangeles &lt;- ces %&gt;% filter(CaliforniaCounty == &quot;Los Angeles&quot;)
-sandiego &lt;- ces %&gt;% filter(CaliforniaCounty == &quot;San Diego&quot;)
+<pre class="r"><code>losangeles &lt;- ces |&gt; filter(CaliforniaCounty == &quot;Los Angeles&quot;)
+sandiego &lt;- ces |&gt; filter(CaliforniaCounty == &quot;San Diego&quot;)
 
 x &lt;- pull(losangeles, LowBirthWeight)
 y &lt;- pull(sandiego, LowBirthWeight)
@@ -256,9 +262,9 @@ t.test(x, y)</code></pre>
 ## 1    0.618      5.31      4.70      9.20 1.73e-19     1114.    0.486     0.749
 ## # ℹ 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;</code></pre>
 <pre class="r"><code># Another way to look at it..
-ces %&gt;% 
-  group_by(CaliforniaCounty) %&gt;% 
-  summarize(mean = mean(LowBirthWeight, na.rm = TRUE)) %&gt;% 
+ces |&gt; 
+  group_by(CaliforniaCounty) |&gt; 
+  summarize(mean = mean(LowBirthWeight, na.rm = TRUE)) |&gt; 
   filter(CaliforniaCounty %in% c(&quot;Los Angeles&quot;, &quot;San Diego&quot;))</code></pre>
 <pre><code>## # A tibble: 2 × 2
 ##   CaliforniaCounty  mean
@@ -303,7 +309,7 @@ t.test(x, y)</code></pre>
 <li>Colors points (<code>geom_point()</code>) by <code>CaliforniaCounty</code></li>
 </ul>
 <pre class="r"><code>ces_sub &lt;- 
-  ces %&gt;% 
+  ces |&gt; 
   filter(CaliforniaCounty %in% c(&quot;Los Angeles&quot;, &quot;San Diego&quot;))
 
 ggplot(ces_sub, aes(x = Lead, y = HousingBurden, color = CaliforniaCounty)) +
@@ -407,56 +413,77 @@ summary(lmfit_bw3)</code></pre>
 </div>
 <div id="p.4" class="section level3">
 <h3>P.4</h3>
-<p>Let’s make <code>LowBirthWeight</code> into a binary variable, where over 5% low birth weight is “TRUE”.</p>
-<p>The following code creates a column <code>weight_cat</code> with TRUE/FALSE values.</p>
-<pre class="r"><code>ces &lt;- read_csv(&quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;)</code></pre>
-<pre><code>## Rows: 8035 Columns: 67
+<p>Let’s look at a different dataset. This data comes from a research article looking at how well internet searches predicted influenza infections. See the DaSEH website for a link to the paper.</p>
+<p><code>any.flu</code>: how many internet searches related to flu for a given survey respondent</p>
+<p><code>parent</code>: binary variable, is the respondent a parent (1) or not (0)</p>
+<p><code>household.flu</code>: binary variable, did someone in the household have a flu infection (1 = yes, 0 = no).</p>
+<pre class="r"><code>flu &lt;- read_csv(&quot;https://daseh.org/data/Wojcik_2021_flu.csv&quot;)</code></pre>
+<pre><code>## Rows: 654 Columns: 3
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr  (3): CaliforniaCounty, ApproxLocation, CES4.0PercRange
-## dbl (64): CensusTract, ZIP, Longitude, Latitude, CES4.0Score, CES4.0Percenti...
+## dbl (3): any.flu, parent, household.flu
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>ces_bw &lt;- 
-  ces %&gt;% 
-  mutate(weight_cat = LowBirthWeight &gt; 5)</code></pre>
 <p>Fit a logistic regression model where:</p>
 <ul>
-<li>The outcome is <code>weight_cat</code>.</li>
-<li><code>HousingBurden</code>, <code>Poverty</code>, and <code>Education</code> are predictors.</li>
+<li>The outcome is <code>household.flu</code>.</li>
+<li><code>any.flu</code> is the predictor.</li>
 <li>Use <code>glm</code> and family = binomial(link = “logit”).</li>
-<li>Save the model fit in an object called “logfit_bw” and display the summary table with <code>summary()</code>.</li>
+<li>Save the model fit in an object called “logfit_flu” and display the summary table with <code>summary()</code>.</li>
+<li>Try adding <code>parent</code> as a predictor. What is the result?</li>
 </ul>
-<p><code>Poverty</code>: Percent of population living below two times the federal poverty level</p>
-<p><code>Education</code>: Percent of population over 25 with less than a high school education</p>
-<pre class="r"><code>logfit_bw &lt;-
+<pre class="r"><code>logfit_flu &lt;-
   glm(
-    weight_cat ~ HousingBurden + Poverty + Education,
-    data = ces_bw,
+    household.flu ~ any.flu,
+    data = flu,
     family = binomial(link = &quot;logit&quot;)
   )
-summary(logfit_bw)</code></pre>
+summary(logfit_flu)</code></pre>
 <pre><code>## 
 ## Call:
-## glm(formula = weight_cat ~ HousingBurden + Poverty + Education, 
-##     family = binomial(link = &quot;logit&quot;), data = ces_bw)
+## glm(formula = household.flu ~ any.flu, family = binomial(link = &quot;logit&quot;), 
+##     data = flu)
 ## 
 ## Coefficients:
-##                Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)   -1.258807   0.061505 -20.467  &lt; 2e-16 ***
-## HousingBurden  0.020510   0.004060   5.051 4.39e-07 ***
-## Poverty        0.015220   0.002486   6.122 9.27e-10 ***
-## Education      0.017751   0.002689   6.601 4.07e-11 ***
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -0.687308   0.088171  -7.795 6.43e-15 ***
+## any.flu      0.017949   0.009576   1.874   0.0609 .  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 10726  on 7749  degrees of freedom
-## Residual deviance: 10041  on 7746  degrees of freedom
-##   (285 observations deleted due to missingness)
-## AIC: 10049
+##     Null deviance: 845.74  on 653  degrees of freedom
+## Residual deviance: 840.81  on 652  degrees of freedom
+## AIC: 844.81
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<pre class="r"><code>logfit_flu2 &lt;-
+  glm(
+    household.flu ~ any.flu + parent,
+    data = flu,
+    family = binomial(link = &quot;logit&quot;)
+  )
+summary(logfit_flu2)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = household.flu ~ any.flu + parent, family = binomial(link = &quot;logit&quot;), 
+##     data = flu)
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -1.207431   0.115999 -10.409  &lt; 2e-16 ***
+## any.flu      0.019027   0.009475   2.008   0.0446 *  
+## parent       1.461327   0.179685   8.133  4.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 845.74  on 653  degrees of freedom
+## Residual deviance: 772.03  on 651  degrees of freedom
+## AIC: 778.03
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 </div>

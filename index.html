@@ -13,7 +13,7 @@
 
 <title>  </title>
 
-<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -32,6 +32,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="shortcut icon" href="images/favicon.ico" />
  <!--- go to https://favicon.io/favicon-converter/ to upload an image to make a new favicon.io. You will need to replace the current favicon.io image with the one in the downloaded directory from the website. The current image is in the resources/images/ directory --->
 
@@ -261,20 +263,62 @@ $(document).ready(function () {
         <li>
   <a href="https://forms.gle/pfX4zCPFjTinKttaA">Apply</a>
 </li>
-<li>
-  <a href="logistics.html">Logistics</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-book-open"></span>
+     
+    Course Content
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="materials_schedule.html">Materials + Schedule</a>
+    </li>
+    <li>
+      <a href="logistics.html">Course Logistics</a>
+    </li>
+    <li>
+      <a href="data.html">Data</a>
+    </li>
+    <li>
+      <a href="help.html">Error FAQ</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="materials_schedule.html">Materials + Schedule</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-circle-info"></span>
+     
+    Support
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="resources.html">Learning Resources</a>
+    </li>
+    <li>
+      <a href="contact.html">Contact Us</a>
+    </li>
+    <li>
+      <a href="https://forms.gle/pfX4zCPFjTinKttaA">Give Feedback</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="data.html">Data</a>
-</li>
-<li>
-  <a href="resources.html">Resources</a>
-</li>
-<li>
-  <a href="help.html">FAQ / Help</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-chalkboard-user"></span>
+     
+    Instructors
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://forms.gle/pfX4zCPFjTinKttaA">Instructor Guide</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -324,9 +368,8 @@ $(document).ready(function () {
 </div>
 <div id="instructors" class="section level4">
 <h4>Instructors</h4>
-<p><a href="https://carriewright11.github.io/">Carrie Wright</a> (cwright2 @ fredhutch.org), <a href="https://www.avahoffman.com/">Ava Hoffman</a> (ahoffma2 at fredhutch.org), <a href="">Elizabeth Humphries</a> (ehumphri at fredhutch.org)</p>
+<p><a href="https://carriewright11.github.io/">Carrie Wright</a>, <a href="https://www.avahoffman.com/">Ava Hoffman</a>, <a href="">Elizabeth Humphries</a></p>
 <p>The lead instructors have earned recognition for excellence in teaching and have trained hundreds of professional learners. We can’t wait to have you in class, too!</p>
-<p>We’re also supported by our data scientist, Candace Savonen (csavonen at fredhutch.org).</p>
 <p><br></p>
 <!-- ## Sign Up! -->
 <!-- *** -->
@@ -348,9 +391,9 @@ $(document).ready(function () {
 <h2>Find an Error!?</h2>
 <hr />
 <p>Feel free to submit typos/errors/etc via the GitHub repository associated with the class: <a href="https://github.com/fhdsl/DaSEH" class="uri">https://github.com/fhdsl/DaSEH</a></p>
-<p>This page was last updated on 2025-05-22.</p>
+<p>This page was last updated on 2025-12-05.</p>
 <p style="text-align:center;">
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://live.staticflickr.com/4557/26350808799_6f9c8bcaa2_b.jpg" height="150"/> </a>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png" height="150"/> </a>
 </p>
 <p><br /></p>
 </div>

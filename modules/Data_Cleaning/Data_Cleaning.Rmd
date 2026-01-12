@@ -944,7 +944,7 @@ ces |> mutate(num_col_mutate = Longitude * Latitude) |> pull(num_col_mutate)
 ```{r}
 ces |> mutate(num_new =  case_when(
   Longitude < -121 & Latitude > 37.8 ~  Longitude * Latitude),
-  .defualt = NA) |> 
+  .default = NA) |> 
   pull(num_new)
 ```
 

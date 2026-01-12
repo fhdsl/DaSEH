@@ -1,0 +1,363 @@
+---
+title: "Wastewater Analysis Using R"
+output:
+  ioslides_presentation:
+    css: ../../docs/styles.css
+    widescreen: true
+  beamer_presentation: default
+---
+
+```{r, echo = FALSE, include=FALSE}
+library(knitr)
+opts_chunk$set(fig.height = 4,
+               fig.width = 7,
+               comment = "")
+library(readr)
+suppressPackageStartupMessages(library(dplyr))
+library(tidyverse)
+library(emoji)
+```
+
+## Introduction
+
+In this module, we will analyze a wastewater dataset from the CDC to investigate how COVID-19 viral levels change through time. 
+
+We will learn ways to manipulate dates in R using the library **lubridate** (part of the Tidyverse package). 
+
+## Recap: Dates and Times in R
+
+There are two most popular R classes used when working with dates and times: 
+
+- `Date` class representing a calendar date
+- `POSIXct` class representing a calendar date with hours, minutes, seconds
+
+A date-time object in R is a point on the timeline stored as the number of seconds since *January 1st, 1970, 00:00 UTC*. This date is also called the **Unix epoch** and serves as a reference by computer systems to track and operate with time. 
+
+## The `lubridate` Package
+
+The lubridate package allows us to work with dates and times in a simple and efficient way. 
+
+In this module, we will learn to:
+
+- Input dates in different formats
+- Perform basic operations with dates
+- Extract components of dates
+
+## `lubridate` First Needs to Understand the Date Format
+
+You tell lubridate how to "read" your character object.
+
+```{r}
+# YYYY-M-DD
+a <- ymd("2024-9-20")
+
+# DD/MM/YYYY
+a <- dmy("20/09/2024")
+
+# MM-DD-YY
+a <- mdy("09-20-24")
+```
+
+## Extract the Components of a Date with `lubridate`
+
+Year, month, and day of the month (`mday`): 
+
+```{r}
+a <- ymd_hms("2024-09-20 3:59:01")
+year(a)
+month(a)
+mday(a)
+```
+
+## Extract the Components of a Date (Continued)
+
+Day of the year (`yday`), day of the week (`wday`), hour, minute, and seconds:
+
+```{r}
+yday(a)
+wday(a)
+hour(a)
+minute(a)
+second(a)
+```
+
+## Perform Operations with Dates
+
+```{r}
+a <- ymd("2024-09-20")
+b <- ymd("2025-07-15")
+b - a
+a - ymd("2024-08-20")
+year(a) - 1989
+```
+
+## Gut Check
+
+What does the package `lubridate` allow us to do?
+
+- Work with dates in R
+- Produce time series data
+- Plot time series data
+
+## Data Used
+
+We will use data reporting the level of SARS-CoV-2 (the virus responsible for COVID-19) viral particles in wastewater.
+
+This data reports the level of SARS-CoV-2 at the state, regional, and national level through time. According to this website, national, regional, and state/territory data represent the median values across all wastewater treatment plants in the respective area.
+
+You can read about the data and how it was collected here: https://www.cdc.gov/nwss/rv/COVID19-statetrend.html
+
+## Download the Data{.codesmall}
+
+We will use the data located here:
+
+```{r, message = FALSE}
+dat <- read_csv("http://daseh.org/data/wastewater_COVID-19_State_and_Territory_Trends.csv")
+```
+
+## Clean Up the Data a Little Bit
+
+Some column names contain `/` and spaces, which are not standard form. We will change them so it is easier to work with them. 
+
+To do so, we use the function `clean_names` in the `janitor` package.
+
+```{r message=FALSE}
+library(janitor)
+dat1 <- dat |> clean_names()
+```
+
+## Clean Up the Data a Little Bit{.codesmall} 
+
+Look at the column names of the old dataset (called `dat`) and the column names of the new dataset (called `dat1`). The new names are all in lower case with underscores between words.
+
+```{r}
+colnames(dat)
+colnames(dat1)
+```
+
+## Mission: Understand the Trends of COVID-19 Disease Through Time in Different Parts of the United States
+
+Let's imagine we want to understand how SARS-CoV-2 infections (and hence COVID-19 disease) change through time in three different parts of the US: the East coast, the West coast, and the Midwest. We want to obtain plots that should look like this:
+
+```{r, echo=FALSE, results='hide',message=FALSE}
+temp <- dat |> clean_names() |> filter(state_territory %in% c("California", "Colorado", "Maine"))
+```
+
+```{r, fig.align='center', echo=FALSE}
+ggplot(data = temp,
+       aes(x = week_ending_date, y = state_territory_wval, color = state_territory)) +
+  geom_line(linewidth = 0.8) +
+  theme(text = element_text(size = 18))
+```
+
+## Clean Up the Data (Continued){.codesmall} 
+
+We will not be using the columns `Coverage` and `date_updated`, so we will remove them from our data frame. We will conduct our analysis using all the results available, so we will remove the rows with results at 1 year or every 6 months.
+
+```{r}
+dat2 <- dat1 |> select(!c(coverage, date_updated)) |> filter(data_collection_period == "All Results")
+head(dat2)
+```
+
+## Select 3 States to Look At{.codesmall} 
+
+We will select three states in the US in three different parts (East, Center, West) to look at their wastewater data: South Carolina, Nebraska, and Washington. 
+
+```{r}
+df <- dat2 |> filter(state_territory %in% c('South Carolina', 'Nebraska', 'Washington'))
+head(df)
+```
+
+## Look at the Data{.codesmall}
+
+We will plot the data using ggplot:
+
+```{r, fig.align='center'}
+ggplot(data = df,
+       aes(x = week_ending_date, y = state_territory_wval, color = state_territory)) +
+  geom_line(linewidth = 0.8) +
+  theme(text = element_text(size = 18))
+```
+
+## Split the Plots to See the Patterns More Clearly{.codesmall}
+
+```{r, fig.align='center'}
+ggplot(data = df,
+       aes(x = week_ending_date, y = state_territory_wval, color = state_territory)) +
+  geom_line(linewidth = 0.8) + theme(text = element_text(size = 18)) + facet_grid(state_territory ~ .)
+```
+
+## What Can We Say About This Data?
+
+- There is a seasonality pattern for each state
+- The peaks of the 2023-2024 winter season occurred at slightly different times in each state
+- Most of the big waves happen in winter time, but all three states had a summer outbreak in 2024
+
+## Zoom In With the Data
+
+Now, we want to investigate the size of the summer outbreak in each state in 2024.
+
+We use `lubridate` to select only the data from year 2024:
+
+## Quick Quiz
+
+Do you remember how to extract the year from a date called `mydate`?
+
+1. `year(mydate)`
+2. `extract(year, mydate)`
+3. `mydate.year()`
+
+## Extract the Data for Year 2024
+
+```{r}
+df2024 <- df |> filter(year(week_ending_date) == 2024)
+head(df2024)
+```
+
+## Obtain the Peak Viral Level in Each State{.codesmall}
+
+First, we need to group the data by state. We use the function `group_by` from `dplyr` to do it:
+
+```{r, eval=FALSE} 
+maxRows <- df2024  |> group_by(state_territory) |> 
+```
+
+Then retrieve the rows with the peak level:
+
+```{r, eval=FALSE} 
+maxRows <- df2024  |> group_by(state_territory) |> ???
+```
+
+How do we do this?
+
+## Quick Quiz
+
+Do you remember what function to use to obtain the peak level?
+
+1. `max(dat)`
+2. `min(dat)`
+3. `unique(dat)`
+
+## Obtain the Peak Viral Level in Each State{.codesmall}
+
+To do this, we need to group the data by state and retrieve the rows with the maximum level:
+
+```{r}
+maxRows <- df2024  |> group_by(state_territory) |> 
+          filter(state_territory_wval == max(state_territory_wval, na.rm=TRUE)) 
+maxRows
+```
+
+## Extract the Peak Wastewater Levels for Each State{.codesmall}
+
+We will compute the date of the summer peak in each state:
+
+```{r}
+Nebraska_peak <- maxRows %>% filter(state_territory=="Nebraska") %>% 
+                             pull(week_ending_date)
+South_Carolina_peak <- maxRows %>% filter(state_territory=="South Carolina") %>% 
+                                   pull(week_ending_date)
+Washington_peak <- maxRows %>% filter(state_territory=="Washington") %>% 
+                               pull(week_ending_date)
+Nebraska_peak
+South_Carolina_peak
+Washington_peak
+```
+
+## Days Between Peaks{.codesmall}
+
+Compute the Number of Days Between the Peak Wastewater Levels for Each State During the Summer Wave:
+
+Difference between South Carolina and Nebraska:
+
+```{r}
+Nebraska_peak - South_Carolina_peak
+```
+
+Difference between South Carolina and Washington:
+
+```{r}
+South_Carolina_peak - Washington_peak
+```
+
+Difference between Nebraska and Washington:
+
+```{r}
+Nebraska_peak - Washington_peak
+```
+
+## Summer Wave
+
+From this data, we can see that South Carolina and Washington had a summer wave that peaked 21 days apart. 
+
+However, the maximum calculated for Nebraska corresponds to the winter wave, not to the summer wave.
+
+```{r, echo = FALSE, fig.align='center', out.width= "45%"}
+knitr::include_graphics("images/confused_emoji.jpeg")
+```
+
+## Let's Look Again at the Plot, but This Time Restricted to the Year 2024{.codesmall}
+
+```{r, fig.align='center'}
+ggplot(data = df2024,
+       aes(x = week_ending_date, y = state_territory_wval, color = state_territory)) +
+  geom_line(linewidth = 0.8) + theme(text = element_text(size = 18)) + facet_grid(state_territory ~ .)
+```
+
+## Summer Wave (Continued)
+
+How can we obtain the day that the wastewater measurement reached the maximum level for Nebraska in the summer?
+
+## Summer Wave (Continued){.codesmall}
+
+We will further zoom our attention to the summer months and modify the code to look at the data for the months of June, July, and August 2024:
+
+```{r}
+maxRows <- df2024 |> filter(month(week_ending_date) %in% c(06, 07, 08)) |>
+                      group_by(state_territory) |>
+                      filter(state_territory_wval == max(state_territory_wval, na.rm=TRUE))
+                                                          
+maxRows
+```
+
+## Re-compute the Peaks in the Summer{.codesmall}
+
+Now we can re-compute the number of days between the peak wastewater levels for each state during the summer wave:
+
+```{r}
+Nebraska_peak <- maxRows %>% filter(state_territory=="Nebraska") %>% 
+                             pull(week_ending_date)
+South_Carolina_peak <- maxRows %>% filter(state_territory=="South Carolina") %>% 
+                                   pull(week_ending_date)
+Washington_peak <- maxRows %>% filter(state_territory=="Washington") %>% 
+                               pull(week_ending_date)
+Nebraska_peak
+South_Carolina_peak
+Washington_peak
+```
+
+## Number of Days Between Summer Peaks
+
+Difference between South Carolina and Nebraska:
+
+```{r}
+Nebraska_peak - South_Carolina_peak
+```
+
+Difference between South Carolina and Washington:
+
+```{r}
+South_Carolina_peak - Washington_peak
+```
+
+Difference between Nebraska and Washington:
+
+```{r}
+Nebraska_peak - Washington_peak
+```
+
+## Conclusion
+
+- South Carolina and Washington had a summer wave that peaked 21 days apart
+- Nebraska and Washington had a summer wave that peaked 28 days apart
+- Nebraska and South Carolina had a summer wave that peaked one week apart
