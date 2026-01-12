@@ -758,17 +758,27 @@ The smaller the p-value, the more likely the data violates normality assumptions
 
 ## Kolmogorov-Smirnov test
 
+Can tell you if two groups come from different distributions.
+
 `ks.test()`
 
+The smaller the p-value, the more likely the data are from different distributions.
+
 ## Fisher’s F-Test
+
+Performs an F test to compare the variances of two samples from normal populations.
 
 `var.test()`
 
 ## Chi-squared test
 
+For categorical data/ratios, can tell you if observations match expected values or if two categorical variables are independent.
+
 `chisq.test()`
 
 ## Analysis of Variance (ANOVA)
+
+For balanced designs, determine if multiple variables influence a dependent variable. "Within versus among group variance".
 
 `aov()`
 
