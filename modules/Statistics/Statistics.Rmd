@@ -736,5 +736,50 @@ knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 
 Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=812226">Pixabay</a>
 
+# Extra Slides
+
+## Wilcoxon Test
+
+The Wilcoxon test is a good alternative to the t-test when the normal distribution of the differences between paired individuals cannot be assumed.
+
+`wilcox.test(x, y, ..)`
+
+- Like t-test, provide one or two vectors (x, y)
+- Choose from `alternative = c("two.sided", "less", "greater")`
+- Use `paired = TRUE` for paired values (e.g., before and after)
+
+## Shapiro Test
+
+Can tell you if a vector is normally distributed. 
+
+`shapiro.test(x)`
+
+The smaller the p-value, the more likely the data violates normality assumptions.
+
+## Kolmogorov-Smirnov test
+
+Can tell you if two groups come from different distributions.
+
+`ks.test()`
+
+The smaller the p-value, the more likely the data are from different distributions.
+
+## Fisher’s F-Test
+
+Performs an F test to compare the variances of two samples from normal populations.
+
+`var.test()`
+
+## Chi-squared test
+
+For categorical data/ratios, can tell you if observations match expected values or if two categorical variables are independent.
+
+`chisq.test()`
+
+## Analysis of Variance (ANOVA)
+
+For balanced designs, determine if multiple variables influence a dependent variable. "Within versus among group variance".
+
+`aov()`
 
 
