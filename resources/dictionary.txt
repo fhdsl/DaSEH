@@ -123,12 +123,14 @@ hrbr
 http
 HTTPS
 https
+hu
 Humphries
 HW
 hydrocodone
 ide
 ifelse
 Ihaka
+ILI
 IMG
 inclusivity
 inute
@@ -181,6 +183,7 @@ NISSANs
 nizovatina
 NonCommercial
 nonconfidential
+noveh
 NWSS
 obert
 ocs
