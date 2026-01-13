@@ -452,34 +452,31 @@ For example, if we want to fit a regression model where outcome is `income` and 
 
 ## Linear regression example
 
-Let's look variables that might be able to predict the number of heat-related ER visits in Colorado.
+Let's look variables that might be able to predict the number of "crowded" households.
 
-We'll use the dataset that has ER visits separated out by age category.
+We'll use a dataset that has socioeconomic measures from CDC. Find out more on https://daseh.org/data.
 
-We'll combine this with a new dataset that has some weather information about summer temperatures in Denver, downloaded from [https://www.weather.gov/bou/DenverSummerHeat](https://www.weather.gov/bou/DenverSummerHeat). 
+It has already been filtered to include a few counties from Washington State.
 
-We will use this as a proxy for temperatures for the state of CO as a whole for this example.
+Each row represents a census tract/area.
 
 ## Linear regression example{.codesmall}
 
 ```{r}
-er <- read_csv(file = "https://daseh.org/data/CO_ER_heat_visits_by_age.csv")
+sp_dat <- read_csv(file = "https://daseh.org/data/socioeco_cdc.csv")
 
-temps <- read_csv(file = "https://daseh.org/data/Denver_heat_data.csv")
-
-er_temps <- full_join(er, temps)
-er_temps
+sp_dat
 ```
 
 ## Linear regression: model fitting{.codesmall}
 
 For this model, we will use two variables:
 
-- **visits** - number of visits to the ER for heat-related illness
-- **highest_temp** - the highest recorded temperature of the summer
+- **crowd** - At household level (occupied housing units), more people than rooms
+- **hu** - Number of housing units 
 
 ```{r}
-fit <- glm(visits ~ highest_temp, data = er_temps)
+fit <- glm(crowd ~ hu, data = sp_dat)
 fit
 ```
 
@@ -497,7 +494,7 @@ The broom package can help us here too!
 
 The estimate is the coefficient or slope.
 
-for every 1 degree increase in the highest temperature, we see 1.134 more heat-related ER visits. The error for this estimate is pretty big at 3.328. This relationship appears to be insignificant with a p value = 0.735.
+for every 1 additional housing unit, we see 0.035 more crowded households (~29 housing units to one more crowded household might make more sense!). This relationship appears to be quite strong, with a p value 7.96e-44!
 
 ```{r}
 tidy(fit) |> glimpse()
@@ -505,10 +502,10 @@ tidy(fit) |> glimpse()
 
 ## Linear regression: multiple predictors {.smaller}
 
-Let's try adding another other explanatory variable to our model, year (`year`).
+Let's try adding another other explanatory variable to our model, average per capita income for each census area (`pci`).
 
 ```{r}
-fit2 <- glm(visits ~ highest_temp + year, data = er_temps)
+fit2 <- glm(crowd ~ hu + pci, data = sp_dat)
 summary(fit2)
 ```
 
@@ -526,12 +523,11 @@ fit2 |>
 
 Factors get special treatment in regression models - lowest level of the factor is the comparison group, and all other factors are **relative** to its values.
 
-Let's add age category (`age`) as a factor into our model. We'll need to convert it to a factor first.
+Let's add the county (`county`) as a factor into our model. We'll need to convert it to a factor first.
 
 ```{r}
-er_temps <- er_temps |> mutate(age = factor(age))
+sp_dat <- sp_dat |> mutate(county = factor(county))
 ```
-
 
 ## Linear regression: factors {.smaller}
 
@@ -539,38 +535,25 @@ The comparison group that is not listed is treated as intercept. All other estim
 
 ```{r regressbaseline, comment="", fig.height=4,fig.width=8}
 
-fit3 <- glm(visits ~ highest_temp + year + age, data = er_temps)
+fit3 <- glm(crowd ~ hu + pci + county, data = sp_dat)
 summary(fit3)
 ```
 
 ## Linear regression: factors {.smaller}
 
-Maybe we want to use the age group "65+ years" as our reference. We can relevel the factor.
+Maybe we want to use King County as our reference. We can relevel the factor.
 
-The ages are relative to the level that is not listed.
+The counties are relative to the level that is not listed.
 
 ```{r}
-er_temps <- 
-  er_temps |> 
-  mutate(age = factor(age,
-    levels = c("65+ years", "35-64 years", "15-34 years", "5-14 years", "0-4 years")
+sp_dat <- 
+  sp_dat |> 
+  mutate(county = factor(county,
+    levels = c("King", "Clark", "Pierce", "Snohomish", "Spokane")
   ))
   
-fit4 <- glm(visits ~ highest_temp + year + age, data = er_temps)
+fit4 <- glm(crowd ~ hu + pci + county, data = sp_dat)
 summary(fit4)
-```
-
-## Linear regression: factors {.smaller}
-
-You can view estimates for the comparison group by removing the intercept in the GLM formula 
-
-`y ~ x - 1`
-
-*Caveat* is that the p-values change, and interpretation is often confusing.
-
-```{r regress9, comment="", fig.height=4, fig.width=8}
-fit5 <- glm(visits ~ highest_temp + year + age - 1, data = er_temps)
-summary(fit5)
 ```
 
 ## Linear regression: interactions
@@ -583,12 +566,11 @@ knitr::include_graphics("images/interaction.png")
 
 ## Linear regression: interactions {.smaller}
 
-You can also specify interactions between variables in a formula `y ~ x1 + x2 + x1 * x2`. This allows for not only the intercepts between factors to differ, but also the slopes with regard to the interacting variable.
+You can also specify interactions between variables in a formula with `*`. This allows for not only the intercepts between factors to differ, but also the slopes with regard to the interacting variable.
 
 ```{r fig.height=4, fig.width=8}
-fit6 <- glm(visits ~ highest_temp + year + age + age*highest_temp, data = er_temps
-) 
-tidy(fit6)
+fit5 <- glm(crowd ~ hu + pci * county, data = sp_dat)
+summary(fit5)
 ```
 
 ## Linear regression: interactions {.smaller}
@@ -596,8 +578,8 @@ tidy(fit6)
 By default, `ggplot` with a factor added as a color will look include the interaction term. Notice the different intercept and slope of the lines.
 
 ```{r fig.height=3.5, fig.width=7, warning=FALSE}
-ggplot(er_temps, aes(x = highest_temp, y = visits, color = age)) +
-  geom_point(size = 1, alpha = 0.1) +
+ggplot(sp_dat, aes(x = pci, y = hu, color = county)) +
+  geom_point(size = 1, alpha = 0.2) +
   geom_smooth(method = "glm", se = FALSE) +
   theme_classic()
 ```
@@ -620,21 +602,19 @@ See `?family` documentation for details of family functions.
 
 ## Logistic regression {.smaller}
 
-Let's look at a logistic regression example. We'll use the `er_temps` dataset again. 
+Let's look at a logistic regression example. We'll use the `sp_dat` dataset again with a different variable.
 
-We will create a new binary variable `high_rate`. We will say a visit rate of more than 8 qualifies as a high visit rate.
+- **f_crowd** - Flag for the percentage of crowded households is in the 90th percentile (1 = yes, 0 = no)
+
+There are 36 census tracks in the 90th percentile for crowded households.
 
 ```{r}
-er_temps <-
-  er_temps |> mutate(high_rate = rate > 8)
-
-glimpse(er_temps)
+sp_dat |> count(f_crowd)
 ```
-
 
 ## Logistic regression {.smaller}
 
-Let's explore how `highest_temp`, `year`, and `age` might predict `high_rate`.
+Let's explore how `hu`, `pci`, and `county` might predict `f_crowd`.
 
 ```
 # General format
@@ -642,14 +622,14 @@ glm(y ~ x, data = DATASET_NAME, family = binomial(link = "logit"))
 ```
 
 ```{r regress7, comment="", fig.height=4,fig.width=8}
-binom_fit <- glm(high_rate ~ highest_temp + year + age, data = er_temps, family = binomial(link = "logit"))
+binom_fit <- glm(f_crowd ~ hu + pci + county, 
+                 data = sp_dat, family = binomial(link = "logit"))
 summary(binom_fit)
 ```
 
 ## Logistic Regression
 
 See this [case study](https://www.opencasestudies.org/ocs-bp-vaping-case-study/#Logistic_regression_%E2%80%9Cby_hand%E2%80%9D_and_by_model) for more information.
-
 
 ## Odds ratios
 
@@ -661,34 +641,27 @@ Use `oddsratio(x, y)` from the `epitools()` package to calculate odds ratios.
 
 ## Odds ratios {.smaller}
 
-During the years 2012, 2018, 2021, and 2022, there were multiple consecutive days with temperatures above 100 degrees. We will code this as `heatwave`.
+Let's see if a high prevalence of no vehicle homes can predict a high prevalence of crowded homes.
+
+- **f_noveh** - Flag for the percentage of households with no vehicles is in the 90th percentile (1 = yes, 0 = no)
+- **f_crowd** - Flag for the percentage of crowded households is in the 90th percentile (1 = yes, 0 = no)
+
+## Odds ratios
+
+In this case, we're calculating the odds ratio for census areas, indicating whether a prevalence of no vehicle households is associated with more crowded households. 
 
 ```{r}
 library(epitools)
 
-er_temps <-
-  er_temps |>
-  mutate(heatwave = year %in% c(2012, 2018, 2021, 2022))
-
-glimpse(er_temps)
+response <- sp_dat %>% pull(f_crowd)
+predictor <- sp_dat %>% pull(f_noveh)
 ```
 
 ## Odds ratios {.smaller}
 
-In this case, we're calculating the odds ratio for whether a heatwave is associated with having a visit rate greater than 8. 
+The Odds Ratio is 3.33.
 
-```{r}
-response <- er_temps |> pull(high_rate)
-predictor <- er_temps |> pull(heatwave)
-
-oddsratio(predictor, response)
-```
-
-## Odds ratios {.smaller}
-
-The Odds Ratio is 3.86.
-
-When the predictor is TRUE (aka it was a heatwave year), the odds of the response (high hospital visitation) are 3.86 times greater than when it is FALSE (not a heatwave year).
+When the predictor is 1 (aka the census area has a lot of no vehicle households), the odds of the response (prevalence of crowded homes) are 3.33 times greater than when it is 0 (not a lot of no vehicle households).
 
 ```{r echo = FALSE}
 oddsratio(predictor, response)
@@ -782,4 +755,61 @@ For balanced designs, determine if multiple variables influence a dependent vari
 
 `aov()`
 
+## More on Linear regression: factors {.smaller}
 
+You can view estimates for the comparison group by removing the intercept in the GLM formula 
+
+`y ~ x - 1`
+
+*Caveat* is that the p-values change, and interpretation is often confusing.
+
+```{r regress9, comment="", fig.height=4, fig.width=8}
+fit_force_intercept <- 
+  glm(crowd ~ pci + sngpnt + county - 1, data = sp_dat)
+summary(fit_force_intercept)
+```
+
+<!-- Raw data from https://hub.scag.ca.gov/datasets/18981b657cf04f2dbe0df065f20581db_5/about : -->
+
+<!-- ```{r} -->
+<!-- wa_dat2 <- -->
+<!--   read_csv(file = "CDC_Social_Vulnerability_Index_2018_271880276067137134.csv") %>% -->
+<!--   select( -->
+<!--     "State Name", -->
+<!--     "COUNTY", -->
+<!--     "FIPS", -->
+<!--     "Text description of tract, county, state", -->
+<!--     "Per capita income estimate, 2014-2018 ACS", -->
+<!--     "Housing units estimate, 2014-2018 ACS", -->
+<!--     "Housing in structures with 10 or more units estimate, 2014-2018 ACS", -->
+<!--     "Single parent household with children under 18 estimate, 2014-2018 ACS", -->
+<!--     "At household level (occupied housing units), more people than rooms estimate, 2014-2018 ACS", -->
+<!--     "Households with no vehicle available estimate, 2014-2018 ACS", -->
+<!--     "Flag - the percentage of single parent households is in the 90th percentile (1 = yes, 0 = no)", -->
+<!--     "Flag - the percentage of crowded households is in the 90th percentile (1 = yes, 0 = no)", -->
+<!--     "Flag - the percentage of households with no vehicles is in the 90th percentile (1 = yes, 0 = no)" -->
+<!--   ) %>% -->
+<!--   rename( -->
+<!--     state = "State Name", -->
+<!--     county = "COUNTY", -->
+<!--     description = "Text description of tract, county, state", -->
+<!--     pci = "Per capita income estimate, 2014-2018 ACS", -->
+<!--     hu = "Housing units estimate, 2014-2018 ACS", -->
+<!--     crowd = "At household level (occupied housing units), more people than rooms estimate, 2014-2018 ACS", -->
+<!--     munit = "Housing in structures with 10 or more units estimate, 2014-2018 ACS", -->
+<!--     sngpnt = "Single parent household with children under 18 estimate, 2014-2018 ACS", -->
+<!--     noveh = "Households with no vehicle available estimate, 2014-2018 ACS", -->
+<!--     f_sngpnt = "Flag - the percentage of single parent households is in the 90th percentile (1 = yes, 0 = no)", -->
+<!--     f_crowd = "Flag - the percentage of crowded households is in the 90th percentile (1 = yes, 0 = no)", -->
+<!--     f_noveh = "Flag - the percentage of households with no vehicles is in the 90th percentile (1 = yes, 0 = no)" -->
+<!--   ) -->
+
+<!-- sp_dat <-  -->
+<!--   janitor::clean_names(wa_dat2) %>%  -->
+<!--   filter(county %in% c("King", "Pierce", "Snohomish", "Spokane", "Clark"), state == "WASHINGTON") %>% -->
+<!--   mutate(across(where(is.numeric), ~na_if(., -999))) %>%  -->
+<!--   select(!c(state)) %>%  -->
+<!--   drop_na() -->
+
+<!-- write_csv(sp_dat, "socioeco_cdc.csv") -->
+<!-- ``` -->
