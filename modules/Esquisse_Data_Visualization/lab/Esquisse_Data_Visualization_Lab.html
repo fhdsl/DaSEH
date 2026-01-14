@@ -174,8 +174,8 @@ library(tidyverse)</code></pre>
 <pre><code>FALSE ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 FALSE ✔ dplyr     1.1.4     ✔ readr     2.1.5
 FALSE ✔ forcats   1.0.0     ✔ stringr   1.5.1
-FALSE ✔ lubridate 1.9.3     ✔ tibble    3.2.1
-FALSE ✔ purrr     1.0.2     ✔ tidyr     1.3.1
+FALSE ✔ lubridate 1.9.4     ✔ tibble    3.2.1
+FALSE ✔ purrr     1.0.4     ✔ tidyr     1.3.1
 FALSE ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 FALSE ✖ dplyr::filter() masks stats::filter()
 FALSE ✖ dplyr::lag()    masks stats::lag()
@@ -198,7 +198,7 @@ FALSE ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to f
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>ces_sub &lt;- select(ces, c(&quot;CES4.0Percentile&quot;, &quot;Asthma&quot;, &quot;ChildrenPercLess10&quot;))
 
-ces_sub &lt;- ces_sub %&gt;% 
+ces_sub &lt;- ces_sub |&gt; 
             mutate(CES4.0Perc_cat = 
               case_when(CES4.0Percentile &gt; 75  ~ &quot;High&quot;, 
                         CES4.0Percentile &lt;= 75 &amp; CES4.0Percentile &gt;25 ~ &quot;Middle&quot;,
@@ -229,12 +229,12 @@ ces_sub &lt;- ces_sub %&gt;%
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>cc &lt;- read_csv(&quot;https://daseh.org/data/Yearly_CC_Disasters.csv&quot;)</code></pre>
-<pre><code>## Rows: 970 Columns: 53
+<pre class="r"><code>cc &lt;- read_csv(&quot;https://daseh.org/data/Yearly_CC_disasters_total_affected.csv&quot;)</code></pre>
+<pre><code>## Rows: 9720 Columns: 3
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
-## chr  (9): Country, ISO2, ISO3, Indicator, Unit, Source, CTS Code, CTS Name, ...
-## dbl (44): ObjectId, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 19...
+## chr (1): country
+## dbl (2): year, total_affected
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
