@@ -46,6 +46,8 @@ Claremont
 Clif
 Cmd
 CMD
+Codeathon
+codeathon
 codeexample
 codesmall
 collegial

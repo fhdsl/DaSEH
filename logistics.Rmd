@@ -15,7 +15,7 @@ Data Science for Environmental Health (DaSEH) is a short course that combines **
 
 We focus on building R skills in the online portion of the course. When in-person, we focus on project skills, working with real datasets.
 
-September 30 - October 10 (online/virtual course) + October 23-25 (in person in Seattle)
+DaSEH takes place over these dates: _`r config::get("online_dates")`_ and _`r config::get("codeathon_dates")`_.
 
 <br>
 
@@ -27,7 +27,15 @@ We have designed DaSEH for the following audience:
 - Educators who want programming and data science skills with a focus on environmental health
 - Practitioners, professionals, researchers, or advanced students from [Minority Serving Institutions](https://msiexchange.nasa.gov/pdf/2023-2024%20MSI%20List.pdf) or institutions without training opportunities like DaSEH.
 
-We especially encourage participants to join who are [underrepresented in data and health sciences](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-20-031.html).
+We especially encourage participants to join who are [underrepresented in data and health sciences](https://web.archive.org/web/20250109093953/https://grants.nih.gov/grants/guide/notice-files/NOT-OD-20-031.html).
+
+<br>
+
+## Instructors
+
+`r config::get("instructors")`
+
+The lead instructors have earned recognition for excellence in teaching and have trained hundreds of professional learners. We can't wait to have you in class, too!
 
 <br>
 
@@ -50,15 +58,18 @@ By the end of the course, learners should be comfortable:
 
 - To get the most out of this class, if possible, we suggest working virtually with a **large monitor or two screens**. This setup allows you to follow along on Zoom while also doing the hands-on coding.  
 - If possible, we also **highly suggest** working in RStudio on the **same computer** as the one you connect with Zoom and Slack, so that you can copy and paste your code if needed or share your code from your screen.
+- We are going to cover a ton of information! It will help to clear your schedule as much as you can so that you can get the most out of DaSEH.
 
-## Online Portion
+<br>
+
+## PART 1: Online R Course
 
 <br>
 
 #### When & Where
 
-- **Dates** : September 30 - October 10  
-- **Time** : 10:30am - 2pm Pacific Time  
+- **Dates** : _`r config::get("online_dates")`_ 
+- **Time** : _`r config::get("online_times")`_
 - Course lectures and labs will be online through Zoom  
 - Zoom link and Slack link will be emailed to students  
 - Communication will mainly occur through Slack  
@@ -96,16 +107,16 @@ By the end of the course, learners should be comfortable:
 
 <br>
 
-## In-person Portion
+## PART 2: In-person Codeathon
 
 <br>
 
 
 #### When & Where
 
-- **Dates:** October 23-25  
-- **Time:** 9:30 am - 4 pm Pacific Time  
-- The Code-a-thon will take place at [Fred Hutch Cancer Center](https://maps.app.goo.gl/LRV4D4mELB5VzbWm8) in Seattle, WA.  
+- **Dates** : _`r config::get("codeathon_dates")`_
+- **Time** : _`r config::get("codeathon_times")`_
+- The Codeathon will take place at [Fred Hutch Cancer Center](https://maps.app.goo.gl/LRV4D4mELB5VzbWm8) in Seattle, WA.  
 
 <br>
 
@@ -118,8 +129,8 @@ By the end of the course, learners should be comfortable:
 
 #### Format
 
-- Each day will consist of 1-2 mini-modules to cover a collaborative topic (such as working on GitHub)
-- The majority of the day will consist of working in teams on a collaborative research project that applies the R programming skills learned in the online course. 
+- Each day will consist of 1-2 mini-modules to cover a collaborative topic.
+- The majority of the day will consist of working on a research project that applies the R programming skills learned in the online course. _We recommend coming with data and/or questions ready to go!_
 - DaSEH organizers will rotate around to help debug or tackle questions.
 
 <br>

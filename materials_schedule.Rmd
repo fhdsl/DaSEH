@@ -41,12 +41,12 @@ pander::pandoc.table(
 
 <br>
 
-## In-person Code-a-thon Schedule + Materials
+## In-person Codeathon Schedule + Materials
 
-- [Schedule](`r config::get("codeathon_schedule")`)
-- [Instructor Slides](`r config::get("instructor_slides")`)
+<!-- - [Schedule](`r config::get("codeathon_schedule")`) -->
+<!-- - [Instructor Slides](`r config::get("instructor_slides")`) -->
 - Mapping module [HTML](resources/Mapping.html), [PDF](resources/Mapping.pdf), [Rmd](resources/Mapping.Rmd)
-- [Lightning Talk Upload Folder](`r config::get("lightning_talk_folder")`)
+<!-- - [Lightning Talk Upload Folder](`r config::get("lightning_talk_folder")`) -->
 - [Project Template](modules/Project_Template/Project_Template.Rmd)
 - [Project Example](modules/Project_Example/Project_Example.Rmd)
 - [Project Example (rendered)](modules/Project_Example/Project_Example.html)
