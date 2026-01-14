@@ -43,6 +43,7 @@ Two-week online course in R programming foundations.
 <br>
 
 ## Code-a-thon
+***
 
 _`r config::get("codeathon_dates")`_  
 _`r config::get("codeathon_times")`_
