@@ -5,7 +5,7 @@
 
 Please get in touch at **daseh@fredhutch.org**. To ensure your email doesn't go to spam, please include "DaSEH course" in the email title.
 
-<br><br>
+<br>
 
 Feel free to submit typos/errors/etc feedback via the GitHub repository associated with the class: 
 https://github.com/fhdsl/DaSEH
