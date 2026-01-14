@@ -83,7 +83,7 @@ Launch Esquisse on any selection of the following datasets we have worked with b
 ```{r}
 co2 <- read_csv("https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
 
-cc <- read_csv("https://daseh.org/data/Yearly_CC_Disasters.csv")
+cc <- read_csv("https://daseh.org/data/Yearly_CC_disasters_total_affected.csv")
 
 nitrate <- read_csv(file = "https://daseh.org/data/Nitrate_Exposure_for_WA_Public_Water_Systems_byquarter_data.csv")
 
