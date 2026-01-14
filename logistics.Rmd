@@ -58,6 +58,9 @@ By the end of the course, learners should be comfortable:
 
 - To get the most out of this class, if possible, we suggest working virtually with a **large monitor or two screens**. This setup allows you to follow along on Zoom while also doing the hands-on coding.  
 - If possible, we also **highly suggest** working in RStudio on the **same computer** as the one you connect with Zoom and Slack, so that you can copy and paste your code if needed or share your code from your screen.
+- We are going to cover a ton of information! It will help to clear your schedule as much as you can so that you can get the most out of DaSEH.
+
+<br>
 
 ## PART 1: Online R Course
 
