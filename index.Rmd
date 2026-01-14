@@ -1,7 +1,6 @@
 ---
 title: |
   ![](images/DaSEH_banner_wide_transparent.png)
-  <br>
 ---
 
 ```{r setup, echo = FALSE, message = FALSE}
@@ -12,9 +11,6 @@ library(config)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
-
-
-<br>
 
 <div class="leaf"></div>
 # Welcome!
