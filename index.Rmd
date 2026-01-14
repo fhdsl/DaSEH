@@ -42,13 +42,13 @@ Two-week online course in R programming foundations.
 
 <br>
 
-## Code-a-thon
+## Codeathon
 ***
 
 _`r config::get("codeathon_dates")`_  
 _`r config::get("codeathon_times")`_
 
-Three-day in-person intensive “Code-a-thon”. Here, we'll work on authentic environmental health projects. We'll also practice data ethics skills in peer code review, reproducibility, and transparency in a supportive environment. 
+Three-day in-person intensive “Codeathon”. Here, we'll work on authentic environmental health projects. We'll also practice data ethics skills in peer code review, reproducibility, and transparency in a supportive environment. 
 
 <br>
 

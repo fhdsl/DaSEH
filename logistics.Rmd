@@ -116,7 +116,7 @@ By the end of the course, learners should be comfortable:
 
 - **Dates** : _`r config::get("codeathon_dates")`_
 - **Time** : _`r config::get("codeathon_times")`_
-- The Code-a-thon will take place at [Fred Hutch Cancer Center](https://maps.app.goo.gl/LRV4D4mELB5VzbWm8) in Seattle, WA.  
+- The Codeathon will take place at [Fred Hutch Cancer Center](https://maps.app.goo.gl/LRV4D4mELB5VzbWm8) in Seattle, WA.  
 
 <br>
 
