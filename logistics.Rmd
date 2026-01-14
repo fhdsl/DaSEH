@@ -31,6 +31,14 @@ We especially encourage participants to join who are [underrepresented in data a
 
 <br>
 
+## Instructors
+
+`r config::get("instructors")`
+
+The lead instructors have earned recognition for excellence in teaching and have trained hundreds of professional learners. We can't wait to have you in class, too!
+
+<br>
+
 ## Learning Objectives
 
 By the end of the course, learners should be comfortable:
