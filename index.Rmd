@@ -1,6 +1,5 @@
 ---
-title: |
-  ![](images/DaSEH_banner_wide_transparent.png)
+title: "![](images/DaSEH_banner_wide_transparent.png)"
 ---
 
 ```{r setup, echo = FALSE, message = FALSE}
@@ -12,6 +11,26 @@ library(config)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
+<!-- HTML Meta Tags -->
+<title>Data Science for Environmental Health</title>
+<meta name="DaSEH: NIEHS Short Course" content="">
+
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="https://daseh.org/data">
+<meta property="og:type" content="website">
+<meta property="og:title" content="data.knit">
+<meta property="og:description" content="">
+<meta property="og:image" content="">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="daseh.org">
+<meta property="twitter:url" content="https://daseh.org/data">
+<meta name="twitter:title" content="data.knit">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="">
+
+<!-- Meta Tags Generated via https://www.opengraph.xyz -->
 <div class="leaf"></div>
 # Welcome!
 ***
