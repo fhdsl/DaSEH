@@ -12,6 +12,22 @@ library(config)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
+<<<<<<< Updated upstream
+=======
+<!-- HTML Meta Tags -->
+<title>Data Science for Environmental Health</title>
+<meta name="DaSEH: NIEHS Short Course" content="">
+
+<!-- Facebook Meta Tags -->
+<meta property="url" content="https://daseh.org">
+<meta property="type" content="website">
+<meta property="title" content="DaSEH: NIEHS Short Course">
+<meta property="description" content="">
+<meta property="image" content="images/DaSEH_logo_white.png">
+
+<!-- Meta Tags Generated via https://www.opengraph.xyz -->
+
+>>>>>>> Stashed changes
 <div class="leaf"></div>
 # Welcome!
 ***
