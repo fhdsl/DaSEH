@@ -19,7 +19,7 @@ knitr::include_graphics("images/2026 Train the Trainer - Flyer.jpg")
 
 <br>
 
-Interested in teaching data science for environmental health? Join us for the DaSEH's Virtual Instructor Training on May 29, 2026! This session is designed to prepare instructors to deliver DaSEH-related curriculum.
+Interested in teaching data science for environmental health? Join us for DaSEH's Virtual Instructor Training on May 29, 2026! This session is designed to prepare instructors to deliver DaSEH-related curriculum.
 
 Virtual Instructor Training: **May 29; 9am – 12pm (PT) on Zoom.**
 
