@@ -1,0 +1,23 @@
+---
+title: Instructor Training
+---
+
+```{r setup, echo = FALSE, message = FALSE}
+library(pander)
+library(kableExtra)
+library(tidyverse)
+library(config)
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+
+```{r, echo = FALSE, fig.alt = "DaSEH participants in person in a classroom learning about reproducibility.", out.width="50%"}
+knitr::include_graphics("images/2026 Train the Trainer - Flyer.jpg")
+```
+
+<br>
+
+text...
+
+<p style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png" height="50"/> </a> </p><br />
