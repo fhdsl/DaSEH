@@ -28,7 +28,7 @@ navbar:
   - text: Instructors
     icon: fa-chalkboard-user
     menu:
-      - text: Instructor Workshps
+      - text: Instructor Workshops
         href: instructors.html
       - text: Instructor Guide
         href: https://forms.gle/pfX4zCPFjTinKttaA
