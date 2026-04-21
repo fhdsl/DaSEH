@@ -316,6 +316,9 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="instructors.html">Instructor Workshops</a>
+    </li>
+    <li>
       <a href="https://forms.gle/pfX4zCPFjTinKttaA">Instructor Guide</a>
     </li>
   </ul>
@@ -397,14 +400,14 @@ code{
 <p>Here we are creating a new object from an existing one:</p>
 <pre class="r"><code>new_rivers &lt;- sample(rivers, 5)
 new_rivers</code></pre>
-<pre><code>## [1] 360 890 618 600 410</code></pre>
+<pre><code>## [1] 350 210 410 524 800</code></pre>
 <p>Using just this will only print the result and not actually change <code>new_rivers</code>:</p>
 <pre class="r"><code>new_rivers + 1</code></pre>
-<pre><code>## [1] 361 891 619 601 411</code></pre>
+<pre><code>## [1] 351 211 411 525 801</code></pre>
 <p>If we want to modify <code>new_rivers</code> and save that modified version, then we need to reassign <code>new_rivers</code> like so:</p>
 <pre class="r"><code>new_rivers &lt;- new_rivers + 1
 new_rivers</code></pre>
-<pre><code>## [1] 361 891 619 601 411</code></pre>
+<pre><code>## [1] 351 211 411 525 801</code></pre>
 <p>If we forget to reassign this can cause subsequent steps to not work as expected because we will not be working with the data that has been modified.</p>
 <hr />
 </div>
@@ -453,7 +456,7 @@ iris |&gt; pull(Species) |&gt; str_detec(&quot;setosa&quot;)</code></pre>
 <p>Make sure you run something like this, with the <code>&lt;-</code> operator:</p>
 <pre class="r"><code>rivers2 &lt;- new_rivers + 1
 rivers2</code></pre>
-<pre><code>## [1] 362 892 620 602 412</code></pre>
+<pre><code>## [1] 352 212 412 526 802</code></pre>
 <hr />
 </div>
 <div id="error-unexpected-in-error-unexpected-in-error-unexpected-x-in" class="section level2">
