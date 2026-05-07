@@ -1,5 +1,8 @@
+---
+title: "Instructor Training"
+---
+
 <div class="leaf"></div> 
-# Instructor Training
 ***
 
 ```{r setup, echo = FALSE, message = FALSE}

@@ -1,6 +1,8 @@
+---
+title: "Resources"
+---
 
 <div class="leaf"></div> 
-# Resources
 ***
 
 ```{r, include = FALSE}
