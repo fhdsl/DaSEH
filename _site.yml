@@ -31,7 +31,7 @@ navbar:
       - text: Instructor Workshops
         href: instructors.html
       - text: Instructor Guide
-        href: https://forms.gle/pfX4zCPFjTinKttaA
+        href: https://hutchdatascience.org/daseh_instructor_guide
 
 output:
   html_document:
