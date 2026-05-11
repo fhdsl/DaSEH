@@ -1,6 +1,9 @@
+---
+title: "DaSEH Data"
+---
 
 <div class="leaf"></div> 
-# Data {.tabset .tabset-fade}
+# {.tabset .tabset-fade}
 ***
 
 ## Datasets Used in Course

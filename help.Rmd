@@ -3,7 +3,6 @@ title: "FAQ / Help"
 output: 
   html_document:
     toc: true
-
 ---
 
 <br>
@@ -21,7 +20,7 @@ code{
 }
 ```
 
-# **Common Issues**
+# Common Issues
 
 ***
 ## **I'm getting an error related to something called Rtools**
@@ -83,7 +82,7 @@ Check out our [Guide on what functions require pulling values out first](https:/
 
 <br><br><br>
 
-# **Common Errors**
+# Common Errors
 
 ***
 ## **Error in x : could not find function "y"**
@@ -247,7 +246,7 @@ ggplot(data = iris, aes(x = Species, y = Petal.Length)) +
   geom_boxplot()
 ```
 
-# **Preference Changes**
+# Preference Changes
 
 ***
 ## **How do I get output to stop printing inside the Rmarkdown and only show it in the console? (How Ava has her setup?)**

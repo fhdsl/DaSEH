@@ -1,6 +1,8 @@
+---
+title: "Materials + Schedule"
+---
 
-<div class="leaf"></div> 
-# Materials + Schedule
+<div class="leaf"></div>
 ***
 
 
