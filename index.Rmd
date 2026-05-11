@@ -42,7 +42,9 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 ------------------------------------------------------------------------
 
-![](images/DaSEH_banner_wide_transparent.png)
+<div style="text-align: center;">
+<img src="images/DaSEH_logo_transparent.png" alt="DaSEH Logo" style="width: 100%; max-width: 500px;">
+</div>
 
 Data Science for Environmental Health (DaSEH) is a short course that combines **online** learning and an **in-person** project-focused intensive. DaSEH is tailored for beginners and novices in R programming, offering instruction on importing, wrangling, visualizing, and analyzing data. It provides hands-on training in using R for statistical computing, a widely-used open-source tool for data analysis and visualization.
 
@@ -103,11 +105,5 @@ Three-day in-person intensive “Codeathon”. Here, we'll work on authentic env
 <br><br><br>
 
 This page was last updated on `r Sys.Date()`.
-
-<p style="text-align:center;">
-
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png" alt="Creative Commons License" style="border-width:0" height="50"/> </a>
-
-</p>
 
 <br />
