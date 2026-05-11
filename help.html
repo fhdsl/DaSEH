@@ -319,7 +319,7 @@ $(document).ready(function () {
       <a href="instructors.html">Instructor Workshops</a>
     </li>
     <li>
-      <a href="https://forms.gle/pfX4zCPFjTinKttaA">Instructor Guide</a>
+      <a href="https://hutchdatascience.org/daseh_instructor_guide">Instructor Guide</a>
     </li>
   </ul>
 </li>
@@ -341,7 +341,7 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#common-issues"><strong>Common Issues</strong></a>
+<li><a href="#common-issues">Common Issues</a>
 <ul>
 <li><a href="#im-getting-an-error-related-to-something-called-rtools"><strong>I’m getting an error related to something called Rtools</strong></a></li>
 <li><a href="#what-packages-are-part-of-the-tidyverse"><strong>What packages are part of the Tidyverse</strong>?</a></li>
@@ -350,7 +350,7 @@ $(document).ready(function () {
 <li><a href="#when-should-i-use-quotes-or-backticks"><strong>When should I use quotes (““) or backticks (``)?</strong></a></li>
 <li><a href="#how-do-i-know-when-to-use-the-pull-function-instead-of-just-using-select"><strong>How do I know when to use the <code>pull()</code> function, instead of just using <code>select()</code>?</strong></a></li>
 </ul></li>
-<li><a href="#common-errors"><strong>Common Errors</strong></a>
+<li><a href="#common-errors">Common Errors</a>
 <ul>
 <li><a href="#error-in-x-could-not-find-function-y"><strong>Error in x : could not find function “y”</strong></a></li>
 <li><a href="#error-object-x-not-found"><strong>Error: object ‘X’ not found</strong></a></li>
@@ -360,7 +360,7 @@ $(document).ready(function () {
 <li><a href="#error-mapping-must-be-created-by-aes-ℹ-did-you-use-or-instead-of"><strong>Error: <code>mapping</code> must be created by <code>aes()</code> / <code>ℹ</code> Did you use ‘|&gt;’ or ‘|&gt;’ instead of ‘+’?</strong></a></li>
 <li><a href="#error-in-.gg-ℹ-did-you-accidentally-put-on-a-new-line"><strong>Error in +.gg: <code>ℹ</code> Did you accidentally put ‘+’ on a new line?</strong></a></li>
 </ul></li>
-<li><a href="#preference-changes"><strong>Preference Changes</strong></a>
+<li><a href="#preference-changes">Preference Changes</a>
 <ul>
 <li><a href="#how-do-i-get-output-to-stop-printing-inside-the-rmarkdown-and-only-show-it-in-the-console-how-ava-has-her-setup"><strong>How do I get output to stop printing inside the Rmarkdown and only show it in the console? (How Ava has her setup?)</strong></a></li>
 <li><a href="#how-do-i-change-the-color-theme"><strong>How do I change the color / theme?</strong></a></li>
@@ -381,7 +381,7 @@ code{
 }
 </style>
 <div id="common-issues" class="section level1">
-<h1><strong>Common Issues</strong></h1>
+<h1>Common Issues</h1>
 <hr />
 <div id="im-getting-an-error-related-to-something-called-rtools" class="section level2">
 <h2><strong>I’m getting an error related to something called Rtools</strong></h2>
@@ -400,14 +400,14 @@ code{
 <p>Here we are creating a new object from an existing one:</p>
 <pre class="r"><code>new_rivers &lt;- sample(rivers, 5)
 new_rivers</code></pre>
-<pre><code>## [1]  230  315 2533  268  265</code></pre>
+<pre><code>## [1] 524 325 290 250 430</code></pre>
 <p>Using just this will only print the result and not actually change <code>new_rivers</code>:</p>
 <pre class="r"><code>new_rivers + 1</code></pre>
-<pre><code>## [1]  231  316 2534  269  266</code></pre>
+<pre><code>## [1] 525 326 291 251 431</code></pre>
 <p>If we want to modify <code>new_rivers</code> and save that modified version, then we need to reassign <code>new_rivers</code> like so:</p>
 <pre class="r"><code>new_rivers &lt;- new_rivers + 1
 new_rivers</code></pre>
-<pre><code>## [1]  231  316 2534  269  266</code></pre>
+<pre><code>## [1] 525 326 291 251 431</code></pre>
 <p>If we forget to reassign this can cause subsequent steps to not work as expected because we will not be working with the data that has been modified.</p>
 <hr />
 </div>
@@ -430,7 +430,7 @@ new_rivers</code></pre>
 </div>
 </div>
 <div id="common-errors" class="section level1">
-<h1><strong>Common Errors</strong></h1>
+<h1>Common Errors</h1>
 <hr />
 <div id="error-in-x-could-not-find-function-y" class="section level2">
 <h2><strong>Error in x : could not find function “y”</strong></h2>
@@ -456,7 +456,7 @@ iris |&gt; pull(Species) |&gt; str_detec(&quot;setosa&quot;)</code></pre>
 <p>Make sure you run something like this, with the <code>&lt;-</code> operator:</p>
 <pre class="r"><code>rivers2 &lt;- new_rivers + 1
 rivers2</code></pre>
-<pre><code>## [1]  232  317 2535  270  267</code></pre>
+<pre><code>## [1] 526 327 292 252 432</code></pre>
 <hr />
 </div>
 <div id="error-unexpected-in-error-unexpected-in-error-unexpected-x-in" class="section level2">
@@ -551,7 +551,7 @@ all.equal((rivers+1, rivers)</code></pre>
 </div>
 </div>
 <div id="preference-changes" class="section level1">
-<h1><strong>Preference Changes</strong></h1>
+<h1>Preference Changes</h1>
 <hr />
 <div id="how-do-i-get-output-to-stop-printing-inside-the-rmarkdown-and-only-show-it-in-the-console-how-ava-has-her-setup" class="section level2">
 <h2><strong>How do I get output to stop printing inside the Rmarkdown and only show it in the console? (How Ava has her setup?)</strong></h2>
@@ -574,6 +574,8 @@ all.equal((rivers+1, rivers)</code></pre>
 </div>
 </div>
 
+<br>
+<br>
 
 <p style="text-align:center;"> <small> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. </small></p>
 
