@@ -336,7 +336,7 @@ jobs:
 
   render-pptx:
     name: Render Rmd to pptx
-    needs: yaml-check
+    needs: render-preview
     runs-on: ubuntu-latest
     container:
       image: ${{needs.yaml-check.outputs.rendering_docker_image}}
