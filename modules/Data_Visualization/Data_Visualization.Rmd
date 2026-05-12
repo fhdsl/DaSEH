@@ -946,7 +946,7 @@ rp_fac_plot
 
 ## plotly
 
-```{r}
+```{r eval=knitr::is_html_output()}
 #install.packages("plotly")
 library(plotly) # creates interactive plots!
 ggplotly(lots_of_lines)
