@@ -50,8 +50,19 @@ jobs:
           fetch-depth: 0
           # use github PAT
           token: ${{ secrets.GH_PAT }}
+          
+      # Set up git checkout
+      - name: Set up git checkout
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-       # Render all module files
+          git fetch --all
+          git checkout main
+          git merge -s recursive --strategy-option=theirs origin/main --allow-unrelated-histories
+        shell: bash
+
+      # Render all module files
       - name: Render pptxs of modules
         id: pptxs
         run: |
