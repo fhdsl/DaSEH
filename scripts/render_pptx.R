@@ -31,14 +31,19 @@ files <- files[grepl("[.]Rmd$", files)]
 
 # --------- Render ---------
 
-# Lecture files are everything else in modules
+# Lecture files are everything in modules subdirs
 lecture_files <-
   files[grepl("modules/.*", files) &
           !grepl("modules/.*/lab", files)]
-message("The following lecture files will be rendered:")
-if (length(lecture_files) != 0)
-  print(lecture_files) else
-  print("(no changes, so no rendering needed)")
+# Don't need to render HWs
+lecture_files <- lecture_files[!grepl("homework", lecture_files)]
+# Don't need to render Projects
+lecture_files <- lecture_files[!grepl("Project", lecture_files)]
+# Misc file not to render
+lecture_files <- lecture_files[!grepl("index_withbase", lecture_files)]
+
+message("The following lecture files will be rendered to pptx:")
+if (length(lecture_files) != 0) print(lecture_files)
 readr::write_csv(data.frame(files = lecture_files), "lecture_files.csv")
 
 # loop thru and render all lecture files to pptx
