@@ -1,5 +1,5 @@
 ---
-title: "Data Visualization"
+title: "Data Visualization 200"
 output:
   ioslides_presentation:
     css: ../../docs/styles.css
