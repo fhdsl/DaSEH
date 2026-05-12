@@ -99,7 +99,7 @@ jobs:
         run: bash scripts/blank_labs_from_keys.sh
         
        # Render all module files
-      - name: Render html of modules
+      - name: Render html and pptx of modules where .Rmd has changed
         run: |
           Rscript --vanilla "scripts/render_modules.R" --files "${{ steps.changed-files.outputs.all_changed_files }}"
           
@@ -204,3 +204,4 @@ jobs:
           git status
           git pull --rebase --set-upstream origin main --allow-unrelated-histories --strategy-option=ours
           git push --force || echo "No changes to commit"
+          

@@ -109,7 +109,7 @@ jobs:
 ########################## Preview ##############################
 
   render-preview:
-    name: Render preview
+    name: Render preview and materials
     needs: yaml-check
     runs-on: ubuntu-latest
     container:
@@ -175,10 +175,10 @@ jobs:
         run: bash scripts/blank_labs_from_keys.sh
 
        # Render all module files
-      - name: Render html of modules where .Rmd has changed
+      - name: Render html and pptx of modules where .Rmd has changed
         run: |
           Rscript --vanilla "scripts/render_modules.R" --files "${{ steps.changed-files.outputs.all_changed_files }}"
-          
+
        # Render the cheatsheets
       - name: Render Cheatsheet pdfs
         run: |
@@ -331,4 +331,3 @@ jobs:
           git pull --rebase --set-upstream origin $branch_name --allow-unrelated-histories --strategy-option=ours
           git push --force || echo "No changes to commit"
         shell: bash
-

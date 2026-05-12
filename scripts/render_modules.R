@@ -60,15 +60,26 @@ if (length(lab_files) != 0) {
   }
 }
 
-# loop thru and render all lecture files to html
+# loop thru and render all lecture files to html and pptx
 # Specific module name will be pulled out based on the dir name in modules/
-
 if (length(lecture_files) != 0) {
   for (i in 1:length(lecture_files)) {
     module_name <-
       stringr::str_split(lecture_files, pattern = '/')[[i]][2]
-    rmarkdown::render(lecture_files[i],
-                      output_dir = paste0("modules/", module_name),
-                      envir = new.env())
+    
+    # Make HTML
+    rmarkdown::render(
+      lecture_files[i],
+      output_dir = paste0("modules/", module_name),
+      envir = new.env()
+    )
+    
+    # Make pptx
+    rmarkdown::render(
+      lecture_files[i],
+      output_format = rmarkdown::powerpoint_presentation(reference_doc = "../../docs/DaSEH_slide_template.pptx", slide_level = 2),
+      output_dir = paste0("modules/", module_name),
+      envir = new.env()
+    )
   }
 }
