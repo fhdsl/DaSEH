@@ -50,17 +50,6 @@ jobs:
           fetch-depth: 0
           # use github PAT
           token: ${{ secrets.GH_PAT }}
-          
-      # Set up git checkout
-      - name: Set up git checkout
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
-          git fetch --all
-          git checkout main
-          git merge -s recursive --strategy-option=theirs origin/main --allow-unrelated-histories
-        shell: bash
 
       # Render all module files
       - name: Render pptxs of modules
@@ -84,9 +73,9 @@ jobs:
       # Commit the rendered files
       - name: Commit pptx
         run: |
-          git status
-          git add *.pptx --force
-          git commit -m 'Render pptx files' || echo "No changes to commit"
-          git status
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add . --force
+          git commit -m 'Render pptx' || echo "No changes to commit"
           git pull --rebase --set-upstream origin main --allow-unrelated-histories --strategy-option=ours
-          git push --force || echo "No changes to commit"
+          git push origin main || echo "No changes to push"
