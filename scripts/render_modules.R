@@ -77,7 +77,7 @@ if (length(lecture_files) != 0) {
     # Make pptx
     rmarkdown::render(
       lecture_files[i],
-      output_format = rmarkdown::powerpoint_presentation(reference_doc = "../../docs/DaSEH_slide_template.pptx", slide_level = 2),
+      output_format = rmarkdown::powerpoint_presentation(reference_doc = "../../resources/DaSEH_slide_template.pptx", slide_level = 2),
       output_dir = paste0("modules/", module_name),
       envir = new.env()
     )

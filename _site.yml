@@ -41,6 +41,6 @@ output:
     highlight: textmate
     css: docs/web_styles.css
     includes:
-      in_header: [resources/header.html, GA_Script.Rhtml]
-      after_body: footer.html
+      in_header: [docs/header.html, docs/GA_Script.Rhtml]
+      after_body: docs/footer.html
       
