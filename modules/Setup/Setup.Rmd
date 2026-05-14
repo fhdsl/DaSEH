@@ -15,7 +15,7 @@ Sections:
 -   [`R` packages](#r-packages)
     -   [Installing `R` Packages (Point and Click)](#installing-r-package-manual)
     -   [Installing `R` Packages (Code)](#installing-r-package-code)
-    -   [Exercise: Install `R` package](#exercise-install-r-package)  
+    -   [Exercise: Install an `R` package](#exercise-install-r-package)  
 
 ## Installing `R` {#installing-r}
 
@@ -111,12 +111,14 @@ library(replace_with_package_name)
 
 (Note the difference in presence of the quotation mark in the two above commands.)
 
-### Exercise: Install `R` package {#exercise-install-r-package}
+### Exercise: Install an `R` package {#exercise-install-r-package}
 
-Use the above to install `tidyverse` package. Execute the `library(...)` command above to check if the package loads successfully.
+Use the above to install the `tidyverse` package. Execute the `library(...)` command above to check if the package loads successfully.
 
 ![](images/install_tidyverse.png)
 
 ![](images/load_tidyverse.png)
 
 ![](images/tidyverse_loaded.png)
+
+If you want extra practice, we will also be using the packages `rmarkdown`, `naniar`, and `janitor`.
