@@ -1,0 +1,29 @@
+Hello all,
+
+We're so excited you've registered for our DaSEH instructor training -- a bit more than a week away!
+
+The session will be held from 9AM-12PM PT May 29, 2026.
+
+Please take note of the following action items:
+
+*Bookmark important links:*
+- <PASTE> : The Zoom link for our training session.
+- https://daseh.org : Class website. We'll be posting additional content under the "Instructors" tab. This is the most up-to-date source of information.
+
+*Install software:*
+You should have the following software installed to get the most out of the training:
+1. Please install the latest version of R (4.6.0 ‘Because it was There’ as of April 24, 2026) at https://cloud.r-project.org/
+2. Please install the latest version of RStudio (Desktop): https://posit.co/download/rstudio-desktop/
+You can find detailed instructions on how to do this on the <website setup page>. Note that if you have any restrictions on your work computer, you might need to work with your IT department to get R and RStudio installed.
+
+*Optional: Join the Slack channel:*
+Slack is an online platform that we use to facilitate communication among learners, TAs, and instructors. We use this for real-time announcements, discussion, and direct messaging as needed. You can use this to stay in touch with us.
+1. Please click on this link to register: <PASTE>
+2. Register for the Workspace with your email and chosen password.
+3. Log in here: https://daseh.slack.com/
+4. (Optional) Download the app for more seamless use of Slack (https://slack.com/download).
+5. Feel free to introduce yourself in the instructors2026 channel!
+
+See everyone on Friday, 5/29!
+
+Ava, Carrie, and Elizabeth
