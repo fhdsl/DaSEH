@@ -121,3 +121,5 @@ pull(sars_ww, date_end) |> range()
 
 # The max of `pull(sars_ww, date_end) |> range()` is numerical not based on date.
 ```
+
+<!-- Clue 5 is "to" -->
