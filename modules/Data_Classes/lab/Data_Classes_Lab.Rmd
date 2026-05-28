@@ -107,3 +107,5 @@ Use `range()` function on `date_formatted` variable to display the range of date
 ```{r P.2response}
 
 ```
+
+<!-- Clue 5 is "to" -->
