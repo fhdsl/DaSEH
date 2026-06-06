@@ -17,7 +17,7 @@ library(emoji)
 ```
 
 
-## Recap on summarization
+## Recap on summarization 
 
 - `summary(x)`: quantile information
 - `count(x)`: what unique values do you have? 
