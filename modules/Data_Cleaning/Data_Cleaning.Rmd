@@ -476,7 +476,7 @@ plastics |>
 ```
 
 
-## `case_when()` drops unspecified values
+## `case_when()` drops unspecified values{.codesmall}
 
 Note that automatically values not reassigned explicitly by
 `case_when()` will be `NA` unless otherwise specified. 
@@ -619,7 +619,7 @@ plastics <- plastics |>
 
 ```
 
-## multiple conditions with `case_when` recoding
+## multiple conditions with `case_when` recoding{.codesmall}
 
 ```{r}
 plastics |> 
@@ -857,7 +857,7 @@ head(plastics_comb)
 head(plastics_comb) |> n_complete_row()
 ```
 
-## `recode()` function
+## `recode()` function{.codesmall}
 
 This is similar to `case_when()` but it can't do as much.
 
