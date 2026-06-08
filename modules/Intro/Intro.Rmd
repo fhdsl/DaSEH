@@ -78,7 +78,7 @@ knitr::include_graphics(here::here("modules", "Intro", "images", "elizabeth.jpg"
 
 Please introduce yourself on Slack!
 
-[Slack Workspace](%60r%20config::get(%22slack_workspace%22)%60)
+`r config::get("slack_workspace")`
 
 ## The Learning Curve
 
@@ -127,10 +127,10 @@ knitr::include_graphics("images/Rlogo.png")
 -   Strong community
 
 ```{r, fig.alt="R-Ladies - a non-profit civil society community", out.width = "20%", echo = FALSE, fig.align='center'}
-knitr::include_graphics("https://github.com/rladies/branding-materials/raw/main/logo/R-LadiesGlobal_RBG_online_LogoWithText_Horizontal.png")
+knitr::include_graphics("https://rladies.org/images/logo-wide.svg")
 ```
 
-<sub>[source: <https://github.com/rladies/meetup-presentations_baltimore>]</sub>
+<sub>[source: <https://rladies.org/>]</sub>
 
 ## Why not R?
 
@@ -188,7 +188,7 @@ ONLINE VIRTUAL COURSE
 -   Lecture with slides, interactive\
 -   Lab/Practical experience\
 -   Two 10 min breaks each day - timing may vary\
--   Sep 30 - Oct 10, 10:30am - 2:00pm PST on Zoom
+-   June 8 - 18, 10:30am - 2:00pm PST on Zoom
 
 ## Course Format
 
@@ -197,13 +197,13 @@ IN-PERSON CODE-A-THON
 -   Mostly independent group work\
 -   Frequent check-ins with instructors and other groups\
 -   Some lectures about the practical aspects of coding\
--   Oct 23 - 25 (in person in Seattle)
+-   June 29 - July 1 (in person in Seattle)
 
-**Deadline for arranging travel assistance is October 11!**
+**Deadline for arranging travel assistance is June 18!**
 
 ## Pulse Check Survey
 
-`r config::get("google_survey")`
+`r config::get("pulsecheck_survey")`
 
 Let us know anonymously how you're doing with the material.
 
@@ -237,13 +237,15 @@ knitr::include_graphics("images/monitors.jpg")
 
 We are collecting data about user experience with our course to learn more about how to improve the data science education experience. This data may ultimately be used for a research publication and reporting to the NIH.
 
-[`https://forms.gle/vxp8vxdN2Ck2j7uY6`](https://forms.gle/vxp8vxdN2Ck2j7uY6)
+`r config::get("research_survey")`
 
 # Where to find help
 
 ## Useful (+ mostly Free) Resources
 
-Found on our website under the `Resources` tab: <https://daseh.org/resources.html>
+Found on our website under the `Resources` tab:
+
+<https://daseh.org/resources.html>
 
 -   videos from previous offerings of the class
 -   cheatsheets for each class
@@ -263,15 +265,15 @@ knitr::include_graphics("images/forrest-gump-running.gif")
 
 ## Using AI
 
-Large Language Models (ChatGPT, Claude, etc.) can be useful for programming. Specifically, it can help with:
+Large Language Models (ChatGPT, Claude, etc.) can be useful for programming. Specifically, they can help with:
 
 * Writing or re-writing (refactoring) your code
 * Annotation (code "notes")
 * Understanding unfamiliar code
 
-We will talk more about AI + programming during the code-a-thon.
+Make sure to try coding on your own first ("programmer thinking"). Some research suggests using LLMs can cause [deskilling](https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2026.1765692/full).
 
-For best practices, we encourage you to check out our [AI for Efficient Programming Course](https://hutchdatascience.org/AI_for_Efficient_Programming).
+We will talk more about AI + programming during the codeathon.
 
 ## Installing R
 

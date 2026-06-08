@@ -8,8 +8,8 @@ default:
   instructor_slides: "https://drive.google.com/drive/folders/18LZlTF-iGwM6kZvFGeoFq1wFmIvOyCYQ?usp=sharing"
   lightning_talk_folder: ""
 
-  pulsecheck_survey: ""
-  research_survey: ""
+  pulsecheck_survey: "https://forms.gle/3AAf2WstqVsuiM8V7"
+  research_survey: "https://forms.gle/t8yEYJYh7BuXtnFB7"
   
   slack_workspace: "https://daseh.slack.com/"
   instructors: "[Carrie Wright](https://carriewright11.github.io/), [Ava Hoffman](https://www.avahoffman.com/), [Elizabeth Humphries]()"
