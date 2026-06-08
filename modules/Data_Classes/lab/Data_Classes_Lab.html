@@ -174,9 +174,9 @@ pre code {
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
+## ✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.4     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
@@ -226,7 +226,7 @@ TF_vect2 &lt;- rep(c(&quot;TRUE&quot;, &quot;TRUE&quot;, &quot;FALSE&quot;), tim
 <p>Use the <code>mutate()</code> function to create a new column named <code>date_formatted</code>, based on the <code>date_end</code> column. Hint: use <code>mdy()</code> function. Reassign to <code>sars_ww</code>.</p>
 <p><code>date_end</code>: This is the last date of the sampling window. A sampling window is used to measure change in viral concentration.</p>
 <pre><code># General format
-NEWDATA &lt;- OLD_DATA %&gt;% mutate(NEW_COLUMN = OLD_COLUMN)</code></pre>
+NEWDATA &lt;- OLD_DATA |&gt; mutate(NEW_COLUMN = OLD_COLUMN)</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own" class="section level1">
@@ -235,11 +235,12 @@ NEWDATA &lt;- OLD_DATA %&gt;% mutate(NEW_COLUMN = OLD_COLUMN)</code></pre>
 <h3>P.1</h3>
 <p>Move the <code>date_formatted</code> variable to be before <code>date_end</code> using the <code>relocate</code> function. Take a look at the data using <code>glimpse()</code>. Note the difference between <code>date_end</code> and <code>date_formatted</code> columns.</p>
 <pre><code># General format
-NEWDATA &lt;- OLD_DATA %&gt;% relocate(COLUMN1, .before = COLUMN2)</code></pre>
+NEWDATA &lt;- OLD_DATA |&gt; relocate(COLUMN1, .before = COLUMN2)</code></pre>
 </div>
 <div id="p.2" class="section level3">
 <h3>P.2</h3>
 <p>Use <code>range()</code> function on <code>date_formatted</code> variable to display the range of dates in the data set. How does this compare to that of <code>date_end</code>? Why? (Hint: use the pull function first to pull the values.)</p>
+<!-- Clue 5 is "to" -->
 </div>
 </div>
 
