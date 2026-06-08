@@ -159,6 +159,8 @@ lefthand
 lightblue
 lightgreen
 Linetype
+LLM
+LLMs
 lmfit
 LowBirthWeight
 LowBirthWeightPctl
@@ -211,6 +213,7 @@ PLoS
 plotly
 png
 POSIXct
+PPTX
 pre
 Precip
 programmatically
