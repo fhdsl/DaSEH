@@ -141,6 +141,18 @@ z <- 3,000
 knitr::include_graphics("images/incomplete_statement.png")
 ```
 
+## TROUBLESHOOTING: Zoom Quotation Marks
+
+```{r error = TRUE}
+y <- “hello world!”
+```
+
+Retype the quotation marks!
+
+```{r error = TRUE}
+y <- "hello world!"
+```
+
 ## Simple object practice
 
 Try assigning your full name to an R object called `name`
@@ -251,7 +263,7 @@ class(name2)
 
 <span style="color:red">Just open up the file to see the questions for lab. More about the file type soon!</span>
 
-💻 [Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
+💻 [Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.html)
 
 ## Math + vector objects
 
@@ -403,7 +415,7 @@ knitr::include_graphics("../../images/lol/install_packages.jpg")
 
 🏠 [Class Website](https://daseh.org/)
 
-💻 [Basic R Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.Rmd)
+💻 [Basic R Lab](https://daseh.org/modules/Basic_R/lab/Basic_R_Lab.html)
 
 📃 [Day 1 Cheatsheet](https://daseh.org/modules/cheatsheets/Day-1.pdf)
 
