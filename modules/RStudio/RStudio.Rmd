@@ -15,12 +15,11 @@ opts_chunk$set(comment = "")
 
 RStudio is an Integrated Development Environment (IDE) for R it helps you:
 
--   write code - makes suggestions
--   view the output of your code, including plots
--   find errors
--   manage files
+-   Write code - makes suggestions
+-   View the output of your code, including plots
+-   Find errors
+-   Manage files
 -   View documentation
--   
 
 
 
@@ -72,12 +71,12 @@ knitr::include_graphics("images/new_pane.png")
 1)  The **Source/Editor**:
     -   Static copy of what you did (reproducibility)
     -   Top by default
-    -   **saves your code**
+    -   **Saves your code**
 2)  The **R Console**:
-    -   Calculator
     -   Try things out interactively, then add to your editor
+    -   Good for installing packages
     -   Bottom by default
-    -   **doesn't save your code**
+    -   **Doesn't save your code**
 
 
 ## RStudio
@@ -104,7 +103,7 @@ knitr::include_graphics("images/rstudio_script.png")
 
 ## Scripts and R Markdown
 
-Although people will use scripts often, and they are good for more programmatic purposes, we generally don't recommend them for Public Health Researchers.
+Although people will use scripts often, and they are good for more programmatic purposes, we generally don't recommend them for analysis.
 
 For data analyses, R Markdown files are generally superior because they allow you to check your code and write more info about your code.
 
@@ -164,6 +163,8 @@ R Markdown files (.Rmd) help generate reports that include your code and output.
 2.  Allows you to check the output
 3.  Can create many different file types
 
+You may have also heard of quarto which does something similar.
+
 ## Code chunks
 
 Within R Markdown files are code "chunks".
@@ -186,8 +187,8 @@ knitr::include_graphics("images/chunk.png")
 
 ## Running a chunk executes the code
 
-- generally see a preview of the output of the code just below the chunk
-- see the code in the console
+- Generally see a preview of the output of the code just below the chunk
+- See the code in the console
 
 ```{r, out.width = "80%", echo = FALSE, fig.align='center'}
 knitr::include_graphics("images/output.png")
@@ -265,13 +266,13 @@ knitr::include_graphics("../../images/error.png")
 
 ## Recap of where code goes
 
-- you can test code in the console
+- You can test code in the console
 
 ```{r, fig.alt="knit", out.width = "90%", echo = FALSE, fig.align='center'}
 knitr::include_graphics("images/where_code_console.png")
 ```
 
-- you can save code in a chunk in the editor (Markdown file)
+- You can save code in a chunk in the editor (Markdown file)
 
 ```{r, fig.alt="knit", out.width = "90%", echo = FALSE, fig.align='center'}
 knitr::include_graphics("images/where_code.png")
@@ -349,7 +350,7 @@ knitr::include_graphics("images/chunk_gut_check.png")
 
 To do this lab we need to:
 
-- Download the file at the link above by clicking on it or go to the website schedule page
+- Download the file at the on next slide by clicking on it or go to the website schedule page
 
 - Find the downloaded file on your computer
 
@@ -368,7 +369,7 @@ You can find these on the resource page of the class website.
 ## Summary
 
 -  RStudio makes working in R easier
--  the Editor (top) is for static code like scripts or R Markdown documents
+-  The Editor (top) is for static code like scripts or R Markdown documents
 -  The console is for testing code (bottom) - best to save your code though!
 -  R markdown documents are really helpful for lots of reasons!
 -  R code goes within what is called a chunk (the gray box with a green play button)
