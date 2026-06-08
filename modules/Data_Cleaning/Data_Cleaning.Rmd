@@ -597,6 +597,9 @@ plastics |>
 ## Note that if you change data classes this might impact .default
 
 ```{r, eval = FALSE}
+
+class(pull(plastics, blood_level_change_nM))
+
 plastics <- plastics |> 
       mutate(Effect = case_when(
                     blood_level_change_nM > 0 ~ "Increase",
