@@ -593,6 +593,7 @@ head(plastics)
 plastics |> 
   count(Foods, Effect)
 ```
+
 ## Note that if you change data classes this might impact .default
 
 ```{r, eval = FALSE}
@@ -601,7 +602,7 @@ plastics <- plastics |>
                     blood_level_change_nM > 0 ~ "Increase",
                     blood_level_change_nM == 0 ~ "Same",
                     blood_level_change_nM < 0 ~ "Decrease",
-                    .default = blood_level_change_nM)) 
+                    .default = blood_level_change_nM)) #default is class double
 # this will give an error!
 
 plastics <- plastics |> 
