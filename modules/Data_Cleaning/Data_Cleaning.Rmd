@@ -605,7 +605,8 @@ plastics <- plastics |>
                     blood_level_change_nM > 0 ~ "Increase",
                     blood_level_change_nM == 0 ~ "Same",
                     blood_level_change_nM < 0 ~ "Decrease",
-                    .default = blood_level_change_nM)) #default is class double
+                    .default = blood_level_change_nM)) 
+#default is class double
 # this will give an error!
 
 plastics <- plastics |> 
@@ -621,7 +622,17 @@ plastics <- plastics |>
 
 ## multiple conditions with `case_when` recoding{.codesmall}
 
-```{r}
+```{r, eval = FALSE}
+plastics |> 
+      mutate(Amt_change = case_when(
+                    blood_level_change_nM > 0 & blood_level_change_nM < 2 ~ "Small",
+                    blood_level_change_nM >= 2 ~ "Large",
+                    blood_level_change_nM < 0 & blood_level_change_nM > -2 ~ "Small",
+                    blood_level_change_nM <= -2 ~ "Large",
+                    blood_level_change_nM == 0 ~ "none"))
+```
+
+```{r, echo=FALSE}
 plastics |> 
       mutate(Amt_change = case_when(
                     blood_level_change_nM > 0 & blood_level_change_nM < 2 ~ "Small",
@@ -629,7 +640,7 @@ plastics |>
                     blood_level_change_nM < 0 & blood_level_change_nM > -2 ~ "Small",
                     blood_level_change_nM <= -2 ~ "Large",
                     blood_level_change_nM == 0 ~ "none")) |>
-  head()
+  print(n = 6, width = Inf)
 ```
 
 ## GUT CHECK: we need to use what function with `case_when()` to modify or create a new variable?
