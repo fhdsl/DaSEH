@@ -1,5 +1,5 @@
 library(qpdf)
-
+### make combined slides file
 topic_order <- c(
   "Intro",
   "Basic_R",
