@@ -709,7 +709,7 @@ The `replacement` argument specifies what to replace the pattern with
 str_replace(string = Effect, pattern = "D", replacement = "d")
 ```
 
-## `st_replace()` only replaces the first instance of the pattern in each value 
+## `str_replace()` only replaces the first instance of the pattern in each value 
 
 `str_replace_all()` can be used to replace all instances within each value
 
