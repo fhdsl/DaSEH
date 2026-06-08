@@ -297,6 +297,8 @@ More on that soon!
 
 🩺 [Pulse Check - `r config::get("pulsecheck_survey")`](`r config::get("pulsecheck_survey")`)
 
+<br>
+
 ```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
