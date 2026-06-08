@@ -43,7 +43,7 @@ pdf_files <- list.files(
 # Combine into a single PDF
 pdf_combine(
   input = pdf_files,
-  output = "resources/all_cheatseheets.pdf"
+  output = "resources/all_cheatsheets.pdf"
 )
 
 
