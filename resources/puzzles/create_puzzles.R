@@ -31,7 +31,7 @@ cheatsheet_func_info <- read_csv(file = here::here("resources/all_the_functions.
 cheatsheet_func_info %>% filter(package == "naniar")
 words <- cheatsheet_func_info %>% filter(package == "naniar")%>% pull(func)
 clues <- cheatsheet_func_info %>% filter(package == "naniar") %>% pull(description)
-x <- crossword(words, clues, r = 40, c = 40)
+x <- crossword(words, clues, r = 50, c = 50)
 pdf(file="resources/puzzles/missing_data_cross_word.pdf", width = 15)
 plot(x, clues = TRUE)
 dev.off()
@@ -45,8 +45,10 @@ clues <- clues %>% mutate(id = row_number())
 clues_tab <- kbl(clues)
 table_grob <- tableGrob(clues_tab)
 pdf(file="resources/puzzles/missing_data_cross_word2.pdf", width = 15)
-grid.arrange(plot(x), table_grob, ncol = 1, heights = c(3,3))
+grid.arrange(plot(x), table_grob, ncol = 2, heights = c(3,3))
 dev.off()
+
+
 stringr_stuff <-cheatsheet_func_info %>% filter(package == "stringr") 
 stringr_stuff <- stringr_stuff %>% mutate(description = str_remove_all(description, pattern = "\\\\code\\{[^}]+\\}")) # remove code contents
 words <- stringr_stuff%>% pull(func)
