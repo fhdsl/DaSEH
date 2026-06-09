@@ -38,11 +38,14 @@ R Projects are a super helpful feature of RStudio. They help you:
 
 ## Why projects?
 
-"The chance of the `setwd()` command having the desired effect – making the file paths work – for anyone besides its author is 0%. It’s also unlikely to work for the author one or two years or computers from now. The project is not self-contained and portable."
-
-- [Jenny Bryan](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
+"The chance of the `setwd()` command having the desired effect – making the file paths work – for anyone besides its author is 0%. It’s also unlikely to work for the author one or two years or computers from now. The project is not self-contained and portable." - [Jenny Bryan](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
 
 **Let's go over how to create and use an R Project!**
+
+```{r, fig.alt="If the first line of your R script is setwd C:Users jenny path that only I have I will come into your office and SET YOUR COMPUTER ON FIRE.", out.width = "40%", echo = FALSE, fig.align='center'}
+knitr::include_graphics("images/Jenny_fire.jpg")
+```
+
 
 ## New R Project
 
@@ -244,7 +247,9 @@ knitr::include_graphics("images/files.jpg")
 
 ## Checking the working directory
 
-Run the `getwd()` function to determine your working directory.
+Run the `getwd()` function to determine your working directory. 
+
+You can also click the ![R Logo](images/files_gear.png){width=25px} in the Files pane > Go To Working Directory.
 
 ```{r eval=FALSE}
 # Get the working directory
