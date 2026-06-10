@@ -209,7 +209,7 @@ head(er)
 Renaming can:
 
 - make it easier to work with your data
-- make your column names more compaitible with R
+- make your column names more compatible with R
 - make your column names more interpretable by others 
 
 ## `rename` function
