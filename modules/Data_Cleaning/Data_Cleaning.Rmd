@@ -440,13 +440,6 @@ plastics |>
 Using Excel to find all of the different ways `microplastic` has been coded,
 could be hectic! In `dplyr` you can use the `case_when` function.
 
-
-## Or you can use `case_when()`
-
-The `case_when()` function of `dplyr` can help us to do this as well.
-
-It is more flexible and powerful. 
-
 ::: {style="color: red;"}
 (need `mutate` here too!)
 :::
@@ -483,7 +476,7 @@ plastics |>
 ```
 
 
-## `case_when()` drops unspecified values
+## `case_when()` drops unspecified values{.codesmall}
 
 Note that automatically values not reassigned explicitly by
 `case_when()` will be `NA` unless otherwise specified. 
@@ -600,15 +593,20 @@ head(plastics)
 plastics |> 
   count(Foods, Effect)
 ```
+
 ## Note that if you change data classes this might impact .default
 
 ```{r, eval = FALSE}
+
+class(pull(plastics, blood_level_change_nM))
+
 plastics <- plastics |> 
       mutate(Effect = case_when(
                     blood_level_change_nM > 0 ~ "Increase",
                     blood_level_change_nM == 0 ~ "Same",
                     blood_level_change_nM < 0 ~ "Decrease",
                     .default = blood_level_change_nM)) 
+#default is class double
 # this will give an error!
 
 plastics <- plastics |> 
@@ -622,9 +620,19 @@ plastics <- plastics |>
 
 ```
 
-## multiple conditions with `case_when` recoding
+## multiple conditions with `case_when` recoding{.codesmall}
 
-```{r}
+```{r, eval = FALSE}
+plastics |> 
+      mutate(Amt_change = case_when(
+                    blood_level_change_nM > 0 & blood_level_change_nM < 2 ~ "Small",
+                    blood_level_change_nM >= 2 ~ "Large",
+                    blood_level_change_nM < 0 & blood_level_change_nM > -2 ~ "Small",
+                    blood_level_change_nM <= -2 ~ "Large",
+                    blood_level_change_nM == 0 ~ "none"))
+```
+
+```{r, echo=FALSE}
 plastics |> 
       mutate(Amt_change = case_when(
                     blood_level_change_nM > 0 & blood_level_change_nM < 2 ~ "Small",
@@ -632,7 +640,7 @@ plastics |>
                     blood_level_change_nM < 0 & blood_level_change_nM > -2 ~ "Small",
                     blood_level_change_nM <= -2 ~ "Large",
                     blood_level_change_nM == 0 ~ "none")) |>
-  head()
+  print(n = 6, width = Inf)
 ```
 
 ## GUT CHECK: we need to use what function with `case_when()` to modify or create a new variable?
@@ -701,7 +709,7 @@ The `replacement` argument specifies what to replace the pattern with
 str_replace(string = Effect, pattern = "D", replacement = "d")
 ```
 
-## `st_replace()` only replaces the first instance of the pattern in each value 
+## `str_replace()` only replaces the first instance of the pattern in each value 
 
 `str_replace_all()` can be used to replace all instances within each value
 
@@ -860,7 +868,7 @@ head(plastics_comb)
 head(plastics_comb) |> n_complete_row()
 ```
 
-## `recode()` function
+## `recode()` function{.codesmall}
 
 This is similar to `case_when()` but it can't do as much.
 
