@@ -16,7 +16,7 @@ files = files[ basename(files) != "illusion.Rmd" ]
 ## read in code
 fileList = lapply(files, scan, what = "character()", sep="\n")
 allFiles = unlist(fileList)
-allFiles = trimws(allFiles)
+#allFiles = trimws(allFiles)
 libCalls = allFiles[grep("^(library|require)", allFiles)]
 theLibs = ss(ss(libCalls, "(", 2, fixed = TRUE), ")", fixed=TRUE)
 theLibs = ss(theLibs, ",", 1, fixed = TRUE)
@@ -27,6 +27,9 @@ theLibs = sort(theLibs)
 
 writeLines(theLibs, con = "./resources/all_the_packages.txt")
 
+theLibs = theLibs[ !grepl("replace_with_package_name", theLibs)]
+theLibs = theLibs[ !grepl("ThemePark", theLibs)]
+
 sapply(theLibs, library, character.only = TRUE)
 
 ####################################
@@ -36,6 +39,9 @@ library(NCmisc)
 all_r = list.files(pattern = "[.]R$", recursive = TRUE, full.names = TRUE)
 all_r = all_r[ !grepl("scratch", all_r)]
 all_r = all_r[ !grepl("all_packages", all_r)]
+all_r = all_r[grepl("modules/", all_r)]
+all_r = all_r[ !grepl("Basic_R.R", all_r)]
+all_r = all_r[ !grepl("help", all_r)]
 xall_func = all_func = sapply(all_r, list.functions.in.file)
 
 all_func = xall_func
