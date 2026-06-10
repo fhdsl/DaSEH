@@ -424,7 +424,7 @@ C. Keeping it as is and use quotes around the column name when you use it.
 
 ## Why Subset?
 
-Subsetting involves grabbing specific parts of your data to eith :
+Subsetting involves grabbing specific parts of your data to:
 
 - Produce a smaller dataset
 - Examine specific subsets of your data
