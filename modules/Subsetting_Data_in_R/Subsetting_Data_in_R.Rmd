@@ -210,7 +210,7 @@ Renaming can:
 
 - make it easier to work with your data
 - make your column names more compatible with R
-- make your column names more interpretable by others 
+- make your column names more understandable by others 
 
 ## `rename` function
 
@@ -428,7 +428,7 @@ Subsetting involves grabbing specific parts of your data to:
 
 - Produce a smaller dataset
 - Examine specific subsets of your data
-- Use a particular part of the data for a specific analysis/visualzation
+- Use a particular part of the data for a specific analysis/visualization
 
 
 Be cautious about removing columns/variables as you might find they are useful later.
@@ -671,7 +671,7 @@ knitr::include_graphics("https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.
 https://media.giphy.com/media/5b5OU7aUekfdSAER5I/giphy.gif
 
 
-## GUT CHECK: If we want to keep just rows that meet either or two conditions, what code should we use?
+## GUT CHECK: If we want to keep just rows that meet either of two conditions (not both), what code should we use?
 
 A. `filter()` with `|`
 
@@ -938,7 +938,9 @@ B. `select()`
 C. `mutate()`
 
 
-## GUT CHECK: How would we interpret `er_30 |> filter(year > 2020) |> select(year, rate)`?
+## GUT CHECK: How would we interpret the following:
+
+`er_30 |> filter(year > 2020) |> select(year, rate)`?
 
 A. Get the `er_30` data, then filter it for rows with `year` values over 2020, then select only the `year` and `rate` columns.
 
