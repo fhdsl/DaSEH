@@ -135,17 +135,17 @@ Examples:
 - Strongly Agree, Agree, Neutral, Disagree, Strongly Disagree
 - beginner, novice, intermediate, expert
 
-** We will learn more about factors in a later module. **
+<span style="color:blue">We will learn more about factors in a later module.</span>
 
 ## Classes Overview
 
-| Example 	| Class 	| Type 	| Notes 	|
-|:---:|:---:|:---:|---|
-| 1.1 	| Numeric 	| double 	| default for numbers 	|
-| 1 	| integer 	| integer 	| Need to coerce to integer with as.integer() or use sample() or seq() with whole numbers	|
-| "FALSE", "Ball" 	| Character 	| Character 	| Need quotes 	|
-| FALSE, TRUE 	| logical 	| logical 	| No quotes 	|
-| "Small", "Large" 	| Factor 	| Factor 	| Need to coerce to factor with factor() 	|
+| Example          | Class     | Type      | Notes                                                                                   |
+|-:-:--------------|-:-:-------|-:-:-------|-----------------------------------------------------------------------------------------|
+| 1.1              | numeric   | double    | Default for numbers                                                                     |
+| 1                | integer   | integer   | Need to coerce to integer with as.integer() or use sample()/seq() with whole numbers    |
+| "FALSE", "Ball"  | character | character | Need quotes                                                                             |
+| FALSE, TRUE      | logical   | logical   | No quotes, 0 and 1, respectively                                                        |
+| "Small", "Large" | factor    | factor    | Need to coerce to factor with factor()                                                  |
 
 # Special data classes
 
