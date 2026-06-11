@@ -185,7 +185,7 @@ ces &lt;- read_csv(file = &quot;https://daseh.org/data/CalEnviroScreen_data.csv&
 <h3>1.3</h3>
 <p>What was the largest population, according to the 2010 census? Use <code>summarize</code> and <code>max</code>.</p>
 <pre><code># General format 
-DATA_TIBBLE %&gt;% 
+DATA_TIBBLE |&gt; 
     summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN))</code></pre>
 </div>
 <div id="section-3" class="section level3">
@@ -193,7 +193,7 @@ DATA_TIBBLE %&gt;%
 <p>Modify your code from 1.3 to add the smallest population among census tracts. Use <code>min</code> in your <code>summarize</code> function.</p>
 <p><em>HINT:</em> Make sure you make your <code>SUMMARY_COLUMN_NAME</code> different for the max and the min summaries! What do you think would happen if you tried to make <code>SUMMARY_COLUMN_NAME</code> the same name for both statistics?</p>
 <pre><code># General format 
-DATA_TIBBLE %&gt;% 
+DATA_TIBBLE |&gt; 
     summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN),
               SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN)
     )</code></pre>
@@ -206,7 +206,7 @@ DATA_TIBBLE %&gt;%
 <p>Summarize the <code>ces</code> data to get the mean of both the <code>TotalPop</code> and <code>Pesticides</code> columns. Make sure to remove <code>NA</code>s.</p>
 <p><code>Pesticides</code>: Total pounds of selected active pesticide ingredients used in production-agriculture per square mile. The higher the number, the greater the amount of pesticides have been used on agricultural sites</p>
 <pre><code># General format 
-DATA_TIBBLE %&gt;% 
+DATA_TIBBLE |&gt; 
     summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE),
               SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE)
     )</code></pre>
@@ -219,7 +219,7 @@ DATA_TIBBLE %&gt;%
 <h3>P.3</h3>
 <p>Filter any zeros from the <code>Pesticides</code> column out of <code>ces</code>. Use <code>filter()</code>. Assign this “cleaned” dataset object the name <code>ces_pest</code>.</p>
 <pre><code># General format 
-DATA_TIBBLE %&gt;% filter(LOGICAL_COMPARISON)</code></pre>
+DATA_TIBBLE |&gt; filter(LOGICAL_COMPARISON)</code></pre>
 <p>How many census tracts have pesticide values greater than 0?</p>
 </div>
 </div>
@@ -238,8 +238,8 @@ DATA_TIBBLE %&gt;% filter(LOGICAL_COMPARISON)</code></pre>
 <h3>2.3</h3>
 <p>How many census tracts are there in each county? Use <code>group_by()</code>, <code>summarize()</code>, and <code>n()</code> on the column named <code>CaliforniaCounty</code>.</p>
 <pre><code># General format 
-DATA_TIBBLE %&gt;% 
-    group_by(GROUPING_COLUMN_NAME) %&gt;% 
+DATA_TIBBLE |&gt; 
+    group_by(GROUPING_COLUMN_NAME) |&gt; 
     summarize(SUMMARY_COLUMN_NAME = n())</code></pre>
 </div>
 <div id="section-7" class="section level3">
@@ -263,7 +263,7 @@ DATA_TIBBLE %&gt;%
 <h3>P.5</h3>
 <p>Take your code from the above question P.4 and do the following:</p>
 <ul>
-<li>Add another pipe (<code>%&gt;%</code>)</li>
+<li>Add another pipe (<code>|&gt;</code>)</li>
 <li>Add the <code>arrange()</code> to sort the output by the summarized column “mean”.</li>
 </ul>
 </div>
