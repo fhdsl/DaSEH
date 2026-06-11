@@ -135,17 +135,17 @@ Examples:
 - Strongly Agree, Agree, Neutral, Disagree, Strongly Disagree
 - beginner, novice, intermediate, expert
 
-<span style="color:blue">We will learn more about factors in a later module.</span>
+** We will learn more about factors in a later module. **
 
 ## Classes Overview
 
-| Example          | Class     | Type      | Notes                                                                                   |
-|-:-:--------------|-:-:-------|-:-:-------|-----------------------------------------------------------------------------------------|
-| 1.1              | numeric   | double    | Default for numbers                                                                     |
-| 1                | integer   | integer   | Need to coerce to integer with as.integer() or use sample()/seq() with whole numbers    |
-| "FALSE", "Ball"  | character | character | Need quotes                                                                             |
-| FALSE, TRUE      | logical   | logical   | No quotes, 0 and 1, respectively                                                        |
-| "Small", "Large" | factor    | factor    | Need to coerce to factor with factor()                                                  |
+| Example          | Class     | Type      | Notes                                                                                              |
+|:----------------:|:---------:|:---------:|----------------------------------------------------------------------------------------------------|
+| 1.1              | numeric   | double    | Default for numbers                                                                                |
+| 1                | integer   | integer   | Need to coerce to integer with `as.integer()` or use `sample()` or `seq()` to create whole numbers |
+| "FALSE", "Ball"  | character | character | Need quotes                                                                                        |
+| FALSE, TRUE      | logical   | logical   | No quotes, 0 and 1, respectively                                                                   |
+| "Small", "Large" | factor    | factor    | Need to coerce to factor with `factor()`                                                           |
 
 # Special data classes
 
@@ -153,19 +153,19 @@ Examples:
 
 There are two most popular R classes used when working with dates and times: 
 
-- `Date` class representing a calendar date
-- `POSIXct` class representing a calendar date with hours, minutes, seconds
+- `Date` class - a calendar date
+- `POSIXct` class - a calendar date with hours, minutes, seconds
 
-We convert data from character to `Date`/`POSIXct` to use functions to manipulate date/date and time
+Converting data from character to `Date`/`POSIXct` allows special functions date/date and time
 
-`lubridate` is a powerful, widely used R package from "tidyverse" family to work with `Date` / `POSIXct` class objects 
+`lubridate` (part of `tidyverse`) helps work with `Date` / `POSIXct` class objects 
 
 ## Creating `Date` class object  
 
 ```{r, message = FALSE}
 class("2021-06-15")
 
-library(lubridate)
+library(tidyverse) # Contains lubridate
 
 x <- ymd("2021-06-15") # lubridate package Year Month Day
 class(x)
