@@ -77,7 +77,7 @@ Now that we have a <span style="color:blue">vector of numbers</span>.. what can 
     * `max(x)`: maximum value in x
     * `min(x)`: minimum value in x
 
-## Pipe (`|>`) vectors into summarizing functions
+## Pipe vectors into summarizing functions
 
 A vector can be summarized:
 
@@ -107,7 +107,9 @@ C. A dataset
 
 ## Summarize the data: `dplyr` `summarize()` function
 
-`summarize` works on datasets without `pull()`.
+`summarize()` is special!
+
+It works on datasets without `pull()`.
 
 Multiple summary statistics can be calculated at once!
 
@@ -257,7 +259,7 @@ er_grouped |>
 ```
 
 
-## Do it in one step: use `|>` to string these together!
+## Do it in one step: use the pipe to string these together!
 
 Pipe `er` into `group_by`, then pipe that into `summarize`:
 
