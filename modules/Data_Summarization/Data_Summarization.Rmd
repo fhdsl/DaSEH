@@ -77,7 +77,7 @@ Now that we have a <span style="color:blue">vector of numbers</span>.. what can 
     * `max(x)`: maximum value in x
     * `min(x)`: minimum value in x
 
-## Pipe (`|>`) vectors into summarizing functions
+## Pipe vectors into summarizing functions
 
 A vector can be summarized:
 
