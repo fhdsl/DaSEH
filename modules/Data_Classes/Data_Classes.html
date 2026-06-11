@@ -329,10 +329,10 @@ fractional values </span>. Can be any amount of places after the decimal.</p>
 </article></slide><slide class=""><hgroup><h2>Classes Overview</h2></hgroup><article  id="classes-overview">
 
 <table class = 'rmdtable'>
-<col width="27.777778%" />
-<col width="27.777778%" />
-<col width="27.777778%" />
-<col width="16.666667%" />
+<col width="12.857143%" />
+<col width="7.857143%" />
+<col width="7.857143%" />
+<col width="71.428571%" />
 <tr class="header">
 <th align="center">Example</th>
 <th align="center">Class</th>
@@ -341,33 +341,33 @@ fractional values </span>. Can be any amount of places after the decimal.</p>
 </tr>
 <tr class="odd">
 <td align="center">1.1</td>
-<td align="center">Numeric</td>
+<td align="center">numeric</td>
 <td align="center">double</td>
-<td align="left">default for numbers</td>
+<td align="left">Default for numbers</td>
 </tr>
 <tr class="even">
 <td align="center">1</td>
 <td align="center">integer</td>
 <td align="center">integer</td>
-<td align="left">Need to coerce to integer with as.integer() or use sample() or seq() with whole numbers</td>
+<td align="left">Need to coerce to integer with <code>as.integer()</code> or use <code>sample()</code> or <code>seq()</code> to create whole numbers</td>
 </tr>
 <tr class="odd">
 <td align="center">&ldquo;FALSE&rdquo;, &ldquo;Ball&rdquo;</td>
-<td align="center">Character</td>
-<td align="center">Character</td>
+<td align="center">character</td>
+<td align="center">character</td>
 <td align="left">Need quotes</td>
 </tr>
 <tr class="even">
 <td align="center">FALSE, TRUE</td>
 <td align="center">logical</td>
 <td align="center">logical</td>
-<td align="left">No quotes</td>
+<td align="left">No quotes, 0 and 1, respectively</td>
 </tr>
 <tr class="odd">
 <td align="center">&ldquo;Small&rdquo;, &ldquo;Large&rdquo;</td>
-<td align="center">Factor</td>
-<td align="center">Factor</td>
-<td align="left">Need to coerce to factor with factor()</td>
+<td align="center">factor</td>
+<td align="center">factor</td>
+<td align="left">Need to coerce to factor with <code>factor()</code></td>
 </tr>
 </table>
 
@@ -378,13 +378,13 @@ fractional values </span>. Can be any amount of places after the decimal.</p>
 <p>There are two most popular R classes used when working with dates and times:</p>
 
 <ul>
-<li><code>Date</code> class representing a calendar date</li>
-<li><code>POSIXct</code> class representing a calendar date with hours, minutes, seconds</li>
+<li><code>Date</code> class - a calendar date</li>
+<li><code>POSIXct</code> class - a calendar date with hours, minutes, seconds</li>
 </ul>
 
-<p>We convert data from character to <code>Date</code>/<code>POSIXct</code> to use functions to manipulate date/date and time</p>
+<p>Converting data from character to <code>Date</code>/<code>POSIXct</code> allows special functions date/date and time</p>
 
-<p><code>lubridate</code> is a powerful, widely used R package from &ldquo;tidyverse&rdquo; family to work with <code>Date</code> / <code>POSIXct</code> class objects</p>
+<p><code>lubridate</code> (part of <code>tidyverse</code>) helps work with <code>Date</code> / <code>POSIXct</code> class objects</p>
 
 </article></slide><slide class=""><hgroup><h2>Creating <code>Date</code> class object</h2></hgroup><article  id="creating-date-class-object">
 
@@ -392,7 +392,7 @@ fractional values </span>. Can be any amount of places after the decimal.</p>
 
 <pre >## [1] &quot;character&quot;</pre>
 
-<pre class = 'prettyprint lang-r'>library(lubridate)
+<pre class = 'prettyprint lang-r'>library(tidyverse) # Contains lubridate
 
 x &lt;- ymd(&quot;2021-06-15&quot;) # lubridate package Year Month Day
 class(x)</pre>
@@ -433,7 +433,7 @@ a - b</pre>
   read_csv(&quot;https://daseh.org/data/SARS-CoV-2_Wastewater_Data.csv&quot;) 
  
 # Selecting a few columns for easy viewing
-sars_ww &lt;- sars_ww %&gt;% select(town_name, date_start)</pre>
+sars_ww &lt;- sars_ww |&gt; select(town_name, date_start)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Class conversion in a dataset</h2></hgroup><article  id="class-conversion-in-a-dataset-1">
 
@@ -460,7 +460,7 @@ sars_ww &lt;- sars_ww %&gt;% select(town_name, date_start)</pre>
 
 <p>We would need to use <code>mutate()</code> to help us modify that column.</p>
 
-<pre class = 'prettyprint lang-r'>sars_ww %&gt;% 
+<pre class = 'prettyprint lang-r'>sars_ww |&gt; 
   mutate(date_start_fixed = mdy(date_start))</pre>
 
 <pre >## # A tibble: 2,813 × 3

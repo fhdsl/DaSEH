@@ -194,3 +194,10 @@ Take your code from the above question P.4 and do the following:
 ```{r P.5response}
 
 ```
+  
+  
+  
+  
+  
+  
+  
