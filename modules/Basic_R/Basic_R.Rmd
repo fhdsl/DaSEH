@@ -19,6 +19,14 @@ For now, we will be working in the **Console** (Pane 1 )
 knitr::include_graphics("../RStudio/images/three_panes.png")
 ```
 
+## FYI: Changing R versions
+
+Check your R version. 
+
+You might change it later today if you aren't up to date with us.
+
+Go to Tools > Global Options > General. Next to "R version", click Change, choose the newest version from the list, click Apply, and restart RStudio. ([1](https://www.listendata.com/2015/08/how-to-update-r-software.html), [2](https://bioinformatics.ccr.cancer.gov/docs/rtools/R%20and%20RStudio/2.6_switching_r_version/), [3](https://r-coder.com/update-r/), [4](https://www.wikihow.com/Update-R))
+
 ## R as a calculator
 
 -   The R console is a full calculator
@@ -399,6 +407,16 @@ library(tidyverse)
 ```{r, fig.alt="Installing must be done once via 'install.packages() while loading must be done every R session via 'library()'.", out.width = "80%", echo = FALSE, fig.align='center'}
 knitr::include_graphics("../../images/lol/install_packages.jpg")
 ```
+
+## RStudio Shortcuts
+
+|                                   | Windows | Mac      |
+|-----------------------------------|---------|----------|
+| Insert assignment operator (`<-`) | Alt+-   | Option+- |
+
+<br><br>
+
+More soon! See shortcuts [here](https://support.posit.co/hc/en-us/articles/200711853-Keyboard-Shortcuts-in-the-RStudio-IDE).
 
 ## Summary
 
