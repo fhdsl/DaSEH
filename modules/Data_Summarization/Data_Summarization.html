@@ -245,7 +245,7 @@ vector of numbers</span>.. what can we do with it?</p>
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Pipe (<code></h2><h3>&gt;</code>) vectors into summarizing functions</h3></hgroup><article  id="pipe-vectors-into-summarizing-functions">
+</article></slide><slide class=""><hgroup><h2>Pipe vectors into summarizing functions</h2></hgroup><article  id="pipe-vectors-into-summarizing-functions">
 
 <p>A vector can be summarized:</p>
 
@@ -275,7 +275,9 @@ vector of numbers</span>.. what can we do with it?</p>
 
 </article></slide><slide class=""><hgroup><h2>Summarize the data: <code>dplyr</code> <code>summarize()</code> function</h2></hgroup><article  id="summarize-the-data-dplyr-summarize-function">
 
-<p><code>summarize</code> works on datasets without <code>pull()</code>.</p>
+<p><code>summarize()</code> is special!</p>
+
+<p>It works on datasets without <code>pull()</code>.</p>
 
 <p>Multiple summary statistics can be calculated at once!</p>
 
@@ -502,7 +504,7 @@ er_grouped</pre>
 11  2021       8.06
 12  2022       9.29</pre>
 
-</article></slide><slide class=""><hgroup><h2>Do it in one step: use <code></h2><h3>&gt;</code> to string these together!</h3></hgroup><article  id="do-it-in-one-step-use-to-string-these-together">
+</article></slide><slide class=""><hgroup><h2>Do it in one step: use the pipe to string these together!</h2></hgroup><article  id="do-it-in-one-step-use-the-pipe-to-string-these-together">
 
 <p>Pipe <code>er</code> into <code>group_by</code>, then pipe that into <code>summarize</code>:</p>
 

@@ -178,9 +178,9 @@ ces &lt;- read_csv(file = &quot;https://daseh.org/data/CalEnviroScreen_data.csv&
 <pre><code>## [1] 8035</code></pre>
 <pre class="r"><code>dim(ces)</code></pre>
 <pre><code>## [1] 8035   67</code></pre>
-<pre class="r"><code>ces %&gt;% nrow()</code></pre>
+<pre class="r"><code>ces |&gt; nrow()</code></pre>
 <pre><code>## [1] 8035</code></pre>
-<pre class="r"><code>ces %&gt;% count()</code></pre>
+<pre class="r"><code>ces |&gt; count()</code></pre>
 <pre><code>## # A tibble: 1 × 1
 ##       n
 ##   &lt;int&gt;
@@ -191,16 +191,16 @@ ces &lt;- read_csv(file = &quot;https://daseh.org/data/CalEnviroScreen_data.csv&
 <p>The <code>TotalPop</code> column includes information about the population for each census tract as of the 2010 census.</p>
 <p>NOTE: A census tract a small, relatively permanent area within a county used to present data from the census. Each row in the <code>ces</code> dataset corresponds to a single census tract. See <a href="https://www2.census.gov/geo/pdfs/education/CensusTracts.pdf" class="uri">https://www2.census.gov/geo/pdfs/education/CensusTracts.pdf</a></p>
 <p>What was the total population in the dataset based on the 2010 census? (use <code>sum()</code> and the <code>TotalPop</code> column)</p>
-<pre class="r"><code>ces %&gt;% pull(TotalPop) %&gt;% sum()</code></pre>
+<pre class="r"><code>ces |&gt; pull(TotalPop) |&gt; sum()</code></pre>
 <pre><code>## [1] 39283497</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
 <p>What was the largest population, according to the 2010 census? Use <code>summarize</code> and <code>max</code>.</p>
 <pre><code># General format 
-DATA_TIBBLE %&gt;% 
+DATA_TIBBLE |&gt; 
     summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN))</code></pre>
-<pre class="r"><code>ces %&gt;% 
+<pre class="r"><code>ces |&gt; 
   summarize(max = max(TotalPop))</code></pre>
 <pre><code>## # A tibble: 1 × 1
 ##     max
@@ -212,11 +212,11 @@ DATA_TIBBLE %&gt;%
 <p>Modify your code from 1.3 to add the smallest population among census tracts. Use <code>min</code> in your <code>summarize</code> function.</p>
 <p><em>HINT:</em> Make sure you make your <code>SUMMARY_COLUMN_NAME</code> different for the max and the min summaries! What do you think would happen if you tried to make <code>SUMMARY_COLUMN_NAME</code> the same name for both statistics?</p>
 <pre><code># General format 
-DATA_TIBBLE %&gt;% 
+DATA_TIBBLE |&gt; 
     summarize(SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN),
               SUMMARY_COLUMN_NAME = FUNCTION(SOURCE_COLUMN)
     )</code></pre>
-<pre class="r"><code>ces %&gt;% 
+<pre class="r"><code>ces |&gt; 
   summarize(max = max(TotalPop),
             min = min(TotalPop))</code></pre>
 <pre><code>## # A tibble: 1 × 2
@@ -224,7 +224,7 @@ DATA_TIBBLE %&gt;%
 ##   &lt;dbl&gt; &lt;dbl&gt;
 ## 1 38754     0</code></pre>
 <pre class="r"><code>#If your code uses the same name for both summary columns, the output only has one column. The min() summary replaces the max() summary
-test &lt;- ces %&gt;% 
+test &lt;- ces |&gt; 
   summarize(summary = max(TotalPop),
             summary = min(TotalPop))
   
@@ -242,11 +242,11 @@ test</code></pre>
 <p>Summarize the <code>ces</code> data to get the mean of both the <code>TotalPop</code> and <code>Pesticides</code> columns. Make sure to remove <code>NA</code>s.</p>
 <p><code>Pesticides</code>: Total pounds of selected active pesticide ingredients used in production-agriculture per square mile. The higher the number, the greater the amount of pesticides have been used on agricultural sites</p>
 <pre><code># General format 
-DATA_TIBBLE %&gt;% 
+DATA_TIBBLE |&gt; 
     summarize(SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE),
               SUMMARY_COLUMN_NAME = OPERATOR(SOURCE_COLUMN, na.rm = TRUE)
     )</code></pre>
-<pre class="r"><code>ces %&gt;% summarize(
+<pre class="r"><code>ces |&gt; summarize(
   mean_pop = mean(TotalPop, na.rm = TRUE),
   mean_pesticide = mean(Pesticides, na.rm = TRUE)
 )</code></pre>
@@ -254,8 +254,8 @@ DATA_TIBBLE %&gt;%
 ##   mean_pop mean_pesticide
 ##      &lt;dbl&gt;          &lt;dbl&gt;
 ## 1    4889.           268.</code></pre>
-<pre class="r"><code>ces %&gt;%
-  select(TotalPop, Pesticides) %&gt;%
+<pre class="r"><code>ces |&gt;
+  select(TotalPop, Pesticides) |&gt;
   colMeans()</code></pre>
 <pre><code>##   TotalPop Pesticides 
 ##  4889.0475   268.4894</code></pre>
@@ -269,16 +269,16 @@ DATA_TIBBLE %&gt;%
 <h3>P.3</h3>
 <p>Filter any zeros from the <code>Pesticides</code> column out of <code>ces</code>. Use <code>filter()</code>. Assign this “cleaned” dataset object the name <code>ces_pest</code>.</p>
 <pre><code># General format 
-DATA_TIBBLE %&gt;% filter(LOGICAL_COMPARISON)</code></pre>
-<pre class="r"><code>ces_pest &lt;- ces %&gt;% filter(Pesticides != 0)</code></pre>
+DATA_TIBBLE |&gt; filter(LOGICAL_COMPARISON)</code></pre>
+<pre class="r"><code>ces_pest &lt;- ces |&gt; filter(Pesticides != 0)</code></pre>
 <p>How many census tracts have pesticide values greater than 0?</p>
 <pre class="r"><code>nrow(ces_pest)</code></pre>
 <pre><code>## [1] 2602</code></pre>
 <pre class="r"><code>dim(ces_pest)</code></pre>
 <pre><code>## [1] 2602   67</code></pre>
-<pre class="r"><code>ces_pest %&gt;% nrow()</code></pre>
+<pre class="r"><code>ces_pest |&gt; nrow()</code></pre>
 <pre><code>## [1] 2602</code></pre>
-<pre class="r"><code>ces_pest %&gt;% count()</code></pre>
+<pre class="r"><code>ces_pest |&gt; count()</code></pre>
 <pre><code>## # A tibble: 1 × 1
 ##       n
 ##   &lt;int&gt;
@@ -290,7 +290,7 @@ DATA_TIBBLE %&gt;% filter(LOGICAL_COMPARISON)</code></pre>
 <div id="section-4" class="section level3">
 <h3>2.1</h3>
 <p>How many census tracts are present in each California county? Use <code>count()</code> on the column named <code>CaliforniaCounty</code>. Use <code>ces</code> as your input data.</p>
-<pre class="r"><code>ces %&gt;% count(CaliforniaCounty)</code></pre>
+<pre class="r"><code>ces |&gt; count(CaliforniaCounty)</code></pre>
 <pre><code>## # A tibble: 58 × 2
 ##    CaliforniaCounty     n
 ##    &lt;chr&gt;            &lt;int&gt;
@@ -309,7 +309,7 @@ DATA_TIBBLE %&gt;% filter(LOGICAL_COMPARISON)</code></pre>
 <div id="section-5" class="section level3">
 <h3>2.2</h3>
 <p>Let’s break down the count further. Modify your code from question 2.1 to count census tracts by County AND ZIP code. Use <code>count()</code> on the columns named <code>CaliforniaCounty</code> and <code>ZIP</code>.</p>
-<pre class="r"><code>ces %&gt;% count(CaliforniaCounty, ZIP)</code></pre>
+<pre class="r"><code>ces |&gt; count(CaliforniaCounty, ZIP)</code></pre>
 <pre><code>## # A tibble: 1,377 × 3
 ##    CaliforniaCounty   ZIP     n
 ##    &lt;chr&gt;            &lt;dbl&gt; &lt;int&gt;
@@ -330,11 +330,11 @@ DATA_TIBBLE %&gt;% filter(LOGICAL_COMPARISON)</code></pre>
 <h3>2.3</h3>
 <p>How many census tracts are there in each county? Use <code>group_by()</code>, <code>summarize()</code>, and <code>n()</code> on the column named <code>CaliforniaCounty</code>.</p>
 <pre><code># General format 
-DATA_TIBBLE %&gt;% 
-    group_by(GROUPING_COLUMN_NAME) %&gt;% 
+DATA_TIBBLE |&gt; 
+    group_by(GROUPING_COLUMN_NAME) |&gt; 
     summarize(SUMMARY_COLUMN_NAME = n())</code></pre>
-<pre class="r"><code>ces %&gt;%
-  group_by(CaliforniaCounty) %&gt;%
+<pre class="r"><code>ces |&gt;
+  group_by(CaliforniaCounty) |&gt;
   summarize(count = n())</code></pre>
 <pre><code>## # A tibble: 58 × 2
 ##    CaliforniaCounty count
@@ -354,8 +354,8 @@ DATA_TIBBLE %&gt;%
 <div id="section-7" class="section level3">
 <h3>2.4</h3>
 <p>Modify your code from 2.3 to also group by <code>ZIP</code>.</p>
-<pre class="r"><code>ces %&gt;%
-  group_by(CaliforniaCounty, ZIP) %&gt;%
+<pre class="r"><code>ces |&gt;
+  group_by(CaliforniaCounty, ZIP) |&gt;
   summarize(count = n())</code></pre>
 <pre><code>## `summarise()` has grouped output by &#39;CaliforniaCounty&#39;. You can override using
 ## the `.groups` argument.</code></pre>
@@ -387,8 +387,8 @@ DATA_TIBBLE %&gt;%
  1 &quot;Alameda &quot;         360 4602.
 ...</code></pre>
 <p>(In the above table, remember that the “count” column is counting the number of census tracts.)</p>
-<pre class="r"><code>ces %&gt;%
-  group_by(CaliforniaCounty) %&gt;%
+<pre class="r"><code>ces |&gt;
+  group_by(CaliforniaCounty) |&gt;
   summarize(
     count = n(),
     mean = mean(TotalPop)
@@ -412,15 +412,15 @@ DATA_TIBBLE %&gt;%
 <h3>P.5</h3>
 <p>Take your code from the above question P.4 and do the following:</p>
 <ul>
-<li>Add another pipe (<code>%&gt;%</code>)</li>
+<li>Add another pipe (<code>|&gt;</code>)</li>
 <li>Add the <code>arrange()</code> to sort the output by the summarized column “mean”.</li>
 </ul>
-<pre class="r"><code>ces %&gt;%
-  group_by(CaliforniaCounty) %&gt;%
+<pre class="r"><code>ces |&gt;
+  group_by(CaliforniaCounty) |&gt;
   summarize(
     count = n(),
     mean = mean(TotalPop)
-  ) %&gt;%
+  ) |&gt;
   arrange(mean)</code></pre>
 <pre><code>## # A tibble: 58 × 3
 ##    CaliforniaCounty count  mean
