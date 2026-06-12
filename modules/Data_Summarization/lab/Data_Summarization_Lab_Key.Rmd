@@ -41,6 +41,9 @@ What was the total population in the dataset based on the 2010 census? (use `sum
 
 ```{r 1.2response}
 ces |> pull(TotalPop) |> sum()
+
+# Alternative
+ces |> summarize(popSum = sum(TotalPop))
 ```
 
 ### 1.3
