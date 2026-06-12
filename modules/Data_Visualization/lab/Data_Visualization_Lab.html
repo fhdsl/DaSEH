@@ -179,7 +179,7 @@ pre code {
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>ces_sub &lt;- ces %&gt;% filter(CaliforniaCounty %in% c(&quot;Fresno&quot;, &quot;Merced&quot;, &quot;Placer&quot;, &quot;Sonoma&quot;, &quot;Yolo&quot;))</code></pre>
+<pre class="r"><code>ces_sub &lt;- ces |&gt; filter(CaliforniaCounty %in% c(&quot;Fresno&quot;, &quot;Merced&quot;, &quot;Placer&quot;, &quot;Sonoma&quot;, &quot;Yolo&quot;))</code></pre>
 <div id="section" class="section level3">
 <h3>1.1</h3>
 <p>Use the <code>ggplot2</code> package to make a plot of how diesel particulate concentration (<code>DieselPM</code>; y-axis) is associated with traffic density values (<code>Traffic</code>; x-axis). You can use lines layer (<code>+ geom_line()</code>) or points layer (<code>+ geom_point()</code>), or both!</p>

@@ -478,7 +478,7 @@ ces2</code></pre>
 <div id="section-11" class="section level3">
 <h3>3.1</h3>
 <p>Create a subset called <code>ces_Alameda</code> from <code>ces</code> that only contains the rows for Alameda and only the columns: <code>Traffic</code> and <code>Asthma</code>. <code>CA_county</code> should not be included in <code>ces_Alameda</code>.</p>
-<p>What are the dimensions of this dataset? Don’t use pipes (<code>%&gt;%</code>) and instead do this in two steps creating the <code>ces_Alameda</code> object with <code>filter</code> and updating it with <code>select</code>.</p>
+<p>What are the dimensions of this dataset? Don’t use pipes (<code>|&gt;</code>) and instead do this in two steps creating the <code>ces_Alameda</code> object with <code>filter</code> and updating it with <code>select</code>.</p>
 <pre class="r"><code>ces_Alameda &lt;- filter(ces, CA_county == &quot;Alameda&quot;)
 ces_Alameda  &lt;- select(ces_Alameda, Traffic, Asthma)
 ces_Alameda # can get dimensions just from viewing the tibble</code></pre>
@@ -501,9 +501,9 @@ ces_Alameda # can get dimensions just from viewing the tibble</code></pre>
 </div>
 <div id="section-12" class="section level3">
 <h3>3.2</h3>
-<p>Try the same thing again with pipes <code>%&gt;%</code>.</p>
-<pre class="r"><code>ces_Alameda &lt;- ces %&gt;%
-  filter(CA_county == &quot;Alameda&quot;) %&gt;%
+<p>Try the same thing again with pipes <code>|&gt;</code>.</p>
+<pre class="r"><code>ces_Alameda &lt;- ces |&gt;
+  filter(CA_county == &quot;Alameda&quot;) |&gt;
   select(Traffic, Asthma)
 ces_Alameda</code></pre>
 <pre><code>## # A tibble: 360 × 2
@@ -523,8 +523,8 @@ ces_Alameda</code></pre>
 <pre class="r"><code>dim(ces_Alameda)</code></pre>
 <pre><code>## [1] 360   2</code></pre>
 <p>What happens if you do the steps in a different order? Why does this not work?</p>
-<pre class="r"><code>ces_Alameda &lt;- ces %&gt;%
-                 select(Traffic, Asthma) %&gt;%
+<pre class="r"><code>ces_Alameda &lt;- ces |&gt;
+                 select(Traffic, Asthma) |&gt;
                  filter(CA_county == &quot;Alameda&quot;)</code></pre>
 <pre><code>## Error in `filter()`:
 ## ℹ In argument: `CA_county == &quot;Alameda&quot;`.
@@ -551,17 +551,17 @@ ces_Alameda</code></pre>
 ##  9   169.    18.9
 ## 10   189.    22.9
 ## # ℹ 350 more rows</code></pre>
-<pre class="r"><code>arrange(ces_Alameda, Traffic) %&gt;%
-  head(n = 1) %&gt;%
+<pre class="r"><code>arrange(ces_Alameda, Traffic) |&gt;
+  head(n = 1) |&gt;
   pull(Traffic)</code></pre>
 <pre><code>## [1] 20.92008</code></pre>
 </div>
 <div id="section-14" class="section level3">
 <h3>3.4</h3>
-<p>Create a new variable in <code>ces_Alameda</code> called <code>Asthma100</code>, which is equal to <code>Asthma</code> divided by 100, using <code>mutate()</code>(don’t forget to reassign <code>ces_Alameda</code>). Use pipes <code>%&gt;%</code>. Take a look at the data now!</p>
+<p>Create a new variable in <code>ces_Alameda</code> called <code>Asthma100</code>, which is equal to <code>Asthma</code> divided by 100, using <code>mutate()</code>(don’t forget to reassign <code>ces_Alameda</code>). Use pipes <code>|&gt;</code>. Take a look at the data now!</p>
 <pre><code># General format
-NEWDATA &lt;- OLD_DATA %&gt;% mutate(NEW_COLUMN = OLD_COLUMN)</code></pre>
-<pre class="r"><code>ces_Alameda &lt;- ces_Alameda %&gt;% mutate(Asthma100 = Asthma/100)
+NEWDATA &lt;- OLD_DATA |&gt; mutate(NEW_COLUMN = OLD_COLUMN)</code></pre>
+<pre class="r"><code>ces_Alameda &lt;- ces_Alameda |&gt; mutate(Asthma100 = Asthma/100)
 ces_Alameda</code></pre>
 <pre><code>## # A tibble: 360 × 3
 ##    Traffic Asthma Asthma100
@@ -584,7 +584,7 @@ ces_Alameda</code></pre>
 <div id="p.4" class="section level3">
 <h3>P.4</h3>
 <p>Move the <code>Asthma100</code> column to be before <code>Traffic</code> in the <code>ces_Alameda</code> dataset. Use <code>relocate()</code>.</p>
-<pre class="r"><code>ces_Alameda &lt;- ces_Alameda %&gt;% relocate(Asthma100, .before = Traffic)
+<pre class="r"><code>ces_Alameda &lt;- ces_Alameda |&gt; relocate(Asthma100, .before = Traffic)
 ces_Alameda</code></pre>
 <pre><code>## # A tibble: 360 × 3
 ##    Asthma100 Traffic Asthma
@@ -605,8 +605,8 @@ ces_Alameda</code></pre>
 <h3>P.5</h3>
 <p>Using the original <code>ces</code> data, how can you find the values of <code>ApproxLocation</code> for areas within zip code 90745 (in Los Angeles county) that also have a CES4.0 score in the range 90-95% - without just looking at the data manually and instead use functions we learned today? (Hint: It can be helpful to look at your data first)</p>
 <p><code>CES4.0PercRange</code>: Percentile of the CalEnviroScreen score, grouped by 5% increments. The CalEnviroScreen score is a measure of the negative environmental effects seen in a given region. Those zip codes that have a percentile range of 90-95% are those regions that experience the highest effects of pollution in California.</p>
-<pre class="r"><code>ces %&gt;%
-  filter(ZIP == 90745 &amp; CES4.0PercRange == &quot;90-95%&quot;) %&gt;%
+<pre class="r"><code>ces |&gt;
+  filter(ZIP == 90745 &amp; CES4.0PercRange == &quot;90-95%&quot;) |&gt;
   select(ApproxLocation)</code></pre>
 <pre><code>## # A tibble: 4 × 1
 ##   ApproxLocation

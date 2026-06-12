@@ -167,18 +167,8 @@ pre code {
 
 <div id="part-1" class="section level1">
 <h1>Part 1</h1>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code># install.packages(&quot;naniar&quot;)
+<pre class="r"><code>library(tidyverse)
+# install.packages(&quot;naniar&quot;)
 library(naniar)</code></pre>
 <p>Read in the CalEnviroScreen data using <code>read_csv</code> and the URL <a href="https://daseh.org/data/CalEnviroScreen_data.csv" class="uri">https://daseh.org/data/CalEnviroScreen_data.csv</a></p>
 <p>Assign this dataset to an object called “ces”</p>
@@ -187,9 +177,9 @@ library(naniar)</code></pre>
 <p>Use the <code>is.na()</code> and <code>any()</code> functions to check if the <code>Lead</code> variable in <code>ces</code> has any <code>NA</code> values. Use the pipe between each step. Hint: You first need to <code>pull</code> out the vector version of this variable to use the <code>is.na()</code> function.</p>
 <p><code>Lead</code>: an estimate of the risk for lead exposure in children living in low-income communities with older housing. A higher number indicates a greater risk.</p>
 <pre><code># General format
-TIBBLE %&gt;%
-  pull(COLUMN) %&gt;%
-  is.na() %&gt;%
+TIBBLE |&gt;
+  pull(COLUMN) |&gt;
+  is.na() |&gt;
   any()</code></pre>
 </div>
 <div id="section-1" class="section level3">
@@ -262,7 +252,7 @@ BloodType</code></pre>
 <h3>2.2</h3>
 <p>Recode the <code>exposure</code> variable of the <code>BloodType</code> data so that it is consistent. Use <code>case_when()</code>. Keep “Other” as “Other”. Don’t forget to use quotes!</p>
 <pre><code># General format
-NEW_TIBBLE &lt;- OLD_TIBBLE %&gt;%
+NEW_TIBBLE &lt;- OLD_TIBBLE |&gt;
   mutate(NEW_COLUMN = case_when(
     OLD_COLUMN %in% c( ... ) ~ ... ,
     OLD_COLUMN %in% c( ... ) ~ ... ,
@@ -285,7 +275,7 @@ NEW_TIBBLE &lt;- OLD_TIBBLE %&gt;%
 <h3>2.6</h3>
 <p>Make a new tibble of <code>BloodType</code> called <code>Bloodtype_split</code> that splits the <code>type</code> variable into two called <code>blood_type</code> and <code>Rhfactor</code>. Note: periods are special characters that generally are interpreted as wild cards thus we need “\.” instead of simply “.” for the <strong>separating character</strong> to tell R that we want it to be interpreted as a period. Make sure you use quotes around “\.” and the column names like shown below (don’t want backticks).</p>
 <pre><code># General format
-NEW_TIBBLE &lt;- OLD_TIBBLE %&gt;%
+NEW_TIBBLE &lt;- OLD_TIBBLE |&gt;
   separate(OLD_COLUMN,
            into = c(&quot;NEW_COLUMN1&quot;, &quot;NEW_COLUMN2&quot;),
            sep = &quot;SEPARATING_CHARACTER&quot;)</code></pre>

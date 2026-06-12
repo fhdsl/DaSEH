@@ -348,11 +348,11 @@ loud(word = &quot;hooray!&quot;)</pre>
 
 <!-- ```{r message=FALSE} -->
 
-<!-- get_row <- function(dat, row) dat %>% filter(row_number() == row) -->
+<!-- get_row <- function(dat, row) dat |> filter(row_number() == row) -->
 
 <!-- ces <- calenviroscreen -->
 
-<!-- ces_1_8 <- ces %>% select(1:8) -->
+<!-- ces_1_8 <- ces |> select(1:8) -->
 
 <!-- ``` -->
 
@@ -368,12 +368,12 @@ loud(word = &quot;hooray!&quot;)</pre>
 
 <pre class = 'prettyprint lang-r'># get means and missing for a specific column
 get_summary &lt;- function(dataset, col_name) {
-    dataset %&gt;%  
+    dataset |&gt;  
     summarise(mean = mean({{col_name}}, na.rm = TRUE),
               na_count = sum(is.na({{col_name}})))
 }</pre>
 
-</article></slide><slide class=""><hgroup><h2>Functions for tibbles - example</h2></hgroup><article  id="functions-for-tibbles---example" class="codesmall">
+</article></slide><slide class=""><hgroup><h2>Functions for tibbles - example</h2></hgroup><article  class="codesmall" id="functions-for-tibbles---example">
 
 <pre class = 'prettyprint lang-r'>er &lt;- read_csv(file = &quot;https://daseh.org/data/CO_ER_heat_visits.csv&quot;)</pre>
 
@@ -436,15 +436,15 @@ get_summary &lt;- function(dataset, col_name) {
 <pre >     county        rate   lower95cl   upper95cl      visits        year 
 &quot;character&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot;   &quot;numeric&quot; </pre>
 
-<pre class = 'prettyprint lang-r'># also: er %&gt;% sapply(class)</pre>
+<pre class = 'prettyprint lang-r'># also: er |&gt; sapply(class)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Using your custom functions: <code>sapply()</code></h2></hgroup><article  id="using-your-custom-functions-sapply-1">
 
 <p>Use the <code>div_100</code> function we created earlier to convert 0-100 percentiles to proportions.</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
-  select(ends_with(&quot;cl&quot;)) %&gt;%
-  sapply(div_100) %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
+  select(ends_with(&quot;cl&quot;)) |&gt;
+  sapply(div_100) |&gt;
   head()</pre>
 
 <pre >      lower95cl  upper95cl
@@ -459,9 +459,9 @@ get_summary &lt;- function(dataset, col_name) {
 
 <p>Also called &ldquo;anonymous function&rdquo;.</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
-  select(ends_with(&quot;cl&quot;)) %&gt;%
-  sapply(function(x) x / 100) %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
+  select(ends_with(&quot;cl&quot;)) |&gt;
+  sapply(function(x) x / 100) |&gt;
   head()</pre>
 
 <pre >      lower95cl  upper95cl
@@ -474,9 +474,9 @@ get_summary &lt;- function(dataset, col_name) {
 
 </article></slide><slide class=""><hgroup><h2>Anonymous functions: alternative syntax</h2></hgroup><article  id="anonymous-functions-alternative-syntax">
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
-  select(ends_with(&quot;cl&quot;)) %&gt;%
-  sapply(\(x) x / 100) %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
+  select(ends_with(&quot;cl&quot;)) |&gt;
+  sapply(\(x) x / 100) |&gt;
   head()</pre>
 
 <pre >      lower95cl  upper95cl
@@ -493,7 +493,7 @@ get_summary &lt;- function(dataset, col_name) {
 
 <p>Already know how to use functions to modify columns using <code>mutate()</code> or calculate summary statistics using <code>summarize()</code>.</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
   summarize(max_visits = max(visits, na.rm = T),
             max_rate = max(rate, na.rm = T))</pre>
 
@@ -522,7 +522,7 @@ get_summary &lt;- function(dataset, col_name) {
 
 <p>Combining with <code>summarize()</code></p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
   summarize(across(
     c(visits, rate),
     mean # no parentheses
@@ -537,7 +537,7 @@ get_summary &lt;- function(dataset, col_name) {
 
 <p>Add anonymous function to include additional arguments (e.g., <code>na.rm = T</code>).</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt;
   summarize(across(
     c(visits, rate),
     function(x) mean(x, na.rm = T)
@@ -552,8 +552,8 @@ get_summary &lt;- function(dataset, col_name) {
 
 <p>Can use with other tidyverse functions like <code>group_by</code>!</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;%
-  group_by(year) %&gt;% 
+<pre class = 'prettyprint lang-r'>er |&gt;
+  group_by(year) |&gt; 
   summarize(across(
     c(visits, rate),
     function(x) mean(x, na.rm = T)
@@ -579,8 +579,8 @@ get_summary &lt;- function(dataset, col_name) {
 
 <p>Using different <code>tidyselect()</code> options (e.g., <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code>)</p>
 
-<pre class = 'prettyprint lang-r'>er %&gt;% 
-  group_by(year) %&gt;%
+<pre class = 'prettyprint lang-r'>er |&gt; 
+  group_by(year) |&gt;
   summarize(across(contains(&quot;cl&quot;), mean, na.rm=T))</pre>
 
 <pre ># A tibble: 12 × 3
@@ -599,7 +599,7 @@ get_summary &lt;- function(dataset, col_name) {
 11  2021     1.30       2.92
 12  2022     1.93       4.71</pre>
 
-</article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  id="applying-functions-with-across-from-dplyr-5" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Applying functions with <code>across</code> from <code>dplyr</code></h2></hgroup><article  class="smaller" id="applying-functions-with-across-from-dplyr-5">
 
 <p>Combining with <code>mutate()</code> - the <code>replace_na</code> function</p>
 
@@ -607,8 +607,8 @@ get_summary &lt;- function(dataset, col_name) {
 
 <p><code>replace_na({data frame}, {list of values})</code> or <code>replace_na({vector}, {single value})</code></p>
 
-<pre class = 'prettyprint lang-r'>yearly_co2 %&gt;%
-  select(country, starts_with(&quot;194&quot;)) %&gt;%
+<pre class = 'prettyprint lang-r'>yearly_co2 |&gt;
+  select(country, starts_with(&quot;194&quot;)) |&gt;
   mutate(across(
     c(`1943`, `1944`, `1945`),
     function(x) replace_na(x, replace = 0)
@@ -659,17 +659,17 @@ get_summary &lt;- function(dataset, col_name) {
 <p><code>select()</code> from each tibble the numeric columns:</p>
 
 <pre class = 'prettyprint lang-r'>df_list &lt;- 
-  df_list %&gt;% 
+  df_list |&gt; 
   sapply(function(x) select(x, where(is.numeric)))</pre>
 
-</article></slide><slide class=""><hgroup><h2>Multiple data frames: <code>sapply</code></h2></hgroup><article  id="multiple-data-frames-sapply" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Multiple data frames: <code>sapply</code></h2></hgroup><article  class="smaller" id="multiple-data-frames-sapply">
 
-<pre class = 'prettyprint lang-r'>df_list %&gt;% sapply(nrow)</pre>
+<pre class = 'prettyprint lang-r'>df_list |&gt; sapply(nrow)</pre>
 
 <pre >        AQ         er yearly_co2 
        153        768        192 </pre>
 
-<pre class = 'prettyprint lang-r'>df_list %&gt;% sapply(colMeans, na.rm = TRUE)</pre>
+<pre class = 'prettyprint lang-r'>df_list |&gt; sapply(colMeans, na.rm = TRUE)</pre>
 
 <pre >$AQ
      Ozone    Solar.R       Wind       Temp      Month        Day 

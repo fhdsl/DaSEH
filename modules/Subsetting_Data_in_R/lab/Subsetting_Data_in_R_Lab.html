@@ -259,11 +259,11 @@ library(tidyverse)</code></pre>
 <div id="section-11" class="section level3">
 <h3>3.1</h3>
 <p>Create a subset called <code>ces_Alameda</code> from <code>ces</code> that only contains the rows for Alameda and only the columns: <code>Traffic</code> and <code>Asthma</code>. <code>CA_county</code> should not be included in <code>ces_Alameda</code>.</p>
-<p>What are the dimensions of this dataset? Don’t use pipes (<code>%&gt;%</code>) and instead do this in two steps creating the <code>ces_Alameda</code> object with <code>filter</code> and updating it with <code>select</code>.</p>
+<p>What are the dimensions of this dataset? Don’t use pipes (<code>|&gt;</code>) and instead do this in two steps creating the <code>ces_Alameda</code> object with <code>filter</code> and updating it with <code>select</code>.</p>
 </div>
 <div id="section-12" class="section level3">
 <h3>3.2</h3>
-<p>Try the same thing again with pipes <code>%&gt;%</code>.</p>
+<p>Try the same thing again with pipes <code>|&gt;</code>.</p>
 <p>What happens if you do the steps in a different order? Why does this not work?</p>
 </div>
 <div id="section-13" class="section level3">
@@ -272,9 +272,9 @@ library(tidyverse)</code></pre>
 </div>
 <div id="section-14" class="section level3">
 <h3>3.4</h3>
-<p>Create a new variable in <code>ces_Alameda</code> called <code>Asthma100</code>, which is equal to <code>Asthma</code> divided by 100, using <code>mutate()</code>(don’t forget to reassign <code>ces_Alameda</code>). Use pipes <code>%&gt;%</code>. Take a look at the data now!</p>
+<p>Create a new variable in <code>ces_Alameda</code> called <code>Asthma100</code>, which is equal to <code>Asthma</code> divided by 100, using <code>mutate()</code>(don’t forget to reassign <code>ces_Alameda</code>). Use pipes <code>|&gt;</code>. Take a look at the data now!</p>
 <pre><code># General format
-NEWDATA &lt;- OLD_DATA %&gt;% mutate(NEW_COLUMN = OLD_COLUMN)</code></pre>
+NEWDATA &lt;- OLD_DATA |&gt; mutate(NEW_COLUMN = OLD_COLUMN)</code></pre>
 </div>
 </div>
 <div id="practice-on-your-own-2" class="section level1">

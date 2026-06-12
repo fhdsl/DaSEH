@@ -172,8 +172,8 @@ pre code {
 <p>Load the CalEnviroScreen dataset and use <code>select</code> to choose the <code>CaliforniaCounty</code>, <code>ImpWaterBodies</code>, and <code>ZIP</code> variables. Then subset this data using <code>filter</code> to include only the California counties Amador, Napa, Ventura, and San Francisco. Name this data “ces”.</p>
 <p><code>ImpWaterBodies</code>: measure of the number of pollutants across all impaired water bodies within a given distance of populated areas.</p>
 <pre class="r"><code>ces &lt;- 
-  read_csv(&quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;) %&gt;% 
-  select(CaliforniaCounty, ImpWaterBodies, ZIP) %&gt;%
+  read_csv(&quot;https://daseh.org/data/CalEnviroScreen_data.csv&quot;) |&gt; 
+  select(CaliforniaCounty, ImpWaterBodies, ZIP) |&gt;
   filter(CaliforniaCounty %in% c(&quot;Amador&quot;, &quot;Napa&quot;, &quot;Ventura&quot;, &quot;San Francisco&quot;))</code></pre>
 <pre><code>## Rows: 8035 Columns: 67
 ## ── Column specification ────────────────────────────────────────────────────────

@@ -222,7 +222,7 @@ pre code {
 <li>Remember that <code>NA</code> values can influence calculations.</li>
 </ul>
 <pre><code># General format
-data %&gt;%
+data |&gt;
   summarize(across(
     {vector or tidyselect},
     {some function}
@@ -238,7 +238,7 @@ data %&gt;%
 <li>Check your work - It will also be easier if you <code>select(contains(&quot;Pctl&quot;))</code>.</li>
 </ul>
 <pre><code># General format
-data %&gt;%
+data |&gt;
   mutate(across(
     {vector or tidyselect},
     {some function}
