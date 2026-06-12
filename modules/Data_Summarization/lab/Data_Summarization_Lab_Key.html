@@ -193,6 +193,12 @@ ces &lt;- read_csv(file = &quot;https://daseh.org/data/CalEnviroScreen_data.csv&
 <p>What was the total population in the dataset based on the 2010 census? (use <code>sum()</code> and the <code>TotalPop</code> column)</p>
 <pre class="r"><code>ces |&gt; pull(TotalPop) |&gt; sum()</code></pre>
 <pre><code>## [1] 39283497</code></pre>
+<pre class="r"><code># Alternative
+ces |&gt; summarize(popSum = sum(TotalPop))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##     popSum
+##      &lt;dbl&gt;
+## 1 39283497</code></pre>
 </div>
 <div id="section-2" class="section level3">
 <h3>1.3</h3>
