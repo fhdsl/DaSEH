@@ -117,7 +117,7 @@ knitr::include_graphics("images/Data_Input_new_project_topright.png")
 
 CO Heat-related ER visits dataset:
 
-We're going to load a dataset from the Colorado Environmental Public Health Tracking Program. This dataset has age-adjusted visit rates and total number of visits for all genders by Colorado county for 2011-2023.
+We're going to load a dataset from the Colorado Environmental Public Health Tracking Program. This dataset has age-adjusted visit rates and total number of visits for all genders by Colorado county for 2011-2022.
 
 * Check out the data at: https://coepht.colorado.gov/heat-related-illness
 
