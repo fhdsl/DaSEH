@@ -132,9 +132,11 @@ We will be talking about:
 - `pivot_longer` - make multiple columns into variables, (wide to long)
 - `pivot_wider` - make a variable into multiple columns, (long to wide)
 
-The `reshape` command exists.  Its arguments are considered more confusing, so we don't recommend it.
+<br>
 
 You might see old functions `gather` and `spread` when googling. These are older iterations of `pivot_longer` and `pivot_wider`, respectively.
+
+You might see other functions like `reshape()`, `melt()`, etc.
 
 # `pivot_longer`...
 
