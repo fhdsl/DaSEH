@@ -139,7 +139,7 @@ new_data <- old_data |> rename(newcol1 = oldcol1, newcol2 = oldcol2)
 
 Read in the climate change disasters dataset from the URL below. Save the dataset as an object called `cc`.
 
-"https://daseh.org/data/Yearly_CC_Disasters_total_affected.csv"
+"https://daseh.org/data/Yearly_CC_disasters_total_affected.csv"
 
 This dataset shows the total number of people affected by climate disasters by country and year.
 

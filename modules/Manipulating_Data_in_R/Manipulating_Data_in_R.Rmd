@@ -132,9 +132,11 @@ We will be talking about:
 - `pivot_longer` - make multiple columns into variables, (wide to long)
 - `pivot_wider` - make a variable into multiple columns, (long to wide)
 
-The `reshape` command exists.  Its arguments are considered more confusing, so we don't recommend it.
+<br>
 
 You might see old functions `gather` and `spread` when googling. These are older iterations of `pivot_longer` and `pivot_wider`, respectively.
+
+You might see other functions like `reshape()`, `melt()`, etc.
 
 # `pivot_longer`...
 
@@ -186,7 +188,7 @@ C. Reshape data
 
 ## Reshaping wide to long: Better column names {.codesmall}
 
-Newly created column names ("Month" and "Rate") are enclosed in quotation marks. It helps us be more specific than "name" and "value".
+Note Newly created column names ("Month" and "Rate") in quotation marks.
 
 ```{r}
 ex_long <- ex_wide |> pivot_longer(cols = ends_with("rate"),
@@ -263,7 +265,9 @@ long_nitrate |>
 
 ## Reshaping data from **wide to long**
 
-There are many ways to **select** the columns we want. Check out https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html to look at more column selection options.
+There are many ways to **select** the columns we want. 
+
+Check out https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html to look at more column selection options.
 
 # `pivot_wider`...
 
@@ -535,12 +539,12 @@ full_join(data_As, data_cold, by = "State")
 
 ## Using the `by` argument
 
-You can join based on multiple columns by using something like `by = c(col1, col2)`.
-
-If the datasets have two different names for the same data, use:
+If the datasets have two different names for the same data, use `by = `. E.g.:
 
 ```{r eval=FALSE}
 full_join(x, y, by = c("a" = "b"))
+full_join(x, y, by = join_by(State == state_entity))
+full_join(x, y, by = join_by(name == artist))
 ```
 
 <IMG style="position:absolute;bottom:10.5%;left:85%;width:120px;"SRC="images/full.png">
