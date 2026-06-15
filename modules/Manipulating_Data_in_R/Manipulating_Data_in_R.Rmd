@@ -539,12 +539,12 @@ full_join(data_As, data_cold, by = "State")
 
 ## Using the `by` argument
 
-You can join based on multiple columns by using something like `by = c(col1, col2)`.
-
-If the datasets have two different names for the same data, use:
+If the datasets have two different names for the same data, use `by = `. E.g.:
 
 ```{r eval=FALSE}
 full_join(x, y, by = c("a" = "b"))
+full_join(x, y, by = join_by(State == state_entity))
+full_join(x, y, by = join_by(name == artist))
 ```
 
 <IMG style="position:absolute;bottom:10.5%;left:85%;width:120px;"SRC="images/full.png">

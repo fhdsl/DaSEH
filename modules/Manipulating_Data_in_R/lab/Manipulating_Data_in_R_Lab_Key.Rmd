@@ -169,6 +169,8 @@ Read in the climate change disasters dataset from the URL below. Save the datase
 
 This dataset shows the total number of people affected by climate disasters by country and year.
 
+**Did you use `read_csv()` from `tidyverse`?**
+
 ```{r 2.2response}
 cc <- read_csv("https://daseh.org/data/Yearly_CC_disasters_total_affected.csv")
 ```
