@@ -1040,6 +1040,8 @@ Check out this [guide](https://jhudatascience.org/tidyversecourse/dataviz.html#m
 
 📃[Posit's theme cheatsheet](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf) 
 
+Additional resources: https://tidyplots.org/, https://www.rawgraphs.io/ (not R) 
+
 ```{r, fig.alt="The End", out.width = "30%", echo = FALSE, fig.align='center'}
 knitr::include_graphics(here::here("images/the-end-g23b994289_1280.jpg"))
 ```
