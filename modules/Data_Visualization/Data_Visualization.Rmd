@@ -533,7 +533,7 @@ ggplot(er_Boulder, aes(x = year, y = rate)) +
             geom_line(size = 0.8, color = "blue", linetype = 2) + 
   labs(title = "Heat-Related ER Visits:Boulder") +
 
-  theme(plot.title = element_text(size = 20, hjust = 0.5, ))
+  theme(plot.title = element_text(size = 20, hjust = 0.5))
 
 ```
 
