@@ -13,10 +13,10 @@ classoption:
 - Tidy data: Each variable forms a column and each observation forms a row.
 - Having data in tidy format and long format makes creating plots easier!
 - Remember to use a `+` at the end of each line when adding new layers to plots.   
-Pipes like `%>%` do not work to add layers to plots, but can be used to pipe data into plots.  
+Pipes like `|>` or `%>%` do not work to add layers to plots, but can be used to pipe data into plots.  
 **This works:** `ggplot(data = iris, aes(x = Species, y = Petal.Length)) + geom_boxplot()`  
-**This works:** `iris %>% ggplot(aes(x = Species, y = Petal.Length)) + geom_boxplot()`  
-**This doesn't:** `iris %>% ggplot(aes(x = Species, y = Petal.Length)) %>% geom_plot()`  
+**This works:** `iris |> ggplot(aes(x = Species, y = Petal.Length)) + geom_boxplot()`  
+**This doesn't:** `iris |> ggplot(aes(x = Species, y = Petal.Length)) |> geom_plot()`  
 - Factor: A factor is a special character vector where the elements have pre-defined groups or "levels". You can think of these as qualitative or categorical variables. An example is 1st grade, 2nd grade, etc. It is important to specify factors as the class `factor` so that R recognizes it as such.
 
 ### Functions
@@ -40,9 +40,9 @@ Click [here](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_syst
 ### Factors
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
-| `base`| [`factor()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/factor) | `fact_qual <-factor(c("poor", "fine", "good"))`| Creates a factor out of a vector.  |
+| `base`| [`factor()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/factor) | `fact_qual <- factor(c("poor", "fine", "good"))`| Creates a factor out of a vector.  |
 | `base`| [`levels()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/levels) | `levels(fact_qual)`| Shows the levels (and order) of a factor vector. |
-| `forcats`| [`as_factor()`](https://forcats.tidyverse.org/reference/as_factor.html) | `fact_qual <-as_factor(c("poor", "fine", "good"))`| Allows the order of the levels of a factor to be changed. |
+| `forcats`| [`as_factor()`](https://forcats.tidyverse.org/reference/as_factor.html) | `fact_qual <- as_factor(c("poor", "fine", "good"))`| Allows the order of the levels of a factor to be changed. |
 | `forcats` | [`fct_reorder()`](https://forcats.tidyverse.org/reference/fct_reorder.html) | `ggplot(iris, aes(x =  fct_reorder(Species, Sepal.Width, mean), y = Sepal.Width)) `<br> `+ geom_boxplot()`| Allows the order of the levels of a factor variable to be changed according to another variable. In this case Species is ordered by the mean of Sepal.Width. This is especially helpful for plots or statistical output! |
 
 \* This format was adapted from the [cheatsheet format from AlexsLemonade](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
