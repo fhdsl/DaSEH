@@ -21,20 +21,20 @@ topic_order <- c(
 pdf_files <- unlist(
   lapply(topic_order, function(topic) {
     list.files(
-      file.path("modules", topic),
+      file.path(here::here("modules", topic)),
       pattern = "\\.pdf$",
       full.names = TRUE
     )
   })
 )
 
-pdf_combine(pdf_files, output = "resources/course_notes.pdf")
+pdf_combine(pdf_files, output = here::here("resources/course_notes.pdf"))
 
 ### make combined cheatsheet file
 
 # Find all PDFs in cheatsheets 
 pdf_files <- list.files(
-  path = "modules/cheatsheets",
+  path = here::here("modules/cheatsheets"),
   pattern = "\\.pdf$",
   recursive = FALSE,
   full.names = TRUE
@@ -43,6 +43,6 @@ pdf_files <- list.files(
 # Combine into a single PDF
 pdf_combine(
   input = pdf_files,
-  output = "resources/all_cheatsheets.pdf"
+  output = here::here("resources/all_cheatsheets.pdf")
 )
 
