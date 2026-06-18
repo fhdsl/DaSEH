@@ -40,9 +40,9 @@ Click [here](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_syst
 ### Factors
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
-| `base`| [`factor()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/factor) | `fact_qual <- factor(c("poor", "fine", "good"))`| Creates a factor out of a vector.  |
+| `base`| [`factor()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/factor) | `fact_qual <- factor(c("poor", "fine", "good"))`| Creates a factor out of a vector. Levels are ordered by default alphanumerically.|
 | `base`| [`levels()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/levels) | `levels(fact_qual)`| Shows the levels (and order) of a factor vector. |
-| `forcats`| [`as_factor()`](https://forcats.tidyverse.org/reference/as_factor.html) | `fact_qual <- as_factor(c("poor", "fine", "good"))`| Allows the order of the levels of a factor to be changed. |
+| `forcats`| [`as_factor()`](https://forcats.tidyverse.org/reference/as_factor.html) | `fact_qual <- as_factor(c("poor", "fine", "good"))`| Creates a factor out of a vector.  Levels are ordered by default in order of first appearance in the data.|
 | `forcats` | [`fct_reorder()`](https://forcats.tidyverse.org/reference/fct_reorder.html) | `ggplot(iris, aes(x =  fct_reorder(Species, Sepal.Width, mean), y = Sepal.Width)) `<br> `+ geom_boxplot()`| Allows the order of the levels of a factor variable to be changed according to another variable. In this case Species is ordered by the mean of Sepal.Width. This is especially helpful for plots or statistical output! |
 
 \* This format was adapted from the [cheatsheet format from AlexsLemonade](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
