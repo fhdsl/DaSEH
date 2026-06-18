@@ -7,11 +7,8 @@ output:
 ---
 
 ```{r, echo = FALSE, message = FALSE}
-library(dplyr)
+library(tidyverse)
 library(knitr)
-library(stringr)
-library(tidyr)
-library(readr)
 opts_chunk$set(comment = "")
 ```
 
@@ -32,31 +29,62 @@ So far we've seen many functions, like `c()`, `class()`, `filter()`, `dim()` ...
 
 The general syntax for a function is: 
 
+<br>
+
 ```
-function_name <- function(arg1, arg2, ...) {
+my_function <- function(argument) {
  <function body>
 }
 ```
 
+<br>
+
+OR
+
+<br>
+
+```
+my_function <- \(argument) {
+ <function body>
+}
+```
 
 ## Writing your own functions
 
-Here we will write a function that multiplies some number `x` by 2:
+Here we will write a function that divides some number `x` by 100:
 
 ```{r}
 div_100 <- function(x) x / 100
 ```
 
-When you run the line of code above, you make it ready to use (no output yet!). Let's test it!
+When you run the line of code above, you make it ready to use (no output yet!). 
+
+Let's test it:
 
 ```{r comment=""}
 div_100(x = 600)
 ```
 
 
+## Writing your own functions
+
+We can take all kinds of arguments. Here is one with text:
+
+```{r}
+greeting <- function(name) paste("Hello my name is", name)
+```
+
+Let's test it:
+
+```{r comment=""}
+greeting(name = "Ava") # Named argument
+greeting("Ava") # R guesses argument based on position
+```
+
+
 ## Writing your own functions: `{ }`
 
-Adding the curly brackets - `{}` - allows you to use functions spanning multiple lines:
+Adding the curly braces - `{}` - allows you to use functions spanning multiple lines:
 
 ```{r comment=""}
 div_100 <- function(x) {
@@ -163,62 +191,55 @@ sqdif(11, 4)
 
 ## Writing your own functions: characters
 
-Functions can have any kind of input. Here is a function with characters:
+Again, functions can have any kind of input.
 
 ```{r comment=""}
-loud <- function(word) {
+loud <- function(word = "hooray!") {
   output <- rep(toupper(word), 5)
   return(output)
 }
-loud(word = "hooray!")
+```
+
+```{r}
+loud()
+loud("wow!")
 ```
 
 
-<!-- ## Functions for tibbles -->
+## Functions for tibbles - Example with ggplot{.codesmall}
 
-<!-- We can use `filter(row_number() == n)` to extract a row of a tibble: -->
+```{r message = FALSE}
+er <- read_csv(file = "https://daseh.org/data/CO_ER_heat_visits.csv")
 
-<!-- ```{r message=FALSE} -->
-<!-- get_row <- function(dat, row) dat |> filter(row_number() == row) -->
+visits_plot <- function(the_county){
+   er_sub <- er |> filter(county == the_county)
+   ggplot(data = er_sub, aes(x = year, y = visits)) +
+     geom_point()
+ }
+```
 
-<!-- ces <- calenviroscreen -->
-<!-- ces_1_8 <- ces |> select(1:8) -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- get_row(dat = ces, row = 10) -->
-<!-- get_row(dat = ces, row = 4) -->
-<!-- ``` -->
+```{r message = FALSE, out.width="20%"}
+visits_plot("Larimer")
+visits_plot("Weld")
+```
 
 
-## Functions for tibbles - curly braces
+## Functions for tibbles - curly braces{.codesmall}
+
+Tell tidyverse functions that you mean the **column** not an **object** with curly braces (`{}`):
 
 ```{r}
-# get means and missing for a specific column
-get_summary <- function(dataset, col_name) {
-    dataset |>  
-    summarise(mean = mean({{col_name}}, na.rm = TRUE),
-              na_count = sum(is.na({{col_name}})))
-}
+visits_plot2 <- function(the_column){
+   ggplot(data = er, aes(x = year, y = visits, color = {{the_column}})) +
+     geom_point()
+ }
 ```
 
 ## Functions for tibbles - example{.codesmall}
 
-```{r message = FALSE}
-er <- read_csv(file = "https://daseh.org/data/CO_ER_heat_visits.csv")
-```
-
-```{r}
-get_summary(er, visits)
-```
-
-```{r message = FALSE}
-yearly_co2 <- 
-  read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
-```
-
-```{r}
-get_summary(yearly_co2, `2014`)
+```{r message = FALSE, warning = FALSE, out.width="30%"}
+visits_plot2(year)
+visits_plot2(rate)
 ```
 
 ## Summary
@@ -372,20 +393,22 @@ Using different `tidyselect()` options (e.g., `starts_with()`, `ends_with()`, `c
 ```{r warning=FALSE}
 er |> 
   group_by(year) |>
-  summarize(across(contains("cl"), mean, na.rm=T))
+  summarize(across(
+    contains("cl"), 
+    function(x) mean(x, na.rm = TRUE)
+  ))
 ```
 
 ## Applying functions with `across` from `dplyr` {.smaller}
 
 Combining with `mutate()` - the `replace_na` function
 
-Let's look at the yearly CO2 emissions dataset we loaded earlier.
-
-```replace_na({data frame}, {list of values})```
-or
-```replace_na({vector}, {single value})```
+Let's look at the yearly CO2 emissions dataset.
 
 ```{r warning=FALSE, message=FALSE}
+yearly_co2 <- 
+  read_csv(file = "https://daseh.org/data/Yearly_CO2_Emissions_1000_tonnes.csv")
+
 yearly_co2 |>
   select(country, starts_with("194")) |>
   mutate(across(
@@ -408,43 +431,24 @@ C. Connect across datasets
 
 Similar to across, `purrr` is a package that allows you to apply a function to multiple columns in a data frame or multiple data objects in a list.
 
-While we won't get into `purrr` too much in this class, its a handy package for you to know about should you get into a situation where you have an irregular list you need to handle!
+While we won't get into `purrr` too much in this class, it's part of the tidyverse and is great if you're doing lots of iterative work!
 
-# Multiple Data Frames
+## One cool function: `modify_if()`
 
-## Multiple data frames
-
-Lists help us work with multiple tibbles / data frames
+Columns must meet a certain criteria to be modified.
 
 ```{r}
-df_list <- list(AQ = airquality, er = er, yearly_co2 = yearly_co2)
+er |>
+  modify_if(is.numeric, \(x) round(x)) |>
+  glimpse()
 ```
-
-<br>
-
-`select()` from each tibble the numeric columns:
-
-```{r}
-df_list <- 
-  df_list |> 
-  sapply(function(x) select(x, where(is.numeric)))
-```
-
-## Multiple data frames: `sapply` {.smaller}
-
-```{r}
-df_list |> sapply(nrow)
-df_list |> sapply(colMeans, na.rm = TRUE)
-```
-
 
 ## Summary
 
 - Apply your functions with `sapply(<a vector or list>, some_function)`
 - Use `across()` to apply functions across multiple columns of data 
 - Need to use `across` within `summarize()` or `mutate()`
-- Can use `sapply` (or `purrr` package) to work with multiple data frames within lists simultaneously
-
+- Check out `purrr` if you want to get into the weeds!
 
 ## Lab Part 2
 
@@ -460,7 +464,7 @@ df_list |> sapply(colMeans, na.rm = TRUE)
 
 <br>
 
-https://forms.gle/jVue79CjgoMmbVbg9
+https://forms.gle/5ac2WPiR9kJu5D3c6
 
 <br>
 <br>

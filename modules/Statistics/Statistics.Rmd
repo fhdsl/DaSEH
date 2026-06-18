@@ -663,7 +663,7 @@ The Odds Ratio is 3.33.
 
 When the predictor is 1 (aka the census area has a lot of no vehicle households), the odds of the response (prevalence of crowded homes) are 3.33 times greater than when it is 0 (not a lot of no vehicle households).
 
-```{r echo = FALSE}
+```{r}
 oddsratio(predictor, response)
 ```
 
@@ -715,7 +715,7 @@ Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribu
 
 Check out the `leaps` package and other code snippets here: https://r-statistics.co/Model-Selection-in-R.html
 
-# More tests!
+# More about tests!
 
 ## Wilcoxon Test
 
