@@ -68,7 +68,7 @@ Write one of the objects in your Environment to your working directory in `rds` 
 
 ### P.3
 
-Read the RDS file you just created from your working directory back into your Environment. Call the file `z`.
+Read the RDS file you just created from your working directory back into your Environment. Call the object `z`.
 
 ```{r P.3response}
 
