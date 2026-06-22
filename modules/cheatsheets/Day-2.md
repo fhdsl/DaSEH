@@ -19,6 +19,8 @@ result.
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | Base `R`| [`sessionInfo()`](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/sessionInfo) |`sessionInfo()`| Returns the R version information, the OS, and the attached packages in the current R session.|
+| Base `R`| [`sample()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/sample) |`sample(x, size = 10, replace = FALSE)`| Returns a random vector of numbers of specified size, can replace values or not.|
+| Base `R`| [`set.seed()`](https://www.rdocumentation.org/packages/simEd/versions/2.0.2/topics/set.seed) |`set.seed(1234)`| Any function following directly after that uses random numbers will give the same specified output each time it is run.|
 
 ### More resources
 - [The RMarkdown book](https://bookdown.org/yihui/rmarkdown/)

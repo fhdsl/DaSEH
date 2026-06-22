@@ -265,6 +265,7 @@ SRC
 StackOverflow
 Stata
 stringr
+str
 subclasses
 Subclasses
 subdir
@@ -303,6 +304,7 @@ VehBCost
 VehicleAge
 VehOdo
 VehYear
+vect
 Ventura
 wastewater
 wb

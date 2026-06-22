@@ -24,13 +24,16 @@ number) by 0.
 |Base `R`| [` is.infinite(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/is.finite)|`is.infinite(x)`| checks if `x` is `Inf` or `-Inf`. |
 |`naniar`| [`pct_complete(x)`](https://www.rdocumentation.org/packages/naniar/versions/0.6.1/topics/pct_complete)|`pct_complete(x)`| Reports the percentage of data that is complete in `x`. |
 |`naniar`| [`gg_miss_var(x)`](https://www.rdocumentation.org/packages/naniar/versions/0.6.1/topics/gg_miss_var)|`gg_miss_var(x)`| Reports as a plot the percentage of data that is complete in `x`. |
+|`naniar`| [`miss_var_summary(x)`](https://www.rdocumentation.org/packages/naniar/versions/1.1.0)|`miss_var_summary(x)`| Reports as a table the percentage of data that is missing in `x`. |
 |`tidyr`| [`drop_na(df)`](https://tidyr.tidyverse.org/reference/drop_na.html)|`drop_na(df)`| Drops rows of `NA` from a given data frame/tibble |
 | `dplyr`| [`case_when()`](https://dplyr.tidyverse.org/reference/case_when.html)| `df <- arrange(df, mpg)`|This function allows you to vectorize multiple [`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html) statements.  If no cases match, NA is returned.|
 | `dplyr`| [`mutate()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/mutate)| `df <- mutate(df, newcol = wt/2.2)`| Adds a new column that is a function of existing columns|
-| `dplyr`| [`separate()`](https://tidyr.tidyverse.org/reference/separate.html)| `df %>% separate(x, c("A", "B"))`| Separate a character column into multiple columns with a regular expression or numeric locations|
-| `dplyr`| [`unite()`](https://tidyr.tidyverse.org/reference/unite.html)| `df %>% unite("z", x:y, remove = FALSE)`| Unite multiple columns together into one column|
-| `stringr`|[`str_detect`](https://www.rdocumentation.org/packages/stringr/versions/1.4.0/topics/str_detect)| `df %>% filter(str_detect(col_name, "string_pattern"))`| Returns logical vector to indicate if string pattern was detected |
-| `stringr`|[`str_replace`](https://stringr.tidyverse.org/reference/str_replace.html)| `str_replace(vector), "replace_me","with_me")`| Replaces all instances of one specified string with another specified string |
+| `dplyr`| [`separate()`](https://tidyr.tidyverse.org/reference/separate.html)| `df |> separate(x, c("A", "B"))`| Separate a character column into multiple columns with a regular expression or numeric locations|
+| `dplyr`| [`unite()`](https://tidyr.tidyverse.org/reference/unite.html)| `df |> unite("z", x:y, remove = FALSE)`| Unite multiple columns together into one column|
+| `stringr`|[`str_detect`](https://www.rdocumentation.org/packages/stringr/versions/1.4.0/topics/str_detect)| `df |> filter(str_detect(col_name, "string_pattern"))`| Returns logical vector to indicate if string pattern was detected |
+| `stringr`|[`str_replace`](https://stringr.tidyverse.org/reference/str_replace.html)| `str_replace(string = vector, "replace_me","with_me")`| Replaces first instance of one specified string with another specified string |
+| `stringr`|[`str_replace_all`](https://stringr.tidyverse.org/reference/str_replace.html)| `str_replace(string = vector, "replace_me","with_me")`| Replaces all instances of one specified string with another specified string |
+| `stringr`|[`str_sub`](https://stringr.tidyverse.org/reference/str_sub.html)| `str_sub(string = vector, start = 1, end = 3)`| Subsets a string to just the places of the characters specified. |
 
 
 \* This format was adapted from the [cheatsheet format from AlexsLemonade](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
