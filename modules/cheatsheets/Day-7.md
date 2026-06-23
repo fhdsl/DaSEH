@@ -36,6 +36,8 @@ classoption: landscape
 
 Click [here](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf) for a summary of the `ggplot2` theme system~
 
+\pagebreak
+
 ## Factors
 
 ### Major concepts

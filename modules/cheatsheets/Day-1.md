@@ -39,7 +39,7 @@ output:
 | Base `R`| [`install.packages()`](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/install.packages)| `install.packages("tidyverse")`| Installs packages|
 | Base `R`| [`library()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/library)|`library(tidyverse)`| Loads and attaches additional packages to the R environment. Done every time you start R.|
 
-<div style="page-break-after: always;"></div>
+\pagebreak
 
 ## RStudio
 
@@ -62,7 +62,5 @@ output.
 |Base `R`| [`View()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/library)| `View(mtcars)`| allows you to view data in a spreadsheet format.|
 | Base `R`| [`head()`](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/head)|`head(mtcars)`| Returns the top 6 rows of an object in the environment by default. You can specify how many rows you want by including the `n = `argument.|
 | Base `R`| [`tail()`](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/head)|`tail(mtcars)`| Returns the bottom 6 rows of an object in the environment by default. You can specify how many rows you want by including the `n =` argument.|
-
-<div style="page-break-after: always;"></div>
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).

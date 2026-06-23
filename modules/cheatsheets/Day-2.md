@@ -29,7 +29,7 @@ result.
 - [Write efficient R code for science](https://www.earthdatascience.org/courses/earth-analytics/automate-science-workflows/write-efficient-code-for-science-r/).
 - [Reproducibility in Cancer Informatics course](https://jhudatascience.org/Reproducibility_in_Cancer_Informatics/introduction.html)
 
-<div style="page-break-after: always;"></div>
+\pagebreak
 
 ## Data Input/Output
 

@@ -33,7 +33,7 @@ classoption: landscape
 
 - Many summarizing functions (e.g., `mean()`, `sum()`) have the argument `na.rm = TRUE`. This can be used to ignore missing data.
 
-<div style="page-break-after: always;"></div>
+\pagebreak
 
 ## Data Classes
 
