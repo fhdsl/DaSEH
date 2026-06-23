@@ -39,8 +39,6 @@ result.
 - **Delimited file** - columns within the file have boundaries created with some type of punctuation - for example, a csv file stands for comma separated values, thus the columns are delimited or separated by commas. txt files often use tabs.
 - **tibble** – a rectangular data frame, where data are split into rows and columns.
 - **File path** - where a file lives on your computer (or on the internet) - [File paths can be relative or absolute](https://en.wikipedia.org/wiki/Path_(computing)#Absolute_and_relative_paths).
-- **Getting help** - For any function, you can write `?FUNCTION_NAME`, or `help("FUNCTION_NAME")` to
-look at the help file for that function.
 - [**R Projects**](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-Projects) set the working directory where the .Rproj file is.
 - **Reading in data (manual)** - *Download the data*, *Put data in the project folder*. Go to File, Import Dataset, From Text (`readr`), browse for the file, and finally click "Update" and "Import".
 

@@ -14,9 +14,9 @@ output:
 ### Major concepts
 
 - **Package** - a package in R is a bundle or “package” of code (and or possibly data) that can be loaded together for easy repeated use or for sharing with others. Like an "expansion pack".
+- **Object** - an object is something that can be worked with in R - can be lots of different things!
 - **Function** - a function is a particular piece of code that allows you to do something in R. You can write your own, use functions that come directly from installing R, or use functions from additional packages.
 - **Argument** - an option that you specify to a function.
-- **Object** - an object is something that can be worked with in R - can be lots of different things!
 - [**Tidyverse**](https://tidyverse.tidyverse.org/articles/paper.html) - This is a newer set of packages designed for data science that can make your code more intuitive as compared to the original older Base R.
 - The R console is a full calculator:
   - `+`, `-`, `/`, `*` are add, subtract, divide and multiply
@@ -53,8 +53,9 @@ output:
 - **R Markdown** - Files (.Rmd) help generate reports that include your code and
 output.
 - **R Project** - Helps you organize your work. Helps with working directories (discussed later). Allows you to easily know which project you’re on.
+- **Getting help** - For any function, you can write `?FUNCTION_NAME`, or `help("FUNCTION_NAME")` to
+look at the help file for that function.
 - [RStudio Keyboard shortcuts](http://www.rstudio.com/ide/docs/using/keyboard_shortcuts)
-
 
 ### Functions
 
