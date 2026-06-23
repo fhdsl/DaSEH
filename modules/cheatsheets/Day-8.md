@@ -14,7 +14,7 @@ urlcolor:blue
 | Base `R`| [`cor(x, y)`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor)|`cor(x, y)`| Calculate correlation of two vectors in R.|
 | `corrplot`| [`corrplot(cor_mat)`](https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html)|`corrplot(cor_mat, type = "upper", order = "hclust")`| Create a correlation matrix plot.|
 | Base `R`| [`t.test(x, y)`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test)|`t.test(x, y, alternative = "two.sided")`| Perform one and two sided t tests.|
-| `broom`| [`tidy(x)`](https://broom.tidymodels.org/)|`tidy(t_test_result)`| Manipulates and tidies up wonky statistical R objects into nice data frames|
+| `broom`| [`tidy(x)`](https://broom.tidymodels.org/)|`tidy(t_test_result)`| Manipulates and tidies up wonky statistical R objects into nice data frames.|
 | Base `R`| [`wilcox.test(x, y)`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/wilcox.test)|`wilcox.test(x, y)`| Calculate non-parametric, Wilcoxon signed rank test, Wilcoxon rank sum test.|
 | Base `R`| [`shapiro.test()`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test)|`shapiro.test(x)`| Test for normality with Shapiro-Wilk. |
 | Base `R`| [`ks.test()`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/ks.test)|`ks.test(x)`| Test for normality with Kolmogorov-Smirnov. |
