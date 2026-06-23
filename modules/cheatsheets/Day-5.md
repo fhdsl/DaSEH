@@ -9,7 +9,6 @@ classoption: landscape
 ### Major concepts
 
 - **Most important rule of data handling - Always be looking at your data!**
-
 - `NA` - general missing data
 - `NaN` - stands for “Not a Number”, happens when you do 0/0.
 - `Inf` and `-Inf` - Infinity, happens when you take a positive number (or negative

@@ -33,6 +33,6 @@ classoption: landscape
 
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
-| `esquisse`| [`esquisser()`](https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html)| `esquisser(Orange)`| Start an `esquisse` interactive session to create a plot of the given `data.frame` or `tibble`|
+| `esquisse`| [`esquisser()`](https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html)| `esquisser(Orange)` \newline `esquisser(Orange, viewer="browser")` | Start an `esquisse` interactive session to create a plot of the given `data.frame` or `tibble`|
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
