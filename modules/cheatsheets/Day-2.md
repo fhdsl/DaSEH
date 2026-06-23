@@ -1,9 +1,8 @@
 ---
+title: Day 2 Cheatsheet
 classoption: landscape
 urlcolor: blue
 ---
-
-# Day 2 Cheatsheet
 
 ## Reproducibility
 
