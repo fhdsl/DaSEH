@@ -56,10 +56,10 @@ urlcolor:blue
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | Base `R`| [`class(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/class)| `class(x)` | Tells the class of an object. |
-| Base `R`| [`as.numeric(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/numeric)| `as.numeric(x)` | Coerces object x into numeric class. This type of function can be used to coerce object `x` into other data types, i.e., `as.character`, `as.numeric`, `as.data.frame`, `as.matrix`, `as.Date` etc. |
-| `lubridate`| [`ymd(x)`](https://www.rdocumentation.org/packages/lubridate/versions/1.9.2/topics/ymd)| `ymd("2024-01-31")` | Coerces character object x into date class. The format of the character object determines the function to use. Other examples include `mdy()`, `dmy()`, etc. |
+| Base `R`| [`as.numeric(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/numeric)| `as.numeric(x)` | Coerces object x into numeric class. This type of function can be used to coerce object `x` into other data types, i.e., `as.character`, `as.numeric`, `as.data.frame`, `as.matrix`, `as.Date` etc. Combine with `mutate()`. |
+| `lubridate`| [`ymd(x)`](https://www.rdocumentation.org/packages/lubridate/versions/1.9.2/topics/ymd)| `ymd("2024-01-31")` | Coerces character object x into date class. The format of the character object determines the function to use. Other examples include `mdy()`, `dmy()`, etc. (_See note_) |
 
-- [`lubridate`](https://lubridate.tidyverse.org/) is a powerful, widely used R package from “tidyverse” family to work
+_NOTE:_  [`lubridate`](https://lubridate.tidyverse.org/) is a powerful, widely used R package from “tidyverse” family to work
 with Date / POSIXct class objects
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
