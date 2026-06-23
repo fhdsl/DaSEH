@@ -182,6 +182,7 @@ jobs:
        # Render the cheatsheets
       - name: Render Cheatsheet pdfs
         run: |
+          pandoc modules/cheatsheets/*.md -o combined_cheatsheet.md
           Rscript --vanilla "scripts/render_cheatsheets.R" --files "${{ steps.changed-files.outputs.all_changed_files }}"
         
        # Render resource pdfs + html
