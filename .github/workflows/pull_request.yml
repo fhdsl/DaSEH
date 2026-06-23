@@ -144,6 +144,11 @@ jobs:
           git merge -s recursive --strategy-option=theirs origin/${{ github.head_ref }} --allow-unrelated-histories
         shell: bash
         
+      # Concatenate all cheatsheets (will be a changed file)
+      - name: Create combined cheatsheet
+        run: |
+          pandoc modules/cheatsheets/*.md -o modules/cheatsheets/combined_cheatsheet.md
+
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v46.0.1
@@ -182,7 +187,6 @@ jobs:
        # Render the cheatsheets
       - name: Render Cheatsheet pdfs
         run: |
-          pandoc modules/cheatsheets/*.md -o combined_cheatsheet.md
           Rscript --vanilla "scripts/render_cheatsheets.R" --files "${{ steps.changed-files.outputs.all_changed_files }}"
         
        # Render resource pdfs + html
