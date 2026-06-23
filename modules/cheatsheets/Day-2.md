@@ -1,12 +1,11 @@
 ---
-title: Day 2 Cheatsheet
+title: "Day 2 Cheatsheet"
 classoption: landscape
 urlcolor: blue
+output: pdf_document
 ---
 
 ## Reproducibility
-
-## test
 
 ### Major concepts
 

@@ -1,9 +1,9 @@
 ---
+title: "Day 4 Cheatsheet"
 classoption: landscape
 urlcolor: blue
+output: pdf_document
 ---
-
-# Day 4 Cheatsheet
 
 ## Data Summarization
 

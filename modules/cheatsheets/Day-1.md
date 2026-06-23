@@ -1,13 +1,9 @@
 ---
+title: "Day 1 Cheatsheet"
 classoption: landscape
 urlcolor: blue
-output:
-  pdf_document: default
-  html_document:
-    df_print: paged
+output: pdf_document
 ---
-
-# Day 1 Cheatsheet
 
 ## Basic R
 

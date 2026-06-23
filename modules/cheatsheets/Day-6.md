@@ -1,9 +1,9 @@
 ---
+title: "Day 6 Cheatsheet"
 classoption: landscape
 urlcolor: blue
+output: pdf_document
 ---
-
-# Day 6 Cheatsheet
 
 ## Data Manipulation
 

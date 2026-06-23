@@ -1,9 +1,9 @@
 ---
+title: "Day 8 Cheatsheet"
 classoption: landscape
 urlcolor: blue
+output: pdf_document
 ---
-
-# Day 8 Cheatsheet
 
 ## Statistics
 

@@ -1,9 +1,9 @@
 ---
+title: "Day 5 Cheatsheet"
 classoption: landscape
 urlcolor: blue
+output: pdf_document
 ---
-
-# Day 5 Cheatsheet
 
 ## Data Cleaning
 

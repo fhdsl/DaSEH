@@ -1,9 +1,9 @@
 ---
+title: "Day 7 Cheatsheet"
 classoption: landscape
 urlcolor: blue
+output: pdf_document
 ---
-
-# Day 7 Cheatsheet
 
 ## Data Visualization
 

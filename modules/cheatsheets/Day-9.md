@@ -1,9 +1,9 @@
 ---
+title: "Day 9 Cheatsheet"
 classoption: landscape
 urlcolor: blue
+output: pdf_document
 ---
-
-# Day 9 Cheatsheet
 
 ## Functions
 

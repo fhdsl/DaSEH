@@ -1,9 +1,9 @@
 ---
+title: "Day 3 Cheatsheet"
 classoption: landscape
-urlcoloR blue
+urlcolor: blue
+output: pdf_document
 ---
-
-# Day 3 Cheatsheet
 
 ## Subsetting Data in R
 
