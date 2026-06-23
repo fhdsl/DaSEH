@@ -8,6 +8,7 @@ classoption:
 ## Statistics
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | Base `R`| [`cor(x, y)`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor)|`cor(x, y)`| Calculate correlation of two vectors in R.|
@@ -22,6 +23,5 @@ classoption:
 | Base `R`| [`summary(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary)| summary(linear_model_result) | Returns a summary of the values in object, including a linear model or other statistical test. |
 | Base `R`| [`glm(x ~ y)`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/glm)|`glm(x ~ y, data = df, family = binomial())`| Fit generalized linear models based on a formula you provide. Must specify the error distribution and link function using the `family` argument. |
 | `epitools`| [`oddsratio(x,y)`](https://www.rdocumentation.org/packages/epitools/versions/0.5-10.1/topics/oddsratio)|`oddsratio(x,y)`| Calculates odds ratio.|
-
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).

@@ -8,6 +8,7 @@ output: pdf_document
 ## Data Summarization
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | Base `R`| [`min(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Extremes) |`min(x)`| Returns the minimum value of all values in an object `x`.|
@@ -51,12 +52,12 @@ output: pdf_document
 - **list** - Can be of varying dimensions and can hold any kind of data type. Can hold vectors, strings, matrices, models, list of other lists.
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | Base `R`| [`class(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/class)| `class(x)` | Tells the class of an object. |
 | Base `R`| [`as.numeric(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/numeric)| `as.numeric(x)` | Coerces object x into numeric class. This type of function can be used to coerce object `x` into other data types, i.e., `as.character`, `as.numeric`, `as.data.frame`, `as.matrix`, `as.Date` etc. |
 | `lubridate`| [`ymd(x)`](https://www.rdocumentation.org/packages/lubridate/versions/1.9.2/topics/ymd)| `ymd("2024-01-31")` | Coerces character object x into date class. The format of the character object determines the function to use. Other examples include `mdy()`, `dmy()`, etc. |
-
 
 - [`lubridate`](https://lubridate.tidyverse.org/) is a powerful, widely used R package from “tidyverse” family to work
 with Date / POSIXct class objects

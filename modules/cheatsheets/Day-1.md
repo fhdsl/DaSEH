@@ -25,6 +25,7 @@ output:
 - `#` is the comment symbol; nothing to its right is evaluated.
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | Base `R`| [`<-`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/assignOps.html)| `x <- 1`| Assigns a name `x` to something in the R environment.|
@@ -55,6 +56,7 @@ output.
 
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 |Base `R`| [`View()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/library)| `View(mtcars)`| allows you to view data in a spreadsheet format.|

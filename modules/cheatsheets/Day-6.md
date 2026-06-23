@@ -13,6 +13,7 @@ classoption:
 - `Long` data - multiple rows per observation, a single column contains the values
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | `dplyr`| [`separate()`](https://tidyr.tidyverse.org/reference/separate.html)| `df |> separate(x, c("A", "B"))`| Separate a character column into multiple columns with a regular expression or numeric locations|
@@ -30,6 +31,7 @@ classoption:
 - The `esquisse` package can help you to test out plots and get familiar with the syntax required to make plots
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | `esquisse`| [`esquisser()`](https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html)| `esquisser(Orange)`| Start an `esquisse` interactive session to create a plot of the given `data.frame` or `tibble`|

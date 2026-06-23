@@ -16,6 +16,7 @@ result.
 - **Replicable** - with new data do we obtain the same inferences?
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | Base `R`| [`sessionInfo()`](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/sessionInfo) |`sessionInfo()`| Returns the R version information, the OS, and the attached packages in the current R session.|
@@ -23,6 +24,7 @@ result.
 | Base `R`| [`set.seed()`](https://www.rdocumentation.org/packages/simEd/versions/2.0.2/topics/set.seed) |`set.seed(1234)`| Any function following directly after that uses random numbers will give the same specified output each time it is run.|
 
 ### More resources
+
 - [The RMarkdown book](https://bookdown.org/yihui/rmarkdown/)
 - [Jenny Bryan's organizational strategies](https://www.stat.ubc.ca/~jenny/STAT545A/block19_codeFormattingOrganization.html).
 - [Write efficient R code for science](https://www.earthdatascience.org/courses/earth-analytics/automate-science-workflows/write-efficient-code-for-science-r/).
@@ -43,6 +45,7 @@ look at the help file for that function.
 - **Reading in data (manual)** - *Download the data*, *Put data in the project folder*. Go to File, Import Dataset, From Text (`readr`), browse for the file, and finally click "Update" and "Import".
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | `tidyverse` (`readr`)| [`read_csv()`](https://www.rdocumentation.org/packages/readr/versions/2.1.5/topics/read_csv)| `df <- read_csv("<url>")`| Reads in a CSV file from a specified file path.|

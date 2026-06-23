@@ -20,6 +20,7 @@ Pipes like `|>` or `%>%` do not work to add layers to plots, but can be used to 
 - Factor: A factor is a special character vector where the elements have pre-defined groups or "levels". You can think of these as qualitative or categorical variables. An example is 1st grade, 2nd grade, etc. It is important to specify factors as the class `factor` so that R recognizes it as such.
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | `ggplot2`| [`ggplot()`](https://www.rdocumentation.org/packages/ggplot2/versions/3.3.0/topics/ggplot) | `ggplot(data = iris)`| Begins a plot that is finished by adding layers.  |
@@ -38,6 +39,7 @@ Pipes like `|>` or `%>%` do not work to add layers to plots, but can be used to 
 Click [here](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf) for a summary of the `ggplot2` theme system~
 
 ### Factors
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | `base`| [`factor()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/factor) | `fact_qual <- factor(c("poor", "fine", "good"))`| Creates a factor out of a vector. Levels are ordered by default alphanumerically.|

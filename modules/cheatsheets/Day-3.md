@@ -8,6 +8,7 @@ classoption:
 ## Subsetting Data in R
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 | Base `R`| [`nrow(x)`; `ncol(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/nrow) | `nrow(x)`; `ncol(x)`| Get the number of rows and the number of columns in an object `x`, respectively.|

@@ -17,6 +17,7 @@ classoption:
 number) by 0.
 
 ### Functions
+
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|
 |Base `R`| [`is.na(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/NA)|`is.na(x)`| checks if `x` is `NA`. |
@@ -34,6 +35,5 @@ number) by 0.
 | `stringr`|[`str_replace`](https://stringr.tidyverse.org/reference/str_replace.html)| `str_replace(string = vector, "replace_me","with_me")`| Replaces first instance of one specified string with another specified string |
 | `stringr`|[`str_replace_all`](https://stringr.tidyverse.org/reference/str_replace.html)| `str_replace(string = vector, "replace_me","with_me")`| Replaces all instances of one specified string with another specified string |
 | `stringr`|[`str_sub`](https://stringr.tidyverse.org/reference/str_sub.html)| `str_sub(string = vector, start = 1, end = 3)`| Subsets a string to just the places of the characters specified. |
-
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
