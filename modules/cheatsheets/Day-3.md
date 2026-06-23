@@ -18,8 +18,13 @@ urlcolor:blue
 | Base `R`| [`data.frame()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/data.frame)| `df <- data.frame(1:3)`| Creates a data frame where the named arguments will be the same length.|
 | Base `R`| [`tibble()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/data.frame)| `tibble(mtcars)`| Creates a tibble from a data.frame or matrix. |
 | `tibble`| [`rownames_to_column()`](https://www.rdocumentation.org/packages/tibble/versions/1.4.2/topics/rownames)|`df <-column_to_rownames(df, 'new_col')`| Transforms the rownames of a data frame into a column (which is added to the start of the data frame).  The string supplied as an argument will be the name of the new column.|
-| `dplyr`| [`rename()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/select)|`df <- rename(df, MPG = mpg)`| Renames designated columns while keeping all variables of the data.frame |
-| `dplyr`| [`pull()`](https://dplyr.tidyverse.org/reference/pull.html)|`pull(df, 'existing_variable_name')`| Extract a column as a vector |
+| Base `R`| [`colnames()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/row%2Bcolnames)|`colnames(df)`| Gets or sets the column names of a matrix or data frame.|
+| `dplyr`| [`rename()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/rename)|`df <- rename(df, MPG = mpg)`| Renames designated columns while keeping all variables of the data.frame |
+| `dplyr`| [`rename_with()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/rename)|`df <- rename_with(df, toupper)`| Renames designated columns while keeping all variables of the data.frame |
+| `dplyr`| [`toupper()`](https://www.rdocumentation.org/packages/base/versions/3.3.0/topics/chartr)|`toupper("text")`| Converts lower-case characters in a character vector to upper-case |
+| `dplyr`| [`tolower()`](https://www.rdocumentation.org/packages/base/versions/3.3.0/topics/chartr)|`tolower("TEXT")`| Converts upper-case characters in a character vector to lower-case |
+| `janitor`| [`clean_names()`](https://www.rdocumentation.org/packages/janitor/versions/1.0.0/topics/clean_names)|`clean_names(df)`| Returns the data.frame with clean names. |
+| `dplyr`| [`pull()`](https://dplyr.tidyverse.org/reference/pull.html)|`pull(df, 'existing_variable_name')`| Extract a column as a vector. You might also see base R notation like `df$column`. |
 | `dplyr`| [`select()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/select)|`select(df, 'existing_variable_name')`| Selects columns that match the specified argument (_See note_)|
 | `dplyr`| [`filter()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/filter)|`filter(df, mpg > 20)`| Returns a subset of rows matching the conditions of the specified logical argument|
 | Base `R`| [`==, <=, >=, !=`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html)|`filter(df, mpg > 20)`| These are binary operators which allow for the comparison of values in an object. They are handy for use with `filter()`|
@@ -29,8 +34,6 @@ urlcolor:blue
 | `dplyr`| [`mutate()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/mutate)| `df <- mutate(df, newcol = wt/2.2)`| Adds a new column that is a function of existing columns|
 | `dplyr`| [`relocate()`](https://dplyr.tidyverse.org/reference/relocate.html)| `df_carb <- relocate(.data = df, wt, .before = mpg)`| Reorder columns in a data frame or tibble|
 | `dplyr`| [`arrange()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/arrange)| `df <- arrange(df, mpg)`| Reorders rows in ascending order. `arrange(desc())` would reorder rows in descending order.|
-| `dplyr`| [`case_when()`](https://dplyr.tidyverse.org/reference/case_when.html)| `df <- arrange(df, mpg)`|This function allows you to vectorize multiple [`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html) statements.  If no cases match, NA is returned.|
-| Base `R`| [`colnames()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/row%2Bcolnames)|`colnames(df)`| Gets or sets the column names of a matrix or data frame.|
 
 _NOTE:_ See [tidyselect helpers](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html) (`?dplyr_tidy_select`) for handy logical functions to use with `select()`.
 
