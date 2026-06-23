@@ -22,6 +22,15 @@ functionName <- function(inputs) {
 }
 ```
 
+Example of an anonymous function used with `across()`:
+```
+iris |> 
+     summarize(across( 
+         starts_with("Sepal"), 
+         \(x) mean(x, na.rm=T)
+     ))
+```
+
 ### Functions
 
 |Library/Package|Piece of code|Example of usage|What it does|
