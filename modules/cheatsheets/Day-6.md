@@ -1,5 +1,6 @@
 ---
 classoption: landscape
+urlcolor:blue
 ---
 
 # Day 6 Cheatsheet

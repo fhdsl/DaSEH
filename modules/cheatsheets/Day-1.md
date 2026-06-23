@@ -1,5 +1,6 @@
 ---
 classoption: landscape
+urlcolor:blue
 output:
   pdf_document: default
   html_document:
