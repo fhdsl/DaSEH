@@ -6,17 +6,16 @@ classoption: landscape
 
 ## Data Visualization
 
-### Major concepts:
+### Major concepts
 
 - The `ggplot2` package is a tidyverse package for producing graphics.
 - Tidy data: Each variable forms a column and each observation forms a row.
 - Having data in tidy format and long format makes creating plots easier!
-- Remember to use a `+` at the end of each line when adding new layers to plots.   
-Pipes like `|>` or `%>%` do not work to add layers to plots, but can be used to pipe data into plots.  
-**This works:** `ggplot(data = iris, aes(x = Species, y = Petal.Length)) + geom_boxplot()`  
-**This works:** `iris |> ggplot(aes(x = Species, y = Petal.Length)) + geom_boxplot()`  
-**This doesn't:** `iris |> ggplot(aes(x = Species, y = Petal.Length)) |> geom_plot()`  
-- Factor: A factor is a special character vector where the elements have pre-defined groups or "levels". You can think of these as qualitative or categorical variables. An example is 1st grade, 2nd grade, etc. It is important to specify factors as the class `factor` so that R recognizes it as such.
+- Remember to use a `+` at the end of each line when adding new layers to plots.
+- Pipes like `|>` or `%>%` do not work to add layers to plots, but can be used to pipe data into plots.
+	- **This works:** `ggplot(data = iris, aes(x = Species, y = Petal.Length)) + geom_boxplot()`
+	- **This works:** `iris |> ggplot(aes(x = Species, y = Petal.Length)) + geom_boxplot()`
+	- **This doesn't:** `iris |> ggplot(aes(x = Species, y = Petal.Length)) |> geom_plot()`
 
 ### Functions
 
@@ -37,7 +36,13 @@ Pipes like `|>` or `%>%` do not work to add layers to plots, but can be used to 
 
 Click [here](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf) for a summary of the `ggplot2` theme system~
 
-### Factors
+## Factors
+
+### Major concepts
+
+- **Factor:** A factor is a special character vector where the elements have pre-defined groups or "levels". You can think of these as qualitative or categorical variables. An example is 1st grade, 2nd grade, etc. It is important to specify factors as the class `factor` so that R recognizes it as such.
+
+### Functions
 
 |Library/Package|Piece of code|Example of usage|What it does|
 |---------------|-------------|----------------|-------------|

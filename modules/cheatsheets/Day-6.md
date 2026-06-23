@@ -6,7 +6,7 @@ classoption: landscape
 
 ## Data Manipulation
 
-### Major concepts:
+### Major concepts
 
 - `Wide` data - multiple columns per individual, values spread across multiple columns
 - `Long` data - multiple rows per observation, a single column contains the values
