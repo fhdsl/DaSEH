@@ -33,4 +33,4 @@ classoption:
 
 - See [tidyselect helpers for handy things to use with `select()`](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html).
 
-\* This format was adapted from the [cheatsheet format from AlexsLemonade](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+\* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).

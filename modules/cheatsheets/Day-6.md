@@ -34,4 +34,4 @@ classoption:
 |---------------|-------------|----------------|-------------|
 | `esquisse`| [`esquisser()`](https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html)| `esquisser(Orange)`| Start an `esquisse` interactive session to create a plot of the given `data.frame` or `tibble`|
 
-\* This format was adapted from the [cheatsheet format from AlexsLemonade](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+\* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).

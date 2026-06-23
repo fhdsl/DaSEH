@@ -24,4 +24,4 @@ classoption:
 | `epitools`| [`oddsratio(x,y)`](https://www.rdocumentation.org/packages/epitools/versions/0.5-10.1/topics/oddsratio)|`oddsratio(x,y)`| Calculates odds ratio.|
 
 
-\* This format was adapted from the [cheatsheet format from AlexsLemonade](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+\* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).

@@ -45,4 +45,4 @@ Click [here](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_syst
 | `forcats`| [`as_factor()`](https://forcats.tidyverse.org/reference/as_factor.html) | `fact_qual <- as_factor(c("poor", "fine", "good"))`| Creates a factor out of a vector.  Levels are ordered by default in order of first appearance in the data.|
 | `forcats` | [`fct_reorder()`](https://forcats.tidyverse.org/reference/fct_reorder.html) | `ggplot(iris, aes(x =  fct_reorder(Species, Sepal.Width, mean), y = Sepal.Width)) `<br> `+ geom_boxplot()`| Allows the order of the levels of a factor variable to be changed according to another variable. In this case Species is ordered by the mean of Sepal.Width. This is especially helpful for plots or statistical output! |
 
-\* This format was adapted from the [cheatsheet format from AlexsLemonade](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+\* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).

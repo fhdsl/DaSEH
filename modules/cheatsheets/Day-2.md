@@ -54,4 +54,4 @@ look at the help file for that function.
 | Base `R`| [`View()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/View)| `View(df)`| View a spreadsheet-style data viewer on a matrix-like R object.|
 | Base `R`| [`str()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/str)| `str(df)`| Display the internal structure of an R object (dimensions, class, etc).|
 
-\* This format was adapted from the [cheatsheet format from AlexsLemonade](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+\* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).

@@ -36,4 +36,4 @@ number) by 0.
 | `stringr`|[`str_sub`](https://stringr.tidyverse.org/reference/str_sub.html)| `str_sub(string = vector, start = 1, end = 3)`| Subsets a string to just the places of the characters specified. |
 
 
-\* This format was adapted from the [cheatsheet format from AlexsLemonade](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+\* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
