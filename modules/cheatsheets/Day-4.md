@@ -11,15 +11,15 @@ urlcolor: blue
 
 | Library/Package | Piece of code | Example of usage | What it does |
 |---------|----------|----------------|-------------|
-| Base R | [`min(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Extremes) | `min(x)` | Returns the minimum value in object `x`. |
-| Base R | [`sum(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/sum) | `sum(x)` | Returns the sum of values in object `x` (integer, numeric, or logical). |
-| Base R | [`mean(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean) | `mean(x)` | Returns the arithmetic mean of values in object `x` (integer, numeric, or logical). |
-| Base R | [`log(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/log) | `log(x)` | Returns the natural logarithm of object `x`. Use `log2(x)` for base 2, or specify another base. |
-| Base R | [`range(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/range) | `range(x)` | Returns the minimum and maximum values in object `x`. |
-| Base R | [`sd(x)`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/sd) | `sd(x)` | Returns the standard deviation of object `x`. |
-| Base R | [`sqrt(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/MathFun) | `sqrt(x)` | Returns the square root of object `x`. |
-| Base R | [`quantile(x)`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile) | `quantile(x, probs = .5)` | Returns sample quantiles for specified probabilities. |
-| Base R | [`summary(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) | `summary(x)` | Returns a summary of values in object `x`. |
+| Base R | [`min()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Extremes) | `min(x)` | Returns the minimum value in object `x`. |
+| Base R | [`sum()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/sum) | `sum(x)` | Returns the sum of values in object `x` (integer, numeric, or logical). |
+| Base R | [`mean()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean) | `mean(x)` | Returns the arithmetic mean of values in object `x` (integer, numeric, or logical). |
+| Base R | [`log()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/log) | `log(x)` | Returns the natural logarithm of object `x`. Use `log2(x)` for base 2, or specify another base. |
+| Base R | [`range()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/range) | `range(x)` | Returns the minimum and maximum values in object `x`. |
+| Base R | [`sd()`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/sd) | `sd(x)` | Returns the standard deviation of object `x`. |
+| Base R | [`sqrt()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/MathFun) | `sqrt(x)` | Returns the square root of object `x`. |
+| Base R | [`quantile()`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile) | `quantile(x, probs = .5)` | Returns sample quantiles for specified probabilities. |
+| Base R | [`summary()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) | `summary(x)` | Returns a summary of values in object `x`. |
 | `tidyverse` (`dplyr`) | [`pull()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/pull) | `x_vect <- df |> pull(x)` | Extracts a single column as a vector. Useful before summary functions like `mean()` and `sum()`. |
 | `tidyverse` (`dplyr`) | [`summarize()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/summarize) | `df <- df |> summarize(mean_x = mean(x))` | Summarizes values into one or more output values. `summarize()` and `summarise()` are synonyms. |
 | `tidyverse` (`dplyr`) | [`distinct()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/distinct) | `df |> distinct(factor_name)` | Displays unique rows from a data frame or tibble. |
@@ -55,9 +55,9 @@ _NOTE:_  Many summarizing functions (e.g., `mean()`, `sum()`) have the argument 
 
 | Library/Package | Piece of code | Example of usage | What it does |
 |---------|-----------|----------------|----------------|
-| Base R | [`class(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/class) | `class(x)` | Returns the class of an object. |
-| Base R | [`as.numeric(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/numeric) | `as.numeric(x)` | Coerces object `x` to numeric class. Similar functions include `as.character()`, `as.data.frame()`, `as.matrix()`, and `as.Date()`. Use with `mutate()`. |
-| `tidyverse` (`lubridate`) | [`ymd(x)`](https://www.rdocumentation.org/packages/lubridate/versions/1.9.2/topics/ymd) | `ymd("2024-01-31")` | Coerces character object `x` to date class. Use functions such as `mdy()` or `dmy()` for other date formats. |
+| Base R | [`class()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/class) | `class(x)` | Returns the class of an object. |
+| Base R | [`as.numeric()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/numeric) | `as.numeric(x)` | Coerces object `x` to numeric class. Similar functions include `as.character()`, `as.data.frame()`, `as.matrix()`, and `as.Date()`. Use with `mutate()`. |
+| `tidyverse` (`lubridate`) | [`ymd()`](https://www.rdocumentation.org/packages/lubridate/versions/1.9.2/topics/ymd) | `ymd("2024-01-31")` | Coerces character object `x` to date class. Use functions such as `mdy()` or `dmy()` for other date formats. |
 
 _NOTE:_  [`lubridate`](https://lubridate.tidyverse.org/) is a powerful, widely used R package from `tidyverse` family to work with Date / POSIXct class objects.
 

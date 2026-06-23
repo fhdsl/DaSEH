@@ -11,10 +11,10 @@ urlcoloR blue
 
 | Library/Package | Code | Example | What it does |
 |---------|-------------|----------------|-------------|
-| Base R | [`nrow(x)`; `ncol(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/nrow) | `nrow(x)`; `ncol(x)` | Get the number of rows and columns in object `x`, respectively. |
-| Base R | [`dim(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/dim) | `dim(x)` | Get the number of rows and columns in object `x`. |
-| `tidyverse` (`dplyr`) | [`glimpse(x)`](https://dplyr.tidyverse.org/reference/glimpse.html) | `glimpse(mtcars)` | Get an overview of data frame `x`. |
-| `tidyverse` (`dplyr`) | [`slice_sample(x)`](https://dplyr.tidyverse.org/reference/slice.html) | `slice_sample(mtcars)` | View a random subset of rows from `x`. |
+| Base R | [`nrow()`; `ncol()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/nrow) | `nrow(x)`; `ncol(x)` | Get the number of rows and columns in object `x`, respectively. |
+| Base R | [`dim()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/dim) | `dim(x)` | Get the number of rows and columns in object `x`. |
+| `tidyverse` (`dplyr`) | [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) | `glimpse(mtcars)` | Get an overview of data frame `x`. |
+| `tidyverse` (`dplyr`) | [`slice_sample()`](https://dplyr.tidyverse.org/reference/slice.html) | `slice_sample(mtcars)` | View a random subset of rows from `x`. |
 | Base R | [`data.frame()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/data.frame) | `df <- data.frame(1:3)` | Create a data frame. Named arguments must have the same length. |
 | `tidyverse` (`tibble`) | [`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) | `tibble(mtcars)` | Create a tibble from a data frame or matrix. |
 | `tidyverse` (`tibble`) | [`rownames_to_column()`](https://www.rdocumentation.org/packages/tibble/versions/1.4.2/topics/rownames) | `df <- rownames_to_column(df, "new_col")` | Convert row names to a new first column. The argument names the new column. |
