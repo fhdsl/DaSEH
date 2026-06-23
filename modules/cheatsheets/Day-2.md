@@ -32,7 +32,7 @@ result.
 
 \pagebreak
 
-## Data Input/Output
+## Data Input
 
 ### Major concepts
 

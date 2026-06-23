@@ -25,6 +25,8 @@ functionName <- function(inputs) {
      return(value)
 }
 	```
+	
+### Examples
 
 - Example of an **anonymous function** used with `across()`:
      

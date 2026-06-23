@@ -35,7 +35,7 @@ urlcolor:blue
 | `ggplot2`   | [`facet_wrap()`](https://www.rdocumentation.org/packages/ggplot2/versions/3.3.0/topics/facet_wrap)   | `ggplot(data = iris, aes(x = Petal.Length)) +`<br> `geom_density() +`<br> `facet_wrap(~Species, scales = "free", nrow = 2)`| Plots individual graphs using specified variables to subset the data. Allows for different shapes and for different axes scales.|
 | `ggplot2`| [`ggsave()`](https://www.rdocumentation.org/packages/ggplot2/versions/3.3.0/topics/ggsave)  | `ggsave(filename = "plotname.pdf")` | Saves the last plot in working directory.|
 
-Click [here](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf) for a summary of the `ggplot2` theme system~
+_NOTE:_ Click [here](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf) for a summary of the `ggplot2` theme system
 
 \pagebreak
 

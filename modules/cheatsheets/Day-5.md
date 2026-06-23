@@ -16,8 +16,10 @@ urlcolor:blue
 - Sometimes you need to look at lots of data though... the [`naniar` package](https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html) is a good option.
 - `stringr` package has great functions for looking for specific **parts of character values** especially `filter()` and `str_detect()` combined
 
+### Examples
+
 - Example of `case_when()` used with `mutate()`:
-     
+
 	```
 Orange |> 
      mutate(old = case_when(

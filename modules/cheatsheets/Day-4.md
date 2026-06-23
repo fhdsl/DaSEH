@@ -32,7 +32,7 @@ urlcolor:blue
 | Base `R`| [`rowMeans()`](https://www.rdocumentation.org/packages/fame/versions/1.03/topics/rowMeans)| `rowMeans(df)`|Calculates means for each row|
 | Base `R`| [`colMeans()`](https://www.statology.org/colmeans-in-r/)|`colMeans(df)`| Calculates means for each column|
 
-- Many summarizing functions (e.g., `mean()`, `sum()`) have the argument `na.rm = TRUE`. This can be used to ignore missing data.
+_NOTE:_  Many summarizing functions (e.g., `mean()`, `sum()`) have the argument `na.rm = TRUE`. This can be used to ignore missing data.
 
 \pagebreak
 
