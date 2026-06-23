@@ -1,5 +1,5 @@
 ---
-title: "Day 1 Cheatsheet"
+title: "DaSEH Day 1 Cheatsheet"
 classoption: landscape
 urlcolor: blue
 output: pdf_document
@@ -60,3 +60,5 @@ output: pdf_document
 | Base R | [`tail()`](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/head) | `tail(mtcars)` | Returns the last 6 rows by default. Use the `n` argument to specify the number of rows. |
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+
+\* Find more resources at https://daseh.org.

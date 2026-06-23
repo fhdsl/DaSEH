@@ -1,5 +1,5 @@
 ---
-title: "Day 7 Cheatsheet"
+title: "DaSEH Day 7 Cheatsheet"
 classoption: landscape
 urlcolor: blue
 output: pdf_document
@@ -55,3 +55,5 @@ _NOTE:_ Click [here](https://github.com/claragranell/ggplot2/blob/main/ggplot_th
 | `tidyverse` (`forcats`) | [`fct_reorder()`](https://forcats.tidyverse.org/reference/fct_reorder.html) | `ggplot(iris, aes(x = fct_reorder(Species, Sepal.Width, mean), y = Sepal.Width)) +` \newline `geom_boxplot()` | Reorders factor levels according to another variable. Here, `Species` is ordered by the mean of `Sepal.Width`. |
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+
+\* Find more resources at https://daseh.org.

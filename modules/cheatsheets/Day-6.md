@@ -1,5 +1,5 @@
 ---
-title: "Day 6 Cheatsheet"
+title: "DaSEH Day 6 Cheatsheet"
 classoption: landscape
 urlcolor: blue
 output: pdf_document
@@ -37,3 +37,5 @@ output: pdf_document
 | `esquisse` | [`esquisser()`](https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html) | `esquisser(Orange)` \newline `esquisser(Orange, viewer = "browser")` | Starts an interactive `esquisse` session to create a plot from a `data.frame` or `tibble` |
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+
+\* Find more resources at https://daseh.org.

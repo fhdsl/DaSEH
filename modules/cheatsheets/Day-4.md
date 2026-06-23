@@ -1,5 +1,5 @@
 ---
-title: "Day 4 Cheatsheet"
+title: "DaSEH Day 4 Cheatsheet"
 classoption: landscape
 urlcolor: blue
 output: pdf_document
@@ -62,3 +62,5 @@ _NOTE:_  Many summarizing functions (e.g., `mean()`, `sum()`) have the argument 
 _NOTE:_  [`lubridate`](https://lubridate.tidyverse.org/) is a powerful, widely used R package from `tidyverse` family to work with Date / POSIXct class objects.
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+
+\* Find more resources at https://daseh.org.

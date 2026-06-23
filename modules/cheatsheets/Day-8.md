@@ -1,5 +1,5 @@
 ---
-title: "Day 8 Cheatsheet"
+title: "DaSEH Day 8 Cheatsheet"
 classoption: landscape
 urlcolor: blue
 output: pdf_document
@@ -40,3 +40,5 @@ output: pdf_document
 | Base R | [`load()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/load) | `load("file.RData")` | Loads R objects from an RData file into the environment. |
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+
+\* Find more resources at https://daseh.org.

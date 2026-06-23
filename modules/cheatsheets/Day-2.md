@@ -1,5 +1,5 @@
 ---
-title: "Day 2 Cheatsheet"
+title: "DaSEH Day 2 Cheatsheet"
 classoption: landscape
 urlcolor: blue
 output: pdf_document
@@ -54,3 +54,5 @@ output: pdf_document
 | Base R | [`str()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/str) | `str(df)` | Displays the internal structure of an R object, including dimensions and class. |
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+
+\* Find more resources at https://daseh.org.

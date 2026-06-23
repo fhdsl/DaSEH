@@ -1,5 +1,5 @@
 ---
-title: "Day 9 Cheatsheet"
+title: "DaSEH Day 9 Cheatsheet"
 classoption: landscape
 urlcolor: blue
 output: pdf_document
@@ -49,3 +49,5 @@ iris |>
 | `tidyverse` (`dplyr`) | [`mutate_if()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/mutate_all) | `iris |> mutate_if(is.numeric, round)` | Applies a function to selected columns in a data frame. |
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+
+\* Find more resources at https://daseh.org.

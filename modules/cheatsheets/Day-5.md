@@ -1,5 +1,5 @@
 ---
-title: "Day 5 Cheatsheet"
+title: "DaSEH Day 5 Cheatsheet"
 classoption: landscape
 urlcolor: blue
 output: pdf_document
@@ -52,3 +52,5 @@ Orange |>
 | `tidyverse` (`stringr`) | [`str_sub()`](https://stringr.tidyverse.org/reference/str_sub.html) | `str_sub(string = vector, start = 1, end = 3)` | Subsets a string to the specified character positions. |
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+
+\* Find more resources at https://daseh.org.
