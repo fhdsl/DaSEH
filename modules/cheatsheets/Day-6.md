@@ -1,6 +1,6 @@
 ---
 classoption: landscape
-urlcolor:blue
+urlcolor: blue
 ---
 
 # Day 6 Cheatsheet
@@ -9,18 +9,18 @@ urlcolor:blue
 
 ### Major concepts
 
-- `Wide` data - multiple columns per individual, values spread across multiple columns
-- `Long` data - multiple rows per observation, a single column contains the values
+- **Wide data:** Multiple columns per individual, with values spread across columns
+- **Long data:** Multiple rows per observation, with values stored in a single column
 
 ### Functions
 
-|Library/Package|Piece of code|Example of usage|What it does|
-|---------------|-------------|----------------|-------------|
-| `dplyr`| [`separate()`](https://tidyr.tidyverse.org/reference/separate.html)| `df |> separate(x, c("A", "B"))`| Separate a character column into multiple columns with a regular expression or numeric locations|
-| `dplyr`| [`unite()`](https://tidyr.tidyverse.org/reference/unite.html)| `df |> unite("z", x:y, remove = FALSE)`| Unite multiple columns together into one column|
-| `tidyr`| [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html)| `df |> pivot_longer(!col_to_keep, names_to = "new_col_with_labels", values_to = "new_col_with_values")`| Lengthens a data frame by increasing the number of rows and decreasing the number of columns.|
-| `tidyr`| [`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html)| `df |> pivot_wider(names_from = "col_with_names", values_from = "col_with_values")`| Widens a data frame by decreasing the number of rows and increasing the number of columns.|
-| `dplyr`| [`?_join()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/join) | `inner_join(x, y)`| Joins data from two data frames. <br> **inner_join** - only rows that match for x and y are kept. <br> **full_join** - all rows of x and y are kept. <br> **left_join** - all rows of x are kept even if not merged with y. <br> **right_join** - all rows of y are kept even if not merged with x. <br> **anti_join** - all rows from x not in y keeping just columns from x. |
+| Library/Package | Piece of code | Example of usage | What it does |
+|-----|-----|----------|--------------|
+| `tidyverse` (`tidyr`) | [`separate()`](https://tidyr.tidyverse.org/reference/separate.html) | `df |> separate(x, c("A", "B"))` | Separates a character column into multiple columns using a regular expression or numeric positions |
+| `tidyverse` (`tidyr`) | [`unite()`](https://tidyr.tidyverse.org/reference/unite.html) | `df |> unite("z", x:y, remove = FALSE)` | Combines multiple columns into one column |
+| `tidyverse` (`tidyr`) | [`pivot_longer()`](https://tidyr.tidyverse.org/reference/pivot_longer.html) | `df |> pivot_longer(!col_to_keep, names_to = "new_col_with_labels", values_to = "new_col_with_values")` | Lengthens a data frame by increasing rows and decreasing columns |
+| `tidyverse` (`tidyr`) | [`pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html) | `df |> pivot_wider(names_from = "col_with_names", values_from = "col_with_values")` | Widens a data frame by decreasing rows and increasing columns |
+| `tidyverse` (`dplyr`) | [`?_join()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/join) | `inner_join(x, y)` | Joins data from two data frames. \newline `inner_join(x, y)` Keeps only rows that match in both `x` and `y`. \newline `full_join(x, y)` Keeps all rows from `x` and `y`. \newline `left_join(x, y)` Keeps all rows from `x`, even if they do not match `y`. \newline `left_join(x, y)` Keeps all rows from `y`, even if they do not match `x`. \newline `anti_join(x, y)` Keeps rows from `x` that do not match `y`, retaining only columns from `x`. |
 
 \pagebreak
 
@@ -28,12 +28,12 @@ urlcolor:blue
 
 ### Major concepts
 
-- The `esquisse` package can help you to test out plots and get familiar with the syntax required to make plots
+- **`esquisse`:** Package for testing and learning the syntax for making plots
 
 ### Functions
 
-|Library/Package|Piece of code|Example of usage|What it does|
-|---------------|-------------|----------------|-------------|
-| `esquisse`| [`esquisser()`](https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html)| `esquisser(Orange)` \newline `esquisser(Orange, viewer="browser")` | Start an `esquisse` interactive session to create a plot of the given `data.frame` or `tibble`|
+| Library/Package | Piece of code | Example of usage | What it does |
+|----|-----|---------|-------|
+| `esquisse` | [`esquisser()`](https://cran.r-project.org/web/packages/esquisse/vignettes/get-started.html) | `esquisser(Orange)` \newline `esquisser(Orange, viewer = "browser")` | Starts an interactive `esquisse` session to create a plot from a `data.frame` or `tibble` |
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
