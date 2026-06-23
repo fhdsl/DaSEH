@@ -48,6 +48,7 @@ jobs:
       toggle_quiz_check: "${{ env.CHECK_QUIZZES }}"
       toggle_render_preview: "${{ env.RENDER_PREVIEW }}"
       toggle_make_labs: "${{ env.MAKE_LABS }}"
+      toggle_make_combined_cheatsheet: "${{ env.MAKE_COMBINED_CHEATSHEET }}"
       rendering_docker_image: "${{ env.RENDERING_DOCKER_IMAGE }}"
       
 ########################## Make the error reports ##############################
@@ -143,12 +144,7 @@ jobs:
           git checkout $branch_name
           git merge -s recursive --strategy-option=theirs origin/${{ github.head_ref }} --allow-unrelated-histories
         shell: bash
-        
-      # Concatenate all cheatsheets (will be a changed file)
-      - name: Create combined cheatsheet
-        run: |
-          pandoc modules/cheatsheets/*.md -o modules/cheatsheets/combined_cheatsheet.md
-
+      
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v46.0.1
@@ -188,6 +184,13 @@ jobs:
       - name: Render Cheatsheet pdfs
         run: |
           Rscript --vanilla "scripts/render_cheatsheets.R" --files "${{ steps.changed-files.outputs.all_changed_files }}"
+        
+       # Optionally concatenate all cheatsheets and render pdf
+      - name: Create combined cheatsheet
+        if: ${{needs.yaml-check.outputs.toggle_make_combined_cheatsheet == 'yes'}}
+        run: |
+          pandoc modules/cheatsheets/*.md -o modules/cheatsheets/combined_cheatsheet.md
+          Rscript -e "rmarkdown::render(modules/cheatsheets/combined_cheatsheet.md, output_dir = "modules/cheatsheets", output_format = "pdf_document")
         
        # Render resource pdfs + html
       - name: Render Resource pdfs + html

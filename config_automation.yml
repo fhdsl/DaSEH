@@ -16,5 +16,8 @@ docker-test: no
 # Autogenerate Labs from Keys (clear the Rmarkdown chunks)
 make-labs: yes
 
+# Make combined documents
+make-combined-cheatsheet: yes
+
 # What docker image should be used for rendering?
 rendering-docker-image: 'jhudsl/daseh:latest'
