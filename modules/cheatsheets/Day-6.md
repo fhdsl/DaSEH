@@ -1,6 +1,5 @@
 ---
-classoption:
-- landscape
+classoption: landscape
 ---
 
 # Day 6 Cheatsheet
