@@ -189,9 +189,10 @@ jobs:
       - name: Create combined cheatsheet
         if: ${{needs.yaml-check.outputs.toggle_make_combined_cheatsheet == 'yes'}}
         run: |
-          pandoc modules/cheatsheets/*.md -o modules/cheatsheets/combined_cheatsheet.md
-          Rscript -e "rmarkdown::render(modules/cheatsheets/combined_cheatsheet.md, output_dir = "modules/cheatsheets", output_format = "pdf_document")
-        
+          rm -fv modules/cheatsheets/combined_cheatsheet.md
+          cat modules/cheatsheets/*.md  >> modules/cheatsheets/combined_cheatsheet.md
+          Rscript --vanilla "scripts/render_combined_cheatsheet.R"
+          
        # Render resource pdfs + html
       - name: Render Resource pdfs + html
         run: |
