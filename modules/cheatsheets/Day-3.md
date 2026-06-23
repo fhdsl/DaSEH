@@ -19,7 +19,7 @@ classoption: landscape
 | `tibble`| [`rownames_to_column()`](https://www.rdocumentation.org/packages/tibble/versions/1.4.2/topics/rownames)|`df <-column_to_rownames(df, 'new_col')`| Transforms the rownames of a data frame into a column (which is added to the start of the data frame).  The string supplied as an argument will be the name of the new column.|
 | `dplyr`| [`rename()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/select)|`df <- rename(df, MPG = mpg)`| Renames designated columns while keeping all variables of the data.frame |
 | `dplyr`| [`pull()`](https://dplyr.tidyverse.org/reference/pull.html)|`pull(df, 'existing_variable_name')`| Extract a column as a vector |
-| `dplyr`| [`select()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/select)|`select(df, 'existing_variable_name')`| Selects columns that match the specified argument|
+| `dplyr`| [`select()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/select)|`select(df, 'existing_variable_name')`| Selects columns that match the specified argument (_See note_)|
 | `dplyr`| [`filter()`](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8/topics/filter)|`filter(df, mpg > 20)`| Returns a subset of rows matching the conditions of the specified logical argument|
 | Base `R`| [`==, <=, >=, !=`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html)|`filter(df, mpg > 20)`| These are binary operators which allow for the comparison of values in an object. They are handy for use with `filter()`|
 | Base `R`| [`%in%`](http://www.datasciencemadesimple.com/in-operator-in-r/)|`filter(df, mpg %in% c(20,21,22))`| Checks if the given value(s) on the left side of the operator are in the vector or other R object defined on the right side of the operator. It returns a logical `TRUE` or `FALSE` statement.|
@@ -31,6 +31,6 @@ classoption: landscape
 | `dplyr`| [`case_when()`](https://dplyr.tidyverse.org/reference/case_when.html)| `df <- arrange(df, mpg)`|This function allows you to vectorize multiple [`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html) statements.  If no cases match, NA is returned.|
 | Base `R`| [`colnames()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/row%2Bcolnames)|`colnames(df)`| Gets or sets the column names of a matrix or data frame.|
 
-- See [tidyselect helpers for handy things to use with `select()`](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html).
+_NOTE:_ See [tidyselect helpers](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html) (`?dplyr_tidy_select`) for handy logical functions to use with `select()`.
 
 \* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
