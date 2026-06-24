@@ -48,6 +48,7 @@ jobs:
       toggle_quiz_check: "${{ env.CHECK_QUIZZES }}"
       toggle_render_preview: "${{ env.RENDER_PREVIEW }}"
       toggle_make_labs: "${{ env.MAKE_LABS }}"
+      toggle_make_combined_cheatsheet: "${{ env.MAKE_COMBINED_CHEATSHEET }}"
       rendering_docker_image: "${{ env.RENDERING_DOCKER_IMAGE }}"
       
 ########################## Make the error reports ##############################
@@ -143,7 +144,7 @@ jobs:
           git checkout $branch_name
           git merge -s recursive --strategy-option=theirs origin/${{ github.head_ref }} --allow-unrelated-histories
         shell: bash
-        
+      
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v46.0.1
@@ -184,6 +185,14 @@ jobs:
         run: |
           Rscript --vanilla "scripts/render_cheatsheets.R" --files "${{ steps.changed-files.outputs.all_changed_files }}"
         
+       # Optionally concatenate all cheatsheets and render pdf - always run if yes in config
+      - name: Create combined cheatsheet
+        if: ${{needs.yaml-check.outputs.toggle_make_combined_cheatsheet == 'yes'}}
+        run: |
+          rm -fv modules/cheatsheets/combined_cheatsheet.md
+          cat modules/cheatsheets/*.md  >> modules/cheatsheets/combined_cheatsheet.md
+          Rscript --vanilla "scripts/render_combined_cheatsheet.R"
+          
        # Render resource pdfs + html
       - name: Render Resource pdfs + html
         run: |

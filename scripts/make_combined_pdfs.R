@@ -29,20 +29,3 @@ pdf_files <- unlist(
 )
 
 pdf_combine(pdf_files, output = here::here("resources/course_notes.pdf"))
-
-### make combined cheatsheet file
-
-# Find all PDFs in cheatsheets 
-pdf_files <- list.files(
-  path = here::here("modules/cheatsheets"),
-  pattern = "\\.pdf$",
-  recursive = FALSE,
-  full.names = TRUE
-)
-
-# Combine into a single PDF
-pdf_combine(
-  input = pdf_files,
-  output = here::here("resources/all_cheatsheets.pdf")
-)
-

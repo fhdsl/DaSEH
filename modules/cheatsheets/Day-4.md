@@ -1,64 +1,66 @@
 ---
+title: "DaSEH Day 4 Cheatsheet"
 classoption: landscape
+urlcolor: blue
 output: pdf_document
 ---
-
-# Day 4 Cheatsheet
 
 ## Data Summarization
 
 ### Functions
-|Library/Package|Piece of code|Example of usage|What it does|
-|---------------|-------------|----------------|-------------|
-| Base `R`| [`min(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Extremes) |`min(x)`| Returns the minimum value of all values in an object `x`.|
-| Base `R`| [`sum(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/sum) | `sum(x)`| Returns the sum of all values (values must be integer, numeric, or logical) in object `x`.|
-| Base `R`| [`mean(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean) |`mean(x)`| Returns the arithmetic mean of all values (values must be integer or numeric) in object `x` or logical vector `x`.|
-| Base `R`| [`log(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/log) |`log(x)`| Gives the natural logarithm of object `x`. `log2(x)` can be used to give the logarithm of the object in base 2. Or the base can be specified as an argument.|
-| Base `R`| [`range(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/range) |`range(x)`| Gives the min and max for object `x`.|
-| Base `R`| [`sd(x)`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/sd) |`sd(x)`| Gives the standard deviation for object `x`.|
-| Base `R`| [`sqrt(x)`](https://www.rdocumentation.org/packages/SparkR/versions/2.1.2/topics/sqrt) |`sqrt(x)`| Gives the square root for object `x`.|
-| Base `R`| [`quantile(x)`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile)|`quantile(x, probs = .5)`| Produces sample quantiles corresponding to the given probabilities `x`.|
-| Base `R`| [`summary(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary)|`summary(x)`| Returns a summary of the values in object `x`.|
-| `dplyr`| [`pull()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/pull)| `x_vect <- df |> pull(x)` | Extract a single column into vector form. `pull()` is very handy before summary functions like `mean()`, `sum()`, etc. |
-| `dplyr`| [`summarize()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/summarize)      | `df <- df |> summarize(mean_x = mean(x))` | Summarizes multiple values in an object into a single value. This function can be used with other functions to retrieve a single output value for the grouped values. `summarize` and `summarise` are synonyms in this package. However, note that this function does not work in the same manner as the base R `summary` function.|
-| `dplyr`| [`distinct()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/distinct) |`df |> distinct(factor_name)`| Display unique/distinct rows from a data frame or tibble|
-| `dplyr`| [`n_distinct()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/n_distinct) |`x_vect |> n_distinct()`|Counts the number of unique/distinct combinations in a set of one or more vectors.|
-| `dplyr`| [`count()`](https://dplyr.tidyverse.org/reference/count.html)|`df |> count(factor_name)`|Count the number of groups in a factor variable of a data frame or tibble|
-| `dplyr`| [`group_by()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/group_by)|`df |> group_by(factor_name)`| Groups data into rows that contain the same specified value(s)|
-| Base `R`| [`unique()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/unique)| `unique(df)`|Returns a vector, data frame or array like x but with duplicate elements/rows removed.|
-| Base `R`| [`rowSums()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/rowsum) | `rowSums(df)`|Calculates sums for each row|
-| Base `R`| [`colSums()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/colSums)|`colSums(df)`| Calculates sums for each column|
-| Base `R`| [`rowMeans()`](https://www.rdocumentation.org/packages/fame/versions/1.03/topics/rowMeans)| `rowMeans(df)`|Calculates means for each row|
-| Base `R`| [`colMeans()`](https://www.statology.org/colmeans-in-r/)|`colMeans(df)`| Calculates means for each column|
 
-- Many summarizing functions (e.g., `mean()`, `sum()`) have the argument `na.rm = TRUE`. This can be used to ignore missing data.
+| Library/Package | Piece of code | Example of usage | What it does |
+|---------|----------|----------------|-------------|
+| Base R | [`min()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Extremes) | `min(x)` | Returns the minimum value in object `x`. |
+| Base R | [`sum()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/sum) | `sum(x)` | Returns the sum of values in object `x` (integer, numeric, or logical). |
+| Base R | [`mean()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean) | `mean(x)` | Returns the arithmetic mean of values in object `x` (integer, numeric, or logical). |
+| Base R | [`log()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/log) | `log(x)` | Returns the natural logarithm of object `x`. Use `log2(x)` for base 2, or specify another base. |
+| Base R | [`range()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/range) | `range(x)` | Returns the minimum and maximum values in object `x`. |
+| Base R | [`sd()`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/sd) | `sd(x)` | Returns the standard deviation of object `x`. |
+| Base R | [`sqrt()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/MathFun) | `sqrt(x)` | Returns the square root of object `x`. |
+| Base R | [`quantile()`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/quantile) | `quantile(x, probs = .5)` | Returns sample quantiles for specified probabilities. |
+| Base R | [`summary()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) | `summary(x)` | Returns a summary of values in object `x`. |
+| `tidyverse` (`dplyr`) | [`pull()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/pull) | `x_vect <- df |> pull(x)` | Extracts a single column as a vector. Useful before summary functions like `mean()` and `sum()`. |
+| `tidyverse` (`dplyr`) | [`summarize()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/summarize) | `df <- df |> summarize(mean_x = mean(x))` | Summarizes values into one or more output values. `summarize()` and `summarise()` are synonyms. |
+| `tidyverse` (`dplyr`) | [`distinct()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/distinct) | `df |> distinct(factor_name)` | Displays unique rows from a data frame or tibble. |
+| `tidyverse` (`dplyr`) | [`n_distinct()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/n_distinct) | `x_vect |> n_distinct()` | Counts unique values or combinations in one or more vectors. |
+| `tidyverse` (`dplyr`) | [`count()`](https://dplyr.tidyverse.org/reference/count.html) | `df |> count(factor_name)` | Counts the number of rows in each group of a factor variable. |
+| `tidyverse` (`dplyr`) | [`group_by()`](https://www.rdocumentation.org/packages/dplyr/versions/1.0.10/topics/group_by) | `df |> group_by(factor_name)` | Groups rows by specified value(s). |
+| Base R | [`unique()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/unique) | `unique(df)` | Returns object `x` with duplicate elements or rows removed. |
+| Base R | [`rowSums()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/rowsum) | `rowSums(df)` | Calculates sums for each row. |
+| Base R | [`colSums()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/colSums) | `colSums(df)` | Calculates sums for each column. |
+| Base R | [`rowMeans()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/colSums) | `rowMeans(df)` | Calculates means for each row. |
+| Base R | [`colMeans()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/colSums) | `colMeans(df)` | Calculates means for each column. |
 
-<div style="page-break-after: always;"></div>
+_NOTE:_  Many summarizing functions (e.g., `mean()`, `sum()`) have the argument `na.rm = TRUE` to ignore missing data.
+
+\pagebreak
 
 ## Data Classes
 
 ### Major concepts
 
-- **Character** - strings or individual characters, quoted
-- **Numeric** - any real number(s)
-- **Double** - a special subset of numeric that contains fractional values.
-- **Integer** - any integer(s)/whole numbers
-- **Factor** - categorical/qualitative variables
-- **Logical** - variables composed of TRUE or FALSE
-- **Date/POSIXct** - represents calendar dates and times
-- **matrix** - Two-dimensional class of data where all rows and columns consist of the same data type.
-- **data frame** - Two-dimensional class of data where all columns can be of different data types.
-- **list** - Can be of varying dimensions and can hold any kind of data type. Can hold vectors, strings, matrices, models, list of other lists.
+- **Character:** Strings or individual characters, quoted.
+- **Numeric:** Any real number(s).
+- **Double:** A subset of numeric values that can contain decimals.
+- **Integer:** Whole number(s).
+- **Factor:** Categorical or qualitative variables.
+- **Logical:** Values composed of `TRUE` or `FALSE`.
+- **Date/POSIXct:** Calendar dates and times.
+- **Matrix:** Two-dimensional data where all rows and columns have the same data type.
+- **Data frame:** Two-dimensional data where columns can have different data types.
+- **List:** Data that can vary in dimensions and contain many data types, including vectors, strings, matrices, models, and other lists.
 
 ### Functions
-|Library/Package|Piece of code|Example of usage|What it does|
-|---------------|-------------|----------------|-------------|
-| Base `R`| [`class(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/class)| `class(x)` | Tells the class of an object. |
-| Base `R`| [`as.numeric(x)`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/numeric)| `as.numeric(x)` | Coerces object x into numeric class. This type of function can be used to coerce object `x` into other data types, i.e., `as.character`, `as.numeric`, `as.data.frame`, `as.matrix`, `as.Date` etc. |
-| `lubridate`| [`ymd(x)`](https://www.rdocumentation.org/packages/lubridate/versions/1.9.2/topics/ymd)| `ymd("2024-01-31")` | Coerces character object x into date class. The format of the character object determines the function to use. Other examples include `mdy()`, `dmy()`, etc. |
 
+| Library/Package | Piece of code | Example of usage | What it does |
+|---------|-----------|----------------|----------------|
+| Base R | [`class()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/class) | `class(x)` | Returns the class of an object. |
+| Base R | [`as.numeric()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/numeric) | `as.numeric(x)` | Coerces object `x` to numeric class. Similar functions include `as.character()`, `as.data.frame()`, `as.matrix()`, and `as.Date()`. Use with `mutate()`. |
+| `tidyverse` (`lubridate`) | [`ymd()`](https://www.rdocumentation.org/packages/lubridate/versions/1.9.2/topics/ymd) | `ymd("2024-01-31")` | Coerces character object `x` to date class. Use functions such as `mdy()` or `dmy()` for other date formats. |
 
-- [`lubridate`](https://lubridate.tidyverse.org/) is a powerful, widely used R package from “tidyverse” family to work
-with Date / POSIXct class objects
+_NOTE:_  [`lubridate`](https://lubridate.tidyverse.org/) is a powerful, widely used R package from `tidyverse` family to work with Date / POSIXct class objects.
 
-\* This format was adapted from the [cheatsheet format from AlexsLemonade](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+\* This cheatsheet format was adapted from Alex's Lemonade Stand materials [(source)](https://github.com/AlexsLemonade/training-modules/tree/master/module-cheatsheets).
+
+\* Find more resources at https://daseh.org.

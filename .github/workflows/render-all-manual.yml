@@ -30,6 +30,7 @@ jobs:
       rendering_docker_image: "${{ env.RENDERING_DOCKER_IMAGE }}"
       toggle_quiz_check: "${{ env.CHECK_QUIZZES }}"
       toggle_make_labs: "${{ env.MAKE_LABS }}"
+      toggle_make_combined_cheatsheet: "${{ env.MAKE_COMBINED_CHEATSHEET }}"
 
 ########################## Site ##############################
 
@@ -86,7 +87,15 @@ jobs:
       - name: Render Cheatsheet pdfs
         run: |
           Rscript --vanilla "scripts/render_cheatsheets.R" --files "all"
-        
+          
+       # Optionally concatenate all cheatsheets and render pdf - always run if yes in config
+      - name: Create combined cheatsheet
+        if: ${{needs.yaml-check.outputs.toggle_make_combined_cheatsheet == 'yes'}}
+        run: |
+          rm -fv modules/cheatsheets/combined_cheatsheet.md
+          cat modules/cheatsheets/*.md  >> modules/cheatsheets/combined_cheatsheet.md
+          Rscript --vanilla "scripts/render_combined_cheatsheet.R"
+
        # Render resource pdfs
       - name: Render Resource pdfs
         run: |
