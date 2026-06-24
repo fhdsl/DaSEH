@@ -185,7 +185,7 @@ jobs:
         run: |
           Rscript --vanilla "scripts/render_cheatsheets.R" --files "${{ steps.changed-files.outputs.all_changed_files }}"
         
-       # Optionally concatenate all cheatsheets and render pdf
+       # Optionally concatenate all cheatsheets and render pdf - always run if yes in config
       - name: Create combined cheatsheet
         if: ${{needs.yaml-check.outputs.toggle_make_combined_cheatsheet == 'yes'}}
         run: |
