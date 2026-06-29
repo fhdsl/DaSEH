@@ -44,7 +44,7 @@ ggplot(data = wa_income, aes(fill = estimate)) +
        x = "Longitude",
        y = "Latitude") +
   theme_classic() +
-  scale_fill_viridis_c() +
+  scale_fill_viridis_c(labels = scales::label_dollar()) +
   theme(legend.title = element_blank())
 ```
 
@@ -224,6 +224,19 @@ ggplot(data = wa_income, aes(fill = estimate)) +
   geom_sf()
 ```
 
+## Getting fancier.. {.codesmall}
+
+```{r message=FALSE}
+ggplot(data = wa_income, aes(fill = estimate)) + 
+  geom_sf() +
+  labs(title = "Median Household Income by Census Tract",
+       x = "Longitude",
+       y = "Latitude") +
+  theme_classic() +
+  scale_fill_viridis_c(labels = scales::label_dollar()) +
+  theme(legend.title = element_blank())
+```
+
 ## Tips for Mapping in R
 
 1. Know the functions: make sure your data going into plotting functions is similar to 
@@ -265,3 +278,21 @@ library(tigris)
 zip_wa <- zctas(state = "WA", year = 2010)
 ```
 
+## Storing API keys safely
+
+**Never EVER put API keys on GitHUB!** 
+
+http://api.census.gov/data/key_signup.html
+
+```{r eval=FALSE}
+library(tidycensus)
+census_api_key("111111abc", install = TRUE)
+# First time, reload your environment so you can use the key without restarting R.
+readRenviron("~/.Renviron")
+# You can check it with:
+Sys.getenv("CENSUS_API_KEY")
+```
+
+<br>
+
+Source: https://walker-data.com/tidycensus/reference/census_api_key.html
