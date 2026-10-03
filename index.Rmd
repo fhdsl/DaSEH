@@ -106,4 +106,6 @@ Three-day in-person intensive “Codeathon”. Here, we'll work on authentic env
 
 This page was last updated on `r Sys.Date()`.
 
+And this is a test.
+
 <br />
